@@ -9,15 +9,19 @@
   <link rel="stylesheet" href="{{ static('css/space-mono.css') }}">
   <link rel="stylesheet" href="{{ static('css/chota.min.css') }}">
   <link rel="stylesheet" href="{{ static('css/styles.css') }}">
-  <script src="{{ static('js/alpine.min.js') }}"></script>
+  <script src="{{ static('js/alpine.min.js') }}" defer></script>
   {% block extra_head %}{% endblock %}
 </head>
 <body>
   <header class="container">
-    asdf
+    <h1 style="line-height: 1.2">
+      David Cooper
+      <br class="hide-md hide-lg">
+      <small>Radio Personality</small>
+    </h1>
   </header>
   <main class="container">
-    <h1>{{ title }}</h1>
+    <h2>{{ title }}</h2>
     {% block content required %}{% endblock %}
   </main>
 </body>
