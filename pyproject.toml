@@ -1,13 +1,14 @@
 [tool.poetry]
 name = "jew-pizza"
-version = "0.1.0"
+version = "0.0.1-dev"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["David Cooper <david@jew.pizza>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
 Django = "^3.2"
 psycopg2 = "^2.9"
+Jinja2 = "^3.0.1"
 
 [tool.poetry.dev-dependencies]
 

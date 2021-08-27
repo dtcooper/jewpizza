@@ -1,0 +1,19 @@
+:root {
+    --font-family-sans: "Space Mono", BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    --grid-maxWidth: 720px;
+    --bg-color: #F5DCFF;
+    --bg-box: #FFEFBD;
+    --red-color: #FE3F3F;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--red-color);
+}
+
+.bd-dashed {
+    background: var(--bg-box);
+    border: 4px dashed var(--red-color);
+    box-sizing: border-box;
+    border-radius: 0.5rem;
+    padding: 1rem 2rem;
+}

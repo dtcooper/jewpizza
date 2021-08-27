@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <title>{{ title }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ static('css/space-mono.css') }}">
+  <link rel="stylesheet" href="{{ static('css/chota.min.css') }}">
+  <link rel="stylesheet" href="{{ static('css/styles.css') }}">
+  <script src="{{ static('js/alpine.min.js') }}"></script>
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+  <header class="container">
+    asdf
+  </header>
+  <main class="container">
+    <h1>{{ title }}</h1>
+    {% block content required %}{% endblock %}
+  </main>
+</body>
+</html>

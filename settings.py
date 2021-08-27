@@ -13,14 +13,14 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve()
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-vx+jf-)628bhvewp-z%m@iivrq#=c09&+&b*=64h2*6^r1vlak'
+SECRET_KEY = 'django-insecure-araj3--yejk1f47j&c#-=ibg4499lekfh7hc95jif9u#jed4)+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'jew_pizza'
 ]
 
 MIDDLEWARE = [
@@ -49,7 +51,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'jew_pizza.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATES = [
     {
@@ -65,9 +67,18 @@ TEMPLATES = [
             ],
         },
     },
+   {
+        "BACKEND": "django.template.backends.jinja2.Jinja2",
+        "APP_DIRS": True,
+        "OPTIONS": {
+            'autoescape': lambda filename: any(filename.endswith(ext) for ext in ('.xml', '.html')),
+            'keep_trailing_newline': True,
+            "environment": "j2_env.environment",
+        },
+    },
 ]
 
-WSGI_APPLICATION = 'jew_pizza.wsgi.application'
+WSGI_APPLICATION = 'wsgi.application'
 
 
 # Database
@@ -76,7 +87,7 @@ WSGI_APPLICATION = 'jew_pizza.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR.parent / 'db.sqlite3',
     }
 }
 
