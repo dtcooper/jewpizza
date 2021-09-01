@@ -13,6 +13,7 @@
        url('../fonts/space-mono-v6-latin-ext_latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
        url('../fonts/space-mono-v6-latin-ext_latin-regular.svg#SpaceMono') format('svg'); /* Legacy iOS */
 }
+
 /* space-mono-italic - latin-ext_latin */
 @font-face {
   font-family: 'Space Mono';
@@ -26,6 +27,7 @@
        url('../fonts/space-mono-v6-latin-ext_latin-italic.ttf') format('truetype'), /* Safari, Android, iOS */
        url('../fonts/space-mono-v6-latin-ext_latin-italic.svg#SpaceMono') format('svg'); /* Legacy iOS */
 }
+
 /* space-mono-700 - latin-ext_latin */
 @font-face {
   font-family: 'Space Mono';
@@ -39,6 +41,7 @@
        url('../fonts/space-mono-v6-latin-ext_latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
        url('../fonts/space-mono-v6-latin-ext_latin-700.svg#SpaceMono') format('svg'); /* Legacy iOS */
 }
+
 /* space-mono-700italic - latin-ext_latin */
 @font-face {
   font-family: 'Space Mono';

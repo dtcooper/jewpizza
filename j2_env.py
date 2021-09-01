@@ -1,3 +1,5 @@
+import random
+
 from django.templatetags.static import static
 from django.urls import reverse
 
@@ -9,5 +11,6 @@ def environment(**options):
     env.globals.update({
         'static': static,
         'url': reverse,
+        'random_bool': lambda: random.choice([True, False]),
     })
     return env

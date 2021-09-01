@@ -1,0 +1,31 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tailwind -i jew_pizza/static/css/tailwind.css -o jew_pizza/static/css/styles.css --minify",
+    "watch": "tailwind -i jew_pizza/static/css/tailwind.css -o jew_pizza/static/css/styles.css --minify --watch",
+    "runserver": "concurrently --kill-others \"npm run watch\" \"poetry run python manage.py runserver\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dtcooper/jew.pizza.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dtcooper/jew.pizza/issues"
+  },
+  "homepage": "https://github.com/dtcooper/jew.pizza#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.3.3",
+    "postcss": "^8.3.6",
+    "postcss-import": "^14.0.2",
+    "tailwindcss": "^2.2.9"
+  },
+  "dependencies": {
+    "concurrently": "^6.2.1"
+  }
+}
