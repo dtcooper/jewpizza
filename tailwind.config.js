@@ -32,6 +32,7 @@ module.exports = {
             colors: {
                 'brand-background': '#f5dcff',
                 'brand': '#fe3f3f',
+                'brand-alt': '#008000',
                 ...colors,
             },
             animation: {

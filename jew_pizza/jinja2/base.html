@@ -12,17 +12,30 @@
 </head>
 <body class="bg-brand-background font-mono">
   <div class="max-w-screen-md mx-auto sm:px-4 sm:py-6 p-2">
-    {% macro random_spin_style(min=500, max=3500, direction=None) -%}
-      --custom-spin-duration: {{ (range(500, 3500)|random) / 1000 }}s; --custom-spin-direction: {% if direction %}{{ direction }}{% elif random_bool() %}reverse{% else %}normal{% endif %}
+    {% macro random_spin_style(min=650, max=3250, direction=undefined) -%}
+      {%- if direction is none and random_bool() -%}
+        {%- set direction = 'reverse' -%}
+      {%- endif -%}
+
+      --custom-spin-duration: {{ (range(min, max)|random) / 1000 }}s; --custom-spin-direction: {{ direction|default(['normal', 'reverse']|random) }}
     {%- endmacro %}
 
     <header>
-      {% macro jew_pizza_emojis(start_with_pizza=True) %}
-        <div class="flex justify-between text-xl xs:text-3xl sm:text-4xl md:text-5xl font-sans select-none">
-            {% for i in range(5) %}
-              <span class="animate-spin-custom" style="{{ random_spin_style() }}">{% if start_with_pizza %}&#x1F355;{% else %}&#x2721;&#xFE0F;{% endif %}</span>
-              <span class="animate-spin-custom" style="{{ random_spin_style() }}">{% if start_with_pizza %}&#x2721;&#xFE0F;{% else %}&#x1F355;{% endif %}</span>
-            {% endfor %}
+      {% macro jew_pizza_emojis() %}
+        {% set items = cycler(*shuffle(['&#x1F355;', '&#x2721;&#xFE0F;', '&#x1F4FB;', '&#x2620;&#xFE0F;', '&#x1F399;&#xFE0F;',
+                                        '&#x1F4A9;', '&#x2721;&#xFE0F;', 'jew', 'pizza', '&#x1F46F;&#x200D;&#x2640;&#xFE0F;'])) %}
+
+        <div class="flex justify-between items-center text-xl xs:text-3xl sm:text-4xl md:text-5xl font-sans select-none">
+          {% for i in range(10) %}
+              {% set item = items.next() %}
+              <!-- {{ emoji }} -->
+              {% if item.isalpha() %}
+                <span class="animate-spin-custom text-brand-alt font-bold font-mono text-xs xs:text-md sm:text-lg" style="{{ random_spin_style() }}">{{ item }}</span>
+              {% else %}
+                <span class="animate-spin-custom" style="{{ random_spin_style() }}">{{ item|safe }}</span>
+              {% endif %}
+            </span>
+          {% endfor %}
         </div>
       {% endmacro %}
       {{ jew_pizza_emojis() }}
@@ -30,14 +43,14 @@
         <img
           class="animate-spin-custom select-none border-brand border-4 h-9 w-9 xs:h-16 xs:w-16 sm:h-18 sm:w-18 md:h-20 md:w-20 rounded-full mr-2 sm:mr-3"
           src="https://pbs.twimg.com/profile_images/842291221854736384/o18PO8DI_400x400.jpg"
-          style="{{ random_spin_style(min=1500, max=2000, direction='normal') }}"
+          style="{{ random_spin_style(min=3250, max=4000, direction='normal') }}"
         >
         <div class="text-brand flex flex-wrap items-end">
           <h1 class="text-lg xs:text-xl sm:text-4xl md:text-5xl italic font-bold mr-2 sm:mr-3">David Cooper</h1>
           <h2 class="text-md xs:text-lg sm:text-2xl italic">Radio Personality</h2>
         </div>
       </div>
-      {{ jew_pizza_emojis(start_with_pizza=False) }}
+      {{ jew_pizza_emojis() }}
     </header>
 
     <main class="mt-5">
