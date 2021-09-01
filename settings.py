@@ -31,10 +31,8 @@ SECRET_KEY = env('SECRET_KEY', default='django-insecure-araj3--yejk1f47j&c#-=ibg
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG', default=True)
 
-ALLOWED_HOSTS = []
-
-if DEBUG:
-    ALLOWED_HOSTS.append('*')
+# XXX whitelist
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition

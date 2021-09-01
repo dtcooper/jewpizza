@@ -11,7 +11,8 @@ if [ "$#" = 0 ]; then
     if [ "$DEBUG" ]; then
         exec npm run runserver
     else
-        echo "Should run prod!"
+        # XXX
+        poetry run ./manage.py runserver
     fi
 else
     exec "$@"
