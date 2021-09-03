@@ -11,7 +11,7 @@ services:
     depends_on:
       - db
     ports:
-      - "${BIND_ADDR}:8000"
+      - "127.0.0.1:${LISTEN_PORT:-8000}:8000"
 
   db:
     container_name: db

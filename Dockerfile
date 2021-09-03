@@ -13,6 +13,9 @@ RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \
         sqlite3 \
     && rm -rf /var/lib/apt/lists/*
 
+RUN wget -qO /usr/local/bin/wait-for-it https://raw.githubusercontent.com/vishnubob/wait-for-it/81b1373f/wait-for-it.sh \
+    && chmod +x /usr/local/bin/wait-for-it
+
 RUN mkdir /app
 WORKDIR /app
 
