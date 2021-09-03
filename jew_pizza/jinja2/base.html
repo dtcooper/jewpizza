@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <title>{{ title }}</title>
+  <title>{{ title|default('jew.pizza') }}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{{ static('css/space-mono.css') }}">
   <link rel="stylesheet" href="{{ static('css/styles.css') }}">
@@ -12,7 +12,7 @@
 </head>
 <body class="bg-brand-background font-mono">
   <div class="max-w-screen-md mx-auto sm:px-4 sm:py-6 p-2">
-    {% macro random_spin_style(min=650, max=3250, direction=undefined) -%}
+    {% macro random_spin_style(min=650, max=2750, direction=undefined) -%}
       {%- if direction is none and random_bool() -%}
         {%- set direction = 'reverse' -%}
       {%- endif -%}
@@ -53,8 +53,8 @@
       {{ jew_pizza_emojis() }}
     </header>
 
-    <main class="mt-5">
-      <h2 class="text-brand text-xl">{{ title }}</h2>
+    <main class="mt-5 sm:mt-10">
+      {% if title %}<h2 class="text-brand underline italic text-xl" style="text-decoration-style: wavy; text-underline-offset: 0.5rem; text-decoration-thickness: 3px">{{ title }}</h2>{% endif %}
       {% block content required %}{% endblock %}
     </main>
 
