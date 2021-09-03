@@ -1,0 +1,27 @@
+services:
+  app:
+    container_name: app
+    restart: always
+    build:
+      context: .
+    volumes:
+      - ./.env:/.env:ro
+      - ./media:/media_root
+      - ./static:/static_root
+    depends_on:
+      - db
+    ports:
+      - "${BIND_ADDR}:8000"
+
+  db:
+    container_name: db
+    image: library/postgres:13-alpine
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_PASSWORD: postgres
+
+
+volumes:
+  postgres_data:

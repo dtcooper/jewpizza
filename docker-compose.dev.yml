@@ -1,0 +1,8 @@
+services:
+    app:
+      restart: "no"
+      volumes:
+        - .:/app
+
+    db:
+      restart: "no"

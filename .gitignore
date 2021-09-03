@@ -1,0 +1,4 @@
+/media/
+/static/
+.env
+docker-compose.override.yml
