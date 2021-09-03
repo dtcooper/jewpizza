@@ -16,17 +16,15 @@ RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \
 RUN wget -qO /usr/local/bin/wait-for-it https://raw.githubusercontent.com/vishnubob/wait-for-it/81b1373f/wait-for-it.sh \
     && chmod +x /usr/local/bin/wait-for-it
 
-RUN mkdir /app
-WORKDIR /app
+RUN mkdir -p /app/jew_pizza
+WORKDIR /app/jew_pizza
 
 RUN pip install "poetry==$POETRY_VERSION"
 
-COPY pyproject.toml poetry.lock /app/
+COPY jew_pizza/pyproject.toml jew_pizza/poetry.lock /app/jew_pizza/
 RUN poetry install
 
 COPY . /app/
-
-WORKDIR /app/jew_pizza
 
 ENTRYPOINT ["/app/entrypoint.sh"]
 CMD []

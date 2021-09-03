@@ -1,11 +1,11 @@
 services:
   app:
-    container_name: app
     restart: always
+    image: jew_pizza_app
     build:
       context: .
     volumes:
-      - ./.env:/.env:ro
+      - ./.env:/.env
       - ./media:/media_root
       - ./static:/static_root
     depends_on:
@@ -14,7 +14,6 @@ services:
       - "127.0.0.1:${LISTEN_PORT:-8000}:8000"
 
   db:
-    container_name: db
     image: library/postgres:13-alpine
     restart: always
     volumes:

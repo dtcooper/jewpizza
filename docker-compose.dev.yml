@@ -1,9 +1,10 @@
 services:
-    app:
-      restart: "no"
-      volumes:
-        - .:/app
-      ports:
-        - "${LISTEN_PORT:-8000}:8000"
-    db:
-      restart: "no"
+  app:
+    restart: "no"
+    volumes:
+      - .:/app
+    ports:
+      - "${LISTEN_PORT:-8000}:8000"
+
+  db:
+    restart: "no"
