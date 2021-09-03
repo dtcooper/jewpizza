@@ -28,7 +28,7 @@
         <div class="flex justify-between items-center text-xl xs:text-3xl sm:text-4xl md:text-5xl font-sans select-none">
           {% for i in range(10) %}
               {% set item = items.next() %}
-              <!-- {{ emoji }} -->
+
               {% if item.isalpha() %}
                 <span class="animate-spin-custom text-brand-alt font-bold font-mono text-xs xs:text-md sm:text-lg" style="{{ random_spin_style() }}">{{ item }}</span>
               {% else %}
@@ -54,7 +54,7 @@
     </header>
 
     <main class="mt-5 sm:mt-10">
-      {% if title %}<h2 class="text-brand underline italic text-xl" style="text-decoration-style: wavy; text-underline-offset: 0.5rem; text-decoration-thickness: 3px">{{ title }}</h2>{% endif %}
+      {% if title %}<h2 class="text-brand font-bold underline italic text-xl" style="text-decoration-style: wavy; text-underline-offset: 0.5rem; text-decoration-thickness: 3px">{{ title }}</h2>{% endif %}
       {% block content required %}{% endblock %}
     </main>
 
