@@ -1,15 +1,15 @@
 services:
   app:
-    restart: always
     image: jew_pizza_app
-    build:
-      context: .
     volumes:
       - ./.env:/.env
       - ./media:/media_root
       - ./static:/static_root
     depends_on:
       - db
+    restart: always
+    build:
+      context: .
     ports:
       - "127.0.0.1:${LISTEN_PORT:-8000}:8000"
 

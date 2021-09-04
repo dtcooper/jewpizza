@@ -2,6 +2,7 @@
 
 cd /app/jew_pizza
 
+# Source .env file
 if [ -f /.env ]; then
     . /.env
 else
@@ -9,6 +10,7 @@ else
     exit 1
 fi
 
+# Check if secret key is set
 if [ -z "$SECRET_KEY" ]; then
     echo 'Generating secret key in .env file'
     NEW_SECRET_KEY="$(python -c 'import secrets; print(secrets.token_urlsafe(40))')"
@@ -24,6 +26,14 @@ if [ -z "$SECRET_KEY" ]; then
 
     . /.env
 fi
+
+# Set sanitize DEBUG variable
+if [ "$DEBUG" -a "$DEBUG" != '0' ]; then
+    DEBUG=1
+else
+    DEBUG=
+fi
+
 
 migrate() {
     wait-for-it -t 0 db:5432
