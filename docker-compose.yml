@@ -21,6 +21,19 @@ services:
     environment:
       POSTGRES_PASSWORD: postgres
 
+  manage:
+    image: jew_pizza_app
+    volumes:
+      - ./.env:/.env
+      - ./media:/media_root
+      - ./static:/static_root
+    depends_on:
+      - db
+    environment:
+      - __RUN_MANAGE=1
+    profiles:
+      - tools
+
   tailwind-build:
     image: library/node:16-alpine
     working_dir: /app/tailwind

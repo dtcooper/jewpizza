@@ -27,20 +27,17 @@ if [ -z "$SECRET_KEY" ]; then
     . /.env
 fi
 
-# Set sanitize DEBUG variable
-if [ "$DEBUG" -a "$DEBUG" != '0' ]; then
-    DEBUG=1
+
+if [ "$__RUN_MANAGE" ]; then
+    poetry run ./manage.py $@
+elif [ "$#" != 0 ]; then
+    exec $@
 else
-    DEBUG=
-fi
+    migrate() {
+        wait-for-it -t 0 db:5432
+        poetry run ./manage.py migrate
+    }
 
-
-migrate() {
-    wait-for-it -t 0 db:5432
-    poetry run ./manage.py migrate
-}
-
-if [ "$#" = 0 ]; then
     if [ "$DEBUG" -a "$DEBUG" != '0' ]; then
         migrate
         exec poetry run ./manage.py runserver
@@ -62,6 +59,4 @@ if [ "$#" = 0 ]; then
                 --access-logfile - \
             jew_pizza.wsgi
     fi
-else
-    exec $@
 fi
