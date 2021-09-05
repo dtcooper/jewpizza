@@ -1,0 +1,33 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "",
+  "watch": {
+    "build": "../jew_pizza/webcore/static/css/styles.css"
+  },
+  "scripts": {
+    "build": "tailwind -i tailwind.css -o ../jew_pizza/webcore/static/css/styles.min.css --minify",
+    "watch:build": "npm-watch build",
+    "watch:dev": "tailwind -i tailwind.css -o ../jew_pizza/webcore/static/css/styles.css --watch",
+    "watch": "run-p watch:*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dtcooper/jew.pizza.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dtcooper/jew.pizza/issues"
+  },
+  "homepage": "https://github.com/dtcooper/jew.pizza#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.3.3",
+    "npm-run-all": "^4.1.5",
+    "npm-watch": "^0.11.0",
+    "postcss": "^8.3.6",
+    "postcss-import": "^14.0.2",
+    "tailwindcss": "^2.2.9"
+  }
+}

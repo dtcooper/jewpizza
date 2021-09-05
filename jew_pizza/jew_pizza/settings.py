@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'core',
+    'webcore',
 ]
 
 MIDDLEWARE = [
@@ -69,6 +69,7 @@ TEMPLATES = [
     },
    {
         "BACKEND": "django.template.backends.jinja2.Jinja2",
+        'DIRS': [],
         "APP_DIRS": True,
         "OPTIONS": {
             'autoescape': lambda filename: any(filename.endswith(ext) for ext in ('.xml', '.html')),
