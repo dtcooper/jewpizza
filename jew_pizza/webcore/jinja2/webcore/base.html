@@ -5,11 +5,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <title>{{ title|default('jew.pizza') }}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{{ static('css/space-mono.css') }}">
   {% if settings.DEBUG and not request.GET.get('force_minified_css') %}
     <link rel="stylesheet" href="{{ static('css/styles.css') }}?v={{ randint(100000000, 999999999) }}">
   {% else %}
-    <link ref="stylesheet" href="{{ static('css/styles.min.css') }}">
+    <link rel="stylesheet" href="{{ static('css/styles.min.css') }}">
   {% endif %}
   <script src="{{ static('js/alpine.min.js') }}" defer></script>
   {% block extra_head %}{% endblock %}

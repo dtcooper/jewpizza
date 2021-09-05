@@ -6,9 +6,9 @@
     "build": "../jew_pizza/webcore/static/css/styles.css"
   },
   "scripts": {
-    "build": "tailwind -i tailwind.css -o ../jew_pizza/webcore/static/css/styles.min.css --minify",
+    "build": "tailwind -i ../jew_pizza/webcore/static/css/tailwind.css -o ../jew_pizza/webcore/static/css/styles.min.css --minify",
     "watch:build": "npm-watch build",
-    "watch:dev": "tailwind -i tailwind.css -o ../jew_pizza/webcore/static/css/styles.css --watch",
+    "watch:dev": "tailwind -i ../jew_pizza/webcore/static/css/tailwind.css -o ../jew_pizza/webcore/static/css/styles.css --watch",
     "watch": "run-p watch:*"
   },
   "repository": {
