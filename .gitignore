@@ -1,4 +1,6 @@
-__pycache__/
-node_modules/
+/media/
+/static/
+/tailwind/node_modules
+/jew_pizza/webcore/static/css/styles.css
 .env
-db.sqlite3
+docker-compose.override.yml

@@ -1,0 +1,26 @@
+services:
+  app:
+    image: jew_pizza_app
+    volumes:
+      - ./.env:/.env
+      - ./media:/media_root
+      - ./static:/static_root
+    depends_on:
+      - db
+    restart: always
+    build:
+      context: .
+    ports:
+      - "127.0.0.1:${LISTEN_PORT:-8000}:8000"
+
+  db:
+    image: library/postgres:13-alpine
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_PASSWORD: postgres
+
+
+volumes:
+  postgres_data:
