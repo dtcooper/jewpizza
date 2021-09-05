@@ -1,5 +1,6 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 const colors = require('tailwindcss/colors')
+delete colors.lightBlue
 
 
 module.exports = {
