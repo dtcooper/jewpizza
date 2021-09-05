@@ -1,13 +1,11 @@
 services:
   tailwind-dev:
     image: library/node:16-alpine
-    working_dir: /app/tailwind-dev
+    working_dir: /app/tailwind
     command: "/bin/sh -c '[ ! -d node_modules ] && npm install; npm run watch'"
     volumes:
       - .:/app
-    environment:
-      - NODE_ENV=development
-    tty: true
+    tty: true  # Needed for tailwind --watch to work properly
 
   app:
     restart: "no"
@@ -15,6 +13,8 @@ services:
       - .:/app
     ports:
       - "${LISTEN_PORT:-8000}:8000"
+    depends_on:
+      - tailwind-dev
 
   db:
     restart: "no"

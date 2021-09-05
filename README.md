@@ -27,6 +27,12 @@ docker-compose up
 
 The development server will run at <http://localhost:8000/>.
 
+To force a rebuilding of the CSS before checking in (this _should_ happen automatically),
+
+```bash
+docker-compose run --rm tailwind-build
+```
+
 ### Production mode (`DEBUG=0`)
 
 Build and start containers,
