@@ -7,10 +7,6 @@ services:
       - .:/app
     tty: true  # Needed for tailwind --watch to work properly
 
-  manage:
-    volumes:
-      - .:/app
-
   app:
     restart: "no"
     volumes:

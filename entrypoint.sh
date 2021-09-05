@@ -28,9 +28,7 @@ if [ -z "$SECRET_KEY" ]; then
 fi
 
 
-if [ "$__RUN_MANAGE" ]; then
-    poetry run ./manage.py $@
-elif [ "$#" != 0 ]; then
+if [ "$#" != 0 ]; then
     exec $@
 else
     migrate() {
