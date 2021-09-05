@@ -12,7 +12,7 @@ RUN wget -qO /usr/local/bin/wait-for-it https://raw.githubusercontent.com/vishnu
 RUN mkdir /app
 WORKDIR /app
 
-RUN pip install "poetry==$POETRY_VERSION"
+RUN pip install --no-cache-dir "poetry==$POETRY_VERSION"
 
 COPY pyproject.toml poetry.lock /app/
 RUN poetry install

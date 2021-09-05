@@ -2,6 +2,9 @@
 
 cd /app/jew_pizza
 
+# Use the poetry's virtualenv
+export PATH="$(poetry env info -p)/bin:$PATH"
+
 # Source .env file
 if [ -f /.env ]; then
     . /.env
@@ -31,24 +34,21 @@ fi
 if [ "$#" != 0 ]; then
     exec $@
 else
-    migrate() {
-        wait-for-it -t 0 db:5432
-        poetry run ./manage.py migrate
-    }
+    if [ -z "$DEBUG" -o "$DEBUG" = '0' ]; then
+        ./manage.py collectstatic --noinput
+    fi
+
+    wait-for-it -t 0 db:5432 && ./manage.py migrate
 
     if [ "$DEBUG" -a "$DEBUG" != '0' ]; then
-        migrate
-        exec poetry run ./manage.py runserver
+        exec ./manage.py runserver
     else
-        poetry run ./manage.py collectstatic --noinput
-        migrate
-
         if [ -z "$GUNICORN_WORKERS" ]; then
             # Number of workers =  min(<cores * 1.5 rounded up> + 1, 3)
             GUNICORN_WORKERS="$(python -c 'import multiprocessing as m; print(max(round(m.cpu_count() * 1.5 + 1), 3))')"
         fi
 
-        exec poetry run gunicorn \
+        exec gunicorn \
                 $GUNICORN_EXTRA_ARGS \
                 --forwarded-allow-ips '*' \
                 -b 0.0.0.0:8000 \

@@ -36,11 +36,10 @@ The development server will run at <http://localhost:8000/>.
 docker-compose run --rm tailwind-dev npm run build
 
 # Django management command
-docker-compose-run --rm app poetry run ./manage.py
+docker-compose-run --rm app ./manage.py
 
 # Run shell in app container
 docker-compose-run --rm app bash
-poetry shell  # optional, if you want the Python environment
 ```
 
 
