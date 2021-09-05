@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@layer utilities {
+    @variants {
+        .underline-wavy {
+            text-decoration-style: wavy;
+            text-underline-offset: 0.5rem;
+            text-decoration-thickness: 3px;
+        }
+    }
+}
+
 @layer base {
     /* From: https://google-webfonts-helper.herokuapp.com/fonts/space-mono?subsets=latin,latin-ext */
 

@@ -5,6 +5,7 @@ delete colors.lightBlue
 
 module.exports = {
     mode: 'jit',
+    darkMode: 'media',
     future: {
         removeDeprecatedGapUtilities: true,
         purgeLayersByDefault: true,

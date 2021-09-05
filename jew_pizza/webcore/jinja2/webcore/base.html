@@ -57,7 +57,7 @@
     </header>
 
     <main class="mt-5 sm:mt-10">
-      {% if title %}<h2 class="text-brand font-bold underline italic text-xl mb-6" style="text-decoration-style: wavy; text-underline-offset: 0.5rem; text-decoration-thickness: 3px">{{ title }}</h2>{% endif %}
+      {% if title %}<h2 class="text-brand font-bold underline underline-wavy italic text-xl mb-6">{{ title }}</h2>{% endif %}
       {% block content required %}{% endblock %}
     </main>
 

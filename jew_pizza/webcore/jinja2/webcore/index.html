@@ -1,5 +1,11 @@
 {% extends 'webcore/base.html' %}
 
 {% block content %}
-    Content would go here
+    <div class="mb-5">
+        Content would go here
+    </div>
+
+    <button class="bg-blue-500 duration-1000 hover:bg-blue-700 hover:text-yellow-300 text-white font-bold py-2 px-4
+                   rounded hover:ring ring-offset-4 ring-offset-brand-background transition"
+                   x-data @click="alert('hello!')">Say hello!</button>
 {% endblock %}
