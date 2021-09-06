@@ -73,6 +73,7 @@
     }))
     Alpine.data('localizedTimeBlurb', () => ({
       userTZ: {% if 'testtz' in request.GET %}{{ request.GET['testtz'] | tojson }}{% else %}moment.tz.guess() || 'US/Eastern'{% endif %},
+      showNightBefore: false,
       showNight: false,
       nextShowStart: null,
       nextShowEnd: null,
@@ -92,13 +93,16 @@
       },
       time() {
         let [displayWeekStart, displayWeekEnd] = [this.weekStart, this.weekEnd]
-        if (this.showNight) {
+        if (this.showNightBefore) {
           [displayWeekStart, displayWeekEnd] = [moment(this.weekStart).subtract(1, 'days'), moment(this.weekEnd).subtract(1, 'days')]
         }
 
-        s = `${this.prettyDay(displayWeekStart)} to ${this.prettyDay(displayWeekEnd)} nights at `
-            + `${this.nextShowStart.format('h:mma')}-${this.nextShowEnd.format('h:mma')} ${this.nextShowStart.format('z')}`
+        s = `${this.prettyDay(displayWeekStart)} to ${this.prettyDay(displayWeekEnd)}`
         if (this.showNight) {
+          s += ' nights'
+        }
+        s += ` at ${this.nextShowStart.format('h:mma')}-${this.nextShowEnd.format('h:mma')} ${this.nextShowStart.format('z')}`
+        if (this.showNightBefore) {
           s += ` (technically ${this.prettyDay(this.weekStart)} to ${this.prettyDay(this.weekEnd)} mornings)`
         }
         return s
@@ -121,9 +125,13 @@
         this.weekStart = moment(this.nextShowStart).day(1).tz(this.userTZ)
         this.weekEnd = moment(this.nextShowStart).day(5).tz(this.userTZ)
 
-        // Show night warning if it's below 3:30am local time
+        // Show night before warning if it's below 3:30am local time
         this.nextShowStart.tz(this.userTZ)
         if (this.nextShowStart.isSameOrBefore(moment(this.nextShowStart).hour(3).minute(30).second(0))) {
+          this.showNightBefore = true
+          this.showNight = true
+        } else if (this.nextShowStart.isSameOrAfter(moment(this.nextShowStart).hour(17).minute(0).second(0))) {
+          // only show "nights" if show happens after 5pm local time
           this.showNight = true
         }
 
