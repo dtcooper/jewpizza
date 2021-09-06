@@ -1,10 +1,10 @@
 services:
   app:
-    image: jew_pizza_app
+    image: dtcooper/jew_pizza_app:latest
     volumes:
       - ./.env:/.env
-      - ./media:/media_root
-      - ./static:/static_root
+      - ./media:/app/media
+      - ./static:/app/static
     depends_on:
       - db
     restart: always

@@ -54,6 +54,7 @@ else
                 -b 0.0.0.0:8000 \
                 -w $GUNICORN_WORKERS \
                 --capture-output \
+                --error-logfile - \
                 --access-logfile - \
             jew_pizza.wsgi
     fi
