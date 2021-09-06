@@ -4,6 +4,17 @@
 
 
 @layer utilities {
+    /* https://github.com/postcss/postcss-100vh-fix */
+    .min-h-screen-iphone-fix {
+        min-height: 100vh;
+    }
+
+    @supports (-webkit-touch-callout: none) {
+        .min-h-screen-iphone-fix {
+            min-height: -webkit-fill-available;
+        }
+    }
+
     @variants {
         .text-indent {
             text-indent: 2rem;
