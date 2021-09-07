@@ -6,5 +6,5 @@ import webcore.views as views
 
 app_name = 'webcore'
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.PlaceholderView.as_view(), name='placeholder'),
 ]

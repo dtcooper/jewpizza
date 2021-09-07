@@ -13,7 +13,7 @@
   <script src="{{ static('js/alpine.min.js') }}" defer></script>
   {% block extra_head %}{% endblock %}
 </head>
-<body class="bg-base-100">
+<body class="{% block body_class %}{% endblock %}">
   {% block content required %}{% endblock content %}
 </body>
 </html>

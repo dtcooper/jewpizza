@@ -2,12 +2,15 @@ import datetime
 
 from pytz import timezone
 
-from django.shortcuts import render
+from django.views.generic import TemplateView
 
 
-def index(request):
+class PlaceholderView(TemplateView):
+    template_name = 'webcore/placeholder.html'
+    extra_context = {'title': 'jew.pizza - David Cooper'}
 
-    return render(request, 'webcore/index.html', {
-        'title': 'jew.pizza - David Cooper',
-        'eastern_tz_abbrev': timezone('US/Eastern').localize(datetime.datetime.now()).tzname()
-    })
+    def get_context_data(self, **kwargs):
+        return {
+            'eastern_tz_abbrev': timezone('US/Eastern').localize(datetime.datetime.now()).tzname(),
+            **super().get_context_data(**kwargs),
+        }

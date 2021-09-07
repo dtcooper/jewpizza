@@ -28,7 +28,11 @@ SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG', default=False)
 
 DOMAIN_NAME = env('DOMAIN_NAME', default='jew.pizza')
-ALLOWED_HOSTS = ["app", "localhost", "127.0.0.1", DOMAIN_NAME]
+
+if DEBUG:
+    ALLOWED_HOSTS = ['*']
+else:
+    ALLOWED_HOSTS = ["app", "localhost", "127.0.0.1", DOMAIN_NAME]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
