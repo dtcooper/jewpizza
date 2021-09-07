@@ -22,19 +22,18 @@
     <div>
       <h2 class="mb-6 sm:mb-8 lg:mb-10 text-2xl sm:text-3xl lg:text-5xl font-bold italic text-center lg:text-left">
         {# XXX text-shadow is in a style tag -#}
-        Welcome to <span class="text-accent underline underline-wavy animate-spin" style="text-shadow: 0 0 12px #ff7598;">jew.pizza</span>
+        Welcome to <span class="text-accent underline underline-wavy animate-spin">jew.pizza</span>
       </h2>
       <p class="lg:text-indent mx-2 lg:mx-0 text-md xs:text-lg" x-data="localizedTimeBlurb">
           Here is my very special website. I'm still working on it. For now, catch me
           <span class="font-bold"><span x-text="showTime">Sun to Thurs nights at 1:30am-2:30am {{ eastern_tz_abbrev }}</span>
           on <a class="link-primary link-hover" target="_blank"
             href="https://www.iheartradio.ca/newstalk-1010/shows/the-late-showgram-with-jim-richards-1.14645758">The
-          Showgram</a> w/ <a href="https://en.wikipedia.org/wiki/Jim_Richards_(broadcaster)" class="link-primary link-hover"
-            target="_blank">Jim Richards</a></span><span x-text="showTechnicalTime"> (technically Mon to Fri mornings)</span>.
+          Showgram w/ Jim Richards</a></span><span x-text="showTechnicalTime"> (technically Mon to Fri mornings)</span>.
           It airs nationally in Canada, and you can <span class="font-bold">stream it on the Toronto affiliate
           <a href="https://www.iheartradio.ca/newstalk-1010" class="link-primary link-hover" target="_blank">CFRB's
           website</a></span>. Or just <span class="font-bold">listen to <a class="link-primary link-hover" target="_blank"
-            href="https://podcasts.apple.com/us/podcast/this-is-going-well-i-think-with-david-cooper/id116827587">my old
+            href="https://podcasts.apple.com/us/podcast/this-is-going-well-i-think-with-david-cooper/id116827587">my
           podcast</a></span>.
       </p>
       <div class="space-y-4 sm:space-y-6 lg:space-y-8 text-center lg:text-left select-none">
@@ -55,7 +54,7 @@
   </div>
 </div>
 
-<span class="fixed bottom-4 right-4 font-sans text-lg sm:text-xl lg:text-3xl duration-500 filter hover:hue-rotate-[360deg] select-none">&#x2721;&#xFE0F; &#x1F355;</span>
+<span class="fixed bottom-4 right-4 font-sans text-lg sm:text-xl lg:text-3xl duration-[1500ms] filter hover:hue-rotate-[360deg] select-none">&#x2721;&#xFE0F; &#x1F355;</span>
 
 <script>
   document.addEventListener('alpine:init', () => {
