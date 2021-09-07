@@ -13,7 +13,7 @@
       <div class="overflow-hidden">
         <img
           src="{{ static('images/david-headshot.jpg') }}" style="--custom-spin-duration: 4000ms"
-          class="max-w-[12rem] sm:max-w-xs lg:max-w-sm rounded-full border-8 border-secondary animate-spin-custom"
+          class="max-w-[12rem] sm:max-w-xs lg:max-w-sm rounded-full border-8 border-secondary animate-spin-custom select-none drag-none"
         >
       </div>
     </div>
@@ -22,17 +22,17 @@
         Welcome to <span class="text-accent underline underline-wavy animate-spin">jew.pizza</span>
       </h2>
       <p class="lg:text-indent mx-2 lg:mx-0 text-md xs:text-lg" x-data="localizedTimeBlurb">
-          Here is my very special website. I'm still working on it. For now, you can catch me
-          <span x-text="time">Sun to Thurs nights at 1:30am-2:30am {{ eastern_tz_abbrev }}
-          (technically Mon to Fri mornings)</span> on
-          <a class="link-primary link-hover" target="_blank"
+          Here is my very special website. I'm still working on it. For now, catch me
+          <span class="font-bold"><span x-text="showTime">Sun to Thurs nights at 1:30am-2:30am {{ eastern_tz_abbrev }}</span>
+          on <a class="link-primary link-hover" target="_blank"
             href="https://www.iheartradio.ca/newstalk-1010/shows/the-late-showgram-with-jim-richards-1.14645758">The
           Showgram</a> w/ <a href="https://en.wikipedia.org/wiki/Jim_Richards_(broadcaster)" class="link-primary link-hover"
-            target="_blank">Jim Richards</a>. It airs nationally in Canada, and you can stream it on the Toronto affiliate
+            target="_blank">Jim Richards</a></span><span x-text="showTechnicalTime"> (technically Mon to Fri mornings)</span>.
+          It airs nationally in Canada, and you can <span class="font-bold">stream it on the Toronto affiliate
           <a href="https://www.iheartradio.ca/newstalk-1010" class="link-primary link-hover" target="_blank">CFRB's
-          website</a>. Or just listen to <a class="link-primary link-hover" target="_blank"
+          website</a></span>. Or just <span class="font-bold">listen to <a class="link-primary link-hover" target="_blank"
             href="https://podcasts.apple.com/us/podcast/this-is-going-well-i-think-with-david-cooper/id116827587">my old
-          podcast</a>.
+          podcast</a></span>.
       </p>
       <div class="space-y-4 sm:space-y-6 lg:space-y-8 text-center lg:text-left">
         <a class="btn btn-neutral" href="https://twitter.com/dtcooper" target="_blank">
@@ -67,7 +67,6 @@
           email += jank.charAt(i);
           jank = jank.substr(i + 1);
         }
-        console.log(email)
         return email
       }
     }))
@@ -91,7 +90,7 @@
             return dt.format('ddd')
         }
       },
-      time() {
+      showTime() {
         let [displayWeekStart, displayWeekEnd] = [this.weekStart, this.weekEnd]
         if (this.showNightBefore) {
           [displayWeekStart, displayWeekEnd] = [moment(this.weekStart).subtract(1, 'days'), moment(this.weekEnd).subtract(1, 'days')]
@@ -101,11 +100,14 @@
         if (this.showNight) {
           s += ' nights'
         }
-        s += ` at ${this.nextShowStart.format('h:mma')}-${this.nextShowEnd.format('h:mma')} ${this.nextShowStart.format('z')}`
+        return `${s} at ${this.nextShowStart.format('h:mma')}-${this.nextShowEnd.format('h:mma')} ${this.nextShowStart.format('z')}`
+      },
+      showTechnicalTime() {
         if (this.showNightBefore) {
-          s += ` (technically ${this.prettyDay(this.weekStart)} to ${this.prettyDay(this.weekEnd)} mornings)`
+          return ` (technically ${this.prettyDay(this.weekStart)} to ${this.prettyDay(this.weekEnd)} mornings)`
+        } else {
+          return ''
         }
-        return s
       },
       init() {
         this.nextShowStart = moment.tz('US/Eastern')

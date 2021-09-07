@@ -25,6 +25,13 @@
             text-underline-offset: 0.25em;
             text-decoration-thickness: 0.1em;
         }
+
+        .drag-none {
+            -webkit-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            user-drag: none;
+        }
     }
 }
 
