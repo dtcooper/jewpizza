@@ -24,10 +24,16 @@ if os.path.exists("/.env"):
 
 
 SECRET_KEY = env('SECRET_KEY')
-
 DEBUG = env('DEBUG', default=False)
-
 DOMAIN_NAME = env('DOMAIN_NAME', default='jew.pizza')
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='webmaster@localhost')
+
+EMAIL_HOST = env("EMAIL_HOST")
+EMAIL_HOST_USER = env("EMAIL_USERNAME")
+EMAIL_HOST_PASSWORD = env("EMAIL_PASSWORD")
+EMAIL_PORT = env.int("EMAIL_PORT", default=587)
+EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=(EMAIL_PORT == 587))
+DEFAULT_FROM_EMAIL = env('EMAIL_FROM_ADDRESS')
 
 if DEBUG:
     ALLOWED_HOSTS = ['*']
@@ -44,6 +50,9 @@ INSTALLED_APPS = [
 
     'webcore',
 ]
+
+if DEBUG:
+    INSTALLED_APPS.append('django_extensions')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -133,13 +142,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+EMAIL_TIMEOUT = 10
 
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = env('TIMEZONE', default='US/Eastern')
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-
 
 STATIC_URL = "/static/"
 STATIC_ROOT = '/static_root'

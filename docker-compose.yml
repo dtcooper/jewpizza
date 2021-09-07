@@ -1,6 +1,9 @@
 services:
   app:
-    image: dtcooper/jew_pizza_app:latest
+    build:
+      context: .
+      args:
+        - "DEBUG=${DEBUG:-0}"
     volumes:
       - ./.env:/.env
       - ./static:/static_root
@@ -8,8 +11,6 @@ services:
     depends_on:
       - db
     restart: always
-    build:
-      context: .
     ports:
       - "127.0.0.1:${LISTEN_PORT:-8000}:8000"
 
