@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cd /app/jew_pizza
+cd /app
 
 # Use the poetry's virtualenv
 export PATH="$(poetry env info -p)/bin:$PATH"

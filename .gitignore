@@ -1,6 +1,6 @@
 /media/
 /static/
-/tailwind/node_modules
+/tailwind/node_modules/
 /jew_pizza/webcore/static/css/styles.css
 .env
 docker-compose.override.yml

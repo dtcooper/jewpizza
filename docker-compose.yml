@@ -3,8 +3,8 @@ services:
     image: dtcooper/jew_pizza_app:latest
     volumes:
       - ./.env:/.env
-      - ./media:/app/media
-      - ./static:/app/static
+      - ./static:/static_root
+      - ./media:/media_root
     depends_on:
       - db
     restart: always

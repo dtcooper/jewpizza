@@ -1,2 +1,3 @@
-/tailwind/node_modules
 /.git/
+/tailwind/node_modules/
+/jew_pizza/webcore/static/css/styles.css

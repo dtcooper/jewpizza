@@ -10,7 +10,8 @@ services:
   app:
     restart: "no"
     volumes:
-      - .:/app
+      - ./jew_pizza:/app
+      - ./entrypoint.sh:/entrypoint.sh
     ports:
       - "${LISTEN_PORT:-8000}:8000"
     depends_on:
