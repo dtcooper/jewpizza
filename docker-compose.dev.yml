@@ -15,7 +15,7 @@ services:
     ports:
       - "${LISTEN_PORT:-8000}:8000"
     depends_on:
-      - tailwind-dev
+      - frontend-dev
 
   db:
     restart: "no"
