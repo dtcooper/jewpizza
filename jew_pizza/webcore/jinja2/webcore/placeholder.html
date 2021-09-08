@@ -3,12 +3,6 @@
 {% block extra_head %}
 <script src="{{ static('js/vendor/moment.min.js') }}"></script>
 <script src="{{ static('js/vendor/moment-timezone.min.js') }}"></script>
-
-<script>
-  window.ENV = {
-    userTZ: {% if 'testtz' in request.GET %}{{ request.GET['testtz'] | tojson }}{% else %}moment.tz.guess() || 'US/Eastern'{% endif %}
-  }
-</script>
 <script src="{{ static('js/placeholder.js') }}"></script>
 {% endblock %}
 

@@ -14,7 +14,7 @@ document.addEventListener('alpine:init', () => {
       }
     }))
     Alpine.data('localizedTimeBlurb', () => ({
-      userTZ: window.ENV.userTZ,
+      userTZ: window.DATA.test_tz || moment.tz.guess() || "US/Eastern",
       showNightBefore: false,
       showNight: false,
       nextShowStart: null,
