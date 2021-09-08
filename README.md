@@ -40,8 +40,8 @@ docker-compose-run --rm app ./manage.py
 # Run shell in app container
 docker-compose-run --rm app bash
 
-# Rebuild CSS (should happen automatically)
-docker-compose run --rm tailwind-dev npm run build
+# Rebuild CSS + JS (should happen automatically)
+docker-compose run --rm frontend-dev npm run build
 ```
 
 

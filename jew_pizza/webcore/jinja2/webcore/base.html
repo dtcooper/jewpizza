@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+<!--
+  Okay, so I used to be an engineer. I built this myself. I could have used
+  Squarespace, Wix, Wordpress or something, but I didn't. I probably should
+  have focused on radio work instead. If you want to see the source, go to
+  https://github.com/dtcooper/jew.pizza
+
+  And no, I'm NOT looking for work in the tech industry. So please don't ask!
+  (Or do. I'm flattered by it. Either way.)
+-->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <title>{{ title|default('jew.pizza') }}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  {% if settings.DEBUG and not request.GET.get('force_minified_css') %}
-    <link rel="stylesheet" href="{{ static('css/styles.css') }}?v={{ randint(100000000, 999999999) }}">
-  {% else %}
-    <link rel="stylesheet" href="{{ static('css/styles.min.css') }}">
-  {% endif %}
-  <script src="{{ static('js/alpine.min.js') }}" defer></script>
+
+  <link rel="stylesheet" href="{{ static('css/styles.css') }}{% if settings.DEBUG %}?v={{ randint(100000000, 999999999) }}{% endif %}">
+  <script src="{{ static('js/vendor/alpine.min.js') }}" defer></script>
   {% block extra_head %}{% endblock %}
 </head>
 <body class="overscroll-none {% block body_class %}{% endblock %}">
