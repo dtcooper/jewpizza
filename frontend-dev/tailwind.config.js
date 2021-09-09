@@ -30,12 +30,7 @@ module.exports = {
       fontFamily: {
         mono: ['"Space Mono"', ...defaultTheme.fontFamily.mono]
       },
-      colors: {
-        'brand-background': '#f5dcff',
-        brand: '#fe3f3f',
-        'brand-alt': '#008000',
-        ...colors
-      },
+      colors: colors,
       animation: {
         'spin-custom': 'spin var(--custom-spin-duration, 1s) linear infinite var(--custom-spin-direction, normal);'
       }
