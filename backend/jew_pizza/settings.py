@@ -129,6 +129,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Local memory cache is fine for now
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+    }
+}
+
 EMAIL_TIMEOUT = 10
 
 LANGUAGE_CODE = "en-us"

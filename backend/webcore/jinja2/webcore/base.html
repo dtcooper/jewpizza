@@ -13,16 +13,40 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <title>{{ title|default('jew.pizza') }}</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-  <link rel="stylesheet" href="{{ static('css/styles.css') }}{% if settings.DEBUG %}?v={{ randint(100000000, 999999999) }}{% endif %}">
+  <link rel="stylesheet" href="{{ static('css/styles.css') }}">
   <script src="{{ static('js/vendor/alpine.min.js') }}" defer></script>
   <script>
     const DATA = {{ (js_data or {})|tojson }}
   </script>
   {% block extra_head %}{% endblock %}
 </head>
-<body class="overscroll-none {% block body_class %}{% endblock %}">
-  {% block content required %}{% endblock content %}
+<body class="overscroll-none bg-gradient-to-br from-base-alt via-base-100 to-base-alt min-h-screen-iphone-fix w-screen">
+  {% block body %}
+    <div class="container mx-auto pt-3 lg:pt-6 px-2 md:px-4 border-l border-r border-black">
+      <header class="flex flex-col md:flex-row justify-center items-stretch md:space-x-8 lg:space-x-10">
+        {% macro header_image(top=true) -%}
+          <div class="{% if top %}hidden md:flex {% else %}flex{% endif %} flex-grow overflow-hidden justify-center">
+            <img
+              src="{{ static('images/david-headshot.jpg') }}" style="--custom-spin-duration: 4000ms;{% if top %} --custom-spin-direction: reverse;{% endif %}"
+              class="max-h-48 md:max-h-28 lg:max-h-36 xl:max-h-44 rounded-full border-[6px] md:border-4 xl:border-[6px] border-secondary animate-spin-custom select-none drag-none"
+            >
+          </div>
+        {%- endmacro %}
+        {{ header_image(top=true) }}
+        <div class="flex flex-row items-baseline md:flex-col justify-center md:space-y-4 md:space-x-0 mb-2 md:mb-0">
+          <h1 class="text-xl md:text-5xl lg:text-7xl xl:text-8xl font-bold italic text-primary lg:tracking-wide mr-2 md:mr-0">
+            David Cooper
+          </h1>
+          <h2 class="text-sm md:text-3xl lg:text-4xl xl:text-5xl font-bold md:font-normal italic text-primary lg:tracking-wide">Radio Personality</h2>
+        </div>
+        {{ header_image(top=false) }}
+      </header>
+      <div class="md:px-3">
+        {% block content required %}{% endblock content %}
+      </div>
+    </div>
+  {% endblock %}
 </body>
 </html>

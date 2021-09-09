@@ -23,14 +23,19 @@ module.exports = {
   },
   theme: {
     screens: {
-      xs: '475px',
-      ...defaultTheme.screens
+      sm: defaultTheme.screens.sm,
+      md: defaultTheme.screens.md,
+      lg: defaultTheme.screens.lg,
+      xl: defaultTheme.screens.xl
     },
     extend: {
       fontFamily: {
         mono: ['"Space Mono"', ...defaultTheme.fontFamily.mono]
       },
-      colors: colors,
+      colors: {
+        'base-alt': '#ffdfad',
+        ...colors
+      },
       animation: {
         'spin-custom': 'spin var(--custom-spin-duration, 1s) linear infinite var(--custom-spin-direction, normal);'
       }

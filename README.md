@@ -37,11 +37,14 @@ The development server will run at <http://localhost:8000/>.
 # Django management command
 docker-compose-run --rm app ./manage.py
 
-# Run shell in app container
+# Run shell in app container (make shell)
 docker-compose-run --rm app bash
 
-# Rebuild CSS + JS (should happen automatically)
+# Rebuild CSS + JS - should happen automatically (make frontend-build)
 docker-compose run --rm frontend-dev npm run build
+
+# Pre commit checks (not required)
+make pre-commit
 ```
 
 

@@ -1,5 +1,14 @@
 {% extends 'webcore/base.html' %}
 
 {% block content %}
-    <h1 class="text-5xl text-center mt-5">Index goes here</h1>
+    <div class="text-lh mt-5">
+        Some content goes here &mdash;
+        <span class="font-bold">
+            size:<!--
+                --><div class="inline md:hidden">sm</div><!--
+                --><div class="hidden md:inline lg:hidden">md</div><!--
+                --><div class="hidden lg:inline xl:hidden">lg</div><!--
+                --><div class="hidden xl:inline">xl</div>
+        </span>
+    </div>
 {% endblock %}

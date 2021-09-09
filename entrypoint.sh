@@ -32,7 +32,7 @@ fi
 
 
 if [ "$#" != 0 ]; then
-    exec $@
+    exec "$@"
 else
     if [ -z "$DEBUG" -o "$DEBUG" = '0' ]; then
         ./manage.py collectstatic --noinput
