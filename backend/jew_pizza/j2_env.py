@@ -19,6 +19,7 @@ def shuffle(items):
 
 
 def static(path, *args, **kwargs):
+    # NOTE: This will only work for in-memory cache, which resets upon restart!
     path_hash = None
 
     for ext in (".js", ".css"):
