@@ -12,10 +12,10 @@ module.exports = {
   purge: {
     enabled: true,
     content: [
-      '../jew_pizza/**/templates/*.html',
-      '../jew_pizza/**/jinja2/*.html',
-      '../jew_pizza/**/templates/**/*.html',
-      '../jew_pizza/**/jinja2/**/*.html'
+      '../backend/**/templates/*.html',
+      '../backend/**/jinja2/*.html',
+      '../backend/**/templates/**/*.html',
+      '../backend/**/jinja2/**/*.html'
     ],
     safelist: [
       'animate-spin'

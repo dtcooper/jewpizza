@@ -15,12 +15,12 @@ RUN pip install --no-cache-dir "poetry==$POETRY_VERSION"
 
 RUN mkdir /app
 WORKDIR /app
-COPY jew_pizza/pyproject.toml jew_pizza/poetry.lock /app/
+COPY backend/pyproject.toml backend/poetry.lock /app/
 RUN poetry install \
     $(if [ -z "$DEBUG" -o "$DEBUG" = '0' ]; then echo '--no-dev'; fi)
 
 COPY entrypoint.sh /
-COPY jew_pizza/ /app/
+COPY backend/ /app/
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD []

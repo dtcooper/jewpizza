@@ -10,7 +10,7 @@ services:
   app:
     restart: "no"
     volumes:
-      - ./jew_pizza:/app
+      - ./backend:/app
       - ./entrypoint.sh:/entrypoint.sh
     ports:
       - "${LISTEN_PORT:-8000}:8000"
