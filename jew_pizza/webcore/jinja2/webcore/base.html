@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="{{ static('css/styles.css') }}{% if settings.DEBUG %}?v={{ randint(100000000, 999999999) }}{% endif %}">
   <script src="{{ static('js/vendor/alpine.min.js') }}" defer></script>
   <script>
-    window.DATA = {{ (js_data or {})|tojson }}
+    const DATA = {{ (js_data or {})|tojson }}
   </script>
   {% block extra_head %}{% endblock %}
 </head>
