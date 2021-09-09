@@ -15,7 +15,7 @@
   <title>{{ title|default('jew.pizza') }}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="{{ static('css/styles.css') }}{% if settings.DEBUG %}?v={{ randint(100000000, 999999999) }}{% endif %}">
+  <link rel="stylesheet" href="{{ static('css/styles.css') }}">
   <script src="{{ static('js/vendor/alpine.min.js') }}" defer></script>
   <script>
     const DATA = {{ (js_data or {})|tojson }}
