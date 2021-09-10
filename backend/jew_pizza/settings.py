@@ -14,7 +14,9 @@ if os.path.exists("/.env"):
 SECRET_KEY = env("SECRET_KEY")
 DEBUG = env("DEBUG", default=False)
 DOMAIN_NAME = env("DOMAIN_NAME", default="jew.pizza")
-DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="webmaster@localhost")
+
+# For testing gunicorn only.
+SERVE_ASSETS_FROM_DJANGO = env("SERVE_ASSETS_FROM_DJANGO", default=False)
 
 EMAIL_HOST = env("EMAIL_HOST")
 EMAIL_HOST_USER = env("EMAIL_USERNAME")
@@ -41,15 +43,17 @@ INSTALLED_APPS = [
 if DEBUG:
     INSTALLED_APPS.append("django_extensions")
 
-MIDDLEWARE = [
-    "django.middleware.security.SecurityMiddleware",
+MIDDLEWARE = ["django.middleware.security.SecurityMiddleware"]
+if not DEBUG and SERVE_ASSETS_FROM_DJANGO:
+    MIDDLEWARE.append('whitenoise.middleware.WhiteNoiseMiddleware')
+MIDDLEWARE.extend([
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-]
+])
 
 ROOT_URLCONF = "jew_pizza.urls"
 

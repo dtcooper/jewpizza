@@ -6,8 +6,8 @@ services:
         - "DEBUG=${DEBUG:-0}"
     volumes:
       - ./.env:/.env
-      - ./static:/static_root
-      - ./media:/media_root
+      - ./serve/static:/static_root
+      - ./serve/media:/media_root
     depends_on:
       - db
     restart: always

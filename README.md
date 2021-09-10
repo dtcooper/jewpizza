@@ -57,9 +57,10 @@ docker-compose build
 docker-compose up -d
 ```
 
-NOTE: gunicorn will listen on `127.0.0.1:${LISTEN_PORT}` (default `8000` in your `.env` file).
-You will have to reverse proxy into the service using `nginx` (or similar) and serve the
-static + media assets (deployed to the `static/` and `media/` folders, respectively).
+NOTE: [Gunicorn](https://gunicorn.org/) will listen on `127.0.0.1:${LISTEN_PORT}`
+(default `8000` in your `.env` file). You will have to reverse proxy into the service
+using `nginx` (or similar) and serve the static and media assets (deployed to the
+`serve/static/` and `serve/media/` folders, respectively).
 
 A sample nginx config might be,
 
@@ -69,11 +70,11 @@ server {
     server_name sample.domain.com;
 
     location /static {
-        alias /home/user/jew.pizza/static;
+        alias /home/user/jew.pizza/serve/static;
     }
 
     location /media {
-        alias /home/user/jew.pizza/media;
+        alias /home/user/jew.pizza/serve/media;
     }
 
     location / {
@@ -81,4 +82,12 @@ server {
         proxy_pass http://127.0.0.1:8000;
     }
 }
+```
+
+Or if you want to **TEST** with `DEBUG=0` without running nginx and have Gunicorn
+serve your static assets using [Whitenoise](http://whitenoise.evans.io/en/stable/),
+add the following to your `.env` file,
+
+```
+SERVE_ASSETS_FROM_DJANGO=1
 ```

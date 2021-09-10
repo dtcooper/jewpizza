@@ -1,3 +1,4 @@
 /.git/
-/frontend-dev/node_modules/
 /backend/webcore/static/css/styles.css
+/frontend-dev/node_modules/
+/serve/

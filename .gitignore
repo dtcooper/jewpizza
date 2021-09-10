@@ -1,6 +1,5 @@
-/media/
-/static/
-/frontend-dev/node_modules/
-/backend/webcore/static/css/styles.css
 .env
+/backend/webcore/static/css/styles.css
+/frontend-dev/node_modules/
+/serve/
 docker-compose.override.yml
