@@ -25,23 +25,38 @@
 <body class="overscroll-none bg-gradient-to-br from-base-alt via-base-100 to-base-alt min-h-screen-iphone-fix w-screen">
   {% block body %}
     <div class="container mx-auto pt-3 lg:pt-6 px-2 md:px-4">
-      <header class="flex flex-col md:flex-row justify-center items-stretch md:space-x-8 lg:space-x-10">
-        {% macro header_image(top=true) -%}
-          <div class="{% if top %}hidden md:flex {% else %}flex{% endif %} flex-grow overflow-hidden justify-center">
+      <header class="grid grid-cols-1 md:grid-cols-[1fr,max-content,1fr] justify-items-center md:justify-items-stretch">
+        <h1 class="order-3 md:order-3 self-center text-[length:min(max(10vw,1.875rem),3.5rem)] leading-snug md:text-5xl lg:text-7xl xl:text-8xl font-bold italic text-primary lg:tracking-wide mr-2 md:mr-0 z-10">David Cooper</h1>
+        <h2 class="order-4 md:order-5 md:row-start-3 md:col-start-2 self-center text-[length:min(max(7vw,1.25rem),3rem)] leading-snug md:text-3xl lg:text-4xl xl:text-5xl italic text-primary lg:tracking-wide z-10">Radio Personality</h2>
+        {% for left_image in (true, false) %}
+          <div class="{% if left_image %}order-3 md:order-2 flex{% else %}order-4 hidden md:flex{% endif %} flex-col row-span-2 overflow-hidden items-center z-10">
             <img
-              src="{{ static('images/david-headshot.jpg') }}" style="--custom-spin-duration: 4000ms;{% if top %} --custom-spin-direction: reverse;{% endif %}"
-              class="max-h-48 md:max-h-28 lg:max-h-36 xl:max-h-44 rounded-full border-[6px] md:border-4 xl:border-[6px] border-secondary animate-spin-custom select-none drag-none"
+              src="{{ static('images/david-headshot.jpg') }}" style="--custom-spin-duration: 4000ms;{% if left_image %} --custom-spin-direction: reverse;{% endif %}"
+              class="max-h-[min(max(45vw,10rem),16rem)] md:max-h-28 lg:max-h-36 xl:max-h-44 rounded-full border-[6px] md:border-4 xl:border-[6px] border-secondary animate-spin-custom select-none drag-none z-10"
             >
           </div>
-        {%- endmacro %}
-        {{ header_image(top=true) }}
-        <div class="flex flex-row items-baseline md:flex-col justify-center md:space-y-4 md:space-x-0 mb-2 md:mb-0">
-          <h1 class="text-xl md:text-5xl lg:text-7xl xl:text-8xl font-bold italic text-primary lg:tracking-wide mr-2 md:mr-0">
-            David Cooper
-          </h1>
-          <h2 class="text-sm md:text-3xl lg:text-4xl xl:text-5xl font-bold md:font-normal italic text-primary lg:tracking-wide">Radio Personality</h2>
-        </div>
-        {{ header_image(top=false) }}
+        {% endfor %}
+        {%- macro random_spin_style(min=650, max=2750, direction=undefined) -%}
+          {%- if direction is none and random_bool() -%}
+            {%- set direction = 'reverse' -%}
+          {%- endif -%}
+
+          --custom-spin-duration: {{ (range(min, max)|random) / 1000 }}s; --custom-spin-direction: {{ direction|default(['normal', 'reverse']|random) }}
+        {%- endmacro -%}
+        {% for top in (true, false) %}
+          {% set items = cycler(*shuffle(['&#x1F355;', '&#x2721;&#xFE0F;', '&#x1F4FB;', '&#x2620;&#xFE0F;', '&#x1F399;&#xFE0F;',
+                                          '&#x1F4A9;', '&#x1F54D;', 'jew', 'pizza', '&#x1F46F;&#x200D;&#x2640;&#xFE0F;'])) %}
+          <div class="{% if top %}order-1 md:mb-2{% else %}order-6 mt-2{% endif %} md:col-span-3 justify-self-stretch flex justify-between items-center text-xl text-lg md:text-4xl lg:text-5xl xl:text-6xl font-sans select-none z-0">
+            {% for i in range(10) %}
+              {% set item = items.next() %}
+              {% if item.isalpha() %}
+                <span class="animate-spin-custom text-accent font-bold font-mono text-xs md:text-lg z-0" style="{{ random_spin_style() }}">{{ item }}</span>
+              {% else %}
+                <span class="animate-spin-custom z-0" style="{{ random_spin_style() }}">{{ item|safe }}</span>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endfor %}
       </header>
       <div class="md:px-3">
         {% block content required %}{% endblock content %}
