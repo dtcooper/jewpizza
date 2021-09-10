@@ -22,43 +22,44 @@
   </script>
   {% block extra_head %}{% endblock %}
 </head>
-<body class="overscroll-none bg-gradient-to-br from-base-alt via-base-100 to-base-alt min-h-screen-iphone-fix w-screen">
+<body class="overscroll-none bg-gradient-to-br from-base-alt via-base-100 to-base-alt min-h-screen-iphone-fix w-full">
   {% block body %}
-    <div class="container mx-auto pt-3 lg:pt-6 px-2 md:px-4">
-      <header class="grid grid-cols-1 md:grid-cols-[1fr,max-content,1fr] justify-items-center md:justify-items-stretch">
-        <h1 class="order-3 md:order-3 self-center text-[length:min(max(10vw,1.875rem),3.5rem)] leading-snug md:text-5xl lg:text-7xl xl:text-8xl font-bold italic text-primary lg:tracking-wide mr-2 md:mr-0 z-10">David Cooper</h1>
-        <h2 class="order-4 md:order-5 md:row-start-3 md:col-start-2 self-center text-[length:min(max(7vw,1.25rem),3rem)] leading-snug md:text-3xl lg:text-4xl xl:text-5xl italic text-primary lg:tracking-wide z-10">Radio Personality</h2>
-        {% for left_image in (true, false) %}
-          <div class="{% if left_image %}order-3 md:order-2 flex{% else %}order-4 hidden md:flex{% endif %} flex-col row-span-2 overflow-hidden items-center z-10">
-            <img
-              src="{{ static('images/david-headshot.jpg') }}" style="--custom-spin-duration: 4000ms;{% if left_image %} --custom-spin-direction: reverse;{% endif %}"
-              class="max-h-[min(max(45vw,10rem),16rem)] md:max-h-28 lg:max-h-36 xl:max-h-44 rounded-full border-[6px] md:border-4 xl:border-[6px] border-secondary animate-spin-custom select-none drag-none z-10"
-            >
-          </div>
-        {% endfor %}
-        {%- macro random_spin_style(min=650, max=2750, direction=undefined) -%}
+    <div class="container mx-auto pt-3 lg:pt-6 px-4">
+      <header class="grid grid-cols-1 md:grid-cols-[1fr,max-content,1fr] justify-items-center md:justify-items-stretch border-4 md:border-[6px] xl:border-8 border-dotted rounded-3xl border-primary px-1 md:px-2 py-2 md:py-3 xl:py-4">
+        <h1 class="order-3 md:order-3 self-center text-[length:min(10vw,3.5rem)] leading-snug md:text-5xl lg:text-7xl xl:text-8xl font-bold italic text-primary lg:tracking-wide mr-2 md:mr-0 z-10">David Cooper</h1>
+        <h2 class="order-4 md:order-5 md:row-start-3 md:col-start-2 self-center text-[length:min(7vw,3rem)] leading-snug md:text-3xl lg:text-4xl xl:text-5xl italic text-primary lg:tracking-wide z-10">Radio Personality</h2>
+        {%- macro random_spin_style(min=850, max=2750, direction=undefined) -%}
           {%- if direction is none and random_bool() -%}
             {%- set direction = 'reverse' -%}
           {%- endif -%}
 
           --custom-spin-duration: {{ (range(min, max)|random) / 1000 }}s; --custom-spin-direction: {{ direction|default(['normal', 'reverse']|random) }}
         {%- endmacro -%}
+        {% for left_image in (true, false) %}
+          <div class="{% if left_image %}order-3 md:order-2 flex{% else %}order-4 hidden md:flex{% endif %} flex-col row-span-2 overflow-hidden items-center z-10">
+            <img
+              src="{{ static('images/david-headshot.jpg') }}" style="{{ random_spin_style(2000, 6000, ('reverse' if left_image else 'normal')) }}"
+              class="max-h-[min(max(45vw,10rem),16rem)] md:max-h-28 lg:max-h-36 xl:max-h-44 rounded-full border-[6px] md:border-4 xl:border-[6px] border-secondary animate-spin-custom select-none drag-none z-10"
+            >
+          </div>
+        {% endfor %}
         {% for top in (true, false) %}
-          {% set items = cycler(*shuffle(['&#x1F355;', '&#x2721;&#xFE0F;', '&#x1F4FB;', '&#x2620;&#xFE0F;', '&#x1F399;&#xFE0F;',
-                                          '&#x1F4A9;', '&#x1F54D;', 'jew', 'pizza', '&#x1F46F;&#x200D;&#x2640;&#xFE0F;'])) %}
-          <div class="{% if top %}order-1 md:mb-2{% else %}order-6 mt-2{% endif %} md:col-span-3 justify-self-stretch flex justify-between items-center text-xl text-lg md:text-4xl lg:text-5xl xl:text-6xl font-sans select-none z-0">
+          {% set items = cycler(*shuffle([('&#x1F355;', True), ('&#x2721;&#xFE0F;', True), ('&#x1F4FB;', True), ('&#x1F54D;', True),
+                                          ('&#x1F399;&#xFE0F;', True), ('&#x1F4A9;', True), ('&#x2620;&#xFE0F;', False), ('jew', False),
+                                          ('pizza', False), ('&#x1F46F;&#x200D;&#x2640;&#xFE0F;', False)])) %}
+          <div class="{% if top %}order-1 md:mb-2{% else %}order-6 mt-2{% endif %} mx-3 md:col-span-3 justify-self-stretch flex justify-between items-center select-none z-0">
             {% for i in range(10) %}
-              {% set item = items.next() %}
+              {% set (item, show_small) = items.next() %}
               {% if item.isalpha() %}
-                <span class="animate-spin-custom text-accent font-bold font-mono text-xs md:text-lg z-0" style="{{ random_spin_style() }}">{{ item }}</span>
+                <div class="{% if not show_small %}hidden md:block {% endif %}animate-spin-custom text-accent font-bold italic md:text-md lg:text-xl xl:text-2xl z-0" style="{{ random_spin_style() }}">{{ item }}</div>
               {% else %}
-                <span class="animate-spin-custom z-0" style="{{ random_spin_style() }}">{{ item|safe }}</span>
+                <div class="{% if not show_small %}hidden md:block {% endif %}animate-spin-custom font-sans text-3xl md:text-4xl lg:text-5xl xl:text-6xl z-0" style="{{ random_spin_style() }}">{{ item|safe }}</div>
               {% endif %}
             {% endfor %}
           </div>
         {% endfor %}
       </header>
-      <div class="md:px-3">
+      <div>
         {% block content required %}{% endblock content %}
       </div>
     </div>

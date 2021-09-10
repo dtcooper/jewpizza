@@ -1,5 +1,6 @@
 services:
   frontend-dev:
+    restart: "on-failure"
     image: library/node:16-alpine
     working_dir: /app/frontend-dev
     command: "/bin/sh -c '[ ! -d node_modules ] && npm install; npm run watch'"
@@ -8,7 +9,7 @@ services:
     tty: true  # Needed for tailwind --watch to work properly
 
   app:
-    restart: "no"
+    restart: "on-failure"
     volumes:
       - ./backend:/app
       - ./entrypoint.sh:/entrypoint.sh
@@ -18,4 +19,4 @@ services:
       - frontend-dev
 
   db:
-    restart: "no"
+    restart: "on-failure"
