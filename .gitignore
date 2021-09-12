@@ -1,5 +1,6 @@
 .env
 /backend/webcore/static/css/styles.css
+/frontend-dev/.cache/
 /frontend-dev/node_modules/
 /serve/
 docker-compose.override.yml
