@@ -1,4 +1,4 @@
-.PHONY: frontend-build lint format pre-commit shell frontend-shell deploy
+.PHONY: frontend-build lint format pre-commit shell frontend-shell show-outdated copy-js-vendor-deps deploy
 
 frontend-build:
 	@docker-compose run --rm frontend-dev npm run build
@@ -16,6 +16,16 @@ shell:
 
 frontend-shell:
 	@docker-compose run --rm frontend-dev ash
+
+show-outdated:
+	@echo 'Showing outdated dependencies... (empty for none)'
+	@echo '============== Frontend =============='
+	@docker-compose run --rm frontend-dev npm outdated
+	@echo '============== Backend ==============='
+	@docker-compose run --rm --no-deps app poetry show -o
+
+copy-js-vendor-deps:
+	@docker-compose run --rm frontend-dev ./copy_vendor_deps.sh
 
 deploy:
 	git push && ssh jew.pizza 'cd jew.pizza; git pull --ff-only && docker-compose build && docker-compose up -d'
