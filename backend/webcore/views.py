@@ -12,7 +12,7 @@ class PlaceholderView(TemplateView):
     extra_context = {"title": "jew.pizza - David Cooper", "hide_header": True}
 
     def get_context_data(self, **kwargs):
-        return{
+        return {
             "eastern_tz_abbrev": timezone("US/Eastern").localize(datetime.datetime.now()).tzname(),
             "js_data": {"test_tz": self.request.GET.get("testtz")},
             **super().get_context_data(**kwargs),

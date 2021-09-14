@@ -28,7 +28,7 @@ def static(path, *args, **kwargs):
             if not path.endswith(f".min{ext}"):
                 if settings.DEBUG:
                     # In DEBUG, use a simple random fake md5 hash
-                    path_hash = '{:032x}'.format(random.randrange(16**32))
+                    path_hash = "{:032x}".format(random.randrange(16 ** 32))
                 else:
                     # In prod, swap out to request the minified version
                     path = f"{path.removesuffix(ext)}.min{ext}"
