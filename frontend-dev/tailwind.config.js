@@ -15,7 +15,8 @@ module.exports = {
       '../backend/**/templates/*.html',
       '../backend/**/jinja2/*.html',
       '../backend/**/templates/**/*.html',
-      '../backend/**/jinja2/**/*.html'
+      '../backend/**/jinja2/**/*.html',
+      '../backend/**/static/js/*.js'
     ],
     safelist: [
       'animate-spin'
