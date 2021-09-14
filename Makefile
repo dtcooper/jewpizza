@@ -34,4 +34,4 @@ copy-js-vendor-deps:
 	@$(COMPOSE) run --rm frontend-dev ./copy_vendor_deps.sh
 
 deploy:
-	git push && ssh jew.pizza 'cd jew.pizza; git pull --ff-only && docker-compose build && docker-compose up -d'
+	git push && ssh jew.pizza 'cd jew.pizza; git pull --ff-only && docker compose build && docker-compose up -d'
