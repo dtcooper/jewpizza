@@ -27,13 +27,13 @@ def static(path, *args, **kwargs):
             # If we're not requesting the minified version
             if not path.endswith(f".min{ext}"):
                 if settings.DEBUG:
-                    # In DEBUG, append a simple random number each request
-                    path_hash = str(random.randint(100000000, 999999999))
+                    # In DEBUG, use a simple random fake md5 hash
+                    path_hash = '{:032x}'.format(random.randrange(16**32))
                 else:
                     # In prod, swap out to request the minified version
                     path = f"{path.removesuffix(ext)}.min{ext}"
 
-            if not settings.DEBUG:
+            if not path_hash:
                 cache_key = f"jew.pizza::file-md5::{path}"
                 # Now compute (or get from cache) md5 sum of file
                 path_hash = cache.get(cache_key)

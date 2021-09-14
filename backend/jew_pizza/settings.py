@@ -81,6 +81,9 @@ TEMPLATES = [
             "autoescape": lambda filename: any(filename.endswith(ext) for ext in (".xml", ".html")),
             "keep_trailing_newline": True,
             "environment": "jew_pizza.j2_env.environment",
+            'extensions': [
+                'jinja2.ext.do',
+            ],
         },
     },
 ]

@@ -17,17 +17,22 @@
 
   <link rel="stylesheet" href="{{ static('css/styles.css') }}">
   <script src="{{ static('js/vendor/alpine.min.js') }}" defer></script>
+  <script src="{{ static('js/base.js') }}"></script>
+  {%- set _js_data = {'debug': settings.DEBUG,
+                      'is_authenticated': request.user.is_authenticated,
+                      'is_superuser': request.user.is_superuser} %}
+  {%- do _js_data.update(js_data or {}) %}
   <script>
-    const DATA = {{ (js_data or {})|tojson }}
+    const DATA = {{ _js_data|tojson }}
   </script>
   {% block extra_head %}{% endblock %}
 </head>
-<body class="overscroll-none bg-gradient-to-br from-base-alt via-base-100 to-base-alt min-h-screen-iphone-fix w-full">
+<body x-data="bodyColors" :class="currentColor" class="overscroll-none transition duration-1000 ease-linear min-h-screen-iphone-fix w-full">
   {% block body %}
     <div class="container mx-auto pt-3 lg:pt-6 px-4">
-      <header class="grid grid-cols-1 md:grid-cols-[1fr,max-content,1fr] justify-items-center md:justify-items-stretch border-4 md:border-[6px] xl:border-8 border-dotted rounded-3xl border-primary px-1 md:px-2 py-2 md:py-3 xl:py-4">
-        <h1 class="order-3 md:order-3 self-center text-[length:min(10vw,3.5rem)] leading-snug md:text-5xl lg:text-7xl xl:text-8xl font-bold italic text-primary lg:tracking-wide mr-2 md:mr-0 z-10">David Cooper</h1>
-        <h2 class="order-4 md:order-5 md:row-start-3 md:col-start-2 self-center text-[length:min(7vw,3rem)] leading-snug md:text-3xl lg:text-4xl xl:text-5xl italic text-primary lg:tracking-wide z-10">Radio Personality</h2>
+      <header class="grid grid-cols-1 md:grid-cols-[1fr,max-content,1fr] justify-items-center md:justify-items-stretch border-4 md:border-[6px] xl:border-8 border-dotted rounded-3xl border-base-100 px-1 md:px-2 py-2 md:py-3 xl:py-4">
+        <h1 class="order-3 md:order-3 self-center text-[length:min(10vw,3.5rem)] leading-snug md:text-5xl lg:text-7xl xl:text-8xl font-bold italic text-primary-content lg:tracking-wide mr-2 md:mr-0 z-10">David Cooper</h1>
+        <h2 class="order-4 md:order-5 md:row-start-3 md:col-start-2 self-center text-[length:min(7vw,3rem)] leading-snug md:text-3xl lg:text-4xl xl:text-5xl italic text-primary-content lg:tracking-wide z-10">Radio Personality</h2>
         {%- macro random_spin_style(min=850, max=2750, direction=undefined) -%}
           {%- if direction is none and random_bool() -%}
             {%- set direction = 'reverse' -%}
@@ -51,7 +56,7 @@
             {% for i in range(10) %}
               {% set (item, show_small) = items.next() %}
               {% if item.isalpha() %}
-                <div class="{% if not show_small %}hidden md:block {% endif %}animate-spin-custom text-accent font-bold italic md:text-md lg:text-xl xl:text-2xl z-0" style="{{ random_spin_style() }}">{{ item }}</div>
+                <div class="{% if not show_small %}hidden md:block {% endif %}animate-spin-custom text-primary-content font-bold italic md:text-md lg:text-xl xl:text-2xl z-0" style="{{ random_spin_style() }}">{{ item }}</div>
               {% else %}
                 <div class="{% if not show_small %}hidden md:block {% endif %}animate-spin-custom font-sans text-3xl md:text-4xl lg:text-5xl xl:text-6xl z-0" style="{{ random_spin_style() }}">{{ item|safe }}</div>
               {% endif %}
@@ -63,6 +68,8 @@
         {% block content required %}{% endblock content %}
       </div>
     </div>
+
+    <span class="fixed bottom-4 right-4 font-sans text-lg sm:text-xl lg:text-3xl duration-[1500ms] filter hover:hue-rotate-[360deg] select-none">&#x2721;&#xFE0F; &#x1F355;</span>
   {% endblock %}
 </body>
 </html>
