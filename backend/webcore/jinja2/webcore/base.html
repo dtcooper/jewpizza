@@ -15,12 +15,19 @@
   <title>{{ title|default('jew.pizza') }}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700" rel="stylesheet">
   <link rel="stylesheet" href="{{ static('css/styles.css') }}">
-  <script src="{{ static('js/vendor/alpine.min.js') }}" defer></script>
+
+  <script src="{{ static('npm/alpinejs/dist/cdn.min.js') }}" defer></script>
   <script src="{{ static('js/base.js') }}"></script>
-  {%- set _js_data = {'debug': settings.DEBUG,
-                      'is_authenticated': request.user.is_authenticated,
-                      'is_superuser': request.user.is_superuser} %}
+
+  {%- set _js_data = {
+    'debug': settings.DEBUG,
+    'is_authenticated': request.user.is_authenticated,
+    'is_superuser': request.user.is_superuser,
+  } %}
   {%- do _js_data.update(js_data or {}) %}
   <script>
     const DATA = {{ _js_data|tojson }}

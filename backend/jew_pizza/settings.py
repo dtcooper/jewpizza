@@ -36,8 +36,9 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    "django.contrib.staticfiles",
+    # To override the runserver command, placed before staticfiles
     "webcore",
+    "django.contrib.staticfiles",
 ]
 
 if DEBUG:
@@ -159,3 +160,17 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = "/media_root"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+NPM_ROOT_PATH = '/app/frontend'
+NPM_STATIC_FILES_PREFIX = 'npm'
+NPM_FILE_PATTERNS = {
+    'alpinejs': ['dist/cdn.min.js'],
+    'moment': ['min/moment.min.js'],
+    'moment-timezone': ['builds/moment-timezone-with-data-1970-2030.min.js'],
+}
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'npm.finders.NpmFinder',
+]

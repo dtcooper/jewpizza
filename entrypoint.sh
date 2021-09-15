@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cd /app
+cd /app/backend
 
 # Use the poetry's virtualenv
 export PATH="$(poetry env info -p)/bin:$PATH"
@@ -35,6 +35,7 @@ if [ "$#" != 0 ]; then
     exec "$@"
 else
     if [ -z "$DEBUG" -o "$DEBUG" = '0' ]; then
+        npm --prefix=../frontend run build
         ./manage.py collectstatic --noinput
     fi
 

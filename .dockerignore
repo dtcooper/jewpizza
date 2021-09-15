@@ -1,5 +1,7 @@
+.env
 /.git/
-/backend/webcore/static/css/styles.css
-/frontend-dev/.cache/
-/frontend-dev/node_modules/
+/backend/webcore/static/css/styles*.css
+/backend/*/static/js/*.min.js
+/frontend/.cache/
+/frontend/node_modules/
 /serve/

@@ -2,7 +2,7 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 const colors = require('tailwindcss/colors')
 const cyberpunkTheme = require('daisyui/colors/themes')['[data-theme=cyberpunk]']
 
-delete colors.lightBlue
+delete colors.lightBlue // Avoid a tailwind deprecation warning
 
 module.exports = {
   mode: 'jit',
@@ -14,11 +14,11 @@ module.exports = {
   purge: {
     enabled: true,
     content: [
-      '../backend/**/templates/*.html',
       '../backend/**/jinja2/*.html',
-      '../backend/**/templates/**/*.html',
       '../backend/**/jinja2/**/*.html',
-      '../backend/**/static/js/*.js'
+      '../backend/**/static/js/*.js',
+      '../backend/**/templates/*.html',
+      '../backend/**/templates/**/*.html'
     ],
     safelist: [
       'animate-spin'

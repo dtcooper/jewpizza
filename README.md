@@ -12,7 +12,7 @@ Create an edit `.env`, and optionally copy over docker-compose dev overrides.
 # Edit me, you'll probably want to be in development mode (DEBUG=1)
 cp .env.sample .env
 
-# For development only, ie if in development mode
+# Option, for dev only to get live reload
 ln -s docker-compose.dev.yml docker-compose.override.yml
 ```
 
@@ -39,9 +39,6 @@ docker-compose-run --rm app ./manage.py
 
 # Run shell in app container (make shell)
 docker-compose-run --rm app bash
-
-# Rebuild CSS + JS - should happen automatically (make frontend-build)
-docker-compose run --rm frontend-dev npm run build
 
 # Pre commit checks (not required)
 make pre-commit
