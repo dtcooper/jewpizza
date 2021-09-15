@@ -1,9 +1,6 @@
-.PHONY: build lint format pre-commit shell show-outdated deploy
+.PHONY: lint format pre-commit shell show-outdated deploy
 
 COMPOSE=docker compose
-
-build:
-	@$(COMPOSE) build --pull
 
 lint:
 	@$(COMPOSE) run --rm --no-deps app flake8 || exit 0

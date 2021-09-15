@@ -5,6 +5,7 @@ services:
       - .:/app
     ports:
       - "${LISTEN_PORT:-8000}:8000"
+    tty: true  # needed for tailwind --watch
 
   db:
     restart: "no"

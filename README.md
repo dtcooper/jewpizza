@@ -12,7 +12,7 @@ Create an edit `.env`, and optionally copy over docker-compose dev overrides.
 # Edit me, you'll probably want to be in development mode (DEBUG=1)
 cp .env.sample .env
 
-# Option, for dev only to get live reload
+# Needed for development only (when DEBUG=1)
 ln -s docker-compose.dev.yml docker-compose.override.yml
 ```
 

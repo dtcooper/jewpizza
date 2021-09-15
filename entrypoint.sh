@@ -34,7 +34,12 @@ fi
 if [ "$#" != 0 ]; then
     exec "$@"
 else
-    if [ -z "$DEBUG" -o "$DEBUG" = '0' ]; then
+    if [ "$DEBUG" -a "$DEBUG" != '0' ]; then
+        if [ ! -d '../frontend/node_modules' ]; then
+            # In case /app is mounted in Docker, needed to re-install the /app/frontend/node_modules folder
+            npm --prefix=../frontend install
+        fi
+    else
         npm --prefix=../frontend run build
         ./manage.py collectstatic --noinput
     fi

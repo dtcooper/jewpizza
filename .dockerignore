@@ -1,7 +1,8 @@
-.env
 /.git/
-/backend/webcore/static/css/styles*.css
+# Below copied from .gitignore
+.env
 /backend/*/static/js/*.min.js
-/frontend/.cache/
+/backend/webcore/static/css/styles*.css
 /frontend/node_modules/
 /serve/
+docker-compose.override.yml

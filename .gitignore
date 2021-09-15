@@ -1,5 +1,5 @@
 .env
-/backend/webcore/*/js/*.min.js
+/backend/*/static/js/*.min.js
 /backend/webcore/static/css/styles*.css
 /frontend/node_modules/
 /serve/
