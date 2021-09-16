@@ -21,7 +21,6 @@
   <link rel="stylesheet" href="{{ static('css/styles.css') }}">
 
   <script src="{{ static('js/vendor/alpinejs/dist/cdn.min.js') }}" defer></script>
-  <script src="{{ static('js/base.js') }}"></script>
 
   {%- set _js_data = {
     'debug': settings.DEBUG,
@@ -34,7 +33,7 @@
   </script>
   {% block extra_head %}{% endblock %}
 </head>
-<body x-data="bodyColors" :class="currentColor" class="overscroll-none transition duration-1000 ease-linear min-h-screen-iphone-fix w-full">
+<body class="overscroll-none transition duration-1000 ease-linear min-h-screen-iphone-fix w-full">
   {% block body %}
     <div class="container mx-auto pt-3 lg:pt-6 px-4">
       <header class="grid grid-cols-1 md:grid-cols-[1fr,max-content,1fr] justify-items-center md:justify-items-stretch border-4 md:border-[6px] xl:border-8 border-dotted rounded-3xl border-base-100 px-1 md:px-2 py-2 md:py-3 xl:py-4">
