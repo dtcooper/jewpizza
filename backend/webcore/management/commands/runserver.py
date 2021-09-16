@@ -1,6 +1,8 @@
 import subprocess
 import threading
+import sys
 
+from django.core.management import CommandError
 from django.contrib.staticfiles.management.commands.runserver import Command as RunserverCommand
 
 
@@ -13,6 +15,11 @@ class Command(RunserverCommand):
             dest="with_npm_watch",
             help="Do NOT run 'npm run watch' in a seprate thread",
         )
+
+    def handle(self, *args, **options):
+        if options["with_npm_watch"] and not sys.stdin.isatty():
+            raise CommandError("stdin is *NOT* a tty, can't run tailwind (npm run watch). Is docker-compose.dev.yml -> docker-compose.override.yml symlinked?")
+        super().handle(*args, **options)
 
     def inner_run(self, *args, **options):
         if options["with_npm_watch"]:

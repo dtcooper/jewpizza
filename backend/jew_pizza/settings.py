@@ -162,7 +162,7 @@ MEDIA_ROOT = "/media_root"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 NPM_ROOT_PATH = "/app/frontend"
-NPM_STATIC_FILES_PREFIX = "npm"
+NPM_STATIC_FILES_PREFIX = "js/vendor"
 NPM_FILE_PATTERNS = {
     "alpinejs": ["dist/cdn.min.js"],
     "moment": ["min/moment.min.js"],
