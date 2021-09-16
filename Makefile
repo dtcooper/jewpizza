@@ -15,10 +15,11 @@ shell:
 
 show-outdated:
 	@echo 'Showing outdated dependencies... (empty for none)'
-	@echo '============== Frontend =============='
-	@$(COMPOSE) run --rm app npm --prefix=../frontend outdated
-	@echo '============== Backend ==============='
-	@$(COMPOSE) run --rm --no-deps app poetry show -o
+	@$(COMPOSE) run --rm --no-deps app sh -c '\
+		echo "============== Frontend ==============";\
+		npm --prefix=../frontend outdated; \
+		echo "============== Backend ==============="; \
+		poetry show -o'
 
 deploy:
 	git push && ssh jew.pizza 'cd jew.pizza; git pull --ff-only && docker compose build && docker compose up -d'
