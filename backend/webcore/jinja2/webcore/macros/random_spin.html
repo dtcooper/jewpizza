@@ -1,0 +1,9 @@
+{% macro random_spin_style(min=850, max=2750, direction=undefined) -%}
+
+  {%- if direction is none and random_bool() -%}
+    {%- set direction = 'reverse' -%}
+  {%- endif -%}
+
+  --custom-spin-duration: {{ (range(min, max)|random) / 1000 }}s; --custom-spin-direction: {{ direction|default(['normal', 'reverse']|random) }}
+
+{%- endmacro %}

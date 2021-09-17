@@ -12,7 +12,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <title>{{ title|default('jew.pizza') }}</title>
+  <title>{% if settings.DEBUG %}[dev] {% endif %}{{ title|default('jew.pizza') }}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,49 +33,90 @@
   </script>
   {% block extra_head %}{% endblock %}
 </head>
-<body class="overscroll-none transition duration-1000 ease-linear min-h-screen-iphone-fix w-full">
-  {% block body %}
-    <div class="container mx-auto pt-3 lg:pt-6 px-4">
-      <header class="grid grid-cols-1 md:grid-cols-[1fr,max-content,1fr] justify-items-center md:justify-items-stretch border-4 md:border-[6px] xl:border-8 border-dotted rounded-3xl border-base-100 px-1 md:px-2 py-2 md:py-3 xl:py-4">
-        <h1 class="order-3 md:order-3 self-center text-[length:min(10vw,3.5rem)] leading-snug md:text-5xl lg:text-7xl xl:text-8xl font-bold italic text-primary-content lg:tracking-wide mr-2 md:mr-0 z-10">David Cooper</h1>
-        <h2 class="order-4 md:order-5 md:row-start-3 md:col-start-2 self-center text-[length:min(7vw,3rem)] leading-snug md:text-3xl lg:text-4xl xl:text-5xl italic text-primary-content lg:tracking-wide z-10">Radio Personality</h2>
-        {%- macro random_spin_style(min=850, max=2750, direction=undefined) -%}
-          {%- if direction is none and random_bool() -%}
-            {%- set direction = 'reverse' -%}
-          {%- endif -%}
+<body>
+  {%- from 'webcore/macros/random_spin.html' import random_spin_style %}
 
-          --custom-spin-duration: {{ (range(min, max)|random) / 1000 }}s; --custom-spin-direction: {{ direction|default(['normal', 'reverse']|random) }}
-        {%- endmacro -%}
-        {% for left_image in (true, false) %}
-          <div class="{% if left_image %}order-3 md:order-2 flex{% else %}order-4 hidden md:flex{% endif %} flex-col row-span-2 overflow-hidden items-center z-10">
-            <img
-              src="{{ static('images/david-headshot.jpg') }}" style="{{ random_spin_style(2000, 6000, ('reverse' if left_image else 'normal')) }}"
-              class="max-h-[min(max(45vw,10rem),16rem)] md:max-h-28 lg:max-h-36 xl:max-h-44 rounded-full border-[6px] md:border-4 xl:border-[6px] border-secondary animate-spin-custom select-none drag-none z-10"
-            >
+  {% block body %}
+    <div x-data="{sidebar: false}" @keydown.escape.window="sidebar = false" class="shadow drawer drawer-end min-h-screen-iphone-fix">
+      <input x-ref="drawer" x-model="sidebar" id="sidebar-drawer" type="checkbox" class="drawer-toggle">
+      <div class="flex flex-col drawer-content">
+        <div class="navbar w-full px-2.5 lg:px-4 min-h-[4.5rem] bg-primary">
+            <div class="flex-1">
+              <a tabindex="-1" href="{{ url_for('admin:index' if request.user.is_superuser else 'webcore:index') }}">
+                <img
+                  src="{{ static('images/david-headshot.jpg') }}"
+                  class="overflow-none h-12 w-12 mr-2 xs:h-14 xs:w-14 xs:mr-3 rounded-full border-2 border-secondary"
+                >
+              </a>
+              <a tabindex="-1" class="flex flex-col lg:flex-row lg:items-baseline lg:space-x-3" href="{{ url_for('admin:index' if request.user.is_superuser else 'webcore:index') }}">
+                <p class="text-xl xs:text-2xl lg:text-3xl xl:text-5xl font-bold italic">David Cooper</p>
+                <p class="text-sm xs:text-lg xl:text-3xl italic">Radio Personality</p>
+              </a>
+            </div>
+          <div class="flex-none hidden md:flex items-center space-x-2">
+            <span class="btn btn-accent btn-disabled">Home</span>
+            <a href="#" class="btn btn-secondary">Shows</a>
+            <a href="#" class="btn btn-secondary">Listen</a>
+            <a href="#" class="btn btn-secondary">Bio</a>
+            <a href="#" class="btn btn-secondary btn-circle">
+              <svg class="inline-block w-7 h-7 fill-current" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.29C11.73,8.63 11.77,8.96 11.84,9.27C8.28,9.09 5.11,7.38 3,4.79C2.63,5.42 2.42,6.16 2.42,6.94C2.42,8.43 3.17,9.75 4.33,10.5C3.62,10.5 2.96,10.3 2.38,10C2.38,10 2.38,10 2.38,10.03C2.38,12.11 3.86,13.85 5.82,14.24C5.46,14.34 5.08,14.39 4.69,14.39C4.42,14.39 4.15,14.36 3.89,14.31C4.43,16 6,17.26 7.89,17.29C6.43,18.45 4.58,19.13 2.56,19.13C2.22,19.13 1.88,19.11 1.54,19.07C3.44,20.29 5.7,21 8.12,21C16,21 20.33,14.46 20.33,8.79C20.33,8.6 20.33,8.42 20.32,8.23C21.16,7.63 21.88,6.87 22.46,6Z" />
+              </svg>
+            </a>
+            <a href="#" class="btn btn-secondary btn-circle">
+              <svg class="inline-block w-7 h-7 fill-current" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"></path>
+              </svg>
+            </a>
+            <a href="#" class="btn btn-secondary btn-circle">
+              <svg class="inline-block w-7 h-7 fill-current" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M22 5.5H9C7.9 5.5 7 6.4 7 7.5V16.5C7 17.61 7.9 18.5 9 18.5H22C23.11 18.5 24 17.61 24 16.5V7.5C24 6.4 23.11 5.5 22 5.5M22 16.5H9V9.17L15.5 12.5L22 9.17V16.5M15.5 10.81L9 7.5H22L15.5 10.81M5 16.5C5 16.67 5.03 16.83 5.05 17H1C.448 17 0 16.55 0 16S.448 15 1 15H5V16.5M3 7H5.05C5.03 7.17 5 7.33 5 7.5V9H3C2.45 9 2 8.55 2 8S2.45 7 3 7M1 12C1 11.45 1.45 11 2 11H5V13H2C1.45 13 1 12.55 1 12Z" />
+              </svg>
+            </a>
           </div>
-        {% endfor %}
-        {% for top in (true, false) %}
-          {% set items = cycler(*shuffle([('&#x1F355;', True), ('&#x2721;&#xFE0F;', True), ('&#x1F4FB;', True), ('&#x1F54D;', True),
-                                          ('&#x1F399;&#xFE0F;', True), ('&#x1F4A9;', True), ('&#x2620;&#xFE0F;', False), ('jew', False),
-                                          ('pizza', False), ('&#x1F46F;&#x200D;&#x2640;&#xFE0F;', False)])) %}
-          <div class="{% if top %}order-1 md:mb-2{% else %}order-6 mt-2{% endif %} mx-3 md:col-span-3 justify-self-stretch flex justify-between items-center select-none z-0">
-            {% for i in range(10) %}
-              {% set (item, show_small) = items.next() %}
-              {% if item.isalpha() %}
-                <div class="{% if not show_small %}hidden md:block {% endif %}animate-spin-custom text-primary-content font-bold italic md:text-md lg:text-xl xl:text-2xl z-0" style="{{ random_spin_style() }}">{{ item }}</div>
-              {% else %}
-                <div class="{% if not show_small %}hidden md:block {% endif %}animate-spin-custom font-sans text-3xl md:text-4xl lg:text-5xl xl:text-6xl z-0" style="{{ random_spin_style() }}">{{ item|safe }}</div>
-              {% endif %}
-            {% endfor %}
+          <div class="flex-none md:hidden">
+            <label for="sidebar-drawer" class="btn btn-square btn-ghost">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+              </svg>
+            </label>
           </div>
-        {% endfor %}
-      </header>
-      <div>
-        {% block content required %}{% endblock content %}
+        </div>
+
+        <div class="flex w-full bottom-0 bg-secondary px-5 py-1 xl:py-1.5 items-baseline justify-between space-x-1.5 select-none">
+          {% set items = shuffle(['&#x1F355;', '&#x2721;&#xFE0F;', '&#x1F4FB;', '&#x1F54D;', '&#x2620;&#xFE0F;',
+                                  '&#x1F46F;', '&#x1F399;&#xFE0F;', '&#x1F4A9;', '&#x1F4DF;', '&#x1F481;&#x200D;&#x2640;️&#xFE0F;']) %}
+
+          {% for item in items %}
+            <div
+              class="animate-spin-custom font-sans text-lg md:text-xl lg:text-2xl xl:text-3xl self-center"
+              style="{{ random_spin_style() }}"
+            >{{ item|safe }}</div>
+          {% endfor %}
+        </div>
+
+        <div class="container mx-auto pt-3 lg:pt-6 px-4">
+          {% block content required %}{% endblock content %}
+        </div>
+      </div>
+      <div class="drawer-side">
+        <label for="sidebar-drawer" class="drawer-overlay"></label>
+        <ul class="p-4 overflow-y-auto menu w-2/3 min-w-[240px] bg-secondary">
+          <li class="bordered">
+            <span>Item 1</span>
+          </li>
+          <li>
+            <a :tabindex="sidebar ? '0' : '-1'" href="#">Item 2</a>
+          </li>
+          <li>
+            <a :tabindex="sidebar ? '0' : '-1'" href="#">Item 3</a>
+          </li>
+          <li>
+            <a :tabindex="sidebar ? '0' : '-1'" href="#">Item 4</a>
+          </li>
+        </ul>
       </div>
     </div>
   {% endblock %}
-
-  <span class="fixed bottom-4 right-4 font-sans text-lg sm:text-xl lg:text-3xl duration-[1500ms] filter hover:hue-rotate-[360deg] select-none">&#x2721;&#xFE0F; &#x1F355;</span>
 </body>
 </html>

@@ -8,17 +8,25 @@ lint:
 format:
 	@$(COMPOSE) run --rm --no-deps app sh -c 'black . && isort .' || exit 0
 
-pre-commit: format lint
+pre-commit:
+	@$(COMPOSE) run --rm --no-deps app sh -c '\
+		echo "============== black =================";\
+		black . ;\
+		echo "============== isort =================";\
+		isort . ;\
+		echo "============== flake8 ================";\
+		flake8;\
+		exit 0'
 
 shell:
-	@$(COMPOSE) run --rm app bash
+	@$(COMPOSE) run --rm --service-ports app bash
 
 show-outdated:
 	@echo 'Showing outdated dependencies... (empty for none)'
 	@$(COMPOSE) run --rm --no-deps app sh -c '\
 		echo "============== Frontend ==============";\
-		npm --prefix=../frontend outdated; \
-		echo "============== Backend ==============="; \
+		npm --prefix=../frontend outdated;\
+		echo "============== Backend ===============";\
 		poetry show -o'
 
 deploy:

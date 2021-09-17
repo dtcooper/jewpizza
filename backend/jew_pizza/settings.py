@@ -31,6 +31,7 @@ else:
     ALLOWED_HOSTS = ["app", "localhost", "127.0.0.1", DOMAIN_NAME]
 
 INSTALLED_APPS = [
+    "django_light",  # Disable admin
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     # To override the runserver command, placed before staticfiles
     "webcore",
     "django.contrib.staticfiles",
+    "markdownx",
 ]
 
 if DEBUG:
@@ -139,12 +141,20 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Local memory cache is fine for now
 CACHES = {
     "default": {
-        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://redis",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "CONNECTION_POOL_KWARGS": {"max_connections": 10},
+        },
+        "KEY_PREFIX": "cache",
     }
 }
+
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"
 
 EMAIL_TIMEOUT = 10
 

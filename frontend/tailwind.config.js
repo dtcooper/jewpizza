@@ -26,10 +26,8 @@ module.exports = {
   },
   theme: {
     screens: {
-      sm: defaultTheme.screens.sm,
-      md: defaultTheme.screens.md,
-      lg: defaultTheme.screens.lg,
-      xl: defaultTheme.screens.xl
+      'xs': '375px',
+      ...defaultTheme.screens,
     },
     extend: {
       fontFamily: {
@@ -46,14 +44,18 @@ module.exports = {
   },
   variants: {},
   plugins: [
+    require('@tailwindcss/typography'),
     require('daisyui')
   ],
   daisyui: {
     themes: [{
       jewpizza: {
         ...cyberpunkTheme,
+        fontFamily: 'Space Mono,ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace',
+        primary: '#ff4272',
+        'primary-focus': '#ec003c',
         '--btn-text-case': 'none',
-        fontFamily: 'Space Mono,ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace'
+        '--rounded-btn': '1.25rem'
       }
     }]
   }

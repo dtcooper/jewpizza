@@ -5,10 +5,30 @@
         Some content goes here &mdash;
         <span class="font-bold">
             size:<!--
-                --><div class="inline md:hidden">sm</div><!--
+                --><div class="inline xs:hidden">2xs</div><!--
+                --><div class="hidden xs:inline sm:hidden">xs</div><!--
+                --><div class="hidden sm:inline md:hidden">sm</div><!--
                 --><div class="hidden md:inline lg:hidden">md</div><!--
                 --><div class="hidden lg:inline xl:hidden">lg</div><!--
                 --><div class="hidden xl:inline">xl</div>
         </span>
+
+        <div class="text-primary">Primary</div>
+        <div class="text-secondary">Secondary</div>
+        <div class="text-accent">Accent</div>
+        <div class="bg-primary text-primary-content">Primary</div>
+        <div class="bg-secondary text-secondary-content">Secondary</div>
+        <div class="bg-accent text-accent-content">Accent</div>
+
+        <div class="font-bold">
+            <a href="#" class="link link-primary link-hover">Primary link</a> /
+            <a href="#" class="link link-secondary link-hover">Secondary link</a> /
+            <a href="#" class="link link-accent link-hover">Accent link</a> /
+            <a href="#" class="link link-neutral link-hover">Neutral link</a>
+        </div>
+
+        <div class="mt-5 bg-secondary prose prose-xl max-w-none">
+            {{ content_block('hi.mom') }}
+        </div>
     </div>
 {% endblock %}

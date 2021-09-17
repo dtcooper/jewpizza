@@ -10,6 +10,7 @@ services:
       - ./serve/media:/media_root
     depends_on:
       - db
+      - redis
     restart: always
     ports:
       - "127.0.0.1:${LISTEN_PORT:-8000}:8000"
@@ -22,6 +23,14 @@ services:
     environment:
       POSTGRES_PASSWORD: postgres
 
+  redis:
+    image: library/redis:6-alpine
+    restart: always
+    volumes:
+      - redis_data:/data
+
+
 
 volumes:
   postgres_data:
+  redis_data:

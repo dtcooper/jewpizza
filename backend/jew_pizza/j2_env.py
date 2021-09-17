@@ -9,6 +9,8 @@ from django.core.cache import cache
 from django.templatetags.static import static as django_static
 from django.urls import reverse
 
+STATIC_MD5_CACHE_KEY_PREFIX = "file-md5::"
+
 
 def shuffle(items):
     try:
@@ -34,7 +36,7 @@ def static(path, *args, **kwargs):
                     path = f"{path.removesuffix(ext)}.min{ext}"
 
             if not path_hash:
-                cache_key = f"jew.pizza::file-md5::{path}"
+                cache_key = f"{STATIC_MD5_CACHE_KEY_PREFIX}{path}"
                 # Now compute (or get from cache) md5 sum of file
                 path_hash = cache.get(cache_key)
                 if path_hash is None:
@@ -53,13 +55,16 @@ def static(path, *args, **kwargs):
 
 
 def environment(**options):
+    from webcore.models import ContentBlock
+
     env = Environment(**options)
     env.globals.update(
         {
+            "content_block": ContentBlock.render_content_block,
             "settings": settings,
             "shuffle": shuffle,
             "static": static,
-            "url": reverse,
+            "url_for": lambda name, *args, **kwargs: reverse(name, args=args, kwargs=kwargs),
         }
     )
     return env

@@ -4,3 +4,14 @@
       countdowns when I'm not on air
 * [ ] Collect emails, have a mailing list + notification of shows
 * [ ] Move [radio-calls](https://github.com/dtcooper/radio-calls) repo into this
+
+## Sections
+
+1.  How to listen -- [expandable](https://codepen.io/philw_/pen/GREJEgx)
+    1. Showgram
+    2. Podcast
+    3. WFMU
+    4. BMIR
+2. Bio
+3. Social
+4. Testimonials
