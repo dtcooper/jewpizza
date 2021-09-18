@@ -1,4 +1,5 @@
 import os
+import sys
 from pathlib import Path
 
 import environ
@@ -59,6 +60,8 @@ MIDDLEWARE.extend(
         "django.middleware.clickjacking.XFrameOptionsMiddleware",
     ]
 )
+if DEBUG and len(sys.argv) >=2 and sys.argv[1] == 'runserver':
+    MIDDLEWARE.append('webcore.middleware.TailwindFunctioningRunserverMiddleware')
 
 ROOT_URLCONF = "jew_pizza.urls"
 
