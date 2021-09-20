@@ -13,6 +13,15 @@ else
     exit 1
 fi
 
+if [ "$DEBUG" -a "$DEBUG" != '0' ]; then
+    DEBUG=1
+    if [ ! -f ../docker-compose.override.yml ]; then
+        echo "WARNING: docker-compose.override.yml NOT found. You'll need to symlink so DEBUG can to work properly."
+    fi
+else
+    DEBUG=
+fi
+
 # Check if secret key is set
 if [ -z "$SECRET_KEY" ]; then
     echo 'Generating secret key in .env file'
@@ -34,7 +43,7 @@ fi
 if [ "$#" != 0 ]; then
     exec "$@"
 else
-    if [ "$DEBUG" -a "$DEBUG" != '0' ]; then
+    if [ "$DEBUG" ]; then
         if [ ! -d '../frontend/node_modules' ]; then
             # In case /app is mounted in Docker, needed to re-install the /app/frontend/node_modules folder
             npm --prefix=../frontend install
@@ -46,7 +55,7 @@ else
 
     wait-for-it -t 0 db:5432 && ./manage.py migrate
 
-    if [ "$DEBUG" -a "$DEBUG" != '0' ]; then
+    if [ "$DEBUG" ]; then
         exec ./manage.py runserver
     else
         if [ -z "$GUNICORN_WORKERS" ]; then

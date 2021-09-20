@@ -4,9 +4,9 @@
   "description": "",
   "scripts": {
     "build": "run-p build:*",
-    "build:css": "tailwind -i ../backend/webcore/static/css/tailwind.css -o ../backend/webcore/static/css/styles.min.css --minify",
+    "build:css": "tailwind -i tailwind.css -o ../backend/webcore/static/css/styles.min.css --minify",
     "build:js": "sh -c 'for f in $(find ../backend/*/static/js/ -type f ! -iname '*.min.js'); do npx uglify-js \"$f\" -o \"${f%.js}.min.js\" ; done'",
-    "watch:dev-css": "tailwind -i ../backend/webcore/static/css/tailwind.css -o ../backend/webcore/static/css/styles.css --watch",
+    "watch:dev-css": "tailwind -i tailwind.css -o ../backend/webcore/static/css/styles.css --watch",
     "watch": "npm run watch:dev-css"
   },
   "repository": {
@@ -23,7 +23,7 @@
   "dependencies": {
     "@alpine-collective/toolkit-scroll": "^1.0.0",
     "@tailwindcss/typography": "^0.4.1",
-    "alpinejs": "^3.3.5",
+    "alpinejs": "^3.4.0",
     "daisyui": "^1.14.0",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.33",

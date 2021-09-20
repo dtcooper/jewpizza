@@ -1,4 +1,4 @@
-.PHONY: lint format pre-commit shell show-outdated deploy
+.PHONY: lint format pre-commit build shell show-outdated deploy
 
 COMPOSE=docker compose
 
@@ -17,6 +17,9 @@ pre-commit:
 		echo "============== flake8 ================";\
 		flake8;\
 		exit 0'
+
+build:
+	@$(COMPOSE) build --pull
 
 shell:
 	@$(COMPOSE) run --rm --service-ports app bash
