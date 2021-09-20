@@ -9,7 +9,7 @@ from django.core.cache import cache
 from django.templatetags.static import static as django_static
 from django.urls import reverse
 
-STATIC_MD5_CACHE_KEY_PREFIX = "file-md5::"
+from webcore.constants import CACHE_KEY_PREFIX_STATIC_ASSET_MD5SUM
 
 
 def shuffle(items):
@@ -35,7 +35,7 @@ def static(path, *args, **kwargs):
                     path = f"{path.removesuffix(ext)}.min{ext}"
 
             if not path_hash:
-                cache_key = f"{STATIC_MD5_CACHE_KEY_PREFIX}{path}"
+                cache_key = f"{CACHE_KEY_PREFIX_STATIC_ASSET_MD5SUM}{path}"
                 # Now compute (or get from cache) md5 sum of file
                 path_hash = cache.get(cache_key)
                 if path_hash is None:

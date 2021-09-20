@@ -1,6 +1,6 @@
 import os
-import sys
 from pathlib import Path
+import sys
 
 import environ
 
@@ -25,6 +25,11 @@ EMAIL_HOST_PASSWORD = env("EMAIL_PASSWORD")
 EMAIL_PORT = env.int("EMAIL_PORT", default=587)
 EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=(EMAIL_PORT == 587))
 DEFAULT_FROM_EMAIL = env("EMAIL_FROM_ADDRESS")
+
+if DEBUG:
+    ICECAST_URL = f'http://{DOMAIN_NAME}:8080'
+else:
+    ICECAST_URL = env('ICECAST_URL')
 
 if DEBUG:
     ALLOWED_HOSTS = ["*"]
@@ -60,8 +65,8 @@ MIDDLEWARE.extend(
         "django.middleware.clickjacking.XFrameOptionsMiddleware",
     ]
 )
-if DEBUG and len(sys.argv) >=2 and sys.argv[1] == 'runserver':
-    MIDDLEWARE.append('webcore.middleware.TailwindFunctioningRunserverMiddleware')
+if DEBUG and len(sys.argv) >= 2 and sys.argv[1] == "runserver":
+    MIDDLEWARE.append("webcore.middleware.TailwindFunctioningRunserverMiddleware")
 
 ROOT_URLCONF = "jew_pizza.urls"
 

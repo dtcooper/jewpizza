@@ -30,7 +30,7 @@ class Command(RunserverCommand):
     def run_npm_watch(self):
         def clear_stylesheet():
             try:
-                os.remove(settings.BASE_DIR / 'webcore' / 'static' / 'css' / 'styles.css')
+                os.remove(settings.BASE_DIR / "webcore" / "static" / "css" / "styles.css")
             except FileNotFoundError:
                 return
 

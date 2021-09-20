@@ -15,3 +15,4 @@
 2. Bio
 3. Social
 4. Testimonials
+5. Newsletter?

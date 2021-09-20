@@ -16,3 +16,16 @@ services:
     restart: "no"
     ports:
       - "127.0.0.1:6379:6379"
+
+  radio:
+    depends_on:
+      - icecast
+    volumes:
+      - ./radio/radio.liq:/etc/radio.liq
+
+  icecast:
+    image: moul/icecast
+    environment:
+      - "ICECAST_HOSTNAME=${DOMAIN_NAME:-localhost}"
+    ports:
+      - 8080:8000

@@ -1,0 +1,2 @@
+CACHE_KEY_PREFIX_CONTENT_BLOCK = "content-block::"
+CACHE_KEY_PREFIX_STATIC_ASSET_MD5SUM = "static-asset-md5sum::"
