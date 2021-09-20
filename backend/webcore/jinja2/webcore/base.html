@@ -1,3 +1,5 @@
+{%- from 'webcore/macros/random_spin.html' import random_spin_style -%}
+
 <!DOCTYPE html>
 <html lang="en">
 <!--
@@ -20,6 +22,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700" rel="stylesheet">
   <link rel="stylesheet" href="{{ static('css/styles.css') }}">
 
+  <script src="{{ static('js/vendor/@alpine-collective/toolkit-scroll/dist/cdn.min.js') }}" defer></script>
   <script src="{{ static('js/vendor/alpinejs/dist/cdn.min.js') }}" defer></script>
 
   {%- set _js_data = {
@@ -33,16 +36,27 @@
   </script>
   {% block extra_head %}{% endblock %}
 </head>
-<body x-data="{menuOpen: false}">
-  {%- from 'webcore/macros/random_spin.html' import random_spin_style %}
-
-  <div class="z-10 sticky top-0">
-    <div class="navbar w-full px-2 lg:px-4 min-h-[3.5rem] xs:min-h-[4.75rem] sm:min-h-[3.5rem] md:min-h-[4.75rem] bg-primary text-primary-content">
+<body
+  x-data="{menuOpen: false, stickFooter: false}"
+  @scroll.window="stickFooter = ($refs.navbar.getBoundingClientRect().y <= 0)"
+  @resize.window="stickFooter = ($refs.navbar.getBoundingClientRect().y <= 0)"
+>
+  <div x-ref="hero" class="flex flex-col justify-center min-h-screen-iphone-fix">
+    <h3 class="flex-1 flex flex-col items-center justify-center text-3xl w-full lg:text-5xl font-bold italic text-center">
+      <span>Welcome to <span class="text-accent underline underline-wavy">jew.pizza</span></span>
+    </h3>
+    <div class="mb-2 w-full text-center place-self-end">
+      <button class="btn" @click="$scroll($refs.navbar)">Scroll down...</button>
+    </div>
+  </div>
+  <div class="sticky top-0">
+    <div x-ref="navbar" class="navbar w-full px-2 lg:px-4 min-h-[3.5rem] xs:min-h-[4.75rem] sm:min-h-[3.5rem] md:min-h-[4.75rem] bg-base-100">
       <div class="flex-1">
         <a tabindex="-1" href="{{ url_for('admin:index' if request.user.is_superuser else 'webcore:index') }}">
           <img
             src="{{ static('images/david-headshot.jpg') }}"
-            class="overflow-none h-12 w-12 mr-2 xs:h-16 xs:w-16 xs:mr-3 sm:h-12 sm:w-12 sm:mr-2 md:h-16 md:w-16 md:mr-3 rounded-full border-[3px] md:border-4 border-accent"
+            class="animate-spin-custom overflow-none h-12 w-12 mr-2 xs:h-16 xs:w-16 xs:mr-3 sm:h-12 sm:w-12 sm:mr-2 md:h-16 md:w-16 md:mr-3 rounded-full border-[3px] md:border-4 border-secondary"
+            style="{{ random_spin_style(min=4000, max=5500, direction='normal') }}"
           >
         </a>
         <a
@@ -51,14 +65,14 @@
           href="{{ url_for('admin:index' if request.user.is_superuser else 'webcore:index') }}"
         >
           <p class="text-xl xs:text-2xl sm:text-3xl md:text-2xl lg:text-3xl xl:text-5xl font-bold italic">David Cooper</p>
-          <p class="text-sm xs:text-lg md:text-lg xl:text-3xl italic">Radio Personality</p>
+          <p class="text-sm xs:text-lg md:text-lg xl:text-3xl italic text-accent">Radio Personality</p>
         </a>
       </div>
       <div class="flex-none flex items-center space-x-2">
-        <span class="btn btn-secondary btn-outline btn-lg btn-disabled hidden md:flex">Home</span>
-        <a href="#" class="btn btn-secondary btn-lg hidden md:flex">Shows</a>
-        <a href="#" class="btn btn-secondary btn-lg hidden md:flex">Listen</a>
-        <a href="#" class="btn btn-secondary btn-lg hidden md:flex">Bio</a>
+        <span class="btn btn-lg btn-outline btn-primary btn-disabled hidden md:flex">Home</span>
+        <a href="#" class="btn btn-lg btn-primary hidden md:flex">Shows</a>
+        <a href="#" class="btn btn-lg btn-primary hidden md:flex">Listen</a>
+        <a href="#" class="btn btn-lg btn-primary hidden md:flex">Bio</a>
         <button
           style="--rounded-btn: 0"
           class="btn btn-square btn-ghost flex md:hidden"
@@ -80,42 +94,28 @@
           </svg>
         </button>
       </div>
-        <!--
-        <a href="#" class="btn btn-secondary btn-circle">
-          <svg class="inline-block w-7 h-7 fill-current" viewBox="0 0 24 24">
-            <path fill="currentColor" d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.29C11.73,8.63 11.77,8.96 11.84,9.27C8.28,9.09 5.11,7.38 3,4.79C2.63,5.42 2.42,6.16 2.42,6.94C2.42,8.43 3.17,9.75 4.33,10.5C3.62,10.5 2.96,10.3 2.38,10C2.38,10 2.38,10 2.38,10.03C2.38,12.11 3.86,13.85 5.82,14.24C5.46,14.34 5.08,14.39 4.69,14.39C4.42,14.39 4.15,14.36 3.89,14.31C4.43,16 6,17.26 7.89,17.29C6.43,18.45 4.58,19.13 2.56,19.13C2.22,19.13 1.88,19.11 1.54,19.07C3.44,20.29 5.7,21 8.12,21C16,21 20.33,14.46 20.33,8.79C20.33,8.6 20.33,8.42 20.32,8.23C21.16,7.63 21.88,6.87 22.46,6Z" />
-          </svg>
-        </a>
-        <a href="#" class="btn btn-secondary btn-circle">
-          <svg class="inline-block w-7 h-7 fill-current" viewBox="0 0 24 24">
-            <path fill="currentColor" d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"></path>
-          </svg>
-        </a>
-        <a href="#" class="btn btn-secondary btn-circle">
-          <svg class="inline-block w-7 h-7 fill-current" viewBox="0 0 24 24">
-            <path fill="currentColor" d="M22 5.5H9C7.9 5.5 7 6.4 7 7.5V16.5C7 17.61 7.9 18.5 9 18.5H22C23.11 18.5 24 17.61 24 16.5V7.5C24 6.4 23.11 5.5 22 5.5M22 16.5H9V9.17L15.5 12.5L22 9.17V16.5M15.5 10.81L9 7.5H22L15.5 10.81M5 16.5C5 16.67 5.03 16.83 5.05 17H1C.448 17 0 16.55 0 16S.448 15 1 15H5V16.5M3 7H5.05C5.03 7.17 5 7.33 5 7.5V9H3C2.45 9 2 8.55 2 8S2.45 7 3 7M1 12C1 11.45 1.45 11 2 11H5V13H2C1.45 13 1 12.55 1 12Z" />
-          </svg>
-        </a>
-        -->
-
-      </div>
-      <div
-        class="w-full md:hidden transition-all duration-1000"
-        :class="{hidden: !menuOpen, block: menuOpen}"
-      >
-        <ul class="menu bg-secondary text-primary">
-          <li class="bordered text-secondary-content"><span class="italic">Home</span></li>
-          <li><a href="#">Shows</a></li>
-          <li><a href="#">Listen</a></li>
-          <li><a href="#">Bio</a></li>
-        </ul>
-      </div>
+    </div>
+    <div
+      class="w-full md:hidden transition-all duration-1000"
+      :class="{hidden: !menuOpen, block: menuOpen}"
+    >
+      <ul class="menu bg-secondary text-primary">
+        <li class="bordered text-secondary-content"><span class="italic">Home</span></li>
+        <li><a href="#">Shows</a></li>
+        <li><a href="#">Listen</a></li>
+        <li><a href="#">Bio</a></li>
+      </ul>
     </div>
   </div>
-  <div class="flex w-full bg-secondary px-5 py-1 xl:py-1.5 items-baseline justify-between space-x-1.5 select-none">
+
+  <div class="max-w-screen-2xl mx-auto pt-3 px-4">
+    {% block content required %}{% endblock content %}
+  </div>
+
+  <div class="flex w-full px-5 py-1 xl:py-1.5 items-baseline justify-between space-x-1.5 select-none">
     {# telephone = '&#x260E;&#xFE0F;' #}
-    {% set emojis = shuffle(['&#x1F355;', '&#x2721;&#xFE0F;', '&#x1F4FB;', '&#x1F54D;', '&#x2620;&#xFE0F;',
-                              '&#x1F46F;', '&#x1F399;&#xFE0F;', '&#x1F4A9;', '&#x1F4DF;', '&#x1F481;&#x200D;&#x2640;️&#xFE0F;']) %}
+    {% set emojis = shuffle(['&#x1F355;', '&#x2721;&#xFE0F;', '&#x1F4FB;', '&#x1F54D;', '&#x2620;&#xFE0F;', '&#x1F46F;',
+                             '&#x1F399;&#xFE0F;', '&#x1F4A9;', '&#x1F4DF;', '&#x1F481;&#x1F3FC;&#x200D;&#x2640;️&#xFE0F;']) %}
 
     {% for emoji in emojis %}
       <div
@@ -127,12 +127,8 @@
     {% endfor %}
   </div>
 
-  <div class="container mx-auto pt-3 lg:pt-6 px-4">
-    {% block content required %}{% endblock content %}
-  </div>
-
-  <div class="sticky bottom-0 w-full bg-accent text-accent-content text-center text-3xl py-3">Player goes here</div>
-
+  {# Todo show if playing, even if we've scrolled up #}
+  <div :class="{'sticky bottom-0': stickFooter}" class="w-full bg-black text-primary text-center text-3xl py-3">Player goes here</div>
 
     {#
     <div x-data="{sidebar: false}" @keydown.escape.window="sidebar = false" class="shadow drawer drawer-end min-h-screen-iphone-fix w-full">

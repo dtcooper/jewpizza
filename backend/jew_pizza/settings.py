@@ -180,6 +180,7 @@ NPM_FILE_PATTERNS = {
     "alpinejs": ["dist/cdn.min.js"],
     "moment": ["min/moment.min.js"],
     "moment-timezone": ["builds/moment-timezone-with-data-1970-2030.min.js"],
+    "@alpine-collective/toolkit-scroll": ["dist/cdn.min.js"],
 }
 
 STATICFILES_FINDERS = [
