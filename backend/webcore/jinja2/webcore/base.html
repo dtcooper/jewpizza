@@ -36,7 +36,8 @@
   </script>
   {% block extra_head %}{% endblock %}
 </head>
-<body
+{% block body %}
+<body {#- TODO: Don't include in block here #}
   x-data="{menuOpen: false, stickFooter: false}"
   @scroll.window="stickFooter = ($refs.navbar.getBoundingClientRect().y <= 0)"
   @resize.window="stickFooter = ($refs.navbar.getBoundingClientRect().y <= 0)"
@@ -154,4 +155,5 @@
     </div>
     #}
 </body>
+{% endblock %}
 </html>
