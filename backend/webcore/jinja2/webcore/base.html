@@ -1,4 +1,6 @@
-{%- from 'webcore/macros/random_spin.html' import random_spin_style -%}
+{%-
+  from 'webcore/macros.html' import icon, random_spin_style
+-%}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,43 +22,39 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700" rel="stylesheet">
-  <link rel="stylesheet" href="{{ static('css/styles.css') }}">
+  <link href="{{ static('css/styles.css') }}" rel="stylesheet">
 
+  <script src="https://code.iconify.design/2/2.0.4/iconify.min.js"></script>
   <script src="{{ static('js/vendor/@alpine-collective/toolkit-scroll/dist/cdn.min.js') }}" defer></script>
+  <script src="{{ static('js/vendor/@alpinejs/intersect/dist/cdn.min.js') }}" defer></script>
   <script src="{{ static('js/vendor/alpinejs/dist/cdn.min.js') }}" defer></script>
-
   {%- set _js_data = {
     'debug': settings.DEBUG,
     'is_authenticated': request.user.is_authenticated,
     'is_superuser': request.user.is_superuser,
+    'force_hero': request.GET.get('force_hero')|bool,
   } %}
   {%- do _js_data.update(js_data or {}) %}
   <script>
     const DATA = {{ _js_data|tojson }}
   </script>
+  <script src="{{ static('js/base.js') }}"></script>
+
   {% block extra_head %}{% endblock %}
 </head>
+
+<body>
 {% block body %}
-<body {#- TODO: Don't include in block here #}
-  x-data="{menuOpen: false, stickFooter: false}"
-  @scroll.window="stickFooter = ($refs.navbar.getBoundingClientRect().y <= 0)"
-  @resize.window="stickFooter = ($refs.navbar.getBoundingClientRect().y <= 0)"
->
-  <div x-ref="hero" class="flex flex-col justify-center min-h-screen-iphone-fix">
-    <h3 class="flex-1 flex flex-col items-center justify-center text-3xl w-full lg:text-5xl font-bold italic text-center">
-      <span>Welcome to <span class="text-accent underline underline-wavy">jew.pizza</span></span>
-    </h3>
-    <div class="mb-2 w-full text-center place-self-end">
-      <button class="btn" @click="$scroll($refs.navbar)">Scroll down...</button>
-    </div>
-  </div>
-  <div class="sticky top-0">
-    <div x-ref="navbar" class="navbar w-full px-2 lg:px-4 min-h-[3.5rem] xs:min-h-[4.75rem] sm:min-h-[3.5rem] md:min-h-[4.75rem] bg-base-100">
-      <div class="flex-1">
+  {# Navbar (sticky) #}
+  <div x-intersect.once="$store.hero.playerFixed = true" x-data="{menuOpen: false }" class="sticky top-0">
+    <div id="navbar" class="navbar w-full px-2 lg:px-4 min-h-[3.5rem] xs:min-h-[4.75rem] sm:min-h-[3.5rem] md:min-h-[4.75rem] bg-base-100">
+
+      {#- Copy and image #}
+      <div class="flex flex-row flex-1">
         <a tabindex="-1" href="{{ url_for('admin:index' if request.user.is_superuser else 'webcore:index') }}">
           <img
             src="{{ static('images/david-headshot.jpg') }}"
-            class="animate-spin-custom overflow-none h-12 w-12 mr-2 xs:h-16 xs:w-16 xs:mr-3 sm:h-12 sm:w-12 sm:mr-2 md:h-16 md:w-16 md:mr-3 rounded-full border-[3px] md:border-4 border-secondary"
+            class="animate-spin-custom overflow-none h-12 w-12 mr-2 xs:h-16 xs:w-16 xs:mr-3 sm:h-12 sm:w-12 sm:mr-2 md:h-16 md:w-16 md:mr-3 rounded-full border-[3px] md:border-4 border-secondary select-none"
             style="{{ random_spin_style(min=4000, max=5500, direction='normal') }}"
           >
         </a>
@@ -66,57 +64,73 @@
           href="{{ url_for('admin:index' if request.user.is_superuser else 'webcore:index') }}"
         >
           <p class="text-xl xs:text-2xl sm:text-3xl md:text-2xl lg:text-3xl xl:text-5xl font-bold italic">David Cooper</p>
-          <p class="text-sm xs:text-lg md:text-lg xl:text-3xl italic text-accent">Radio Personality</p>
+          <p class="text-sm xs:text-lg md:text-lg xl:text-3xl italic">Radio Personality</p>
         </a>
       </div>
+
+      {#- Buttons + Menu #}
       <div class="flex-none flex items-center space-x-2">
-        <span class="btn btn-lg btn-outline btn-primary btn-disabled hidden md:flex">Home</span>
-        <a href="#" class="btn btn-lg btn-primary hidden md:flex">Shows</a>
-        <a href="#" class="btn btn-lg btn-primary hidden md:flex">Listen</a>
-        <a href="#" class="btn btn-lg btn-primary hidden md:flex">Bio</a>
-        <button
-          style="--rounded-btn: 0"
-          class="btn btn-square btn-ghost flex md:hidden"
-          @click="menuOpen = true"
-          :class="{hidden: menuOpen, flex: !menuOpen}"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
+        {% for link in navigation_links %}
+          {% if not link.is_subnav %}
+            {% if link.is_active %}
+              <span class="btn btn-lg btn-outline btn-primary btn-disabled hidden md:flex">
+            {% else %}
+              <a href="{{ link.url }}" class="btn btn-lg btn-primary hidden md:flex">
+            {% endif %}
+                {{ icon(link.icon) }} {{ link.name }}
+            {% if link.is_active %}</span>{% else %}</a>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+        <div class="hidden md:block 3xl:hidden">
+          <div class="dropdown dropdown-end select-none">
+            <div tabindex="0" class="btn btn-primary btn-lg">
+              More {{ icon('mdi:dots-vertical', margin='ml-1') }}
+            </div>
+            <ul tabindex="0" class="menu dropdown-content bg-secondary text-lg text-primary font-bold w-72">
+              {% for link in navigation_links %}
+                {% if link.is_subnav %}
+                  <li{% if link.is_active %} class="bordered text-secondary-content"{% endif %}>
+                    {% if link.is_active %}<span class="italic">{% else %}<a href="{{ link.url }}">{% endif %}
+                      {{ icon(link.icon) }} {{ link.name }}
+                    {% if link.is_active %}</span>{% else %}</a>{% endif %}
+                  </li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+
+        {#- Mobile expand/close buttons #}
+        <button x-cloak style="--rounded-btn: 0" class="btn btn-square btn-ghost flex md:hidden" @click="menuOpen = true" :class="{hidden: menuOpen, flex: !menuOpen}">
+          {{ icon('fa:bars', margin=None) }}
         </button>
-        <button
-          style="--rounded-btn: 0"
-          class="btn btn-square btn-ghost flex md:hidden"
-          @click="menuOpen = false"
-          :class="{hidden: !menuOpen, flex: menuOpen}"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
+        <button x-cloak style="--rounded-btn: 0" class="btn btn-square btn-ghost flex md:hidden" @click="menuOpen = false" :class="{hidden: !menuOpen, flex: menuOpen}">
+          {{ icon('fa:close', margin=None) }}
         </button>
       </div>
     </div>
-    <div
-      class="w-full md:hidden transition-all duration-1000"
-      :class="{hidden: !menuOpen, block: menuOpen}"
-    >
-      <ul class="menu bg-secondary text-primary">
-        <li class="bordered text-secondary-content"><span class="italic">Home</span></li>
-        <li><a href="#">Shows</a></li>
-        <li><a href="#">Listen</a></li>
-        <li><a href="#">Bio</a></li>
+    <div x-cloak class="w-full md:hidden transition-all duration-1000" :class="{hidden: !menuOpen, block: menuOpen}">
+      <ul class="menu bg-secondary font-bold text-primary">
+        {% for link in navigation_links %}
+          <li{% if link.is_active %} class="bordered text-secondary-content"{% endif %}>
+            {% if link.is_active %}<span class="italic">{% else %}<a href="{{ link.url }}">{% endif %}
+              {{ icon(link.icon) }} {{ link.name }}
+            {% if link.is_active %}</span>{% else %}</a>{% endif %}
+          </li>
+        {% endfor %}
       </ul>
     </div>
   </div>
 
-  <div class="max-w-screen-2xl mx-auto pt-3 px-4">
+  <div class="max-w-screen-3xl mx-auto pt-3 px-4">
     {% block content required %}{% endblock content %}
   </div>
 
   <div class="flex w-full px-5 py-1 xl:py-1.5 items-baseline justify-between space-x-1.5 select-none">
     {# telephone = '&#x260E;&#xFE0F;' #}
-    {% set emojis = shuffle(['&#x1F355;', '&#x2721;&#xFE0F;', '&#x1F4FB;', '&#x1F54D;', '&#x2620;&#xFE0F;', '&#x1F46F;',
-                             '&#x1F399;&#xFE0F;', '&#x1F4A9;', '&#x1F4DF;', '&#x1F481;&#x1F3FC;&#x200D;&#x2640;️&#xFE0F;']) %}
+    {% set emojis = ['&#x1F355;', '&#x2721;&#xFE0F;', '&#x1F4FB;', '&#x1F54D;', '&#x2620;&#xFE0F;', '&#x1F46F;',
+                     '&#x1F399;&#xFE0F;', '&#x1F4A9;', '&#x1F4DF;', '&#x1F481;&#x1F3FC;&#x200D;&#x2640;️&#xFE0F;']|shuffle %}
 
     {% for emoji in emojis %}
       <div
@@ -129,31 +143,20 @@
   </div>
 
   {# Todo show if playing, even if we've scrolled up #}
-  <div :class="{'sticky bottom-0': stickFooter}" class="w-full bg-black text-primary text-center text-3xl py-3">Player goes here</div>
+  <div x-data :class="{'fixed bottom-0': $store.hero.playerFixed}" class="w-full bg-black text-primary text-center text-3xl py-3">Player goes here</div>
 
-    {#
-    <div x-data="{sidebar: false}" @keydown.escape.window="sidebar = false" class="shadow drawer drawer-end min-h-screen-iphone-fix w-full">
-      <input x-ref="drawer" x-model="sidebar" id="sidebar-drawer" type="checkbox" class="drawer-toggle">
-      <div class="flex flex-col drawer-content">
-
-
-
-
-        <div class="container mx-auto pt-3 lg:pt-6 px-4">
-          {% block content required %}{% endblock content %}
-        </div>
-      </div>
-      <div class="drawer-side">
-        <label for="sidebar-drawer" class="drawer-overlay"></label>
-        <ul class="p-4 overflow-y-auto menu w-2/3 min-w-[240px] bg-secondary">
-          <li class="bordered"><span class="italic">Home</span></li>
-          <li><a :tabindex="sidebar ? '0' : '-1'" href="#">Shows</a></li>
-          <li><a :tabindex="sidebar ? '0' : '-1'" href="#">Listen</a></li>
-          <li><a :tabindex="sidebar ? '0' : '-1'" href="#">Bio</a></li>
-        </ul>
-      </div>
-    </div>
-    #}
-</body>
+  {% if settings.DEBUG and request.user.is_superuser %}
+    <span class="bg-primary bg-white text-black border border-black fixed top-0.5 left-0.5 p-px">
+      <span class="inline xs:hidden">_</span>
+      <span class="hidden xs:inline sm:hidden">xs</span>
+      <span class="hidden sm:inline md:hidden">sm</span>
+      <span class="hidden md:inline lg:hidden">md</span>
+      <span class="hidden lg:inline xl:hidden">lg</span>
+      <span class="hidden xl:inline 2xl:hidden">xl</span>
+      <span class="hidden 2xl:inline 3xl:hidden">2xl</span>
+      <span class="hidden 3xl:inline ">3xl</span>
+    </span>
+  {% endif %}
 {% endblock %}
+</body>
 </html>

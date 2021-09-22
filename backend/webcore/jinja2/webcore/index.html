@@ -1,43 +1,72 @@
 {% extends 'webcore/base.html' %}
 
-{% block content %}
-    <div class="text-lh mt-5">
-        Some content goes here &mdash;
-        <span class="font-bold">
-            size:<!--
-                --><div class="inline xs:hidden">2xs</div><!--
-                --><div class="hidden xs:inline sm:hidden">xs</div><!--
-                --><div class="hidden sm:inline md:hidden">sm</div><!--
-                --><div class="hidden md:inline lg:hidden">md</div><!--
-                --><div class="hidden lg:inline xl:hidden">lg</div><!--
-                --><div class="hidden xl:inline">xl</div>
-        </span>
+{% block extra_head %}
+  <script src="{{ static('js/vendor/moment/min/moment.min.js') }}"></script>
+  <script src="{{ static('js/vendor/moment-timezone/builds/moment-timezone-with-data-1970-2030.min.js') }}"></script>
+  <script src="{{ static('js/index.js') }}"></script>
+{% endblock %}
 
-        <div class="text-primary">Primary</div>
-        <div class="text-secondary">Secondary</div>
-        <div class="text-accent">Accent</div>
-        <div class="bg-primary text-primary-content">Primary</div>
-        <div class="bg-secondary text-secondary-content">Secondary</div>
-        <div class="bg-accent text-accent-content">Accent</div>
-
-        <div class="font-bold mb-3">
-            <a href="#" class="link link-primary link-hover">Primary link</a> /
-            <a href="#" class="link link-secondary link-hover">Secondary link</a> /
-            <a href="#" class="link link-accent link-hover">Accent link</a> /
-            <a href="#" class="link link-neutral link-hover">Neutral link</a>
+{% block body %}
+<div x-data x-show="$store.hero.showHero" x-cloak>
+  <div class="hero min-h-screen-iphone-fix">
+    <div class="flex-col hero-content max-w-screen-lg lg:flex-row-reverse lg:rounded-3xl">
+      <div class="flex flex-col lg:flex-col-reverse gap-y-3 items-center">
+        <h1 class="italic text-xl md:text-2xl lg:text-xl font-bold">David Cooper <small class="font-normal">Radio Personality</small></h1>
+        <div class="overflow-hidden">
+          <img
+            src="{{ static('images/david-headshot.jpg') }}" style="{{ random_spin_style(min=4000, max=5500, direction='normal') }}"
+            class="max-w-[12rem] sm:max-w-xs lg:max-w-sm rounded-full border-8 border-secondary animate-spin-custom select-none drag-none"
+          >
         </div>
+      </div>
+      <div>
+        <h2 class="mb-6 sm:mb-8 lg:mb-10 text-2xl sm:text-3xl lg:text-5xl font-bold italic text-center lg:text-left">
+          Welcome to <span class="text-accent underline underline-wavy animate-spin">jew.pizza</span>
+        </h2>
+        <p class="lg:text-indent mx-2 lg:mx-0 text-lg sm:text-xl" x-data="localizedTimeBlurb">
+          Welcome to my very special website. You can catch me live
+          <span class="font-bold"><span x-text="showTime">Sun to Thurs nights at 1:30am-2:30am {{ get_current_eastern_tz_abbrev() }}</span>
+          on <a class="link-primary link-hover" target="_blank"
+            href="https://www.iheartradio.ca/newstalk-1010/shows/the-late-showgram-with-jim-richards-1.14645758">The
+          Showgram w/ Jim Richards</a></span><span x-text="showTechnicalTime"> (technically Mon to Fri mornings)</span>.
+          It airs nationally in Canada, and you can <span class="font-bold">stream it on Toronto-based
+          <a href="https://www.iheartradio.ca/newstalk-1010" class="link-primary link-hover" target="_blank">NEWSTALK 1010's
+          website</a></span>.
+        </p>
 
-        <button class="btn btn-lg btn-primary">Primary</button>
-        <button class="btn btn-lg btn-primary btn-outline">Outline</button>
-        <button class="btn btn-lg btn-secondary">Secondary</button>
-        <button class="btn btn-lg btn-secondary btn-outline">Outline</button>
-        <button class="btn btn-lg btn-accent">Accent</button>
-        <button class="btn btn-lg btn-accent btn-outline">Outline</button>
-        <button class="btn btn-lg">Neutral</button>
-        <button class="btn btn-lg btn-outline">Outline</button>
-
-        <div class="mt-5 bg-secondary prose prose-xl max-w-none">
-            {{ content_block('hi.mom') }}
+        <p class="lg:text-indent mt-3 mx-2 lg:mx-0 text-base sm:text-xl italic">
+          <span class="link-accent link-hover cursor-pointer" @click="$scroll('#navbar')">Scroll down</span> to find out more and have the nightmare continue!
+        </p>
+        <div class="hidden sm:block mt-6 lg:mt-8 text-center lg:text-left select-none">
+          {% for link in navigation_links %}
+            {% if not link.is_subnav %}
+              <a class="btn btn-neutral" href="{{ link.url }}">
+                {{ icon(link.icon, size='2xl', margin='ml-0 sm:mr-2') }}
+                <span class="hidden sm:block">{{ link.name }}</span>
+              </a>
+            {% endif %}
+          {% endfor %}
         </div>
+      </div>
     </div>
+  </div>
+
+  <div class="sticky bottom-0 flex justify-between md:justify-around select-none">
+    {% for i in range(5) %}
+      <div x-data @click="$scroll('#navbar')"{% if not (loop.first or loop.last) %} class="hidden sm:block"{% endif %}>
+        {{ icon('mdi:chevron-double-down', margin=None, classes='font-bold animate-bounce cursor-pointer') }}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+  <div class="text-lh mt-5">
+    <div class="mt-5 bg-secondary prose prose-xl max-w-none">
+        {{ lipsum() }}
+    </div>
+  </div>
 {% endblock %}

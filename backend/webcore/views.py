@@ -24,6 +24,7 @@ class IndexView(TemplateView):
     extra_context = {"title": "jew.pizza - David Cooper"}
 
     def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_staff and not settings.DEBUG:
-            return HttpResponseForbidden()
         return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        return {"js_data": {"test_tz": self.request.GET.get("testtz")}, **super().get_context_data(**kwargs)}

@@ -1,15 +1,21 @@
+from collections import namedtuple
+import datetime
 import hashlib
 import os
 import random
 
 from jinja2 import Environment
+from pytz import timezone
 
 from django.conf import settings
 from django.core.cache import cache
 from django.templatetags.static import static as django_static
 from django.urls import reverse
 
-from webcore.constants import CACHE_KEY_PREFIX_STATIC_ASSET_MD5SUM
+from webcore.constants import CACHE_KEY_PREFIX_STATIC_ASSET_MD5SUM, NAVIGATION_LINKS
+
+
+Link = namedtuple('Link', ('name', 'url', 'icon', 'is_subnav', 'is_active'))
 
 
 def shuffle(items):
@@ -25,14 +31,12 @@ def static(path, *args, **kwargs):
 
     for ext in (".js", ".css"):
         if path.endswith(ext):
-            # If we're not requesting the minified version
-            if not path.endswith(f".min{ext}"):
-                if settings.DEBUG:
-                    # In DEBUG, use a simple random fake md5 hash
-                    path_hash = "{:032x}".format(random.randrange(16 ** 32))
-                else:
-                    # In prod, swap out to request the minified version
-                    path = f"{path.removesuffix(ext)}.min{ext}"
+            if settings.DEBUG:
+                # In DEBUG, use a simple random fake md5 hash
+                path_hash = "{:032x}".format(random.randrange(16 ** 32))
+            elif not path.endswith(f".min{ext}"):
+                # If we're not requesting the minified version in prod, swap it out
+                path = f"{path.removesuffix(ext)}.min{ext}"
 
             if not path_hash:
                 cache_key = f"{CACHE_KEY_PREFIX_STATIC_ASSET_MD5SUM}{path}"
@@ -53,17 +57,29 @@ def static(path, *args, **kwargs):
     return static_path
 
 
-def environment(**options):
-    from webcore.models import ContentBlock
+def navigation_links(request):
+    navigation_links = []
+    for name, url_name, icon, is_subnav in NAVIGATION_LINKS:
+        is_active = (request.resolver_match.view_name == url_name)
+        url = reverse(url_name) if url_name else '#'  # XXX allow stubs as empty string
+        navigation_links.append(
+            Link(name=name, url=url, icon=icon, is_subnav=is_subnav, is_active=is_active))
 
+    return {"navigation_links": navigation_links}
+
+
+def environment(**options):
     env = Environment(**options)
     env.globals.update(
         {
-            "content_block": ContentBlock.render_content_block,
+            "get_current_eastern_tz_abbrev": lambda: timezone("US/Eastern").localize(datetime.datetime.now()).tzname(),
             "settings": settings,
-            "shuffle": shuffle,
             "static": static,
             "url_for": lambda name, *args, **kwargs: reverse(name, args=args, kwargs=kwargs),
         }
     )
+    env.filters.update({
+        'shuffle': shuffle,
+        'bool': bool,
+    })
     return env

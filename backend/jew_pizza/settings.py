@@ -27,9 +27,9 @@ EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=(EMAIL_PORT == 587))
 DEFAULT_FROM_EMAIL = env("EMAIL_FROM_ADDRESS")
 
 if DEBUG:
-    ICECAST_URL = f'http://{DOMAIN_NAME}:8080'
+    ICECAST_URL = f"http://{DOMAIN_NAME}:8080"
 else:
-    ICECAST_URL = env('ICECAST_URL')
+    ICECAST_URL = env("ICECAST_URL")
 
 if DEBUG:
     ALLOWED_HOSTS = ["*"]
@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     # To override the runserver command, placed before staticfiles
     "webcore",
     "django.contrib.staticfiles",
-    "markdownx",
 ]
 
 if DEBUG:
@@ -94,6 +93,9 @@ TEMPLATES = [
             "environment": "jew_pizza.j2_env.environment",
             "extensions": [
                 "jinja2.ext.do",
+            ],
+            "context_processors": [
+                "jew_pizza.j2_env.navigation_links",
             ],
         },
     },
@@ -183,9 +185,10 @@ NPM_ROOT_PATH = "/app/frontend"
 NPM_STATIC_FILES_PREFIX = "js/vendor"
 NPM_FILE_PATTERNS = {
     "alpinejs": ["dist/cdn.min.js"],
+    '@alpinejs/intersect': ['dist/cdn.min.js'],
+    "@alpine-collective/toolkit-scroll": ["dist/cdn.min.js"],
     "moment": ["min/moment.min.js"],
     "moment-timezone": ["builds/moment-timezone-with-data-1970-2030.min.js"],
-    "@alpine-collective/toolkit-scroll": ["dist/cdn.min.js"],
 }
 
 STATICFILES_FINDERS = [

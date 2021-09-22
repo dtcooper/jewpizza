@@ -7,6 +7,7 @@ import time
 from django.conf import settings
 from django.contrib.staticfiles.management.commands.runserver import Command as RunserverCommand
 from django.core.management import CommandError
+from django.utils.autoreload import DJANGO_AUTORELOAD_ENV
 
 
 class Command(RunserverCommand):
@@ -19,13 +20,17 @@ class Command(RunserverCommand):
             help="Do NOT run 'npm run watch' in a seprate thread",
         )
 
-    def handle(self, *args, **options):
-        if options["with_npm_watch"] and not sys.stdin.isatty():
-            raise CommandError(
-                "stdin is *NOT* a tty, can't run tailwind (npm run watch). Is docker-compose.dev.yml ->"
-                " docker-compose.override.yml symlinked?"
-            )
-        super().handle(*args, **options)
+    def execute(self, *args, **options):
+        if options["with_npm_watch"] and os.environ.get(DJANGO_AUTORELOAD_ENV) != 'true':
+            if sys.stdin.isatty():
+                thread = threading.Thread(target=self.run_npm_watch, daemon=True)
+                thread.start()
+            else:
+                raise CommandError(
+                    "stdin is *NOT* a tty, can't run tailwind (npm run watch). Is docker-compose.dev.yml ->"
+                    " docker-compose.override.yml symlinked?"
+                )
+        super().execute(*args, **options)
 
     def run_npm_watch(self):
         def clear_stylesheet():
@@ -39,13 +44,10 @@ class Command(RunserverCommand):
             try:
                 clear_stylesheet()
                 subprocess.run(["npm", "--prefix=../frontend", "run", "watch"], check=True)
-            except subprocess.SubprocessError:
+            except subprocess.SubprocessError as e:
+                if e.returncode < 0:
+                    # negative = the child was terminated by signal N (POSIX only) - from subprocess manual
+                    return
                 clear_stylesheet()
                 self.stderr.write("Tailwind crashed. Retrying in 1 second. (npm run watch)")
                 time.sleep(1)
-
-    def inner_run(self, *args, **options):
-        if options["with_npm_watch"]:
-            thread = threading.Thread(target=self.run_npm_watch)
-            thread.start()
-        super().inner_run(*args, **options)

@@ -9,6 +9,10 @@
         min-height: 100vh;
     }
 
+    [x-cloak] {
+        display: none;
+    }
+
     @supports (-webkit-touch-callout: none) {
         .min-h-screen-iphone-fix {
             min-height: -webkit-fill-available;

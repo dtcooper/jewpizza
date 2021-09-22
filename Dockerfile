@@ -27,7 +27,8 @@ RUN poetry install \
 
 RUN mkdir -p /app/frontend
 COPY frontend/package.json frontend/package-lock.json /app/frontend/
-RUN npm --prefix=../frontend install
+RUN npm --prefix=../frontend install \
+    && echo "alias npm='npm --prefix=/app/frontend'" >> /root/.bashrc
 
 COPY . /app/
 

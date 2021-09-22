@@ -1,3 +1,7 @@
+{% macro icon(icon, size='3xl', margin='mr-2', classes=None) -%}
+  <span class="iconify text-{{ size }}{% if margin %} {{ margin }}{% endif %}{% if classes %} {{ classes }}{% endif %}" data-icon="{{ icon }}"></span>
+{%- endmacro %}
+
 {% macro random_spin_style(min=850, max=2750, direction=undefined) -%}
 
   {%- if direction is none and random_bool() -%}

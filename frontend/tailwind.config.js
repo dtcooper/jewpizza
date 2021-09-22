@@ -26,8 +26,9 @@ module.exports = {
   },
   theme: {
     screens: {
-      'xs': '375px',
+      xs: '375px',
       ...defaultTheme.screens,
+      '3xl': '1600px'
     },
     extend: {
       fontFamily: {
@@ -54,7 +55,7 @@ module.exports = {
         fontFamily: 'Space Mono,ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace',
         primary: '#fc49ab',
         'primary-focus': '#f10486',
-        // 'primary-content': '#ffffff',
+        'primary-content': '#ffffff',
         // secondary: '#5fe8ff',
         // 'secondary-focus': '#0adaff',
         // 'secondary-content': '#171731',
