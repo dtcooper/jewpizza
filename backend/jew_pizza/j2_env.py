@@ -5,17 +5,16 @@ import os
 import random
 
 from jinja2 import Environment
-from pytz import timezone
 
 from django.conf import settings
 from django.core.cache import cache
 from django.templatetags.static import static as django_static
 from django.urls import reverse
+from django.utils.timezone import get_default_timezone
 
 from webcore.constants import CACHE_KEY_PREFIX_STATIC_ASSET_MD5SUM, NAVIGATION_LINKS
 
-
-Link = namedtuple('Link', ('name', 'url', 'icon', 'is_subnav', 'is_active'))
+Link = namedtuple("Link", ("name", "url", "icon", "is_subnav", "is_active"))
 
 
 def shuffle(items):
@@ -60,10 +59,9 @@ def static(path, *args, **kwargs):
 def navigation_links(request):
     navigation_links = []
     for name, url_name, icon, is_subnav in NAVIGATION_LINKS:
-        is_active = (request.resolver_match.view_name == url_name)
-        url = reverse(url_name) if url_name else '#'  # XXX allow stubs as empty string
-        navigation_links.append(
-            Link(name=name, url=url, icon=icon, is_subnav=is_subnav, is_active=is_active))
+        is_active = request.resolver_match.view_name == url_name
+        url = reverse(url_name) if url_name else "#"  # XXX allow stubs as empty string
+        navigation_links.append(Link(name=name, url=url, icon=icon, is_subnav=is_subnav, is_active=is_active))
 
     return {"navigation_links": navigation_links}
 
@@ -72,14 +70,15 @@ def environment(**options):
     env = Environment(**options)
     env.globals.update(
         {
-            "get_current_eastern_tz_abbrev": lambda: timezone("US/Eastern").localize(datetime.datetime.now()).tzname(),
             "settings": settings,
+            "shuffle": shuffle,
             "static": static,
             "url_for": lambda name, *args, **kwargs: reverse(name, args=args, kwargs=kwargs),
         }
     )
-    env.filters.update({
-        'shuffle': shuffle,
-        'bool': bool,
-    })
+    env.filters.update(
+        {
+            "bool": bool,
+        }
+    )
     return env

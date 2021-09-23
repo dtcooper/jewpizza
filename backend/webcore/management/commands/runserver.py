@@ -21,7 +21,7 @@ class Command(RunserverCommand):
         )
 
     def execute(self, *args, **options):
-        if options["with_npm_watch"] and os.environ.get(DJANGO_AUTORELOAD_ENV) != 'true':
+        if options["with_npm_watch"] and os.environ.get(DJANGO_AUTORELOAD_ENV) != "true":
             if sys.stdin.isatty():
                 thread = threading.Thread(target=self.run_npm_watch, daemon=True)
                 thread.start()

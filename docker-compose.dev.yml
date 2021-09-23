@@ -25,6 +25,7 @@ services:
 
   icecast:
     image: moul/icecast
+    init: true  # for Icecast to shut down faster
     environment:
       - "ICECAST_HOSTNAME=${DOMAIN_NAME:-localhost}"
     ports:

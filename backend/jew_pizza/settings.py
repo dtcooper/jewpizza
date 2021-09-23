@@ -43,9 +43,13 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    # To override the runserver command, placed before staticfiles
+    # To override the runserver command, place local webcore before staticfiles
     "webcore",
     "django.contrib.staticfiles",
+    # 3rd party
+    "recurrence",
+    # Local
+    "shows",
 ]
 
 if DEBUG:
@@ -179,13 +183,14 @@ STATIC_ROOT = "/static_root"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = "/media_root"
 
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+# Causes django-recurrence to issue a migration
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 NPM_ROOT_PATH = "/app/frontend"
 NPM_STATIC_FILES_PREFIX = "js/vendor"
 NPM_FILE_PATTERNS = {
     "alpinejs": ["dist/cdn.min.js"],
-    '@alpinejs/intersect': ['dist/cdn.min.js'],
+    "@alpinejs/intersect": ["dist/cdn.min.js"],
     "@alpine-collective/toolkit-scroll": ["dist/cdn.min.js"],
     "moment": ["min/moment.min.js"],
     "moment-timezone": ["builds/moment-timezone-with-data-1970-2030.min.js"],

@@ -21,11 +21,11 @@
       </div>
       <div>
         <h2 class="mb-6 sm:mb-8 lg:mb-10 text-2xl sm:text-3xl lg:text-5xl font-bold italic text-center lg:text-left">
-          Welcome to <span class="text-accent underline underline-wavy animate-spin">jew.pizza</span>
+          Welcome to <span class="text-accent underline underline-wavy">jew.pizza</span>
         </h2>
         <p class="lg:text-indent mx-2 lg:mx-0 text-lg sm:text-xl" x-data="localizedTimeBlurb">
           Welcome to my very special website. You can catch me live
-          <span class="font-bold"><span x-text="showTime">Sun to Thurs nights at 1:30am-2:30am {{ get_current_eastern_tz_abbrev() }}</span>
+          <span class="font-bold"><span x-text="showTime">Sun to Thurs nights at 1:30am-2:30am {{ default_tz_abbrev }}</span>
           on <a class="link-primary link-hover" target="_blank"
             href="https://www.iheartradio.ca/newstalk-1010/shows/the-late-showgram-with-jim-richards-1.14645758">The
           Showgram w/ Jim Richards</a></span><span x-text="showTechnicalTime"> (technically Mon to Fri mornings)</span>.
@@ -64,9 +64,11 @@
 {% endblock %}
 
 {% block content %}
-  <div class="text-lh mt-5">
-    <div class="mt-5 bg-secondary prose prose-xl max-w-none">
-        {{ lipsum() }}
-    </div>
+  {% with base_template='webcore/content_only.html' %}
+    {% include 'webcore/bio.html' %}
+  {% endwith %}
+
+  <div class="text-lg mt-5 prose prose-lg max-w-full">
+    {{ lipsum() }}
   </div>
 {% endblock %}

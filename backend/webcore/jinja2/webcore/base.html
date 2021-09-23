@@ -82,7 +82,7 @@
             {% endif %}
           {% endif %}
         {% endfor %}
-        <div class="hidden md:block 3xl:hidden">
+        <div class="hidden md:block">
           <div class="dropdown dropdown-end select-none">
             <div tabindex="0" class="btn btn-primary btn-lg">
               More {{ icon('mdi:dots-vertical', margin='ml-1') }}
@@ -124,13 +124,16 @@
   </div>
 
   <div class="max-w-screen-3xl mx-auto pt-3 px-4">
+    {% if not hide_title %}
+      <h3 class="text-5xl text-accent underline underline-wavy mb-10 ml-20 italic">{{ title }}</h3>
+    {% endif %}
     {% block content required %}{% endblock content %}
   </div>
 
   <div class="flex w-full px-5 py-1 xl:py-1.5 items-baseline justify-between space-x-1.5 select-none">
     {# telephone = '&#x260E;&#xFE0F;' #}
-    {% set emojis = ['&#x1F355;', '&#x2721;&#xFE0F;', '&#x1F4FB;', '&#x1F54D;', '&#x2620;&#xFE0F;', '&#x1F46F;',
-                     '&#x1F399;&#xFE0F;', '&#x1F4A9;', '&#x1F4DF;', '&#x1F481;&#x1F3FC;&#x200D;&#x2640;️&#xFE0F;']|shuffle %}
+    {% set emojis = shuffle(['&#x1F355;', '&#x2721;&#xFE0F;', '&#x1F4FB;', '&#x1F54D;', '&#x2620;&#xFE0F;', '&#x1F46F;',
+                             '&#x1F399;&#xFE0F;', '&#x1F4A9;', '&#x1F4DF;', '&#x1F481;&#x1F3FC;&#x200D;&#x2640;️&#xFE0F;']) %}
 
     {% for emoji in emojis %}
       <div
@@ -143,7 +146,7 @@
   </div>
 
   {# Todo show if playing, even if we've scrolled up #}
-  <div x-data :class="{'fixed bottom-0': $store.hero.playerFixed}" class="w-full bg-black text-primary text-center text-3xl py-3">Player goes here</div>
+  <div x-data :class="{'sticky bottom-0': $store.hero.playerFixed}" class="w-full bg-black text-primary text-center text-3xl py-3">Player goes here</div>
 
   {% if settings.DEBUG and request.user.is_superuser %}
     <span class="bg-primary bg-white text-black border border-black fixed top-0.5 left-0.5 p-px">
