@@ -22,9 +22,9 @@
   "homepage": "https://github.com/dtcooper/jew.pizza#readme",
   "dependencies": {
     "@alpine-collective/toolkit-scroll": "^1.0.0",
-    "@alpinejs/intersect": "^3.4.0",
+    "@alpinejs/intersect": "^3.4.1",
     "@tailwindcss/typography": "^0.4.1",
-    "alpinejs": "^3.4.0",
+    "alpinejs": "^3.4.1",
     "daisyui": "^1.14.0",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.33",
