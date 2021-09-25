@@ -1,6 +1,8 @@
-.PHONY: lint format pre-commit build shell show-outdated deploy
+.PHONY: lint format pre-commit build shell show-outdated deploy up down
 
-COMPOSE=docker compose
+COMPOSE:=docker compose
+SERVER:=jew.pizza
+SERVER_PROJET_DIR:=jew.pizza
 
 lint:
 	@$(COMPOSE) run --rm --no-deps app flake8 || exit 0
@@ -33,4 +35,10 @@ show-outdated:
 		poetry show -o'
 
 deploy:
-	git push && ssh jew.pizza 'cd jew.pizza; git pull --ff-only && docker compose build && docker compose up -d'
+	git push && ssh $(SERVER) 'cd $(SERVER_PROJET_DIR); git pull --ff-only && make build && make up'
+
+up:
+	@$(COMPOSE) up $(shell source .env; if [ -z "$$DEBUG" -o "$$DEBUG" = 0 ]; then echo "-d"; fi)
+
+down:
+	@$(COMPOSE) down
