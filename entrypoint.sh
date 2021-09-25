@@ -41,6 +41,13 @@ fi
 
 
 if [ "$#" != 0 ]; then
+    if [ "$DEBUG" ] ; then
+        # Make psql work easily
+        export PGHOST=db
+        export PGUSER=postgres
+        export PGPASSWORD=postgres
+    fi
+
     exec "$@"
 else
     if [ "$DEBUG" ]; then
@@ -53,7 +60,7 @@ else
         ./manage.py collectstatic --noinput
     fi
 
-    wait-for-it -t 0 db:5432 && ./manage.py migrate
+    wait-for-it -t 0 db:5432 -- ./manage.py migrate
 
     if [ "$DEBUG" ]; then
         exec ./manage.py runserver

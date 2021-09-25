@@ -12,6 +12,13 @@ RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
         nodejs \
+        # Dev requirements
+        $(if [ "$DEBUG" -a "$DEBUG" != '0' ]; then echo \
+            nano \
+            netcat \
+            postgresql-client \
+            redis-tools \
+        ; fi) \
     && rm -rf /var/lib/apt/lists/*
 
 RUN wget -qO /usr/local/bin/wait-for-it https://raw.githubusercontent.com/vishnubob/wait-for-it/81b1373f/wait-for-it.sh \
@@ -23,12 +30,15 @@ RUN mkdir -p /app/backend
 WORKDIR /app/backend
 COPY backend/pyproject.toml backend/poetry.lock /app/backend/
 RUN poetry install \
+    # In prod use "--no-dev"
     $(if [ -z "$DEBUG" -o "$DEBUG" = '0' ]; then echo '--no-dev'; fi)
 
 RUN mkdir -p /app/frontend
 COPY frontend/package.json frontend/package-lock.json /app/frontend/
 RUN npm --prefix=../frontend install \
-    && echo "alias npm='npm --prefix=/app/frontend'" >> /root/.bashrc
+    && echo "alias npm='npm --prefix=/app/frontend'" >> /root/.bashrc \
+    # May as well set redis-cli alias while we're at it
+    && echo "alias redis-cli='redis-cli -h redis'" >> /root/.bashrc
 
 COPY . /app/
 
