@@ -1,5 +1,4 @@
 from collections import namedtuple
-import datetime
 import hashlib
 import os
 import random
@@ -10,7 +9,6 @@ from django.conf import settings
 from django.core.cache import cache
 from django.templatetags.static import static as django_static
 from django.urls import reverse
-from django.utils.timezone import get_default_timezone
 
 from webcore.constants import CACHE_KEY_PREFIX_STATIC_ASSET_MD5SUM, NAVIGATION_LINKS
 
@@ -70,10 +68,10 @@ def environment(**options):
     env = Environment(**options)
     env.globals.update(
         {
+            "randint": random.randint,
             "settings": settings,
             "shuffle": shuffle,
             "static": static,
-            "randint": random.randint,
             "url_for": lambda name, *args, **kwargs: reverse(name, args=args, kwargs=kwargs),
         }
     )

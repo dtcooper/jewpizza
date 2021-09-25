@@ -47,38 +47,39 @@
 {% block body %}
   {# Navbar (sticky) #}
   <div x-data="{menuOpen: false }" class="sticky top-0">
-    <div id="navbar" class="navbar w-full !px-1 !lg:px-4 min-h-[3.5rem] xs:min-h-[4.75rem] sm:min-h-[3.5rem] md:min-h-[4.75rem] bg-base-100">
+    <div id="navbar" class="navbar w-full min-h-[3.5rem] xs:min-h-[4.75rem] sm:min-h-[3.5rem] xl:min-h-[4.75rem] bg-base-100">
 
       {#- Copy and image #}
+      {# TODO: Redo, why bother struggling tof it in MD when we can just use the dropdown #}
       <div class="flex flex-row flex-1">
         <{% if request.user.is_superuser %}a href="{{ url_for('admin:index') }}" tabindex="-1"{% else %}div{% endif %}>
           <img
             src="{{ static('images/david-headshot.jpg') }}"
-            class="animate-spin-custom overflow-none h-12 w-12 mr-2 xs:h-16 xs:w-16 xs:mr-3 sm:h-12 sm:w-12 sm:mr-2 md:mr-1 lg:mr-2 xl:h-16 xl:w-16 xl:mr-3 rounded-full border-[3px] xl:border-4 border-secondary select-none"
+            class="animate-spin-custom overflow-none h-12 w-12 mr-2 xl:h-16 xl:w-16 xl:mr-3 rounded-full border-[3px] xl:border-4 border-secondary select-none"
             style="{{ random_spin_style(min=4000, max=5500, direction='normal') }}"
           >
           </{% if request.user.is_superuser %}a{% else %}div{% endif %}>
         <{% if request.user.is_superuser %}a href="{{ url_for('admin:index') }}" tabindex="-1"{% else %}div{% endif %}
-          class="flex flex-col items-start sm:flex-row sm:items-baseline md:flex-col md:items-start lg:flex-row lg:items-baseline sm:space-x-3 md:space-x-0 lg:space-x-1.5 xl:space-x-3"
+          class="flex flex-col items-start sm:flex-row sm:items-baseline sm:space-x-2"
 
         >
-          <p class="text-xl xs:text-2xl sm:text-3xl md:text-2xl lg:text-3xl xl:text-5xl font-bold italic">David Cooper</p>
-          <p class="text-sm xs:text-lg md:text-base xl:text-2xl 2xl:text-3xl italic">Radio Personality</p>
+          <p class="text-xl xs:text-2xl sm:text-3xl lg:text-[length:min(3rem,2.65vw)] font-bold italic">David Cooper</p>
+          <p class="text-sm xs:text-lg sm:text-2xl lg:text-[length:min(1.875rem,2vw)] italic">Radio Personality</p>
         </{% if request.user.is_superuser %}a{% else %}div{% endif %}>
       </div>
 
       {#- Buttons + Menu #}
-      <div class="flex-none flex items-center space-x-1 md:space-x-0.5 lg:space-x-1 2xl:space-x-2">
+      <div class="flex-none flex items-center space-x-0.5 2xl:space-x-2">
         {% for link in navigation_links %}
             {% if link.is_active %}
-              <span class="btn 2xl:btn-lg btn-outline btn-primary btn-disabled hidden {% if link.is_subnav %}3xl:flex{% else %}md:flex{% endif %}">
+              <span class="btn 2xl:btn-lg btn-outline btn-primary btn-disabled hidden {% if link.is_subnav %}3xl:flex{% else %}lg:flex{% endif %}">
             {% else %}
-              <a href="{{ link.url }}" class="btn 2xl:btn-lg btn-primary hidden {% if link.is_subnav %}3xl:flex{% else %}md:flex{% endif %}">
+              <a href="{{ link.url }}" class="btn 2xl:btn-lg btn-primary hidden {% if link.is_subnav %}3xl:flex{% else %}lg:flex{% endif %}">
             {% endif %}
                 {{ icon(link.icon, size='2xl', classes='2xl:text-3xl') }} {{ link.name }}
             {% if link.is_active %}</span>{% else %}</a>{% endif %}
         {% endfor %}
-        <div class="hidden md:block 3xl:hidden" x-data="{open: false}" @click.away="open = false">
+        <div class="hidden lg:block 3xl:hidden" x-data="{open: false}" @click.away="open = false">
           <button class="btn btn-primary 2xl:btn-lg pr-1.5 2xl:pr-3" @click="open = !open">
             More {{ icon('mdi:dots-vertical', size='2xl', margin=None, classes='2xl:text-3xl') }}
           </button>
@@ -98,20 +99,21 @@
         </div>
 
         {#- Mobile expand/close buttons #}
-        <button x-cloak style="--rounded-btn: 0" class="btn btn-square btn-ghost flex md:hidden" @click="menuOpen = true" :class="{hidden: menuOpen, flex: !menuOpen}">
+        <button x-cloak style="--rounded-btn: 0" class="btn btn-square btn-ghost flex lg:hidden" @click="menuOpen = true" :class="{hidden: menuOpen, flex: !menuOpen}">
           {{ icon('fa:bars', margin=None) }}
         </button>
-        <button x-cloak style="--rounded-btn: 0" class="btn btn-square btn-ghost flex md:hidden" @click="menuOpen = false" :class="{hidden: !menuOpen, flex: menuOpen}">
+        <button x-cloak style="--rounded-btn: 0" class="btn btn-square btn-ghost flex lg:hidden" @click="menuOpen = false" :class="{hidden: !menuOpen, flex: menuOpen}">
           {{ icon('fa:close', margin=None) }}
         </button>
       </div>
     </div>
-    <div x-cloak class="w-full md:hidden" :class="{hidden: !menuOpen, block: menuOpen}">
-      <ul class="menu bg-secondary font-bold text-primary">
+
+    <div x-cloak class="w-full z-10 lg:hidden" :class="{hidden: !menuOpen, 'sticky top-0': menuOpen}">
+      <ul class="menu bg-secondary text-sm font-bold text-primary z-10">
         {% for link in navigation_links %}
           <li{% if link.is_active %} class="bordered text-secondary-content"{% endif %}>
             {% if link.is_active %}<span class="italic">{% else %}<a href="{{ link.url }}">{% endif %}
-              {{ icon(link.icon) }} {{ link.name }}
+              {{ icon(link.icon, size='2xl') }} {{ link.name }}
             {% if link.is_active %}</span>{% else %}</a>{% endif %}
           </li>
         {% endfor %}
@@ -123,7 +125,7 @@
   <div class="flex flex-col flex-1 w-full">
     <div class="flex-1 max-w-screen-3xl mx-auto pt-3 px-4">
       {% if not hide_title %}
-        <h3 class="text-5xl text-accent underline underline-wavy mb-10 ml-20 italic">{{ title }}</h3>
+        <h3 class="text-5xl text-accent underline underline-wavy md:mb-10 md:ml-20 italic">{{ title }}</h3>
       {% endif %}
       {% block content required %}{% endblock content %}
     </div>
@@ -141,7 +143,7 @@
         </div>
       {% endfor %}
     </div>
-    <div class="sticky bottom-0 w-full bg-black text-primary text-center text-3xl py-3">Player goes here</div>
+    <div class="sticky bottom-0 w-full bg-black text-primary text-center text-3xl py-3 z-0">Player goes here</div>
   </div>
 
   {% if settings.DEBUG and request.user.is_superuser %}

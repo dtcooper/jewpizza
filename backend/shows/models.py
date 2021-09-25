@@ -9,8 +9,13 @@ from recurrence.fields import RecurrenceField
 
 class Show(models.Model):
     name = models.CharField("name", max_length=255)
-    render_as_page = models.BooleanField("render as page", blank=False, default=True, help_text="Render this show as its own page, and not just on the schedule.")
-    slug = models.SlugField('URL slug', blank=True, help_text="Required if 'render as page' is set.")
+    render_as_page = models.BooleanField(
+        "render as page",
+        blank=False,
+        default=True,
+        help_text="Render this show as its own page, and not just on the schedule.",
+    )
+    slug = models.SlugField("URL slug", blank=True, help_text="Required if 'render as page' is set.")
     start = models.TimeField("start time")
     duration = models.DurationField("duration")
     dates = RecurrenceField("dates", blank=True)
