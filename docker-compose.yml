@@ -15,9 +15,9 @@ services:
     ports:
       - "127.0.0.1:${LISTEN_PORT:-8000}:8000"
 
-  radio:
-    build:
-      context: radio
+  # radio:
+  #   build:
+  #     context: radio
 
   db:
     image: library/postgres:13-alpine
