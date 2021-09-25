@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block body %}
-<div x-data x-show="$store.hero.showHero" x-cloak>
+<div x-data="hero" x-show="showHero" x-cloak>
   <div class="hero min-h-screen-iphone-fix">
     <div class="flex-col hero-content max-w-screen-lg lg:flex-row-reverse lg:rounded-3xl">
       <div class="flex flex-col lg:flex-col-reverse gap-y-3 items-center">
@@ -64,11 +64,26 @@
 {% endblock %}
 
 {% block content %}
-  {% with base_template='webcore/content_only.html' %}
-    {% include 'webcore/bio.html' %}
-  {% endwith %}
+  <div class="space-y-10">
+    <div>
+      <h3 class="text-5xl text-accent underline underline-wavy mb-10 ml-20 italic">Shows</h3>
+      {% with base_template='webcore/content_only.html' %}
+        {% include 'shows/shows.html' %}
+      {% endwith %}
+    </div>
 
-  <div class="text-lg mt-5 prose prose-lg max-w-full">
-    {{ lipsum() }}
+    <div>
+      <h3 class="text-5xl text-accent underline underline-wavy mb-10 ml-20 italic">Bio</h3>
+      {% with base_template='webcore/content_only.html' %}
+        {% include 'webcore/bio.html' %}
+      {% endwith %}
+    </div>
+
+    <div>
+      <h3 class="text-5xl text-accent underline underline-wavy mb-10 ml-20 italic">Lorem Ipsum</h3>
+      <div class="text-lg mt-5 prose prose-lg max-w-full">
+        {{ lipsum() }}
+      </div>
+    </div>
   </div>
 {% endblock %}

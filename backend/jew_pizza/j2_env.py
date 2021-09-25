@@ -73,6 +73,7 @@ def environment(**options):
             "settings": settings,
             "shuffle": shuffle,
             "static": static,
+            "randint": random.randint,
             "url_for": lambda name, *args, **kwargs: reverse(name, args=args, kwargs=kwargs),
         }
     )

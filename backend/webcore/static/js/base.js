@@ -16,11 +16,8 @@ document.addEventListener('alpine:init', () => {
     }
   }))
 
-  const hideHero = DATA.force_hero ? false : !!window.localStorage.getItem('hideHero')
-
-  Alpine.store('hero', {
-    showHero: !hideHero,
-    playerFixed: hideHero,
+  Alpine.data('hero', () => ({
+    showHero: DATA.force_hero ? true : !window.localStorage.getItem('hideHero'),
     init () {
       if (this.showHero) {
         const navbar = document.getElementById('navbar')
@@ -37,5 +34,5 @@ document.addEventListener('alpine:init', () => {
         update()
       }
     }
-  })
+  }))
 })
