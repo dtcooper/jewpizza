@@ -5,7 +5,7 @@ EXPOSE 8000/tcp
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
-ARG POETRY_VERSION=1.1.8 \
+ARG POETRY_VERSION=1.1.10 \
     DEBUG=0
 
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash \
