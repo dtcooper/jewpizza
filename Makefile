@@ -1,17 +1,15 @@
-.PHONY: lint format pre-commit build shell show-outdated deploy up down
+.PHONY: pre-commit build shell show-outdated deploy up down
 
 COMPOSE:=docker compose
 SERVER:=jew.pizza
 SERVER_PROJET_DIR:=jew.pizza
 
-lint:
-	@$(COMPOSE) run --rm --no-deps app flake8 || exit 0
-
-format:
-	@$(COMPOSE) run --rm --no-deps app sh -c 'black . && isort .' || exit 0
-
 pre-commit:
 	@$(COMPOSE) run --rm --no-deps app sh -c '\
+		echo "============== djlint ================";\
+		djlint --reformat . ;\
+		echo "============== standard ==============";\
+		npx --prefix=/app/frontend standard --fix ;\
 		echo "============== black =================";\
 		black . ;\
 		echo "============== isort =================";\

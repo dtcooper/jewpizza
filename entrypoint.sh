@@ -39,6 +39,10 @@ if [ -z "$SECRET_KEY" ]; then
     . /.env
 fi
 
+if [ "$DEBUG" -a ! -d '../frontend/node_modules' ]; then
+    # In case /app is mounted in Docker, needed to re-install the /app/frontend/node_modules folder
+    npm --prefix=../frontend install
+fi
 
 if [ "$#" != 0 ]; then
     if [ "$DEBUG" ] ; then
@@ -50,12 +54,7 @@ if [ "$#" != 0 ]; then
 
     exec "$@"
 else
-    if [ "$DEBUG" ]; then
-        if [ ! -d '../frontend/node_modules' ]; then
-            # In case /app is mounted in Docker, needed to re-install the /app/frontend/node_modules folder
-            npm --prefix=../frontend install
-        fi
-    else
+    if [ -z "$DEBUG" ]; then
         npm --prefix=../frontend run build
         ./manage.py collectstatic --noinput
     fi

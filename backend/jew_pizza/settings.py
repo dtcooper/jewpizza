@@ -97,6 +97,7 @@ TEMPLATES = [
             "environment": "jew_pizza.j2_env.environment",
             "extensions": [
                 "jinja2.ext.do",
+                "jinja2.ext.loopcontrols",
             ],
             "context_processors": [
                 "jew_pizza.j2_env.navigation_links",
