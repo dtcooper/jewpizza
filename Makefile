@@ -6,8 +6,6 @@ SERVER_PROJET_DIR:=jew.pizza
 
 pre-commit:
 	@$(COMPOSE) run --rm --no-deps app sh -c '\
-		echo "============== djlint ================";\
-		djlint --reformat . ;\
 		echo "============== standard ==============";\
 		npx --prefix=/app/frontend standard --fix ;\
 		echo "============== black =================";\
@@ -22,7 +20,7 @@ build:
 	@$(COMPOSE) build --pull
 
 shell:
-	@$(COMPOSE) run --rm --service-ports app bash
+	@$(COMPOSE) run --rm --service-ports app bash || true
 
 show-outdated:
 	@echo 'Showing outdated dependencies... (empty for none)'

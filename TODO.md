@@ -5,6 +5,7 @@
     - [ ] Call-in button via Twilio client
 * [ ] Collect emails, have a mailing list + notification of shows
 * [ ] Move [radio-calls](https://github.com/dtcooper/radio-calls) repo into this
+* [ ] SPA with scrollspy per section, unless it's a bot, then properly rendered per-page stuff
 
 ## Sections
 
