@@ -3,6 +3,7 @@
 COMPOSE:=docker compose
 SERVER:=jew.pizza
 SERVER_PROJET_DIR:=jew.pizza
+SHELL:=/bin/bash
 
 pre-commit:
 	@$(COMPOSE) run --rm --no-deps app sh -c '\
