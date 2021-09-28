@@ -6,9 +6,12 @@ personal website.
 
 ## Initial Setup
 
-Create an edit `.env`, and optionally copy over docker-compose dev overrides.
+Clone and create an edit `.env`, and optionally copy over docker-compose dev
+overrides.
 
 ```bash
+git clone https://github.com/dtcooper/jewpizza.git
+
 # Edit me, you'll probably want to be in development mode (DEBUG=1)
 cp .env.sample .env
 
@@ -40,7 +43,7 @@ docker-compose-run --rm app ./manage.py
 # Run shell in app container (make shell)
 docker-compose-run --rm app bash
 
-# Pre commit checks (not required)
+# Pre commit checks + reformatting (not required)
 make pre-commit
 ```
 
