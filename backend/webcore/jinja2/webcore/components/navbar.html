@@ -38,6 +38,8 @@
         <button class="btn btn-primary no-animation 2xl:btn-lg pr-1.5 2xl:pr-3" @click="moreMenuOpen = !moreMenuOpen" :class="{'btn-disabled': $store.page.loading}">
           More {{ icon('mdi:dots-vertical', size='2xl', margin=None, classes='2xl:text-3xl') }}
         </button>
+
+        {# TODO close when URL is navigated to #}
         <div class="relative" x-show="moreMenuOpen" x-cloak>
           <ul class="absolute z-[9999] top-1 right-3 select-none menu bg-secondary text-sm 2xl:text-lg text-primary font-bold w-72 rounded-lg">
             {% for link in nav_links %}
@@ -70,6 +72,7 @@
     </div>
   </div>
 
+  {# TODO close when URL is navigated to #}
   <div x-cloak class="w-full lg:hidden" x-show="navMenuOpen">
     <ul class="menu bg-secondary text-sm font-bold text-primary">
       {% for link in nav_links %}
