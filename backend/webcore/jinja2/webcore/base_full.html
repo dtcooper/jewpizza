@@ -62,9 +62,11 @@
     {% include 'webcore/components/emojis.html' %}
   </div>
 
-
   {% if not disable_player %}
-    {% include 'webcore/components/player.html' %}
+    <div class="relative">
+      {% include 'webcore/components/clippy.html' %}
+      {% include 'webcore/components/player.html' %}
+    </div>
   {% endif %}
 
   {% if settings.DEBUG or request.user.is_superuser %}
