@@ -15,7 +15,6 @@ whitenoise = "^5.3.0"
 django-npm = "^1.0.0"
 django-redis = "^5.0.0"
 django-light = "^0.1.0"
-pywatchman = "^1.4.1"
 django-recurrence = "^1.10.3"
 
 [tool.poetry.dev-dependencies]
