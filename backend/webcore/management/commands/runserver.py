@@ -49,7 +49,10 @@ class Command(RunserverCommand):
             self.stdout.write("Running tailwind (npm run watch)")
 
             clear_stylesheet()
-            process = subprocess.Popen(["npm", "--prefix=../frontend", "run", "watch"], preexec_fn=os.setsid)
+            # stdin needs to be a pipe, since sharing it with parent breaks pdb
+            process = subprocess.Popen(
+                ["npm", "--prefix=../frontend", "run", "watch"], stdin=subprocess.PIPE, preexec_fn=os.setsid
+            )
             while process.poll() is None:
                 if self.exited:  # Kill subprocess and all children when main thread exits
                     os.killpg(os.getpgid(process.pid), signal.SIGTERM)
