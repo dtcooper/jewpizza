@@ -2,7 +2,7 @@
 
 COMPOSE:=docker compose
 SERVER:=jew.pizza
-SERVER_PROJET_DIR:=jew.pizza
+SERVER_PROJET_DIR:=dev.jew.pizza
 SHELL:=/bin/bash
 
 pre-commit:

@@ -28,14 +28,5 @@
       current: DATA.current_page,
       loading: false
     })
-
-    Alpine.store('modal', {
-      isOpen: false,
-      html: '',
-      open (modal) {
-        this.html = modal
-        this.isOpen = true
-      }
-    })
   })
 })()
