@@ -8,6 +8,6 @@ NAVIGATION_LINKS = [
     ("Bio", "webcore:bio", "mdi:text-account", False),
     ("Newsletter", "webcore:newsletter", "mdi:email-newsletter", True),
     ("Testimonials", "webcore:testimonials", "bi:chat-text", True),
-    ("Social", 'webcore:social', "mdi:twitter", True),
-    ("Contact", 'webcore:contact', "mdi:email", True),
+    ("Social", "webcore:social", "mdi:twitter", True),
+    ("Contact", "webcore:contact", "mdi:email", True),
 ]

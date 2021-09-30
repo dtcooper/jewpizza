@@ -12,8 +12,7 @@ from django.urls import reverse
 
 from webcore.constants import CACHE_KEY_PREFIX_STATIC_ASSET_MD5SUM, NAVIGATION_LINKS
 
-
-NavLink = namedtuple('NavLink', 'name url url_name icon is_subnav is_active')
+NavLink = namedtuple("NavLink", "name url url_name icon is_subnav is_active")
 
 
 def shuffle(items):
@@ -61,10 +60,10 @@ def nav_links(request):
     for name, url_name, icon, is_subnav in NAVIGATION_LINKS:
         url = reverse(url_name)
         is_active = request.resolver_match.view_name == url_name
-        context['nav_links'].append(NavLink(name, url, url_name, icon, is_subnav, is_active))
-        context['nav_links_json'][url] = name
+        context["nav_links"].append(NavLink(name, url, url_name, icon, is_subnav, is_active))
+        context["nav_links_json"][url] = name
         if is_active:
-            context['active_link'] = url
+            context["active_link"] = url
 
     return context
 
