@@ -1,0 +1,14 @@
+<div class="flex w-full px-5 py-1 xl:py-1.5 items-baseline justify-between space-x-1.5 select-none">
+  {# telephone = '&#x260E;&#xFE0F;' #}
+  {% set emojis = shuffle(['&#x1F355;', '&#x2721;&#xFE0F;', '&#x1F4FB;', '&#x1F54D;', '&#x2620;&#xFE0F;', '&#x1F46F;',
+                            '&#x1F399;&#xFE0F;', '&#x1F4A9;', '&#x1F4DF;', '&#x1F481;&#x1F3FC;&#x200D;&#x2640;️&#xFE0F;']) %}
+
+  {% for emoji in emojis %}
+    <div
+      class="animate-spin-custom font-sans text-lg md:text-xl lg:text-2xl xl:text-3xl self-center"
+      style="{{ random_spin_style() }}"
+    >
+      {{ emoji|safe }}
+    </div>
+  {% endfor %}
+</div>
