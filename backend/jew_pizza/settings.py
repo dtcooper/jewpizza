@@ -191,6 +191,7 @@ NPM_ROOT_PATH = "/app/frontend"
 NPM_STATIC_FILES_PREFIX = "js/vendor"
 NPM_FILE_PATTERNS = {
     "alpinejs": ["dist/cdn.min.js"],
+    "@alpinejs/persist": ["dist/cdn.min.js"],
     "moment": ["min/moment.min.js"],
     "moment-timezone": ["builds/moment-timezone-with-data-1970-2030.min.js"],
     "navigo": ["lib/navigo.min.js"],

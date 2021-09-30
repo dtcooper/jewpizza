@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/dtcooper/jew.pizza#readme",
   "dependencies": {
+    "@alpinejs/persist": "^3.4.2",
     "@tailwindcss/typography": "^0.4.1",
     "alpinejs": "^3.4.2",
     "daisyui": "^1.14.2",

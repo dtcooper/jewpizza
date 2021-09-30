@@ -4,6 +4,7 @@
 
 {% block content %}
 <div class="h-full">
+  {# todo redo #}
   <div class="hero h-full">
     <div class="flex-col hero-content max-w-screen-lg lg:flex-row-reverse lg:rounded-3xl">
       <div class="flex flex-col lg:flex-col-reverse gap-y-3 items-center">
@@ -35,7 +36,7 @@
           {% for link in nav_links %}
             {% if not link.is_subnav and not link.url_name == 'webcore:home' %}
               <a data-navigo class="btn btn-neutral" href="{{ link.url }}">
-                {{ icon(link.icon, size='2xl', margin='ml-0 sm:mr-2') }}
+                {{ icon(link.icon, size='text-2xl', margin='ml-0 sm:mr-2') }}
                 <span class="hidden sm:block">{{ link.name }}</span>
               </a>
             {% endif %}

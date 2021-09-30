@@ -1,19 +1,22 @@
 <div
-  x-cloak x-data="{open: true}"
-  :class="{'h-[200px] w-[200px] mt-[-200px] border-t-3 border-l-3 border-r-3': open, 'h-12 w-12 -mt-12': !open}"
-  class="pointer-events-none absolute right-6 top-0 bg-neutral text-primary-content bg-opacity-90 p-3 border-black"
+  x-cloak x-data="{open: $persist(true).as('clippy-open')}"
+  :class="{
+    'h-[200px] w-[200px] mt-[-200px] bg-neutral text-primary-content bg-opacity-90 border-t-3 border-l-3 border-r-3 p-3': open,
+    'h-12 w-12 -mt-12': !open
+  }"
+  class="pointer-events-none absolute right-6 top-0  border-black"
 >
   <button
     x-data x-show="open" @click="open = false"
     style="--rounded-btn: 0" class="pointer-events-auto btn btn-ghost btn-square btn-sm absolute top-0 right-0"
   >
-    {{ icon('mdi:window-minimize', size='2xl', margin=None) }}
+    {{ icon('mdi:window-minimize', size='text-2xl', margin=None) }}
   </button>
   <button
     x-data x-show="!open" @click="open = true"
-    style="--rounded-btn: 0" class="pointer-events-auto btn btn-accent btn-square absolute top-0 right-0 font-sans"
+    style="--rounded-btn: 0" class="pointer-events-auto btn btn-primary btn-square font-sans"
   >
-    {{ icon('mdi:window-maximize', size='3xl', margin=None) }}
+    {{ icon('mdi:robot-confused-outline', size='text-4xl', margin=None) }}
   </button>
 
   <span x-show="open">

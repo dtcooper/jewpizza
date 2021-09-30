@@ -31,12 +31,12 @@
             'btn-disabled': $store.page.loading || $store.page.current == {{ link.url|tojson|forceescape }}
           }"
         >
-          {{ icon(link.icon, size='2xl', classes='2xl:text-3xl') }} {{ link.name }}
+          {{ icon(link.icon, size='text-2xl', classes='2xl:text-3xl') }} {{ link.name }}
         </a>
       {% endfor %}
       <div class="hidden lg:block 3xl:hidden" x-data="{moreMenuOpen: false}" @click.away="moreMenuOpen = false">
         <button class="btn btn-primary no-animation 2xl:btn-lg pr-1.5 2xl:pr-3" @click="moreMenuOpen = !moreMenuOpen" :class="{'btn-disabled': $store.page.loading}">
-          More {{ icon('mdi:dots-vertical', size='2xl', margin=None, classes='2xl:text-3xl') }}
+          More {{ icon('mdi:dots-vertical', size='text-2xl', margin=None, classes='2xl:text-3xl') }}
         </button>
 
         {# TODO close when URL is navigated to #}
@@ -80,12 +80,12 @@
           :class="{'bordered text-secondary-content': $store.page.current == {{ link.url|tojson|forceescape }}}"
           style="--rounded-btn: 0"
         >
-          <span x-show="$store.page.current == {{ link.url|tojson|forceescape }}">{{ icon(link.icon, size='2xl') }} {{ link.name }}</span>
+          <span x-show="$store.page.current == {{ link.url|tojson|forceescape }}">{{ icon(link.icon, size='text-2xl') }} {{ link.name }}</span>
           <a
             data-navigo x-show="$store.page.current != {{ link.url|tojson|forceescape }}"
             href="{{ link.url }}" @click="navMenuOpen = false"
           >
-            {{ icon(link.icon, size='2xl') }} {{ link.name }}
+            {{ icon(link.icon, size='text-2xl') }} {{ link.name }}
           </a>
         </li>
       {% endfor %}
