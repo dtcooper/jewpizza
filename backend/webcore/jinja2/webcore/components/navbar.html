@@ -1,4 +1,4 @@
-<div>
+<div class="z-max">
   <div class="navbar w-full min-h-[3.5rem] xs:min-h-[4.75rem] sm:min-h-[3.5rem] xl:min-h-[4.75rem] bg-base-100">
 
     {#- Copy and image #}
@@ -39,9 +39,9 @@
           More {{ icon('mdi:dots-vertical', size='text-2xl', margin=None, classes='2xl:text-3xl') }}
         </button>
 
-        {# TODO close when URL is navigated to #}
+        {# TODO close when URL is navigated to, could share state with mobile nav #}
         <div class="relative" x-show="moreMenuOpen" x-cloak>
-          <ul class="absolute z-[9999] top-1 right-3 select-none menu bg-secondary text-sm 2xl:text-lg text-primary font-bold w-72 rounded-lg">
+          <ul class="absolute z-max top-1 right-3 select-none menu bg-secondary text-sm 2xl:text-lg text-primary font-bold w-72 rounded-lg">
             {% for link in nav_links %}
               {% if link.is_subnav %}
                 <li

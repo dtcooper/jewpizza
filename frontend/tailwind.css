@@ -32,6 +32,10 @@
     }
 
     @variants {
+        .z-max {
+            z-index: 9999;
+        }
+
         .text-indent {
             text-indent: 2rem;
         }
