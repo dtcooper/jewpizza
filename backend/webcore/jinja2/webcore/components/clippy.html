@@ -1,14 +1,14 @@
 <div
   x-cloak x-data="{open: $persist(true).as('clippy-open')}"
   :class="{
-    'h-[200px] w-[200px] mt-[-200px] bg-neutral text-primary-content bg-opacity-90 border-t-3 border-l-3 border-r-3 p-3': open,
+    'h-[200px] w-[200px] mt-[-200px] bg-neutral text-white bg-opacity-90 border-t-2 border-l-2 border-r-2 p-3': open,
     'h-12 w-12 -mt-12': !open
   }"
-  class="pointer-events-none absolute right-6 top-0  border-black"
+  class="pointer-events-none absolute right-3 top-0 border-primary"
 >
   <button
     x-data x-show="open" @click="open = false"
-    style="--rounded-btn: 0" class="pointer-events-auto btn btn-ghost btn-square btn-sm absolute top-0 right-0"
+    style="--rounded-btn: 0" class="pointer-events-auto btn text-neutral-content btn-ghost btn-square btn-sm absolute top-0 right-0"
   >
     {{ icon('mdi:window-minimize', size='text-2xl', margin=None) }}
   </button>
