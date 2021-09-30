@@ -1,0 +1,75 @@
+{%-
+  from 'webcore/macros.html' import icon, random_spin_style
+-%}
+
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  Okay, so I used to be an engineer. I built this myself. I could have used
+  Squarespace, Wix, Wordpress or something, but I didn't. I probably should
+  have focused on radio work instead. If you want to see the source, go to
+  https://github.com/dtcooper/jew.pizza
+
+  And no, I'm NOT looking for work in the tech industry. So please don't ask!
+  (Or do. I'm flattered by it. Either way.)
+-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <title>{% if settings.DEBUG %}[dev] {% endif %}{{ title|default('jew.pizza') }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700" rel="stylesheet">
+  <link href="{{ static('css/styles.css') }}" rel="stylesheet">
+
+  <script src="https://code.iconify.design/2/2.0.4/iconify.min.js"></script>
+  <script src="{{ static('js/vendor/navigo/lib/navigo.min.js') }}"></script>
+  <script src="{{ static('js/vendor/alpinejs/dist/cdn.min.js') }}" defer></script>
+  <script src="{{ static('js/vendor/moment/min/moment.min.js') }}"></script>
+  <script src="{{ static('js/vendor/moment-timezone/builds/moment-timezone-with-data-1970-2030.min.js') }}"></script>
+  {%- set _js_data = {
+    'debug': settings.DEBUG,
+    'is_authenticated': request.user.is_authenticated,
+    'is_superuser': request.user.is_superuser,
+    'nav_links': nav_links_json,
+    'current_page': active_link,
+  } %}
+  {%- do _js_data.update(js_data or {}) %}
+  <script>
+    const DATA = {{ _js_data|tojson }}
+  </script>
+  <script src="{{ static('js/base.js') }}"></script>
+  <script src="{{ static('js/index.js') }}"></script>
+</head>
+
+<body
+  {#- Overflow hidden needed on mobile safari to fix weird scrolling bug.
+      ie, we want scrolling to apply ONLY to item (main content) #}
+  class="h-screen-iphone-fix flex flex-col overflow-hidden-iphone-only"
+  x-data="{navMenuOpen: false}"
+  {# Disable overflow-hidden in unlikely event nav is larger than screen #}
+  :class="{'overflow-hidden-iphone-only': !navMenuOpen, 'cursor-wait': $store.page.loading}"
+>
+  {% include 'webcore/components/navbar.html' %}
+
+  <div class="flex flex-col flex-1 w-full overflow-y-auto">
+    <div id="content" class="flex-1 w-full max-w-screen-3xl mx-auto pt-3 px-4">
+      {% block base_content required %}{% endblock %}
+    </div>
+
+    {% include 'webcore/components/emojis.html' %}
+  </div>
+
+
+  {% if not disable_player %}
+    {% include 'webcore/components/player.html' %}
+  {% endif %}
+
+  {% if settings.DEBUG or request.user.is_superuser %}
+    {% include 'webcore/components/debug.html' %}
+  {% endif %}
+
+</body>
+</html>

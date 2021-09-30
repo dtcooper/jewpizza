@@ -1,0 +1,7 @@
+{% extends 'webcore/base.html' %}
+
+{% block content %}
+  <div class="prose prose-xl max-w-none">
+    {{ lipsum(randint(1, 8), min=10, max=80) }}
+  </div>
+{% endblock %}

@@ -5,7 +5,11 @@
 
 @layer utilities {
     /* https://github.com/postcss/postcss-100vh-fix */
-    .min-h-screen-iphone-fix {
+    .h-screen-iphone-fix {
+        height: 100vh;
+    }
+
+    .h-min-screen-iphone-fix {
         min-height: 100vh;
     }
 
@@ -14,8 +18,16 @@
     }
 
     @supports (-webkit-touch-callout: none) {
-        .min-h-screen-iphone-fix {
+        .h-screen-iphone-fix {
+            height: -webkit-fill-available;
+        }
+
+        .h-min-screen-iphone-fix {
             min-height: -webkit-fill-available;
+        }
+
+        .overflow-hidden-iphone-only {
+            overflow: hidden;
         }
     }
 

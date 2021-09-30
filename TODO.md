@@ -8,6 +8,7 @@
 * [ ] SPA with scrollspy per section, unless it's a bot, then properly rendered per-page stuff
 * [ ] Warn on leave iff player is playing
 * [ ] use django-useragent to detect if not. Show relevant page, otherwise in SPA mode.
+* [ ] Testimonials / Calls / Etc in clippy
 
 ## Sections
 

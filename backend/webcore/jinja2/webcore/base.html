@@ -1,90 +1,9 @@
-{%-
-  from 'webcore/macros.html' import icon, random_spin_style
--%}
+{% extends 'webcore/base_content_only.html' if content_only else 'webcore/base_full.html' %}
 
-<!DOCTYPE html>
-<html lang="en">
-<!--
-  Okay, so I used to be an engineer. I built this myself. I could have used
-  Squarespace, Wix, Wordpress or something, but I didn't. I probably should
-  have focused on radio work instead. If you want to see the source, go to
-  https://github.com/dtcooper/jew.pizza
-
-  And no, I'm NOT looking for work in the tech industry. So please don't ask!
-  (Or do. I'm flattered by it. Either way.)
--->
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <title>{% if settings.DEBUG %}[dev] {% endif %}{{ title|default('jew.pizza') }}</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700" rel="stylesheet">
-  <link href="{{ static('css/styles.css') }}" rel="stylesheet">
-
-  <script src="https://code.iconify.design/2/2.0.4/iconify.min.js"></script>
-  <script src="{{ static('js/vendor/@alpine-collective/toolkit-scroll/dist/cdn.min.js') }}" defer></script>
-  <script src="{{ static('js/vendor/@alpinejs/intersect/dist/cdn.min.js') }}" defer></script>
-  <script src="{{ static('js/vendor/alpinejs/dist/cdn.min.js') }}" defer></script>
-  {%- set _js_data = {
-    'debug': settings.DEBUG,
-    'is_authenticated': request.user.is_authenticated,
-    'is_superuser': request.user.is_superuser,
-    'force_hero': request.GET.get('force_hero')|bool,
-  } %}
-  {%- do _js_data.update(js_data or {}) %}
-  <script>
-    const DATA = {{ _js_data|tojson }}
-  </script>
-  <script src="{{ static('js/base.js') }}"></script>
-
-  {% block extra_head %}{% endblock %}
-</head>
-
-<body class="min-h-screen-iphone-fix flex flex-col">
-{% block body %}
-  {# Navbar (sticky) #}
-  {% include 'webcore/components/navbar.html' %}
-
-  <div class="flex flex-col flex-1 w-full">
-    <div class="flex-1 max-w-screen-3xl mx-auto pt-3 px-4">
-      {% if not hide_title %}
-        <h3 class="text-5xl text-accent underline underline-wavy md:mb-10 md:ml-20 italic">{{ title }}</h3>
-      {% endif %}
-      {% block content required %}{% endblock content %}
-    </div>
-    <div class="flex w-full px-5 py-1 xl:py-1.5 items-baseline justify-between space-x-1.5 select-none">
-      {# telephone = '&#x260E;&#xFE0F;' #}
-      {% set emojis = shuffle(['&#x1F355;', '&#x2721;&#xFE0F;', '&#x1F4FB;', '&#x1F54D;', '&#x2620;&#xFE0F;', '&#x1F46F;',
-                               '&#x1F399;&#xFE0F;', '&#x1F4A9;', '&#x1F4DF;', '&#x1F481;&#x1F3FC;&#x200D;&#x2640;️&#xFE0F;']) %}
-
-      {% for emoji in emojis %}
-        <div
-          class="animate-spin-custom font-sans text-lg md:text-xl lg:text-2xl xl:text-3xl self-center"
-          style="{{ random_spin_style() }}"
-        >
-          {{ emoji|safe }}
-        </div>
-      {% endfor %}
-    </div>
-
-    {% include 'webcore/components/player.html' %}
-  </div>
-
-  {% if settings.DEBUG and request.user.is_superuser %}
-    <span class="bg-primary bg-white text-black border border-black fixed top-0.5 left-0.5 p-px">
-      <span class="inline xs:hidden">_</span>
-      <span class="hidden xs:inline sm:hidden">xs</span>
-      <span class="hidden sm:inline md:hidden">sm</span>
-      <span class="hidden md:inline lg:hidden">md</span>
-      <span class="hidden lg:inline xl:hidden">lg</span>
-      <span class="hidden xl:inline 2xl:hidden">xl</span>
-      <span class="hidden 2xl:inline 3xl:hidden">2xl</span>
-      <span class="hidden 3xl:inline ">3xl</span>
-    </span>
+{% block base_content %}
+  {% if title and not hide_title %}
+    <h3 class="text-5xl text-accent underline underline-wavy md:mb-10 md:ml-20 italic">{{ title }}</h3>
   {% endif %}
+
+  {% block content required %}{% endblock %}
 {% endblock %}
-</body>
-</html>

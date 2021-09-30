@@ -1,0 +1,10 @@
+<div class="modal" x-data :class="{'modal-open': $store.modal.isOpen}">
+  <div class="modal-box max-h-full min-w-50 overflow-y-auto" x-trap="$store.modal.isOpen">
+    <div x-html="$store.modal.html"></div>
+    {{ lipsum(25) }}
+    <div class="modal-action">
+      <a href="#" class="btn btn-primary">TODO</a>
+      <a href="#" class="btn" @click="$store.modal.isOpen = false">Close</a>
+    </div>
+  </div>
+</div>

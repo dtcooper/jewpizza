@@ -1,0 +1,14 @@
+<span
+  class="bg-primary bg-yellow-50 text-black border border-black top-0.5 left-0.5 p-px"
+  x-data="{show: false}" @keyup.meta.window="show = false" @keydown.meta.window="show = true"
+  :class="{'fixed': show, 'hidden': !show}" x-cloak
+>
+  <span class="inline xs:hidden">_</span>
+  <span class="hidden xs:inline sm:hidden">xs</span>
+  <span class="hidden sm:inline md:hidden">sm</span>
+  <span class="hidden md:inline lg:hidden">md</span>
+  <span class="hidden lg:inline xl:hidden">lg</span>
+  <span class="hidden xl:inline 2xl:hidden">xl</span>
+  <span class="hidden 2xl:inline 3xl:hidden">2xl</span>
+  <span class="hidden 3xl:inline ">3xl</span>
+</span>

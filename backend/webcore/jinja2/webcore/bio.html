@@ -1,7 +1,7 @@
-{% extends base_template|default('webcore/base.html') %}
+{% extends 'webcore/base.html' %}
 
 {% block content %}
-<div class="prose lg:prose-lg 2xl:prose-xl 3xl:prose-2xl text-indent max-w-full">
+<div class="prose lg:prose-lg 2xl:prose-xl 3xl:prose-2xl text-indent max-w-none">
   <img
     src="https://picsum.photos/1000?v={{ randint(10000, 99999) }}"
     class="mx-auto sm:float-right h-2/3 w-2/3 sm:h-1/3 sm:w-1/3 lg:h-1/4 lg:w-1/4 sm:ml-3 rounded-full border-8 border-secondary"

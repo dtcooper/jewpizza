@@ -100,7 +100,7 @@ TEMPLATES = [
                 "jinja2.ext.loopcontrols",
             ],
             "context_processors": [
-                "jew_pizza.j2_env.navigation_links",
+                "jew_pizza.j2_env.nav_links",
             ],
         },
     },
@@ -191,10 +191,9 @@ NPM_ROOT_PATH = "/app/frontend"
 NPM_STATIC_FILES_PREFIX = "js/vendor"
 NPM_FILE_PATTERNS = {
     "alpinejs": ["dist/cdn.min.js"],
-    "@alpinejs/intersect": ["dist/cdn.min.js"],
-    "@alpine-collective/toolkit-scroll": ["dist/cdn.min.js"],
     "moment": ["min/moment.min.js"],
     "moment-timezone": ["builds/moment-timezone-with-data-1970-2030.min.js"],
+    "navigo": ["lib/navigo.min.js"],
 }
 
 STATICFILES_FINDERS = [

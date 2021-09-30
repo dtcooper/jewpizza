@@ -12,7 +12,8 @@ from django.urls import reverse
 
 from webcore.constants import CACHE_KEY_PREFIX_STATIC_ASSET_MD5SUM, NAVIGATION_LINKS
 
-Link = namedtuple("Link", ("name", "url", "icon", "is_subnav", "is_active"))
+
+NavLink = namedtuple('NavLink', 'name url url_name icon is_subnav is_active')
 
 
 def shuffle(items):
@@ -54,14 +55,18 @@ def static(path, *args, **kwargs):
     return static_path
 
 
-def navigation_links(request):
-    navigation_links = []
-    for name, url_name, icon, is_subnav in NAVIGATION_LINKS:
-        is_active = request.resolver_match.view_name == url_name
-        url = reverse(url_name) if url_name else "#"  # XXX allow stubs as empty string
-        navigation_links.append(Link(name=name, url=url, icon=icon, is_subnav=is_subnav, is_active=is_active))
+def nav_links(request):
+    context = {"nav_links": [], "nav_links_json": {}, "active_link": None}
 
-    return {"navigation_links": navigation_links}
+    for name, url_name, icon, is_subnav in NAVIGATION_LINKS:
+        url = reverse(url_name)
+        is_active = request.resolver_match.view_name == url_name
+        context['nav_links'].append(NavLink(name, url, url_name, icon, is_subnav, is_active))
+        context['nav_links_json'][url] = name
+        if is_active:
+            context['active_link'] = url
+
+    return context
 
 
 def environment(**options):

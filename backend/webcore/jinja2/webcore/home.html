@@ -1,14 +1,10 @@
 {% extends 'webcore/base.html' %}
 
-{% block extra_head %}
-  <script src="{{ static('js/vendor/moment/min/moment.min.js') }}"></script>
-  <script src="{{ static('js/vendor/moment-timezone/builds/moment-timezone-with-data-1970-2030.min.js') }}"></script>
-  <script src="{{ static('js/index.js') }}"></script>
-{% endblock %}
+{% from 'webcore/macros.html' import icon, random_spin_style %}
 
-{% block body %}
-<div x-data="hero" x-show="showHero" x-cloak>
-  <div class="hero min-h-screen-iphone-fix">
+{% block content %}
+<div class="h-full">
+  <div class="hero h-full">
     <div class="flex-col hero-content max-w-screen-lg lg:flex-row-reverse lg:rounded-3xl">
       <div class="flex flex-col lg:flex-col-reverse gap-y-3 items-center">
         <h1 class="italic text-xl md:text-2xl lg:text-xl font-bold">David Cooper <small class="font-normal">Radio Personality</small></h1>
@@ -23,6 +19,7 @@
         <h2 class="mb-6 sm:mb-8 lg:mb-10 text-2xl sm:text-3xl lg:text-5xl font-bold italic text-center lg:text-left">
           Welcome to <span class="text-accent underline underline-wavy">jew.pizza</span>
         </h2>
+
         <p class="lg:text-indent mx-2 lg:mx-0 text-lg sm:text-xl" x-data="localizedTimeBlurb">
           Welcome to my very special website. You can catch me live
           <span class="font-bold"><span x-text="showTime">Sun to Thurs nights at 1:30am-2:30am {{ default_tz_abbrev }}</span>
@@ -34,13 +31,10 @@
           website</a></span>.
         </p>
 
-        <p class="lg:text-indent mt-3 mx-2 lg:mx-0 text-base sm:text-xl italic">
-          <span class="link-accent link-hover cursor-pointer" @click="$scroll('#navbar')">Scroll down</span> to find out more and have the nightmare continue!
-        </p>
         <div class="hidden sm:block mt-6 lg:mt-8 text-center lg:text-left select-none">
-          {% for link in navigation_links %}
-            {% if not link.is_subnav %}
-              <a class="btn btn-neutral" href="{{ link.url }}">
+          {% for link in nav_links %}
+            {% if not link.is_subnav and not link.url_name == 'webcore:home' %}
+              <a data-navigo class="btn btn-neutral" href="{{ link.url }}">
                 {{ icon(link.icon, size='2xl', margin='ml-0 sm:mr-2') }}
                 <span class="hidden sm:block">{{ link.name }}</span>
               </a>
@@ -50,40 +44,5 @@
       </div>
     </div>
   </div>
-
-  <div class="sticky bottom-0 flex justify-between md:justify-around select-none">
-    {% for i in range(5) %}
-      <div x-data @click="$scroll('#navbar')"{% if not (loop.first or loop.last) %} class="hidden sm:block"{% endif %}>
-        {{ icon('mdi:chevron-double-down', margin=None, classes='font-bold animate-bounce cursor-pointer') }}
-      </div>
-    {% endfor %}
-  </div>
 </div>
-
-{{ super() }}
-{% endblock %}
-
-{% block content %}
-  <div class="space-y-10">
-    <div>
-      <h3 class="text-5xl text-accent underline underline-wavy mb-10 ml-20 italic">Shows</h3>
-      {% with base_template='webcore/content_only.html' %}
-        {% include 'shows/shows.html' %}
-      {% endwith %}
-    </div>
-
-    <div>
-      <h3 class="text-5xl text-accent underline underline-wavy mb-10 ml-20 italic">Bio</h3>
-      {% with base_template='webcore/content_only.html' %}
-        {% include 'webcore/bio.html' %}
-      {% endwith %}
-    </div>
-
-    <div>
-      <h3 class="text-5xl text-accent underline underline-wavy mb-10 ml-20 italic">Lorem Ipsum</h3>
-      <div class="text-lg mt-5 prose prose-lg max-w-full">
-        {{ lipsum() }}
-      </div>
-    </div>
-  </div>
 {% endblock %}

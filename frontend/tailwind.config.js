@@ -38,6 +38,9 @@ module.exports = {
         'base-alt': '#ffdfad',
         ...colors
       },
+      border: {
+        '3': '3px'
+      },
       animation: {
         'spin-custom': 'spin var(--custom-spin-duration, 1s) linear infinite var(--custom-spin-direction, normal);'
       }
