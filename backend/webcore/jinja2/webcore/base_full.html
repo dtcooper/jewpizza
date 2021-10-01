@@ -43,6 +43,10 @@
   </script>
   <script src="{{ static('js/base.js') }}"></script>
   <script src="{{ static('js/index.js') }}"></script>
+
+  {% if settings.UMAMI_WEBSITE_ID and settings.UMAMI_SCRIPT_URL %}
+    <script async defer data-website-id="{{ settings.UMAMI_WEBSITE_ID }}" src="{{ settings.UMAMI_SCRIPT_URL }}"></script>
+  {% endif %}
 </head>
 
 <body

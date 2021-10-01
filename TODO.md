@@ -10,6 +10,7 @@
 * [ ] use django-useragent to detect if not. Show relevant page, otherwise in SPA mode.
 * [ ] Testimonials / Calls / Etc in clippy
 * [ ] Scroll up on page load
+* [x] Use [umami](https://github.com/mikecao/umami) for tracking
 
 ## Sections
 

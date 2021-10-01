@@ -91,3 +91,28 @@ add the following to your `.env` file,
 ```
 SERVE_ASSETS_FROM_DJANGO=1
 ```
+
+#### Icecast 2 in Production
+
+TODO needs documenting
+
+#### Analytics using [umami](https://github.com/mikecao/umami) in Production (optional)
+
+Create the following (or add) to your `docker-compose.overrides.yml` file,
+
+```yaml
+  umami:
+    image: ghcr.io/mikecao/umami:postgresql-latest
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/postgres
+      - DATABASE_TYPE=postgresql
+      # Needs to happen AFTER SECRET_KEY has been set
+      - "HASH_SALT=${SECRET_KEY}"
+    depends_on:
+      - db
+```
+
+TODO needs documenting
