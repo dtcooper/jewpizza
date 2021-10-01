@@ -3,7 +3,8 @@ import hashlib
 import os
 import random
 
-from jinja2 import Environment
+from jinja2 import Environment, pass_eval_context
+from jinja2.filters import do_forceescape, do_tojson
 
 from django.conf import settings
 from django.core.cache import cache
@@ -68,6 +69,12 @@ def nav_links(request):
     return context
 
 
+@pass_eval_context
+def attrjs(eval_ctx, value):
+    # Fully escaped JS suitable for HTML attributes
+    return do_forceescape(do_tojson(eval_ctx, value))
+
+
 def environment(**options):
     env = Environment(**options)
     env.globals.update(
@@ -82,6 +89,7 @@ def environment(**options):
     env.filters.update(
         {
             "bool": bool,
+            "attrjs": attrjs,
         }
     )
     return env

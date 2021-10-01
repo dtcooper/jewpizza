@@ -27,8 +27,8 @@
           data-navigo href="{{ link.url }}"
           class="btn 2xl:btn-lg no-animation btn-primary hidden {% if link.is_subnav %}3xl:flex{% else %}lg:flex{% endif %}{% if link.is_active %} btn-disabled btn-outline{% endif %}"
           :class="{
-            'btn-outline': $store.page.current == {{ link.url|tojson|forceescape }},
-            'btn-disabled': $store.page.loading || $store.page.current == {{ link.url|tojson|forceescape }}
+            'btn-outline': $store.page.current == {{ link.url|attrjs }},
+            'btn-disabled': $store.page.loading || $store.page.current == {{ link.url|attrjs }}
           }"
         >
           {{ icon(link.icon, size='text-2xl', classes='2xl:text-3xl') }} {{ link.name }}
@@ -45,12 +45,12 @@
             {% for link in nav_links %}
               {% if link.is_subnav %}
                 <li
-                  :class="{'bordered text-secondary-content': $store.page.current == {{ link.url|tojson|forceescape }}}"
+                  :class="{'bordered text-secondary-content': $store.page.current == {{ link.url|attrjs }}}"
                   style="--rounded-btn: 0"
                 >
-                  <span x-show="$store.page.current == {{ link.url|tojson|forceescape }}">{{ icon(link.icon) }} {{ link.name }}</span>
+                  <span x-show="$store.page.current == {{ link.url|attrjs }}">{{ icon(link.icon) }} {{ link.name }}</span>
                   <a
-                    data-navigo x-show="$store.page.current != {{ link.url|tojson|forceescape }}"
+                    data-navigo x-show="$store.page.current != {{ link.url|attrjs }}"
                     href="{{ link.url }}" @click="moreMenuOpen = false"
                   >
                     {{ icon(link.icon) }} {{ link.name }}
@@ -77,12 +77,12 @@
     <ul class="menu bg-secondary text-sm font-bold text-primary">
       {% for link in nav_links %}
         <li
-          :class="{'bordered text-secondary-content': $store.page.current == {{ link.url|tojson|forceescape }}}"
+          :class="{'bordered text-secondary-content': $store.page.current == {{ link.url|attrjs }}}"
           style="--rounded-btn: 0"
         >
-          <span x-show="$store.page.current == {{ link.url|tojson|forceescape }}">{{ icon(link.icon, size='text-2xl') }} {{ link.name }}</span>
+          <span x-show="$store.page.current == {{ link.url|attrjs }}">{{ icon(link.icon, size='text-2xl') }} {{ link.name }}</span>
           <a
-            data-navigo x-show="$store.page.current != {{ link.url|tojson|forceescape }}"
+            data-navigo x-show="$store.page.current != {{ link.url|attrjs }}"
             href="{{ link.url }}" @click="navMenuOpen = false"
           >
             {{ icon(link.icon, size='text-2xl') }} {{ link.name }}
