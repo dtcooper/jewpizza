@@ -6,7 +6,7 @@ personal website.
 
 ## Initial Setup
 
-Clone and create an edit `.env`, and optionally copy over docker-compose dev
+Clone and create an edit `.env`, and optionally copy over the docker compose dev
 overrides.
 
 ```bash
@@ -27,8 +27,8 @@ ln -s docker-compose.dev.yml docker-compose.override.yml
 Build and start containers,
 
 ```bash
-docker-compose build
-docker-compose up
+docker compose build
+docker compose up
 ```
 
 The development server will run at <http://localhost:8000/>.
@@ -38,10 +38,10 @@ The development server will run at <http://localhost:8000/>.
 
 ```bash
 # Django management command
-docker-compose-run --rm app ./manage.py
+docker compose run --rm app ./manage.py
 
 # Run shell in app container (make shell)
-docker-compose-run --rm app bash
+docker compose run --rm app bash
 
 # Pre commit checks + reformatting (not required)
 make pre-commit
@@ -53,8 +53,8 @@ make pre-commit
 Build containers and start in daemon mode.
 
 ```bash
-docker-compose build
-docker-compose up -d
+docker compose build
+docker compose up -d
 ```
 
 NOTE: [Gunicorn](https://gunicorn.org/) will listen on `127.0.0.1:${LISTEN_PORT}`
@@ -115,4 +115,15 @@ Create the following (or add) to your `docker-compose.overrides.yml` file,
       - db
 ```
 
-TODO needs documenting
+And create the requisite tables with the `db` container running
+
+```sh
+docker compose exec db sh -c 'wget -O - https://raw.githubusercontent.com/mikecao/umami/master/sql/schema.postgresql.sql | psql -U postgres'
+```
+
+Log in with `admin:umami` and change the admin password.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
+for details.
