@@ -8,20 +8,41 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Show',
+            name="Show",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255, verbose_name='name')),
-                ('render_as_page', models.BooleanField(default=True, help_text='Render this show as its own page, and not just on the schedule.', verbose_name='render as page')),
-                ('slug', models.SlugField(blank=True, help_text="Required if 'render as page' is set.", verbose_name='URL slug')),
-                ('start', models.TimeField(verbose_name='start time')),
-                ('duration', models.DurationField(verbose_name='duration')),
-                ('dates', recurrence.fields.RecurrenceField(blank=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255, verbose_name="name")),
+                (
+                    "render_as_page",
+                    models.BooleanField(
+                        default=True,
+                        help_text="Render this show as its own page, and not just on the schedule.",
+                        verbose_name="render as page",
+                    ),
+                ),
+                (
+                    "slug",
+                    models.SlugField(
+                        blank=True,
+                        help_text="Required if 'render as page' is set.",
+                        verbose_name="URL slug",
+                    ),
+                ),
+                ("start", models.TimeField(verbose_name="start time")),
+                ("duration", models.DurationField(verbose_name="duration")),
+                ("dates", recurrence.fields.RecurrenceField(blank=True)),
             ],
         ),
     ]

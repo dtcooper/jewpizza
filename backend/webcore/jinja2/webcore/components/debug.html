@@ -1,7 +1,7 @@
 <span
-  class="bg-primary bg-yellow-50 text-black border border-black top-0.5 left-0.5 p-px"
+  class="bg-yellow-50 text-black border border-black top-0.5 left-0.5 p-px fixed z-max"
   x-data="{show: false}" @keyup.meta.window="show = false" @keydown.meta.window="show = true"
-  :class="{'fixed': show, 'hidden': !show}" x-cloak
+  x-show="show" x-cloak
 >
   <span class="inline xs:hidden">_</span>
   <span class="hidden xs:inline sm:hidden">xs</span>

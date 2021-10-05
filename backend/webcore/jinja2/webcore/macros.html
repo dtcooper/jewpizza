@@ -1,16 +1,82 @@
 {% macro icon(icon, size='text-3xl', margin='mr-2', classes=None) -%}
-
   <span class="iconify {{ size }}{% if margin %} {{ margin }}{% endif %}{% if classes %} {{ classes }}{% endif %}" data-icon="{{ icon }}"></span>
-
 {%- endmacro %}
 
 
 {% macro random_spin_style(min=850, max=2750, direction=undefined) -%}
-
   {%- if direction is none and random_bool() -%}
     {%- set direction = 'reverse' -%}
   {%- endif -%}
 
   --custom-spin-duration: {{ (range(min, max)|random) / 1000 }}s; --custom-spin-direction: {{ direction|default(['normal', 'reverse']|random) }}
-
 {%- endmacro %}
+
+{% macro render_non_field_errors(form) %}
+  {% set errors = form.non_field_errors() %}
+
+  {% if errors %}
+    <div class="text-error">
+      The following errors occurred:
+      <ul class="mt-2 list-disc list-inside space-y-2">
+        {% for error in errors %}
+          <li class="ml-5">{{ error }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+{% endmacro %}
+
+{% macro render_form_field(field, placeholder=false, classes=none, attrs=none, label=false, with_form_control=True) %}
+  {# Set placeholder=None to disable placeholder, same for label #}
+  {% if with_form_control %}<div class="form-control">{% endif %}
+
+    {% if label is not none %}
+      {% set label = field.label %}
+    {% endif %}
+
+    {% set ns = namespace(field=field) %}
+
+    {%- if classes -%}
+      {%- set ns.field = ns.field|add_class(classes) -%}
+    {%- endif -%}
+    {%- if placeholder is not none -%}
+      {%- if placeholder -%}
+        {%- set ns.field = ns.field|attr('placeholder:' + placeholder) -%}
+      {%- else %}
+        {%- set ns.field = ns.field|attr('placeholder:Enter your ' + ns.field.label|lower) -%}
+      {%- endif -%}
+    {%- endif -%}
+    {%- if attrs -%}
+      {%- for attr, value in attrs.items() -%}
+        {%- set ns.field = ns.field|attr(attr + ':' + value) -%}
+      {%- endfor -%}
+    {%- endif -%}
+    {%- if field.widget_type in ('email', 'text') -%}
+      {%- set ns.field = ns.field|add_class('input input-bordered')|add_error_class('input-error') -%}
+    {%- endif -%}
+
+    {% if ns.field.widget_type == 'checkbox' %}
+      <label class="cursor-pointer label">
+        {{ ns.field|add_class('toggle toggle-lg toggle-primary') }}
+        {% if label %}
+          <span class="label-text ml-3 w-max flex-1">{{ label }}</span>
+        {% endif %}
+      </label>
+    {% else %}
+      {% if label %}
+        <label class="label" for="{{ field.id_for_label }}">
+          <span class="label-text">{{ label }}:</span>
+        </label>
+      {% endif %}
+
+      {{ ns.field }}
+    {% endif %}
+
+    {% if ns.field.errors  %}
+      {% for error in ns.field.errors %}
+        <span class="text-error text-bold mt-1">{{ error }}</span>
+      {% endfor %}
+    {% endif %}
+
+  {% if with_form_control %}</div>{% endif %}
+{% endmacro %}

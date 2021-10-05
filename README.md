@@ -65,6 +65,7 @@ using `nginx` (or similar) and serve the static and media assets (deployed to th
 A sample nginx config might be,
 
 ```nginx
+# Main site
 server {
     listen 80;
     server_name sample.domain.com;
@@ -82,6 +83,17 @@ server {
         proxy_pass http://127.0.0.1:8000;
     }
 }
+
+# Umami analytics
+server {
+    listen 80;
+    server_name umami.domain.com;
+
+    location / {
+        include proxy_params;
+        proxy_pass http://127.0.0.1:3000;
+    }
+}
 ```
 
 Or if you want to **TEST** with `DEBUG=0` without running nginx and have Gunicorn
@@ -92,36 +104,15 @@ add the following to your `.env` file,
 SERVE_ASSETS_FROM_DJANGO=1
 ```
 
+#### Change Passwords
+
+Change passwords,
+* Django: `dave:cooper`
+* Umami: `dave:cooper`
+
 #### Icecast 2 in Production
 
 TODO needs documenting
-
-#### Analytics using [umami](https://github.com/mikecao/umami) in Production (optional)
-
-Create the following (or add) to your `docker-compose.overrides.yml` file,
-
-```yaml
-  umami:
-    image: ghcr.io/mikecao/umami:postgresql-latest
-    restart: always
-    ports:
-      - "3000:3000"
-    environment:
-      - DATABASE_URL=postgresql://postgres:postgres@db:5432/postgres
-      - DATABASE_TYPE=postgresql
-      # Needs to happen AFTER SECRET_KEY has been set
-      - "HASH_SALT=${SECRET_KEY}"
-    depends_on:
-      - db
-```
-
-And create the requisite tables with the `db` container running
-
-```sh
-docker compose exec db sh -c 'wget -O - https://raw.githubusercontent.com/mikecao/umami/master/sql/schema.postgresql.sql | psql -U postgres'
-```
-
-Log in with `admin:umami` and change the admin password.
 
 ## License
 

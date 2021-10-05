@@ -1,4 +1,4 @@
-.PHONY: pre-commit build shell show-outdated deploy up down
+.PHONY: pre-commit build shell show-outdated deploy up down ssh
 
 COMPOSE:=docker compose
 SERVER:=jew.pizza
@@ -39,3 +39,6 @@ up:
 
 down:
 	@$(COMPOSE) down
+
+ssh: # For me only.
+	ssh -R 8888:localhost:8000 jew.pizza

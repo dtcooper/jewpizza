@@ -14,4 +14,7 @@ class TailwindFunctioningRunserverMiddleware:
             response = self.get_response(request)
             return response
         else:
-            return HttpResponse("Tailwind did NOT generate stylesheet, see command output.", content_type="text/plain")
+            return HttpResponse(
+                "Tailwind did NOT generate stylesheet, see command output.",
+                content_type="text/plain",
+            )

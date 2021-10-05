@@ -1,32 +1,89 @@
 /* global DATA, Alpine, Navigo */
 
 (() => {
-  const getPage = async function (url) {
-    const data = await (await window.fetch(url, { headers: { 'Content-Type': 'application/json' } })).json()
-    return data.content
+  let router
+
+  const getCookie = function (name) {
+    let cookieValue = null
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';')
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim()
+        // Does this cookie string begin with the name we want?
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1))
+          break
+        }
+      }
+    }
+    return cookieValue
+  }
+
+  const loadURL = async function (url, data) {
+    const store = Alpine.store('page')
+    let json
+    store.loading = true
+
+    data = data || {}
+    data.headers = { Accept: 'application/json', 'X-CSRFToken': getCookie('csrftoken') }
+
+    try {
+      json = await (await window.fetch(url, data)).json()
+    } catch (err) {
+      if (DATA.debug) {
+        console.error(`An error occurred while fetching ${url}`)
+        console.error('data:', data)
+        console.error('error:', err)
+      }
+      router._setCurrent(null) // Force reloads (allow retries)
+      store.loading = false
+      Alpine.store('messages', [{ level: 'error', message: 'An error occurred. Please try loading the page again.' }])
+      return
+    }
+
+    if (json.redirect) {
+      router._setCurrent(null) // Force reloads
+      router.navigate(json.redirect)
+    } else {
+      const contentElem = document.getElementById('content')
+      const contentScrollerElem = document.getElementById('content-scroller')
+      document.title = (DATA.debug ? '[dev] ' : '') + json.title
+      store.current = url
+      contentElem.innerHTML = json.content
+
+      store.loading = false
+      Alpine.store('messages', json.messages)
+      router.updatePageLinks()
+      contentScrollerElem.scrollTop = 0
+    }
+  }
+
+  window.formSubmit = async function (e) {
+    e.preventDefault()
+    const url = e.target.getAttribute('action')
+    await loadURL(url, {
+      method: 'POST',
+      credentials: 'same-origin',
+      body: new window.FormData(e.target)
+    })
   }
 
   document.addEventListener('alpine:init', () => {
-    const router = new Navigo('/')
-    const contentElem = document.getElementById('content')
-    router.on('*', async ({ url }) => {
-      const store = Alpine.store('page')
-      store.loading = true
+    router = new Navigo('/')
+    window.router = router
 
+    router.on('*', async ({ url, ...args }) => {
       url = `/${url}`
       if (url !== '/') {
         url = `${url}/`
       }
-      const html = await getPage(url)
-      document.title = (DATA.debug ? '[dev] ' : '') + (DATA.nav_links[url] || 'jew.pizza')
-      store.current = url
-      contentElem.innerHTML = html
-      store.loading = false
-      router.updatePageLinks()
+      await loadURL(url)
     })
+
     Alpine.store('page', {
       current: DATA.current_page,
       loading: false
     })
+    Alpine.store('messages', DATA.messages)
   })
 })()

@@ -27,16 +27,18 @@ EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=(EMAIL_PORT == 587))
 DEFAULT_FROM_EMAIL = env("EMAIL_FROM_ADDRESS")
 UMAMI_SCRIPT_URL = env("UMAMI_SCRIPT_URL", default=None)
 UMAMI_WEBSITE_ID = env("UMAMI_WEBSITE_ID", default=None)
+TWILIO_ACCOUNT_SID = env("TWILIO_ACCOUNT_SID")
+TWILIO_AUTH_TOKEN = env("TWILIO_AUTH_TOKEN")
+TWILIO_FROM_NUMBER = env("TWILIO_FROM_NUMBER")
 
-if DEBUG:
-    ICECAST_URL = f"http://{DOMAIN_NAME}:8080"
-else:
-    ICECAST_URL = env("ICECAST_URL")
+ICECAST_URL = env("ICECAST_URL")
+
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 if DEBUG:
     ALLOWED_HOSTS = ["*"]
 else:
-    ALLOWED_HOSTS = ["app", "localhost", "127.0.0.1", DOMAIN_NAME]
+    ALLOWED_HOSTS = list({"app", "localhost", "127.0.0.1", DOMAIN_NAME})
 
 INSTALLED_APPS = [
     "django_light",  # Disable admin
@@ -49,8 +51,10 @@ INSTALLED_APPS = [
     "webcore",
     "django.contrib.staticfiles",
     # 3rd party
+    "phonenumber_field",
     "recurrence",
     # Local
+    "notifications",
     "shows",
 ]
 
@@ -96,13 +100,13 @@ TEMPLATES = [
         "OPTIONS": {
             "autoescape": lambda filename: any(filename.endswith(ext) for ext in (".xml", ".html")),
             "keep_trailing_newline": True,
-            "environment": "jew_pizza.j2_env.environment",
+            "environment": "jew_pizza.jinja2.environment",
             "extensions": [
                 "jinja2.ext.do",
                 "jinja2.ext.loopcontrols",
             ],
             "context_processors": [
-                "jew_pizza.j2_env.nav_links",
+                "jew_pizza.jinja2.nav_links",
             ],
         },
     },
@@ -172,6 +176,7 @@ CACHES = {
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
+MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 
 EMAIL_TIMEOUT = 10
 
@@ -198,6 +203,8 @@ NPM_FILE_PATTERNS = {
     "moment-timezone": ["builds/moment-timezone-with-data-1970-2030.min.js"],
     "navigo": ["lib/navigo.min.js"],
 }
+
+PHONENUMBER_DEFAULT_REGION = "US"
 
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",

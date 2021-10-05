@@ -11,16 +11,10 @@ urlpatterns = [
         name="bio",
     ),
     path(
-        "newsletter/",
-        views.TemplateOrJSONView.as_view(
-            template_name="webcore/placeholder.html", extra_context={"title": "Newsletter"}
-        ),
-        name="newsletter",
-    ),
-    path(
         "testimonials/",
         views.TemplateOrJSONView.as_view(
-            template_name="webcore/placeholder.html", extra_context={"title": "Testimonials"}
+            template_name="webcore/placeholder.html",
+            extra_context={"title": "Testimonials"},
         ),
         name="testimonials",
     ),

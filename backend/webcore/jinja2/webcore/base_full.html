@@ -32,10 +32,10 @@
   <script src="{{ static('js/vendor/moment-timezone/builds/moment-timezone-with-data-1970-2030.min.js') }}"></script>
   {%- set _js_data = {
     'debug': settings.DEBUG,
+    'current_page': active_link,
     'is_authenticated': request.user.is_authenticated,
     'is_superuser': request.user.is_superuser,
-    'nav_links': nav_links_json,
-    'current_page': active_link,
+    'messages': get_messages(),
   } %}
   {%- do _js_data.update(js_data or {}) %}
   <script>
@@ -58,8 +58,9 @@
   :class="{'overflow-hidden-iphone-only': !navMenuOpen, 'cursor-wait': $store.page.loading}"
 >
   {% include 'webcore/components/navbar.html' %}
+  {% include 'webcore/components/messages.html' %}
 
-  <div class="flex flex-col flex-1 w-full overflow-y-auto">
+  <div id="content-scroller" class="flex flex-col flex-1 w-full overflow-y-auto">
     <div id="content" class="flex-1 w-full max-w-screen-3xl mx-auto pt-3 px-4">
       {% block base_content required %}{% endblock %}
     </div>
@@ -67,12 +68,14 @@
     {% include 'webcore/components/emojis.html' %}
   </div>
 
+  {# XXX
   {% if not disable_player %}
     <div class="relative">
       {% include 'webcore/components/clippy.html' %}
       {% include 'webcore/components/player.html' %}
     </div>
   {% endif %}
+  #}
 
   {% if settings.DEBUG or request.user.is_superuser %}
     {% include 'webcore/components/debug.html' %}

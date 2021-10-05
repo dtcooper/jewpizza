@@ -6,6 +6,7 @@ admin.site.site_title = "jew.pizza site admin"
 
 urlpatterns = [
     path("", include("webcore.urls")),
+    path("", include("notifications.urls")),
     path("", include("shows.urls")),
     path("cmsadmin/", admin.site.urls),
 ]

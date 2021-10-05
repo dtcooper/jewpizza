@@ -6,8 +6,8 @@ authors = ["David Cooper <david@jew.pizza>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-Django = "^3.2"
-Jinja2 = "^3.0.1"
+Django = "^3.2.8"
+Jinja2 = "^3.0.2"
 django-environ = "^0.7.0"
 gunicorn = "^20.1.0"
 psycopg2 = "^2.9.1"
@@ -16,6 +16,9 @@ django-npm = "^1.0.0"
 django-redis = "^5.0.0"
 django-light = "^0.1.0"
 django-recurrence = "^1.10.3"
+django-phonenumber-field = {extras = ["phonenumbers"], version = "^5.2.0"}
+django-widget-tweaks = "^1.4.8"
+twilio = "^7.0.0"
 
 [tool.poetry.dev-dependencies]
 ipython = "^7.28.0"
@@ -24,6 +27,9 @@ flake8 = "^3.9.2"
 black = "^21.9b0"
 isort = "^5.9.3"
 ipdb = "^0.13.9"
+pytest = "^6.2.5"
+pytest-cov = "^3.0.0"
+pytest-django = "^4.4.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -45,5 +51,14 @@ line_length = 120
 force_sort_within_sections = true
 sections = ['FUTURE', 'STDLIB', 'THIRDPARTY', 'DJANGO', 'DJANGOTHIRDPARTY', 'FIRSTPARTY', 'LOCALFOLDER']
 known_django = ['django']
-known_djangothirdparty = ['environ', 'recurrence']
+known_djangothirdparty = ['environ', 'phonenumber_field', 'recurrence', 'widget_tweaks']
 skip = ['migrations']
+
+[tool.pytest.ini_options]
+addopts = '-s --cov=. --cov-report=term-missing'
+python_files = 'tests.py'
+cache_dir = '/tmp/.pytest_cache'
+filterwarnings = [
+    # From django-recurrance
+    'ignore:django.utils.translation.ugettext_lazy\(\) is deprecated in favor of django.utils.translation.gettext_lazy\(\).:django.utils.deprecation.RemovedInDjango40Warning',
+]

@@ -8,13 +8,13 @@
 >
   <button
     x-data x-show="open" @click="open = false"
-    style="--rounded-btn: 0" class="pointer-events-auto btn text-neutral-content btn-ghost btn-square btn-sm absolute top-0 right-0"
+    class="pointer-events-auto btn text-neutral-content btn-ghost btn-square btn-sm absolute top-0 right-0"
   >
     {{ icon('mdi:window-minimize', size='text-2xl', margin=None) }}
   </button>
   <button
     x-data x-show="!open" @click="open = true"
-    style="--rounded-btn: 0" class="pointer-events-auto btn btn-primary btn-square font-sans"
+    class="pointer-events-auto btn btn-primary btn-square font-sans"
   >
     {{ icon('mdi:robot-confused-outline', size='text-4xl', margin=None) }}
   </button>

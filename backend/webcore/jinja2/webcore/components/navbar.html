@@ -1,4 +1,4 @@
-<div class="z-max">
+<div>
   <div class="navbar w-full min-h-[3.5rem] xs:min-h-[4.75rem] sm:min-h-[3.5rem] xl:min-h-[4.75rem] bg-base-100">
 
     {#- Copy and image #}
@@ -20,12 +20,12 @@
       </{% if request.user.is_superuser %}a{% else %}div{% endif %}>
     </div>
 
-    {#- Buttons + Menu #}
-    <div class="flex-none flex items-center space-x-0.5 2xl:space-x-2">
+    {#- Buttons + Dropdown Menu #}
+    <div class="flex-none flex items-center space-x-1 xl:space-x-1.5 2xl:space-x-2">
       {% for link in nav_links %}
         <a
           data-navigo href="{{ link.url }}"
-          class="btn 2xl:btn-lg no-animation btn-primary hidden {% if link.is_subnav %}3xl:flex{% else %}lg:flex{% endif %}{% if link.is_active %} btn-disabled btn-outline{% endif %}"
+          class="btn 2xl:btn-lg btn-rounded no-animation btn-primary hidden {% if link.is_subnav %}3xl:flex{% else %}lg:flex{% endif %}{% if link.is_active %} btn-disabled btn-outline{% endif %}"
           :class="{
             'btn-outline': $store.page.current == {{ link.url|attrjs }},
             'btn-disabled': $store.page.loading || $store.page.current == {{ link.url|attrjs }}
@@ -35,7 +35,7 @@
         </a>
       {% endfor %}
       <div class="hidden lg:block 3xl:hidden" x-data="{moreMenuOpen: false}" @click.away="moreMenuOpen = false">
-        <button class="btn btn-primary no-animation 2xl:btn-lg pr-1.5 2xl:pr-3" @click="moreMenuOpen = !moreMenuOpen" :class="{'btn-disabled': $store.page.loading}">
+        <button class="btn btn-primary btn-rounded no-animation 2xl:btn-lg pr-1.5 2xl:pr-3" @click="moreMenuOpen = !moreMenuOpen" :class="{'btn-disabled': $store.page.loading}">
           More {{ icon('mdi:dots-vertical', size='text-2xl', margin=None, classes='2xl:text-3xl') }}
         </button>
 
@@ -44,10 +44,7 @@
           <ul class="absolute z-max top-1 right-3 select-none menu bg-secondary text-sm 2xl:text-lg text-primary font-bold w-72 rounded-lg">
             {% for link in nav_links %}
               {% if link.is_subnav %}
-                <li
-                  :class="{'bordered text-secondary-content': $store.page.current == {{ link.url|attrjs }}}"
-                  style="--rounded-btn: 0"
-                >
+                <li :class="{'bordered text-secondary-content': $store.page.current == {{ link.url|attrjs }}}">
                   <span x-show="$store.page.current == {{ link.url|attrjs }}">{{ icon(link.icon) }} {{ link.name }}</span>
                   <a
                     data-navigo x-show="$store.page.current != {{ link.url|attrjs }}"
@@ -63,23 +60,21 @@
       </div>
 
       {#- Mobile expand/close buttons #}
-      <button x-cloak style="--rounded-btn: 0" class="btn btn-square btn-ghost flex lg:hidden" @click="navMenuOpen = true" x-show="!navMenuOpen">
+      <button x-cloak class="btn btn-square btn-ghost flex lg:hidden" @click="navMenuOpen = true" x-show="!navMenuOpen">
         {{ icon('fa:bars', margin=None) }}
       </button>
-      <button style="--rounded-btn: 0" class="btn btn-square btn-ghost flex lg:hidden" @click="navMenuOpen = false" x-show="navMenuOpen">
+      <button class="btn btn-square btn-ghost flex lg:hidden" @click="navMenuOpen = false" x-show="navMenuOpen">
         {{ icon('fa:close', margin=None) }}
       </button>
     </div>
   </div>
 
+  {# Mobile nav #}
   {# TODO close when URL is navigated to #}
-  <div x-cloak class="w-full lg:hidden" x-show="navMenuOpen">
+  <div x-cloak class="w-full lg:hidden z-max" x-show="navMenuOpen">
     <ul class="menu bg-secondary text-sm font-bold text-primary">
       {% for link in nav_links %}
-        <li
-          :class="{'bordered text-secondary-content': $store.page.current == {{ link.url|attrjs }}}"
-          style="--rounded-btn: 0"
-        >
+        <li :class="{'bordered text-secondary-content': $store.page.current == {{ link.url|attrjs }}}">
           <span x-show="$store.page.current == {{ link.url|attrjs }}">{{ icon(link.icon, size='text-2xl') }} {{ link.name }}</span>
           <a
             data-navigo x-show="$store.page.current != {{ link.url|attrjs }}"

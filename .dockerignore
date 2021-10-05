@@ -1,7 +1,9 @@
 /.git/
 # Below copied from .gitignore
 .env
+/backend/.coverage
 /backend/*/static/js/*.min.js
+/backend/htmlcov
 /backend/webcore/static/css/styles*.css
 /frontend/node_modules/
 /serve/

@@ -21,7 +21,11 @@ module.exports = {
       '../backend/**/templates/**/*.html'
     ],
     safelist: [
-      'animate-spin'
+      'animate-spin',
+      'alert-success',
+      'alert-info',
+      'alert-warning',
+      'alert-error'
     ]
   },
   theme: {
@@ -62,8 +66,8 @@ module.exports = {
         // secondary: '#5fe8ff',
         // 'secondary-focus': '#0adaff',
         // 'secondary-content': '#171731',
-        // 'accent-focus': '#b15fe7',
         // accent: '#c07eec',
+        // 'accent-focus': '#b15fe7',
         // 'accent-content': '#171731',
         // neutral: "#423f00",
         // neutral-focus: "#090901",
@@ -72,9 +76,13 @@ module.exports = {
         // 'base-200': '#e0e000',
         // 'base-300': '#b8b800',
         // 'base-content': '#171731',
+        // 'info': '#2094f3',
+        // 'success': '#009485',
+        warning: '#b88a00',
+        // 'error': '#ff5724',
         '--border-btn': '0.1875rem',
         '--btn-text-case': 'none',
-        '--rounded-btn': '1.25rem'
+        '--rounded-btn': '0'
       }
     }]
   }

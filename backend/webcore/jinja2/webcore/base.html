@@ -2,7 +2,7 @@
 
 {% block base_content %}
   {% if title and not hide_title %}
-    <h3 class="text-5xl text-accent underline underline-wavy md:mb-10 md:ml-20 italic">{{ title }}</h3>
+    <h3 class="title">{{ title }}</h3>
   {% endif %}
 
   {% block content required %}{% endblock %}

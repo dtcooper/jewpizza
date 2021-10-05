@@ -1,0 +1,19 @@
+
+<div x-data class="w-full max-w-screen-3xl mx-auto pt-1 px-4" x-cloak x-show="$store.messages">
+  <template x-for="(msg, index) in $store.messages" :key="index">
+    <div class="alert !flex-row" :class="['alert-' + msg.level]">
+      <div class="flex-1 flex items-center">
+        <span x-show="msg.level === 'info'">{{ icon('mdi:information-outline', size='text-4xl') }}</span>
+        <span x-show="msg.level === 'success'">{{ icon('mdi:check-decagram-outline', size='text-4xl') }}</span>
+        <span x-show="msg.level === 'warning'">{{ icon('mdi:alert-decagram-outline', size='text-4xl') }}</span>
+        <span x-show="msg.level === 'error'">{{ icon('mdi:alert-outline', size='text-4xl') }}</span>
+        <label class="mx-3" x-text="msg.message"></label>
+      </div>
+      <div class="flex-none">
+        <button class="btn btn-sm text-base-content btn-ghost btn-square" @click="$store.messages.splice(index, 1)">
+          {{ icon('fa:close', size='text-2xl', margin=None) }}
+        </button>
+      </div>
+    </div>
+  </template>
+</div>

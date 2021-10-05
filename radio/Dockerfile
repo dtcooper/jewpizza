@@ -1,3 +1,4 @@
+# TODO use savonet/liquidsoap:v2.0.0-rc1 container
 FROM ubuntu:20.04
 
 ARG LIQUIDSOAP_VERSION="2.0.0-rc1"

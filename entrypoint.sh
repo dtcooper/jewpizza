@@ -61,6 +61,10 @@ else
 
     wait-for-it -t 0 db:5432 -- ./manage.py migrate
 
+    if [ "$(./manage.py shell -c 'from django.contrib.auth.models import User; print("" if User.objects.exists() else "1")')" = 1 ]; then
+        DJANGO_SUPERUSER_PASSWORD=cooper ./manage.py createsuperuser --noinput --username dave --email 'david@jew.pizza'
+    fi
+
     if [ "$DEBUG" ]; then
         exec ./manage.py runserver
     else

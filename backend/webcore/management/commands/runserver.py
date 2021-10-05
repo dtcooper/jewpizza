@@ -39,19 +39,14 @@ class Command(RunserverCommand):
             self.exited = True
 
     def run_npm_watch(self):
-        def clear_stylesheet():
-            try:
-                os.remove(settings.BASE_DIR / "webcore" / "static" / "css" / "styles.css")
-            except FileNotFoundError:
-                return
-
         while True:
             self.stdout.write("Running tailwind (npm run watch)")
 
-            clear_stylesheet()
             # stdin needs to be a pipe, since sharing it with parent breaks pdb
             process = subprocess.Popen(
-                ["npm", "--prefix=../frontend", "run", "watch"], stdin=subprocess.PIPE, preexec_fn=os.setsid
+                ["npm", "--prefix=../frontend", "run", "watch"],
+                stdin=subprocess.PIPE,
+                preexec_fn=os.setsid,
             )
             while process.poll() is None:
                 if self.exited:  # Kill subprocess and all children when main thread exits
@@ -63,6 +58,9 @@ class Command(RunserverCommand):
                 # negative = the child was terminated by signal N (POSIX only) - from subprocess manual
                 return
 
-            clear_stylesheet()
+            stylesheet = settings.BASE_DIR / "webcore" / "static" / "css" / "styles.css"
+            if os.path.exists(stylesheet):
+                os.remove(stylesheet)
+
             self.stderr.write("Tailwind crashed. Retrying in 1 second. (npm run watch)")
             time.sleep(1)

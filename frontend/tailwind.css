@@ -54,3 +54,19 @@
         }
     }
 }
+
+.btn-rounded {
+    --rounded-btn: 1.25rem;
+}
+
+.title {
+    @apply text-3xl md:text-5xl text-accent underline underline-wavy text-center md:text-left mb-6 md:mb-10 md:ml-16 italic;
+}
+
+.prose a {
+    @apply link link-primary link-hover;
+}
+
+.btn-error, .btn-warning, .btn-success, .btn-info {
+    @apply text-black;
+}

@@ -28,14 +28,14 @@
             href="https://www.iheartradio.ca/newstalk-1010/shows/the-late-showgram-with-jim-richards-1.14645758">The
           Showgram w/ Jim Richards</a></span><span x-text="showTechnicalTime"> (technically Mon to Fri mornings)</span>.
           It airs nationally in Canada, and you can <span class="font-bold">stream it on Toronto-based
-          <a href="https://www.iheartradio.ca/newstalk-1010" class="link-primary link-hover" target="_blank">NEWSTALK 1010's
-          website</a></span>.
+          <a href="https://www.iheartradio.ca/newstalk-1010" class="link-primary link-hover" target="_blank">CFRB
+            NEWSTALK 1010's website</a></span>.
         </p>
 
         <div class="hidden sm:block mt-6 lg:mt-8 text-center lg:text-left select-none">
           {% for link in nav_links %}
             {% if not link.is_subnav and not link.url_name == 'webcore:home' %}
-              <a data-navigo class="btn btn-neutral" href="{{ link.url }}">
+              <a data-navigo class="btn btn-neutral btn-rounded" href="{{ link.url }}">
                 {{ icon(link.icon, size='text-2xl', margin='ml-0 sm:mr-2') }}
                 <span class="hidden sm:block">{{ link.name }}</span>
               </a>

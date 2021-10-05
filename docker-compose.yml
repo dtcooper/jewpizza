@@ -24,14 +24,36 @@ services:
     restart: always
     volumes:
       - postgres_data:/var/lib/postgresql/data/
+      - ./init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
     environment:
       - POSTGRES_PASSWORD=postgres
+      - "UMAMI_WEBSITE_ID=${UMAMI_WEBSITE_ID:-}"
+      - "DOMAIN_NAME=${DOMAIN_NAME}"
 
   redis:
     image: library/redis:6-alpine
     restart: always
     volumes:
       - redis_data:/data
+
+  # nchan:
+  #   image: rookiezoe/nginx
+  #   #restart: always
+  #   ports:
+  #     - "127.0.0.1:8888:80"
+
+  umami:
+    image: ghcr.io/mikecao/umami:postgresql-latest
+    restart: always
+    ports:
+      - "127.0.0.1:${UMAMI_LISTEN_PORT:-3000}:3000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/umami
+      - DATABASE_TYPE=postgresql
+      # SECRET_KEY needs to be set in order to run this container
+      - "HASH_SALT=${SECRET_KEY}"
+    depends_on:
+      - db
 
 volumes:
   postgres_data:

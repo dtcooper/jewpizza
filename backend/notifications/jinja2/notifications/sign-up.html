@@ -1,0 +1,52 @@
+{% extends 'webcore/base.html' %}
+
+{% from 'webcore/macros.html' import render_form_field, render_non_field_errors %}
+
+{% block content %}
+  <div class="max-w-screen-md mx-auto" x-data="{optOut: {{ form.opt_out.value()|attrjs }}, withPhone: {{ form.with_phone.value()|attrjs }}}">
+    <h3 class="title">{{ title }}</h3>
+
+    <div class="prose prose-lg">
+      <p>
+        Sign up to receive an email (or text message) when David has a live show!
+        He may also send out an occasional newsletter.
+      </p>
+      <p x-show="!optOut">
+        If you have previously signed up for notifications and would like to cancel
+        them, <span class="link link-primary link-hover" @click.prevent="optOut = true">click here</span>.
+      </p>
+    </div>
+
+    <form class="mt-6 space-y-3" method="POST" action="{{ url_for('notifications:sign-up') }}" x-data @submit="formSubmit">
+
+      {{ render_non_field_errors(form) }}
+
+      {{ render_form_field(form.email, placeholder='john.doe@gmail.com', attrs={'required': 'required'}) }}
+
+      <div class="form-control" x-show="!optOut">
+        {{ render_form_field(form.with_phone, attrs={'x-model': 'withPhone'}, with_form_control=False) }}
+      </div>
+
+      <div class="form-control" x-show="withPhone && !optOut">
+        {{ render_form_field(form.phone, placeholder='+1 (555) 555-1234', attrs={'::required': 'withPhone && !optOut'}, with_form_control=False) }}
+      </div>
+
+      <div class="prose prose-lg" x-show="optOut">
+        <span class="font-bold text-error">
+          You will be <span class="underline">unsubscribed</span> from both email and text message notifications.
+        </span>
+        We're sad to see you go.<br>To cancel unsubscribing,
+        <span class="link link-primary link-hover" @click.prevent="optOut = false">click here</span>.
+      </div>
+
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary" :class="{'btn-primary': !optOut, 'btn-error': optOut}" x-text="optOut ? 'Unsubscribe' : 'Sign Up'"></button>
+      </div>
+
+      <input class="hidden" type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+      <input class="hidden" type="hidden" name="opt_out" x-model="optOut">
+    </form>
+
+  </div>
+
+{% endblock %}

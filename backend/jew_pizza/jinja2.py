@@ -3,25 +3,20 @@ import hashlib
 import os
 import random
 
-from jinja2 import Environment, pass_eval_context
+from jinja2 import Environment, pass_context, pass_eval_context
 from jinja2.filters import do_forceescape, do_tojson
 
 from django.conf import settings
+from django.contrib import messages
 from django.core.cache import cache
 from django.templatetags.static import static as django_static
 from django.urls import reverse
 
+from widget_tweaks.templatetags.widget_tweaks import add_class, add_error_class, set_attr
+
 from webcore.constants import CACHE_KEY_PREFIX_STATIC_ASSET_MD5SUM, NAVIGATION_LINKS
 
 NavLink = namedtuple("NavLink", "name url url_name icon is_subnav is_active")
-
-
-def shuffle(items):
-    try:
-        random.shuffle(items)
-        return items
-    except Exception:
-        return items
 
 
 def static(path, *args, **kwargs):
@@ -56,23 +51,21 @@ def static(path, *args, **kwargs):
 
 
 def nav_links(request):
-    context = {"nav_links": [], "nav_links_json": {}, "active_link": None}
+    nav_links = []
+    active_link = None
 
     for name, url_name, icon, is_subnav in NAVIGATION_LINKS:
         url = reverse(url_name)
         is_active = request.resolver_match.view_name == url_name
-        context["nav_links"].append(NavLink(name, url, url_name, icon, is_subnav, is_active))
-        context["nav_links_json"][url] = name
+        nav_links.append(NavLink(name, url, url_name, icon, is_subnav, is_active))
         if is_active:
-            context["active_link"] = url
+            active_link = url
 
-    return context
+    return {"nav_links": nav_links, "active_link": active_link}
 
 
-@pass_eval_context
-def attrjs(eval_ctx, value):
-    # Fully escaped JS suitable for HTML attributes
-    return do_forceescape(do_tojson(eval_ctx, value))
+def get_messages(request):
+    return [{"level": msg.level_tag, "message": msg.message} for msg in messages.get_messages(request)]
 
 
 def environment(**options):
@@ -81,15 +74,20 @@ def environment(**options):
         {
             "randint": random.randint,
             "settings": settings,
-            "shuffle": shuffle,
+            "shuffle": lambda items: random.shuffle(items) or items,  # Hack since shuffle returns None
             "static": static,
             "url_for": lambda name, *args, **kwargs: reverse(name, args=args, kwargs=kwargs),
+            "get_messages": pass_context(lambda ctx: get_messages(ctx["request"])),
         }
     )
     env.filters.update(
         {
+            "add_class": add_class,
+            "add_error_class": add_error_class,
+            "attr": set_attr,
             "bool": bool,
-            "attrjs": attrjs,
+            "attrjs": pass_eval_context(lambda eval_ctx, value: do_forceescape(do_tojson(eval_ctx, value))),
+            "smart_title": lambda s: " ".join(f"{w[0].upper()}{w[1:]}" for w in s.split()),
         }
     )
     return env

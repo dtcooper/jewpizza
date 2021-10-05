@@ -17,16 +17,15 @@ services:
     ports:
       - "127.0.0.1:6379:6379"
 
-  # radio:
-  #   depends_on:
-  #     - icecast
-  #   volumes:
-  #     - ./radio/radio.liq:/etc/radio.liq
+  umami:
+    restart: "no"
+    ports:
+      - "${UMAMI_LISTEN_PORT:-3000}:3000"
 
-  # icecast:
-  #   image: moul/icecast
-  #   init: true  # for Icecast to shut down faster
-  #   environment:
-  #     - "ICECAST_HOSTNAME=${DOMAIN_NAME:-localhost}"
-  #   ports:
-  #     - 8080:8000
+  icecast:
+    image: moul/icecast
+    init: true  # for Icecast to shut down faster
+    environment:
+      - "ICECAST_HOSTNAME=${DOMAIN_NAME:-localhost}"
+    ports:
+      - 8080:8000
