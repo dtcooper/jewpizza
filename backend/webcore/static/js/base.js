@@ -30,7 +30,7 @@
     try {
       json = await (await window.fetch(url, data)).json()
     } catch (err) {
-      if (DATA.debug) {
+      if (DATA.debug || DATA.isSuperuser) {
         console.error(`An error occurred while fetching ${url}`)
         console.error('data:', data)
         console.error('error:', err)
@@ -81,7 +81,7 @@
     })
 
     Alpine.store('page', {
-      current: DATA.current_page,
+      current: DATA.currentPage,
       loading: false
     })
     Alpine.store('messages', DATA.messages)

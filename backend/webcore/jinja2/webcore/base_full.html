@@ -31,15 +31,15 @@
   <script src="{{ static('js/vendor/moment/min/moment.min.js') }}"></script>
   <script src="{{ static('js/vendor/moment-timezone/builds/moment-timezone-with-data-1970-2030.min.js') }}"></script>
   {%- set _js_data = {
+    'currentPage': active_link,
     'debug': settings.DEBUG,
-    'current_page': active_link,
-    'is_authenticated': request.user.is_authenticated,
-    'is_superuser': request.user.is_superuser,
+    'isAuthenticated': request.user.is_authenticated,
+    'isSuperuser': request.user.is_superuser,
     'messages': get_messages(),
   } %}
   {%- do _js_data.update(js_data or {}) %}
   <script>
-    const DATA = {{ _js_data|tojson }}
+    const DATA = window.DATA = {{ _js_data|tojson }}
   </script>
   <script src="{{ static('js/base.js') }}"></script>
   <script src="{{ static('js/index.js') }}"></script>

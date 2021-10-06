@@ -3,7 +3,9 @@ from smtplib import SMTPException
 from twilio.twiml.messaging_response import MessagingResponse
 
 from django.conf import settings
-from django.contrib import messages
+from django.contrib import admin, messages
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.mail import send_mail
 from django.http import HttpResponse, HttpResponseForbidden
 from django.urls import reverse, reverse_lazy
@@ -13,8 +15,36 @@ from django.views.generic import FormView, RedirectView
 from jew_pizza.twilio import send_sms, twilio_validator
 from webcore.views import TemplateOrJSONViewMixin
 
-from .forms import SignUpForm
+from .forms import SendNotificationAdminForm, SignUpForm
 from .models import SignUp, TextMessage
+
+
+class SendNotificationAdminView(UserPassesTestMixin, SuccessMessageMixin, FormView):
+    form_class = SendNotificationAdminForm
+    template_name = 'notifications/send_notification.html'
+    success_message = 'The notification was successfully sent.'
+    success_url = reverse_lazy('admin:notifications_signup_changelist')
+    extra_context = {'title': 'Send Notification', 'site_header': admin.site.site_header, 'has_permission': True, 'site_url': admin.site.site_url}
+
+    def test_func(self):
+        return self.request.user.is_superuser
+
+    def form_valid(self, form):
+        email_subject = form.cleaned_data.get('email_subject', '').strip()
+        email_message = form.cleaned_data.get('email_message', '').strip()
+        text_message = form.cleaned_data.get('text_message', '').strip()
+
+        if email_subject and email_message:
+            emails = SignUp.objects.filter(status__in=(SignUp.Status.EMAIL, SignUp.Status.BOTH)).values_list('email', flat=True)
+            for email in emails:
+                send_mail(subject=email_subject, message=email_message, from_email=None, recipient_list=[email])
+
+        if text_message:
+            phones = SignUp.objects.exclude(phone='').filter(status__in=(SignUp.Status.SMS, SignUp.Status.BOTH)).values_list('phone', flat=True).distinct()
+            for phone in phones:
+                send_sms(text_message, phone)
+
+        return super().form_valid(form)
 
 
 @csrf_exempt

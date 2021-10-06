@@ -51,3 +51,22 @@ class SignUpForm(forms.Form):
 
             if cleaned_data.get("opt_out") and not self.existing_sign_up:
                 raise ValidationError("Sign up with this email address does not exist. Can't opt out.")
+
+
+class SendNotificationAdminForm(forms.Form):
+    email_subject = forms.CharField(label='Email Subject', required=False)
+    email_message = forms.CharField(label='Email Message', required=False, widget=forms.Textarea)
+    text_message = forms.CharField(label='Text Message', required=False, max_length=160)
+
+    def clean(self):
+        cleaned_data = super().clean()
+        email_subject = cleaned_data.get('email_subject', '').strip()
+        email_message = cleaned_data.get('email_message', '').strip()
+        text_message = cleaned_data.get('text_message', '').strip()
+
+        if email_subject and not email_message:
+            raise ValidationError({'email_message': 'You must provide an email message or leave email subject blank.'})
+        if not email_subject and email_message:
+            raise ValidationError({'email_subject': 'You must provide an email subject or leave email message blank.'})
+        if not text_message and not email_message:
+            raise ValidationError('You must provide either an email or text message.')

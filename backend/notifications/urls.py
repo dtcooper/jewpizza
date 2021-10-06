@@ -1,10 +1,11 @@
 from django.urls import path
 
-from .views import SignUpConfirmationView, SignUpView, incoming_sms_view
+from . import views
 
 app_name = "notifications"
 urlpatterns = [
-    path("notify/", SignUpView.as_view(), name="sign-up"),
-    path("notify/<path:token>/", SignUpConfirmationView.as_view(), name="sign-up-confirm"),
-    path("incoming-sms/", incoming_sms_view, name="incoming-sms"),
+    path("notify/", views.SignUpView.as_view(), name="sign-up"),
+    path("notify/<path:token>/", views.SignUpConfirmationView.as_view(), name="sign-up-confirm"),
+    path("incoming-sms/", views.incoming_sms_view, name="incoming-sms"),
+    path("cmsadmin/notifications/send/", views.SendNotificationAdminView.as_view(), name='send-notification'),
 ]

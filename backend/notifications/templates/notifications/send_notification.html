@@ -1,0 +1,35 @@
+{% extends 'admin/base_site.html' %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+  form, table, input[type="text"], input[type="submit"], textarea {
+    width: 100%;
+    font-size: 1.25rem;
+  }
+
+  .center {
+    text-align: center;
+  }
+</style>
+{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+  <a href="{% url 'admin:index' %}">Home</a> &gt;
+  <a href="{% url 'admin:app_list' app_label='notifications' %}">Notifications</a> &gt;
+  Send Notification
+</div>
+{% endblock %}
+
+{% block content %}
+<form action="." method="POST">
+  {% csrf_token %}
+  <table>
+    {{ form.as_table }}
+    <tr>
+      <td colspan="2" class="center"><input type="submit" value="Send"></td>
+    </tr>
+  </table>
+</form>
+{% endblock %}
