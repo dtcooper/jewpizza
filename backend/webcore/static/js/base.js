@@ -45,16 +45,14 @@
       router._setCurrent(null) // Force reloads
       router.navigate(json.redirect)
     } else {
-      const contentElem = document.getElementById('content')
-      const contentScrollerElem = document.getElementById('content-scroller')
       document.title = (DATA.debug ? '[dev] ' : '') + json.title
       store.current = url
-      contentElem.innerHTML = json.content
+      document.getElementById('content').innerHTML = json.content
 
       store.loading = false
       Alpine.store('messages', json.messages)
       router.updatePageLinks()
-      contentScrollerElem.scrollTop = 0
+      document.getElementById('content-scroller').scrollTop = 0
     }
   }
 
