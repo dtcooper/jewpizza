@@ -9,6 +9,7 @@
 * [ ] Testimonials / Calls / Etc in clippy
 * [ ] Scroll up on page load
 * [x] Use [umami](https://github.com/mikecao/umami) for tracking
+* [ ] Investigate whether to complete JSON rendering in middleware.
 
 ## Sections
 
