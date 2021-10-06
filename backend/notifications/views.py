@@ -13,7 +13,6 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import FormView, RedirectView
 
 from jew_pizza.twilio import send_sms, twilio_validator
-from webcore.views import TemplateOrJSONViewMixin
 
 from .forms import SendNotificationAdminForm, SignUpForm
 from .models import SignUp, TextMessage
@@ -107,7 +106,7 @@ class SignUpConfirmationView(RedirectView):
         return super().get_redirect_url(*args, **kwargs)
 
 
-class SignUpView(TemplateOrJSONViewMixin, FormView):
+class SignUpView(FormView):
     form_class = SignUpForm
     template_name = "notifications/sign-up.html"
     extra_context = {"title": "Notify Me", "hide_title": True}

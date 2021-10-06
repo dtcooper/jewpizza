@@ -1,17 +1,16 @@
 from django.urls import path
-
-from webcore.views import TemplateOrJSONView
+from django.views.generic import TemplateView
 
 app_name = "shows"
 urlpatterns = [
     path(
         "shows/",
-        TemplateOrJSONView.as_view(template_name="webcore/placeholder.html", extra_context={"title": "Shows"}),
+        TemplateView.as_view(template_name="webcore/placeholder.html", extra_context={"title": "Shows"}),
         name="shows",
     ),
     path(
         "listen/",
-        TemplateOrJSONView.as_view(template_name="webcore/placeholder.html", extra_context={"title": "Listen"}),
+        TemplateView.as_view(template_name="webcore/placeholder.html", extra_context={"title": "Listen"}),
         name="listen",
     ),
 ]

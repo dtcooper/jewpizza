@@ -20,7 +20,7 @@ services:
   #     context: radio
 
   db:
-    image: library/postgres:13-alpine
+    image: library/postgres:14-alpine
     restart: always
     volumes:
       - postgres_data:/var/lib/postgresql/data/
@@ -43,7 +43,7 @@ services:
   #     - "127.0.0.1:8888:80"
 
   umami:
-    image: ghcr.io/mikecao/umami:postgresql-latest
+    image: ghcr.io/mikecao/umami:postgresql-2575cbf
     restart: always
     ports:
       - "127.0.0.1:${UMAMI_LISTEN_PORT:-3000}:3000"

@@ -7,9 +7,11 @@
 * [ ] Move [radio-calls](https://github.com/dtcooper/radio-calls) repo into this
 * [ ] Warn on leave iff player is playing
 * [ ] Testimonials / Calls / Etc in clippy
-* [ ] Scroll up on page load
+* [x] Scroll up on page load
 * [x] Use [umami](https://github.com/mikecao/umami) for tracking
-* [ ] Investigate whether to complete JSON rendering in middleware.
+* [x] Investigate whether to complete JSON rendering in middleware.
+* [ ] Move send notification outside of admin, in a superuser-only area with a
+    single link from admin, but using a classless CSS reset.
 
 ## Sections
 
@@ -21,4 +23,6 @@
 2. Bio
 3. Social
 4. Testimonials
-5. Newsletter?
+5. Notifications (Newsletter)
+6. Contact // "I do bar mitzvahs, weddings, children's parties, and corporate events.
+    You should hurry because I'm often fully booked. My calender is currently completely open."

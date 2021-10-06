@@ -72,6 +72,7 @@ MIDDLEWARE.extend(
         "django.contrib.auth.middleware.AuthenticationMiddleware",
         "django.contrib.messages.middleware.MessageMiddleware",
         "django.middleware.clickjacking.XFrameOptionsMiddleware",
+        "webcore.middleware.JSONResponseMiddleware",
     ]
 )
 if DEBUG and len(sys.argv) >= 2 and sys.argv[1] == "runserver":
