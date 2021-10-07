@@ -47,13 +47,24 @@ module.exports = {
       },
       animation: {
         'spin-custom': 'spin var(--custom-spin-duration, 1s) linear infinite var(--custom-spin-direction, normal);'
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: 'none',
+            a: {
+              '@apply link link-primary link-hover': ''
+            }
+          }
+        }
       }
     }
   },
   variants: {},
   plugins: [
-    require('@tailwindcss/typography'),
-    require('daisyui')
+    require('daisyui'),
+    // Intentionally after daisyUI as its typography CSS is screwy
+    require('@tailwindcss/typography')
   ],
   daisyui: {
     themes: [{

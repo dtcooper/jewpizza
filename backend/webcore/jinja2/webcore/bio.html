@@ -3,28 +3,30 @@
 {% from 'webcore/macros.html' import random_spin_style %}
 
 {% block content %}
-<div class="prose lg:prose-lg 2xl:prose-xl 3xl:prose-2xl text-indent overflow-hidden">
+<article class="text-indent overflow-hidden">
   <img
     src="{{ static('images/david-headshot.jpg') }}" style="{{ random_spin_style(min=30000, max=40000, direction='reverse') }}"
     class="mx-auto sm:float-right h-2/3 w-2/3 sm:h-1/3 sm:w-1/3 lg:h-1/4 lg:w-1/4 sm:ml-3 rounded-full border-8 border-secondary animate-spin-custom select-none drag-none"
   >
-  <p>
+
+  {% markdown %}
     David Cooper is a human train wreck and Canadian living in New York City. His
     extensive broadcasting credentials include briefly saying hello to Malcolm
     Gladwell and having a 30 minute phone call with Rick Moranis &mdash;
     arranged by David's mother.
-  </p>
-  <p>
+
     After growing up in Toronto, David fled to San Francisco where he was introduced
     to radio almost by accident: While dabbling in stand-up comedy, David wandered
     into a radio station to promote one of his shows. Something terrible clicked
     that day and there was no turning back.
-  </p>
+  {% endmarkdown %}
+
   <img
     src="{{ static('images/david-bmir.jpg') }}" style="{{ random_spin_style(min=30000, max=40000, direction='normal') }}"
     class="mx-auto sm:float-left h-2/3 w-2/3 sm:h-1/3 sm:w-1/3 lg:h-1/4 lg:w-1/4 sm:mr-5 rounded-full border-8 border-secondary animate-spin-custom select-none drag-none"
   >
-  <p>
+
+  {% markdown %}
     Since 2016, David has hosted various radio shows on independent stations around
     San Francisco, including a wacky call-in program called This Is Going Well, I
     Think (visible from a coffee shop window). His experiment with a phone booth in
@@ -32,8 +34,7 @@
     David quit his lucrative career as a software engineer to pursue radio
     opportunities full-time "like an idiot" (a direct quote from his overbearing
     Jewish mother).
-  </p>
-  <p>
+
     David's on-air style oscillates between frenzied comedy and confession-booth
     sincerity, blurring the lines between his personal relationships and on-air ones
     in a way both intimate and (arguably) intrusive. He can be heard nightly as
@@ -42,7 +43,7 @@
     New York/New Jersey; and every year in the Nevada Desert on Burning Man
     Information Radio (BMIR) 94.5 FM, where he has interviewed everyone from
     stripper-clowns to George Stroumboulopoulos.
-  </p>
+  {% endmarkdown %}
 
   <div class="clear-both"></div>
 </div>

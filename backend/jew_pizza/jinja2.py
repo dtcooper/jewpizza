@@ -20,6 +20,20 @@ from webcore.constants import CACHE_KEY_PREFIX_STATIC_ASSET_MD5SUM, NAVIGATION_L
 NavLink = namedtuple("NavLink", "name url url_name icon is_subnav is_active")
 
 
+def get_messages(request):
+    return [{"level": msg.level_tag, "message": msg.message} for msg in messages.get_messages(request)]
+
+
+@pass_context
+def _get_messages_jinja2(ctx):
+    return get_messages(ctx["request"])
+
+
+def shuffle(items):
+    random.shuffle(items)
+    return items
+
+
 def static(path, *args, **kwargs):
     path_hash = None
 
@@ -51,6 +65,19 @@ def static(path, *args, **kwargs):
     return static_path
 
 
+def url_for(name, *args, **kwargs):
+    return reverse(name, args=args, kwargs=kwargs)
+
+
+@pass_eval_context
+def attrjs(eval_ctx, value):
+    return do_forceescape(do_tojson(eval_ctx, value))
+
+
+def smart_title(s):
+    return " ".join(f"{w[0:1].upper()}{w[1:]}" for w in s.split())
+
+
 def nav_links(request):
     nav_links = []
     active_link = None
@@ -63,10 +90,6 @@ def nav_links(request):
             active_link = url
 
     return {"nav_links": nav_links, "active_link": active_link}
-
-
-def get_messages(request):
-    return [{"level": msg.level_tag, "message": msg.message} for msg in messages.get_messages(request)]
 
 
 # https://gist.github.com/rtt/5029885
@@ -85,16 +108,35 @@ class RedisBytecodeCache(BytecodeCache):
         self.redis.set(f"{self.CACHE_KEY_PREFIX}{bucket.key}", bucket.bytecode_to_string())
 
 
-def environment(**options):
-    env = Environment(bytecode_cache=RedisBytecodeCache(), **options)
+def autoescape(filename):
+    return any(filename.endswith(ext) for ext in (".xml", ".html"))
+
+
+def create_environment(**options):
+    extensions = [
+        "jinja2.ext.do",
+        "jinja2.ext.loopcontrols",
+        "jinja_markdown.MarkdownExtension",
+    ]
+    if settings.DEBUG:
+        extensions.append('jinja2.ext.debug')
+
+    options.update({
+        "autoescape": autoescape,
+        "bytecode_cache": RedisBytecodeCache(),
+        "extensions": extensions,
+        "keep_trailing_newline": True,
+    })
+
+    env = Environment(**options)
     env.globals.update(
         {
+            "get_messages": _get_messages_jinja2,
             "randint": random.randint,
             "settings": settings,
-            "shuffle": lambda items: random.shuffle(items) or items,  # Hack since shuffle returns None
+            "shuffle": shuffle,
             "static": static,
-            "url_for": lambda name, *args, **kwargs: reverse(name, args=args, kwargs=kwargs),
-            "get_messages": pass_context(lambda ctx: get_messages(ctx["request"])),
+            "url_for": url_for,
         }
     )
     env.filters.update(
@@ -102,9 +144,9 @@ def environment(**options):
             "add_class": add_class,
             "add_error_class": add_error_class,
             "attr": set_attr,
-            "attrjs": pass_eval_context(lambda eval_ctx, value: do_forceescape(do_tojson(eval_ctx, value))),
+            "attrjs": attrjs,
             "bool": bool,
-            "smart_title": lambda s: " ".join(f"{w[0].upper()}{w[1:]}" for w in s.split()),
+            "smart_title": smart_title,
         }
     )
     return env

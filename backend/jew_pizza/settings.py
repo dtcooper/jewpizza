@@ -100,14 +100,7 @@ TEMPLATES = [
         "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
-            "autoescape": lambda filename: any(filename.endswith(ext) for ext in (".xml", ".html")),
-            "keep_trailing_newline": True,
-            "environment": "jew_pizza.jinja2.environment",
-            "extensions": [
-                "jinja2.ext.do",
-                "jinja2.ext.loopcontrols",
-                "jinja_markdown.MarkdownExtension",
-            ],
+            "environment": "jew_pizza.jinja2.create_environment",
             "context_processors": [
                 "jew_pizza.jinja2.nav_links",
             ],
