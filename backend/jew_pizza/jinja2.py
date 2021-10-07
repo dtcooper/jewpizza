@@ -2,7 +2,6 @@ from collections import namedtuple
 import hashlib
 import os
 import random
-import textwrap
 
 from jinja2 import BytecodeCache, Environment, pass_context, pass_eval_context
 from jinja2.filters import do_forceescape, do_tojson
@@ -13,8 +12,8 @@ from django.core.cache import cache
 from django.templatetags.static import static as django_static
 from django.urls import reverse
 
-from widget_tweaks.templatetags.widget_tweaks import add_class, add_error_class, set_attr
 from django_redis import get_redis_connection
+from widget_tweaks.templatetags.widget_tweaks import add_class, add_error_class, set_attr
 
 from webcore.constants import CACHE_KEY_PREFIX_STATIC_ASSET_MD5SUM, NAVIGATION_LINKS
 
