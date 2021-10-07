@@ -53,7 +53,7 @@ line_length = 120
 force_sort_within_sections = true
 sections = ['FUTURE', 'STDLIB', 'THIRDPARTY', 'DJANGO', 'DJANGOTHIRDPARTY', 'FIRSTPARTY', 'LOCALFOLDER']
 known_django = ['django']
-known_djangothirdparty = ['environ', 'phonenumber_field', 'recurrence', 'widget_tweaks']
+known_djangothirdparty = ['django_redis', 'environ', 'phonenumber_field', 'recurrence', 'widget_tweaks']
 skip = ['migrations']
 
 [tool.pytest.ini_options]

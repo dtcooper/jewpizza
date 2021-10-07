@@ -33,7 +33,7 @@ def twilio_request(view):
         ):
             response = view(request, *args, **kwargs)
             if isinstance(response, TwiML):
-                response = HttpResponse(response, content_type='text/xml')
+                response = HttpResponse(response, content_type="text/xml")
             elif response is True:  # Special case for text messages, return empty response. True and only True.
                 response = HttpResponse(status=204)
             return response

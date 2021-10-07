@@ -84,7 +84,7 @@ ROOT_URLCONF = "jew_pizza.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / 'jew_pizza' /  'templates'],  # For admin override
+        "DIRS": [BASE_DIR / "jew_pizza" / "templates"],  # For admin override
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

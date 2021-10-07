@@ -3,14 +3,13 @@ import datetime
 from django.utils.timezone import get_default_timezone
 from django.views.generic import TemplateView
 
-from jew_pizza.jinja2 import get_messages
-
 
 class HomeView(TemplateView):
     template_name = "webcore/home.html"
 
     def get_context_data(self, **kwargs):
         import random
+
         from django.conf import settings
         from django.contrib import messages
 
