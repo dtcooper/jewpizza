@@ -61,7 +61,7 @@
   {% include 'webcore/components/messages.html' %}
 
   <div id="content-scroller" class="flex flex-col flex-1 w-full overflow-y-auto">
-    <div id="content" class="flex-1 w-full max-w-screen-3xl mx-auto pt-3 px-4">
+    <div id="content" class="flex-1 w-full max-w-screen-3xl mx-auto pt-3 px-4" x-data :class="$store.containerWidth">
       {% block base_content required %}{% endblock %}
     </div>
 

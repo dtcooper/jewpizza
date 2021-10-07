@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if title %}{{ title }} | {% endif %}jew.pizza Admin Tools</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700" rel="stylesheet">
+    <link rel="stylesheet" href="{{ static('js/vendor/simpledotcss/simple.min.css') }}">
+    <style>
+      :root {
+        --mono-font: "Space Mono", Consolas, Menlo, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+        --sans-font: var(--mono-font);
+        --bg: #FFF;
+        --accent-bg: #F5F7FF;
+        --text: #212121;
+        --text-light: #585858;
+        --border: #D8DAE1;
+        --accent: #0D47A1;
+        --accent-light: #90CAF9;
+        --code: #D81B60;
+        --preformatted: #444;
+        --marked: #FFDD33;
+        --disabled: #EFEFEF;
+      }
+
+      img, video {
+        opacity: unset;
+      }
+
+      body {
+        max-width: 80rem;
+      }
+
+      th {
+        text-align: right;
+      }
+
+      button {
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
+      blockquote {
+        font-style: normal;
+      }
+
+      [x-cloak] {
+        display: none;
+      }
+    </style>
+    <script src="{{ static('js/vendor/alpinejs/dist/cdn.min.js') }}" defer></script>
+</head>
+<body>
+  <header>
+    <h1>
+      <em>jew.pizza Admin Tools</em>
+    </h1>
+    <small>
+      <a href="{{ url_for('webcore:home') }}">View Site</a> /
+      <a href="{{ url_for('admin:index') }}">Django Admin</a> /
+      <a href="{{ url_for('admin:logout') }}">Log Out</a>
+    </small>
+    <nav>
+      {% for url_name, name in admin_nav_links %}
+        <a href="{{ url_for(url_name) }}">{{ name }}</a>
+      {% endfor %}
+    </nav>
+  </header>
+
+  <main>
+    {% if title %}<h2><u>{{ title }}</u></h2>{% endif %}
+
+    {% set messages = get_messages() %}
+    {% if messages %}
+      <blockquote>
+        Messages:
+        <ul>
+          {% for msg in messages %}
+            <li>({{ msg.level }}) {{ msg.message }}</li>
+          {% endfor %}
+        </ul>
+      </blockquote>
+    {% endif %}
+
+    {% block content %}
+      The following tools are available:
+
+      <ul>
+        {% for url_name, name in admin_nav_links %}
+          {% if url_name != 'admin-tools:index' %}
+            <li><a href="{{ url_for(url_name) }}">{{ name }}</a></li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    {% endblock %}
+  </main>
+
+  <footer>
+    <div>
+      {% for url_name, name in admin_nav_links %}
+        <a href="{{ url_for(url_name) }}">{{ name }}</a>{% if not loop.last %} /{% endif %}
+      {% endfor %}
+    </div>
+    <div>
+      <a href="{{ url_for('webcore:home') }}">View Site</a> /
+      <a href="{{ url_for('admin:index') }}">Admin</a> /
+      <a href="{{ url_for('admin:logout') }}">Log Out</a>
+    </div>
+  </footer>
+</body>
+</html>

@@ -13,6 +13,7 @@ class HomeView(TemplateView):
         import random
         from django.conf import settings
         from django.contrib import messages
+
         if settings.DEBUG:
             level = random.choice([messages.INFO, messages.SUCCESS, messages.ERROR, messages.WARNING])
             messages.add_message(

@@ -1,0 +1,19 @@
+{% extends 'webcore/base.html' %}
+
+{% block content %}
+  <div class="prose md:prose-lg lg:prose-xl max-w-none" x-data="alternateWidth('max-w-screen-lg')">
+    {% markdown %}
+      For a newsletter, I use Substack. You can read it by [clicking here](https://jewpizza.substack.com/).
+
+      Or subscribe here,
+    {% endmarkdown %}
+  </div>
+
+  <div class="flex justify-center my-4">
+    <iframe
+      src="https://jewpizza.substack.com/embed" frameborder="0" scrolling="no"
+      class="max-w-xl w-full h-36 border-4 border-primary rounded-2xl"
+    ></iframe>
+  </div>
+  </div>
+{% endblock %}

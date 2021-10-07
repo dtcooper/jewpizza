@@ -1,0 +1,6 @@
+{% extends 'admin/base_site.html' %}
+
+{% block userlinks %}
+  <a href="{% url 'admin-tools:index' %}">Admin Tools</a> /
+  {{ block.super }}
+{% endblock %}

@@ -21,19 +21,29 @@
 
   const loadURL = async function (url, data) {
     const store = Alpine.store('page')
-    let json
+    let json = null
+    let response = null
+    let debugResponse = null
     store.loading = true
 
     data = data || {}
     data.headers = { Accept: 'application/json', 'X-CSRFToken': getCookie('csrftoken') }
 
     try {
-      json = await (await window.fetch(url, data)).json()
+      response = await window.fetch(url, data)
+      if (DATA.debug) {
+        debugResponse = response.clone()
+      }
+      json = await response.json()
     } catch (err) {
       if (DATA.debug || DATA.isSuperuser) {
         console.error(`An error occurred while fetching ${url}`)
         console.error('data:', data)
         console.error('error:', err)
+        if (debugResponse) {
+          console.error('Response body...')
+          console.error(await debugResponse.text())
+        }
       }
       router._setCurrent(null) // Force reloads (allow retries)
       store.loading = false
@@ -83,5 +93,14 @@
       loading: false
     })
     Alpine.store('messages', DATA.messages)
+    Alpine.store('containerWidth', [])
+    Alpine.data('alternateWidth', (width) => ({
+      init () {
+        Alpine.store('containerWidth', [width])
+      },
+      destroy () {
+        Alpine.store('containerWidth', [])
+      }
+    }))
   })
 })()

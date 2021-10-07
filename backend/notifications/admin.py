@@ -1,12 +1,12 @@
 from django.contrib import admin
 
-from .models import SignUp, TextMessage
+from .models import TextMessage
 
 
 class TextMessageAdmin(admin.ModelAdmin):
     date_hierarchy = "created"
-    list_display = ("phone", "created", "message")
-    search_fields = ("phone",)
+    list_display = ("phone_number", "created", "message")
+    search_fields = ("phone_number",)
 
     def has_add_permission(self, request):
         return False
@@ -19,4 +19,3 @@ class TextMessageAdmin(admin.ModelAdmin):
 
 
 admin.site.register(TextMessage, TextMessageAdmin)
-admin.site.register(SignUp)

@@ -6,7 +6,7 @@ NAVIGATION_LINKS = [
     ("Shows", "shows:shows", "mdi:calendar-check-outline", False),
     ("Listen", "shows:listen", "ic:outline-radio", False),
     ("Bio", "webcore:bio", "mdi:text-account", False),
-    ("Notify Me", "notifications:sign-up", "mdi:email-newsletter", True),
+    ("Newsletter", "notifications:newsletter", "mdi:email-newsletter", True),
     ("Testimonials", "webcore:testimonials", "bi:chat-text", True),
     ("Social", "webcore:social", "mdi:twitter", True),
     ("Contact", "webcore:contact", "mdi:email", True),

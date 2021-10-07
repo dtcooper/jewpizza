@@ -1,0 +1,17 @@
+{% extends 'admin_tools/form.html' %}
+
+{% block form %}
+  <div
+    x-data="{message: '', audience: {{ form.audience.value()|attrjs }}}"
+    x-init="
+      document.getElementById('id_phone_number').parentNode.setAttribute('x-show', 'audience === \'single\'')
+    "
+    x-cloak
+  >
+    {{ super() }}
+    <p>
+      Message Preview:
+      <pre x-text="message.trim() || 'Preview goes here...'"></pre>
+    </p>
+  </div>
+{% endblock %}

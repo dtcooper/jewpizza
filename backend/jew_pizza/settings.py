@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "phonenumber_field",
     "recurrence",
     # Local
+    "admin_tools",
     "notifications",
     "shows",
 ]
@@ -83,7 +84,7 @@ ROOT_URLCONF = "jew_pizza.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / 'jew_pizza' /  'templates'],  # For admin override
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -105,6 +106,7 @@ TEMPLATES = [
             "extensions": [
                 "jinja2.ext.do",
                 "jinja2.ext.loopcontrols",
+                "jinja_markdown.MarkdownExtension",
             ],
             "context_processors": [
                 "jew_pizza.jinja2.nav_links",
@@ -198,11 +200,12 @@ DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 NPM_ROOT_PATH = "/app/frontend"
 NPM_STATIC_FILES_PREFIX = "js/vendor"
 NPM_FILE_PATTERNS = {
-    "alpinejs": ["dist/cdn.min.js"],
     "@alpinejs/persist": ["dist/cdn.min.js"],
-    "moment": ["min/moment.min.js"],
+    "alpinejs": ["dist/cdn.min.js"],
     "moment-timezone": ["builds/moment-timezone-with-data-1970-2030.min.js"],
+    "moment": ["min/moment.min.js"],
     "navigo": ["lib/navigo.min.js"],
+    "simpledotcss": ["simple.min.css"],
 }
 
 PHONENUMBER_DEFAULT_REGION = "US"

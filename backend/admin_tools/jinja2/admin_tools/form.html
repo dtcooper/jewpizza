@@ -1,0 +1,11 @@
+{% extends 'admin_tools/base.html' %}
+
+{% block content %}
+  <form method="POST" action="{{ request.path }}">
+    {{ csrf_input }}
+
+    {% block form %}{{ form.as_p() }}{% endblock %}
+
+    <button type="submit">{{ submit_text|default('Submit') }}</button>
+  </form>
+{% endblock %}
