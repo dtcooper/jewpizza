@@ -3,7 +3,7 @@
 {% from 'webcore/macros.html' import random_spin_style %}
 
 {% block content %}
-<div class="prose lg:prose-lg 2xl:prose-xl 3xl:prose-2xl text-indent max-w-none overflow-hidden">
+<div class="prose lg:prose-lg 2xl:prose-xl 3xl:prose-2xl text-indent overflow-hidden">
   <img
     src="{{ static('images/david-headshot.jpg') }}" style="{{ random_spin_style(min=30000, max=40000, direction='reverse') }}"
     class="mx-auto sm:float-right h-2/3 w-2/3 sm:h-1/3 sm:w-1/3 lg:h-1/4 lg:w-1/4 sm:ml-3 rounded-full border-8 border-secondary animate-spin-custom select-none drag-none"

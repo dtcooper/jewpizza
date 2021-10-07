@@ -106,7 +106,7 @@ TEMPLATES = [
             "extensions": [
                 "jinja2.ext.do",
                 "jinja2.ext.loopcontrols",
-                "jinja_markdown.MarkdownExtension",
+                'jinja_markdown.MarkdownExtension',
             ],
             "context_processors": [
                 "jew_pizza.jinja2.nav_links",

@@ -2,8 +2,9 @@ from collections import namedtuple
 import hashlib
 import os
 import random
+import textwrap
 
-from jinja2 import Environment, pass_context, pass_eval_context
+from jinja2 import BytecodeCache, Environment, pass_context, pass_eval_context
 from jinja2.filters import do_forceescape, do_tojson
 
 from django.conf import settings
@@ -13,6 +14,7 @@ from django.templatetags.static import static as django_static
 from django.urls import reverse
 
 from widget_tweaks.templatetags.widget_tweaks import add_class, add_error_class, set_attr
+from django_redis import get_redis_connection
 
 from webcore.constants import CACHE_KEY_PREFIX_STATIC_ASSET_MD5SUM, NAVIGATION_LINKS
 
@@ -68,8 +70,24 @@ def get_messages(request):
     return [{"level": msg.level_tag, "message": msg.message} for msg in messages.get_messages(request)]
 
 
+# https://gist.github.com/rtt/5029885
+class RedisBytecodeCache(BytecodeCache):
+    CACHE_KEY_PREFIX = "jinja2:cache:"
+
+    def __init__(self):
+        self.redis = get_redis_connection()
+
+    def load_bytecode(self, bucket):
+        bytecode = self.redis.get(f"{self.CACHE_KEY_PREFIX}{bucket.key}")
+        if bytecode:
+            bucket.bytecode_from_string(bytecode)
+
+    def dump_bytecode(self, bucket):
+        self.redis.set(f"{self.CACHE_KEY_PREFIX}{bucket.key}", bucket.bytecode_to_string())
+
+
 def environment(**options):
-    env = Environment(**options)
+    env = Environment(bytecode_cache=RedisBytecodeCache(), **options)
     env.globals.update(
         {
             "randint": random.randint,
@@ -85,8 +103,8 @@ def environment(**options):
             "add_class": add_class,
             "add_error_class": add_error_class,
             "attr": set_attr,
-            "bool": bool,
             "attrjs": pass_eval_context(lambda eval_ctx, value: do_forceescape(do_tojson(eval_ctx, value))),
+            "bool": bool,
             "smart_title": lambda s: " ".join(f"{w[0].upper()}{w[1:]}" for w in s.split()),
         }
     )

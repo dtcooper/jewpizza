@@ -93,13 +93,17 @@
       loading: false
     })
     Alpine.store('messages', DATA.messages)
-    Alpine.store('containerWidth', [])
-    Alpine.data('alternateWidth', (width) => ({
+    Alpine.store('containerWidthClasses', {})
+    Alpine.data('alternateContainerWidth', (width) => ({
       init () {
-        Alpine.store('containerWidth', [width])
+        const containerWidthClasses = Alpine.store('containerWidthClasses')
+        containerWidthClasses[DATA.defaultContainerWidth] = false
+        containerWidthClasses[width] = true
       },
       destroy () {
-        Alpine.store('containerWidth', [])
+        const containerWidthClasses = Alpine.store('containerWidthClasses')
+        containerWidthClasses[DATA.defaultContainerWidth] = true
+        containerWidthClasses[width] = false
       }
     }))
   })

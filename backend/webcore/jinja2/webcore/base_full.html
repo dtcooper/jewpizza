@@ -30,9 +30,11 @@
   <script src="{{ static('js/vendor/alpinejs/dist/cdn.min.js') }}" defer></script>
   <script src="{{ static('js/vendor/moment/min/moment.min.js') }}"></script>
   <script src="{{ static('js/vendor/moment-timezone/builds/moment-timezone-with-data-1970-2030.min.js') }}"></script>
+  {% set default_container_width = 'max-w-screen-3xl' %}
   {%- set _js_data = {
     'currentPage': active_link,
     'debug': settings.DEBUG,
+    'defaultContainerWidth': default_container_width,
     'isAuthenticated': request.user.is_authenticated,
     'isSuperuser': request.user.is_superuser,
     'messages': get_messages(),
@@ -61,7 +63,7 @@
   {% include 'webcore/components/messages.html' %}
 
   <div id="content-scroller" class="flex flex-col flex-1 w-full overflow-y-auto">
-    <div id="content" class="flex-1 w-full max-w-screen-3xl mx-auto pt-3 px-4" x-data :class="$store.containerWidth">
+    <div id="content" class="flex-1 w-full mx-auto pt-3 px-4 {{ default_container_width }}" x-data :class="$store.containerWidthClasses">
       {% block base_content required %}{% endblock %}
     </div>
 
