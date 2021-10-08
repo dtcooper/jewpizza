@@ -15,6 +15,7 @@
 * [ ] Add "I would like to also be signed up for the newsletter" to contact form.
 * [ ] Make minimum input size 16px to avoid mobile safari zoom.
     [More info here](https://stackoverflow.com/a/6394497).
+* [ ] Opengraph tags, SEO, and 4xx + 5xx error pages
 
 ## Sections
 
