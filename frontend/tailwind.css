@@ -59,12 +59,8 @@
     --rounded-btn: 1.25rem;
 }
 
-.title {
-    @apply text-3xl md:text-5xl text-accent underline underline-wavy text-center md:text-left mb-6 md:mb-10 md:ml-16 italic;
-}
-
 article {
-    @apply prose md:prose-lg xl:prose-xl 3xl:prose-2xl;
+    @apply prose md:prose-lg xl:prose-xl;
 }
 
 .btn-error, .btn-warning, .btn-success, .btn-info {

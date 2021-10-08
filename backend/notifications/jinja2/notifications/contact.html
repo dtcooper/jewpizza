@@ -5,14 +5,14 @@
 {% macro render_form_field(field, placeholder=none) %}
   {% if field.widget_type in ('text', 'email') %}
     {% set field = field
-        |add_class('input input-bordered input-secondary md:input-lg')
+        |add_class('input input-bordered input-secondary input-lg')
         |add_error_class('input-error')
     %}
   {% elif field.widget_type == 'textarea' %}
     {% set field = field
-      |add_class('textarea textarea-bordered textarea-secondary md:text-lg')
+      |add_class('textarea textarea-bordered textarea-secondary text-lg')
       |add_error_class('textarea-error')
-      |add_attr('rows:8')
+      |add_attr('rows:6')
     %}
   {% endif %}
 
@@ -31,8 +31,17 @@
 
 {% block content %}
 <article>
-  Fill out the following form to contact David. Or email him at
-  <a x-data :href="`mailto:${window.emailAddress}`" x-text="emailAddress"></a>.
+  {% markdown %}
+    I do **bar mitzvahs**, weddings, children's parties, **funerals** and
+    corporate events. I'm great with kids. You should hurry because I'm often
+    fully booked. (My calender is currently **completely** open.) _Did I mention
+    I hate children?_
+  {% endmarkdown %}
+
+  <p>
+    Fill out the form below to contact me. Or email me at
+    <a x-data :href="`mailto:${emailAddress}`" x-text="emailAddress" target="_blank"></a>.
+  </p>
 </article>
 
 <form method="POST" class="my-3" action="{{ url_for('notifications:contact') }}" x-data @submit="formSubmit">
@@ -49,7 +58,7 @@
   </div>
 
   <div class="flex justify-center mt-3">
-    <button type="submit" class="btn btn-lg btn-neutral italic">Send it to David!</button>
+    <button type="submit" class="btn sm:btn-lg btn-neutral italic">Send! The Internet is MAGIC!</button>
   </div>
 </form>
 {% endblock %}
