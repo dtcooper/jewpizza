@@ -10,8 +10,11 @@
 * [x] Scroll up on page load
 * [x] Use [umami](https://github.com/mikecao/umami) for tracking
 * [x] Investigate whether to complete JSON rendering in middleware.
-* [ ] Move send notification outside of admin, in a superuser-only area with a
+* [x] Move send notification outside of admin, in a superuser-only area with a
     single link from admin, but using a classless CSS reset.
+* [ ] Add "I would like to also be signed up for the newsletter" to contact form.
+* [ ] Make minimum input size 16px to avoid mobile safari zoom.
+    [More info here](https://stackoverflow.com/a/6394497).
 
 ## Sections
 
