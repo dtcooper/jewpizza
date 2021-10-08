@@ -9,5 +9,5 @@ NAVIGATION_LINKS = [
     ("Newsletter", "notifications:newsletter", "mdi:email-newsletter", True),
     ("Testimonials", "webcore:testimonials", "bi:chat-text", True),
     ("Social", "webcore:social", "mdi:twitter", True),
-    ("Contact", "webcore:contact", "mdi:email", True),
+    ("Contact", "notifications:contact", "mdi:email", True),
 ]

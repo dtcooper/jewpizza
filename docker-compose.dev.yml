@@ -3,8 +3,6 @@ services:
     restart: "no"
     volumes:
       - .:/app
-    ports:
-      - "${LISTEN_PORT:-8000}:8000"
     tty: true  # needed for tailwind --watch
 
   db:
@@ -19,8 +17,6 @@ services:
 
   umami:
     restart: "no"
-    ports:
-      - "${UMAMI_LISTEN_PORT:-3000}:3000"
 
   icecast:
     image: moul/icecast

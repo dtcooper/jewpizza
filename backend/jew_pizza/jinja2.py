@@ -144,7 +144,7 @@ def create_environment(**options):
         {
             "add_class": add_class,
             "add_error_class": add_error_class,
-            "attr": set_attr,
+            "add_attr": set_attr,
             "attrjs": attrjs,
             "bool": bool,
             "smart_title": smart_title,

@@ -1,9 +1,11 @@
 {% extends 'webcore/base_content_only.html' if content_only else 'webcore/base_full.html' %}
 
 {% block base_content %}
-  {% if title and not hide_title %}
-    <h3 class="title">{{ title }}</h3>
-  {% endif %}
+  <div class="w-full mx-auto pt-3 px-4 {% block content_max_width %}max-w-screen-3xl{% endblock %}">
+    {% if title and not hide_title %}
+      <h3 class="title">{{ title }}</h3>
+    {% endif %}
 
-  {% block content required %}{% endblock %}
+    {% block content required %}{% endblock %}
+  </div>
 {% endblock %}

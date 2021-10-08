@@ -19,6 +19,15 @@
     return cookieValue
   }
 
+  let jank = "dNa1TvK\u000b3iJ@@Ydtee@W@Ug(8=\\jI'AJ8H6e@0DXDM(CwcJ,tTnl-_.`\\#CRm`UWmpf<}pL@h@p&Ki@Ji3Lg@d3r6Rz%o@l5xxj,|M\nDzo\nH_-\u000b;RU\tpu*zap0kDvl9gHhb@5Mb"
+  let email = ''
+  for (let i = 0; jank.length > 0; i++) {
+    email += jank.charAt(i)
+    jank = jank.substr(i + 1)
+  }
+
+  window.emailAddress = email
+
   const loadURL = async function (url, data) {
     Alpine.store('menuOpen', false)
     const store = Alpine.store('page')
@@ -69,6 +78,7 @@
 
   window.formSubmit = async function (e) {
     e.preventDefault()
+    console.log(e.target)
     const url = e.target.getAttribute('action')
     await loadURL(url, {
       method: 'POST',
@@ -95,18 +105,5 @@
     })
     Alpine.store('menuOpen', false)
     Alpine.store('messages', DATA.messages)
-    Alpine.store('containerWidthClasses', {})
-    Alpine.data('alternateContainerWidth', (width) => ({
-      init () {
-        const containerWidthClasses = Alpine.store('containerWidthClasses')
-        containerWidthClasses[DATA.defaultContainerWidth] = false
-        containerWidthClasses[width] = true
-      },
-      destroy () {
-        const containerWidthClasses = Alpine.store('containerWidthClasses')
-        containerWidthClasses[DATA.defaultContainerWidth] = true
-        containerWidthClasses[width] = false
-      }
-    }))
   })
 })()

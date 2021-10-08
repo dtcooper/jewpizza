@@ -13,7 +13,7 @@ services:
       - redis
     restart: always
     ports:
-      - "127.0.0.1:${LISTEN_PORT:-8000}:8000"
+      - "${BIND_ADDR:-127.0.0.1:8000}:8000"
 
   # radio:
   #   build:
@@ -46,7 +46,7 @@ services:
     image: ghcr.io/mikecao/umami:postgresql-2575cbf
     restart: always
     ports:
-      - "127.0.0.1:${UMAMI_LISTEN_PORT:-3000}:3000"
+      - "${UMAMI_BIND_ADDR:-127.0.0.1:3000}:3000"
     environment:
       - DATABASE_URL=postgresql://postgres:postgres@db:5432/umami
       - DATABASE_TYPE=postgresql

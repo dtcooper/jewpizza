@@ -1,0 +1,55 @@
+{% extends 'webcore/base.html' %}
+
+{% block content_max_width %}max-w-screen-md{% endblock %}
+
+{% macro render_form_field(field, placeholder=none) %}
+  {% if field.widget_type in ('text', 'email') %}
+    {% set field = field
+        |add_class('input input-bordered input-secondary md:input-lg')
+        |add_error_class('input-error')
+    %}
+  {% elif field.widget_type == 'textarea' %}
+    {% set field = field
+      |add_class('textarea textarea-bordered textarea-secondary md:text-lg')
+      |add_error_class('textarea-error')
+      |add_attr('rows:8')
+    %}
+  {% endif %}
+
+  <label class="label" for="{{ field.id_for_label }}">
+    <span class="label-text md:text-lg">{{ field.label }}:</span>
+  </label>
+
+  {{ field }}
+
+  {% if field.errors %}
+    {% for error in field.errors %}
+      <div class="text-error font-bold md:text-lg mt-2 mr-3 text-right">{{ error }}</div>
+    {% endfor %}
+  {% endif %}
+{% endmacro %}
+
+{% block content %}
+<article>
+  Fill out the following form to contact David. Or email him at
+  <a x-data :href="`mailto:${window.emailAddress}`" x-text="emailAddress"></a>.
+</article>
+
+<form method="POST" class="my-3" action="{{ url_for('notifications:contact') }}" x-data @submit="formSubmit">
+  {{ csrf_input }}
+
+  <div class="form-control">
+    {{ render_form_field(form.name) }}
+    </div>
+  <div class="form-control">
+    {{ render_form_field(form.email) }}
+  </div>
+  <div class="form-control">
+    {{ render_form_field(form.message) }}
+  </div>
+
+  <div class="flex justify-center mt-3">
+    <button type="submit" class="btn btn-lg btn-neutral italic">Send it to David!</button>
+  </div>
+</form>
+{% endblock %}

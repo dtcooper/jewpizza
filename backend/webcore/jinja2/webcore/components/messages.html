@@ -1,5 +1,5 @@
 
-<div x-data class="w-full {{ default_container_width }} mx-auto pt-1 px-4" x-cloak x-show="$store.messages">
+<div x-data class="w-full max-w-screen-3xl mx-auto pt-1 px-4" x-cloak x-show="$store.messages">
   <template x-for="(msg, index) in $store.messages" :key="index">
     {# Not using actual class names for tailwind to purge, so need to include these in tailwind's safelist #}
     <div class="alert !flex-row" :class="['alert-' + msg.level]">

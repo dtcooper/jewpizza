@@ -1,14 +1,21 @@
 import re
+from smtplib import SMTPException
 
 from twilio.twiml.messaging_response import MessagingResponse
 from unidecode import unidecode
 
+from django.conf import settings
+from django.core.mail import send_mail
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import View
+from django.views.generic import View, FormView
+from django.urls import reverse_lazy
 
 from jew_pizza.twilio import twilio_request
 
+from .forms import ContactForm
 from .models import TextMessage
 
 
@@ -42,3 +49,28 @@ class IncomingTextMessageView(View):
             response.message(f'You have been {"un" if unsubscribe else ""}subscribed')
 
         return True
+
+
+class ContactView(SuccessMessageMixin, FormView):
+    extra_context = {'title': 'Contact'}
+    template_name = 'notifications/contact.html'
+    form_class = ContactForm
+    success_url = reverse_lazy('webcore:home')
+    success_message = 'Your message has successfully been sent to David. Give him a little while to respond. Thanks!'
+
+    def form_valid(self, form):
+        name = form.cleaned_data["name"]
+        email = form.cleaned_data["email"]
+        message = form.cleaned_data["message"]
+
+        try:
+            send_mail(
+                subject=f'{name} - jew.pizza Contact Form',
+                message=f'Name: {name}\nEmail: {email}\n\nMessage:\n{message}',
+                from_email=None,
+                recipient_list=[settings.CONTACT_FORM_TO_ADDRESS],
+            )
+        except SMTPException:
+            messages.error(self.request, 'An error occurred while sending the message. Please try again.')
+
+        return super().form_valid(form)

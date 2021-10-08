@@ -17,9 +17,4 @@ urlpatterns = [
         TemplateView.as_view(template_name="webcore/placeholder.html", extra_context={"title": "Social"}),
         name="social",
     ),
-    path(
-        "contact/",
-        TemplateView.as_view(template_name="webcore/placeholder.html", extra_context={"title": "Contact"}),
-        name="contact",
-    ),
 ]
