@@ -34,22 +34,18 @@
           {{ icon(link.icon, size='text-2xl', classes='2xl:text-3xl') }} {{ link.name }}
         </a>
       {% endfor %}
-      <div class="hidden lg:block 3xl:hidden" x-data="{moreMenuOpen: false}" @click.away="moreMenuOpen = false">
-        <button class="btn btn-primary btn-rounded no-animation 2xl:btn-lg pr-1.5 2xl:pr-3" @click="moreMenuOpen = !moreMenuOpen" :class="{'btn-disabled': $store.page.loading}">
+      <div class="hidden lg:block 3xl:hidden" @click.away="$store.menuOpen = false">
+        <button class="btn btn-primary btn-rounded no-animation 2xl:btn-lg pr-1.5 2xl:pr-3" @click="$store.menuOpen = !$store.menuOpen" :class="{'btn-disabled': $store.page.loading}">
           More {{ icon('mdi:dots-vertical', size='text-2xl', margin=None, classes='2xl:text-3xl') }}
         </button>
 
-        {# TODO close when URL is navigated to, could share state with mobile nav #}
-        <div class="relative" x-show="moreMenuOpen" x-cloak>
+        <div class="relative" x-show="$store.menuOpen" x-cloak>
           <ul class="absolute z-max top-1 right-3 select-none menu bg-secondary text-sm 2xl:text-lg text-primary font-bold w-72 rounded-lg">
             {% for link in nav_links %}
               {% if link.is_subnav %}
                 <li :class="{'bordered text-secondary-content': $store.page.current == {{ link.url|attrjs }}}">
                   <span x-show="$store.page.current == {{ link.url|attrjs }}">{{ icon(link.icon) }} {{ link.name }}</span>
-                  <a
-                    data-navigo x-show="$store.page.current != {{ link.url|attrjs }}"
-                    href="{{ link.url }}" @click="moreMenuOpen = false"
-                  >
+                  <a data-navigo x-show="$store.page.current != {{ link.url|attrjs }}" href="{{ link.url }}">
                     {{ icon(link.icon) }} {{ link.name }}
                   </a>
                 </li>
@@ -60,26 +56,22 @@
       </div>
 
       {#- Mobile expand/close buttons #}
-      <button x-cloak class="btn btn-square btn-ghost flex lg:hidden" @click="navMenuOpen = true" x-show="!navMenuOpen">
+      <button x-cloak class="btn btn-square btn-ghost flex lg:hidden" @click="$store.menuOpen = true" x-show="!$store.menuOpen">
         {{ icon('fa:bars', margin=None) }}
       </button>
-      <button class="btn btn-square btn-ghost flex lg:hidden" @click="navMenuOpen = false" x-show="navMenuOpen">
+      <button class="btn btn-square btn-ghost flex lg:hidden" @click="$store.menuOpen = false" x-show="$store.menuOpen">
         {{ icon('fa:close', margin=None) }}
       </button>
     </div>
   </div>
 
   {# Mobile nav #}
-  {# TODO close when URL is navigated to #}
-  <div x-cloak class="w-full lg:hidden z-max" x-show="navMenuOpen">
+  <div x-cloak class="w-full lg:hidden z-max" x-show="$store.menuOpen">
     <ul class="menu bg-secondary text-sm font-bold text-primary">
       {% for link in nav_links %}
         <li :class="{'bordered text-secondary-content': $store.page.current == {{ link.url|attrjs }}}">
           <span x-show="$store.page.current == {{ link.url|attrjs }}">{{ icon(link.icon, size='text-2xl') }} {{ link.name }}</span>
-          <a
-            data-navigo x-show="$store.page.current != {{ link.url|attrjs }}"
-            href="{{ link.url }}" @click="navMenuOpen = false"
-          >
+          <a data-navigo x-show="$store.page.current != {{ link.url|attrjs }}" href="{{ link.url }}">
             {{ icon(link.icon, size='text-2xl') }} {{ link.name }}
           </a>
         </li>

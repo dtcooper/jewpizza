@@ -44,7 +44,7 @@
     const DATA = window.DATA = {{ _js_data|tojson }}
   </script>
   <script src="{{ static('js/base.js') }}"></script>
-  <script src="{{ static('js/index.js') }}"></script>
+  <script src="{{ static('js/home.js') }}"></script>
 
   {% if settings.UMAMI_WEBSITE_ID and settings.UMAMI_SCRIPT_URL %}
     <script async defer data-website-id="{{ settings.UMAMI_WEBSITE_ID }}" src="{{ settings.UMAMI_SCRIPT_URL }}"></script>
@@ -54,10 +54,9 @@
 <body
   {#- Overflow hidden needed on mobile safari to fix weird scrolling bug.
       ie, we want scrolling to apply ONLY to item (main content) #}
-  class="h-screen-iphone-fix flex flex-col overflow-hidden-iphone-only"
-  x-data="{navMenuOpen: false}"
+  x-data class="h-screen-iphone-fix flex flex-col overflow-hidden-iphone-only"
   {# Disable overflow-hidden in unlikely event nav is larger than screen #}
-  :class="{'overflow-hidden-iphone-only': !navMenuOpen, 'cursor-wait': $store.page.loading}"
+  :class="{'overflow-hidden-iphone-only': !$store.menuOpen, 'cursor-wait': $store.page.loading}"
 >
   {% include 'webcore/components/navbar.html' %}
   {% include 'webcore/components/messages.html' %}
@@ -70,14 +69,16 @@
     {% include 'webcore/components/emojis.html' %}
   </div>
 
-  {# XXX
-  {% if not disable_player %}
+  {% if config.ENABLE_PLAYER or config.ENABLE_CLIPPY %}
     <div class="relative">
-      {% include 'webcore/components/clippy.html' %}
-      {% include 'webcore/components/player.html' %}
+      {% if config.ENABLE_CLIPPY %}
+        {% include 'webcore/components/clippy.html' %}
+      {% endif %}
+      {% if config.ENABLE_PLAYER %}
+        {% include 'webcore/components/player.html' %}
+      {% endif %}
     </div>
   {% endif %}
-  #}
 
   {% if settings.DEBUG or request.user.is_superuser %}
     {% include 'webcore/components/debug.html' %}

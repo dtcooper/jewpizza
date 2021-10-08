@@ -32,14 +32,11 @@
             NEWSTALK 1010's website</a></span>.
         </p>
 
-        <div class="hidden sm:block mt-6 lg:mt-8 text-center lg:text-left select-none">
-          {% for link in nav_links %}
-            {% if not link.is_subnav and not link.url_name == 'webcore:home' %}
-              <a data-navigo class="btn btn-neutral btn-rounded" href="{{ link.url }}">
-                {{ icon(link.icon, size='text-2xl', margin='ml-0 sm:mr-2') }}
-                <span class="hidden sm:block">{{ link.name }}</span>
-              </a>
-            {% endif %}
+        <div class="grid xs:grid-cols-2 xs:grid-rows-2 justify-items-center gap-y-2 sm:block mt-6 lg:mt-8 text-center lg:text-left select-none">
+          {% for link in nav_links[1:5] %} {# Skip home (first item) #}
+            <a data-navigo class="btn btn-neutral btn-rounded" href="{{ link.url }}">
+              {{ icon(link.icon, size='text-2xl', margin='mr-2') }} {{ link.name }}
+            </a>
           {% endfor %}
         </div>
       </div>

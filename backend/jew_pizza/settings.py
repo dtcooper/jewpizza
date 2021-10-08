@@ -1,3 +1,4 @@
+from collections import OrderedDict
 import os
 from pathlib import Path
 import sys
@@ -41,19 +42,19 @@ else:
     ALLOWED_HOSTS = list({"app", "localhost", "127.0.0.1", DOMAIN_NAME})
 
 INSTALLED_APPS = [
-    "django_light",  # Disable admin
+    "django_light",  # Disable admin dark mode
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    # To override the runserver command, place local webcore before staticfiles
-    "webcore",
-    "django.contrib.staticfiles",
     # 3rd party
+    "constance",
     "phonenumber_field",
     "recurrence",
     # Local
+    "webcore",  # To override the runserver command, place local webcore before staticfiles
+    "django.contrib.staticfiles",
     "admin_tools",
     "notifications",
     "shows",
@@ -208,3 +209,13 @@ STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
     "npm.finders.NpmFinder",
 ]
+
+CONSTANCE_BACKEND = "constance.backends.redisd.RedisBackend"
+CONSTANCE_REDIS_CONNECTION_CLASS = "django_redis.get_redis_connection"
+CONSTANCE_SUPERUSER_ONLY = False
+CONSTANCE_CONFIG = OrderedDict(
+    [
+        ("ENABLE_CLIPPY", (False, "Enable clippy")),
+        ("ENABLE_PLAYER", (False, "Enable audio player")),
+    ]
+)

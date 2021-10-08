@@ -8,19 +8,6 @@ class HomeView(TemplateView):
     template_name = "webcore/home.html"
 
     def get_context_data(self, **kwargs):
-        import random
-
-        from django.conf import settings
-        from django.contrib import messages
-
-        if settings.DEBUG:
-            level = random.choice([messages.INFO, messages.SUCCESS, messages.ERROR, messages.WARNING])
-            messages.add_message(
-                self.request,
-                level,
-                f'Test "{messages.constants.DEFAULT_TAGS.get(level)}" message!',
-            )
-
         return {
             **super().get_context_data(**kwargs),
             "hide_title": True,

@@ -37,15 +37,17 @@ class JSONResponseMiddleware:
 
         if self.is_json(request) and response.status_code < 400:
             redirect_to = response.headers.get("Location")
+            headers = {"Vary": "Accept"}  # https://stackoverflow.com/a/60118781
             if redirect_to:
-                return JsonResponse({"redirect": redirect_to})
+                return JsonResponse({"redirect": redirect_to}, headers=headers)
             else:
                 return JsonResponse(
                     {
                         "content": response.content.decode().strip(),
                         "messages": get_messages(request),
                         "title": response.context_data.get("title") or "jew.pizza",
-                    }
+                    },
+                    headers=headers,
                 )
 
         return response

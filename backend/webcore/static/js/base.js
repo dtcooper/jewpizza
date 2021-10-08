@@ -20,6 +20,7 @@
   }
 
   const loadURL = async function (url, data) {
+    Alpine.store('menuOpen', false)
     const store = Alpine.store('page')
     let json = null
     let response = null
@@ -92,6 +93,7 @@
       current: DATA.currentPage,
       loading: false
     })
+    Alpine.store('menuOpen', false)
     Alpine.store('messages', DATA.messages)
     Alpine.store('containerWidthClasses', {})
     Alpine.data('alternateContainerWidth', (width) => ({

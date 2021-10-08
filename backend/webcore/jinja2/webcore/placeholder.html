@@ -1,7 +1,7 @@
 {% extends 'webcore/base.html' %}
 
 {% block content %}
-  <div class="prose prose-xl">
+  <article class="text-indent">
     {{ lipsum(randint(1, 8), min=10, max=80) }}
   </div>
 {% endblock %}

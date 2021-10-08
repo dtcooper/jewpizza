@@ -64,7 +64,7 @@
 }
 
 article {
-    @apply prose lg:prose-lg 2xl:prose-xl 3xl:prose-2xl;
+    @apply prose md:prose-lg xl:prose-xl 3xl:prose-2xl;
 }
 
 .btn-error, .btn-warning, .btn-success, .btn-info {

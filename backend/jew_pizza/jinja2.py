@@ -12,6 +12,7 @@ from django.core.cache import cache
 from django.templatetags.static import static as django_static
 from django.urls import reverse
 
+from constance import config as constance_config
 from django_redis import get_redis_connection
 from widget_tweaks.templatetags.widget_tweaks import add_class, add_error_class, set_attr
 
@@ -119,18 +120,21 @@ def create_environment(**options):
         "jinja_markdown.MarkdownExtension",
     ]
     if settings.DEBUG:
-        extensions.append('jinja2.ext.debug')
+        extensions.append("jinja2.ext.debug")
 
-    options.update({
-        "autoescape": autoescape,
-        "bytecode_cache": RedisBytecodeCache(),
-        "extensions": extensions,
-        "keep_trailing_newline": True,
-    })
+    options.update(
+        {
+            "autoescape": autoescape,
+            "bytecode_cache": RedisBytecodeCache(),
+            "extensions": extensions,
+            "keep_trailing_newline": True,
+        }
+    )
 
     env = Environment(**options)
     env.globals.update(
         {
+            "config": constance_config,
             "get_messages": _get_messages_jinja2,
             "randint": random.randint,
             "settings": settings,
