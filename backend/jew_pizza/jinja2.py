@@ -114,19 +114,16 @@ def autoescape(filename):
 
 
 def create_environment(**options):
-    extensions = [
-        "jinja2.ext.do",
-        "jinja2.ext.loopcontrols",
-        "jinja_markdown.MarkdownExtension",
-    ]
-    if settings.DEBUG:
-        extensions.append("jinja2.ext.debug")
-
     options.update(
         {
             "autoescape": autoescape,
             "bytecode_cache": RedisBytecodeCache(),
-            "extensions": extensions,
+            "extensions": [
+                "jinja2.ext.debug",
+                "jinja2.ext.do",
+                "jinja2.ext.loopcontrols",
+                "jinja_markdown.MarkdownExtension",
+            ],
             "keep_trailing_newline": True,
         }
     )

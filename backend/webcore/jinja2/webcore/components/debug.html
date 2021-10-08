@@ -10,9 +10,7 @@
     <span class="hidden 3xl:inline ">3xl</span>
   </span>
 
-  {% if settings.DEBUG %}
-    <pre class="pointer-events-auto w-2/3 h-2/3 bg-yellow-50 text-black border border-black bottom-0.5 right-0.5 overflow-y-auto fixed" x-show="show == 2">
-      {% debug %}
-    </pre>
-  {% endif %}
+  <pre class="pointer-events-auto w-2/3 h-2/3 bg-yellow-50 text-black border border-black bottom-0.5 right-0.5 overflow-y-auto fixed" x-show="show == 2">
+    {% debug %}
+  </pre>
 </div>
