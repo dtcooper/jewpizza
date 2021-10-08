@@ -218,5 +218,6 @@ CONSTANCE_CONFIG = OrderedDict(
     [
         ("ENABLE_CLIPPY", (False, "Enable clippy")),
         ("ENABLE_PLAYER", (False, "Enable audio player")),
+        ("ENABLE_TEST_NOTIFICATIONS", (False, "Enable test notifications on home page for superuser only.")),
     ]
 )

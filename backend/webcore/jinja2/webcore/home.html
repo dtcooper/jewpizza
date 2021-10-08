@@ -2,9 +2,12 @@
 
 {% from 'webcore/macros.html' import icon, random_spin_style %}
 
+{# Max width is defined in the hero #}
+{% block content_max_width %}{% endblock %}
+
 {% block content %}
 <div class="h-full">
-  {# todo redo #}
+  {# TODO redo #}
   <div class="hero h-full">
     <div class="flex-col hero-content max-w-screen-lg lg:flex-row-reverse lg:rounded-3xl">
       <div class="flex flex-col lg:flex-col-reverse gap-y-3 items-center">
@@ -32,9 +35,9 @@
             NEWSTALK 1010's website</a></span>.
         </p>
 
-        <div class="grid xs:grid-cols-2 xs:grid-rows-2 justify-items-center gap-y-2 sm:block mt-6 lg:mt-8 text-center lg:text-left select-none">
+        <div class="grid xs:grid-cols-2 xs:grid-rows-2 gap-2 sm:block mt-6 lg:mt-8 text-center lg:text-left select-none">
           {% for link in nav_links[1:5] %} {# Skip home (first item) #}
-            <a data-navigo class="btn btn-neutral" href="{{ link.url }}">
+            <a data-navigo class="btn btn-neutral " href="{{ link.url }}">
               {{ icon(link.icon, size='text-2xl', margin='mr-2') }} {{ link.name }}
             </a>
           {% endfor %}

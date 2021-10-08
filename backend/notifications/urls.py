@@ -5,7 +5,7 @@ from . import views
 
 app_name = "notifications"
 urlpatterns = [
-    path("contact/", views.ContactView.as_view(), name='contact'),
+    path("contact/", views.ContactView.as_view(), name="contact"),
     path(
         "newsletter/",
         TemplateView.as_view(template_name="notifications/newsletter.html", extra_context={"title": "Newsletter"}),
