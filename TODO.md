@@ -16,6 +16,7 @@
 * [ ] Make minimum input size 16px to avoid mobile safari zoom.
     [More info here](https://stackoverflow.com/a/6394497).
 * [ ] Opengraph tags, SEO, and 4xx + 5xx error pages
+* [ ] Log IP from contact form.
 
 ## Sections
 
