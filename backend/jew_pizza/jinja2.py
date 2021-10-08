@@ -16,6 +16,7 @@ from constance import config as constance_config
 from django_redis import get_redis_connection
 from widget_tweaks.templatetags.widget_tweaks import add_class, add_error_class, set_attr
 
+from jew_pizza.utils import GIT_REV
 from webcore.constants import CACHE_KEY_PREFIX_STATIC_ASSET_MD5SUM, NAVIGATION_LINKS
 
 NavLink = namedtuple("NavLink", "name url url_name icon is_subnav is_active")
@@ -133,6 +134,7 @@ def create_environment(**options):
         {
             "config": constance_config,
             "get_messages": _get_messages_jinja2,
+            "GIT_REV": GIT_REV,
             "randint": random.randint,
             "settings": settings,
             "shuffle": shuffle,
