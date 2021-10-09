@@ -79,7 +79,7 @@ module.exports = {
         // 'secondary-content': '#171731',
         // accent: '#c07eec',
         // 'accent-focus': '#b15fe7',
-        // 'accent-content': '#171731',
+        'accent-content': '#ffffff',
         // neutral: "#423f00",
         // neutral-focus: "#090901",
         // 'neutral-content': '#ffff00',

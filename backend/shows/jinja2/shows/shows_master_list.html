@@ -7,20 +7,20 @@
 
   <div class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-3 mt-3">
     {% for i in range(4) %}
-    <div class="card border-accent border-4 lg:border-[6px]">
-      <figure class="border-accent border-b-4 lg:border-b-[6px]">
-        <img src="{{ static('images/shows/showgram.jpg') }}">
-      </figure>
-      <div class="card-body">
-        <h2 class="card-title">Show Name Here
-          <div class="badge mx-2 badge-secondary">FUN</div>
-        </h2>
-        <p>Rerum reiciendis beatae tenetur excepturi aut pariatur est eos. Sit sit necessitatibus veritatis sed molestiae voluptates incidunt iure sapiente.</p>
-        <div class="justify-end card-actions">
-          <button class="btn btn-secondary">More info</button>
+      <div class="card border-accent border-4 lg:border-[6px]">
+        <figure class="border-accent border-b-4 lg:border-b-[6px]">
+          <img src="{{ static(shuffle(['images/shows/showgram.png', 'images/shows/bmir.png'])[0]) }}">
+        </figure>
+        <div class="card-body">
+          <h2 class="card-title">Show Name Here
+            <div class="badge ml-2 {{ loop.cycle(shuffle(['badge-secondary', 'badge-primary', 'badge-accent'])[0]) }}">FUN</div>
+          </h2>
+          <p>Rerum reiciendis beatae tenetur excepturi aut pariatur est eos. Sit sit necessitatibus veritatis sed molestiae voluptates incidunt iure sapiente.</p>
+          <div class="justify-end card-actions">
+            <button class="btn btn-secondary">More info</button>
+          </div>
         </div>
       </div>
-    </div>
     {% endfor %}
   </div>
 {% endblock %}
