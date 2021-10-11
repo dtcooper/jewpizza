@@ -11,15 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dtcooper/jew.pizza.git"
+    "url": "git+https://github.com/dtcooper/jewpizza.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/dtcooper/jew.pizza/issues"
+    "url": "https://github.com/dtcooper/jewpizza/issues"
   },
-  "homepage": "https://github.com/dtcooper/jew.pizza#readme",
+  "homepage": "https://github.com/dtcooper/jewpizza#readme",
   "dependencies": {
     "@alpinejs/persist": "^3.4.2",
     "@tailwindcss/typography": "^0.4.1",
