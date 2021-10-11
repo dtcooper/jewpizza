@@ -6,7 +6,7 @@ personal website.
 
 ## Initial Setup
 
-Clone and create an edit `.env`, and optionally copy over the docker compose dev
+Clone, then copy and edit the `.env` file, and optionally copy over the docker compose dev
 overrides.
 
 ```bash
