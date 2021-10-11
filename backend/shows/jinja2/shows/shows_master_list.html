@@ -14,9 +14,23 @@
         {{ choice(['fun', 'great', 'awesome', 'terrible', 'wicked', 'terrible', 'not good'])|upper }}
       </div>
     </h2>
-    <p>{{ lipsum(1) }}</p>
+    <article>
+      {{ lipsum(n=randint(1, 2), min=15, max=35) }}
+
+      <p>Latest Episodes:</p>
+    </article>
+
+    <ul class="text-responsive list-disc list-outside ml-6 space-y-2">
+      {% for i in range(randint(2, 4)) %}
+        <li><a class="link link-primary link-hover" href="#TODO">{{ lipsum(n=1, html=False, min=4, max=10) }}</a></li>
+      {% endfor  %}
+    </ul>
+
+
     <div class="justify-end card-actions">
-      <button class="btn btn-secondary">More Info &amp; Episodes</button>
+      <button class="btn md:btn-lg btn-secondary">
+        More Info &amp; Episodes
+      </button>
     </div>
   </div>
 </div>
