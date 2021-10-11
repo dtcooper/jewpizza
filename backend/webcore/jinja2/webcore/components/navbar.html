@@ -4,10 +4,10 @@
     {#- Copy and image #}
     {# TODO: Redo, why bother struggling tof it in MD when we can just use the dropdown #}
     <div class="flex flex-row flex-1">
-      <{% if request.user.is_superuser %}a href="{{ url_for('admin:index') }}" tabindex="-1"{% else %}div{% endif %}>
+      <{% if request.user.is_superuser %}a href="{{ url_for('admin:index') }}" tabindex="-1"{% else %}div{% endif %} class="overflow-hidden">
         <img
           src="{{ static('images/david-headshot.jpg') }}"
-          class="animate-spin-custom overflow-none h-12 w-12 mr-2 xl:h-16 xl:w-16 xl:mr-3 rounded-full border-[3px] xl:border-4 border-secondary select-none"
+          class="animate-spin-custom h-12 w-12 mr-2 xl:h-16 xl:w-16 xl:mr-3 rounded-full border-[3px] xl:border-4 border-secondary select-none"
           style="{{ random_spin_style(min=4000, max=5500, direction='normal') }}"
         >
         </{% if request.user.is_superuser %}a{% else %}div{% endif %}>
