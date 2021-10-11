@@ -131,6 +131,7 @@ def create_environment(**options):
     env = Environment(**options)
     env.globals.update(
         {
+            "choice": random.choice,
             "config": constance_config,
             "get_messages": _get_messages_jinja2,
             "randint": random.randint,

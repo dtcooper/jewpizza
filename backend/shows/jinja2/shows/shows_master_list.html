@@ -1,26 +1,36 @@
 {% extends 'webcore/base.html' %}
 
+{% block content_max_width %}max-w-screen-xl{% endblock %}
+
+{% macro show_stub(show_name, img_name) %}
+<div class="card border-accent border-4 lg:border-[6px] rounded-3xl">
+  <figure class="border-accent border-b-4 lg:border-b-[6px]">
+    <img src="{{ static('images/shows/{}.png'.format(img_name)) }}">
+  </figure>
+  <div class="card-body">
+    <h2 class="card-title text-lg">
+      {{ show_name }}
+      <div class="badge ml-2 {{ choice(['badge-secondary', 'badge-primary', 'badge-accent']) }}">
+        {{ choice(['fun', 'great', 'awesome', 'terrible', 'wicked', 'terrible', 'not good'])|upper }}
+      </div>
+    </h2>
+    <p>{{ lipsum(1) }}</p>
+    <div class="justify-end card-actions">
+      <button class="btn btn-secondary">More Info &amp; Episodes</button>
+    </div>
+  </div>
+</div>
+{% endmacro %}
+
 {% block content %}
   <article>
     Here's a list of the shows I've been on.
   </article>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-3 mt-3">
-    {% for i in range(4) %}
-      <div class="card border-accent border-4 lg:border-[6px]">
-        <figure class="border-accent border-b-4 lg:border-b-[6px]">
-          <img src="{{ static(shuffle(['images/shows/showgram.png', 'images/shows/bmir.png'])[0]) }}">
-        </figure>
-        <div class="card-body">
-          <h2 class="card-title">Show Name Here
-            <div class="badge ml-2 {{ loop.cycle(shuffle(['badge-secondary', 'badge-primary', 'badge-accent'])[0]) }}">FUN</div>
-          </h2>
-          <p>Rerum reiciendis beatae tenetur excepturi aut pariatur est eos. Sit sit necessitatibus veritatis sed molestiae voluptates incidunt iure sapiente.</p>
-          <div class="justify-end card-actions">
-            <button class="btn btn-secondary">More info</button>
-          </div>
-        </div>
-      </div>
-    {% endfor %}
+  <div class="grid md:grid-cols-2 gap-3 mt-3">
+    {{ show_stub('The Late Showgram w/ Jim Richards', 'showgram') }}
+    {{ show_stub('That Went Well, I Think w/ David Cooper on WFMU', 'twwit') }}
+    {{ show_stub('This Is Going Well, I Think w/ David Cooper', 'tigwit') }}
+    {{ show_stub('Burning Man Information Radio', 'bmir') }}
   </div>
 {% endblock %}
