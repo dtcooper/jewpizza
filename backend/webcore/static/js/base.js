@@ -38,6 +38,7 @@
 
     data = data || {}
     data.headers = { Accept: 'application/json', 'X-CSRFToken': getCookie('csrftoken') }
+    data.credentials = 'same-origin'
 
     try {
       response = await window.fetch(url, data)
@@ -82,7 +83,6 @@
     const url = e.target.getAttribute('action')
     await loadURL(url, {
       method: 'POST',
-      credentials: 'same-origin',
       body: new window.FormData(e.target)
     })
   }

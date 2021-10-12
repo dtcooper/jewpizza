@@ -8,8 +8,7 @@
       I am fairly competent at social networking. <em>Try one of the links below!</em>
     </p>
     <p>
-      I'm verified
-      {{ icon('octicon:verified-16', margin=None, classes='inline text-blue-400', size=None) }}
+      I'm verified{{ icon('octicon:verified-16', margin='ml-1.5', classes='inline text-blue-400 align-baseline', size='text-2xl') }}
       on <a href="https://twitter.com/dtcooper" class="umami--click--social-twitter" target="_blank">Twitter</a>,
       but still hate myself.
     </p>
@@ -26,7 +25,7 @@
       )
     %}
       <a
-        class="btn lg:btn-lg btn-neutral btn-rounded umami--click--social-{{ name|lower }}" target="_blank"
+        class="btn lg:btn-lg btn-neutral umami--click--social-{{ name|lower }}" target="_blank"
         {% if name == 'Email' %}
           x-data :href="`mailto:${emailAddress}`"
         {% else %}

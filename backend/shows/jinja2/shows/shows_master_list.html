@@ -8,7 +8,7 @@
     <a href="#"><img src="{{ static('images/shows/{}.png'.format(img_name)) }}"></a>
   </figure>
   <div class="card-body">
-    <h2 class="card-title text-lg">
+    <h2 class="card-title">
       {{ show_name }}
       <div class="badge ml-2 {{ choice(['badge-secondary', 'badge-primary', 'badge-accent']) }}">
         {{ choice(['fun', 'great', 'awesome', 'terrible', 'wicked', 'terrible', 'not good'])|upper }}
