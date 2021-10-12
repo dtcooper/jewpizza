@@ -2,6 +2,7 @@
 
 COMPOSE:=docker compose
 SERVER:=jew.pizza
+SERVER_NODENAME:=jewpizza
 SERVER_PROJET_DIR:=dev.jew.pizza
 SHELL:=/bin/bash
 
@@ -32,7 +33,11 @@ show-outdated:
 		poetry show -o'
 
 deploy:
-	git push && ssh $(SERVER) 'cd $(SERVER_PROJET_DIR); git pull --ff-only && make build && make up'
+	@if [ "$(shell uname -m)" = "$(SERVER_NODENAME)"; then \
+		cd $(SERVER_PROJET_DIR); git pull --ff-only && make build && make up; \
+	else
+		git push && ssh $(SERVER) make deploy; \
+	fi
 
 up:
 	@$(COMPOSE) up $(shell source .env; if [ -z "$$DEBUG" -o "$$DEBUG" = 0 ]; then echo "-d"; fi)
