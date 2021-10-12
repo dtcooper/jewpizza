@@ -1,4 +1,4 @@
-# jew.pizza Website ✡️🍕🥸
+# jew.pizza Website ✡️🍕
 
 Here's the code for the website that powers [`jew.pizza`](https://jew.pizza), my
 personal website.
