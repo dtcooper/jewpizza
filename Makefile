@@ -33,10 +33,10 @@ show-outdated:
 		poetry show -o'
 
 deploy:
-	@if [ "$(shell uname -m)" = "$(SERVER_NODENAME)"; then \
-		cd $(SERVER_PROJET_DIR); git pull --ff-only && make build && make up; \
-	else
-		git push && ssh $(SERVER) make deploy; \
+	@if [ $(shell uname -n) = $(SERVER_NODENAME) ]; then \
+		git pull --ff-only && make build && make up; \
+	else \
+		git push && ssh $(SERVER) 'cd $(SERVER_PROJECT_DIR) && make deploy'; \
 	fi
 
 up:
