@@ -23,8 +23,6 @@ class TailwindFunctioningRunserverMiddleware:
 
 
 class JSONResponseMiddleware:
-    JSON_TEMPLATES = {"webcore/bio.html", "webcore/home.html", "webcore/placeholder.html"}
-
     def __init__(self, get_response):
         self.get_response = get_response
 

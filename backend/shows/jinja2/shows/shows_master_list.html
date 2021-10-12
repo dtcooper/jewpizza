@@ -1,11 +1,11 @@
 {% extends 'webcore/base.html' %}
 
-{% block content_max_width %}max-w-screen-xl{% endblock %}
+{% block content_max_width %}max-w-screen-2xl{% endblock %}
 
 {% macro show_stub(show_name, img_name) %}
 <div class="card border-accent border-4 lg:border-[6px] rounded-3xl">
   <figure class="border-accent border-b-4 lg:border-b-[6px]">
-    <img src="{{ static('images/shows/{}.png'.format(img_name)) }}">
+    <a href="#"><img src="{{ static('images/shows/{}.png'.format(img_name)) }}"></a>
   </figure>
   <div class="card-body">
     <h2 class="card-title text-lg">
@@ -28,9 +28,9 @@
 
 
     <div class="justify-end card-actions">
-      <button class="btn md:btn-lg btn-secondary">
+      <a class="btn md:btn-lg btn-secondary" href="#">
         More Info &amp; Episodes
-      </button>
+      </a>
     </div>
   </div>
 </div>

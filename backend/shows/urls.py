@@ -8,6 +8,7 @@ urlpatterns = [
     path("shows/", views.ShowsMasterListView.as_view(), name="shows-master-list"),
     path(
         "listen/",
+        # TODO: delete placeholder.html after this view is swapped out
         TemplateView.as_view(template_name="webcore/placeholder.html", extra_context={"title": "Listen"}),
         name="listen",
     ),

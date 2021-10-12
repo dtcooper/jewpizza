@@ -1,0 +1,24 @@
+{% extends 'webcore/base.html' %}
+
+{% block content %}
+  <div class="space-y-6">
+    {%
+      for quote, person in (
+        ('Ustoppable.', 'Rick Moranis'),
+        ("You're a psycho […]!", 'George Stroumboulopoulos'),
+        ('Uh, nice to meet you.', 'Malcolm Gladwell'),
+        ("We're very proud of you, David.", "Clara Cooper (David's Mother)"),
+        (('David, thank you for calling State Farm regarding your coverage. We are '
+          'here to help you and your family with your insurance coverage needs and '
+          'to answer any questions you have regarding eligibility and coverage.'),
+          'Michelle, Insurance Agent'),
+          ("Sure, I'll take a photo with you.", 'The Fonz, Henry Winkler'),
+      )
+    %}
+      <div class="border-l-primary border-l-4 lg:border-l-[6px] border-b-secondary border-b-4 lg:border-b-[6px] pl-4 pb-2 text-lg sm:text-xl md:text-2xl lg:text-3xl space-y-3">
+        <div class="italic">"{{ quote }}"</div>
+        <div class="normal text-indent">&mdash; {{ person }}</div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

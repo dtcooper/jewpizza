@@ -9,7 +9,7 @@ urlpatterns = [
     path("bio/", TemplateView.as_view(template_name="webcore/bio.html", extra_context={"title": "Bio"}), name="bio"),
     path(
         "testimonials/",
-        TemplateView.as_view(template_name="webcore/placeholder.html", extra_context={"title": "Testimonials"}),
+        TemplateView.as_view(template_name="webcore/testimonials.html", extra_context={"title": "Testimonials"}),
         name="testimonials",
     ),
     path(
