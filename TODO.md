@@ -13,10 +13,10 @@
 * [x] Move send notification outside of admin, in a superuser-only area with a
     single link from admin, but using a classless CSS reset.
 * [ ] Add "I would like to also be signed up for the newsletter" to contact form.
-* [ ] Make minimum input size 16px to avoid mobile safari zoom.
+* [x] Make minimum input size 16px to avoid mobile safari zoom.
     [More info here](https://stackoverflow.com/a/6394497).
 * [ ] Opengraph tags, SEO, and 4xx + 5xx error pages
-* [ ] Log IP from contact form.
+* [x] Log IP from contact form.
 
 ## Sections
 
@@ -29,5 +29,4 @@
 3. Social
 4. Testimonials
 5. Notifications (Newsletter)
-6. Contact // "I do bar mitzvahs, weddings, children's parties, and corporate events.
-    You should hurry because I'm often fully booked. My calender is currently completely open."
+6. Contact
