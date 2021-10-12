@@ -1,7 +1,7 @@
 {% extends 'webcore/base_content_only.html' if content_only else 'webcore/base_full.html' %}
 
 {% block base_content %}
-  <div class="w-full mx-auto pt-3 px-4 {% block content_max_width %}max-w-screen-lg{% endblock %}">
+  <div class="w-full {% block content_margin_padding %}mx-auto pt-3 px-4{% endblock %} {% block content_max_width %}max-w-screen-lg{% endblock %}">
     {% if title and not hide_title %}
       <h3 class="text-3xl md:text-5xl text-accent underline underline-wavy text-center md:text-left mb-6 md:mb-10 italic">{{ title }}</h3>
     {% endif %}

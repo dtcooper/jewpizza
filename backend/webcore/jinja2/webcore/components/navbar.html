@@ -31,12 +31,12 @@
             'btn-disabled': $store.page.loading || $store.page.current == {{ link.url|attrjs }}
           }"
         >
-          {{ icon(link.icon, size='text-2xl', classes='2xl:text-3xl') }} {{ link.name }}
+          {{ icon(link.icon, size='text-2xl 2xl:text-3xl') }} {{ link.name }}
         </a>
       {% endfor %}
       <div class="hidden lg:block 3xl:hidden" @click.away="$store.menuOpen = false">
-        <button class="btn btn-primary btn-rounded no-animation 2xl:btn-lg pr-1.5 2xl:pr-3" @click="$store.menuOpen = !$store.menuOpen" :class="{'btn-disabled': $store.page.loading}">
-          More {{ icon('mdi:dots-vertical', size='text-2xl', margin=None, classes='2xl:text-3xl') }}
+        <button class="btn btn-primary btn-rounded no-animation 2xl:btn-lg pr-1.5 2xl:pr-3 umami--click--navbar-more" @click="$store.menuOpen = !$store.menuOpen" :class="{'btn-disabled': $store.page.loading}">
+          More {{ icon('mdi:dots-vertical', size='text-2xl 2xl:text-3xl', margin=None) }}
         </button>
 
         <div class="relative" x-show="$store.menuOpen" x-cloak>
@@ -56,10 +56,10 @@
       </div>
 
       {#- Mobile expand/close buttons #}
-      <button x-cloak class="btn btn-square btn-ghost flex lg:hidden" @click="$store.menuOpen = true" x-show="!$store.menuOpen">
+      <button x-cloak class="btn btn-square btn-ghost flex lg:hidden umami--click--navbar-mobile-expand" @click="$store.menuOpen = true" x-show="!$store.menuOpen">
         {{ icon('fa:bars', margin=None) }}
       </button>
-      <button class="btn btn-square btn-ghost flex lg:hidden" @click="$store.menuOpen = false" x-show="$store.menuOpen">
+      <button class="btn btn-square btn-ghost flex lg:hidden umami--click--navbar-mobile-close" @click="$store.menuOpen = false" x-show="$store.menuOpen">
         {{ icon('fa:close', margin=None) }}
       </button>
     </div>

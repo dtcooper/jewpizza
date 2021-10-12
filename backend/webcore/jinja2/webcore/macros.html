@@ -1,5 +1,5 @@
 {% macro icon(icon, size='text-3xl', margin='mr-2', classes=None) -%}
-  <span class="iconify {{ size }}{% if margin %} {{ margin }}{% endif %}{% if classes %} {{ classes }}{% endif %}" data-icon="{{ icon }}"></span>
+  <span class="iconify {% if size %}{{ size }}{% endif %} {% if margin %}{{ margin }}{% endif %} {% if classes %}{{ classes }}{% endif %}" data-icon="{{ icon }}"></span>
 {%- endmacro %}
 
 
