@@ -1,6 +1,5 @@
 import datetime
 
-from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.timezone import get_default_timezone
 
@@ -8,26 +7,18 @@ from recurrence.fields import RecurrenceField
 
 
 class Show(models.Model):
-    name = models.CharField("name", max_length=255)
-    render_as_page = models.BooleanField(
-        "render as page",
-        blank=False,
-        default=True,
-        help_text="Render this show as its own page, and not just on the schedule.",
+    PROTECTED_SLUGS = (
+        'showgram',
+        'this-is-going-well-i-think',
+        'that-went-well-i-think',
+        'bmir',
     )
-    slug = models.SlugField("URL slug", blank=True, help_text="Required if 'render as page' is set.")
-    start = models.TimeField("start time")
-    duration = models.DurationField("duration")
-    dates = RecurrenceField("dates", blank=True)
+
+    name = models.CharField("name", max_length=255)
+    slug = models.SlugField("URL slug", blank=True, help_text="Required if 'render as page' is set.", unique=True)
 
     def __str__(self):
         return self.name
-
-    def clean(self):
-        if self.render_as_page and not self.slug:
-            raise ValidationError({"slug": "A slug is required when 'render as page' is set."})
-
-        super().clean()
 
     def next_date_ranges(self, num=25, from_dt=None):
         if from_dt is None:
@@ -46,3 +37,13 @@ class Show(models.Model):
                     break
 
         return date_ranges
+
+
+class ShowDate(models.Model):
+    show = models.ForeignKey(Show, on_delete=models.CASCADE, related_name='dates')
+    start = models.TimeField("start time")
+    duration = models.DurationField()
+    dates = RecurrenceField()
+
+    def __str__(self):
+        return str(self.show)

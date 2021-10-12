@@ -22,6 +22,7 @@ twilio = "^7.1.0"
 Unidecode = "^1.3.2"
 jinja-markdown = "^1.210911"
 django-constance = "^2.8.0"
+requests = "^2.26.0"
 
 [tool.poetry.dev-dependencies]
 ipython = "^7.28.0"

@@ -5,7 +5,8 @@ from . import views
 
 app_name = "shows"
 urlpatterns = [
-    path("shows/", views.ShowsMasterListView.as_view(), name="shows-master-list"),
+    path("shows/", views.ShowsMasterListView.as_view(), name="master-list"),
+    path("shows/dev-export/", views.DevExportView.as_view(), name='dev-export'),
     path(
         "listen/",
         # TODO: delete placeholder.html after this view is swapped out
