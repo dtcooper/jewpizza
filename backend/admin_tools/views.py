@@ -12,7 +12,6 @@ from .forms import SendTextMessageForm
 NAVIGATION_LINKS = (
     ("admin-tools:index", "Tools Index"),
     ("admin-tools:send-text-message", "Send Text Message"),
-    (settings.LOGS_URL, "Server Logs"),
 )
 
 

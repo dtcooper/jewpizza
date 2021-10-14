@@ -63,9 +63,10 @@
       <a href="{{ url_for('admin:logout') }}">Log Out</a>
     </small>
     <nav>
-      {% for url, name in admin_nav_links %}
-        <a href="{% if url.startswith('http') %}{{ url }}{% else %}{{ url_for(url) }}{% endif %}">{{ name }}</a>
+      {% for url_name, name in admin_nav_links %}
+        <a href="{{ url_for(url_name) }}">{{ name }}</a>
       {% endfor %}
+      <a href="{{ settings.LOGS_URL }}" target="_blank">Server Logs</a>
     </nav>
   </header>
 
@@ -88,21 +89,22 @@
       The following tools are available:
 
       <ul>
-        {% for url, name in admin_nav_links %}
-          {% if url != 'admin-tools:index' %}
-            <li><a href="{% if url.startswith('http') %}{{ url }}{% else %}{{ url_for(url) }}{% endif %}">{{ name }}</a></li>
+        {% for url_name, name in admin_nav_links %}
+          {% if url_name != 'admin-tools:index' %}
+            <li><a href="{{ url_for(url_name) }}">{{ name }}</a></li>
           {% endif %}
         {% endfor %}
+        <li><a href="{{ settings.LOGS_URL }}" target="_blank">Server Logs</a></li>
       </ul>
     {% endblock %}
   </main>
 
   <footer>
     <div>
-      {% for url, name in admin_nav_links %}
-        <a href="{% if url.startswith('http') %}{{ url }}{% else %}{{ url_for(url) }}{% endif %}">{{ name }}</a>
-        {% if not loop.last %} /{% endif %}
+      {% for url_name, name in admin_nav_links %}
+        <a href="{{ url_for(url_name) }}">{{ name }}</a> /
       {% endfor %}
+      <a href="{{ settings.LOGS_URL }}" target="_blank">Server Logs</a>
     </div>
     <div>
       <a href="{{ url_for('webcore:home') }}">View Site</a> /
