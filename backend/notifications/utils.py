@@ -14,6 +14,8 @@ DEFAULT_USER_AGENT = (
     " Safari/537.36"
 )
 
+logger = logging.getLogger(f'jewpizza.{__name__}')
+
 
 def sign_up_for_substack(email, request=None):
     # Sketchy, brittle, but returns False if we encountered an error for graceful downgrade
@@ -40,20 +42,20 @@ def sign_up_for_substack(email, request=None):
         response.raise_for_status()
         data = response.json()
 
-        for key in ("email", "didSignup", "subscription_id"):
+        for key in ("email", "didSignup", 'requires_confirmation', "subscription_id"):
             if data.get(key) is None:
                 raise Exception(f'Expecting key "{key}" in data payload from Substack. Got: {data!r}')
     except Exception:
-        logger = logging.getLogger("django.request")
-        logger.exception("An error occurred while subscribing a user to Substack")
+        django_logger = logging.getLogger("django.request")
+        django_logger.exception("An error occurred while subscribing a user to Substack")
         if request:
             messages.error(request, "An error occurred while signing you up for the newsletter. Please try again.")
         return False
 
-    messages.warning(request, str(data))  # XXX
+    logger.info(f'Got payload from Substack: {data!r}')
 
     if request:
-        if data["didSignup"]:
+        if data["didSignup"] or data['requires_confirmation']:
             messages.success(request, "You were successfully signed up for the newsletter. Please check your inbox.")
         else:
             messages.info(request, "You were already signed up for the newsletter.")

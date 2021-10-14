@@ -137,6 +137,10 @@ LOGGING = {
             "handlers": ["console"],
             "level": "INFO",
         },
+        "jewpizza": {
+            "handlers": ["console"],
+            "level": "INFO",
+        },
     },
 }
 
