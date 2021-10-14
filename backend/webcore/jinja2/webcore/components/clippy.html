@@ -8,13 +8,13 @@
 >
   <button
     x-data x-show="open" @click="open = false"
-    class="pointer-events-auto btn text-content btn-ghost btn-square btn-sm absolute top-0 right-0"
+    class="pointer-events-auto btn text-content btn-ghost btn-square btn-sm absolute top-0 right-0 umami--click--clippy-close"
   >
     {{ icon('bx:bx-window-close', size='text-2xl', margin=None) }}
   </button>
   <button
     x-data x-show="!open" @click="open = true"
-    class="pointer-events-auto btn btn-primary btn-square font-sans"
+    class="pointer-events-auto btn btn-primary btn-square font-sans umami--click--clippy-expand"
   >
     {{ icon('fa-solid:glasses', size='text-4xl', margin=None) }}
   </button>
