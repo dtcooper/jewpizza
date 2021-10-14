@@ -18,6 +18,9 @@ services:
   umami:
     restart: "no"
 
+  logs:
+    restart: "no"
+
   icecast:
     image: moul/icecast
     init: true  # for Icecast to shut down faster

@@ -119,6 +119,17 @@ server {
         proxy_pass http://127.0.0.1:3000;
     }
 }
+
+# Logs
+server {
+    listen 80;
+    server_name logs.domain.com;
+
+    location / {
+        include proxy_params;
+        proxy_pass http://127.0.0.1:8888;
+    }
+}
 ```
 
 If you want to **TEST** with `DEBUG=0` without running nginx and have Gunicorn

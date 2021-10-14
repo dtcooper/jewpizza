@@ -52,8 +52,21 @@ services:
       - DATABASE_TYPE=postgresql
       # SECRET_KEY needs to be set in order to run this container
       - "HASH_SALT=${SECRET_KEY}"
+      - "TZ=${TIMEZONE:-US/Eastern}"
     depends_on:
       - db
+
+  logs:
+    image: amir20/dozzle:latest
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "${LOGS_BIND_ADDR:-127.0.0.1:8888}:8080"
+    environment:
+      - DOZZLE_TAILSIZE=2500
+      - DOZZLE_NO_ANALYTICS=true
+      - "TZ=${TIMEZONE:-US/Eastern}"
 
 volumes:
   postgres_data:

@@ -2,5 +2,6 @@
 
 {% block userlinks %}
   <a href="{% url 'admin-tools:index' %}">Admin Tools</a> /
+  <a href="{{ settings.LOGS_URL }}" target="_blank">Logs</a> /
   {{ block.super }}
 {% endblock %}

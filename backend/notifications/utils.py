@@ -14,7 +14,7 @@ DEFAULT_USER_AGENT = (
     " Safari/537.36"
 )
 
-logger = logging.getLogger(f'jewpizza.{__name__}')
+logger = logging.getLogger(f"jewpizza.{__name__}")
 
 
 def sign_up_for_substack(email, request=None):
@@ -42,7 +42,7 @@ def sign_up_for_substack(email, request=None):
         response.raise_for_status()
         data = response.json()
 
-        for key in ("email", "didSignup", 'requires_confirmation', "subscription_id"):
+        for key in ("email", "didSignup", "requires_confirmation", "subscription_id"):
             if key not in data:
                 raise Exception(f'Expecting key "{key}" in data payload from Substack. Got: {data!r}')
     except Exception:
@@ -52,10 +52,10 @@ def sign_up_for_substack(email, request=None):
             messages.error(request, "An error occurred while signing you up for the newsletter. Please try again.")
         return False
 
-    logger.info(f'Got payload from Substack: {data!r}')
+    logger.info(f"Got payload from Substack: {data!r}")
 
     if request:
-        if data["didSignup"] or data['requires_confirmation']:
+        if data["didSignup"] or data["requires_confirmation"]:
             messages.success(request, "You were successfully signed up for the newsletter. Please check your inbox.")
         else:
             messages.info(request, "You were already signed up for the newsletter.")

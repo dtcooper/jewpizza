@@ -39,6 +39,7 @@ INSTAGRAM_NAME = env("INSTAGRAM_NAME", default="dtcooper")
 FACEBOOK_NAME = env("FACEBOOK_NAME", default="dtcooper")
 
 ICECAST_URL = env("ICECAST_URL")
+LOGS_URL = env("LOGS_URL")
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 

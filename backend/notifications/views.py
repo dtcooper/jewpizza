@@ -78,12 +78,19 @@ class ContactView(SuccessMessageMixin, FormInvalidErrorMixin, FormView):
         try:
             send_mail(
                 subject=f"{name} - jew.pizza Contact Form",
-                message=f"Name: {name}\nEmail: {email}\nIP: {ip_address}\n\nMessage:\n{message}",
+                message=(
+                    f"Name: {name}\nEmail: {email}\nNewsletter sign-up: {'yes' if substack_sign_up else 'no'}\n"
+                    f"IP: {ip_address}\n\nMessage:\n{message}"
+                ),
                 from_email=None,
                 recipient_list=[settings.EMAIL_ADDRESS],
             )
         except SMTPException:
-            messages.error(self.request, "An error occurred while sending your email. Try again or send your message to david@jew.pizza directly.")
+            messages.error(
+                self.request,
+                "An error occurred while sending your email. Try again or send your message to"
+                f" {settings.EMAIL_ADDRESS} directly.",
+            )
             django_logger = logging.getLogger("django.request")
             django_logger.exception("An error occurred while sending an email via the contact form.")
 
