@@ -16,7 +16,7 @@
     x-data x-show="!open" @click="open = true"
     class="pointer-events-auto btn btn-primary btn-square font-sans"
   >
-    {{ icon('mdi:robot-confused-outline', size='text-4xl', margin=None) }}
+    {{ icon('fa-solid:glasses', size='text-4xl', margin=None) }}
   </button>
 
   <span x-show="open" x-data="{clippy: {{ randint(0, 1)|attrjs }}}" x-init="setInterval(() => clippy = (clippy + 1) % 2, 12000)">
