@@ -1,3 +1,4 @@
+import logging
 import re
 from smtplib import SMTPException
 
@@ -82,7 +83,9 @@ class ContactView(SuccessMessageMixin, FormInvalidErrorMixin, FormView):
                 recipient_list=[settings.EMAIL_ADDRESS],
             )
         except SMTPException:
-            messages.error(self.request, "An error occurred while sending your email. Please try again.")
+            messages.error(self.request, "An error occurred while sending your email. Try again or send your message to david@jew.pizza directly.")
+            django_logger = logging.getLogger("django.request")
+            django_logger.exception("An error occurred while sending an email via the contact form.")
 
         if substack_sign_up:
             sign_up_for_substack(email, request=self.request)
