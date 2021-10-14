@@ -63,7 +63,7 @@ class FormInvalidErrorMixin:
 class ContactView(SuccessMessageMixin, FormInvalidErrorMixin, FormView):
     extra_context = {"title": "Contact"}
     form_class = ContactForm
-    success_message = "Your message has successfully been sent to David. Give him a little while to respond. Thanks!"
+    success_message = "Your email has successfully been sent to David. Give him a little while to respond. Thanks!"
     success_url = reverse_lazy("webcore:home")
     template_name = "notifications/contact.html"
 
@@ -82,7 +82,7 @@ class ContactView(SuccessMessageMixin, FormInvalidErrorMixin, FormView):
                 recipient_list=[settings.EMAIL_ADDRESS],
             )
         except SMTPException:
-            messages.error(self.request, "An error occurred while sending the message. Please try again.")
+            messages.error(self.request, "An error occurred while sending your email. Please try again.")
 
         if substack_sign_up:
             sign_up_for_substack(email, request=self.request)

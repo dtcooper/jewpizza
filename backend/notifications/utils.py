@@ -21,11 +21,11 @@ def sign_up_for_substack(email, request=None):
         response = requests.post(
             SUBSTACK_URL_API,
             headers={
-                "User-Agent": request.headers.get("User-Agent", DEFAULT_USER_AGENT) if request else DEFAULT_USER_AGENT,
-                "Authority": SUBSTACK_HOST,
-                "Origin": SUBSTACK_URL,
-                "Referer": SUBSTACK_URL_EMBED,
-                "Content-Type": "application/json",
+                "user-agent": request.headers.get("User-Agent", DEFAULT_USER_AGENT) if request else DEFAULT_USER_AGENT,
+                "authority": SUBSTACK_HOST,
+                "origin": SUBSTACK_URL,
+                "referer": SUBSTACK_URL_EMBED,
+                "content-type": "application/json",
             },
             json={
                 "email": email,
@@ -49,6 +49,8 @@ def sign_up_for_substack(email, request=None):
         if request:
             messages.error(request, "An error occurred while signing you up for the newsletter. Please try again.")
         return False
+
+    messages.warning(request, str(data))  # XXX
 
     if request:
         if data["didSignup"]:
