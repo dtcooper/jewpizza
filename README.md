@@ -123,10 +123,21 @@ server {
 # Logs
 server {
     listen 80;
-    server_name logs.domain.com;
+    server_name logs.jew.pizza;
+
+    auth_basic "jew.pizza Logs";
+    # Generate via: htpasswd -Bc /path.to/htpaswd username
+    auth_basic_user_file /path.to/htpaswd;
 
     location / {
         include proxy_params;
+        proxy_pass http://127.0.0.1:8888;
+    }
+
+    location /api {
+        include proxy_params;
+        proxy_buffering off;
+        proxy_cache off;
         proxy_pass http://127.0.0.1:8888;
     }
 }

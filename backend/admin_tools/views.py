@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.urls import reverse_lazy
@@ -11,6 +12,7 @@ from .forms import SendTextMessageForm
 NAVIGATION_LINKS = (
     ("admin-tools:index", "Tools Index"),
     ("admin-tools:send-text-message", "Send Text Message"),
+    (settings.LOGS_URL, "Server Logs"),
 )
 
 

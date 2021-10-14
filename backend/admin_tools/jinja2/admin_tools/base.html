@@ -58,14 +58,13 @@
       <em>jew.pizza Admin Tools</em>
     </h1>
     <small>
-      <a href="{{ settings.LOGS_URL }}" target="_blank">Logs</a> /
       <a href="{{ url_for('webcore:home') }}">View Site</a> /
       <a href="{{ url_for('admin:index') }}">Django Admin</a> /
       <a href="{{ url_for('admin:logout') }}">Log Out</a>
     </small>
     <nav>
-      {% for url_name, name in admin_nav_links %}
-        <a href="{{ url_for(url_name) }}">{{ name }}</a>
+      {% for url, name in admin_nav_links %}
+        <a href="{% if url.startswith('http') %}{{ url }}{% else %}{{ url_for(url) }}{% endif %}">{{ name }}</a>
       {% endfor %}
     </nav>
   </header>
@@ -89,9 +88,9 @@
       The following tools are available:
 
       <ul>
-        {% for url_name, name in admin_nav_links %}
-          {% if url_name != 'admin-tools:index' %}
-            <li><a href="{{ url_for(url_name) }}">{{ name }}</a></li>
+        {% for url, name in admin_nav_links %}
+          {% if url != 'admin-tools:index' %}
+            <li><a href="{% if url.startswith('http') %}{{ url }}{% else %}{{ url_for(url) }}{% endif %}">{{ name }}</a></li>
           {% endif %}
         {% endfor %}
       </ul>
@@ -100,8 +99,9 @@
 
   <footer>
     <div>
-      {% for url_name, name in admin_nav_links %}
-        <a href="{{ url_for(url_name) }}">{{ name }}</a>{% if not loop.last %} /{% endif %}
+      {% for url, name in admin_nav_links %}
+        <a href="{% if url.startswith('http') %}{{ url }}{% else %}{{ url_for(url) }}{% endif %}">{{ name }}</a>
+        {% if not loop.last %} /{% endif %}
       {% endfor %}
     </div>
     <div>
