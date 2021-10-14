@@ -1,16 +1,16 @@
 <div
   x-cloak x-data="{open: $persist(true).as('clippy-open')}"
   :class="{
-    'h-[200px] w-[200px] mt-[-200px] bg-neutral text-white bg-opacity-90 border-t-2 border-l-2 border-r-2 p-3': open,
+    'h-[200px] w-[200px] mt-[-200px]': open,
     'h-12 w-12 -mt-12': !open
   }"
   class="pointer-events-none absolute right-4 top-0 border-primary"
 >
   <button
     x-data x-show="open" @click="open = false"
-    class="pointer-events-auto btn text-neutral-content btn-ghost btn-square btn-sm absolute top-0 right-0"
+    class="pointer-events-auto btn text-content btn-ghost btn-square btn-sm absolute top-0 right-0"
   >
-    {{ icon('mdi:window-minimize', size='text-2xl', margin=None) }}
+    {{ icon('bx:bx-window-close', size='text-2xl', margin=None) }}
   </button>
   <button
     x-data x-show="!open" @click="open = true"
@@ -19,9 +19,9 @@
     {{ icon('mdi:robot-confused-outline', size='text-4xl', margin=None) }}
   </button>
 
-  <span x-show="open">
-    {% for i in range(5) %}
-      A jew would go here!
+  <span x-show="open" x-data="{clippy: 1}" x-init="setInterval(() => clippy = (clippy + 1) % 2, 7500)">
+    {% for i in range(2) %}
+      <img src="{{ static('images/clippy-{}.gif'.format(i)) }}" class="w-[200px] h-[200px]" x-show="clippy === {{ i|attrjs }}">
     {% endfor %}
   </span>
 </div>

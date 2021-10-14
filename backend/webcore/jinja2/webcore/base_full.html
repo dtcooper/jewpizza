@@ -21,6 +21,9 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  {% for i in range(2) %}
+    <link rel="preload" as="image" href="{{ static('images/clippy-{}.gif'.format(i)) }}">
+  {% endfor %}
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700" rel="stylesheet">
   <link href="{{ static('css/styles.css') }}" rel="stylesheet">
   {% if settings.DEBUG and config.HIDDEN_IMG_MODE %}

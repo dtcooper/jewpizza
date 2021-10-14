@@ -18,6 +18,7 @@
 * [ ] Opengraph tags, SEO, and 4xx + 5xx error pages
 * [x] Log IP from contact form.
 * [x] Vertically center homepage hero
+* [ ] namespace webcore static assets with a folder `webcore/`
 
 ## Sections
 
