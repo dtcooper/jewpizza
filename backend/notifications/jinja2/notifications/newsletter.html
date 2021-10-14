@@ -1,5 +1,7 @@
 {% extends 'webcore/base.html' %}
 
+{% from 'notifications/macros.html' import render_form_field %}
+
 {% block content_max_width %}max-w-screen-md{% endblock %}
 
 {% block content %}
@@ -11,10 +13,23 @@
     {% endmarkdown %}
   </article>
 
-  <div class="flex justify-center my-4">
-    <iframe
-      src="https://jewpizza.substack.com/embed" frameborder="0" scrolling="no"
-      class="max-w-xl w-full h-32 md:h-44 xl:h-64 3xl:h-72 border-4 md:border-[6px] border-primary rounded-2xl"
-    ></iframe>
-  </div>
+  {% if form %}
+    <form method="POST" class="my-3" action="{{ url_for('notifications:newsletter') }}" x-data @submit="formSubmit">
+      {{ csrf_input }}
+
+      <div class="space-y-3">
+        {{ render_form_field(form.email, placeholder='weird.person@gmail.com') }}
+      </div>
+      <button type="submit" class="btn sm:btn-lg w-full btn-neutral italic mt-6">
+        Sign up! The Internet is MAGIC
+      </button>
+    </form>
+  {% else %}
+    <div class="flex justify-center my-4">
+      <iframe
+        src="https://jewpizza.substack.com/embed" frameborder="0" scrolling="no"
+        class="max-w-xl w-full h-32 md:h-44 xl:h-64 3xl:h-72 border-4 md:border-[6px] border-primary rounded-2xl"
+      ></iframe>
+    </div>
+  {% endif %}
 {% endblock %}

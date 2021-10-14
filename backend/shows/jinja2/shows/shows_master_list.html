@@ -1,22 +1,27 @@
 {% extends 'webcore/base.html' %}
 
-{% block content_max_width %}max-w-screen-2xl{% endblock %}
+{% block content_max_width %}max-w-screen-xl{% endblock %}
 
-{% macro show_stub(show_name, img_name) %}
+{# TODO: this ddoesn't have to be a macro #}
+{% macro show_stub(show) %}
+
+{% from 'shows/snippets/{}.html'.format(show.code) import short_description, title %}
+
 <div class="card border-accent border-4 lg:border-[6px] rounded-3xl">
-  <figure class="border-accent border-b-4 lg:border-b-[6px]">
-    <a href="#"><img src="{{ static('images/shows/{}.png'.format(img_name)) }}"></a>
-  </figure>
+  {% if show.has_banner %}
+    <figure class="border-accent border-b-4 lg:border-b-[6px]">
+      <a href="#"><img src="{{ static('images/shows/{}.png'.format(show.code)) }}"></a>
+    </figure>
+  {% endif %}
   <div class="card-body">
     <h2 class="card-title">
-      {{ show_name }}
+      {{ title }}
       <div class="badge ml-2 {{ choice(['badge-secondary', 'badge-primary', 'badge-accent']) }}">
         {{ choice(['fun', 'great', 'awesome', 'terrible', 'wicked', 'terrible', 'not good'])|upper }}
       </div>
     </h2>
     <article>
-      {{ lipsum(n=randint(1, 2), min=15, max=35) }}
-
+      {{ short_description }}
       <p>Latest Episodes:</p>
     </article>
 
@@ -25,7 +30,6 @@
         <li><a class="link link-primary link-hover" href="#TODO">{{ lipsum(n=1, html=False, min=4, max=10) }}</a></li>
       {% endfor  %}
     </ul>
-
 
     <div class="justify-end card-actions">
       <a class="btn md:btn-lg btn-secondary" href="#">
@@ -42,9 +46,8 @@
   </article>
 
   <div class="grid md:grid-cols-2 gap-3 mt-3">
-    {{ show_stub('The Late Showgram w/ Jim Richards', 'showgram') }}
-    {{ show_stub('That Went Well, I Think w/ David Cooper on WFMU', 'twwit') }}
-    {{ show_stub('This Is Going Well, I Think w/ David Cooper', 'tigwit') }}
-    {{ show_stub('Burning Man Information Radio', 'bmir') }}
+    {% for show in shows %}
+      {{ show_stub(show) }}
+    {% endfor %}
   </div>
 {% endblock %}

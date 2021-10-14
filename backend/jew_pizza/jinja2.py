@@ -2,6 +2,7 @@ from collections import namedtuple
 import hashlib
 import os
 import random
+import string
 
 from jinja2 import BytecodeCache, Environment, pass_context, pass_eval_context
 from jinja2.filters import do_forceescape, do_tojson
@@ -13,7 +14,6 @@ from django.templatetags.static import static as django_static
 from django.urls import reverse
 
 from constance import config as constance_config
-from django_redis import get_redis_connection
 from widget_tweaks.templatetags.widget_tweaks import add_class, add_error_class, set_attr
 
 from webcore.constants import CACHE_KEY_PREFIX_STATIC_ASSET_MD5SUM, NAVIGATION_LINKS
@@ -58,7 +58,7 @@ def static(path, *args, **kwargs):
                             path_hash = hashlib.md5(file_to_check.read()).hexdigest()
                     else:
                         path_hash = False  # File not found, cache that fact using False
-                    cache.set(cache_key, path_hash)
+                    cache.set(cache_key, path_hash, timeout=None)
 
     static_path = django_static(path, *args, **kwargs)
     if path_hash:
@@ -93,20 +93,26 @@ def nav_links(request):
     return {"nav_links": nav_links, "active_link": active_link}
 
 
+def __encoded_email():
+    printable = string.ascii_letters + string.digits + string.printable + ".....@@@@@"
+
+    encoded = ""
+    for i, c in enumerate(settings.EMAIL_ADDRESS, 1):
+        encoded += f'{c}{"".join(random.choice(printable) for _ in range(i))}'
+    return encoded
+
+
 # https://gist.github.com/rtt/5029885
 class RedisBytecodeCache(BytecodeCache):
     CACHE_KEY_PREFIX = "jinja2:cache:"
 
-    def __init__(self):
-        self.redis = get_redis_connection()
-
     def load_bytecode(self, bucket):
-        bytecode = self.redis.get(f"{self.CACHE_KEY_PREFIX}{bucket.key}")
+        bytecode = cache.get(f"{self.CACHE_KEY_PREFIX}{bucket.key}")
         if bytecode:
             bucket.bytecode_from_string(bytecode)
 
     def dump_bytecode(self, bucket):
-        self.redis.set(f"{self.CACHE_KEY_PREFIX}{bucket.key}", bucket.bytecode_to_string())
+        cache.set(f"{self.CACHE_KEY_PREFIX}{bucket.key}", bucket.bytecode_to_string(), timeout=None)
 
 
 def autoescape(filename):
@@ -134,6 +140,7 @@ def create_environment(**options):
             "choice": random.choice,
             "config": constance_config,
             "get_messages": _get_messages_jinja2,
+            "encoded_email": __encoded_email(),
             "randint": random.randint,
             "settings": settings,
             "shuffle": shuffle,

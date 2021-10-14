@@ -20,23 +20,29 @@ DOMAIN_NAME = env("DOMAIN_NAME", default="jew.pizza")
 # For testing gunicorn only.
 SERVE_ASSETS_FROM_DJANGO = env("SERVE_ASSETS_FROM_DJANGO", default=False)
 
+EMAIL_ADDRESS = env("EMAIL_ADDRESS")
 EMAIL_HOST = env("EMAIL_HOST")
 EMAIL_HOST_USER = env("EMAIL_USERNAME")
 EMAIL_HOST_PASSWORD = env("EMAIL_PASSWORD")
 EMAIL_PORT = env.int("EMAIL_PORT", default=587)
 EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=(EMAIL_PORT == 587))
-CONTACT_FORM_TO_ADDRESS = env("CONTACT_FORM_TO_ADDRESS")
-DEFAULT_FROM_EMAIL = env("EMAIL_FROM_ADDRESS")
+DEFAULT_FROM_EMAIL = SERVER_EMAIL = env("EMAIL_FROM_ADDRESS")
 UMAMI_SCRIPT_URL = env("UMAMI_SCRIPT_URL", default=None)
 UMAMI_WEBSITE_ID = env("UMAMI_WEBSITE_ID", default=None)
 TWILIO_ACCOUNT_SID = env("TWILIO_ACCOUNT_SID")
 TWILIO_AUTH_TOKEN = env("TWILIO_AUTH_TOKEN")
 TWILIO_FROM_NUMBER = env("TWILIO_FROM_NUMBER")
 LOAD_SHOWS_DEV_EXPORT_URL = env("LOAD_SHOWS_DEV_EXPORT_URL", default="https://jew.pizza/shows/dev-export/")
+SUBSTACK_NAME = env("SUBSTACK_NAME", default="jewpizza")
+TWITTER_NAME = env("TWITTER_NAME", default="dtcooper")
+INSTAGRAM_NAME = env("INSTAGRAM_NAME", default="dtcooper")
+FACEBOOK_NAME = env("FACEBOOK_NAME", default="dtcooper")
 
 ICECAST_URL = env("ICECAST_URL")
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+ADMINS = [(f"{DOMAIN_NAME} Admin", EMAIL_ADDRESS)]
 
 if DEBUG:
     ALLOWED_HOSTS = ["*"]
@@ -52,6 +58,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     # 3rd party
     "constance",
+    "durationwidget",
     "phonenumber_field",
     "recurrence",
     # Local
@@ -132,6 +139,18 @@ LOGGING = {
         },
     },
 }
+
+if not DEBUG:
+    LOGGING["handlers"]["mail_admins"] = {
+        "level": "ERROR",
+        "class": "django.utils.log.AdminEmailHandler",
+        "include_html": True,
+    }
+    LOGGING["loggers"]["django.request"] = {
+        "handlers": ["mail_admins"],
+        "level": "ERROR",
+        "propagate": False,
+    }
 
 WSGI_APPLICATION = "jew_pizza.wsgi.application"
 

@@ -1,37 +1,8 @@
 {% extends 'webcore/base.html' %}
 
-{% from 'webcore/macros.html' import icon %}
+{% from 'notifications/macros.html' import render_form_field %}
 
 {% block content_max_width %}max-w-screen-md{% endblock %}
-
-{% macro render_form_field(field, placeholder=none) %}
-  {% if field.widget_type in ('text', 'email') %}
-    {% set field = field
-        |add_class('input border-[3px] input-bordered input-primary input-lg')
-        |add_error_class('input-error')
-    %}
-  {% elif field.widget_type == 'textarea' %}
-    {% set field = field
-      |add_class('textarea border-[3px] textarea-bordered textarea-primary text-lg')
-      |add_error_class('textarea-error')
-      |add_attr('rows:6')
-    %}
-  {% endif %}
-
-  <label class="label" for="{{ field.id_for_label }}">
-    <span class="label-text md:text-lg">{{ field.label }}:</span>
-  </label>
-
-  {{ field }}
-
-  {% if field.errors %}
-    {% for error in field.errors %}
-      <div class="text-error font-bold md:text-lg mt-2 ml-1.5 flex items-center">
-        {{ icon('mdi:alert-outline') }} {{ error }}
-      </div>
-    {% endfor %}
-  {% endif %}
-{% endmacro %}
 
 {% block content %}
 <article>
@@ -52,16 +23,13 @@
   {{ csrf_input }}
 
   <div class="space-y-3">
-    <div class="form-control">
-      {{ render_form_field(form.name) }}
-      </div>
-    <div class="form-control">
-      {{ render_form_field(form.email) }}
-    </div>
-    <div class="form-control">
-      {{ render_form_field(form.message) }}
-    </div>
+    {{ render_form_field(form.name, placeholder='John Doe') }}
+    {{ render_form_field(form.email, placeholder='weird.person@gmail.com') }}
+    {{ render_form_field(form.message, placeholder='Enter your message here...') }}
+    {{ render_form_field(form.substack_sign_up) }}
   </div>
-  <button type="submit" class="btn sm:btn-lg w-full btn-neutral italic mt-6">Send! The Internet is MAGIC!</button>
+  <button type="submit" class="btn sm:btn-lg w-full btn-neutral italic mt-6">
+    Send! The Internet is MAGIC!
+  </button>
 </form>
 {% endblock %}

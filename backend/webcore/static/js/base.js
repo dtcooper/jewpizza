@@ -19,7 +19,7 @@
     return cookieValue
   }
 
-  let jank = "dNa1TvK\u000b3iJ@@Ydtee@W@Ug(8=\\jI'AJ8H6e@0DXDM(CwcJ,tTnl-_.`\\#CRm`UWmpf<}pL@h@p&Ki@Ji3Lg@d3r6Rz%o@l5xxj,|M\nDzo\nH_-\u000b;RU\tpu*zap0kDvl9gHhb@5Mb"
+  let jank = DATA.encodedEmail
   let email = ''
   for (let i = 0; jank.length > 0; i++) {
     email += jank.charAt(i)
@@ -58,7 +58,7 @@
       }
       router._setCurrent(null) // Force reloads (allow retries)
       store.loading = false
-      Alpine.store('messages', [{ level: 'error', message: 'An error occurred. Please try loading the page again.' }])
+      Alpine.store('messages', [{ level: 'error', message: 'An error occurred. Please try refreshing the page.' }])
       return
     }
 

@@ -1,25 +1,17 @@
 from django.contrib import admin
+from django.db.models import DurationField
 
-from .models import Show, ShowDate
+from durationwidget.widgets import TimeDurationWidget
 
-
-class ShowDateInline(admin.TabularInline):
-    model = ShowDate
-    extra = 0
+from .models import ShowDate
 
 
-class ShowAdmin(admin.ModelAdmin):
-    inlines = (ShowDateInline,)
+class ShowDateAdmin(admin.ModelAdmin):
+    list_display = ("show", "start", "duration")
 
-    def get_readonly_fields(self, request, obj=None):
-        readonly_fields = super().get_readonly_fields(request, obj=obj)
-        if obj is not None and obj.slug in Show.PROTECTED_SLUGS:
-            readonly_fields = list(readonly_fields)
-            readonly_fields.append('slug')
-        return readonly_fields
-
-    def has_delete_permission(self, request, obj=None):
-        return obj is None or obj.slug not in Show.PROTECTED_SLUGS
+    formfield_overrides = {
+        DurationField: {"widget": TimeDurationWidget(show_days=False)},
+    }
 
 
-admin.site.register(Show, ShowAdmin)
+admin.site.register(ShowDate, ShowDateAdmin)

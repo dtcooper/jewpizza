@@ -17,6 +17,7 @@
     [More info here](https://stackoverflow.com/a/6394497).
 * [ ] Opengraph tags, SEO, and 4xx + 5xx error pages
 * [x] Log IP from contact form.
+* [ ] Vertically center homepage hero
 
 ## Sections
 

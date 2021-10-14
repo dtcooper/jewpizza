@@ -35,6 +35,7 @@
   {%- set _js_data = {
     'currentPage': active_link,
     'debug': settings.DEBUG,
+    'encodedEmail': encoded_email,
     'isAuthenticated': request.user.is_authenticated,
     'isSuperuser': request.user.is_superuser,
     'messages': get_messages(),

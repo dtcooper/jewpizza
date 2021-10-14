@@ -1,0 +1,10 @@
+{% set title %}
+  <p>This Is Going Well, I Think with David Cooper</p>
+  <p><small>on <a href="#">Shouting Fire</a></small></p>
+{% endset %}
+
+{% set short_description %}
+  {% markdown %}
+    {{ lipsum(n=1, html=False, min=20, max=45) }}
+  {% endmarkdown %}
+{% endset %}

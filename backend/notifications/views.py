@@ -8,6 +8,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.mail import send_mail
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
@@ -16,8 +17,9 @@ from django.views.generic import FormView, View
 from jew_pizza.twilio import twilio_request
 from jew_pizza.utils import get_client_ip
 
-from .forms import ContactForm
+from .forms import ContactForm, NewsletterForm
 from .models import TextMessage
+from .utils import sign_up_for_substack
 
 
 @method_decorator(csrf_exempt, name="dispatch")
@@ -52,21 +54,24 @@ class IncomingTextMessageView(View):
         return True
 
 
-class ContactView(SuccessMessageMixin, FormView):
-    extra_context = {"title": "Contact"}
-    template_name = "notifications/contact.html"
-    form_class = ContactForm
-    success_url = reverse_lazy("webcore:home")
-    success_message = "Your message has successfully been sent to David. Give him a little while to respond. Thanks!"
-
+class FormInvalidErrorMixin:
     def form_invalid(self, form):
         messages.error(self.request, "There was an error with your submission. Please correct it below.")
         return super().form_invalid(form)
+
+
+class ContactView(SuccessMessageMixin, FormInvalidErrorMixin, FormView):
+    extra_context = {"title": "Contact"}
+    form_class = ContactForm
+    success_message = "Your message has successfully been sent to David. Give him a little while to respond. Thanks!"
+    success_url = reverse_lazy("webcore:home")
+    template_name = "notifications/contact.html"
 
     def form_valid(self, form):
         name = form.cleaned_data["name"]
         email = form.cleaned_data["email"]
         message = form.cleaned_data["message"]
+        substack_sign_up = form.cleaned_data.get("substack_sign_up")
         ip_address = get_client_ip(self.request)
 
         try:
@@ -74,9 +79,26 @@ class ContactView(SuccessMessageMixin, FormView):
                 subject=f"{name} - jew.pizza Contact Form",
                 message=f"Name: {name}\nEmail: {email}\nIP: {ip_address}\n\nMessage:\n{message}",
                 from_email=None,
-                recipient_list=[settings.CONTACT_FORM_TO_ADDRESS],
+                recipient_list=[settings.EMAIL_ADDRESS],
             )
         except SMTPException:
             messages.error(self.request, "An error occurred while sending the message. Please try again.")
 
+        if substack_sign_up:
+            sign_up_for_substack(email, request=self.request)
+
+        return super().form_valid(form)
+
+
+class NewsletterView(FormInvalidErrorMixin, FormView):
+    extra_context = {"title": "Newsletter"}
+    form_class = NewsletterForm
+    success_url = reverse_lazy("webcore:home")
+    template_name = "notifications/newsletter.html"
+
+    def form_valid(self, form):
+        email = form.cleaned_data["email"]
+        if not sign_up_for_substack(email, request=self.request):
+            # Downgrade gracefully
+            return redirect("notifications:newsletter-iframe")
         return super().form_valid(form)

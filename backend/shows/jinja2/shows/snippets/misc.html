@@ -1,0 +1,9 @@
+{% set title %}
+  <p>Miscellaneous &amp; Guest Appearances</p>
+{% endset %}
+
+{% set short_description %}
+  {% markdown %}
+    {{ lipsum(n=1, html=False, min=20, max=45) }}
+  {% endmarkdown %}
+{% endset %}

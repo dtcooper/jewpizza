@@ -11,8 +11,8 @@
         <label class="mx-3" x-text="msg.message"></label>
       </div>
       <div class="flex-none">
-        <button class="btn btn-sm text-base-content btn-ghost btn-square" @click="$store.messages.splice(index, 1)">
-          {{ icon('fa:close', size='text-2xl', margin=None) }}
+        <button class="btn btn-sm text-sm btn-rounded text-base-content btn-ghost" @click="$store.messages.splice(index, 1)">
+          <span class="hidden sm:inline">Dismiss </span>{{ icon('fa:close', size='text-2xl', margin='sm:ml-2') }}
         </button>
       </div>
     </div>

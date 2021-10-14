@@ -66,7 +66,6 @@ else
     fi
 
     if [ "$DEBUG" ]; then
-        ./manage.py load_shows_from_remote --auto
         exec ./manage.py runserver
     else
         if [ -z "$GUNICORN_WORKERS" ]; then
