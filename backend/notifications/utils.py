@@ -43,7 +43,7 @@ def sign_up_for_substack(email, request=None):
         data = response.json()
 
         for key in ("email", "didSignup", 'requires_confirmation', "subscription_id"):
-            if data.get(key) is None:
+            if key not in data:
                 raise Exception(f'Expecting key "{key}" in data payload from Substack. Got: {data!r}')
     except Exception:
         django_logger = logging.getLogger("django.request")
