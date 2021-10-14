@@ -19,7 +19,7 @@
     {{ icon('mdi:robot-confused-outline', size='text-4xl', margin=None) }}
   </button>
 
-  <span x-show="open" x-data="{clippy: 1}" x-init="setInterval(() => clippy = (clippy + 1) % 2, 7500)">
+  <span x-show="open" x-data="{clippy: 1}" x-init="setInterval(() => clippy = (clippy + 1) % 2, 12000)">
     {% for i in range(2) %}
       <img src="{{ static('images/clippy-{}.gif'.format(i)) }}" class="w-[200px] h-[200px]" x-show="clippy === {{ i|attrjs }}">
     {% endfor %}
