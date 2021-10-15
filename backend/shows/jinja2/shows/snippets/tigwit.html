@@ -1,10 +1,26 @@
 {% set title %}
   <p>This Is Going Well, I Think with David Cooper</p>
-  <p><small>on <a href="#">Shouting Fire</a></small></p>
+  <p>
+    <small>
+      <span class="font-normal">on</span>
+      <span class="italic"><a href="#">Shouting Fire</a></span>
+    </small>
+  </p>
 {% endset %}
 
+{# TODO: iHeart icon? #}
 {% set short_description %}
   {% markdown %}
-    {{ lipsum(n=1, html=False, min=20, max=45) }}
+    > **It's not a podcast. It's a radio show.**
+
+    Enjoy the **incoherency**, **bad listening skills** and **self-doubt** that
+    is host **David Cooper.** As I write this description I _truly_ can't tell
+    you what the show is about. _This is going well, I think._ Broadcast live, there's
+    comedians, callers with a **real telephone**, laughter, anger, and frustration.
+    There's some very real moments. Oh, and flashing neon lights. It's a
+    nightmare. Airing live _most_ Tuesdays at 4pm PT / 7pm ET, we might take your
+    calls or texts at [+1 (415) 857-1155](tel:+14158571155). No promises. Listen
+    live at [shoutingfire.com](#) or on [iHeartRadio]().
+    _**Kill me.**_
   {% endmarkdown %}
 {% endset %}

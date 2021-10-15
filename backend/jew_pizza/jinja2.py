@@ -18,6 +18,8 @@ from widget_tweaks.templatetags.widget_tweaks import add_class, add_error_class,
 
 from webcore.constants import CACHE_KEY_PREFIX_STATIC_ASSET_MD5SUM, NAVIGATION_LINKS
 
+from .utils import format_datetime, format_datetime_short
+
 NavLink = namedtuple("NavLink", "name url url_name icon is_subnav is_active")
 
 
@@ -156,6 +158,8 @@ def create_environment(**options):
             "attrjs": attrjs,
             "bool": bool,
             "smart_title": smart_title,
+            "date": format_datetime,
+            "dateshort": format_datetime_short,
         }
     )
     return env

@@ -19,6 +19,10 @@
 * [x] Log IP from contact form.
 * [x] Vertically center homepage hero
 * [ ] namespace webcore static assets with a folder `webcore/`
+* [ ] Leave space on bottom to render page / controls when clippy is maximized
+* [ ] Bitcoin donations
+* [ ] Get duration and other info from ffprobe
+    - `ffprobe -i <filename> -print_format json -hide_banner -loglevel error -show_format -show_error -show_streams -select_streams a:0`
 
 ## Sections
 

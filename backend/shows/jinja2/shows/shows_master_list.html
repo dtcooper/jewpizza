@@ -2,44 +2,6 @@
 
 {% block content_max_width %}max-w-screen-xl{% endblock %}
 
-{# TODO: this ddoesn't have to be a macro #}
-{% macro show_stub(show) %}
-
-{% from 'shows/snippets/{}.html'.format(show.code) import short_description, title %}
-
-<div class="card border-accent border-4 lg:border-[6px] rounded-3xl">
-  {% if show.has_banner %}
-    <figure class="border-accent border-b-4 lg:border-b-[6px]">
-      <a href="#"><img src="{{ static('images/shows/{}.png'.format(show.code)) }}"></a>
-    </figure>
-  {% endif %}
-  <div class="card-body">
-    <h2 class="card-title">
-      {{ title }}
-      <div class="badge ml-2 {{ choice(['badge-secondary', 'badge-primary', 'badge-accent']) }}">
-        {{ choice(['fun', 'great', 'awesome', 'terrible', 'wicked', 'terrible', 'not good'])|upper }}
-      </div>
-    </h2>
-    <article>
-      {{ short_description }}
-      <p>Latest Episodes:</p>
-    </article>
-
-    <ul class="text-responsive list-disc list-outside ml-6 space-y-2">
-      {% for i in range(randint(2, 4)) %}
-        <li><a class="link link-primary link-hover" href="#TODO">{{ lipsum(n=1, html=False, min=4, max=10) }}</a></li>
-      {% endfor  %}
-    </ul>
-
-    <div class="justify-end card-actions">
-      <a class="btn md:btn-lg btn-secondary" href="#">
-        More Info &amp; Episodes
-      </a>
-    </div>
-  </div>
-</div>
-{% endmacro %}
-
 {% block content %}
   <article>
     Here's a list of the shows I've been on.
@@ -47,7 +9,49 @@
 
   <div class="grid md:grid-cols-2 gap-3 mt-3">
     {% for show in shows %}
-      {{ show_stub(show) }}
+      {% from 'shows/snippets/{}.html'.format(show.code) import short_description, title %}
+      {% set episodes = episodes_for_shows[show.code] %}
+
+      <div class="card border-accent border-4 lg:border-[6px] rounded-3xl">
+        {% if show.has_banner_img %}
+          <figure class="border-accent border-b-4 lg:border-b-[6px]">
+            <a href="#"><img src="{{ static('images/shows/{}.png'.format(show.code)) }}"></a>
+          </figure>
+        {% endif %}
+        <div class="card-body">
+          <h2 class="card-title">
+            {{ title }}
+            {# Badge could go here?
+            <div class="badge ml-2 {{ choice(['badge-secondary', 'badge-primary', 'badge-accent']) }}">
+              {{ choice(['fun', 'great', 'awesome', 'terrible', 'wicked', 'terrible', 'not good'])|upper }}
+            </div>
+            #}
+          </h2>
+          <article>
+            {{ short_description }}
+            {% if episodes %}
+              <p>Latest Episodes:</p>
+            {% endif %}
+          </article>
+
+          {% if episodes %}
+            <ul class="text-responsive list-disc list-outside ml-6 space-y-2">
+              {% for episode in episodes %}
+                <li>
+                  <a class="link link-primary link-hover" href="#TODO">{{ episode.start|date }}</a> /
+                  <button class="link link-accent link-hover italic" x-data  @click="alert('would play: ' + {{ episode.asset_url|attrjs }})">Play!</button>
+                </li>
+              {% endfor  %}
+            </ul>
+          {% endif %}
+
+          <div class="justify-end card-actions">
+            <a class="btn md:btn-lg btn-secondary" href="#">
+              More Info &amp; {% if episodes %}Other{% endif %} Episodes
+            </a>
+          </div>
+        </div>
+      </div>
     {% endfor %}
   </div>
 {% endblock %}

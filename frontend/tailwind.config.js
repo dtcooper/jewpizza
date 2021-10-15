@@ -54,6 +54,9 @@ module.exports = {
             maxWidth: 'none',
             a: {
               '@apply link link-primary link-hover': ''
+            },
+            blockquote: {
+              '@apply border-l-primary': ''
             }
           }
         }
