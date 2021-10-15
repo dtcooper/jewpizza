@@ -1,5 +1,5 @@
 <div
-  x-cloak x-data="{open: $persist(true).as('clippy-open')}"
+  x-cloak x-data="{open: $persist(true).as('clippy-open'), gif: {{ jewippy_gifs[0]|attrjs }}, i: 0}" x-init="console.log(gif);"
   :class="{
     'h-[200px] w-[200px] mt-[-200px]': open,
     'h-12 w-12 -mt-12': !open
@@ -19,9 +19,9 @@
     {{ icon('fa-solid:glasses', size='text-4xl', margin=None) }}
   </button>
 
-  <span x-show="open" x-data="{clippy: {{ randint(0, 1)|attrjs }}}" x-init="setInterval(() => clippy = (clippy + 1) % 2, 12000)">
-    {% for i in range(2) %}
-      <img src="{{ static('images/clippy-{}.gif'.format(i)) }}" class="w-[200px] h-[200px]" x-show="clippy === {{ i|attrjs }}">
+  <span x-show="open" x-init="setInterval(() => { i = (i + 1) % DATA.jewippyGifs.length; gif = DATA.jewippyGifs[i]; console.log(gif) }, 6000)">
+    {% for jewippy_gif in jewippy_gifs %}
+      <img src="{{ jewippy_gif }}" class="w-[200px] h-[200px]" x-show="gif === {{ jewippy_gif|attrjs }}">
     {% endfor %}
   </span>
 </div>

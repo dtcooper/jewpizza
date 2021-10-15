@@ -11,3 +11,14 @@ NAVIGATION_LINKS = [
     ("Social", "webcore:social", "mdi:twitter", True),
     ("Contact", "notifications:contact", "mdi:email", True),
 ]
+
+JEWIPPY_GIFS = (
+    'images/jewippy/Exploding.gif',
+    'images/jewippy/Flirt.gif',
+    'images/jewippy/Headphones.gif',
+    'images/jewippy/Idle.gif',
+    'images/jewippy/Idle2.gif',
+    'images/jewippy/Melted.gif',
+    'images/jewippy/Rotation.gif',
+    'images/jewippy/XanaxRain.gif',
+)

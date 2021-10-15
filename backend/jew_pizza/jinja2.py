@@ -16,7 +16,7 @@ from django.urls import reverse
 from constance import config as constance_config
 from widget_tweaks.templatetags.widget_tweaks import add_class, add_error_class, set_attr
 
-from webcore.constants import CACHE_KEY_PREFIX_STATIC_ASSET_MD5SUM, NAVIGATION_LINKS
+from webcore.constants import CACHE_KEY_PREFIX_STATIC_ASSET_MD5SUM, NAVIGATION_LINKS, JEWIPPY_GIFS
 
 from .utils import format_datetime, format_datetime_short
 
@@ -141,8 +141,9 @@ def create_environment(**options):
         {
             "choice": random.choice,
             "config": constance_config,
-            "get_messages": _get_messages_jinja2,
             "encoded_email": __encoded_email(),
+            "get_messages": _get_messages_jinja2,
+            "jewippy_gifs": list(map(static, JEWIPPY_GIFS)),
             "randint": random.randint,
             "settings": settings,
             "shuffle": shuffle,

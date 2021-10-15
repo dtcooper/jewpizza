@@ -13,7 +13,7 @@ class ShowsCommonModelAdminMixin:
     list_filter = ("published", "show")
 
     formfield_overrides = {
-        DurationField: {"widget": TimeDurationWidget(show_days=False)},
+        DurationField: {"widget": TimeDurationWidget(show_days=False, show_seconds=False)},
     }
 
     @admin.display(description='Show', ordering='show')

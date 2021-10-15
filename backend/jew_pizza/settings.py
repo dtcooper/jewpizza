@@ -226,7 +226,7 @@ CONSTANCE_REDIS_CONNECTION_CLASS = "django_redis.get_redis_connection"
 CONSTANCE_SUPERUSER_ONLY = False
 CONSTANCE_CONFIG = OrderedDict(
     (
-        ("ENABLE_CLIPPY", (True, "Enable clippy")),
+        ("ENABLE_JEWIPPY", (True, "Enable jewippy at bottom of page")),
         ("ENABLE_PLAYER", (False, "Enable audio player")),
         ("ENABLE_TEST_NOTIFICATIONS", (False, "Enable test notifications on home page for superuser only.")),
         ("HIDDEN_IMG_MODE", (False, "Enable hidden image mode (for development in public, to not look so awkward)")),

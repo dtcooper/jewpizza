@@ -21,8 +21,8 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  {% for i in range(2) %}
-    <link rel="preload" as="image" href="{{ static('images/clippy-{}.gif'.format(i)) }}">
+  {% for jewippy_gif in jewippy_gifs %}
+    <link rel="preload" as="image" href="{{ jewippy_gif }}">
   {% endfor %}
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700" rel="stylesheet">
   <link href="{{ static('css/styles.css') }}" rel="stylesheet">
@@ -41,6 +41,7 @@
     'encodedEmail': encoded_email,
     'isAuthenticated': request.user.is_authenticated,
     'isSuperuser': request.user.is_superuser,
+    'jewippyGifs': jewippy_gifs,
     'messages': get_messages(),
   } %}
   {%- do _js_data.update(js_data or {}) %}
@@ -72,10 +73,10 @@
     {% include 'webcore/components/emojis.html' %}
   </div>
 
-  {% if config.ENABLE_PLAYER or config.ENABLE_CLIPPY %}
+  {% if config.ENABLE_PLAYER or config.ENABLE_JEWIPPY %}
     <div class="relative">
-      {% if config.ENABLE_CLIPPY %}
-        {% include 'webcore/components/clippy.html' %}
+      {% if config.ENABLE_JEWIPPY %}
+        {% include 'webcore/components/jewippy.html' %}
       {% endif %}
       {% if config.ENABLE_PLAYER %}
         {% include 'webcore/components/player.html' %}
