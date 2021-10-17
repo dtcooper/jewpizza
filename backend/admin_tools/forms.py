@@ -28,3 +28,9 @@ class SendTextMessageForm(forms.Form):
         cleaned_data = super().clean()
         if cleaned_data["audience"] == "single" and not cleaned_data.get("phone_number"):
             raise ValidationError({"phone_number": "A phone number is required."})
+
+
+class SendEmailForm(forms.Form):
+    recipient = forms.EmailField(label='Receipient email address')
+    subject = forms.CharField()
+    message = forms.CharField(widget=forms.Textarea(attrs={'rows': 8}))

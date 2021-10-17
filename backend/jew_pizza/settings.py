@@ -37,6 +37,7 @@ SUBSTACK_NAME = env("SUBSTACK_NAME", default="jewpizza")
 TWITTER_NAME = env("TWITTER_NAME", default="dtcooper")
 INSTAGRAM_NAME = env("INSTAGRAM_NAME", default="dtcooper")
 FACEBOOK_NAME = env("FACEBOOK_NAME", default="dtcooper")
+RUN_HUEY = env("__RUN_HUEY", default=False)
 
 ICECAST_URL = env("ICECAST_URL")
 LOGS_URL = env("LOGS_URL")
@@ -60,6 +61,8 @@ INSTALLED_APPS = [
     # 3rd party
     "constance",
     "durationwidget",
+    "djhuey_email",
+    "huey.contrib.djhuey",
     "phonenumber_field",
     "recurrence",
     # Local
@@ -131,6 +134,7 @@ LOGGING = {
         "console": {
             "class": "logging.StreamHandler",
             "formatter": "console",
+            "level": "INFO"
         },
     },
     "loggers": {
@@ -151,11 +155,13 @@ if not DEBUG:
         "class": "django.utils.log.AdminEmailHandler",
         "include_html": True,
     }
-    LOGGING["loggers"]["django.request"] = {
-        "handlers": ["mail_admins"],
-        "level": "ERROR",
+    email_admin_logger = {
+        "handlers": ["mail_admins", "console"],
+        "level": "INFO",
         "propagate": False,
     }
+
+    LOGGING["loggers"].update({"django.request": email_admin_logger, 'huey': email_admin_logger})
 
 WSGI_APPLICATION = "jew_pizza.wsgi.application"
 
@@ -182,11 +188,20 @@ CACHES = {
     }
 }
 
+HUEY = {
+    "connection": {"host": "redis"},
+    "expire_time": 60 * 60,
+    "huey_class": "huey.PriorityRedisExpireHuey",
+    "immediate": False,
+    "name": "jewpizza",
+}
+
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 
-EMAIL_TIMEOUT = 10
+if not RUN_HUEY:  # Don't run emails async using huey
+    EMAIL_BACKEND = 'djhuey_email.backends.HueyEmailBackend'
 
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = env("TIMEZONE", default="US/Eastern")

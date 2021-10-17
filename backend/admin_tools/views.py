@@ -4,14 +4,17 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import FormView, TemplateView
+from django.core.mail import send_mail
+from django.contrib.messages.views import SuccessMessageMixin
 
 from jew_pizza.twilio import send_sms
 
-from .forms import SendTextMessageForm
+from .forms import SendEmailForm, SendTextMessageForm
 
 NAVIGATION_LINKS = (
     ("admin-tools:index", "Tools Index"),
     ("admin-tools:send-text-message", "Send Text Message"),
+    ("admin-tools:send-email", "Send Email"),
 )
 
 
@@ -42,12 +45,11 @@ class AdminFormView(AdminToolsViewMixin, FormView):
 
 
 class SendTextMessageView(AdminFormView):
-    form_class = SendTextMessageForm
-    title = "Send Text Message"
-    template_name = "admin_tools/send_text_message.html"
-    success_message = "The text message was sent!"
-    success_url = reverse_lazy("admin-tools:send-text-message")
     extra_context = {"submit_text": "Send Text Message"}
+    form_class = SendTextMessageForm
+    success_url = reverse_lazy("admin-tools:send-text-message")
+    template_name = "admin_tools/send_text_message.html"
+    title = "Send Text Message"
 
     def form_valid(self, form):
         message = form.cleaned_data["message"]
@@ -61,4 +63,19 @@ class SendTextMessageView(AdminFormView):
             # XXX TODO
             messages.warning(self.request, "Sign up messages not yet implemented.")
 
+        return super().form_valid(form)
+
+
+class SendEmailView(SuccessMessageMixin, AdminFormView):
+    extra_context = {"submit_text": "Send Email"}
+    form_class = SendEmailForm
+    success_message = "The email was sent!"
+    success_url = reverse_lazy('admin-tools:send-email')
+    title = "Send Email"
+
+    def form_valid(self, form):
+        recipient = form.cleaned_data['recipient']
+        subject = form.cleaned_data['subject']
+        message = form.cleaned_data['message']
+        send_mail(subject=subject, message=message, from_email=None, recipient_list=[recipient])
         return super().form_valid(form)

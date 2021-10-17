@@ -5,6 +5,11 @@ services:
       - .:/app
     tty: true  # needed for tailwind --watch
 
+  tasks:
+    restart: "no"
+    volumes:
+      - .:/app
+
   db:
     restart: "no"
     ports:

@@ -22,6 +22,10 @@ else
     DEBUG=
 fi
 
+if [ "$RUN_HUEY" ]; then
+    export __RUN_HUEY=1
+fi
+
 # Check if secret key is set
 if [ -z "$SECRET_KEY" ]; then
     echo 'Generating secret key in .env file'
@@ -53,6 +57,17 @@ if [ "$#" != 0 ]; then
     fi
 
     exec "$@"
+elif [ "$RUN_HUEY" ]; then
+    if [ -z "$HUEY_WORKERS" ]; then
+        HUEY_WORKERS="$(python -c 'import multiprocessing as m; print(max(m.cpu_count() * 3, 6))')"
+    fi
+
+    CMD="./manage.py run_huey --workers $HUEY_WORKERS --flush-locks"
+    if [ "$DEBUG" -a "$DEBUG" != '0' ]; then
+        exec watchmedo auto-restart --directory=./ --pattern=*.py --recursive -- $CMD
+    else
+        exec $CMD
+    fi
 else
     if [ -z "$DEBUG" ]; then
         npm --prefix=../frontend run build

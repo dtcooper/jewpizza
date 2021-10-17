@@ -15,6 +15,20 @@ services:
     ports:
       - "${BIND_ADDR:-127.0.0.1:8000}:8000"
 
+  tasks:
+    build:
+      context: .
+      args:
+        - "DEBUG=${DEBUG:-0}"
+    volumes:
+      - ./.env:/.env
+    depends_on:
+      - db
+      - redis
+    restart: always
+    environment:
+      - RUN_HUEY=1
+
   # radio:
   #   build:
   #     context: radio

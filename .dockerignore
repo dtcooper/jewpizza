@@ -1,5 +1,6 @@
 /.git/
 # Below copied from .gitignore
+.DS_Store
 .env
 /backend/.coverage
 /backend/*/static/js/*.min.js
