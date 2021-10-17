@@ -1,9 +1,9 @@
 .DS_Store
 .env
 /backend/.coverage
-/backend/*/static/js/*.min.js
+/backend/*/static/*/js/*.min.js
 /backend/htmlcov
-/backend/webcore/static/css/styles*.css
+/backend/webcore/static/webcore/css/styles*.css
 /frontend/node_modules/
 /serve/
 docker-compose.override.yml

@@ -16,4 +16,4 @@ def format_datetime(dt, format="N j, Y g:i A"):
 
 
 def format_datetime_short(dt):
-    return format_datetime(localtime(dt), format='n/j/y g:i A')
+    return format_datetime(localtime(dt), format="n/j/y g:i A")

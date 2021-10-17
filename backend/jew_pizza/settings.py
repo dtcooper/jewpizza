@@ -131,11 +131,7 @@ LOGGING = {
         },
     },
     "handlers": {
-        "console": {
-            "class": "logging.StreamHandler",
-            "formatter": "console",
-            "level": "INFO"
-        },
+        "console": {"class": "logging.StreamHandler", "formatter": "console", "level": "INFO"},
     },
     "loggers": {
         "django": {
@@ -161,7 +157,7 @@ if not DEBUG:
         "propagate": False,
     }
 
-    LOGGING["loggers"].update({"django.request": email_admin_logger, 'huey': email_admin_logger})
+    LOGGING["loggers"].update({"django.request": email_admin_logger, "huey": email_admin_logger})
 
 WSGI_APPLICATION = "jew_pizza.wsgi.application"
 
@@ -201,7 +197,7 @@ SESSION_CACHE_ALIAS = "default"
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 
 if not RUN_HUEY:  # Don't run emails async using huey
-    EMAIL_BACKEND = 'djhuey_email.backends.HueyEmailBackend'
+    EMAIL_BACKEND = "djhuey_email.backends.HueyEmailBackend"
 
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = env("TIMEZONE", default="US/Eastern")
@@ -218,7 +214,7 @@ MEDIA_ROOT = "/media_root"
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 NPM_ROOT_PATH = "/app/frontend"
-NPM_STATIC_FILES_PREFIX = "js/vendor"
+NPM_STATIC_FILES_PREFIX = "vendor/js"
 NPM_FILE_PATTERNS = {
     "@alpinejs/persist": ["dist/cdn.min.js"],
     "alpinejs": ["dist/cdn.min.js"],

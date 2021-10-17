@@ -11,8 +11,8 @@ class ShowsMasterListView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['episodes_for_shows'] = {
-            show.code: list(Episode.objects.filter(show=show.code).order_by('-start')[:self.MAX_EPISODES_PER_SHOW])
+        context["episodes_for_shows"] = {
+            show.code: list(Episode.objects.filter(show=show.code).order_by("-start")[: self.MAX_EPISODES_PER_SHOW])
             for show in SHOWS
         }
         return context

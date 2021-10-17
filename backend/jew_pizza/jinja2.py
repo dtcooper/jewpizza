@@ -16,7 +16,7 @@ from django.urls import reverse
 from constance import config as constance_config
 from widget_tweaks.templatetags.widget_tweaks import add_class, add_error_class, set_attr
 
-from webcore.constants import CACHE_KEY_PREFIX_STATIC_ASSET_MD5SUM, NAVIGATION_LINKS, JEWIPPY_GIFS
+from webcore import constants
 
 from .utils import format_datetime, format_datetime_short
 
@@ -50,7 +50,7 @@ def static(path, *args, **kwargs):
                 path = f"{path.removesuffix(ext)}.min{ext}"
 
             if not path_hash:
-                cache_key = f"{CACHE_KEY_PREFIX_STATIC_ASSET_MD5SUM}{path}"
+                cache_key = f"{constants.CACHE_KEY_PREFIX_STATIC_ASSET_MD5SUM}{path}"
                 # Now compute (or get from cache) md5 sum of file
                 path_hash = cache.get(cache_key)
                 if path_hash is None:
@@ -85,7 +85,7 @@ def nav_links(request):
     nav_links = []
     active_link = None
 
-    for name, url_name, icon, is_subnav in NAVIGATION_LINKS:
+    for name, url_name, icon, is_subnav in constants.NAVIGATION_LINKS:
         url = reverse(url_name)
         is_active = request.resolver_match.view_name == url_name
         nav_links.append(NavLink(name, url, url_name, icon, is_subnav, is_active))
@@ -143,7 +143,9 @@ def create_environment(**options):
             "config": constance_config,
             "encoded_email": __encoded_email(),
             "get_messages": _get_messages_jinja2,
-            "jewippy_gifs": list(map(static, JEWIPPY_GIFS)),
+            "jewippy_gifs": [
+                {**img, "gif": static(img["gif"]), "apng": static(img["apng"])} for img in constants.JEWIPPY_GIFS
+            ],
             "randint": random.randint,
             "settings": settings,
             "shuffle": shuffle,

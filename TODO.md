@@ -18,7 +18,7 @@
 * [ ] Opengraph tags, SEO, and 4xx + 5xx error pages
 * [x] Log IP from contact form.
 * [x] Vertically center homepage hero
-* [ ] namespace webcore static assets with a folder `webcore/`
+* [x] namespace webcore static assets with a folder `webcore/`
 * [ ] Leave space on bottom to render page / controls when clippy is maximized
 * [ ] Bitcoin donations
 * [ ] Get duration and other info from ffprobe

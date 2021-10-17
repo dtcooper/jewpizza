@@ -31,6 +31,6 @@ class SendTextMessageForm(forms.Form):
 
 
 class SendEmailForm(forms.Form):
-    recipient = forms.EmailField(label='Receipient email address')
+    recipient = forms.EmailField(label="Receipient email address")
     subject = forms.CharField()
-    message = forms.CharField(widget=forms.Textarea(attrs={'rows': 8}))
+    message = forms.CharField(widget=forms.Textarea(attrs={"rows": 8}))

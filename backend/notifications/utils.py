@@ -52,7 +52,7 @@ def sign_up_for_substack(email, request=None):
             messages.error(request, "An error occurred while signing you up for the newsletter. Please try again.")
         return False
 
-    logger.info(f"Got payload from Substack: {data!r}")
+    logger.info(f"Got payload from Substack submitting {email!r}: {data!r}")
 
     if request:
         if data["didSignup"] or data["requires_confirmation"]:

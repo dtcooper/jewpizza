@@ -1,11 +1,13 @@
 <div
-  x-cloak x-data="{open: $persist(true).as('clippy-open'), gif: {{ jewippy_gifs[0]|attrjs }}, i: 0}" x-init="console.log(gif);"
+  x-cloak x-data="jewippy"
   :class="{
     'h-[200px] w-[200px] mt-[-200px]': open,
     'h-12 w-12 -mt-12': !open
   }"
   class="pointer-events-none absolute right-4 top-0 border-primary"
+  x-show="idleLoaded"
 >
+
   <button
     x-data x-show="open" @click="open = false"
     class="pointer-events-auto btn text-content btn-ghost btn-square btn-sm absolute top-0 right-0 umami--click--clippy-close"
@@ -14,14 +16,41 @@
   </button>
   <button
     x-data x-show="!open" @click="open = true"
-    class="pointer-events-auto btn btn-primary btn-square font-sans umami--click--clippy-expand"
+    class="pointer-events-auto btn btn-primary btn-square animate-bounce umami--click--clippy-expand"
   >
     {{ icon('fa-solid:glasses', size='text-4xl', margin=None) }}
   </button>
+  {# DEBUG #}
+  <div class="absolute top-0 left-0 flex space-x-2" x-show="open">
+    {% for gif in jewippy_gifs %}
+      {% if gif.name not in ('idle', 'idleAlt') %}
+        <button
+          class="pointer-events-auto font-bold hover:bg-black hover:text-white text-sm"
+          @click="
+            queuedAnimation = null
+            if (animationQueue.length > 0) {
+              queuedAnimation = animationQueue[animationQueue.length - 1].name
+            }
 
+            if (queuedAnimation == {{ gif.name|attrjs }}) {
+              setImg({{ gif.name|attrjs }})
+              queueImg(['idle', 'idleAlt'], true)
+            } else {
+              queueImg(['idle', 'idleAlt'], true)
+              queueImg({{ gif.name|attrjs }})
+            }
+          "
+        >{{ gif.name[:2] }}</button>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <img x-ref="jewippyGif" height="200" width="200" class="w-[200px] h-[200px] absolote bottom-0 right-0 select-none drag-none" x-show="open">
+  {#
   <span x-show="open" x-init="setInterval(() => { i = (i + 1) % DATA.jewippyGifs.length; gif = DATA.jewippyGifs[i]; console.log(gif) }, 6000)">
     {% for jewippy_gif in jewippy_gifs %}
-      <img src="{{ jewippy_gif }}" class="w-[200px] h-[200px]" x-show="gif === {{ jewippy_gif|attrjs }}">
+      <img src="{{ jewippy_gif }}" class="w-[200px] h-[200px] absolote bottom-0 right-0" x-show="gif === {{ jewippy_gif|attrjs }}">
     {% endfor %}
   </span>
+  #}
 </div>

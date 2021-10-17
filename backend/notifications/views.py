@@ -1,6 +1,5 @@
 import logging
 import re
-from smtplib import SMTPException
 
 from twilio.twiml.messaging_response import MessagingResponse
 from unidecode import unidecode
@@ -21,6 +20,8 @@ from jew_pizza.utils import get_client_ip
 from .forms import ContactForm, NewsletterForm
 from .models import TextMessage
 from .utils import sign_up_for_substack
+
+logger = logging.getLogger(f"jewpizza.{__name__}")
 
 
 @method_decorator(csrf_exempt, name="dispatch")
@@ -75,28 +76,20 @@ class ContactView(SuccessMessageMixin, FormInvalidErrorMixin, FormView):
         substack_sign_up = form.cleaned_data.get("substack_sign_up")
         ip_address = get_client_ip(self.request)
 
-        try:
-            send_mail(
-                subject=f"{name} - jew.pizza Contact Form",
-                message=(
-                    f"Name: {name}\nEmail: {email}\nNewsletter sign-up: {'yes' if substack_sign_up else 'no'}\n"
-                    f"IP: {ip_address}\n\nMessage:\n{message}"
-                ),
-                from_email=None,
-                recipient_list=[settings.EMAIL_ADDRESS],
-            )
-        except SMTPException:
-            messages.error(
-                self.request,
-                "An error occurred while sending your email. Try again or send your message to"
-                f" {settings.EMAIL_ADDRESS} directly.",
-            )
-            django_logger = logging.getLogger("django.request")
-            django_logger.exception("An error occurred while sending an email via the contact form.")
+        send_mail(
+            subject=f"{name} - jew.pizza Contact Form",
+            message=(
+                f"Name: {name}\nEmail: {email}\nNewsletter sign-up: {'yes' if substack_sign_up else 'no'}\n"
+                f"IP: {ip_address}\n\nMessage:\n{message}"
+            ),
+            from_email=None,
+            recipient_list=[settings.EMAIL_ADDRESS],
+        )
 
         if substack_sign_up:
             sign_up_for_substack(email, request=self.request)
 
+        logger.info(f"Send contact form email from {email}")
         return super().form_valid(form)
 
 

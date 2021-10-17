@@ -1,11 +1,10 @@
-from django.conf import settings
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.messages.views import SuccessMessageMixin
+from django.core.mail import send_mail
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import FormView, TemplateView
-from django.core.mail import send_mail
-from django.contrib.messages.views import SuccessMessageMixin
 
 from jew_pizza.twilio import send_sms
 
@@ -70,12 +69,12 @@ class SendEmailView(SuccessMessageMixin, AdminFormView):
     extra_context = {"submit_text": "Send Email"}
     form_class = SendEmailForm
     success_message = "The email was sent!"
-    success_url = reverse_lazy('admin-tools:send-email')
+    success_url = reverse_lazy("admin-tools:send-email")
     title = "Send Email"
 
     def form_valid(self, form):
-        recipient = form.cleaned_data['recipient']
-        subject = form.cleaned_data['subject']
-        message = form.cleaned_data['message']
+        recipient = form.cleaned_data["recipient"]
+        subject = form.cleaned_data["subject"]
+        message = form.cleaned_data["message"]
         send_mail(subject=subject, message=message, from_email=None, recipient_list=[recipient])
         return super().form_valid(form)

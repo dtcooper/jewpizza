@@ -21,35 +21,34 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  {% for jewippy_gif in jewippy_gifs %}
-    <link rel="preload" as="image" href="{{ jewippy_gif }}">
-  {% endfor %}
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700" rel="stylesheet">
-  <link href="{{ static('css/styles.css') }}" rel="stylesheet">
+  <link href="{{ static('webcore/css/styles.css') }}" rel="stylesheet">
   {% if settings.DEBUG and config.HIDDEN_IMG_MODE %}
     <style>img { filter: brightness(0.075); }</style>
   {% endif %}
   <script src="https://code.iconify.design/2/2.0.4/iconify.min.js"></script>
-  <script src="{{ static('js/vendor/navigo/lib/navigo.min.js') }}"></script>
-  <script src="{{ static('js/vendor/@alpinejs/persist/dist/cdn.min.js') }}" defer></script>
-  <script src="{{ static('js/vendor/alpinejs/dist/cdn.min.js') }}" defer></script>
-  <script src="{{ static('js/vendor/moment/min/moment.min.js') }}"></script>
-  <script src="{{ static('js/vendor/moment-timezone/builds/moment-timezone-with-data-1970-2030.min.js') }}"></script>
-  {%- set _js_data = {
-    'currentPage': active_link,
-    'debug': settings.DEBUG,
-    'encodedEmail': encoded_email,
-    'isAuthenticated': request.user.is_authenticated,
-    'isSuperuser': request.user.is_superuser,
-    'jewippyGifs': jewippy_gifs,
-    'messages': get_messages(),
-  } %}
-  {%- do _js_data.update(js_data or {}) %}
+  <script src="{{ static('vendor/js/navigo/lib/navigo.min.js') }}"></script>
+  <script src="{{ static('vendor/js/@alpinejs/persist/dist/cdn.min.js') }}" defer></script>
+  <script src="{{ static('vendor/js/alpinejs/dist/cdn.min.js') }}" defer></script>
+  <script src="{{ static('vendor/js/moment/min/moment.min.js') }}"></script>
+  <script src="{{ static('vendor/js/moment-timezone/builds/moment-timezone-with-data-1970-2030.min.js') }}"></script>
   <script>
-    const DATA = window.DATA = {{ _js_data|tojson }}
+    const DATA = window.DATA = {{ {
+      'apngTestUrl': static('webcore/images/apng-test.apng'),
+      'currentPage': active_link,
+      'debug': settings.DEBUG,
+      'encodedEmail': encoded_email,
+      'isAuthenticated': request.user.is_authenticated,
+      'isSuperuser': request.user.is_superuser,
+      'jewippyGifs': jewippy_gifs,
+      'messages': get_messages(),
+    }|tojson(indent=2 if settings.DEBUG else none) }}
   </script>
-  <script src="{{ static('js/base.js') }}"></script>
-  <script src="{{ static('js/home.js') }}"></script>
+  <script src="{{ static('webcore/js/base.js') }}"></script>
+  <script src="{{ static('webcore/js/home.js') }}"></script>
+  {% if config.ENABLE_JEWIPPY %}
+    <script src="{{ static('webcore/js/jewippy.js') }}"></script>
+  {% endif %}
 
   {% if settings.UMAMI_WEBSITE_ID and settings.UMAMI_SCRIPT_URL %}
     <script async defer data-website-id="{{ settings.UMAMI_WEBSITE_ID }}" src="{{ settings.UMAMI_SCRIPT_URL }}"></script>
