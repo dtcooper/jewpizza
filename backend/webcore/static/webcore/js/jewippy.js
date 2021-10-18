@@ -10,46 +10,44 @@ document.addEventListener('alpine:init', () => {
       choices: new Set(),
       current: 'idle',
       open: this.$persist(true),
-      imgStyle: this.$persist(null),
       idleLoaded: false,
       allLoaded: false,
       timeout: null,
       animationQueue: [],
       init () {
-        if (this.imgStyle === null) {
-          const apngTest = new window.Image()
-          const apngTestCtx = document.createElement('canvas').getContext('2d')
-          apngTest.addEventListener('load', () => {
-            apngTestCtx.drawImage(apngTest, 0, 0)
-            this.imgStyle = (apngTestCtx.getImageData(0, 0, 1, 1).data[3] === 0) ? 'apng' : 'gif'
-            this.initWithImages()
-          })
-          apngTest.src = DATA.apngTestUrl
-        } else {
-          this.initWithImages()
-        }
-      },
-      initWithImages () {
         let numLoaded = 0
-        const numToLoad = Object.keys(DATA.jewippyGifs).length
-        for (const gif of DATA.jewippyGifs) {
-          const img = new window.Image()
-          img.addEventListener('load', () => {
-            numLoaded += 1
-            if (gif.name === 'idle') {
-              this.idleLoaded = true
-              this.setImg('idle')
-            }
-            if (numLoaded === numToLoad) {
-              this.allLoaded = true
-              this.queueImg(['idle', 'idleAlt'], true)
-            }
-          })
-          img.src = gif[this.imgStyle]
-          this.imgs[gif.name] = img
-          this.lengths[gif.name] = gif.length
-          this.choices.add(gif.name)
-        }
+        const jewippyGifs = Array.from(DATA.jewippyGifs)
+        const numToLoad = jewippyGifs.length
+
+        const first = jewippyGifs.shift() // First load idle gif
+        const firstImg = new window.Image()
+        firstImg.addEventListener('load', () => {
+          numLoaded += 1
+          this.idleLoaded = true
+          this.setImg(first.name)
+          this._debug(`${first.name} image loaded`)
+
+          for (const gif of jewippyGifs) {
+            const img = new window.Image()
+            img.addEventListener('load', () => {
+              this._debug(`${gif.name} loaded`)
+              numLoaded += 1
+              if (numLoaded === numToLoad) {
+                this.allLoaded = true
+                this.queueImg(['idle', 'idleAlt'], true)
+              }
+            })
+            img.src = gif.url
+            this.imgs[gif.name] = img
+            this.lengths[gif.name] = gif.length
+            this.choices.add(gif.name)
+          }
+        })
+
+        firstImg.src = first.url
+        this.imgs[first.name] = firstImg
+        this.lengths[first.name] = first.length
+        this.choices.add(first.name)
       },
       _debug (str) {
         // XXX remove me

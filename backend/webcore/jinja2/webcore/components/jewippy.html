@@ -21,11 +21,11 @@
     {{ icon('fa-solid:glasses', size='text-4xl', margin=None) }}
   </button>
   {# DEBUG #}
-  <div class="absolute top-0 left-0 flex space-x-2" x-show="open">
+  <div class="absolute top-0 left-0 flex space-x-1" x-show="open">
     {% for gif in jewippy_gifs %}
       {% if gif.name not in ('idle', 'idleAlt') %}
         <button
-          class="pointer-events-auto font-bold hover:bg-black hover:text-white text-sm"
+          class="pointer-events-auto font-bold hover:bg-base-200 text-xs"
           @click="
             queuedAnimation = null
             if (animationQueue.length > 0) {
@@ -40,7 +40,7 @@
               queueImg({{ gif.name|attrjs }})
             }
           "
-        >{{ gif.name[:2] }}</button>
+        >{{ gif.name[:3] }}</button>
       {% endif %}
     {% endfor %}
   </div>

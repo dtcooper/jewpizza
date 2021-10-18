@@ -143,9 +143,7 @@ def create_environment(**options):
             "config": constance_config,
             "encoded_email": __encoded_email(),
             "get_messages": _get_messages_jinja2,
-            "jewippy_gifs": [
-                {**img, "gif": static(img["gif"]), "apng": static(img["apng"])} for img in constants.JEWIPPY_GIFS
-            ],
+            "jewippy_gifs": [{**img, "url": static(img["url"])} for img in constants.JEWIPPY_GIFS],
             "randint": random.randint,
             "settings": settings,
             "shuffle": shuffle,
@@ -155,14 +153,14 @@ def create_environment(**options):
     )
     env.filters.update(
         {
+            "add_attr": set_attr,
             "add_class": add_class,
             "add_error_class": add_error_class,
-            "add_attr": set_attr,
             "attrjs": attrjs,
             "bool": bool,
-            "smart_title": smart_title,
             "date": format_datetime,
             "dateshort": format_datetime_short,
+            "smart_title": smart_title,
         }
     )
     return env
