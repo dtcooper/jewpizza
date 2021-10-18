@@ -46,3 +46,6 @@ COPY . /app/
 
 ENTRYPOINT ["/app/entrypoint.sh"]
 CMD []
+
+ARG GIT_REV=unknown
+ENV GIT_REV=${GIT_REV}

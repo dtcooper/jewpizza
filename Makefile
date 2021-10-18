@@ -19,7 +19,7 @@ pre-commit:
 		exit 0'
 
 build:
-	@$(COMPOSE) build --pull
+	@$(COMPOSE) build --pull --build-arg GIT_REV=$(shell git describe --tags --always --dirty)
 
 shell:
 	@$(COMPOSE) run --rm --service-ports app bash || true
