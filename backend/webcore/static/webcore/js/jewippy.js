@@ -1,20 +1,36 @@
 /* global Alpine, DATA */
 
 document.addEventListener('alpine:init', () => {
-  const animationBufferMS = 0.25
+  let component
 
+  Alpine.store('jewippy', {
+    get open () {
+      return component.open
+    },
+    set open (value) {
+      component.open = value
+    },
+    get setImg () {
+      return function () { return component.setImg.apply(component, arguments) }
+    },
+    get queueImg () {
+      return function () { return component.queueImg.apply(jewippyComponent, arguments) }
+    }
+  })
   Alpine.data('jewippy', function () { // Use function() here to bind $persist
     return {
       imgs: {},
       lengths: {},
       choices: new Set(),
       current: 'idle',
-      open: this.$persist(true),
+      open: this.$persist(true).as('jewippy-open'),
       idleLoaded: false,
       allLoaded: false,
       timeout: null,
       animationQueue: [],
       init () {
+        component = this
+
         let numLoaded = 0
         const jewippyGifs = Array.from(DATA.jewippyGifs)
         const numToLoad = jewippyGifs.length
@@ -90,7 +106,7 @@ document.addEventListener('alpine:init', () => {
         const actual = this._resolveName(name)
         this._debug(`setImg(${JSON.stringify(name)} / actual=${actual}) (emptyQueue=${emptyQueue || false}) (queue=${JSON.stringify(this.animationQueue)})`)
         this.$refs.jewippyGif.src = this.imgs[actual].src
-        this.timeout = setTimeout(() => this._timeoutFunc(), this.lengths[actual] - animationBufferMS)
+        this.timeout = setTimeout(() => this._timeoutFunc(), this.lengths[actual])
       },
       queueImg (name, emptyQueue, hook) {
         if ((Array.isArray(name) && name.every((val) => this.choices.has(val))) || this.choices.has(name)) {
@@ -100,7 +116,7 @@ document.addEventListener('alpine:init', () => {
           this.animationQueue.push({ name: name, hook: hook })
           this._debug(`adding to animation queue: [${JSON.stringify(name)}] (emptyQueue=${emptyQueue || false}) (queue=${JSON.stringify(this.animationQueue)})`)
         } else if (DATA.debug) {
-          console.error(`invalid animation(s): [${JSON.stringify(name)}]`)
+          console.error(`invalid animation(s): ${JSON.stringify(name)}. Valid choices: ${JSON.stringify([...this.choices])}`)
         }
       }
     }

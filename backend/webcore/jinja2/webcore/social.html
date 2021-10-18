@@ -14,7 +14,7 @@
     </p>
   </article>
 
-  <div class="mt-6 grid xs:grid-cols-2 sm:grid-cols-3 gap-y-2 gap-x-3">
+  <div class="mt-6 grid xs:grid-cols-2 sm:grid-cols-3 gap-2 md:gap-3">
     {%
       for name, icon_name, link in (
         ('Twitter', 'simple-icons:twitter', 'https://twitter.com/{}'.format(settings.TWITTER_NAME)),
@@ -26,7 +26,7 @@
       )
     %}
       <a
-        class="btn md:btn-lg btn-neutral umami--click--social-{{ name|lower }}" target="_blank"
+        class="btn md:btn-lg btn-neutral btn-rounded italic umami--click--social-{{ name|lower }}" target="_blank"
         {% if name == 'Email' %}
           x-data :href="`mailto:${emailAddress}`"
         {% else %}

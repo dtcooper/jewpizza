@@ -39,7 +39,7 @@
 
         <div class="grid xs:grid-cols-2 xs:grid-rows-2 gap-2 sm:block mt-6 lg:mt-8 text-center lg:text-left select-none">
           {% for link in nav_links[1:5] %} {# Skip home (first item) #}
-            <a data-navigo class="btn btn-neutral " href="{{ link.url }}">
+            <a data-navigo class="btn btn-neutral btn-rounded" href="{{ link.url }}">
               {{ icon(link.icon, size='text-2xl', margin='mr-2') }} {{ link.name }}
             </a>
           {% endfor %}
