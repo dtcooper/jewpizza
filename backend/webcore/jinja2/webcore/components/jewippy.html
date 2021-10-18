@@ -16,7 +16,8 @@
   </button>
   <button
     x-data x-show="!open" @click="open = true"
-    class="pointer-events-auto btn btn-primary btn-square animate-bounce umami--click--clippy-expand"
+    {# The animate classes here are insane, don't use daisyUI's btn for this as a one-off... just use tailwind utilities #}
+    class="pointer-events-auto btn btn-primary btn-lg btn-square rounded-lg bg-opacity-80 border-none no-animation animate-bounce active:animation-bounce hover:animate-bounce focus:animate-bounce active:focus:animate-bounce active:hover:animate-bounce umami--click--clippy-expand"
   >
     {{ icon('fa-solid:glasses', size='text-4xl', margin=None) }}
   </button>
