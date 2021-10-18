@@ -1,4 +1,5 @@
 from collections import OrderedDict
+import logging
 import os
 from pathlib import Path
 import sys
@@ -10,7 +11,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env()
 if os.path.exists("/.env"):
-    env.read_env("/.env")
+    logging.disable(logging.CRITICAL)
+    environ.Env.read_env("/.env")  # django-environ 0.8.0 makes noisy logs here
+    logging.disable(logging.NOTSET)
 
 
 SECRET_KEY = env("SECRET_KEY")

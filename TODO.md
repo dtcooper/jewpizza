@@ -24,8 +24,8 @@
 * [ ] Get duration and other info from ffprobe
     - `ffprobe -i <filename> -print_format json -hide_banner -loglevel error -show_format -show_error -show_streams -select_streams a:0`
 * [ ] Use headphone jewippy when you click shows or listen
-* [ ] [Optimize images](https://imageoptim.com/mac)
-* [ ] favicon emoji using inline SVG (google it)
+* [x] [Optimize images](https://imageoptim.com/mac)
+* [x] favicon emoji using inline SVG (google it)
 * [ ] Social media card, Twitter card validator (Alpine day source code? 1200x660 jpg Twitter card.)
 * [ ] Dark mode?
 * [ ] Use devtools lighthouse?

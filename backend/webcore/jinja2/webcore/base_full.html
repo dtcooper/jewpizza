@@ -17,7 +17,7 @@
   <!-- git rev: {{ settings.GIT_REV }} -->
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <title>{% if settings.DEBUG %}[dev] {% endif %}{{ title|default('jew.pizza') }}</title>
+  <title>{% if settings.DEBUG %}[dev] {% endif %}{% if title %}{{ title }} - {% endif %}jew.pizza</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
