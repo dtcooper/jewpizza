@@ -40,6 +40,7 @@ SUBSTACK_NAME = env("SUBSTACK_NAME", default="jewpizza")
 TWITTER_NAME = env("TWITTER_NAME", default="dtcooper")
 INSTAGRAM_NAME = env("INSTAGRAM_NAME", default="dtcooper")
 FACEBOOK_NAME = env("FACEBOOK_NAME", default="dtcooper")
+TIKTOK_NAME = env("TIKTOK_NAME", default="jew.pizza")
 RUN_HUEY = env.bool("__RUN_HUEY", default=False)
 GIT_REV = env("GIT_REV", default="unknown")
 

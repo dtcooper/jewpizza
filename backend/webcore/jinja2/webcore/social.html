@@ -14,25 +14,26 @@
     </p>
   </article>
 
-  <div class="mt-6 text-center flex flex-col space-y-3 md:space-y-0 md:flex-row md:justify-between">
+  <div class="mt-6 grid xs:grid-cols-2 sm:grid-cols-3 gap-y-2 gap-x-3">
     {%
       for name, icon_name, link in (
         ('Twitter', 'simple-icons:twitter', 'https://twitter.com/{}'.format(settings.TWITTER_NAME)),
         ('Instagram', 'simple-icons:instagram', 'https://www.instagram.com/{}/'.format(settings.INSTAGRAM_NAME)),
-        ('Facebook', 'simple-icons:facebook', 'https://www.facebook.com/{}'.format(settings.FACEBOOK_NAME)),
         ('Substack', 'simple-icons:substack', 'https://{}.substack.com/'.format(settings.SUBSTACK_NAME)),
+        ('Facebook', 'simple-icons:facebook', 'https://www.facebook.com/{}'.format(settings.FACEBOOK_NAME)),
+        ('Tiktok', 'simple-icons:tiktok', 'https://www.tiktok.com/@{}'.format(settings.TIKTOK_NAME)),
         ('Email', 'ic:outline-email', None)
       )
     %}
       <a
-        class="btn lg:btn-lg btn-neutral umami--click--social-{{ name|lower }}" target="_blank"
+        class="btn md:btn-lg btn-neutral umami--click--social-{{ name|lower }}" target="_blank"
         {% if name == 'Email' %}
           x-data :href="`mailto:${emailAddress}`"
         {% else %}
           href="{{ link }}"
         {% endif %}
       >
-        {{ name }} {{ icon(icon_name, size='text-2xl lg:text-3xl', margin='ml-2 xl:ml-3') }}
+        {{ name }} {{ icon(icon_name, size='text-2xl md:text-3xl', margin='ml-2 md:ml-3') }}
       </a>
     {% endfor %}
   </div>
