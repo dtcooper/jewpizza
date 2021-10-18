@@ -4,7 +4,7 @@
     'h-[200px] w-[200px] mt-[-200px]': open,
     'h-12 w-12 -mt-12': !open
   }"
-  class="pointer-events-none absolute right-4 top-0 border-primary"
+  class="pointer-events-none absolute right-6 top-0 border-primary"
   x-show="idleLoaded"
 >
 
@@ -46,11 +46,4 @@
   </div>
 
   <img x-ref="jewippyGif" height="200" width="200" class="w-[200px] h-[200px] absolote bottom-0 right-0 select-none drag-none" x-show="open">
-  {#
-  <span x-show="open" x-init="setInterval(() => { i = (i + 1) % DATA.jewippyGifs.length; gif = DATA.jewippyGifs[i]; console.log(gif) }, 6000)">
-    {% for jewippy_gif in jewippy_gifs %}
-      <img src="{{ jewippy_gif }}" class="w-[200px] h-[200px] absolote bottom-0 right-0" x-show="gif === {{ jewippy_gif|attrjs }}">
-    {% endfor %}
-  </span>
-  #}
 </div>

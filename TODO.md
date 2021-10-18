@@ -20,6 +20,7 @@
 * [x] Vertically center homepage hero
 * [x] namespace webcore static assets with a folder `webcore/`
 * [ ] Leave space on bottom to render page / controls when clippy is maximized
+    - [ ] Consider removing emoji footer
 * [ ] Bitcoin donations
 * [ ] Get duration and other info from ffprobe
     - `ffprobe -i <filename> -print_format json -hide_banner -loglevel error -show_format -show_error -show_streams -select_streams a:0`

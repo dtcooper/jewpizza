@@ -102,12 +102,6 @@ document.addEventListener('alpine:init', () => {
         } else if (DATA.debug) {
           console.error(`invalid animation(s): [${JSON.stringify(name)}]`)
         }
-      },
-      testClick () {
-        if (this.allLoaded) {
-          this.queueImg(['idle', 'idleAlt'], true)
-          this.queueImg('xanaxRain', false)
-        }
       }
     }
   })
