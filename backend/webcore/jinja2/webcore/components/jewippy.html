@@ -1,10 +1,10 @@
 <div
   x-cloak x-data="jewippy"
   :class="{
-    'h-[320px] w-[300px] mt-[-320px]': open,
+    'h-[320px] w-[275px] mt-[-320px]': open,
     'h-16 w-16 -mt-16': !open
   }"
-  class="pointer-events-none absolute right-6 top-0 border-primary"
+  class="pointer-events-none absolute right-0 xs:right-2 sm:right top-0 border-primary"
   x-show="idleLoaded"
 >
 
@@ -22,20 +22,33 @@
     {{ icon('fa-solid:glasses', size='text-5xl', margin=None) }}
   </button>
   {# DEBUG #}
-  <div class="absolute bottom-8 left-0 grid grid-cols-[auto,auto] gap-px" x-show="open">
+  <div class="absolute bottom-4 left-0 grid grid-cols-[auto,auto] gap-px" x-show="open">
     {% for gif in jewippy_gifs %}
       <button
-        class="pointer-events-auto font-bold border-black border py-px px-0.5 bg-base-200 hover:bg-base-300 active:bg-black active:text-base-100 text-2xs"
+        class="pointer-events-auto font-bold border-black border p-px bg-base-200 hover:bg-base-300 active:bg-black active:text-base-100 text-[9.5px]"
         @click="queueImg(['idle', 'idleAlt'], true); queueImg({{ gif.name|attrjs }})"
       >{{ gif.name }}</button>
       <button
-        class="pointer-events-auto font-bold border-black border py-px px-0.5 bg-base-200 hover:bg-base-300 active:bg-black active:text-base-100 text-2xs"
+        class="pointer-events-auto font-bold border-black border p-px bg-base-200 hover:bg-base-300 active:bg-black active:text-base-100 text-[9.5px]"
         @click="setImg({{ gif.name|attrjs }}); queueImg(['idle', 'idleAlt'], true)"
       >force</button>
     {% endfor %}
   </div>
 
-  <img src="{{ static('webcore/images/jewippy/bubble.svg') }}" width="220" height="155" class="w-[220px] h-[155px] absolute top-0 left-0 select-none drag-none" x-show="open">
-  <div class="absolute absolute top-2 left-3 w-[200px] h-[97px] overflow-y-auto pointer-events-auto font-clippy text-sm">{{ lipsum(n=1, html=false, min=15, max=30) }}</div>
+  <div class="w-[220px] h-[155px] px-[3px] pt-[3px] absolute top-0 left-0 jewippy-bubble" x-show="open">
+    <div class="pointer-events-auto w-[214px] h-[111px] p-1 pl-1.5 overflow-y-scroll font-jewippy text-sm flex flex-col">
+      <div class="flex-1 flex flex-col justify-center">What would you like to Jew today?</div>
+      <div>
+        <button class="btn-jewippy">Test</button>
+        <button class="btn-jewippy">Button</button>
+      </div>
+    </div>
+  </div>
+  {# <div class="absolute top-2 left-3 w-[200px] h-[97px] min-h-[97px] flex flex-col justify-center overflow-y-auto pointer-events-auto font-clippy text-[11px]">
+    What do you want to Jew today?
+    <button class="btn-clippy">Test</button>
+    {{ lipsum(html=false) }}
+
+  </div> #}
   <img x-ref="jewippyGif" height="200" width="200" class="w-[200px] h-[200px] absolute bottom-0 right-0 select-none drag-none" x-show="open">
 </div>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="224px" height="162px" viewBox="0 0 224 162" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>Path</title>
+<svg width="220px" height="155px" viewBox="0 0 220 155" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>bubble</title>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <path d="M16.9827191,2 C8.68229273,2 2,8.53352194 2,16.6491523 L2,104.391663 C2,112.507293 8.68229273,119.040815 16.9827191,119.040815 L64.4913596,119.040815 L58.0784336,157 L94.8027601,119.040815 L207.017281,119.040815 C215.317707,119.040815 222,112.507293 222,104.391663 L222,16.6491523 C222,8.53352194 215.317707,2 207.017281,2 L16.9827191,2 Z" id="Path" stroke="#171731" stroke-width="3" fill="#F7F5C9" transform="translate(112.000000, 79.500000) scale(-1, 1) translate(-112.000000, -79.500000) "></path>
+        <path d="M218.5,1.5 L218.5,115.509852 L114.157452,115.509852 L79.9145006,150.407585 L86.583318,115.509852 L1.5,115.509852 L1.5,1.5 L218.5,1.5 Z" id="bubble" stroke="#171731" stroke-width="3" fill="#F7F5C9" transform="translate(110.000000, 77.500000) scale(-1, 1) translate(-110.000000, -77.500000) "></path>
     </g>
 </svg>

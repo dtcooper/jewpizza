@@ -37,7 +37,7 @@ module.exports = {
     extend: {
       fontFamily: {
         mono: ['"Space Mono"', ...defaultTheme.fontFamily.mono],
-        clippy: ['"Times New Roman"', 'times', '"Microsoft Sans"', 'sans-serif']
+        jewippy: ['"Pixelated MS Sans Serif"', '"Microsoft Sans"', 'sans-serif']
       },
       colors: {
         'base-alt': '#ffdfad',

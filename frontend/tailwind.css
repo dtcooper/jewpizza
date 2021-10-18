@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Fonts from https://github.com/jdan/98.css/ */
+@font-face {
+  font-family: "Pixelated MS Sans Serif";
+  src: url("../fonts/ms-sans-serif.woff") format("woff");
+  src: url("../fonts/ms-sans-serif.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Pixelated MS Sans Serif";
+  src: url("../fonts/ms-sans-serif-bold.woff") format("woff");
+  src: url("../fonts/ms-sans-serif-bold.woff2") format("woff2");
+  font-weight: bold;
+  font-style: normal;
+}
+
 
 @layer utilities {
     /* https://github.com/postcss/postcss-100vh-fix */
@@ -52,6 +69,10 @@
             -o-user-drag: none;
             user-drag: none;
         }
+
+        .font-smoothing-none {
+          -webkit-font-smoothing: none;
+        }
     }
 }
 
@@ -70,4 +91,151 @@ article {
 .btn-error, .btn-warning, .btn-success, .btn-info {
     /* daisyUI doesn't have hover states for these */
     @apply text-white hover:brightness-[0.96];
+}
+
+/* Jewippy */
+
+.jewippy-bubble {
+  background: url('../images/jewippy/bubble.svg') no-repeat center center;
+}
+
+:root {
+  /* Color */
+  --w98-surface: #c0c0c0;
+  --w98-button-highlight: #ffffff;
+  --w98-button-face: #dfdfdf;
+  --w98-button-shadow: #808080;
+  --w98-window-frame: #0a0a0a;
+  --w98-dialog-blue: #000080;
+  --w98-dialog-blue-light: #1084d0;
+  --w98-dialog-gray: #808080;
+  --w98-dialog-gray-light: #b5b5b5;
+  --w98-link-blue: #0000ff;
+
+  /* Spacing */
+  --w98-element-spacing: 8px;
+  --w98-grouped-button-spacing: 4px;
+  --w98-grouped-element-spacing: 6px;
+  --w98-radio-width: 12px;
+  --w98-checkbox-width: 13px;
+  --w98-radio-label-spacing: 6px;
+  --w98-range-track-height: 4px;
+  --w98-range-spacing: 10px;
+
+  /* Some detailed computations for radio buttons and checkboxes */
+  --w98-radio-total-width-precalc: var(--w98-radio-width) + var(--w98-radio-label-spacing);
+  --w98-radio-total-width: calc(var(--w98-radio-total-width-precalc));
+  --w98-radio-left: calc(-1 * var(--w98-radio-total-width-precalc));
+  --w98-radio-dot-width: 4px;
+  --w98-radio-dot-top: calc(var(--w98-radio-width) / 2 - var(--w98-radio-dot-width) / 2);
+  --w98-radio-dot-left: calc(
+    -1 * (var(--w98-radio-total-width-precalc)) + var(--w98-radio-width) / 2 - var(
+        --w98-radio-dot-width
+      ) / 2
+  );
+
+  --w98-checkbox-total-width-precalc: var(--w98-checkbox-width) +
+    var(--w98-radio-label-spacing);
+  --w98-checkbox-total-width: calc(var(--w98-checkbox-total-width-precalc));
+  --w98-checkbox-left: calc(-1 * var(--w98-checkbox-total-width-precalc));
+  --w98-checkmark-width: 7px;
+  --w98-checkmark-top: 3px;
+  --w98-checkmark-left: 3px;
+
+  /* Borders */
+  --w98-border-width: 1px;
+  --w98-border-raised-outer: inset -1px -1px var(--w98-window-frame),
+    inset 1px 1px var(--w98-button-highlight);
+  --w98-border-raised-inner: inset -2px -2px var(--w98-button-shadow),
+    inset 2px 2px var(--w98-button-face);
+  --w98-border-sunken-outer: inset -1px -1px var(--w98-button-highlight),
+    inset 1px 1px var(--w98-window-frame);
+  --w98-border-sunken-inner: inset -2px -2px var(--w98-button-face),
+    inset 2px 2px var(--w98-button-shadow);
+
+  /* Window borders flip button-face and button-highlight */
+  --w98-border-window-outer: inset -1px -1px var(--w98-window-frame),
+    inset 1px 1px var(--w98-button-face);
+  --w98-border-window-inner: inset -2px -2px var(--w98-button-shadow),
+    inset 2px 2px var(--w98-button-highlight);
+
+  /* Field borders (checkbox, input, etc) flip window-frame and button-shadow */
+  --w98-border-field: inset -1px -1px var(--w98-button-highlight),
+    inset 1px 1px var(--w98-button-shadow), inset -2px -2px var(--w98-button-face),
+    inset 2px 2px var(--w98-window-frame);
+}
+
+.jewippy-bubble *::-webkit-scrollbar {
+  width: 16px;
+}
+.jewippy-bubble *::-webkit-scrollbar:horizontal {
+  height: 17px;
+}
+
+.jewippy-bubble *::-webkit-scrollbar-corner {
+  background: var(--w98-button-face);
+}
+
+.jewippy-bubble *::-webkit-scrollbar-track {
+  background-image: url('../images/jewippy/icons/scrollbar-background.svg');
+}
+
+.jewippy-bubble *::-webkit-scrollbar-thumb {
+  background-color: var(--w98-button-face);
+  box-shadow: var(--w98-border-raised-outer), var(--w98-border-raised-inner);
+}
+
+.jewippy-bubble *::-webkit-scrollbar-button:horizontal:start:decrement,
+.jewippy-bubble *::-webkit-scrollbar-button:horizontal:end:increment,
+.jewippy-bubble *::-webkit-scrollbar-button:vertical:start:decrement,
+.jewippy-bubble *::-webkit-scrollbar-button:vertical:end:increment {
+  display: block;
+}
+
+.jewippy-bubble *::-webkit-scrollbar-button:vertical:start {
+  height: 17px;
+  background-image: url('../images/jewippy/icons/button-up.svg');
+}
+.jewippy-bubble *::-webkit-scrollbar-button:vertical:end {
+  height: 17px;
+  background-image: url('../images/jewippy/icons/button-down.svg');
+}
+.jewippy-bubble *::-webkit-scrollbar-button:horizontal:start {
+  width: 16px;
+  background-image: url('../images/jewippy/icons/button-left.svg');
+}
+.jewippy-bubble *::-webkit-scrollbar-button:horizontal:end {
+  width: 16px;
+  background-image: url('../images/jewippy/icons/button-right.svg');
+}
+
+.btn-jewippy {
+  box-sizing: border-box;
+  border: none;
+  background: var(--w98-surface);
+  box-shadow: var(--w98-border-raised-outer), var(--w98-border-raised-inner);
+  border-radius: 0;
+
+  min-width: 75px;
+  min-height: 23px;
+  padding: 0 10px;
+}
+.btn-jewippy:active {
+  box-shadow: var(--border-sunken-outer), var(--border-sunken-inner);
+  padding: 2px 11px 0 13px;
+}
+
+@media (not(hover)) {
+  .btn-jewippy:hover {
+    box-shadow: var(--border-sunken-outer), var(--border-sunken-inner);
+  }
+}
+
+.btn-jewippy:focus {
+  outline: 1px dotted #000000;
+  outline-offset: -4px;
+}
+
+.btn-jewippy::-moz-focus-inner {
+  border: 0;
 }
