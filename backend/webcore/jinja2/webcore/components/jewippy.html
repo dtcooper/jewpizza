@@ -2,7 +2,7 @@
   x-cloak x-data="jewippy"
   :class="{
     'h-[200px] w-[200px] mt-[-200px]': open,
-    'h-12 w-12 -mt-12': !open
+    'h-16 w-16 -mt-16': !open
   }"
   class="pointer-events-none absolute right-6 top-0 border-primary"
   x-show="idleLoaded"
@@ -19,7 +19,7 @@
     {# The animate classes here are insane, don't use daisyUI's btn for this as a one-off... just use tailwind utilities #}
     class="pointer-events-auto btn btn-primary btn-lg btn-square rounded-lg bg-opacity-80 border-none no-animation animate-bounce active:animation-bounce hover:animate-bounce focus:animate-bounce active:focus:animate-bounce active:hover:animate-bounce umami--click--clippy-expand"
   >
-    {{ icon('fa-solid:glasses', size='text-4xl', margin=None) }}
+    {{ icon('fa-solid:glasses', size='text-5xl', margin=None) }}
   </button>
   {# DEBUG #}
   <div class="absolute top-0 left-0 flex space-x-1" x-show="open">
