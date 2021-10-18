@@ -36,11 +36,13 @@
   </div>
 
   <div class="w-[220px] h-[155px] px-[3px] pt-[3px] absolute top-0 left-0 jewippy-bubble" x-show="open">
-    <div class="pointer-events-auto w-[214px] h-[111px] p-1 pl-1.5 overflow-y-scroll font-jewippy text-sm flex flex-col">
-      <div class="flex-1 flex flex-col justify-center">What would you like to Jew today?</div>
-      <div>
-        <button class="btn-jewippy">Test</button>
-        <button class="btn-jewippy">Button</button>
+    <div class="jewippy-scroller pointer-events-auto w-[214px] h-[111px] p-1 pl-1.5 overflow-y-auto">
+      <div class="font-jewippy text-xs flex flex-col h-full">
+        <div class="flex-1 flex flex-col justify-center">What would you like to Jew today?</div>
+        <div>
+          <button class="btn-jewippy" @click="alert('clicked test')">Test</button>
+          <button class="btn-jewippy" @click="alert('clicked button')">Button</button>
+        </div>
       </div>
     </div>
   </div>

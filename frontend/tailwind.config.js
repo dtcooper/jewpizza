@@ -37,7 +37,7 @@ module.exports = {
     extend: {
       fontFamily: {
         mono: ['"Space Mono"', ...defaultTheme.fontFamily.mono],
-        jewippy: ['"Pixelated MS Sans Serif"', '"Microsoft Sans"', 'sans-serif']
+        jewippy: ['"Pixelated MS Sans Serif"', 'Arial', 'sans-serif']
       },
       colors: {
         'base-alt': '#ffdfad',
