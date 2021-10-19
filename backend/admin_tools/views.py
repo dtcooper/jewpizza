@@ -10,6 +10,7 @@ from jew_pizza.twilio import send_sms
 
 from .forms import SendEmailForm, SendTextMessageForm
 
+
 NAVIGATION_LINKS = (
     ("admin-tools:index", "Tools Index"),
     ("admin-tools:send-text-message", "Send Text Message"),

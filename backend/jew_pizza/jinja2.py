@@ -20,6 +20,7 @@ from webcore import constants
 
 from .utils import format_datetime, format_datetime_short
 
+
 NavLink = namedtuple("NavLink", "name url url_name icon is_subnav is_active")
 
 

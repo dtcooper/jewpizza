@@ -3,6 +3,7 @@ from django.views.generic import TemplateView
 
 from . import views
 
+
 app_name = "notifications"
 urlpatterns = [
     path("contact/", views.ContactView.as_view(), name="contact"),

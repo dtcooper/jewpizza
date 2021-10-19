@@ -3,6 +3,7 @@ from django.views.generic import TemplateView
 
 from .views import HomeView
 
+
 app_name = "webcore"
 urlpatterns = [
     path("", HomeView.as_view(), name="home"),

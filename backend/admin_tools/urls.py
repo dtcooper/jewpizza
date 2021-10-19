@@ -2,6 +2,7 @@ from django.urls import path
 
 from . import views
 
+
 app_name = "admin-tools"
 urlpatterns = [
     path("", views.AdminTemplateView.as_view(title="Tools Index"), name="index"),

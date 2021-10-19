@@ -21,6 +21,7 @@ from .forms import ContactForm, NewsletterForm
 from .models import TextMessage
 from .utils import sign_up_for_substack
 
+
 logger = logging.getLogger(f"jewpizza.{__name__}")
 
 

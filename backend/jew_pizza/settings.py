@@ -6,6 +6,7 @@ import sys
 
 import environ
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -229,32 +230,35 @@ CONSTANCE_BACKEND = "constance.backends.redisd.RedisBackend"
 CONSTANCE_REDIS_CONNECTION_CLASS = "django_redis.get_redis_connection"
 CONSTANCE_SUPERUSER_ONLY = False
 CONSTANCE_ADDITIONAL_FIELDS = {
-    "char": ["django.forms.CharField", {"required": False}],
-    "char_required": ["django.forms.CharField", {"required": True}],
-    "url": ["django.forms.URLField", {"required": False}],
-    "url_required": ["django.forms.URLField", {"required": True}],
+    "char": ("django.forms.CharField", {"required": False}),
+    "char_required": ("django.forms.CharField", {"required": True}),
+    "url": ("django.forms.URLField", {"required": False}),
+    "url_required": ("django.forms.URLField", {"required": True}),
+    "phone_required": ("phonenumber_field.formfields.PhoneNumberField", {"required": True}),
 }
-CONSTANCE_CONFIG ={
+CONSTANCE_CONFIG = {
     "ENABLE_JEWIPPY": (True, "Enable jewippy at bottom of page"),
     "ENABLE_PLAYER": (False, "Enable audio player"),
     "ENABLE_TEST_NOTIFICATIONS": (False, "Enable test notifications on home page for superuser only."),
     "HIDDEN_IMG_MODE": (False, "Enable hidden image mode (for development in public, to not look so awkward)"),
-    'FACEBOOK_NAME': ('dtcooper', 'Social media account name for Facebook', 'char_required'),
-    'INSTAGRAM_NAME': ('dtcooper', 'Social media account name for Instagram', 'char_required'),
-    'SUBSTACK_NAME': ('jewpizza', 'Social media account name for Substack', 'char_required'),
-    'TIKTOK_NAME': ('jew.pizza', 'Social media account name for Tiktok', 'char_required'),
-    'TWITTER_NAME': ('dtcooper', 'Social media account name for Twitter', 'char_required'),
-    'TWILIO_FROM_NUMBER': ('+155555551234', 'Twilio from number for texts/calls', 'char_required'),
-    'LOGS_URL': ('https://logs.jew.pizza/', 'URL for logs container, linked in admin', 'url_required'),
-    'UMAMI_URL': ('', 'URL for umami analytics login, linked in admin (optional)', 'url'),
-    'UMAMI_WEBSITE_ID': ('', 'Website ID in umami (optional)', 'char'),
-    'UMAMI_SCRIPT_URL': ('', 'URL for umami.js in script tag (optional)', 'url'),
+    "FACEBOOK_NAME": ("dtcooper", "Social media account name for Facebook", "char_required"),
+    "INSTAGRAM_NAME": ("dtcooper", "Social media account name for Instagram", "char_required"),
+    "SUBSTACK_NAME": ("jewpizza", "Social media account name for Substack", "char_required"),
+    "TIKTOK_NAME": ("jew.pizza", "Social media account name for Tiktok", "char_required"),
+    "TWITTER_NAME": ("dtcooper", "Social media account name for Twitter", "char_required"),
+    "TWILIO_FROM_NUMBER": ("+155555551234", "Twilio from number for texts/calls", "phone_required"),
+    "LOGS_URL": ("https://logs.jew.pizza/", "URL for logs container, linked in admin", "url_required"),
+    "UMAMI_URL": ("", "URL for umami analytics login, linked in admin (optional)", "url"),
+    "UMAMI_WEBSITE_ID": ("", "Website ID in umami (optional)", "char"),
+    "UMAMI_SCRIPT_URL": ("", "URL for umami.js in script tag (optional)", "url"),
 }
 
-CONSTANCE_CONFIG_FIELDSETS = OrderedDict((
-    ('Development Options', ('ENABLE_JEWIPPY', 'ENABLE_PLAYER', 'ENABLE_TEST_NOTIFICATIONS', 'HIDDEN_IMG_MODE')),
-    ('Social Media Account', ('FACEBOOK_NAME', 'INSTAGRAM_NAME', 'SUBSTACK_NAME', 'TIKTOK_NAME', 'TWITTER_NAME')),
-    ('Telephony', ('TWILIO_FROM_NUMBER',)),
-    ('Tracking Tag', ('UMAMI_WEBSITE_ID', 'UMAMI_SCRIPT_URL')),
-    ('URLs', ('LOGS_URL', 'UMAMI_URL')),
-))
+CONSTANCE_CONFIG_FIELDSETS = OrderedDict(
+    (
+        ("Development Options", ("ENABLE_JEWIPPY", "ENABLE_PLAYER", "ENABLE_TEST_NOTIFICATIONS", "HIDDEN_IMG_MODE")),
+        ("Social Media Account", ("FACEBOOK_NAME", "INSTAGRAM_NAME", "SUBSTACK_NAME", "TIKTOK_NAME", "TWITTER_NAME")),
+        ("Telephony", ("TWILIO_FROM_NUMBER",)),
+        ("Tracking Tag", ("UMAMI_WEBSITE_ID", "UMAMI_SCRIPT_URL")),
+        ("URLs", ("LOGS_URL", "UMAMI_URL")),
+    )
+)

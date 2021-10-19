@@ -1,5 +1,6 @@
 from collections import namedtuple
 
+
 Show = namedtuple("Show", "code slug name has_banner_img", defaults=(True,))
 
 SHOWS = (

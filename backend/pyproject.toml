@@ -52,6 +52,7 @@ experimental-string-processing = true
 
 [tool.isort]
 multi_line_output = 3
+lines_after_imports = 2
 include_trailing_comma = true
 force_grid_wrap = 0
 use_parentheses = true
