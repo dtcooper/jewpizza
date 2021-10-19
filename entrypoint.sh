@@ -62,6 +62,7 @@ headers={'Cookie': f'umami.auth={token}'}).json()['website_uuid']
 print(uuid)
 END
 )"
+        wait-for-it -t 0 redis:6379
         ./manage.py constance set UMAMI_WEBSITE_ID "$WEBSITE_ID"
     fi
 }
@@ -107,6 +108,8 @@ else
             # Number of workers =  min(<cores * 1.5 rounded up> + 1, 3)
             GUNICORN_WORKERS="$(python -c 'import multiprocessing as m; print(max(round(m.cpu_count() * 1.5 + 1), 3))')"
         fi
+
+        wait-for-it -t 0 redis:6379 &
 
         wait
         exec gunicorn \
