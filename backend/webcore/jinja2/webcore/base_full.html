@@ -67,7 +67,7 @@
   {% include 'webcore/components/messages.html' %}
 
   <div id="content-scroller" class="flex flex-col flex-1 w-full overflow-y-auto">
-    <div id="content" class="flex-1">
+    <div id="content" class="flex-1" x-data :class="{'pb-[275px]': $store.jewippy.open, 'pb-5': !$store.jewippy.open}">
       {% block base_content required %}{% endblock %}
     </div>
     {% include 'webcore/components/emojis.html' %}

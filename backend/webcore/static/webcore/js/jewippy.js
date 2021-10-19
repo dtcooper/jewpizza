@@ -1,22 +1,18 @@
 /* global Alpine, DATA */
 
 document.addEventListener('alpine:init', () => {
-  let component
+  let component = null
 
   Alpine.store('jewippy', {
-    get open () {
-      return component.open
-    },
-    set open (value) {
-      component.open = value
-    },
+    open: false,
     get setImg () {
       return function () { return component.setImg.apply(component, arguments) }
     },
     get queueImg () {
-      return function () { return component.queueImg.apply(jewippyComponent, arguments) }
+      return function () { return component.queueImg.apply(component, arguments) }
     }
   })
+
   Alpine.data('jewippy', function () { // Use function() here to bind $persist
     return {
       imgs: {},
@@ -30,6 +26,9 @@ document.addEventListener('alpine:init', () => {
       animationQueue: [],
       init () {
         component = this
+        const store = Alpine.store('jewippy')
+        store.open = this.open
+        this.$watch('open', (value) => { store.open = value })
 
         let numLoaded = 0
         const jewippyGifs = Array.from(DATA.jewippyGifs)

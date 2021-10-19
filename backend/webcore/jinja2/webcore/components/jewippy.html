@@ -4,7 +4,7 @@
     'h-[320px] w-[275px] mt-[-320px]': open,
     'h-16 w-16 -mt-16': !open
   }"
-  class="pointer-events-none absolute right-0 xs:right-2 sm:right top-0 border-primary"
+  class="pointer-events-none absolute right-0 xs:right-3 sm:right-4 top-0 border-primary"
   x-show="idleLoaded"
 >
 
@@ -37,11 +37,11 @@
 
   <div class="w-[220px] h-[155px] px-[3px] pt-[3px] absolute top-0 left-0 jewippy-bubble" x-show="open">
     <div class="jewippy-scroller pointer-events-auto w-[214px] h-[111px] p-1 pl-1.5 overflow-y-auto">
-      <div class="font-jewippy text-xs flex flex-col h-full">
-        <div class="flex-1 flex flex-col justify-center">What would you like to Jew today?</div>
+      <div class="font-jewippy text-sm flex flex-col h-full">
+        <div class="flex-1 flex flex-col justify-center">Did yuo know David has a newsletter?</div>
         <div>
-          <button class="btn-jewippy" @click="alert('clicked test')">Test</button>
-          <button class="btn-jewippy" @click="alert('clicked button')">Button</button>
+          <button class="btn-jewippy" @click="window.router.navigate({{ url_for('notifications:newsletter')|attrjs }})">Sign me up!</button>
+          <button class="btn-jewippy" @click="open = false">Fuck off!</button>
         </div>
       </div>
     </div>
