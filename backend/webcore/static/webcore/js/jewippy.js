@@ -20,6 +20,7 @@ document.addEventListener('alpine:init', () => {
       choices: new Set(),
       current: 'idle',
       open: this.$persist(true).as('jewippy-open'),
+      bubbleOpen: true,
       idleLoaded: false,
       allLoaded: false,
       timeout: null,
@@ -50,6 +51,7 @@ document.addEventListener('alpine:init', () => {
               if (numLoaded === numToLoad) {
                 this.allLoaded = true
                 this.queueImg(['idle', 'idleAlt'], true)
+                this.openBubbleDemo() // XXX
               }
             })
             img.src = gif.url
@@ -117,6 +119,29 @@ document.addEventListener('alpine:init', () => {
         } else if (DATA.debug) {
           console.error(`invalid animation(s): ${JSON.stringify(name)}. Valid choices: ${JSON.stringify([...this.choices])}`)
         }
+      },
+      bubbleDemoHTML: '',
+      bubbleDemoLink: null,
+      bubbleDemoClick () {
+        window.router.navigate(this.bubbleDemoLink)
+        this.bubbleDemoClose(5000)
+      },
+      bubbleDemoClose (reopenTimeout) {
+        this.bubbleOpen = false
+        this._debug(`Closing bubble for ${reopenTimeout / 1000}s`)
+        setTimeout(() => this.openBubbleDemo(), reopenTimeout)
+      },
+      openBubbleDemo () {
+        const links = Array.from(DATA.bubbleDemoNavLinks)
+        const currentPage = links.findIndex((link) => link[1] === Alpine.store('page').current)
+        if (currentPage > -1) {
+          links.splice(currentPage, 1)
+        }
+        const link = links[Math.floor(Math.random() * links.length)]
+        this.bubbleDemoHTML = `Have you seen the <strong>${link[0]}</strong> page? Check it out!`
+        this.bubbleDemoLink = link[1]
+        this._debug(`Opening bubble demo with ${link[0]} link`)
+        this.bubbleOpen = true
       }
     }
   })

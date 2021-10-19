@@ -35,7 +35,9 @@
   <script src="{{ static('vendor/js/moment/min/moment.min.js') }}"></script>
   <script src="{{ static('vendor/js/moment-timezone/builds/moment-timezone-with-data-1970-2030.min.js') }}"></script>
   <script>
+    {# XXX bubbleDemoNavLinks variable for bubble demo only, delete it #}
     const DATA = window.DATA = {{ {
+      'bubbleDemoNavLinks': nav_links,
       'currentPage': active_link,
       'debug': settings.DEBUG,
       'encodedEmail': encoded_email,

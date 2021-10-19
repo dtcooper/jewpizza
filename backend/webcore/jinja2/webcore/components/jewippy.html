@@ -35,13 +35,13 @@
     {% endfor %}
   </div>
 
-  <div class="w-[220px] h-[155px] px-[3px] pt-[3px] absolute top-0 left-0 jewippy-bubble" x-show="open">
+  <div class="w-[220px] h-[155px] px-[3px] pt-[3px] absolute top-0 left-0 jewippy-bubble" x-show="open && bubbleOpen">
     <div class="jewippy-scroller pointer-events-auto w-[214px] h-[111px] p-1 pl-1.5 overflow-y-auto">
       <div class="font-jewippy text-sm flex flex-col h-full">
-        <div class="flex-1 flex flex-col justify-center">Did yuo know David has a newsletter?</div>
+        <div class="flex-1 flex flex-col justify-center"><span x-html="bubbleDemoHTML"></span></div>
         <div>
-          <button class="btn-jewippy" @click="window.router.navigate({{ url_for('notifications:newsletter')|attrjs }})">Sign me up!</button>
-          <button class="btn-jewippy" @click="open = false">Fuck off!</button>
+          <button class="btn-jewippy font-bold" @click="bubbleDemoClick">Show me...</button>
+          <button class="btn-jewippy italic" @click="bubbleDemoClose(1000)">Fuck right off!</button>
         </div>
       </div>
     </div>
