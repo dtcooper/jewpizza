@@ -7,7 +7,7 @@ else
 
     URL="http://app:8000/internal/radio/script/${SCRIPT_NAME}/"
     SCRIPT="/radio/script.liq"
-    if ! wget -qO /radio/script.liq "$URL" ; then
+    if ! wget "--header=X-Secret-Key: $SECRET_KEY" -qO /radio/script.liq "$URL" ; then
         echo "Error fetching script at $URL"
         exit 1
     fi
