@@ -123,8 +123,10 @@ document.addEventListener('alpine:init', () => {
       bubbleDemoHTML: '',
       bubbleDemoLink: null,
       bubbleDemoClick () {
+        this.setImg('explode')
+        this.queueImg(['idle', 'idleAlt'], true)
         window.router.navigate(this.bubbleDemoLink)
-        this.bubbleDemoClose(5000)
+        this.bubbleDemoClose(7500)
       },
       bubbleDemoClose (reopenTimeout) {
         this.bubbleOpen = false
