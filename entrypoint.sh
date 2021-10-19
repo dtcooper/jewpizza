@@ -81,6 +81,25 @@ else
     fi
 
     if [ "$DEBUG" ]; then
+        if [ -z "$(./manage.py constance get UMAMI_WEBSITE_ID)" ]; then
+            echo "No UMAMI_WEBSITE_ID with DEBUG = True. Setting..."
+            wait-for-it -t 0 umami:3000
+            WEBSITE_ID="$(cat <<'END' | python
+import requests
+
+token = requests.post(
+    'http://umami:3000/api/auth/login',
+    json={'username': 'dave', 'password': 'cooper'}).json()['token']
+uuid = requests.post(
+    'http://umami:3000/api/website',
+    json={'domain': 'localhost', 'name': 'jew.pizza local dev', 'enable_share_url': False},
+    headers={'Cookie': f'umami.auth={token}'}).json()['website_uuid']
+print(uuid)
+END
+)"
+            ./manage.py constance set UMAMI_WEBSITE_ID "$WEBSITE_ID"
+        fi
+
         exec ./manage.py runserver
     else
         if [ -z "$GUNICORN_WORKERS" ]; then

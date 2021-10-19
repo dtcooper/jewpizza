@@ -22,7 +22,7 @@ build:
 	@$(COMPOSE) build --pull --build-arg GIT_REV=$(shell git describe --tags --always --dirty)
 
 shell:
-	@$(COMPOSE) run --rm --service-ports app bash || true
+	@$(COMPOSE) run --rm --service-ports --use-aliases app bash || true
 
 show-outdated:
 	@echo 'Showing outdated dependencies... (empty for none)'

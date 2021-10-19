@@ -1,27 +1,23 @@
-# TODO use savonet/liquidsoap:v2.0.0-rc1 container
-FROM ubuntu:20.04
+FROM savonet/liquidsoap:v2.0.1
 
-ARG LIQUIDSOAP_VERSION="2.0.0-rc1"
+ENV SCRIPT_NAME=radio
 
-ARG DEBIAN_FRONTEND=noninteractive
+USER root
+
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         ca-certificates \
-        festival \
-        festvox-kallpc16k \
-        ffmpeg \
         wget \
     && rm -rf /var/lib/apt/lists/*
 
-RUN ARCH="$(dpkg --print-architecture)" \
-    DEB_NAME="liquidsoap-v${LIQUIDSOAP_VERSION}_$(echo "$LIQUIDSOAP_VERSION" | sed 's/-/./')-ubuntu-focal-1_${ARCH}.deb" \
-    && wget -qO /tmp/liquidsoap.deb "https://github.com/savonet/liquidsoap/releases/download/v${LIQUIDSOAP_VERSION}/${DEB_NAME}" \
-    && apt-get update \
-    && apt-get install -y --no-install-recommends \
-        /tmp/liquidsoap.deb \
-    && rm -rf /var/lib/apt/lists/* /tmp/*.deb
+RUN wget -qO /usr/local/bin/wait-for-it https://raw.githubusercontent.com/vishnubob/wait-for-it/81b1373f/wait-for-it.sh \
+    && chmod +x /usr/local/bin/wait-for-it
 
-COPY radio.liq /etc/radio.liq
+RUN mkdir /radio && chown liquidsoap:liquidsoap /radio
+
+COPY entrypoint.sh failsafe.mp3 jingle.mp3 /
 
 USER liquidsoap
-CMD ["liquidsoap", "/etc/radio.liq"]
+WORKDIR /radio
+ENTRYPOINT ["/usr/bin/tini", "--", "/entrypoint.sh"]
+CMD []

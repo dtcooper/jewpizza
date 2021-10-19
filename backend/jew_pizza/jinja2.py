@@ -1,3 +1,4 @@
+import base64
 from collections import namedtuple
 import hashlib
 import os
@@ -82,6 +83,33 @@ def smart_title(s):
     return " ".join(f"{w[0:1].upper()}{w[1:]}" for w in s.split())
 
 
+def liqval(value, comment_string=True):
+    if isinstance(value, bool):
+        encoded = str(value).lower()
+
+    elif isinstance(value, float):
+        encoded = f"{value:.5g}"  # 5 decimal places
+        if "." not in encoded:
+            encoded += "."
+
+    elif isinstance(value, int):
+        encoded = value
+
+    else:
+        if not isinstance(value, str):
+            value = str(value)
+
+        # Best way to encode a string, since it's not exactly documented escape
+        # characters properly for liquidsoap.
+        # TODO: look at liquidsoap v2 docs to see if there's a better way
+        encoded = base64.b64encode(value.encode("utf-8")).decode("utf-8")
+        encoded = f'base64.decode("{encoded}")'
+        if comment_string:
+            encoded += f"  # {value!r}"
+
+    return encoded
+
+
 def nav_links(request):
     nav_links = []
     active_link = None
@@ -161,6 +189,7 @@ def create_environment(**options):
             "bool": bool,
             "date": format_datetime,
             "dateshort": format_datetime_short,
+            "liqval": liqval,
             "smart_title": smart_title,
         }
     )

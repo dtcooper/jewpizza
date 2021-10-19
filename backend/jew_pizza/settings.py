@@ -36,6 +36,12 @@ TWILIO_AUTH_TOKEN = env("TWILIO_AUTH_TOKEN")
 RUN_HUEY = env.bool("__RUN_HUEY", default=False)
 GIT_REV = env("GIT_REV", default="unknown")
 
+ICECAST_HOST = env('ICECAST_HOST', default='icecast')
+ICECAST_PORT = env.int('ICECAST_PORT', default=8000)
+ICECAST_USERNAME = env('ICECAST_USERNAME', default='source')
+ICECAST_PASSWORD = env('ICECAST_PASSWORD', default='hackme')
+ICECAST_PROTOCOL = env('ICECAST_PROTOCOL', default='http')
+
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 ADMINS = [(f"{DOMAIN_NAME} Admin", EMAIL_ADDRESS)]
@@ -64,6 +70,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "admin_tools",
     "notifications",
+    "radio",
     "shows",
 ]
 
@@ -247,10 +254,10 @@ CONSTANCE_CONFIG = {
     "TIKTOK_NAME": ("jew.pizza", "Social media account name for Tiktok", "char_required"),
     "TWITTER_NAME": ("dtcooper", "Social media account name for Twitter", "char_required"),
     "TWILIO_FROM_NUMBER": ("+155555551234", "Twilio from number for texts/calls", "phone_required"),
-    "LOGS_URL": ("https://logs.jew.pizza/", "URL for logs container, linked in admin", "url_required"),
-    "UMAMI_URL": ("", "URL for umami analytics login, linked in admin (optional)", "url"),
+    "LOGS_URL": ("http://localhost:8888/" if DEBUG else "https://logs.jew.pizza/", "URL for logs container, linked in admin", "url_required"),
+    "UMAMI_URL": ("http://localhost:3000/" if DEBUG else "", "URL for umami analytics login, linked in admin (optional)", "url"),
     "UMAMI_WEBSITE_ID": ("", "Website ID in umami (optional)", "char"),
-    "UMAMI_SCRIPT_URL": ("", "URL for umami.js in script tag (optional)", "url"),
+    "UMAMI_SCRIPT_URL": ("http://localhost:3000/umami.js" if DEBUG else "", "URL for umami.js in script tag (optional)", "url"),
 }
 
 CONSTANCE_CONFIG_FIELDSETS = OrderedDict(

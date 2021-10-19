@@ -29,9 +29,29 @@ services:
     environment:
       - RUN_HUEY=1
 
-  # radio:
+  radio:
+    build:
+      context: radio
+    restart: always
+    environment:
+      - SCRIPT_NAME=radio
+
+  radio-uplink:
+    build:
+      context: radio
+    restart: always
+    environment:
+      - SCRIPT_NAME=uplink
+
+  # radio-controller:
   #   build:
+  #     dockerfile: Dockerfile.controller
   #     context: radio
+  #   volumes:
+  #     - .:/app
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #   environment:
+  #     - COMPOSE_PROJECT_NAME
 
   db:
     image: library/postgres:14-alpine
