@@ -10,7 +10,7 @@ RUN apt-get update \
 
 RUN wget -qO - https://get.docker.com/ | sh \
     && wget -qO /usr/libexec/docker/cli-plugins/docker-compose \
-        https://github.com/docker/compose/releases/download/v${COMPOSE_VERSION}/docker-compose-linux-aarch64 \
+        "https://github.com/docker/compose/releases/download/v${COMPOSE_VERSION}/docker-compose-linux-$(arch)" \
     && chmod +x /usr/libexec/docker/cli-plugins/docker-compose
 
 COPY --from=msoap/shell2http /app/shell2http /usr/local/bin/
