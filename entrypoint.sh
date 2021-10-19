@@ -81,6 +81,10 @@ elif [ "$RUN_HUEY" ]; then
         HUEY_WORKERS="$(python -c 'import multiprocessing as m; print(max(m.cpu_count() * 3, 6))')"
     fi
 
+    wait-for-it -t 0 db:5432 &
+    wait-for-it -t 0 redis:6379 &
+    wait
+
     CMD="./manage.py run_huey --workers $HUEY_WORKERS --flush-locks"
     if [ "$DEBUG" -a "$DEBUG" != '0' ]; then
         exec watchmedo auto-restart --directory=./ --pattern=*.py --recursive -- $CMD
@@ -98,6 +102,7 @@ else
     fi
 
     migrate_and_create_user &
+    wait-for-it -t 0 redis:6379 &
 
     if [ "$DEBUG" ]; then
         wait
@@ -108,8 +113,6 @@ else
             # Number of workers =  min(<cores * 1.5 rounded up> + 1, 3)
             GUNICORN_WORKERS="$(python -c 'import multiprocessing as m; print(max(round(m.cpu_count() * 1.5 + 1), 3))')"
         fi
-
-        wait-for-it -t 0 redis:6379 &
 
         wait
         exec gunicorn \
