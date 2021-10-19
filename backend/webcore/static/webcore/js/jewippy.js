@@ -128,9 +128,9 @@ document.addEventListener('alpine:init', () => {
         window.router.navigate(this.bubbleDemoLink)
         this.bubbleDemoClose(7500)
       },
-      bubbleDemoClickMinimize () {
+      bubbleDemoClickMinimize (animation) {
         this.bubbleDemoClose(12500)
-        this.setImg('melting')
+        this.setImg(animation || 'melting')
         this.queueImg(['idle', 'idleAlt'], true)
       },
       bubbleDemoClose (reopenTimeout) {
@@ -149,6 +149,8 @@ document.addEventListener('alpine:init', () => {
         this.bubbleDemoLink = link[1]
         this._debug(`Opening bubble demo with ${link[0]} link`)
         this.bubbleOpen = true
+        // Doesn't want to scroll immediately, so set a 10ms delay
+        setTimeout(() => { document.getElementById('jewippy-scroller').scrollTop = 0 }, 10)
       }
     }
   })

@@ -26,27 +26,45 @@ if [ "$RUN_HUEY" ]; then
     export __RUN_HUEY=1
 fi
 
-# Check if secret key is set
 if [ -z "$SECRET_KEY" ]; then
-    echo 'Generating secret key in .env file'
-    NEW_SECRET_KEY="$(python -c 'import secrets; print(secrets.token_urlsafe(40))')"
+    echo "SECRET_KEY not set. Exiting."
+    exit 1
+fi
 
-    if grep -q '^SECRET_KEY=' /.env; then
-        # sed in place doesn't work on docker file mounts, so copy
-        sed "s/^SECRET_KEY=.*/SECRET_KEY='$NEW_SECRET_KEY'/" /.env > /tmp/new.env
-        cat /tmp/new.env > /.env
-        rm /tmp/new.env
-    else
-        echo "\nSECRET_KEY='$NEW_SECRET_KEY'" >> /.env
+
+collectstatic () {
+    npm --prefix=../frontend run build
+    ./manage.py collectstatic --noinput
+}
+
+migrate_and_create_user () {
+    wait-for-it -t 0 db:5432 -- ./manage.py migrate
+
+    if [ "$(./manage.py shell -c 'from django.contrib.auth.models import User; print("" if User.objects.exists() else "1")')" = 1 ]; then
+        DJANGO_SUPERUSER_PASSWORD=cooper ./manage.py createsuperuser --noinput --username dave --email 'david@jew.pizza'
     fi
+}
 
-    . /.env
-fi
+init_umami () {
+    if [ -z "$(./manage.py constance get UMAMI_WEBSITE_ID)" ]; then
+        echo "No UMAMI_WEBSITE_ID with DEBUG = True. Setting..."
+        wait-for-it -t 0 umami:3000
+        WEBSITE_ID="$(cat <<'END' | python
+import requests
 
-if [ "$DEBUG" -a ! -d '../frontend/node_modules' ]; then
-    # In case /app is mounted in Docker, needed to re-install the /app/frontend/node_modules folder
-    npm --prefix=../frontend install
-fi
+token = requests.post(
+'http://umami:3000/api/auth/login',
+json={'username': 'dave', 'password': 'cooper'}).json()['token']
+uuid = requests.post(
+'http://umami:3000/api/website',
+json={'domain': 'localhost', 'name': 'jew.pizza local dev', 'enable_share_url': False},
+headers={'Cookie': f'umami.auth={token}'}).json()['website_uuid']
+print(uuid)
+END
+)"
+        ./manage.py constance set UMAMI_WEBSITE_ID "$WEBSITE_ID"
+    fi
+}
 
 if [ "$#" != 0 ]; then
     if [ "$DEBUG" ] ; then
@@ -69,37 +87,20 @@ elif [ "$RUN_HUEY" ]; then
         exec $CMD
     fi
 else
+    if [ "$DEBUG" -a ! -d '../frontend/node_modules' ]; then
+        # In case /app is mounted in Docker, needed to re-install the /app/frontend/node_modules folder
+        npm --prefix=../frontend install &
+    fi
+
     if [ -z "$DEBUG" ]; then
-        npm --prefix=../frontend run build
-        ./manage.py collectstatic --noinput
+        collectstatic &
     fi
 
-    wait-for-it -t 0 db:5432 -- ./manage.py migrate
-
-    if [ "$(./manage.py shell -c 'from django.contrib.auth.models import User; print("" if User.objects.exists() else "1")')" = 1 ]; then
-        DJANGO_SUPERUSER_PASSWORD=cooper ./manage.py createsuperuser --noinput --username dave --email 'david@jew.pizza'
-    fi
+    migrate_and_create_user &
 
     if [ "$DEBUG" ]; then
-        if [ -z "$(./manage.py constance get UMAMI_WEBSITE_ID)" ]; then
-            echo "No UMAMI_WEBSITE_ID with DEBUG = True. Setting..."
-            wait-for-it -t 0 umami:3000
-            WEBSITE_ID="$(cat <<'END' | python
-import requests
-
-token = requests.post(
-    'http://umami:3000/api/auth/login',
-    json={'username': 'dave', 'password': 'cooper'}).json()['token']
-uuid = requests.post(
-    'http://umami:3000/api/website',
-    json={'domain': 'localhost', 'name': 'jew.pizza local dev', 'enable_share_url': False},
-    headers={'Cookie': f'umami.auth={token}'}).json()['website_uuid']
-print(uuid)
-END
-)"
-            ./manage.py constance set UMAMI_WEBSITE_ID "$WEBSITE_ID"
-        fi
-
+        wait
+        init_umami &
         exec ./manage.py runserver
     else
         if [ -z "$GUNICORN_WORKERS" ]; then
@@ -107,6 +108,7 @@ END
             GUNICORN_WORKERS="$(python -c 'import multiprocessing as m; print(max(round(m.cpu_count() * 1.5 + 1), 3))')"
         fi
 
+        wait
         exec gunicorn \
                 $GUNICORN_EXTRA_ARGS \
                 --forwarded-allow-ips '*' \

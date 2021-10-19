@@ -38,15 +38,16 @@ services:
     volumes:
       - ./radio/entrypoint.sh:/entrypoint.sh
 
-  # radio-controller:
-  #   restart: "no"
-  #   ports:
-  #     - "127.0.0.1:5000:8080"
+  radio-controller:
+    restart: "no"
+    ports:
+      - "127.0.0.1:5000:8080"
 
   icecast:
     image: moul/icecast
     init: true  # for Icecast to shut down faster
     environment:
       - "ICECAST_HOSTNAME=${DOMAIN_NAME:-localhost}"
+      - "TZ=${TIMEZONE:-US/Eastern}"
     ports:
       - 8080:8000

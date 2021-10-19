@@ -237,11 +237,12 @@ CONSTANCE_BACKEND = "constance.backends.redisd.RedisBackend"
 CONSTANCE_REDIS_CONNECTION_CLASS = "django_redis.get_redis_connection"
 CONSTANCE_SUPERUSER_ONLY = False
 CONSTANCE_ADDITIONAL_FIELDS = {
-    "char": ("django.forms.CharField", {"required": False}),
     "char_required": ("django.forms.CharField", {"required": True}),
-    "url": ("django.forms.URLField", {"required": False}),
-    "url_required": ("django.forms.URLField", {"required": True}),
+    "char": ("django.forms.CharField", {"required": False}),
     "phone_required": ("phonenumber_field.formfields.PhoneNumberField", {"required": True}),
+    "url_required": ("django.forms.URLField", {"required": True}),
+    "url": ("django.forms.URLField", {"required": False}),
+    "uuid": ("django.forms.UUIDField", {"required": False}),
 }
 CONSTANCE_CONFIG = {
     "ENABLE_JEWIPPY": (True, "Enable jewippy at bottom of page"),
@@ -253,11 +254,10 @@ CONSTANCE_CONFIG = {
     "SUBSTACK_NAME": ("jewpizza", "Social media account name for Substack", "char_required"),
     "TIKTOK_NAME": ("jew.pizza", "Social media account name for Tiktok", "char_required"),
     "TWITTER_NAME": ("dtcooper", "Social media account name for Twitter", "char_required"),
-    "TWILIO_FROM_NUMBER": ("+155555551234", "Twilio from number for texts/calls", "phone_required"),
+    "TWILIO_FROM_NUMBER": ("+14164390000", "Twilio from number for texts/calls", "phone_required"),
     "LOGS_URL": ("http://localhost:8888/" if DEBUG else "https://logs.jew.pizza/", "URL for logs container, linked in admin", "url_required"),
-    "UMAMI_URL": ("http://localhost:3000/" if DEBUG else "", "URL for umami analytics login, linked in admin (optional)", "url"),
-    "UMAMI_WEBSITE_ID": ("", "Website ID in umami (optional)", "char"),
-    "UMAMI_SCRIPT_URL": ("http://localhost:3000/umami.js" if DEBUG else "", "URL for umami.js in script tag (optional)", "url"),
+    "UMAMI_URL": ("http://localhost:3000/" if DEBUG else "https://umami.jew.pizza/", "URL for umami analytics", "url_required"),
+    "UMAMI_WEBSITE_ID": ("", "Website ID in umami", "uuid"),
 }
 
 CONSTANCE_CONFIG_FIELDSETS = OrderedDict(
@@ -265,7 +265,7 @@ CONSTANCE_CONFIG_FIELDSETS = OrderedDict(
         ("Development Options", ("ENABLE_JEWIPPY", "ENABLE_PLAYER", "ENABLE_TEST_NOTIFICATIONS", "HIDDEN_IMG_MODE")),
         ("Social Media Account", ("FACEBOOK_NAME", "INSTAGRAM_NAME", "SUBSTACK_NAME", "TIKTOK_NAME", "TWITTER_NAME")),
         ("Telephony", ("TWILIO_FROM_NUMBER",)),
-        ("Tracking Tag", ("UMAMI_WEBSITE_ID", "UMAMI_SCRIPT_URL")),
-        ("URLs", ("LOGS_URL", "UMAMI_URL")),
+        ("Tracking Tag", ("UMAMI_WEBSITE_ID", "UMAMI_URL")),
+        ("URLs", ("LOGS_URL",)),
     )
 )

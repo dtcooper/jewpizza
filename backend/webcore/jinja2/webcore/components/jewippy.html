@@ -11,14 +11,13 @@
 
     <button
       x-data x-show="open" @click="open = false"
-      class="pointer-events-auto btn text-content btn-ghost btn-square btn-sm absolute bottom-[180px] right-0 umami--click--clippy-close"
+      class="pointer-events-auto btn text-content btn-ghost btn-square btn-sm absolute bottom-[172px] right-0 umami--click--clippy-close"
     >
       {{ icon('bx:bx-window-close', size='text-2xl', margin=None) }}
     </button>
     <button
       x-data x-show="!open" @click="open = true"
-      {# The animate classes here are insane, don't use daisyUI's btn for this as a one-off... just use tailwind utilities #}
-      class="pointer-events-auto btn btn-primary btn-lg btn-square rounded-lg bg-opacity-80 border-none no-animation animate-bounce active:animation-bounce hover:animate-bounce focus:animate-bounce active:focus:animate-bounce active:hover:animate-bounce umami--click--clippy-expand"
+      class="pointer-events-auto bg-primary hover:bg-primary-focus text-primary-content absolute bottom-0 right-1.5 p-1.5 animate-bounce rounded-xl umami--click--clippy-expand"
     >
       {{ icon('fa-solid:glasses', size='text-5xl', margin=None) }}
     </button>
@@ -37,23 +36,21 @@
       {% endfor %}
     </div>
 
-    <div class="w-[220px] h-[155px] px-[3px] pt-[3px] absolute top-0 left-0 jewippy-bubble" x-show="open && bubbleOpen">
-      <div class="jewippy-scroller pointer-events-auto w-[214px] h-[111px] p-1 pl-1.5 overflow-y-auto">
+    <div class="pointer-events-auto w-[220px] h-[155px] px-[3px] pt-[3px] absolute top-0 left-0 jewippy-bubble relative" x-show="open && bubbleOpen">
+      <div id="jewippy-scroller" class="group jewippy-scroller w-[214px] h-[111px] p-1 pl-1.5 overflow-y-auto">
         <div class="font-jewippy text-sm flex flex-col h-full">
-          <div class="flex-1 flex flex-col justify-center"><span x-html="bubbleDemoHTML"></span></div>
+          <div class="flex-1 flex flex-col justify-center"><span x-html="bubbleDemoHTML"></span> {{ lipsum(html=false) }}</div>
           <div>
-            <button class="btn-jewippy font-bold" @click="bubbleDemoClick">Show me...</button>
-            <button class="btn-jewippy italic" @click="bubbleDemoClickMinimize">Fuck right off!</button>
+            <button class="btn-jewippy font-bold" @click="bubbleDemoClick()">Show me...</button>
+            <button class="btn-jewippy italic" @click="bubbleDemoClickMinimize()">Fuck right off!</button>
           </div>
         </div>
       </div>
+      <button class="absolute top-0 -right-8 btn text-content btn-ghost btn-square btn-sm absolute umami--click--clippy-bubble-close" @click="bubbleDemoClickMinimize('xanaxRain')">
+        {{ icon('bx:bx-window-close', size='text-2xl', margin=None) }}
+      </button>
     </div>
-    {# <div class="absolute top-2 left-3 w-[200px] h-[97px] min-h-[97px] flex flex-col justify-center overflow-y-auto pointer-events-auto font-clippy text-[11px]">
-      What do you want to Jew today?
-      <button class="btn-clippy">Test</button>
-      {{ lipsum(html=false) }}
 
-    </div> #}
     <img x-ref="jewippyGif" height="200" width="200" class="w-[200px] h-[200px] absolute bottom-0 right-0 select-none drag-none" x-show="open">
   </div>
 </div>

@@ -33,7 +33,7 @@ compose dev overrides.
 ```bash
 git clone https://github.com/dtcooper/jewpizza.git
 
-# Edit me, you'll probably want to be in development mode (DEBUG=1)
+# Edit me, make sure you set SECRET_KEY!
 cp .env.sample .env
 
 # Needed for development only (when DEBUG=1)
