@@ -30,6 +30,7 @@
 * [ ] Social media card, Twitter card validator (Alpine day source code? 1200x660 jpg Twitter card.)
 * [ ] Dark mode?
 * [ ] Use devtools lighthouse?
+* [ ] Remove automatic `SECRET_KEY` generation, just document it in README. This needs to be set before first run.
 
 ## Sections
 
