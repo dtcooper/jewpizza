@@ -44,6 +44,8 @@ services:
     environment:
       - SECRET_KEY
       - SCRIPT_NAME=uplink
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   # radio-controller:
   #   build:

@@ -103,7 +103,7 @@ def liqval(value, comment_string=True):
         # characters properly for liquidsoap.
         # TODO: look at liquidsoap v2 docs to see if there's a better way
         encoded = base64.b64encode(value.encode("utf-8")).decode("utf-8")
-        encoded = f'base64.decode("{encoded}")'
+        encoded = f'string.base64.decode("{encoded}")'
         if comment_string:
             encoded += f"  # {value!r}"
 
