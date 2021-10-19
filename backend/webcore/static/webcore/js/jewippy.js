@@ -128,6 +128,11 @@ document.addEventListener('alpine:init', () => {
         window.router.navigate(this.bubbleDemoLink)
         this.bubbleDemoClose(7500)
       },
+      bubbleDemoClickMinimize () {
+        this.bubbleDemoClose(12500)
+        this.setImg('melting')
+        this.queueImg(['idle', 'idleAlt'], true)
+      },
       bubbleDemoClose (reopenTimeout) {
         this.bubbleOpen = false
         this._debug(`Closing bubble for ${reopenTimeout / 1000}s`)

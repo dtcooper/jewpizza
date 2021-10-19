@@ -75,15 +75,12 @@
     {% include 'webcore/components/emojis.html' %}
   </div>
 
-  {% if config.ENABLE_PLAYER or config.ENABLE_JEWIPPY %}
-    <div class="relative">
-      {% if config.ENABLE_JEWIPPY %}
-        {% include 'webcore/components/jewippy.html' %}
-      {% endif %}
-      {% if config.ENABLE_PLAYER %}
-        {% include 'webcore/components/player.html' %}
-      {% endif %}
-    </div>
+  {% if config.ENABLE_JEWIPPY %}
+    {% include 'webcore/components/jewippy.html' %}
+  {% endif %}
+
+  {% if config.ENABLE_PLAYER %}
+    {% include 'webcore/components/player.html' %}
   {% endif %}
 
   {% if settings.DEBUG or request.user.is_superuser %}
