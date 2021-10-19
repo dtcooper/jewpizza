@@ -9,7 +9,7 @@
     </p>
     <p>
       I'm verified{{ icon('octicon:verified-16', margin='ml-1.5', classes='inline text-blue-400 align-baseline', size='text-2xl') }}
-      on <a href="https://twitter.com/{{ settings.TWITTER_NAME }}" class="umami--click--social-twitter" target="_blank">Twitter</a>,
+      on <a href="https://twitter.com/{{ config.TWITTER_NAME }}" class="umami--click--social-twitter" target="_blank">Twitter</a>,
       but still hate myself.
     </p>
   </article>
@@ -17,16 +17,16 @@
   <div class="mt-6 grid xs:grid-cols-2 sm:grid-cols-3 gap-2 md:gap-3">
     {%
       for name, icon_name, link in (
-        ('Twitter', 'simple-icons:twitter', 'https://twitter.com/{}'.format(settings.TWITTER_NAME)),
-        ('Instagram', 'simple-icons:instagram', 'https://www.instagram.com/{}/'.format(settings.INSTAGRAM_NAME)),
-        ('Substack', 'simple-icons:substack', 'https://{}.substack.com/'.format(settings.SUBSTACK_NAME)),
-        ('Facebook', 'simple-icons:facebook', 'https://www.facebook.com/{}'.format(settings.FACEBOOK_NAME)),
-        ('Tiktok', 'simple-icons:tiktok', 'https://www.tiktok.com/@{}'.format(settings.TIKTOK_NAME)),
+        ('Twitter', 'simple-icons:twitter', 'https://twitter.com/{}'.format(config.TWITTER_NAME)),
+        ('Instagram', 'simple-icons:instagram', 'https://www.instagram.com/{}/'.format(config.INSTAGRAM_NAME)),
+        ('Substack', 'simple-icons:substack', 'https://{}.substack.com/'.format(config.SUBSTACK_NAME)),
+        ('Facebook', 'simple-icons:facebook', 'https://www.facebook.com/{}'.format(config.FACEBOOK_NAME)),
+        ('Tiktok', 'simple-icons:tiktok', 'https://www.tiktok.com/@{}'.format(config.TIKTOK_NAME)),
         ('Email', 'ic:outline-email', None)
       )
     %}
       <a
-        class="btn md:btn-lg btn-neutral btn-rounded italic umami--click--social-{{ name|lower }}" target="_blank"
+        class="btn md:btn-lg btn-neutral btn-rounded umami--click--social-{{ name|lower }}" target="_blank"
         {% if name == 'Email' %}
           x-data :href="`mailto:${emailAddress}`"
         {% else %}

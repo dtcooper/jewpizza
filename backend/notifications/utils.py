@@ -2,13 +2,11 @@ import logging
 
 import requests
 
-from django.conf import settings
 from django.contrib import messages
 
-SUBSTACK_HOST = f"{settings.SUBSTACK_NAME}.substack.com"
-SUBSTACK_URL = f"https://{SUBSTACK_HOST}"
-SUBSTACK_URL_EMBED = f"{SUBSTACK_URL}/embed"
-SUBSTACK_URL_API = f"{SUBSTACK_URL}/api/v1/free"
+from constance import config
+
+
 DEFAULT_USER_AGENT = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81"
     " Safari/537.36"
@@ -18,22 +16,27 @@ logger = logging.getLogger(f"jewpizza.{__name__}")
 
 
 def sign_up_for_substack(email, request=None):
+    substack_host = f"{config.SUBSTACK_NAME}.substack.com"
+    substack_url = f"https://{substack_host}"
+    substack_url_embed = f"{substack_url}/embed"
+    substack_url_api = f"{substack_url}/api/v1/free"
+
     # Sketchy, brittle, but returns False if we encountered an error for graceful downgrade
     try:
         response = requests.post(
-            SUBSTACK_URL_API,
+            substack_url_api,
             headers={
                 "user-agent": request.headers.get("User-Agent", DEFAULT_USER_AGENT) if request else DEFAULT_USER_AGENT,
-                "authority": SUBSTACK_HOST,
-                "origin": SUBSTACK_URL,
-                "referer": SUBSTACK_URL_EMBED,
+                "authority": substack_host,
+                "origin": substack_url,
+                "referer": substack_url_embed,
                 "content-type": "application/json",
             },
             json={
                 "email": email,
-                "first_url": SUBSTACK_URL_EMBED,
+                "first_url": substack_url_embed,
                 "first_referrer": "",
-                "current_url": SUBSTACK_URL_EMBED,
+                "current_url": substack_url_embed,
                 "current_referrer": "",
                 "referral_code": "",
                 "source": "embed",

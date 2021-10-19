@@ -41,8 +41,6 @@ services:
       - ./init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
     environment:
       - POSTGRES_PASSWORD=postgres
-      - "UMAMI_WEBSITE_ID=${UMAMI_WEBSITE_ID:-}"
-      - "DOMAIN_NAME=${DOMAIN_NAME}"
 
   redis:
     image: library/redis:6-alpine

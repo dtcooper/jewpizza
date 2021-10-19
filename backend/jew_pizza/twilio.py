@@ -8,6 +8,7 @@ from twilio.twiml import TwiML
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseForbidden
 
+from constance import config
 from phonenumber_field.phonenumber import PhoneNumber
 
 twilio_client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
@@ -19,7 +20,7 @@ def send_sms(message, phone_number):
         if isinstance(phone_number, PhoneNumber):
             phone_number = phone_number.as_e164
 
-        twilio_client.messages.create(to=phone_number, from_=settings.TWILIO_FROM_NUMBER, body=message)
+        twilio_client.messages.create(to=phone_number, from_=config.TWILIO_FROM_NUMBER, body=message)
         return True
     except TwilioRestException:
         return False

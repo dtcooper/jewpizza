@@ -53,8 +53,8 @@
     <script src="{{ static('webcore/js/jewippy.js') }}"></script>
   {% endif %}
 
-  {% if settings.UMAMI_WEBSITE_ID and settings.UMAMI_SCRIPT_URL %}
-    <script async defer data-website-id="{{ settings.UMAMI_WEBSITE_ID }}" src="{{ settings.UMAMI_SCRIPT_URL }}"></script>
+  {% if config.UMAMI_WEBSITE_ID and config.UMAMI_SCRIPT_URL %}
+    <script async defer data-website-id="{{ config.UMAMI_WEBSITE_ID }}" src="{{ config.UMAMI_SCRIPT_URL }}"></script>
   {% endif %}
 </head>
 

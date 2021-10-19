@@ -66,7 +66,8 @@
       {% for url_name, name in admin_nav_links %}
         <a href="{{ url_for(url_name) }}">{{ name }}</a>
       {% endfor %}
-      <a href="{{ settings.LOGS_URL }}" target="_blank">Server Logs</a>
+      <a href="{{ config.LOGS_URL }}" target="_blank">Server Logs</a>
+      {% if config.UMAMI_URL %}<a href="{{ config.UMAMI_URL }}" target="_blank">Analytics</a>{% endif %}
     </nav>
   </header>
 
@@ -94,7 +95,8 @@
             <li><a href="{{ url_for(url_name) }}">{{ name }}</a></li>
           {% endif %}
         {% endfor %}
-        <li><a href="{{ settings.LOGS_URL }}" target="_blank">Server Logs</a></li>
+        <li><a href="{{ config.LOGS_URL }}" target="_blank">Server Logs</a></li>
+        {% if config.UMAMI_URL %}<li><a href="{{ config.UMAMI_URL }}" target="_blank">Analytics</a></li>{% endif %}
       </ul>
     {% endblock %}
   </main>
@@ -104,7 +106,8 @@
       {% for url_name, name in admin_nav_links %}
         <a href="{{ url_for(url_name) }}">{{ name }}</a> /
       {% endfor %}
-      <a href="{{ settings.LOGS_URL }}" target="_blank">Server Logs</a>
+      <a href="{{ config.LOGS_URL }}" target="_blank">Server Logs</a>
+      {% if config.UMAMI_URL %}<a href="{{ config.UMAMI_URL }}" target="_blank">Server Logs</a>{% endif %}
     </div>
     <div>
       <a href="{{ url_for('webcore:home') }}">View Site</a> /
