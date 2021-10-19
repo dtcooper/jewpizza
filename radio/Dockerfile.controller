@@ -18,7 +18,7 @@ COPY --from=msoap/shell2http /app/shell2http /usr/local/bin/
 RUN mkdir /app
 WORKDIR /app
 
-CMD [ "shell2http", "-host", "0.0.0.0", \
-      "/restart/radio", "docker compose restart radio", \
-      "/restart/radio-uplink", "docker compose restart radio-uplink" \
+CMD [ "shell2http", "-host", "0.0.0.0", "-export-vars", "COMPOSE_PROJECT_NAME", \
+      "/restart/radio/", "docker compose restart radio", \
+      "/restart/uplink/", "docker compose restart radio-uplink" \
 ]

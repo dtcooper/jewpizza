@@ -11,10 +11,10 @@ failsafe = single(fallible=false, '/failsafe.mp3')
 
 radio = fallback(track_sensitive=false, [input, failsafe])
 
-host = {{ settings.ICECAST_HOST|liqval }}
-port = {{ settings.ICECAST_PORT|liqval }}
-username = {{ settings.ICECAST_USERNAME|liqval }}
-password = {{ settings.ICECAST_PASSWORD|liqval }}
-protocol = {{ settings.ICECAST_PROTOCOL|liqval }}
+hostname = {{ config.ICECAST_HOSTNAME|liqval }}
+port = {{ config.ICECAST_PORT|liqval }}
+username = {{ config.ICECAST_USERNAME|liqval }}
+password = {{ config.ICECAST_PASSWORD|liqval }}
+protocol = {{ config.ICECAST_PROTOCOL|liqval }}
 
-output.icecast(%mp3, host=host, port=port, user=username, password=password, protocol=protocol, mount='radio', radio)
+output.icecast(%mp3, host=hostname, port=port, user=username, password=password, protocol=protocol, mount='radio', radio)

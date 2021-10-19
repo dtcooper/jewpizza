@@ -36,11 +36,11 @@ TWILIO_AUTH_TOKEN = env("TWILIO_AUTH_TOKEN")
 RUN_HUEY = env.bool("__RUN_HUEY", default=False)
 GIT_REV = env("GIT_REV", default="unknown")
 
-ICECAST_HOST = env('ICECAST_HOST', default='icecast')
-ICECAST_PORT = env.int('ICECAST_PORT', default=8000)
-ICECAST_USERNAME = env('ICECAST_USERNAME', default='source')
-ICECAST_PASSWORD = env('ICECAST_PASSWORD', default='hackme')
-ICECAST_PROTOCOL = env('ICECAST_PROTOCOL', default='http')
+ICECAST_HOST = env("ICECAST_HOST", default="icecast")
+ICECAST_PORT = env.int("ICECAST_PORT", default=8000)
+ICECAST_USERNAME = env("ICECAST_USERNAME", default="source")
+ICECAST_PASSWORD = env("ICECAST_PASSWORD", default="hackme")
+ICECAST_PROTOCOL = env("ICECAST_PROTOCOL", default="http")
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
@@ -236,28 +236,46 @@ STATICFILES_FINDERS = [
 CONSTANCE_BACKEND = "constance.backends.redisd.RedisBackend"
 CONSTANCE_REDIS_CONNECTION_CLASS = "django_redis.get_redis_connection"
 CONSTANCE_SUPERUSER_ONLY = False
+CONSTANCE_IGNORE_ADMIN_VERSION_CHECK = True
 CONSTANCE_ADDITIONAL_FIELDS = {
-    "char_required": ("django.forms.CharField", {"required": True}),
-    "char": ("django.forms.CharField", {"required": False}),
-    "phone_required": ("phonenumber_field.formfields.PhoneNumberField", {"required": True}),
-    "url_required": ("django.forms.URLField", {"required": True}),
-    "url": ("django.forms.URLField", {"required": False}),
-    "uuid": ("django.forms.UUIDField", {"required": False}),
+    "char": ("django.forms.CharField",),
+    "phone": ("phonenumber_field.formfields.PhoneNumberField",),
+    "url": ("django.forms.URLField",),
+    "uuid_optional": ("django.forms.UUIDField", {"required": False}),
+    "icecast_protocol": (
+        "django.forms.ChoiceField",
+        {"choices": (("http", "http (insecure)"), ("https", "https (secure)"))},
+    ),
+    "positive_int": ("django.forms.IntegerField", {"min_value": 1}),
 }
 CONSTANCE_CONFIG = {
     "ENABLE_JEWIPPY": (True, "Enable jewippy at bottom of page"),
     "ENABLE_PLAYER": (False, "Enable audio player"),
     "ENABLE_TEST_NOTIFICATIONS": (False, "Enable test notifications on home page for superuser only."),
     "HIDDEN_IMG_MODE": (False, "Enable hidden image mode (for development in public, to not look so awkward)"),
-    "FACEBOOK_NAME": ("dtcooper", "Social media account name for Facebook", "char_required"),
-    "INSTAGRAM_NAME": ("dtcooper", "Social media account name for Instagram", "char_required"),
-    "SUBSTACK_NAME": ("jewpizza", "Social media account name for Substack", "char_required"),
-    "TIKTOK_NAME": ("jew.pizza", "Social media account name for Tiktok", "char_required"),
-    "TWITTER_NAME": ("dtcooper", "Social media account name for Twitter", "char_required"),
-    "TWILIO_FROM_NUMBER": ("+14164390000", "Twilio from number for texts/calls", "phone_required"),
-    "LOGS_URL": ("http://localhost:8888/" if DEBUG else "https://logs.jew.pizza/", "URL for logs container, linked in admin", "url_required"),
-    "UMAMI_URL": ("http://localhost:3000/" if DEBUG else "https://umami.jew.pizza/", "URL for umami analytics", "url_required"),
-    "UMAMI_WEBSITE_ID": ("", "Website ID in umami", "uuid"),
+    "FACEBOOK_NAME": ("dtcooper", "Social media account name for Facebook", "char"),
+    "INSTAGRAM_NAME": ("dtcooper", "Social media account name for Instagram", "char"),
+    "SUBSTACK_NAME": ("jewpizza", "Social media account name for Substack", "char"),
+    "TIKTOK_NAME": ("jew.pizza", "Social media account name for Tiktok", "char"),
+    "TWITTER_NAME": ("dtcooper", "Social media account name for Twitter", "char"),
+    "TWILIO_FROM_NUMBER": ("+14164390000", "Twilio from number for texts/calls", "phone"),
+    "LOGS_URL": (
+        "http://localhost:8888/" if DEBUG else "https://logs.jew.pizza/",
+        "URL for logs container, linked in admin",
+        "url",
+    ),
+    "UMAMI_URL": ("http://localhost:3000/" if DEBUG else "https://umami.jew.pizza/", "URL for umami analytics", "url"),
+    "UMAMI_WEBSITE_ID": ("", "Website ID in umami", "uuid_optional"),
+    "ICECAST_URL": (
+        "http://localhost:8080/" if DEBUG else "https://play.jew.pizza/",
+        "Public URL for Icecast server",
+        "url",
+    ),
+    "ICECAST_HOSTNAME": ("icecast", "Hostname for Icecast server", "char"),
+    "ICECAST_PORT": (8000, "Port for Icecast server", "positive_int"),
+    "ICECAST_USERNAME": ("source", "Username for Icecast server", "char"),
+    "ICECAST_PASSWORD": ("hackme", "Password for Icecast server", "char"),
+    "ICECAST_PROTOCOL": ("http", "Protocol for Icecast server", "icecast_protocol"),
 }
 
 CONSTANCE_CONFIG_FIELDSETS = OrderedDict(
@@ -265,7 +283,18 @@ CONSTANCE_CONFIG_FIELDSETS = OrderedDict(
         ("Development Options", ("ENABLE_JEWIPPY", "ENABLE_PLAYER", "ENABLE_TEST_NOTIFICATIONS", "HIDDEN_IMG_MODE")),
         ("Social Media Account", ("FACEBOOK_NAME", "INSTAGRAM_NAME", "SUBSTACK_NAME", "TIKTOK_NAME", "TWITTER_NAME")),
         ("Telephony", ("TWILIO_FROM_NUMBER",)),
-        ("Tracking Tag", ("UMAMI_WEBSITE_ID", "UMAMI_URL")),
-        ("URLs", ("LOGS_URL",)),
+        ("Umami Tracking Tag", ("UMAMI_WEBSITE_ID", "UMAMI_URL")),
+        (
+            "Icecast",
+            (
+                "ICECAST_URL",
+                "ICECAST_HOSTNAME",
+                "ICECAST_PORT",
+                "ICECAST_USERNAME",
+                "ICECAST_PASSWORD",
+                "ICECAST_PROTOCOL",
+            ),
+        ),
+        ("Miscellaneous", ("LOGS_URL",)),
     )
 )
