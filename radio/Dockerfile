@@ -1,4 +1,4 @@
-FROM savonet/liquidsoap:v2.0.1
+FROM savonet/liquidsoap:v2.0.0
 
 ENV SCRIPT_NAME=radio
 

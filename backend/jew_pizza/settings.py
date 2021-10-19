@@ -267,11 +267,11 @@ CONSTANCE_CONFIG = {
     "UMAMI_URL": ("http://localhost:3000/" if DEBUG else "https://umami.jew.pizza/", "URL for umami analytics", "url"),
     "UMAMI_WEBSITE_ID": ("", "Website ID in umami", "uuid_optional"),
     "ICECAST_URL": (
-        "http://localhost:8080/" if DEBUG else "https://play.jew.pizza/",
+        "http://localhost:8080/" if DEBUG else "https://radio.jew.pizza/",
         "Public URL for Icecast server",
         "url",
     ),
-    "ICECAST_HOSTNAME": ("icecast", "Hostname for Icecast server", "char"),
+    "ICECAST_HOSTNAME": ("icecast" if DEBUG else "host.docker.internal", "Hostname for Icecast server", "char"),
     "ICECAST_PORT": (8000, "Port for Icecast server", "positive_int"),
     "ICECAST_USERNAME": ("source", "Username for Icecast server", "char"),
     "ICECAST_PASSWORD": ("hackme", "Password for Icecast server", "char"),
