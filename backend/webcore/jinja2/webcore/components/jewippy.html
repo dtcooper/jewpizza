@@ -11,13 +11,13 @@
 
     <button
       x-data x-show="open" @click="open = false"
-      class="pointer-events-auto btn text-content btn-ghost btn-square btn-sm absolute bottom-[172px] right-0 umami--click--clippy-close"
+      class="pointer-events-auto btn text-content btn-ghost btn-square btn-sm absolute bottom-[172px] right-0 umami--click--jewippy-close"
     >
       {{ icon('bx:bx-window-close', size='text-2xl', margin=None) }}
     </button>
     <button
       x-data x-show="!open" @click="open = true"
-      class="pointer-events-auto bg-primary hover:bg-primary-focus text-primary-content absolute bottom-0 right-1.5 p-1.5 animate-bounce rounded-xl umami--click--clippy-expand"
+      class="pointer-events-auto bg-primary hover:bg-primary-focus text-primary-content absolute bottom-0 right-1.5 p-1.5 animate-bounce rounded-xl umami--click--jewippy-expand"
     >
       {{ icon('fa-solid:glasses', size='text-5xl', margin=None) }}
     </button>
@@ -39,14 +39,14 @@
     <div class="pointer-events-auto w-[220px] h-[155px] px-[3px] pt-[3px] absolute top-0 left-0 jewippy-bubble relative" x-show="open && bubbleOpen">
       <div id="jewippy-scroller" class="group jewippy-scroller w-[214px] h-[111px] p-1 pl-1.5 overflow-y-auto">
         <div class="font-jewippy text-sm flex flex-col h-full">
-          <div class="flex-1 flex flex-col justify-center"><span x-html="bubbleDemoHTML"></span> {{ lipsum(html=false) }}</div>
+          <div class="flex-1 flex flex-col justify-center"><span x-html="bubbleDemoHTML"></span></div>
           <div>
             <button class="btn-jewippy font-bold" @click="bubbleDemoClick()">Show me...</button>
             <button class="btn-jewippy italic" @click="bubbleDemoClickMinimize()">Fuck right off!</button>
           </div>
         </div>
       </div>
-      <button class="absolute top-0 -right-8 btn text-content btn-ghost btn-square btn-sm absolute umami--click--clippy-bubble-close" @click="bubbleDemoClickMinimize('xanaxRain')">
+      <button class="absolute top-0 -right-8 btn text-content btn-ghost btn-square btn-sm absolute umami--click--jewippy-bubble-close" @click="bubbleDemoClickMinimize('xanaxRain')">
         {{ icon('bx:bx-window-close', size='text-2xl', margin=None) }}
       </button>
     </div>
