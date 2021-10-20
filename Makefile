@@ -40,7 +40,7 @@ deploy:
 	fi
 
 up:
-	@$(COMPOSE) up $(shell source .env; if [ -z "$$DEBUG" -o "$$DEBUG" = 0 ]; then echo "-d"; fi)
+	@$(COMPOSE) up --remove-orphans $(shell source .env; if [ -z "$$DEBUG" -o "$$DEBUG" = 0 ]; then echo "-d"; fi)
 
 down:
 	@$(COMPOSE) down
