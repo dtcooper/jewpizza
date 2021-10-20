@@ -43,7 +43,7 @@ up:
 	@$(COMPOSE) up --remove-orphans $(shell source .env; if [ -z "$$DEBUG" -o "$$DEBUG" = 0 ]; then echo "-d"; fi)
 
 down:
-	@$(COMPOSE) down
+	@$(COMPOSE) down --remove-orphans
 
 ssh: # For me only.
 	ssh -R 8888:localhost:8000 jew.pizza

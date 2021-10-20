@@ -1,5 +1,9 @@
 {% extends 'admin_tools/form.html' %}
 
+{% block extra_head %}
+  <script src="{{ static('vendor/js/alpinejs/dist/cdn.min.js') }}" defer></script>
+{% endblock %}
+
 {% block form %}
   <div
     x-data="{message: '', audience: {{ form.audience.value()|attrjs }}}"

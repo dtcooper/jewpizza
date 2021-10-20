@@ -1,5 +1,16 @@
 {% extends 'admin_tools/base.html' %}
 
+{% block extra_head %}
+  <style>
+    .state-running {
+      color: forestgreen;
+    }
+    .state-exited, .state-dead, .state-destroyed {
+      color: darkred;
+    }
+  </style>
+{% endblock %}
+
 {% block content %}
   {% if containers %}
     <form action="." method="POST">
@@ -9,17 +20,33 @@
           <tr>
             <th>Container</th>
             <th>Status</th>
+            <th>Ports</th>
             <th>Restart</th>
+            <th>Logs</th>
           </tr>
         </thead>
         <tbody>
-          {% for container, is_running in containers %}
+          {% for name, state, ports, logs_url in containers %}
             <tr>
-              <td>{{ container }}</td>
-              <td>{% if is_running %}running{% else %}stopped{% endif %}</td>
+              <td>{{ name }}</td>
+              <td class="state-{{ state }}">{{ state }}</td>
               <td>
-                {% if is_running %}
-                  <button action="submit" name="container" value="{{ container }}">Restart</button>
+                {% if ports %}
+                  <ul>
+                    {% for port in ports %}
+                      <li>{{ port }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </td>
+              <td>
+                {% if state == 'running' and name != 'controller' %}
+                  <button action="submit" name="container" value="{{ name }}">Restart</button>
+                {% endif %}
+              </td>
+              <td>
+                {% if logs_url %}
+                  <a href="{{ logs_url }}" target="_blank">Logs</a>
                 {% endif %}
               </td>
             </tr>
