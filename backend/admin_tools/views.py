@@ -2,10 +2,10 @@ from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.mail import send_mail
+from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import FormView, TemplateView
-from django.shortcuts import redirect
 
 from constance import config
 
@@ -13,6 +13,7 @@ from jew_pizza.twilio import send_sms
 from jew_pizza.utils import list_containers, restart_container
 
 from .forms import SendEmailForm, SendTextMessageForm
+
 
 NAVIGATION_VIEWS = (
     ("index", "Tools Index"),
@@ -39,11 +40,13 @@ class AdminToolsViewMixin:
     def get_context_data(self, **kwargs):
         nav_links = []
         for url_name, name in NAVIGATION_VIEWS:
-            nav_links.append((reverse(f'admin-tools:{url_name}'), name, False))
-        nav_links.extend([
-            (config.LOGS_URL, 'Service Logs', True),
-            (config.UMAMI_URL, 'Analytics', True),
-        ])
+            nav_links.append((reverse(f"admin-tools:{url_name}"), name, False))
+        nav_links.extend(
+            [
+                (config.LOGS_URL, "Service Logs", True),
+                (config.UMAMI_URL, "Analytics", True),
+            ]
+        )
         return {"admin_nav_links": nav_links, **super().get_context_data(**kwargs)}
 
 
@@ -93,17 +96,19 @@ class SendEmailView(SuccessMessageMixin, AdminFormView):
 
 
 class ContainerStatusView(AdminTemplateView):
-    template_name = 'admin_tools/container_status.html'
-    title = 'Container Status'
+    template_name = "admin_tools/container_status.html"
+    title = "Container Status"
 
     def get_context_data(self, **kwargs):
-        return {'containers': list_containers(fail_silently=True), **super().get_context_data(**kwargs)}
+        return {"containers": list_containers(fail_silently=True), **super().get_context_data(**kwargs)}
 
     def post(self, request, *args, **kwargs):
-        container = request.POST.get('container')
+        container = request.POST.get("container")
         if container:
             if restart_container(container, fail_silently=True):
-                messages.success(request, f'You successfully restarted the {container} container!')
+                messages.success(request, f"You successfully restarted the {container} container!")
             else:
-                messages.error(request, f'An error occurred while restarting the {container} container. Check the server logs.')
-        return redirect('admin-tools:container-status')
+                messages.error(
+                    request, f"An error occurred while restarting the {container} container. Check the server logs."
+                )
+        return redirect("admin-tools:container-status")

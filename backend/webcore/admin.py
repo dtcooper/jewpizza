@@ -4,7 +4,7 @@ from django.contrib import admin
 from constance import config
 from constance.admin import Config, ConstanceAdmin, ConstanceForm
 
-from .signals import config_updated_in_admin
+from jew_pizza.signals import config_updated_in_admin
 
 
 class ConstanceSignalForm(ConstanceForm):

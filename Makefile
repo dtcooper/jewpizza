@@ -34,7 +34,7 @@ show-outdated:
 
 deploy:
 	@if [ $(shell uname -n) = $(SERVER_NODENAME) ]; then \
-		git pull --ff-only && make build && make up; \
+		git pull --ff-only && make build && make down && make up; \
 	else \
 		git push && ssh $(SERVER) 'cd $(SERVER_PROJECT_DIR) && make deploy'; \
 	fi
