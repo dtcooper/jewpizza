@@ -3,10 +3,10 @@ import logging
 
 import requests
 
-from constance import config
-
 from django.utils.formats import date_format as django_date_format
 from django.utils.timezone import localtime
+
+from constance import config
 
 
 logger = logging.getLogger("jewpizza.{__name__}")
@@ -42,23 +42,33 @@ def _call_controller(cmd, fail_silently=False, params=None, json=False):
 
 
 def restart_container(container, fail_silently=False):
-    return _call_controller('restart', fail_silently=True, params={'container': container}) is not None
+    return _call_controller("restart", fail_silently=True, params={"container": container}) is not None
 
 
-ContainerInfo = namedtuple('ContainerInfo', 'name state ports logs_url')
+ContainerInfo = namedtuple("ContainerInfo", "name state ports logs_url")
 
 
 def list_containers(fail_silently=False):
-    containers_names = _call_controller('list', fail_silently=fail_silently).splitlines()
-    containers_ps = {c['Service']: c for c in _call_controller('ps', fail_silently=fail_silently, json=True)}
-    import pprint; pprint.pprint(containers_ps)
+    response = _call_controller("list", fail_silently=fail_silently)
+    if not response:
+        return []
+
+    containers_names = response.splitlines()
+    containers_ps = {c["Service"]: c for c in _call_controller("ps", fail_silently=fail_silently, json=True)}
+    import pprint
+
+    pprint.pprint(containers_ps)
     containers = []
     for container in containers_names:
         ps = containers_ps.get(container, {})
-        state = ps.get('State', 'destroyed')
-        ports = sorted(f"{p['URL']}:{p['PublishedPort']}/{p['Protocol']}" for p in (ps.get('Publishers') or []) if p['PublishedPort'] > 0)
+        state = ps.get("State", "destroyed")
+        ports = sorted(
+            f"{p['URL']}:{p['PublishedPort']}/{p['Protocol']}"
+            for p in (ps.get("Publishers") or [])
+            if p["PublishedPort"] > 0
+        )
         logs_url = None
-        container_id = ps.get('ID')
+        container_id = ps.get("ID")
         if container_id:
             # dozzle specific
             logs_url = f'{config.LOGS_URL.removesuffix("/")}/container/{container_id[:12]}'
