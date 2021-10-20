@@ -217,14 +217,6 @@ reference = "master"
 resolved_reference = "dcd0abc2abd4bf771bba95cde09009bd50f6bbb2"
 
 [[package]]
-name = "django-light"
-version = "0.1.0.post3"
-description = "Disable dark mode in Django admin UI."
-category = "main"
-optional = false
-python-versions = "*"
-
-[[package]]
 name = "django-npm"
 version = "1.0.0"
 description = "A django staticfiles finder that uses npm"
@@ -897,7 +889,7 @@ brotli = ["brotli"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "cffef6529bec6362a5ef4b6680d30cc632baf47d0abf5f27eeaf6909a445a2b3"
+content-hash = "a27e7b7bfb2521f4faa026c5676d79fe06c083aed56d818ab1f3bf0dd55659c9"
 
 [metadata.files]
 appnope = [
@@ -1000,10 +992,6 @@ django-extensions = [
     {file = "django_extensions-3.1.3-py3-none-any.whl", hash = "sha256:50de8977794a66a91575dd40f87d5053608f679561731845edbd325ceeb387e3"},
 ]
 django-huey-email = []
-django-light = [
-    {file = "django-light-0.1.0.post3.tar.gz", hash = "sha256:74e7fc67c4aaaae304cb34529b5bb9e46b78ce6c87381c5edc00b7f4f84a422e"},
-    {file = "django_light-0.1.0.post3-py3-none-any.whl", hash = "sha256:921a09124f2a8db0c0ea3a8f06dede5782180b0398f901bc595305db7b622a90"},
-]
 django-npm = [
     {file = "django-npm-1.0.0.tar.gz", hash = "sha256:2e6bba65e728fa18b9db3c8dc0d4490b70cb7f43bacf60eb3654d7dcb6424272"},
 ]

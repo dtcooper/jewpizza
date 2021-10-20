@@ -52,7 +52,6 @@ else:
     ALLOWED_HOSTS = list({"app", "localhost", "127.0.0.1", DOMAIN_NAME})
 
 INSTALLED_APPS = [
-    "django_light",  # Disable admin dark mode
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
