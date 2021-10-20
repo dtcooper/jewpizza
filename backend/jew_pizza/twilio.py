@@ -20,8 +20,11 @@ def send_sms(message, phone_number):
     try:
         if isinstance(phone_number, PhoneNumber):
             phone_number = phone_number.as_e164
+        from_number = config.TWILIO_FROM_NUMBER
+        if isinstance(from_number, PhoneNumber):
+            from_number = from_number.as_e164
 
-        twilio_client.messages.create(to=phone_number, from_=config.TWILIO_FROM_NUMBER, body=message)
+        twilio_client.messages.create(to=phone_number, from_=from_number, body=message)
         return True
     except TwilioRestException:
         return False

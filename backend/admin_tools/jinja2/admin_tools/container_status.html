@@ -1,0 +1,33 @@
+{% extends 'admin_tools/base.html' %}
+
+{% block content %}
+  {% if containers %}
+    <form action="." method="POST">
+      {{ csrf_input }}
+      <table>
+        <thead>
+          <tr>
+            <th>Container</th>
+            <th>Status</th>
+            <th>Restart</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for container, is_running in containers %}
+            <tr>
+              <td>{{ container }}</td>
+              <td>{% if is_running %}running{% else %}stopped{% endif %}</td>
+              <td>
+                {% if is_running %}
+                  <button action="submit" name="container" value="{{ container }}">Restart</button>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </form>
+  {% else %}
+    No containers appear to be running!
+  {% endif %}
+{% endblock %}

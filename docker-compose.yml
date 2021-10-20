@@ -52,10 +52,11 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
-  radio-controller:
+  controller:
     build:
       dockerfile: Dockerfile.controller
-      context: radio
+    restart: always
+    init: true
     volumes:
       - .:/app
       - /var/run/docker.sock:/var/run/docker.sock

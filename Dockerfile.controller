@@ -18,7 +18,6 @@ COPY --from=msoap/shell2http /app/shell2http /usr/local/bin/
 RUN mkdir /app
 WORKDIR /app
 
-CMD [ "shell2http", "-host", "0.0.0.0", "-export-vars", "COMPOSE_PROJECT_NAME", \
-      "/restart/radio/", "docker compose restart radio", \
-      "/restart/uplink/", "docker compose restart radio-uplink" \
-]
+CMD shell2http -host 0.0.0.0 -form -export-vars COMPOSE_PROJECT_NAME \
+    '/containers/list' 'docker compose config --services ; echo "== UP ==" ; docker compose ps --services --filter "status=running"' \
+    '/containers/restart' 'docker compose restart "$v_container"'

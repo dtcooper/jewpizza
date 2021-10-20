@@ -1,4 +1,5 @@
 /.git/
+/scratch/
 # Below copied from .gitignore
 .DS_Store
 .env
