@@ -34,6 +34,9 @@ show-outdated:
 		npm --prefix=../frontend outdated;\
 		echo "============== Backend ===============";\
 		poetry show -o'
+	@$(COMPOSE) run --rm --no-deps sse sh -c '\
+		echo "============== Backend (sse) =========";\
+		poetry show -o'
 
 deploy:
 	@if [ $(shell uname -n) = $(SERVER_NODENAME) ]; then \
