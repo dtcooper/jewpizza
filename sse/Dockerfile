@@ -21,6 +21,6 @@ RUN poetry install \
     # In prod use "--no-dev"
     $(if [ -z "$DEBUG" -o "$DEBUG" = '0' ]; then echo '--no-dev'; fi)
 
-COPY entrypoint.sh sse.py /app/
+COPY . /app/
 
 ENTRYPOINT ["/app/entrypoint.sh"]
