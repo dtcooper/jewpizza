@@ -36,6 +36,7 @@
     - `ffprobe -i <filename> -print_format json -hide_banner -loglevel error -show_format -show_error -show_streams -select_streams a:0`
 * [ ] Use headphone jewippy when you click shows or listen
 * [ ] Restart radio liquidsoap script with watchdog when `DEBUG=1`
+* [ ] Retro cursors, use static for files in tailwind CSS, possibly use `static()` for urls in tailwind css, maybe use CSS props?
 
 ## Sections
 
