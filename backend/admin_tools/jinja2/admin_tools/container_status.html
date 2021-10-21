@@ -20,16 +20,20 @@
           <tr>
             <th>Container</th>
             <th>Status</th>
+            <th>CPU</th>
+            <th>Memory</th>
             <th>Ports</th>
             <th>Restart</th>
             <th>Logs</th>
           </tr>
         </thead>
         <tbody>
-          {% for name, state, ports, logs_url in containers %}
+          {% for name, state, ports, logs_url, cpu_info, mem_info in containers %}
             <tr>
               <td>{{ name }}</td>
               <td class="state-{{ state }}">{{ state }}</td>
+              <td>{% if cpu_info %}{{ cpu_info }}{% endif %}</td>
+              <td>{% if mem_info %}{{ mem_info }}{% endif %}</td>
               <td>
                 {% if ports %}
                   <ul>

@@ -21,4 +21,5 @@ WORKDIR /app
 CMD shell2http -host 0.0.0.0 -form -export-vars COMPOSE_PROJECT_NAME \
     '/list' 'docker compose config --services' \
     '/ps' 'docker compose ps --format json' \
+    '/stats' 'docker stats --no-stream --no-trunc --format "{{.ID}}\t{{.CPUPerc}}\t{{.MemUsage}} ({{.MemPerc}})"' \
     '/restart' 'docker compose restart "$v_container"'

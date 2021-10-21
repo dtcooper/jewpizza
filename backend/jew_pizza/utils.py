@@ -45,19 +45,23 @@ def restart_container(container, fail_silently=False):
     return _call_controller("restart", fail_silently=True, params={"container": container}) is not None
 
 
-ContainerInfo = namedtuple("ContainerInfo", "name state ports logs_url")
+ContainerInfo = namedtuple("ContainerInfo", "name state ports logs_url cpu_info mem_info")
 
 
 def list_containers(fail_silently=False):
-    response = _call_controller("list", fail_silently=fail_silently)
-    if not response:
+    if not (response := _call_controller("list", fail_silently=fail_silently)):
         return []
 
     containers_names = response.splitlines()
-    containers_ps = {c["Service"]: c for c in _call_controller("ps", fail_silently=fail_silently, json=True)}
-    import pprint
 
-    pprint.pprint(containers_ps)
+    containers_ps = {}
+    if response := _call_controller("ps", fail_silently=fail_silently, json=True):
+        containers_ps = {c["Service"]: c for c in response}
+
+    containers_stats = {}
+    if response := _call_controller("stats", fail_silently=fail_silently):
+        containers_stats = {s.split('\t')[0]: s.split('\t')[1:] for s in response.splitlines()}
+
     containers = []
     for container in containers_names:
         ps = containers_ps.get(container, {})
@@ -67,10 +71,12 @@ def list_containers(fail_silently=False):
             for p in (ps.get("Publishers") or [])
             if p["PublishedPort"] > 0
         )
-        logs_url = None
-        container_id = ps.get("ID")
-        if container_id:
+
+        mem_info = cpu_info = logs_url = None
+        if container_id := ps.get("ID"):
             # dozzle specific
             logs_url = f'{config.LOGS_URL.removesuffix("/")}/container/{container_id[:12]}'
-        containers.append(ContainerInfo(container, state, ports, logs_url))
+            if stats := containers_stats.get(container_id):
+                cpu_info, mem_info = stats
+        containers.append(ContainerInfo(container, state, ports, logs_url, cpu_info, mem_info))
     return containers
