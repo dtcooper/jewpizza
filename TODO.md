@@ -17,6 +17,7 @@
 * [x] favicon emoji using inline SVG (google it)
 * [x] Remove automatic `SECRET_KEY` generation, just document it in README. This needs to be set before first run.
 * [x] set timezones in ALL containers
+* [x] Remove _all_ radio-uplink code
 * [ ] Icecast server + liquidsoap with player to play whatever show I'm on, read
       countdowns when I'm not on air
     - [ ] Call-in button via Twilio client
@@ -32,7 +33,6 @@
 * [ ] Get duration and other info from ffprobe
     - `ffprobe -i <filename> -print_format json -hide_banner -loglevel error -show_format -show_error -show_streams -select_streams a:0`
 * [ ] Use headphone jewippy when you click shows or listen
-* [ ] Remove _all_ radio-uplink code
 
 ## Sections
 

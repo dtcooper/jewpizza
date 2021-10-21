@@ -85,6 +85,6 @@ def list_containers(fail_silently=False):
     return containers
 
 
-def send_sse_message(message):
+def send_sse_message(message_type, message):
     redis = get_redis_connection()
-    redis.publish(REDIS_PUBSUB_CHANNEL, json.dumps(message))
+    redis.publish(REDIS_PUBSUB_CHANNEL, f'{message_type}:{json.dumps(message)}')

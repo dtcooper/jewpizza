@@ -37,10 +37,12 @@ services:
       context: radio
       args:
         - "DEBUG=${DEBUG:-0}"
+    volumes:
+      - ./.env:/.env:ro
+    depends_on:
+      - app
     restart: always
     environment:
-      - SECRET_KEY
-      - SCRIPT_NAME=radio
       - "TZ=${TIMEZONE:-US/Eastern}"
     extra_hosts:
       - "host.docker.internal:host-gateway"

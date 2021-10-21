@@ -16,15 +16,16 @@ RUN apt-get update \
         wget \
         # Dev requirements
         $(if [ "$DEBUG" -a "$DEBUG" != '0' ]; then echo \
-            rlwrap \
             netcat-traditional \
+            python3-pygments \
+            rlwrap \
         ; fi) \
     && rm -rf /var/lib/apt/lists/*
 
 RUN wget -qO /usr/local/bin/wait-for-it "https://raw.githubusercontent.com/vishnubob/wait-for-it/${WAIT_FOR_IT_VERSION}/wait-for-it.sh" \
     && chmod +x /usr/local/bin/wait-for-it
 
-RUN mkdir /radio && chown liquidsoap:liquidsoap /radio
+RUN mkdir /radio && chown liquidsoap:liquidsoap /radio && usermod -d /radio liquidsoap
 
 COPY entrypoint.sh failsafe.mp3 jingle.mp3 /
 

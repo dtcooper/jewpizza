@@ -105,13 +105,17 @@
     })
     Alpine.store('menuOpen', false)
     Alpine.store('messages', DATA.messages)
+    Alpine.store('sse', {})
 
     const eventsource = window.eventsource = new window.EventSource(DATA.sseURL)
     eventsource.addEventListener('message', function (e) {
       const separator = e.data.indexOf(':')
       const messageType = e.data.substr(0, separator)
-      const messageBody = JSON.parse(e.data.substr(separator + 1))
-      console.log(`Got "${messageType}" message from SSE service: ${JSON.stringify(messageBody, null, 2)}`)
+      const message = JSON.parse(e.data.substr(separator + 1))
+      Alpine.store('sse')[messageType] = message
+      if (DATA.debug) {
+        console.log(`Recieved ${messageType} SSE message at ${new Date()}: ${JSON.stringify(message, null, 2)}`)
+      }
     })
   })
 })()
