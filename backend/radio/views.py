@@ -7,7 +7,7 @@ from jew_pizza.constants import REDIS_PUBSUB_CHANNEL
 
 class LiquidsoapScriptView(TemplateView):
     content_type = "text/plain"
-    template_name = 'radio/radio.liq'
+    template_name = "radio/radio.liq"
     extra_context = {"REDIS_PUBSUB_CHANNEL": REDIS_PUBSUB_CHANNEL}
 
     def dispatch(self, request, *args, **kwargs):
