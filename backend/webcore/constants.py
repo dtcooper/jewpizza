@@ -17,41 +17,41 @@ JEWIPPY_GIFS = [
     {
         "url": "webcore/images/jewippy/Idle.gif",
         "name": "idle",
-        "length": 7240,
+        "length": 7080,
     },
     {
         "url": "webcore/images/jewippy/Idle2.gif",
         "name": "idleAlt",
-        "length": 7240,
+        "length": 7080,
     },
     {
-        "url": "webcore/images/jewippy/Explode2.gif",
+        "url": "webcore/images/jewippy/Explode.gif",
         "name": "explode",
         "length": 7080,
     },
     {
         "url": "webcore/images/jewippy/Flirt.gif",
         "name": "flirt",
-        "length": 7240,
+        "length": 7080,
     },
     {
         "url": "webcore/images/jewippy/Headphones.gif",
         "name": "headphones",
-        "length": 7240,
+        "length": 7080,
     },
     {
         "url": "webcore/images/jewippy/Melting.gif",
         "name": "melting",
-        "length": 7240,
+        "length": 7080,
     },
     {
         "url": "webcore/images/jewippy/Rotating.gif",
         "name": "rotating",
-        "length": 7240,
+        "length": 7080,
     },
     {
         "url": "webcore/images/jewippy/XanaxRain.gif",
         "name": "xanaxRain",
-        "length": 7240,
+        "length": 7080,
     },
 ]
