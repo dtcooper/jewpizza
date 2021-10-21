@@ -5,6 +5,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     DJANGO_SETTINGS_MODULE=jew_pizza.settings
 
 ARG POETRY_VERSION=1.1.11 \
+    WAIT_FOR_IT_VERSION=81b1373f \
     DEBUG=0
 
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash \
@@ -20,7 +21,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash \
         ; fi) \
     && rm -rf /var/lib/apt/lists/*
 
-RUN wget -qO /usr/local/bin/wait-for-it https://raw.githubusercontent.com/vishnubob/wait-for-it/81b1373f/wait-for-it.sh \
+RUN wget -qO /usr/local/bin/wait-for-it "https://raw.githubusercontent.com/vishnubob/wait-for-it/${WAIT_FOR_IT_VERSION}/wait-for-it.sh" \
     && chmod +x /usr/local/bin/wait-for-it
 
 RUN pip install --no-cache-dir "poetry==$POETRY_VERSION"

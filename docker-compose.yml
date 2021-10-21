@@ -52,6 +52,17 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
+  sse:
+    build:
+      context: sse
+    restart: always
+    volumes:
+      - ./.env:/.env:ro
+    depends_on:
+      - redis
+    ports:
+      - "${SSE_BIND_ADDR:-127.0.0.1:8001}:8001"
+
   controller:
     build:
       dockerfile: Dockerfile.controller

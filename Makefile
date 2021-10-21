@@ -12,10 +12,13 @@ pre-commit:
 		npx --prefix=/app/frontend standard --fix ;\
 		echo "============== black =================";\
 		black . ;\
+		black --config pyproject.toml ../sse ;\
 		echo "============== isort =================";\
 		isort . ;\
+		isort --sp pyproject.toml ../sse ;\
 		echo "============== flake8 ================";\
 		flake8;\
+		flake8 --config .flake8 ../sse ;\
 		exit 0'
 
 build:
