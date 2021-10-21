@@ -39,34 +39,40 @@ def shuffle(items):
     return items
 
 
-def static(path, *args, **kwargs):
-    path_hash = None
+def get_cached_file_hash(path):
+    if settings.DEBUG:
+        return "{:032x}".format(random.randrange(16 ** 32))
+    else:
+        cache_key = f"{constants.CACHE_KEY_PREFIX_STATIC_ASSET_HASH}{path}"
+        file_hash = cache.get(cache_key)
 
-    for ext in (".js", ".css"):
-        if path.endswith(ext):
-            if settings.DEBUG:
-                # In DEBUG, use a simple random fake md5 hash
-                path_hash = "{:032x}".format(random.randrange(16 ** 32))
-            elif not path.endswith(f".min{ext}"):
+        if file_hash is None:
+            full_path = os.path.join(settings.STATIC_ROOT, path)
+            if os.path.exists(full_path):
+                hash = hashlib.md5()
+                with open(full_path, "rb") as file:
+                    while chunk := file.read(32 * 1024):
+                        hash.update(chunk)
+                file_hash = hash.hexdigest()
+            else:
+                file_hash = False
+            cache.set(cache_key, file_hash, timeout=None)
+        return file_hash
+
+
+def static(path, no_hash=False, *args, **kwargs):
+    file_hash = None
+
+    if not no_hash:
+        for ext in (".js", ".css"):
+            if path.endswith(ext) and not path.endswith(f".min{ext}") and not settings.DEBUG:
                 # If we're not requesting the minified version in prod, swap it out
                 path = f"{path.removesuffix(ext)}.min{ext}"
-
-            if not path_hash:
-                cache_key = f"{constants.CACHE_KEY_PREFIX_STATIC_ASSET_MD5SUM}{path}"
-                # Now compute (or get from cache) md5 sum of file
-                path_hash = cache.get(cache_key)
-                if path_hash is None:
-                    local_path = os.path.join(settings.STATIC_ROOT, path)
-                    if os.path.exists(local_path):
-                        with open(local_path, "rb") as file_to_check:
-                            path_hash = hashlib.md5(file_to_check.read()).hexdigest()
-                    else:
-                        path_hash = False  # File not found, cache that fact using False
-                    cache.set(cache_key, path_hash, timeout=None)
+        file_hash = get_cached_file_hash(path)
 
     static_path = django_static(path, *args, **kwargs)
-    if path_hash:
-        static_path = f"{static_path}?v={path_hash}"
+    if file_hash:
+        static_path = f"{static_path}?v={file_hash}"
     return static_path
 
 

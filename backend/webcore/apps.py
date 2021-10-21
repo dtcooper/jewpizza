@@ -1,7 +1,7 @@
 from django.apps import AppConfig
 from django.core.cache import cache
 
-from .constants import CACHE_KEY_PREFIX_STATIC_ASSET_MD5SUM
+from .constants import CACHE_KEY_PREFIX_STATIC_ASSET_HASH
 
 
 class WebcoreConfig(AppConfig):
@@ -10,5 +10,5 @@ class WebcoreConfig(AppConfig):
     verbose_name = "Application Core"
 
     def ready(self):
-        # Clear static asset MD5 cache
-        cache.delete_pattern(f"{CACHE_KEY_PREFIX_STATIC_ASSET_MD5SUM}*")
+        # Clear static asset hash cache
+        cache.delete_pattern(f"{CACHE_KEY_PREFIX_STATIC_ASSET_HASH}*")

@@ -1,4 +1,4 @@
-CACHE_KEY_PREFIX_STATIC_ASSET_MD5SUM = "static-asset-md5sum::"
+CACHE_KEY_PREFIX_STATIC_ASSET_HASH = "static-asset-hash::"
 
 NAVIGATION_LINKS = [
     # name, url_name, icon, is_subnav
