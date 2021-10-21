@@ -730,7 +730,7 @@ python-versions = "*"
 name = "pyyaml"
 version = "6.0"
 description = "YAML parser and emitter for Python"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.6"
 
@@ -860,7 +860,7 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 name = "watchdog"
 version = "2.1.6"
 description = "Filesystem events monitoring"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.6"
 
@@ -889,7 +889,7 @@ brotli = ["brotli"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "5f7e39470c7a9895afe813602a9e15c76d55b3c1ac91a148ae6fbcdc76295756"
+content-hash = "0b1ac75a47265fd97fbdc8e639512efa135d3b0dedbb00e8594f8927eeb393f2"
 
 [metadata.files]
 appnope = [

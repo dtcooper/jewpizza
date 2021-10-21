@@ -50,6 +50,8 @@ services:
   sse:
     build:
       context: sse
+      args:
+        - "DEBUG=${DEBUG:-0}"
     restart: always
     volumes:
       - ./.env:/.env:ro
