@@ -21,6 +21,11 @@ NAVIGATION_VIEWS = (
     ("send-text-message", "Send Text Message"),
     ("send-email", "Send Email"),
 )
+NAVIGATION_EXT_LINKS = (
+    (lambda: config.LOGS_URL, "Service Logs"),
+    (lambda: config.UMAMI_URL, "Analytics"),
+    (lambda: f"{config.SSE_URL.removesuffix('/')}/test", "SSE Test"),
+)
 
 
 class AdminToolsViewMixin:
@@ -41,12 +46,8 @@ class AdminToolsViewMixin:
         nav_links = []
         for url_name, name in NAVIGATION_VIEWS:
             nav_links.append((reverse(f"admin-tools:{url_name}"), name, False))
-        nav_links.extend(
-            [
-                (config.LOGS_URL, "Service Logs", True),
-                (config.UMAMI_URL, "Analytics", True),
-            ]
-        )
+        for url_func, name in NAVIGATION_EXT_LINKS:
+            nav_links.append((url_func(), name, True))
         return {"admin_nav_links": nav_links, **super().get_context_data(**kwargs)}
 
 

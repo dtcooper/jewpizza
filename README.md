@@ -109,6 +109,19 @@ server {
     }
 }
 
+# Server-Sent Events
+server {
+    listen 80;
+    server_name sse.jew.pizza;
+
+    location / {
+        include proxy_params;
+        proxy_buffering off;
+        proxy_cache off;
+        proxy_pass http://127.0.0.1:8001;
+    }
+}
+
 # Umami analytics
 server {
     listen 80;

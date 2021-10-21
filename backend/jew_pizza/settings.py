@@ -36,12 +36,6 @@ TWILIO_AUTH_TOKEN = env("TWILIO_AUTH_TOKEN")
 RUN_HUEY = env.bool("__RUN_HUEY", default=False)
 GIT_REV = env("GIT_REV", default="unknown")
 
-ICECAST_HOST = env("ICECAST_HOST", default="icecast")
-ICECAST_PORT = env.int("ICECAST_PORT", default=8000)
-ICECAST_USERNAME = env("ICECAST_USERNAME", default="source")
-ICECAST_PASSWORD = env("ICECAST_PASSWORD", default="hackme")
-ICECAST_PROTOCOL = env("ICECAST_PROTOCOL", default="http")
-
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 ADMINS = [(f"{DOMAIN_NAME} Admin", EMAIL_ADDRESS)]
@@ -265,6 +259,11 @@ CONSTANCE_CONFIG = {
     ),
     "UMAMI_URL": ("http://localhost:3000/" if DEBUG else "https://umami.jew.pizza/", "URL for umami analytics", "url"),
     "UMAMI_WEBSITE_ID": ("", "Website ID in umami", "uuid_optional"),
+    "SSE_URL": (
+        "http://localhost:8001/" if DEBUG else "https://sse.jew.pizza/",
+        "URL for server-sent events endpoint",
+        "url",
+    ),
     "ICECAST_URL": (
         "http://localhost:8080/" if DEBUG else "https://radio.jew.pizza/",
         "Public URL for Icecast server",
@@ -294,6 +293,6 @@ CONSTANCE_CONFIG_FIELDSETS = OrderedDict(
                 "ICECAST_PROTOCOL",
             ),
         ),
-        ("Miscellaneous", ("LOGS_URL",)),
+        ("Miscellaneous", ("LOGS_URL", "SSE_URL")),
     )
 )
