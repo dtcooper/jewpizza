@@ -109,12 +109,10 @@
 
     const eventsource = window.eventsource = new window.EventSource(DATA.sseURL)
     eventsource.addEventListener('message', function (e) {
-      const separator = e.data.indexOf(':')
-      const messageType = e.data.substr(0, separator)
-      const message = JSON.parse(e.data.substr(separator + 1))
-      Alpine.store('sse')[messageType] = message
+      const data = JSON.parse(e.data)
+      Alpine.store('sse')[data.type] = data.message
       if (DATA.debug) {
-        console.log(`Recieved ${messageType} SSE message at ${new Date()}: ${JSON.stringify(message, null, 2)}`)
+        console.log(`Recieved ${data.type} SSE message at ${new Date()}: ${JSON.stringify(data.type, null, 2)}`)
       }
     })
   })

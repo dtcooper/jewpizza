@@ -6,11 +6,7 @@
     var received = 0
     evtSource.onmessage = function(e) {
       received += 1
-      const splitIndex = e.data.indexOf(':')
-      const type = e.data.substr(0, splitIndex)
-      const message = e.data.substr(splitIndex + 1)
-
-      var description = (new Date()) + ': type=' + type + ', ' + JSON.stringify(JSON.parse(message), null, 2) + "\n\n"
+      var description = (new Date()) + ': ' + JSON.stringify(JSON.parse(e.data), null, 2) + "\n\n"
       var elem = document.getElementById('response')
       elem.innerText = description + elem.innerText
       document.getElementById('received').innerText = received
