@@ -32,6 +32,7 @@
 * [ ] Get duration and other info from ffprobe
     - `ffprobe -i <filename> -print_format json -hide_banner -loglevel error -show_format -show_error -show_streams -select_streams a:0`
 * [ ] Use headphone jewippy when you click shows or listen
+* [ ] Remove _all_ radio-uplink code
 
 ## Sections
 

@@ -88,7 +88,7 @@
   }
 
   document.addEventListener('alpine:init', () => {
-    router = new Navigo('/')
+    const router = window.router = new Navigo('/')
     window.router = router
 
     router.on('*', async ({ url, ...args }) => {
@@ -105,5 +105,13 @@
     })
     Alpine.store('menuOpen', false)
     Alpine.store('messages', DATA.messages)
+
+    const eventsource = window.eventsource = new window.EventSource(DATA.sseURL)
+    eventsource.addEventListener('message', function (e) {
+      const separator = e.data.indexOf(':')
+      const messageType = e.data.substr(0, separator)
+      const messageBody = JSON.parse(e.data.substr(separator + 1))
+      console.log(`Got "${messageType}" message from SSE service: ${JSON.stringify(messageBody, null, 2)}`)
+    })
   })
 })()

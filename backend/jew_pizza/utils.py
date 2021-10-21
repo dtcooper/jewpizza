@@ -1,4 +1,5 @@
 from collections import namedtuple
+import json
 import logging
 
 import requests
@@ -7,8 +8,12 @@ from django.utils.formats import date_format as django_date_format
 from django.utils.timezone import localtime
 
 from constance import config
+from django_redis import get_redis_connection
+
+from jew_pizza.constants import REDIS_PUBSUB_CHANNEL
 
 
+ContainerInfo = namedtuple("ContainerInfo", "name state ports logs_url cpu_info mem_info")
 logger = logging.getLogger("jewpizza.{__name__}")
 
 
@@ -36,6 +41,7 @@ def _call_controller(cmd, fail_silently=False, params=None, json=False):
     except Exception:
         if not fail_silently:
             raise
+        logger.exception(f"_call_controller() failed with cmd {cmd!r}")
         return None
     else:
         return response.json() if json else response.text.strip()
@@ -43,9 +49,6 @@ def _call_controller(cmd, fail_silently=False, params=None, json=False):
 
 def restart_container(container, fail_silently=False):
     return _call_controller("restart", fail_silently=True, params={"container": container}) is not None
-
-
-ContainerInfo = namedtuple("ContainerInfo", "name state ports logs_url cpu_info mem_info")
 
 
 def list_containers(fail_silently=False):
@@ -60,7 +63,7 @@ def list_containers(fail_silently=False):
 
     containers_stats = {}
     if response := _call_controller("stats", fail_silently=fail_silently):
-        containers_stats = {s.split('\t')[0]: s.split('\t')[1:] for s in response.splitlines()}
+        containers_stats = {s.split("\t")[0]: s.split("\t")[1:] for s in response.splitlines()}
 
     containers = []
     for container in containers_names:
@@ -74,9 +77,14 @@ def list_containers(fail_silently=False):
 
         mem_info = cpu_info = logs_url = None
         if container_id := ps.get("ID"):
-            # dozzle specific
+            # dozzle specific logs URL
             logs_url = f'{config.LOGS_URL.removesuffix("/")}/container/{container_id[:12]}'
             if stats := containers_stats.get(container_id):
                 cpu_info, mem_info = stats
         containers.append(ContainerInfo(container, state, ports, logs_url, cpu_info, mem_info))
     return containers
+
+
+def send_sse_message(message):
+    redis = get_redis_connection()
+    redis.publish(REDIS_PUBSUB_CHANNEL, json.dumps(message))

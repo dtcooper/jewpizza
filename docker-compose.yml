@@ -35,19 +35,12 @@ services:
   radio:
     build:
       context: radio
+      args:
+        - "DEBUG=${DEBUG:-0}"
     restart: always
     environment:
       - SECRET_KEY
       - SCRIPT_NAME=radio
-      - "TZ=${TIMEZONE:-US/Eastern}"
-
-  radio-uplink:
-    build:
-      context: radio
-    restart: always
-    environment:
-      - SECRET_KEY
-      - SCRIPT_NAME=uplink
       - "TZ=${TIMEZONE:-US/Eastern}"
     extra_hosts:
       - "host.docker.internal:host-gateway"

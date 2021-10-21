@@ -66,6 +66,12 @@ INSTALLED_APPS = [
 
 if DEBUG:
     INSTALLED_APPS.append("django_extensions")
+    SHELL_PLUS_IMPORTS = [
+        "from constance import config",
+        "from django_redis import get_redis_connection",
+        "from jew_pizza.twilio import send_sms, twilio_client",
+        "from jew_pizza.utils import list_containers, restart_container, send_sse_message",
+    ]
 
 MIDDLEWARE = ["django.middleware.security.SecurityMiddleware"]
 if not DEBUG and SERVE_ASSETS_FROM_DJANGO:

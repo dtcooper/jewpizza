@@ -11,8 +11,6 @@ else
     exit 1
 fi
 
-DEBUG=0
-
 if [ "$#" != 0 ]; then
     exec "$@"
 else

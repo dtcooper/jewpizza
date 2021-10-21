@@ -19,7 +19,7 @@ from aiohttp_sse import sse_response
 import aioredis
 
 
-REDIS_PUBSUB_CHANNEL = "sse::messages"
+REDIS_PUBSUB_CHANNEL = "sse::messages"  # Duplicated in backend/jew_pizza/constants.py
 DISCONNECT = object()
 TEST_HTML = open("/app/test.html", "rb").read()
 
@@ -33,25 +33,28 @@ async def redis_subscriber(app):
         while True:
             async for message in pubsub.listen():
                 if message["type"] == "message" and message["data"]:
-                    data = app["messages"]["last"] = message["data"].decode()
+                    message = message["data"].decode()
+                    message_type, message_body = message.split(":", 1)
+                    app["last_messages"][message_type] = message_body
 
                     num_written = 0
-                    for num_written, queue in enumerate(app["messages"]["queues"], 1):
-                        queue.put_nowait(data)
+                    for num_written, queue in enumerate(app["client_queues"], 1):
+                        queue.put_nowait(message)
                     queue = None  # Make sure WeakSet looses a reference
 
                     if app["DEBUG"]:
-                        print(f"Sent message to {num_written} subscribers: {data}")
+                        print(f"Sent message to {num_written} subscribers: {message}")
 
     except asyncio.CancelledError:
         pass
 
 
 async def subscribe(request):
-    request.app["messages"]["queues"].add(queue := asyncio.Queue())
+    request.app["client_queues"].add(queue := asyncio.Queue())
 
-    async with sse_response(request) as resp:
-        await resp.send(request.app["messages"]["last"])
+    async with sse_response(request, headers={"Access-Control-Allow-Origin": "*"}) as resp:
+        for message_type, message_body in request.app["last_messages"].items():
+            await resp.send(f"{message_type}:{message_body}")
         while message := await queue.get():
             if message is DISCONNECT:
                 break
@@ -67,14 +70,15 @@ async def test(response):
 
 
 async def on_startup(app):
-    app["messages"] = {"queues": WeakSet(), "last": "{}"}
+    app["client_queues"] = WeakSet()
+    app["last_messages"] = {}
     app["redis_subscriber"] = asyncio.create_task(redis_subscriber(app))
 
 
 async def on_shutdown(app):
     app["redis_subscriber"].cancel()
     await app["redis_subscriber"]
-    for queue in app["messages"]["queues"]:
+    for queue in app["client_queues"]:
         await queue.put(DISCONNECT)
 
 
