@@ -20,12 +20,36 @@ document.addEventListener('alpine:init', () => {
       choices: new Set(),
       current: 'idle',
       open: this.$persist(true).as('jewippy-open'),
+      imageType: this.$persist(null).as('jewippy-image-type'),
       bubbleOpen: true,
       idleLoaded: false,
       allLoaded: false,
       timeout: null,
       animationQueue: [],
       init () {
+        if (this.imageType) {
+          this._debug(`Loading with ${this.imageType} ($persist)`)
+          this.initAfterImageDetection()
+        } else {
+          const webp = new window.Image()
+          webp.onload = () => {
+            if ((webp.width > 0) && (webp.height > 0)) {
+              this.imageType = 'webp'
+            } else {
+              this.imageType = 'gif'
+            }
+            this._debug(`Loading with ${this.imageType} (onload)`)
+            this.initAfterImageDetection()
+          }
+          webp.onerror = () => {
+            this.imageType = 'gif'
+            this._debug(`Loading with ${this.imageType} (onerror)`)
+            this.initAfterImageDetection()
+          }
+          webp.src = DATA.jewippyTestWEBP
+        }
+      },
+      initAfterImageDetection () {
         component = this
         const store = Alpine.store('jewippy')
         store.open = this.open
@@ -54,14 +78,14 @@ document.addEventListener('alpine:init', () => {
                 this.openBubbleDemo() // XXX
               }
             })
-            img.src = gif.url
+            img.src = gif[this.imageType]
             this.imgs[gif.name] = img
             this.lengths[gif.name] = gif.length
             this.choices.add(gif.name)
           }
         })
 
-        firstImg.src = first.url
+        firstImg.src = first[this.imageType]
         this.imgs[first.name] = firstImg
         this.lengths[first.name] = first.length
         this.choices.add(first.name)
@@ -74,7 +98,7 @@ document.addEventListener('alpine:init', () => {
           const m = `${d.getMinutes()}`.padStart(2, '0')
           const s = `${d.getSeconds()}`.padStart(2, '0')
           const ms = `${d.getMilliseconds()}`.padStart(3, '0')
-          console.log(`${h}:${m}:${s}.${ms} ${str}`)
+          console.log(`jewippy: ${h}:${m}:${s}.${ms} ${str}`)
         }
       },
       _timeoutFunc () {

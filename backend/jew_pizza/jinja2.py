@@ -178,7 +178,7 @@ def create_environment(**options):
             "config": constance_config,
             "encoded_email": __encoded_email(),
             "get_messages": _get_messages_jinja2,
-            "jewippy_gifs": [{**img, "url": static(img["url"])} for img in constants.JEWIPPY_GIFS],
+            "jewippy_gifs": [{**i, "webp": static(i["webp"]), "gif": static(i["gif"])} for i in constants.JEWIPPY_GIFS],
             "randint": random.randint,
             "settings": settings,
             "shuffle": shuffle,

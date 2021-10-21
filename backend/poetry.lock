@@ -270,7 +270,7 @@ redis = ">=3.0.0"
 
 [[package]]
 name = "django-widget-tweaks"
-version = "1.4.8"
+version = "1.4.9"
 description = "Tweak the form field rendering in templates, not in python-level form definitions."
 category = "main"
 optional = false
@@ -566,7 +566,7 @@ testing = ["pytest", "pytest-benchmark"]
 
 [[package]]
 name = "prompt-toolkit"
-version = "3.0.20"
+version = "3.0.21"
 description = "Library for building powerful interactive command lines in Python"
 category = "dev"
 optional = false
@@ -889,7 +889,7 @@ brotli = ["brotli"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "0b1ac75a47265fd97fbdc8e639512efa135d3b0dedbb00e8594f8927eeb393f2"
+content-hash = "17b801cfe0fd74817e573489c5fa583eeebe9f5a9ee9b17837572a3f08b68674"
 
 [metadata.files]
 appnope = [
@@ -1008,8 +1008,8 @@ django-redis = [
     {file = "django_redis-5.0.0-py3-none-any.whl", hash = "sha256:97739ca9de3f964c51412d1d7d8aecdfd86737bb197fce6e1ff12620c63c97ee"},
 ]
 django-widget-tweaks = [
-    {file = "django-widget-tweaks-1.4.8.tar.gz", hash = "sha256:9f91ca4217199b7671971d3c1f323a2bec71a0c27dec6260b3c006fa541bc489"},
-    {file = "django_widget_tweaks-1.4.8-py2.py3-none-any.whl", hash = "sha256:f80bff4a8a59b278bb277a405a76a8b9a884e4bae7a6c70e78a39c626cd1c836"},
+    {file = "django-widget-tweaks-1.4.9.tar.gz", hash = "sha256:19bcb66a4a9e68493ced04e7124882d753c5be517ed001556f9e35a40147f545"},
+    {file = "django_widget_tweaks-1.4.9-py2.py3-none-any.whl", hash = "sha256:d6c64fbf92cd2df9031f597c1374982233c05a1190d295c39d1c57ce007569c7"},
 ]
 flake8 = [
     {file = "flake8-4.0.1-py2.py3-none-any.whl", hash = "sha256:479b1304f72536a55948cb40a32dce8bb0ffe3501e26eaf292c7e60eb5e0428d"},
@@ -1158,8 +1158,8 @@ pluggy = [
     {file = "pluggy-1.0.0.tar.gz", hash = "sha256:4224373bacce55f955a878bf9cfa763c1e360858e330072059e10bad68531159"},
 ]
 prompt-toolkit = [
-    {file = "prompt_toolkit-3.0.20-py3-none-any.whl", hash = "sha256:6076e46efae19b1e0ca1ec003ed37a933dc94b4d20f486235d436e64771dcd5c"},
-    {file = "prompt_toolkit-3.0.20.tar.gz", hash = "sha256:eb71d5a6b72ce6db177af4a7d4d7085b99756bf656d98ffcc4fecd36850eea6c"},
+    {file = "prompt_toolkit-3.0.21-py3-none-any.whl", hash = "sha256:62b3d3ea5a3ccee94dc1aac018279cf64866a76837156ebe159b981c42dd20a8"},
+    {file = "prompt_toolkit-3.0.21.tar.gz", hash = "sha256:27f13ff4e4850fe8f860b77414c7880f67c6158076a7b099062cc8570f1562e5"},
 ]
 psycopg2 = [
     {file = "psycopg2-2.9.1-cp36-cp36m-win32.whl", hash = "sha256:7f91312f065df517187134cce8e395ab37f5b601a42446bdc0f0d51773621854"},
