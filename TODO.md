@@ -37,6 +37,7 @@
 * [ ] Use headphone jewippy when you click shows or listen
 * [ ] Restart radio liquidsoap script with watchdog when `DEBUG=1`
 * [ ] Retro cursors, use static for files in tailwind CSS, possibly use `static()` for urls in tailwind css, maybe use CSS props?
+* [ ] Report on prod JS exceptions via email
 
 ## Sections
 
