@@ -1,38 +1,39 @@
+x-service-defaults: &service-defaults
+  restart: always
+
+x-app-template: &app-template
+  build:
+    context: .
+    args:
+      - "DEBUG=${DEBUG:-0}"
+  volumes:
+    - ./.env:/.env:ro
+    - ./serve/static:/static_root
+    - ./serve/media:/media_root
+  depends_on:
+    - db
+    - redis
+  environment:
+    TZ: "${TIMEZONE:-US/Eastern}"
+
 services:
   app:
-    build:
-      context: .
-      args:
-        - "DEBUG=${DEBUG:-0}"
-    volumes:
-      - ./.env:/.env:ro
-      - ./serve/static:/static_root
-      - ./serve/media:/media_root
-    depends_on:
-      - db
-      - redis
-    restart: always
+    <<: *service-defaults
+    <<: *app-template
     ports:
       - "${BIND_ADDR:-127.0.0.1:8000}:8000"
     environment:
       - "TZ=${TIMEZONE:-US/Eastern}"
 
   tasks:
-    build:
-      context: .
-      args:
-        - "DEBUG=${DEBUG:-0}"
-    volumes:
-      - ./.env:/.env:ro
-    depends_on:
-      - db
-      - redis
-    restart: always
+    <<: *service-defaults
+    <<: *app-template
     environment:
       - RUN_HUEY=1
       - "TZ=${TIMEZONE:-US/Eastern}"
 
   radio:
+    <<: *service-defaults
     build:
       context: radio
       args:
@@ -42,18 +43,17 @@ services:
     depends_on:
       - app
       - redis
-    restart: always
     environment:
       - "TZ=${TIMEZONE:-US/Eastern}"
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
   sse:
+    <<: *service-defaults
     build:
       context: sse
       args:
         - "DEBUG=${DEBUG:-0}"
-    restart: always
     volumes:
       - ./.env:/.env:ro
     depends_on:
@@ -62,9 +62,9 @@ services:
       - "${SSE_BIND_ADDR:-127.0.0.1:8001}:8001"
 
   controller:
+    <<: *service-defaults
     build:
       dockerfile: Dockerfile.controller
-    restart: always
     init: true
     volumes:
       - .:/app
@@ -73,8 +73,8 @@ services:
       - "COMPOSE_PROJECT_NAME=${COMPOSE_PROJECT_NAME:-jewpizza}"
 
   db:
+    <<: *service-defaults
     image: library/postgres:14-alpine
-    restart: always
     volumes:
       - postgres_data:/var/lib/postgresql/data/
       - ./init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
@@ -83,22 +83,18 @@ services:
       - "TZ=${TIMEZONE:-US/Eastern}"
 
   redis:
+    <<: *service-defaults
     image: library/redis:6-alpine
-    restart: always
     volumes:
       - redis_data:/data
     environment:
       - "TZ=${TIMEZONE:-US/Eastern}"
 
-  # nchan:
-  #   image: rookiezoe/nginx
-  #   #restart: always
-  #   ports:
-  #     - "127.0.0.1:8888:80"
-
   umami:
+    <<: *service-defaults
     image: ghcr.io/mikecao/umami:postgresql-2575cbf
-    restart: always
+    depends_on:
+      - db
     ports:
       - "${UMAMI_BIND_ADDR:-127.0.0.1:3000}:3000"
     environment:
@@ -107,12 +103,10 @@ services:
       # SECRET_KEY needs to be set in order to run this container
       - "HASH_SALT=${SECRET_KEY}"
       - "TZ=${TIMEZONE:-US/Eastern}"
-    depends_on:
-      - db
 
   logs:
+    <<: *service-defaults
     image: amir20/dozzle:latest
-    restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     ports:

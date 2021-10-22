@@ -1,38 +1,41 @@
+x-service-dev-defaults: &service-dev-defaults
+  restart: "no"
+
 services:
   app:
-    restart: "no"
+    <<: *service-dev-defaults
     volumes:
       - .:/app
     tty: true  # needed for tailwind --watch
 
   tasks:
-    restart: "no"
+    <<: *service-dev-defaults
     volumes:
       - .:/app
 
   sse:
-    restart: "no"
+    <<: *service-dev-defaults
     volumes:
       - ./sse:/app
 
   db:
-    restart: "no"
+    <<: *service-dev-defaults
     ports:
       - "127.0.0.1:5432:5432"
 
   redis:
-    restart: "no"
+    <<: *service-dev-defaults
     ports:
       - "127.0.0.1:6379:6379"
 
   umami:
-    restart: "no"
+    <<: *service-dev-defaults
 
   logs:
-    restart: "no"
+    <<: *service-dev-defaults
 
   radio:
-    restart: "no"
+    <<: *service-dev-defaults
     volumes:
       - ./backend/radio/jinja2/radio:/watch
       - ./radio/entrypoint.sh:/entrypoint.sh
@@ -40,11 +43,12 @@ services:
       - "127.0.0.1:1234:1234"
 
   controller:
-    restart: "no"
+    <<: *service-dev-defaults
     ports:
       - "127.0.0.1:5000:8080"
 
   icecast:
+    <<: *service-dev-defaults
     image: moul/icecast
     init: true  # for Icecast to shut down faster
     environment:
