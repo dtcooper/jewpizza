@@ -12,4 +12,5 @@ urlpatterns = [
     path("internal/radio/", include("radio.urls")),
     path("cmsadmin/tools/", include("admin_tools.urls")),
     path("cmsadmin/", admin.site.urls),
+    path("js_error_hook/", include("django_js_error_hook.urls")),
 ]

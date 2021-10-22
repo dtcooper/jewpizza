@@ -217,6 +217,17 @@ reference = "master"
 resolved_reference = "dcd0abc2abd4bf771bba95cde09009bd50f6bbb2"
 
 [[package]]
+name = "django-js-error-hook"
+version = "0.8"
+description = "Generic handler for hooking client side javascript error."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+django = ">=1.10"
+
+[[package]]
 name = "django-npm"
 version = "1.0.0"
 description = "A django staticfiles finder that uses npm"
@@ -889,7 +900,7 @@ brotli = ["brotli"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "17b801cfe0fd74817e573489c5fa583eeebe9f5a9ee9b17837572a3f08b68674"
+content-hash = "4ddd10b727096eb597128f3d601ba054cc694866a249ce7dd91e8a3fd5bb81c7"
 
 [metadata.files]
 appnope = [
@@ -992,6 +1003,10 @@ django-extensions = [
     {file = "django_extensions-3.1.3-py3-none-any.whl", hash = "sha256:50de8977794a66a91575dd40f87d5053608f679561731845edbd325ceeb387e3"},
 ]
 django-huey-email = []
+django-js-error-hook = [
+    {file = "django-js-error-hook-0.8.tar.gz", hash = "sha256:edf0a8728897e47367ea7f81c7fbdf298d59d9344270e48f915917338be23027"},
+    {file = "django_js_error_hook-0.8-py3-none-any.whl", hash = "sha256:d56d7322a35ee189ff0f69ff030f27f476c3464b766cc2050d0cbae05781f554"},
+]
 django-npm = [
     {file = "django-npm-1.0.0.tar.gz", hash = "sha256:2e6bba65e728fa18b9db3c8dc0d4490b70cb7f43bacf60eb3654d7dcb6424272"},
 ]

@@ -50,8 +50,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     # 3rd party
     "constance",
-    "durationwidget",
+    "django_js_error_hook",
     "djhuey_email",
+    "durationwidget",
     "huey.contrib.djhuey",
     "phonenumber_field",
     "recurrence",
@@ -122,6 +123,11 @@ TEMPLATES = [
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
+    "filters": {
+        "require_debug_false": {
+            "()": "django.utils.log.RequireDebugFalse",
+        }
+    },
     "formatters": {
         "console": {
             "format": "[%(asctime)s] %(levelname)s:%(name)s:%(lineno)s:%(funcName)s: %(message)s",
@@ -129,32 +135,39 @@ LOGGING = {
     },
     "handlers": {
         "console": {"class": "logging.StreamHandler", "formatter": "console", "level": "INFO"},
+        "mail_admins": {
+            "level": "ERROR",
+            "filters": ["require_debug_false"],
+            "class": "django.utils.log.AdminEmailHandler",
+            "include_html": True,
+        },
     },
     "loggers": {
         "django": {
             "handlers": ["console"],
             "level": "INFO",
         },
+        "django.request": {
+            "handlers": ["mail_admins", "console"],
+            "level": "INFO",
+            "propagate": False,
+        },
+        "huey": {
+            "handlers": ["mail_admins", "console"],
+            "level": "INFO",
+            "propagate": False,
+        },
         "jewpizza": {
             "handlers": ["console"],
             "level": "INFO",
         },
+        "javascript_error": {
+            "handlers": ["mail_admins", "console"],
+            "level": "ERROR",
+            "propagate": True,
+        },
     },
 }
-
-if not DEBUG:
-    LOGGING["handlers"]["mail_admins"] = {
-        "level": "ERROR",
-        "class": "django.utils.log.AdminEmailHandler",
-        "include_html": True,
-    }
-    email_admin_logger = {
-        "handlers": ["mail_admins", "console"],
-        "level": "INFO",
-        "propagate": False,
-    }
-
-    LOGGING["loggers"].update({"django.request": email_admin_logger, "huey": email_admin_logger})
 
 WSGI_APPLICATION = "jew_pizza.wsgi.application"
 

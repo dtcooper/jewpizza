@@ -70,11 +70,11 @@ def list_containers(fail_silently=False):
         ps = containers_ps.get(container, {})
         state = ps.get("State", "destroyed")
         ports = []
-        for p in (ps.get("Publishers") or []):
-            addr = ''
-            if p['URL'] == '127.0.0.1':
-                addr = 'localhost:'
-            elif p['URL'] != '0.0.0.0':
+        for p in ps.get("Publishers") or []:
+            addr = ""
+            if p["URL"] == "127.0.0.1":
+                addr = "localhost:"
+            elif p["URL"] != "0.0.0.0":
                 addr = f"{p['URL']}:"
             ports.append(f"{addr}{p['PublishedPort']}/{p['Protocol']}")
 

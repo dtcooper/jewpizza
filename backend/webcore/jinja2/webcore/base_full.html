@@ -28,6 +28,7 @@
   {% if settings.DEBUG and config.HIDDEN_IMG_MODE %}
     <style>img { filter: brightness(0.075); }</style>
   {% endif %}
+  <script src="{{ url_for('js-error-handler-js') }}"></script>
   <script src="https://code.iconify.design/2/2.0.4/iconify.min.js"></script>
   <script src="{{ static('vendor/js/navigo/lib/navigo.min.js') }}"></script>
   <script src="{{ static('vendor/js/@alpinejs/persist/dist/cdn.min.js') }}" defer></script>
