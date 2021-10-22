@@ -38,6 +38,7 @@
 * [ ] Use headphone jewippy when you click shows or listen
 * [ ] Retro cursors, use static for files in tailwind CSS, possibly use `static()` for urls in tailwind css, maybe use CSS props?
 * [ ] Report on prod JS exceptions via email
+* [ ] [Space Grotesk](https://fonts.google.com/specimen/Space+Grotesk) for body copy
 
 ## Sections
 

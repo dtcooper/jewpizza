@@ -22,6 +22,7 @@ pre-commit:
 		exit 0'
 
 build:
+	@$(COMPOSE) pull
 	@$(COMPOSE) build --pull --build-arg GIT_REV=$(shell git describe --tags --always --dirty)
 
 shell:

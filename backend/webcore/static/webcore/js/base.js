@@ -88,7 +88,7 @@
   }
 
   document.addEventListener('alpine:init', () => {
-    const router = window.router = new Navigo('/')
+    router = window.router = new Navigo('/')
     window.router = router
 
     router.on('*', async ({ url, ...args }) => {
