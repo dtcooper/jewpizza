@@ -34,7 +34,14 @@ fi
 
 collectstatic () {
     npm --prefix=../frontend run build
-    ./manage.py collectstatic --noinput
+    ./manage.py collectstatic --noinput --clear
+}
+
+compressstatic () {
+    echo 'Compressing files using brotli and gzip...'
+    find /static_root -type f -exec brotli -q 11 '{}' \;
+    find /static_root -type f -exec gzip -9 --keep '{}' \;
+    echo 'Done compressing files!'
 }
 
 migrate_and_create_user () {
@@ -115,6 +122,7 @@ else
         fi
 
         wait
+        compressstatic &  # This can happen after startup
         exec gunicorn \
                 $GUNICORN_EXTRA_ARGS \
                 --forwarded-allow-ips '*' \

@@ -9,7 +9,7 @@ else
     exit 1
 fi
 
-wait_for_services() {
+wait_for_services () {
     wait-for-it -t 0 app:8000
     wait-for-it -t 0 redis:6379
 }

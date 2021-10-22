@@ -11,6 +11,8 @@ ARG POETRY_VERSION=1.1.11 \
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
+        brotli \
+        gzip \
         nodejs \
         # Dev requirements
         $(if [ "$DEBUG" -a "$DEBUG" != '0' ]; then echo \
