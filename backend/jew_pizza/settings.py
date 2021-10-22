@@ -51,7 +51,6 @@ INSTALLED_APPS = [
     # 3rd party
     "constance",
     "django_js_error_hook",
-    "djhuey_email",
     "durationwidget",
     "huey.contrib.djhuey",
     "phonenumber_field",
@@ -205,9 +204,6 @@ HUEY = {
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
-
-if not RUN_HUEY:  # Don't run emails async using huey
-    EMAIL_BACKEND = "djhuey_email.backends.HueyEmailBackend"
 
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = env("TIMEZONE", default="US/Eastern")

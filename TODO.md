@@ -21,6 +21,9 @@
 * [x] Add metadata delay to sse publisher
     - [x] Switch to actual json messages, with `type` and `delay` (optional, with a max), and `message`
 * [x] Restart radio liquidsoap script with watchdog when `DEBUG=1`
+* [x] Report on prod JS exceptions via email
+    * Using [django-js-error-hook](https://github.com/jojax/django-js-error-hook)
+        which is very poor man's JS error reporting. May want a better alternative.
 * [ ] Icecast server + liquidsoap with player to play whatever show I'm on, read
       countdowns when I'm not on air
     - [ ] Call-in button via Twilio client
@@ -37,7 +40,6 @@
     - `ffprobe -i <filename> -print_format json -hide_banner -loglevel error -show_format -show_error -show_streams -select_streams a:0`
 * [ ] Use headphone jewippy when you click shows or listen
 * [ ] Retro cursors, use static for files in tailwind CSS, possibly use `static()` for urls in tailwind css, maybe use CSS props?
-* [ ] Report on prod JS exceptions via email
 * [ ] [Space Grotesk](https://fonts.google.com/specimen/Space+Grotesk) for body copy
 
 ## Sections
