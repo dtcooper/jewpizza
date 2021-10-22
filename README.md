@@ -13,21 +13,21 @@ coming back to this project after a year or so of neglect.
 
 ## Stack
 
-It's build using the _wildly_ popular, _extremely_ common **DJ LARD DISPATCH**
+It's built using the _wildly_ popular, _extremely_ common **DJ LARD DISPATCH**
 stack, ie,
 
 * [**D**jango](https://www.djangoproject.com/);
 * [**J**inja](https://jinja.palletsprojects.com/);
 * [**L**iquidsoap](https://www.liquidsoap.info/);
-* [**A**lpineJS](https://alpinejs.dev/);
+* [**a**iohttp](https://docs.aiohttp.org/);
 * [**R**edis](https://redis.io/);
 * [**D**ocker](https://www.docker.com/);
 * [**d**aisyUI](https://daisyui.com/);
 * [**I**cecast](https://icecast.org/);
 * [**S**erver-Sent Events (SSE)](https://en.wikipedia.org/wiki/Server-sent_events),
-    with [aoihttp-sse](https://github.com/aio-libs/aiohttp-sse));
+    with [aoihttp-sse](https://github.com/aio-libs/aiohttp-sse);
+* [**A**lpineJS](https://alpinejs.dev/);
 * [**P**ostgresSQL](https://www.postgresql.org/);
-* [**a**iohttp](https://docs.aiohttp.org/);
 * [**T**ailwind CSS](https://tailwindcss.com/);
 * [**C**ompose](https://docs.docker.com/compose/), ie Docker Compose; and
 * [**h**uey](https://huey.readthedocs.io/).
