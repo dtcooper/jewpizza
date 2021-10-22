@@ -34,14 +34,13 @@ fi
 
 collectstatic () {
     npm --prefix=../frontend run build
-    ./manage.py collectstatic --noinput --clear
+    ./manage.py collectstatic -v0 --noinput --clear
 }
 
 compressstatic () {
-    echo 'Compressing files using brotli and gzip...'
-    find /static_root -type f -exec brotli -q 11 '{}' \;
-    find /static_root -type f -exec gzip -9 --keep '{}' \;
-    echo 'Done compressing files!'
+    echo "$(date) - Compressing files using brotli and gzip..."
+    find /static_root -type f -exec brotli -q 11 '{}' \; -exec gzip -9 --keep '{}' \;
+    echo "$(date) - Done compressing files"
 }
 
 migrate_and_create_user () {
