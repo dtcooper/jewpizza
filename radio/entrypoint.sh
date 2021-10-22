@@ -9,10 +9,21 @@ else
     exit 1
 fi
 
+wait_for_services() {
+    wait-for-it -t 0 app:8000
+    wait-for-it -t 0 redis:6379
+}
+
 if [ "$#" != 0 ]; then
     exec "$@"
+elif [ "$DEBUG" -a "$DEBUG" != '0' -a -d /watch -a -z "$__SKIP_WATCHDOG" ]; then
+    wait_for_services
+    export __SKIP_WATCHDOG=1
+    exec watchmedo auto-restart --directory=/watch/ --pattern=*.liq -- /entrypoint.sh
 else
-    wait-for-it -t 0 app:8000
+    if [ -z "$__SKIP_WATCHDOG" ]; then
+        wait_for_services
+    fi
 
     URL="http://app:8000/internal/radio/liquidsoap/script/"
     SCRIPT="/radio/script.liq"
@@ -27,5 +38,6 @@ else
         pygmentize -l ruby "$SCRIPT" | cat -n
         echo '======================'
     fi
+
     exec liquidsoap "$SCRIPT"
 fi

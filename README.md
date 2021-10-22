@@ -10,20 +10,29 @@ I can't imagine in a million years _why on earth_ you'd want to run this code.
 So, these instructions are mostly for me &mdash; in case of sudden amnesia or
 coming back to this project after a year or so of neglect.
 
-You might also use this code as an example of a
-[docker compose](https://docs.docker.com/compose/) project running
-[Poetry](https://python-poetry.org/) and [Django](https://www.djangoproject.com/),
-plus a _very_ minimal frontend build system for [Tailwind CSS](https://tailwindcss.com/)
-and [daisyUI](https://daisyui.com/). It uses front-end packages managed by
-[npm](https://www.npmjs.com/)/[django-npm](https://github.com/kevin1024/django-npm).
-Most notably, [Alpine.js](https://alpinejs.dev/) is used for a reactive front-end
-framework and a poor man's [SPA](https://en.wikipedia.org/wiki/Single-page_application)
-with [Navigo](https://github.com/krasimir/navigo). The need for an SPA is due to
-the 24/7 audio player embedded in the footer of the site.
 
-If I ever run out of money and do tech consulting, I might just derive a starting
-template from this repo.
+## Stack
 
+It's build using the _wildly_ popular, _extremely_ common **DJ LARD DISPATCH**
+stack, ie,
+
+* [**D**jango](https://www.djangoproject.com/);
+* [**J**inja](https://jinja.palletsprojects.com/);
+* [**L**iquidsoap](https://www.liquidsoap.info/);
+* [**A**lpineJS](https://alpinejs.dev/);
+* [**R**edis](https://redis.io/);
+* [**D**ocker](https://www.docker.com/);
+* [**d**aisyUI](https://daisyui.com/);
+* [**I**cecast](https://icecast.org/);
+* [**S**erver-Sent Events (SSE)](https://en.wikipedia.org/wiki/Server-sent_events),
+    with [aoihttp-sse](https://github.com/aio-libs/aiohttp-sse));
+* [**P**ostgresSQL](https://www.postgresql.org/);
+* [**a**iohttp](https://docs.aiohttp.org/);
+* [**T**ailwind CSS](https://tailwindcss.com/);
+* [**C**ompose](https://docs.docker.com/compose/), ie Docker Compose; and
+* [**h**uey](https://huey.readthedocs.io/).
+
+**DJ LARD DISPATCH**. A well-known acronym in the engineering world.
 
 ## Initial Setup
 
@@ -164,6 +173,7 @@ set `SERVE_ASSETS_FROM_DJANGO=1` in your `.env` file,
 #### Change Passwords
 
 Change passwords,
+
 * Django: `dave:cooper`
 * Umami: `dave:cooper`
 

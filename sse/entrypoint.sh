@@ -17,7 +17,7 @@ else
     wait-for-it -t 0 redis:6379
 
     if [ "$DEBUG" -a "$DEBUG" != '0' ]; then
-        exec watchmedo auto-restart --directory=./ --pattern=*.py --recursive -- python sse.py
+        exec watchmedo auto-restart --directory=./ --pattern=*.py -- python sse.py
     else
         exec gunicorn \
                 --worker-class aiohttp.GunicornUVLoopWebWorker \

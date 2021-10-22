@@ -41,6 +41,7 @@ services:
       - ./.env:/.env:ro
     depends_on:
       - app
+      - redis
     restart: always
     environment:
       - "TZ=${TIMEZONE:-US/Eastern}"
