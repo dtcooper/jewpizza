@@ -1,6 +1,6 @@
-# jew.pizza Website ✡️🍕
+# [jew.pizza](https://jew.pizza) Website [✡️ ⚪ 🍕](https://jew.pizza)
 
-Here's the code for the website that powers [`jew.pizza`](https://jew.pizza), my
+Here's the code for the website that powers [jew.pizza](https://jew.pizza), my
 personal website.
 
 
