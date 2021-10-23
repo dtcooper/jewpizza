@@ -1,4 +1,4 @@
-# [jew.pizza](https://jew.pizza) Website [✡️ ⚪ 🍕](https://jew.pizza)
+# [jew.pizza](https://jew.pizza) Website ✡️ ⚪ 🍕
 
 Here's the code for the website that powers [jew.pizza](https://jew.pizza), my
 personal website.
@@ -11,31 +11,42 @@ So, these instructions are mostly for me &mdash; in case of sudden amnesia or
 coming back to this project after a year or so of neglect.
 
 
-## Stack
+## Stack &mdash; **DR. DJ PLASTIC HAND**
 
-It's built using the _wildly_ popular, _extremely_ common **DJ LARD DISPATCH**
+It's built using the _wildly_ popular, _extremely_ common **DR. DJ PLASTIC HAND**
 stack, ie,
 
-* [**D**jango](https://www.djangoproject.com/);
-* [**J**inja](https://jinja.palletsprojects.com/);
-* [**L**iquidsoap](https://www.liquidsoap.info/);
-* [**a**iohttp](https://docs.aiohttp.org/);
-* [**R**edis](https://redis.io/);
-* [**D**ocker](https://www.docker.com/);
-* [**d**aisyUI](https://daisyui.com/);
-* [**I**cecast](https://icecast.org/);
+* [**D**jango](https://www.djangoproject.com/), a back-end web framework;
+* [**R**edis](https://redis.io/), a data store and message broker;
+* [**D**ocker](https://www.docker.com/) to run all this crap in containers;
+* [**J**inja](https://jinja.palletsprojects.com/) for templating. Like django,
+    but less sucky;
+* [**P**ostgresSQL](https://www.postgresql.org/), a database;
+* [**L**iquidsoap](https://www.liquidsoap.info/) a fantastic scripting language
+    for describing audio streams;
+* [**A**lpineJS](https://alpinejs.dev/), a lightweight, reactive front-end
+    framework;
 * [**S**erver-Sent Events (SSE)](https://en.wikipedia.org/wiki/Server-sent_events),
-    with [aoihttp-sse](https://github.com/aio-libs/aiohttp-sse);
-* [**A**lpineJS](https://alpinejs.dev/);
-* [**P**ostgresSQL](https://www.postgresql.org/);
-* [**T**ailwind CSS](https://tailwindcss.com/);
-* [**C**ompose](https://docs.docker.com/compose/), ie Docker Compose; and
-* [**h**uey](https://huey.readthedocs.io/).
+    to send realtime messages to the browser, using
+    [aoihttp-sse](https://github.com/aio-libs/aiohttp-sse);
+* [**T**ailwind CSS](https://tailwindcss.com/), a utility-first CSS framework;
+* [**I**cecast](https://icecast.org/), a streaming media server for listeners to
+    connect;
+* [**C**ompose](https://docs.docker.com/compose/), ie Docker Compose, for
+    multi-container orchestration;
+* [**h**uey](https://huey.readthedocs.io/), a lightweight asynchronous task
+    queue for Python;
+* [**a**iohttp](https://docs.aiohttp.org/) for the SSE service. Django's bad at
+    persistent connections and aiohttp isn't;
+* [**N**avigo](https://github.com/krasimir/navigo) for a simple
+    [SPA](https://en.wikipedia.org/wiki/Single-page_application) router; and
+* [**d**aisyUI](https://daisyui.com/) as lightweight UI component framework on
+    top of Tailwind CSS.
 
-**DJ LARD DISPATCH**. A well-known acronym in the engineering world.
+**DR. DJ PLASTIC HAND**. A very well-known acronym in the engineering world, _probably._
+
 
 ## Initial Setup
-
 Clone, then copy and edit the `.env` file, and optionally copy over the docker
 compose dev overrides.
 
@@ -93,23 +104,25 @@ NOTE: [Gunicorn](https://gunicorn.org/) will listen on `127.0.0.1:8000`
 into the service using `nginx` (or similar) and serve the static and media assets
 (deployed to the `serve/static/` and `serve/media/` folders, respectively).
 
-You'll also have to reverse proxy into the [umami](https://umami.is/) analytics,
-or set `UMAMI_BIND_ADDR=0.0.0.0:3000`.
+You'll also have to reverse proxy into SSE service, [umami](https://umami.is/)
+analytics, and [Dozzle](https://dozzle.dev/) logs containers on ports `8001`,
+`3000`, and `8888`, respectively.
 
 A sample nginx config might be,
 
 ```nginx
 # Main site
 server {
-    listen 80;
-    server_name sample.domain.com;
+    listen 443 ssl http2;
+    server_name jew.pizza;
+    include ssl_params;
 
     location /static {
-        alias /home/user/jew.pizza/serve/static;
+        alias /home/username/jew.pizza/serve/static;
     }
 
     location /media {
-        alias /home/user/jew.pizza/serve/media;
+        alias /home/username/jew.pizza/serve/media;
     }
 
     location / {
@@ -118,9 +131,9 @@ server {
     }
 }
 
-# Server-Sent Events
+# SSE service
 server {
-    listen 80;
+    listen 443 ssl http2;
     server_name sse.jew.pizza;
 
     location / {
@@ -133,8 +146,9 @@ server {
 
 # Umami analytics
 server {
-    listen 80;
-    server_name umami.domain.com;
+    listen 443 ssl http2;
+    server_name umami.jew.pizza;
+    include ssl_params;
 
     location / {
         include proxy_params;
@@ -142,14 +156,15 @@ server {
     }
 }
 
-# Logs
+# Dozzle logs
 server {
-    listen 80;
+    listen 443 ssl http2;
     server_name logs.jew.pizza;
+    include ssl_params;
 
     auth_basic "jew.pizza Logs";
     # Generate via: htpasswd -Bc /path.to/htpaswd username
-    auth_basic_user_file /path.to/htpaswd;
+    auth_basic_user_file /home/username/config/htpasswd;
 
     location / {
         include proxy_params;
@@ -165,9 +180,9 @@ server {
 }
 ```
 
-If you want to **TEST** with `DEBUG=0` without running nginx and have Gunicorn
-serve your static assets using [Whitenoise](http://whitenoise.evans.io/en/stable/),
-set `SERVE_ASSETS_FROM_DJANGO=1` in your `.env` file,
+To <ins>test</ins> (and _only_ test) with `DEBUG=0` without running nginx and
+have Gunicorn serve static assets using [Whitenoise](http://whitenoise.evans.io/en/stable/),
+set `SERVE_ASSETS_FROM_DJANGO=1` in the `.env` file,
 
 
 #### Change Passwords

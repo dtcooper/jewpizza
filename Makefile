@@ -8,15 +8,15 @@ SHELL:=/bin/bash
 
 pre-commit:
 	@$(COMPOSE) run --rm --no-deps app sh -c '\
-		echo "============== standard ==============";\
+		echo "=============== standard ===============";\
 		npx --prefix=/app/frontend standard --fix ;\
-		echo "============== black =================";\
+		echo "=============== black ==================";\
 		black . ;\
 		black --config pyproject.toml ../sse ;\
-		echo "============== isort =================";\
+		echo "=============== isort ==================";\
 		isort . ;\
 		isort --sp pyproject.toml ../sse ;\
-		echo "============== flake8 ================";\
+		echo "=============== flake8 =================";\
 		flake8;\
 		flake8 --config .flake8 ../sse ;\
 		exit 0'
@@ -31,12 +31,12 @@ shell:
 show-outdated:
 	@echo 'Showing outdated dependencies... (empty for none)'
 	@$(COMPOSE) run --rm --no-deps app sh -c '\
-		echo "============== Frontend ==============";\
+		echo "============ Frontend (app) ============";\
 		npm --prefix=../frontend outdated;\
-		echo "============== Backend ===============";\
+		echo "============ Backend (app) =============";\
 		poetry show -o'
 	@$(COMPOSE) run --rm --no-deps sse sh -c '\
-		echo "============== Backend (sse) =========";\
+		echo "============ Backend (sse) =============";\
 		poetry show -o'
 
 deploy:
