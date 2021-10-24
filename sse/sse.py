@@ -13,6 +13,7 @@
 import asyncio
 import datetime
 import json
+import time
 from weakref import WeakSet
 
 from aiohttp import web
@@ -38,8 +39,8 @@ async def publish_message_delayed(app, message, delay):
 
 
 def publish_message(app, message):
-    raw_message = json.dumps(message)
-    app["last_messages"][message["type"]] = raw_message
+    message["timestamp"] = time.time()
+    raw_message = app["last_messages"][message["type"]] = json.dumps(message)
 
     num_written = 0
     for num_written, queue in enumerate(app["client_queues"], 1):
