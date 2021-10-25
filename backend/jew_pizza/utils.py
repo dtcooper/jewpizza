@@ -4,6 +4,7 @@ import logging
 
 import requests
 
+from django.conf import settings
 from django.utils.formats import date_format as django_date_format
 from django.utils.timezone import localtime
 
@@ -92,3 +93,8 @@ def send_sse_message(message_type, message, delay=None):
     message = json.dumps({"type": message_type, "message": message, "delay": delay})
     redis = get_redis_connection()
     redis.publish(REDIS_PUBSUB_CHANNEL, message)
+
+
+def settings_template_context(request):
+    # Template context processor for Django templates
+    return {'settings': settings}

@@ -3,6 +3,7 @@
 {# Disable django dark mode, from https://github.com/frnhr/django-light/ #}
 {% block extrastyle %}
   {{ block.super }}
+  {% include 'admin/favicon.html' %}
   <style>
     @media (prefers-color-scheme: dark) {
       :root {
