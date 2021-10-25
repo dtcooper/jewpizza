@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     # 3rd party
     "constance",
-    "django_js_error_hook",
     "durationwidget",
     "huey.contrib.djhuey",
     "phonenumber_field",
@@ -160,11 +159,6 @@ LOGGING = {
         "jewpizza": {
             "handlers": ["console"],
             "level": "INFO",
-        },
-        "javascript_error": {
-            "handlers": ["mail_admins", "console"],
-            "level": "ERROR",
-            "propagate": True,
         },
     },
 }

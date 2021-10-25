@@ -1,10 +1,42 @@
 import datetime
+import json
+import logging
 
 from django.contrib import messages
 from django.utils.timezone import get_default_timezone
-from django.views.generic import TemplateView
+from django.core.mail import send_mail
+from django.http import HttpResponse, HttpResponseBadRequest
+from django.views.generic import TemplateView, View
+from django.conf import settings
 
 from constance import config
+
+
+logger = logging.getLogger(f'jewpizza.{__file__}')
+
+
+class LogJSErrorView(View):
+    def post(self, request, *args, **kwargs):
+        try:
+            error = json.loads(request.body)
+        except json.JSONDecodeError:
+            return HttpResponseBadRequest()
+
+        logger.warning(f"Got JS error: {error['title']}")
+
+        message = f"{error['title']} occurred at {error['url']}"
+        if filename := error.get('filename'):
+            message += f" ({filename})"
+        message += f":\n\n{error['detail']}"
+
+        send_mail(
+            subject=f"jew.pizza JS Error: {error['title']}",
+            message=message,
+            from_email=None,
+            recipient_list=[settings.EMAIL_ADDRESS],
+        )
+
+        return HttpResponse(status=204)
 
 
 class HomeView(TemplateView):

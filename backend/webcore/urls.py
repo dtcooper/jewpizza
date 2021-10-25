@@ -1,7 +1,7 @@
 from django.urls import path
 from django.views.generic import TemplateView
 
-from .views import HomeView
+from .views import HomeView, LogJSErrorView
 
 
 app_name = "webcore"
@@ -18,4 +18,5 @@ urlpatterns = [
         TemplateView.as_view(template_name="webcore/social.html", extra_context={"title": "Social"}),
         name="social",
     ),
+    path("internal/log-js-error/", LogJSErrorView.as_view(), name='log-js-error'),
 ]

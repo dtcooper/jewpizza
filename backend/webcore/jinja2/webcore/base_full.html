@@ -28,7 +28,6 @@
   {% if settings.DEBUG and config.HIDDEN_IMG_MODE %}
     <style>img { filter: brightness(0.075); }</style>
   {% endif %}
-  <script src="{{ url_for('js-error-handler-js') }}"></script>
   <script src="https://code.iconify.design/2/2.0.4/iconify.min.js"></script>
   <script src="{{ static('vendor/js/navigo/lib/navigo.min.js') }}"></script>
   <script src="{{ static('vendor/js/@alpinejs/persist/dist/cdn.min.js') }}" defer></script>
@@ -39,6 +38,7 @@
     {# XXX bubbleDemoNavLinks variable for bubble demo only, delete it #}
     const DATA = window.DATA = {{ {
       'bubbleDemoNavLinks': nav_links,
+      'csrfToken': csrf_token|string,
       'currentPage': active_link,
       'debug': settings.DEBUG,
       'encodedEmail': encoded_email,
@@ -46,8 +46,9 @@
       'isSuperuser': request.user.is_superuser,
       'jewippyGifs': jewippy_gifs,
       'jewippyTestWEBP': static('webcore/images/jewippy/test.webp'),
-      'sseURL': config.SSE_URL,
+      'jsErrorURL': url_for('webcore:log-js-error'),
       'messages': get_messages(),
+      'sseURL': config.SSE_URL,
     }|tojson(indent=2 if settings.DEBUG else none) }}
   </script>
   <script src="{{ static('webcore/js/base.js') }}"></script>

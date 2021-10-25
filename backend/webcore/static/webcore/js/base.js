@@ -3,22 +3,35 @@
 (() => {
   let router
 
-  const getCookie = function (name) {
-    let cookieValue = null
-    if (document.cookie && document.cookie !== '') {
-      const cookies = document.cookie.split(';')
-      for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].trim()
-        // Does this cookie string begin with the name we want?
-        if (cookie.substring(0, name.length + 1) === (name + '=')) {
-          cookieValue = decodeURIComponent(cookie.substring(name.length + 1))
-          break
-        }
-      }
-    }
-    return cookieValue
+  // Send JS Errors to backend
+  async function reportError (title, detail, filename) {
+    await window.fetch(DATA.jsErrorURL, {
+      headers: { 'X-CSRFToken': DATA.csrfToken, 'Content-Type': 'application/json' },
+      method: 'POST',
+      body: JSON.stringify({
+        url: window.location.href,
+        title: title,
+        detail: detail,
+        filename: filename || null
+      })
+    })
   }
 
+  window.addEventListener('error', async (event) => {
+    let detail = event.message
+    if (event.error && event.error.stack) {
+      detail = event.error.stack
+    }
+    await reportError(event.message, detail, event.filename)
+  })
+
+  window.addEventListener('unhandledrejection', async (event) => {
+    if (event.reason) {
+      await reportError(event.reason.toString(), event.reason.stack)
+    }
+  })
+
+  // Decode my email address
   let jank = DATA.encodedEmail
   let email = ''
   for (let i = 0; jank.length > 0; i++) {
@@ -28,6 +41,7 @@
 
   window.emailAddress = email
 
+  // Main entrypoint for SPA, load a URL
   const loadURL = async function (url, data) {
     Alpine.store('menuOpen', false)
     const store = Alpine.store('page')
@@ -37,7 +51,7 @@
     store.loading = true
 
     data = data || {}
-    data.headers = { Accept: 'application/json', 'X-CSRFToken': getCookie('csrftoken') }
+    data.headers = { Accept: 'application/json', 'X-CSRFToken': DATA.csrfToken }
     data.credentials = 'same-origin'
 
     try {
@@ -77,9 +91,9 @@
     }
   }
 
+  // @submit function to use SPA instead of an actual POST
   window.formSubmit = async function (e) {
     e.preventDefault()
-    console.log(e.target)
     const url = e.target.getAttribute('action')
     await loadURL(url, {
       method: 'POST',
@@ -105,15 +119,19 @@
     })
     Alpine.store('menuOpen', false)
     Alpine.store('messages', DATA.messages)
-    Alpine.store('sse', {})
 
-    const eventsource = window.eventsource = new window.EventSource(DATA.sseURL)
-    eventsource.addEventListener('message', function (e) {
-      const data = JSON.parse(e.data)
-      Alpine.store('sse')[data.type] = data.message
-      if (DATA.debug) {
-        console.log(`Recieved ${data.type} SSE message at ${new Date()}: ${JSON.stringify(data.type, null, 2)}`)
-      }
-    })
+    // XXX Test eventsource
+    if (DATA.debug) {
+      Alpine.store('sse', {})
+
+      const eventsource = window.eventsource = new window.EventSource(DATA.sseURL)
+      eventsource.addEventListener('message', function (e) {
+        const data = JSON.parse(e.data)
+        Alpine.store('sse')[data.type] = data.message
+        if (DATA.debug) {
+          console.log(`Recieved ${data.type} SSE message at ${new Date()}: ${JSON.stringify(data.type, null, 2)}`)
+        }
+      })
+    }
   })
 })()
