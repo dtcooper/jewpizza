@@ -2,17 +2,17 @@ import datetime
 import json
 import logging
 
+from django.conf import settings
 from django.contrib import messages
-from django.utils.timezone import get_default_timezone
 from django.core.mail import send_mail
 from django.http import HttpResponse, HttpResponseBadRequest
+from django.utils.timezone import get_default_timezone
 from django.views.generic import TemplateView, View
-from django.conf import settings
 
 from constance import config
 
 
-logger = logging.getLogger(f'jewpizza.{__file__}')
+logger = logging.getLogger(f"jewpizza.{__file__}")
 
 
 class LogJSErrorView(View):
@@ -25,7 +25,7 @@ class LogJSErrorView(View):
         logger.warning(f"Got JS error: {error['title']}")
 
         message = f"{error['title']} occurred at {error['url']}"
-        if filename := error.get('filename'):
+        if filename := error.get("filename"):
             message += f" ({filename})"
         message += f":\n\n{error['detail']}"
 

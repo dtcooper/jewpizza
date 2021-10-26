@@ -18,5 +18,5 @@ urlpatterns = [
         TemplateView.as_view(template_name="webcore/social.html", extra_context={"title": "Social"}),
         name="social",
     ),
-    path("internal/log-js-error/", LogJSErrorView.as_view(), name='log-js-error'),
+    path("internal/log-js-error/", LogJSErrorView.as_view(), name="log-js-error"),
 ]

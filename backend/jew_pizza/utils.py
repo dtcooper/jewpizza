@@ -97,4 +97,4 @@ def send_sse_message(message_type, message, delay=None):
 
 def settings_template_context(request):
     # Template context processor for Django templates
-    return {'settings': settings}
+    return {"settings": settings}

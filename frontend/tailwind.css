@@ -23,76 +23,76 @@
 
 
 @layer utilities {
-    /* https://github.com/postcss/postcss-100vh-fix */
+  /* https://github.com/postcss/postcss-100vh-fix */
+  .h-screen-iphone-fix {
+    height: 100vh;
+  }
+
+  .h-min-screen-iphone-fix {
+    min-height: 100vh;
+  }
+
+  [x-cloak] {
+    display: none;
+  }
+
+  @supports (-webkit-touch-callout: none) {
     .h-screen-iphone-fix {
-        height: 100vh;
+        height: -webkit-fill-available;
     }
 
     .h-min-screen-iphone-fix {
-        min-height: 100vh;
+        min-height: -webkit-fill-available;
     }
 
-    [x-cloak] {
-        display: none;
+    .overflow-hidden-iphone-only {
+        overflow: hidden;
+    }
+  }
+
+  @variants {
+    .z-max {
+        z-index: 9999;
     }
 
-    @supports (-webkit-touch-callout: none) {
-        .h-screen-iphone-fix {
-            height: -webkit-fill-available;
-        }
-
-        .h-min-screen-iphone-fix {
-            min-height: -webkit-fill-available;
-        }
-
-        .overflow-hidden-iphone-only {
-            overflow: hidden;
-        }
+    .text-indent {
+        text-indent: 2rem;
     }
 
-    @variants {
-        .z-max {
-            z-index: 9999;
-        }
-
-        .text-indent {
-            text-indent: 2rem;
-        }
-
-        .underline-wavy {
-            text-decoration-style: wavy;
-            text-underline-offset: 0.25em;
-            text-decoration-thickness: 0.1em;
-        }
-
-        .drag-none {
-            -webkit-user-drag: none;
-            -moz-user-drag: none;
-            -o-user-drag: none;
-            user-drag: none;
-        }
-
-        .font-smoothing-none {
-          -webkit-font-smoothing: none;
-        }
+    .underline-wavy {
+        text-decoration-style: wavy;
+        text-underline-offset: 0.25em;
+        text-decoration-thickness: 0.1em;
     }
+
+    .drag-none {
+        -webkit-user-drag: none;
+        -moz-user-drag: none;
+        -o-user-drag: none;
+        user-drag: none;
+    }
+
+    .font-smoothing-none {
+      -webkit-font-smoothing: none;
+    }
+  }
 }
 
 .btn-rounded {
-    --rounded-btn: 1.25rem;
+  --rounded-btn: 1.25rem;
 }
 
 article {
-    @apply prose md:prose-lg xl:prose-xl;
+  @apply prose md:prose-lg xl:prose-xl;
 }
 
 .text-responsive {
-    @apply text-base md:text-lg xl:text-xl;
+  @apply text-base md:text-lg xl:text-xl;
 }
 
 .btn-error, .btn-warning, .btn-success, .btn-info {
-    /* daisyUI doesn't have hover states for these */
-    @apply text-white hover:brightness-[0.96];
+  /* daisyUI doesn't have hover states for these */
+  @apply text-white hover:brightness-[0.96];
 }
 
 /* Jewippy */
