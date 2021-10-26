@@ -4,6 +4,7 @@ import hashlib
 import os
 import random
 import string
+import json
 
 from jinja2 import BytecodeCache, Environment, pass_context, pass_eval_context
 from jinja2.filters import do_forceescape, do_tojson
@@ -30,7 +31,7 @@ def get_messages(request):
 
 
 @pass_context
-def _get_messages_jinja2(ctx):
+def get_messages_jinja2(ctx):
     return get_messages(ctx["request"])
 
 
@@ -60,7 +61,8 @@ def get_cached_file_hash(path):
         return file_hash
 
 
-def static(path, no_hash=False, *args, **kwargs):
+@pass_context
+def static(ctx, path, no_hash=False, *args, **kwargs):
     file_hash = None
 
     if not no_hash:
@@ -70,14 +72,22 @@ def static(path, no_hash=False, *args, **kwargs):
                 path = f"{path.removesuffix(ext)}.min{ext}"
         file_hash = get_cached_file_hash(path)
 
+    absolute = kwargs.pop('_external', False)
     static_path = django_static(path, *args, **kwargs)
     if file_hash:
         static_path = f"{static_path}?v={file_hash}"
+    if absolute:
+        static_path = ctx['request'].build_absolute_uri(static_path)
     return static_path
 
 
-def url_for(name, *args, **kwargs):
-    return reverse(name, args=args, kwargs=kwargs)
+@pass_context
+def url_for(ctx, name, *args, **kwargs):
+    absolute = kwargs.pop('_external', False)
+    path = reverse(name, args=args, kwargs=kwargs)
+    if absolute:
+        path = ctx['request'].build_absolute_uri(path)
+    return path
 
 
 @pass_eval_context
@@ -105,13 +115,8 @@ def liqval(value, comment_string=True):
         if not isinstance(value, str):
             value = str(value)
 
-        # Best way to encode a string, since it's not exactly documented escape
-        # characters properly for liquidsoap.
-        # TODO: look at liquidsoap v2 docs to see if there's a better way
-        encoded = base64.b64encode(value.encode("utf-8")).decode("utf-8")
-        encoded = f'string.base64.decode("{encoded}")'
-        if comment_string:
-            encoded += f"  # {value!r}"
+        #  #{ => #"^"{ to skip interpolation
+        encoded = json.dumps(value).replace("#{", '#"^"{')
 
     return encoded
 
@@ -177,8 +182,8 @@ def create_environment(**options):
             "choice": random.choice,
             "config": constance_config,
             "encoded_email": __encoded_email(),
-            "get_messages": _get_messages_jinja2,
-            "jewippy_gifs": [{**i, "webp": static(i["webp"]), "gif": static(i["gif"])} for i in constants.JEWIPPY_GIFS],
+            "get_messages": get_messages_jinja2,
+            "jewippy_gifs": [{**i, "webp": static(path=i["webp"], ctx=None), "gif": static(path=i["gif"], ctx=None)} for i in constants.JEWIPPY_GIFS],
             "randint": random.randint,
             "settings": settings,
             "shuffle": shuffle,

@@ -22,7 +22,7 @@ stack, ie,
 * [**J**inja](https://jinja.palletsprojects.com/) for templating. Like django,
     but less sucky;
 * [**P**ostgresSQL](https://www.postgresql.org/), a database;
-* [**L**iquidsoap](https://www.liquidsoap.info/) a fantastic scripting language
+* [**L**iquidsoap](https://www.liquidsoap.info/), a fantastic scripting language
     for describing audio streams;
 * [**A**lpineJS](https://alpinejs.dev/), a lightweight, reactive front-end
     framework;

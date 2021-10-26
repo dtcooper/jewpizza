@@ -57,7 +57,7 @@ class Episode(ShowBaseModel):
     start = models.DateTimeField("start date", db_index=True)
     duration = models.DurationField()
     description = models.TextField()
-    asset_url = S3DirectField("audio asset", dest="show_asset")
+    asset_url = S3DirectField("audio asset", dest="show_asset_url")
 
     @property
     def end(self):

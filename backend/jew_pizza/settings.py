@@ -241,7 +241,7 @@ STATICFILES_FINDERS = [
 
 AWS_S3_ENDPOINT_URL = f"https://{AWS_S3_REGION_NAME}.digitaloceanspaces.com"
 S3DIRECT_DESTINATIONS = {
-    "show_asset": {
+    "show_asset_url": {
         "key": "shows",
         "auth": lambda u: u.is_staff,
     },
