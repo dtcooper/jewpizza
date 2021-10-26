@@ -30,6 +30,11 @@ EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=(EMAIL_PORT == 587))
 DEFAULT_FROM_EMAIL = SERVER_EMAIL = env("EMAIL_FROM_ADDRESS")
 TWILIO_ACCOUNT_SID = env("TWILIO_ACCOUNT_SID")
 TWILIO_AUTH_TOKEN = env("TWILIO_AUTH_TOKEN")
+AWS_ACCESS_KEY_ID = env("DIGITALOCEAN_SPACES_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = env("DIGITALOCEAN_SPACES_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME = env("DIGITALOCEAN_SPACES_STORAGE_BUCKET_NAME")
+AWS_S3_REGION_NAME = env("DIGITALOCEAN_SPACES_REGION_NAME")
+
 RUN_HUEY = env.bool("__RUN_HUEY", default=False)
 GIT_REV = env("GIT_REV", default="unknown")
 
@@ -54,6 +59,7 @@ INSTALLED_APPS = [
     "huey.contrib.djhuey",
     "phonenumber_field",
     "recurrence",
+    "s3direct",
     # Local
     "webcore",  # To override the runserver command, place local webcore before staticfiles
     "django.contrib.staticfiles",
@@ -232,6 +238,14 @@ STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
     "npm.finders.NpmFinder",
 ]
+
+AWS_S3_ENDPOINT_URL = f"https://{AWS_S3_REGION_NAME}.digitaloceanspaces.com"
+S3DIRECT_DESTINATIONS = {
+    "show_asset": {
+        "key": "shows",
+        "auth": lambda u: u.is_staff,
+    },
+}
 
 CONSTANCE_BACKEND = "constance.backends.redisd.RedisBackend"
 CONSTANCE_REDIS_CONNECTION_CLASS = "django_redis.get_redis_connection"

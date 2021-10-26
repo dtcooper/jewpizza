@@ -10,13 +10,13 @@ aiohttp = "^3.7.4"
 aiohttp-sse = "^2.0.0"
 aioredis = "^2.0.0"
 gunicorn = "^20.1.0"
-uvloop = "^0.16.0"
 schema = "^0.7.4"
+uvloop = "^0.16.0"
 
 [tool.poetry.dev-dependencies]
-watchdog = "^2.1.6"
-PyYAML = "^6.0"
 ipdb = "^0.13.9"
+PyYAML = "^6.0"
+watchdog = "^2.1.6"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

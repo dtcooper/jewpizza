@@ -72,7 +72,7 @@ def list_containers(fail_silently=False):
         state = ps.get("State", "destroyed")
         ports = []
         for p in ps.get("Publishers") or []:
-            port = p['PublishedPort']
+            port = p["PublishedPort"]
             if port != 0:
                 addr = ""
                 if p["URL"] == "127.0.0.1":

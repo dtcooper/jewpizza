@@ -1,5 +1,7 @@
 import datetime
 
+from s3direct.fields import S3DirectField
+
 from django.db import models
 
 from recurrence.fields import RecurrenceField
@@ -55,6 +57,7 @@ class Episode(ShowBaseModel):
     start = models.DateTimeField("start date", db_index=True)
     duration = models.DurationField()
     description = models.TextField()
+    asset_url = S3DirectField("audio asset", dest="show_asset")
 
     @property
     def end(self):

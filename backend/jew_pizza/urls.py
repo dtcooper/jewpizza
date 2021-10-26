@@ -12,4 +12,5 @@ urlpatterns = [
     path("internal/radio/", include("radio.urls")),
     path("cmsadmin/tools/", include("admin_tools.urls")),
     path("cmsadmin/", admin.site.urls),
+    path("s3direct/", include("s3direct.urls")),
 ]

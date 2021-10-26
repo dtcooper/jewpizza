@@ -251,6 +251,17 @@ Django = ">=2.2"
 redis = ">=3.0.0"
 
 [[package]]
+name = "django-s3direct"
+version = "1.1.8"
+description = "Add direct uploads to S3 functionality with a progress bar to file input fields."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+django = ">=1.8"
+
+[[package]]
 name = "django-widget-tweaks"
 version = "1.4.9"
 description = "Tweak the form field rendering in templates, not in python-level form definitions."
@@ -874,7 +885,7 @@ brotli = ["brotli"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "de67785d08a7d598bd1e6cd8ee0403d4fdafb1d4ff61025f728e2bd77e1d7e49"
+content-hash = "1eb7ef41a5124e30034e31a1f494d3813c0abe7d311838b7cbf996746347669a"
 
 [metadata.files]
 appnope = [
@@ -990,6 +1001,11 @@ django-recurrence = [
 django-redis = [
     {file = "django-redis-5.0.0.tar.gz", hash = "sha256:048f665bbe27f8ff2edebae6aa9c534ab137f1e8fa7234147ef470df3f3aa9b8"},
     {file = "django_redis-5.0.0-py3-none-any.whl", hash = "sha256:97739ca9de3f964c51412d1d7d8aecdfd86737bb197fce6e1ff12620c63c97ee"},
+]
+django-s3direct = [
+    {file = "django-s3direct-1.1.8.tar.gz", hash = "sha256:10e729e9ec56bb2ad15add9fc534f0af278e2a9381477282d76a8095782d4a26"},
+    {file = "django_s3direct-1.1.8-py2.7.egg", hash = "sha256:fc08cf57b54614552479835374c16346ed7f43427dafc881681496b83f14ea48"},
+    {file = "django_s3direct-1.1.8-py3.7.egg", hash = "sha256:856ceab46618ead2055be2feae24bea7d51888e41e5656648e7ba5af85e8de56"},
 ]
 django-widget-tweaks = [
     {file = "django-widget-tweaks-1.4.9.tar.gz", hash = "sha256:19bcb66a4a9e68493ced04e7124882d753c5be517ed001556f9e35a40147f545"},
