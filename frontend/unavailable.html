@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="cyberpunk">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <title>jew.pizza Unavailable</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700" rel="stylesheet">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#x1F355;</text></svg>">
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@1.16.0/dist/full.css" rel="stylesheet" type="text/css" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://unpkg.com/alpinejs" defer></script>
+  <style>
+    html, body {
+      font-family: "Space Mono", ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+    .btn {
+      text-transform: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div
+    class="hero min-h-screen" x-data="{timeout: 10}"
+    x-init="
+      setInterval(() => {
+        timeout = Math.max(0, timeout - 1)
+        if (timeout == 0) {
+          setTimeout(() => window.location.reload(), 500)
+        }
+      }, 1000)
+    ">
+    <div class="text-center hero-content">
+      <div class="max-w-screen-2xl">
+        <h1 class="mb-5 text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold italic">
+          <span class="text-accent">jew.pizza</span> is Currently Unavailable!
+        </h1>
+        <p class="mb-5 lg:text-lg xl:text-xl">
+          We'll back soon. Trying again
+          <span
+            x-text="timeout > 0 ? `in ${timeout} second${timeout != 1 ? 's' : ''}&hellip;` : 'right now!'"
+            :class="{italic: timeout == 0}"
+          >
+            in 10 seconds&hellip;
+          </span>
+        </p>
+        <button :disabled="timeout == 0" class="btn btn-primary lg:btn-lg" @click="window.location.reload()">Refresh NOW!</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
