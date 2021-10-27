@@ -127,7 +127,7 @@ def nav_links(request):
 
     for name, url_name, icon, is_subnav in constants.NAVIGATION_LINKS:
         url = reverse(url_name)
-        is_active = request.resolver_match.view_name == url_name
+        is_active = request.resolver_match.view_name == url_name if request.resolver_match else False
         nav_links.append(NavLink(name, url, url_name, icon, is_subnav, is_active))
         if is_active:
             active_link = url

@@ -1,0 +1,19 @@
+{% extends 'webcore/base.html' %}
+
+{% block content_max_width %}max-w-screen-md{% endblock %}
+
+{% block content %}
+  <article>
+    <p>{{ description }}</p>
+
+    <p>
+        {% if status_code == 500 %}
+          I'll email David about it in the meantime
+        {% else %}
+          If you believe this is in error, please email David about it
+        {% endif %}
+        at <a class="text-primary" :href="`mailto:${emailAddress}`" x-text="emailAddress" target="_blank"></a>.
+        Otherwise, try refreshing the page.
+    </p>
+  </article>
+{% endblock %}

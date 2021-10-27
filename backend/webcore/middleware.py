@@ -33,20 +33,21 @@ class JSONResponseMiddleware:
     def __call__(self, request):
         response = self.get_response(request)
 
-        if self.is_json(request) and response.status_code < 400:
-            redirect_to = response.headers.get("Location")
+        if self.is_json(request):
             headers = {"Vary": "Accept"}  # https://stackoverflow.com/a/60118781
-            if redirect_to:
-                return JsonResponse({"redirect": redirect_to}, headers=headers)
+            json_data = {'status': response.status_code}
+
+            if redirect_to := response.headers.get("Location"):
+                json_data['redirect'] = redirect_to
             else:
-                return JsonResponse(
-                    {
-                        "content": response.content.decode().strip(),
-                        "messages": get_messages(request),
-                        "title": response.context_data.get("title") or "jew.pizza",
-                    },
-                    headers=headers,
-                )
+                json_data.update({
+                    "content": response.content.decode().strip(),
+                    "messages": get_messages(request),
+                    "title": 'jew.pizza',
+                })
+                if hasattr(response, 'context_data') and (title := response.context_data.get('title')):
+                    json_data['title'] = title
+            response = JsonResponse(json_data, headers=headers)
 
         return response
 

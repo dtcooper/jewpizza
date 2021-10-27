@@ -6,7 +6,8 @@ from twilio.rest import Client
 from twilio.twiml import TwiML
 
 from django.conf import settings
-from django.http import HttpResponse, HttpResponseForbidden
+from django.core.exceptions import PermissionDenied
+from django.http import HttpResponse
 
 from constance import config
 from phonenumber_field.phonenumber import PhoneNumber
@@ -43,6 +44,6 @@ def twilio_request(view):
                 response = HttpResponse(status=204)
             return response
         else:
-            return HttpResponseForbidden()
+            raise PermissionDenied
 
     return decorated_view

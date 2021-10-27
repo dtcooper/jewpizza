@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.http import HttpResponseForbidden
+from django.core.exceptions import PermissionDenied
 from django.views.generic import TemplateView
 
 from jew_pizza.constants import REDIS_PUBSUB_CHANNEL
@@ -15,4 +15,4 @@ class LiquidsoapScriptView(TemplateView):
         if secret_key == settings.SECRET_KEY or settings.DEBUG:
             return super().dispatch(request, *args, **kwargs)
         else:
-            return HttpResponseForbidden()
+            raise PermissionDenied

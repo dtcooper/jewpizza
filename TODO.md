@@ -22,6 +22,9 @@
     - [x] Switch to actual json messages, with `type` and `delay` (optional, with a max), and `message`
 * [x] Restart radio liquidsoap script with watchdog when `DEBUG=1`
 * [x] Report on prod JS exceptions via email
+* [x] Custom error pages
+    - [x] nginx 502 unavailable during deployment (static file @ `frontend/unavailable.html`)
+    - [x] Django specific (500, 404, 403)
 * [ ] Icecast server + liquidsoap with player to play whatever show I'm on, read
       countdowns when I'm not on air
     - [ ] Call-in button via Twilio client

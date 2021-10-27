@@ -8,6 +8,7 @@
     await window.fetch(DATA.jsErrorURL, {
       headers: { 'X-CSRFToken': DATA.csrfToken, 'Content-Type': 'application/json' },
       method: 'POST',
+      credentials: 'same-origin',
       body: JSON.stringify({
         url: window.location.href,
         title: title,
@@ -51,7 +52,7 @@
     store.loading = true
 
     data = data || {}
-    data.headers = { Accept: 'application/json', 'X-CSRFToken': DATA.csrfToken }
+    data.headers = { Accept: 'application/json' }
     data.credentials = 'same-origin'
 
     try {
@@ -80,7 +81,7 @@
       router._setCurrent(null) // Force reloads
       router.navigate(json.redirect)
     } else {
-      document.title = (DATA.debug ? '[dev] ' : '') + json.title
+      document.title = (DATA.debug ? '[dev] ' : '') + (json.title ? `${json.title} - ` : '') + 'jew.pizza'
       store.current = url
       document.getElementById('content').innerHTML = json.content
 
@@ -121,7 +122,7 @@
     Alpine.store('messages', DATA.messages)
 
     // XXX Test eventsource
-    if (DATA.debug) {
+    if (DATA.enabledPlayer) {
       Alpine.store('sse', {})
 
       const eventsource = window.eventsource = new window.EventSource(DATA.sseURL)
