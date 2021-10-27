@@ -35,6 +35,10 @@ def format_datetime_short(dt):
     return format_datetime(localtime(dt), format="n/j/y g:i A")
 
 
+def format_date_short(date):
+    return django_date_format(date, format="n/j/y")
+
+
 def _call_controller(cmd, fail_silently=False, params=None, json=False):
     try:
         response = requests.get(f"http://controller:8080/{cmd}", params=params)

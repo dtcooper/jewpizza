@@ -55,7 +55,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     # 3rd party
     "constance",
-    "durationwidget",
     "huey.contrib.djhuey",
     "phonenumber_field",
     "recurrence",
@@ -240,6 +239,7 @@ STATICFILES_FINDERS = [
 ]
 
 AWS_S3_ENDPOINT_URL = f"https://{AWS_S3_REGION_NAME}.digitaloceanspaces.com"
+DIGITALOCEAN_SPACES_REWRITE_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.{AWS_S3_REGION_NAME}.digitaloceanspaces.com"
 S3DIRECT_DESTINATIONS = {
     "show_asset_url": {
         "key": "shows",

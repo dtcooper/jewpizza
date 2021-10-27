@@ -43,6 +43,7 @@
 * [ ] Fixtures, at least for shows by GUID
 * [ ] [Space Grotesk](https://fonts.google.com/specimen/Space+Grotesk) for body copy
 * [ ] [Change Podcast RSS](https://castos.com/podcast-directories/)
+* [ ] Decouple podcast namedtuples with shows?
 
 ## Sections
 

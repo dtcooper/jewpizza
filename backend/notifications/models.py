@@ -17,13 +17,14 @@ class TextMessageSignUp(models.Model):
 
 
 class TextMessage(models.Model):
-    created = models.DateTimeField("received date", auto_now_add=True, db_index=True)
+    created = models.DateTimeField("received date", auto_now_add=True)
     phone_number = PhoneNumberField("phone number")
     message = models.TextField()
 
     class Meta:
-        verbose_name = "Text message"
+        indexes = (models.Index(fields=("created",)),)
         ordering = ("-created",)
+        verbose_name = "Text message"
 
     def __str__(self):
         return f"Message from {self.phone}"

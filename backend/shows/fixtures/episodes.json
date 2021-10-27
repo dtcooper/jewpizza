@@ -1,0 +1,2628 @@
+[
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 1: Dan Linley",
+    "show": "tigwit",
+    "published": true,
+    "date": "2016-10-13",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "f406a64e-1401-4af8-b1a4-d4706983d528",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep001-2016-10-13.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 2: Ray Connolly",
+    "show": "tigwit",
+    "published": true,
+    "date": "2016-10-20",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "649ac8f6-9e05-4556-85b9-b4a16bf7a291",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep002-2016-10-20.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 3: Erika Kettleson",
+    "show": "tigwit",
+    "published": true,
+    "date": "2016-10-27",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "287c107d-ba45-4be6-b844-ed516ff235fa",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep003-2016-10-27.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 4: Ginny Hogan",
+    "show": "tigwit",
+    "published": true,
+    "date": "2016-11-03",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "4d7e4a73-827b-4f28-b28c-c22cb6c6fe21",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep004-2016-11-03.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 5: David Roth & Krista Fatka",
+    "show": "tigwit",
+    "published": true,
+    "date": "2016-11-15",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "0d650bac-de76-4582-9150-8d919cb488a8",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep005-2016-11-15.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 6: Cici Whittle & Priyanka Wali",
+    "show": "tigwit",
+    "published": true,
+    "date": "2016-11-17",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "762bd7c8-817f-46de-a0cb-fef34eaf22f7",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep006-2016-11-17.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 7: Allison Hooker",
+    "show": "tigwit",
+    "published": true,
+    "date": "2016-11-23",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "59a593c7-20f9-4c44-affb-b39a299616e8",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep007-2016-11-23.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 8: David Klein",
+    "show": "tigwit",
+    "published": true,
+    "date": "2016-12-01",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "119545d0-bbcf-4295-a54d-5452870e8b7e",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep008-2016-12-01.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 9: Omar Doe",
+    "show": "tigwit",
+    "published": true,
+    "date": "2016-12-08",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "97dc60d7-fd86-47f4-9fb0-f73c5a609e56",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep009-2016-12-08.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 10: Dan Linley, pt. 2",
+    "show": "tigwit",
+    "published": true,
+    "date": "2016-12-14",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "47d7e4be-0622-4921-83b1-91b32244db0f",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep010-2016-12-14.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 11: Rusty Shackleford",
+    "show": "tigwit",
+    "published": true,
+    "date": "2016-12-22",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "b89d21ec-f6ab-42f3-a3ed-bd8468b4a041",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep011-2016-12-22.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 12: Dan Linley & Vic Dence (Christmas Special)",
+    "show": "tigwit",
+    "published": true,
+    "date": "2016-12-24",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "46f5d4c2-535e-4e1f-aaed-70b69d28f741",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep012-2016-12-24.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 13: Jon Cooper (Canadian Special)",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-01-05",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "ccd45243-c8cf-4005-9952-54d0a19ffb3b",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep013-2017-01-05.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 14: Alexandria Love",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-01-12",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "9e83890c-6d54-45e3-bc59-b0243edca311",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep014-2017-01-12.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 15: Ray Connolly, pt. 2",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-01-19",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "7b40f81c-180d-46d3-8d0a-49cf8fdc7fef",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep015-2017-01-19.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 16: Munette, Anally",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-01-25",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "02b9f737-be0b-4ce1-ab04-4c7897c33b0a",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep016-2017-01-25.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 17: Cole Chapman",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-02-02",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "bc4377f8-914c-4c92-8d0f-827c23258aef",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep017-2017-02-02.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 18: Sara DeForest",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-02-09",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "dd90a79f-41eb-4af1-b883-3c01b9f055e3",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep018-2017-02-09.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 19: Joseph Ugalde",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-02-16",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "1d81eacf-2b6d-4296-9d00-af02da142e35",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep019-2017-02-16.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 20: Rusty Shackleford, pt. 2",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-03-02",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "83484b4c-f79a-45d7-bb4b-77491c7fc196",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep020-2017-03-02.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 21: Cici Whittle",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-03-09",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "87da16de-01eb-40fe-8d8b-d8ef0cd9fe71",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep021-2017-03-09.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 22: Drew Ritter & Kristine Holst",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-03-16",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "b7cfaa8e-1ae7-4c2e-8347-16edbabcf59e",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep022-2017-03-16.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 23: Trish Pandya",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-03-30",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "417d4939-5305-4aad-9b7c-0052ad1277d5",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep023-2017-03-30.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 24: Celeste & Dale",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-04-06",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "a397b44e-d5dd-41ed-8f6c-a329f70a5ecf",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep024-2017-04-06.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 25: Ian Levy",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-04-13",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "bee65ac1-8e5d-4058-b25f-ca0ecb8c2523",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep025-2017-04-13.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 26: Clara Cooper & Sean Kennedy",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-04-20",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "fb4df2bb-e796-4d09-bd36-c99ebb52f731",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep026-2017-04-20.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 27: Katy Karns",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-04-27",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "943697e7-57e8-4db5-b9ba-1d279852ec37",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep027-2017-04-27.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 28: Florentina Tanase",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-05-04",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "89efbac2-1d8c-4831-8440-15ab2af5a066",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep028-2017-05-04.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 29: Michael Brandon",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-05-11",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "bb82594f-5c3c-4f56-b7d9-404b612ea1ad",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep029-2017-05-11.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 30: Jonathan Ortiz",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-05-18",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "2cee9598-05e2-4c5a-8ccc-09c09edb3a8e",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep030-2017-05-18.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 31: Tracy Nguyen",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-05-25",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "8a32abd8-2acb-4290-a769-12c1e45672f4",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep031-2017-05-25.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 32: Scott Cohen",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-06-15",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "3fa72565-a3c5-4f35-9acc-1e8cc99a81fc",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep032-2017-06-15.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 33: Alexandria Love, pt. 2",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-06-22",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "87c8fd2d-6919-476d-b4f2-41e5e46ce526",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep033-2017-06-22.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 34: Annick Adelle",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-07-06",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "bb47b49b-150f-47ad-92ae-476177d4fdcd",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep034-2017-07-06.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 35: David Roth",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-07-11",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "4ea331da-4cd6-4a59-bbc9-b92c6b5602db",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep035-2017-07-11.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 36: Miranda",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-07-13",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "26d68535-5786-4101-9257-0d4378a0c817",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep036-2017-07-13.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 37: Celeste & Dale, pt. 2",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-07-18",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "033435b6-5b5b-4cde-ad02-e28e6297faf1",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep037-2017-07-18.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 38: Omar Doe, pt. 2",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-07-20",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "17c5580c-68f7-4e3c-b870-cba9b1819fd9",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep038-2017-07-20.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 39: Muriel MacDonald",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-07-25",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "62f0251f-df8c-477c-b2c3-fa2f5f658bd7",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep039-2017-07-25.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 40: Ray Connolly & Dan Linley",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-07-27",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "06dee497-ca2b-4041-99d2-20c77f0c063d",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep040-2017-07-27.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 41: Neptune",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-08-01",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "68a2c9bf-5140-4f73-971f-58398cd55298",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep041-2017-08-01.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 42: Mischa Salmon",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-08-03",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "448eed37-8aec-4a90-9510-ecab1e8a5a37",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep042-2017-08-03.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 43: David A., The Owner",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-08-08",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "6cd7c4c1-821f-4de8-b44b-a785aa726799",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep043-2017-08-08.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 44: Dan Linley, pt. 3",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-08-10",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "5766cc8c-f3c2-46f8-924c-4998899f2c39",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep044-2017-08-10.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 45: Hannah Marianetti",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-10-05",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "d13ddd4e-f3dd-428d-84db-2573522a0b9b",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep045-2017-10-05.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 46: Jeff Dean",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-10-12",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "d01a3ad8-cb51-41ca-85dd-e7152a621659",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep046-2017-10-12.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 47: Alexandria Love, pt. 3",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-10-19",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "bb37b29d-fcf3-4498-bb30-d4e1612e305e",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep047-2017-10-19.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 48: Emma Tolkin",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-10-26",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "4b499549-5038-498a-84f2-89dee497b063",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep048-2017-10-26.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 49: Dan Linley, pt. 4",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-11-02",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "b01cdfa7-e6dc-4506-92e8-6ed3ad1e1ce0",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep049-2017-11-02.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 50: Caliban",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-11-09",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "f3a81885-70f1-4d79-80ad-5cec526351c9",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep050-2017-11-09.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 51: Tracy Nguyen, pt. 2",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-11-16",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "374579a0-5eae-41f8-b8e7-c169b53a2ddd",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep051-2017-11-16.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 52: Marcy [sic]",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-11-30",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "c1258cb2-1861-40e1-9e72-378b3f1438ee",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep052-2017-11-30.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 53: Mischa Salmon, pt. 2",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-12-07",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "3471e376-60aa-4f19-93d8-5c0b32b3cd23",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep053-2017-12-07.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 54: Miranda, pt. 2",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-12-14",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "d84e592f-c923-4c43-b34d-fe27180f6e07",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep054-2017-12-14.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 55: Marty Cunnie",
+    "show": "tigwit",
+    "published": true,
+    "date": "2017-12-21",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "13ed7c5e-264a-458d-bbb5-b7ef97e17f35",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep055-2017-12-21.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 56: Vahé Hove",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-01-04",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "6f64a789-c304-43d5-8b75-0e117293262f",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep056-2018-01-04.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 57: Joshua Rosenthal",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-01-11",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "d723ecc6-ad79-4449-ae15-7e6e1bc088be",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep057-2018-01-11.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 58: Atish Mehta",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-01-18",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "3af3f983-543b-4c21-9855-496dc0d15676",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep058-2018-01-18.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 59: Celeste",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-01-25",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "e4923834-b3f0-4c21-83ea-4ee1534e6faf",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep059-2018-01-25.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 60: Peter",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-02-01",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "4f1c1672-b383-4e64-9428-6393be50f9e2",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep060-2018-02-01.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 61: Oli",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-02-08",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "c5e645e2-8896-4b23-905e-e830d8e85478",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep061-2018-02-08.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 62: Justin Lockwood",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-02-15",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "b0f4a9ba-7d88-48d2-912e-f7f362566bd1",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep062-2018-02-15.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 63: Miranda, pt. 3",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-03-01",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "f720af43-1594-416e-a392-753cf1273fdb",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep063-2018-03-01.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 64: Dan Linley, pt. 5",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-03-08",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "b04cae0e-933b-4b92-be03-1f8eda8d359b",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep064-2018-03-08.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 65: Marcus Peverill",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-03-15",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "5c3c7580-4f68-4ed9-b6c5-2c4402efecab",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep065-2018-03-15.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 66: Tracy Nguyen, pt. 3",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-03-22",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "15bdeccf-6232-4781-9b02-658bdee64ea2",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep066-2018-03-22.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 67: Next & Donkey Show",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-03-29",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "096773d3-5255-4467-b3b0-6b7329efadf6",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep067-2018-03-29.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 68: Bronson",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-04-05",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "873e826d-3b92-492f-bd2c-b3f4eb18c469",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep068-2018-04-05.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 69: Ray Connolly, pt. 3",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-04-12",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "995ea814-418c-420c-b89d-54fee76c77f0",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep069-2018-04-12.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 70: Nick Katz",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-04-19",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "ef9d770e-0356-43b8-b8c4-6f8ca7120205",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep070-2018-04-19.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 71: Celeste, pt. 2",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-04-26",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "242ae003-1747-47a5-9b3e-7bc717bf6166",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep071-2018-04-26.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 72: Michael Makarov",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-05-03",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "a4b0d68f-7536-4aa1-b2ab-1703e1acb0f6",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep072-2018-05-03.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 73: Nepture, pt. 2",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-05-10",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "6e8399ab-2088-4c4a-b394-9fecc980c4dc",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep073-2018-05-10.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 74: Chicken John",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-05-17",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "f6d348a0-c8c2-4d6a-8bfa-f0116feeb4c7",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep074-2018-05-17.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 75: Annie & Dan Linley",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-05-24",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "24d0e0d3-49ed-46bf-92ec-a6d8b17ea7b0",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep075-2018-05-24.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 76: Joseph Ugalde, pt. 2",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-05-31",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "cd71dad5-b671-4132-b190-4a53efb3f8a7",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep076-2018-05-31.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 77: Matt Naderi",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-06-07",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "4d3718c2-8701-4d84-bb19-cf5734fd0ea9",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep077-2018-06-07.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 78: Anah Redding",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-06-14",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "43c23958-eed9-4b28-b894-02fc33ab898b",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep078-2018-06-14.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 79: Mischa Salmon & Celeste",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-06-21",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "4b9788a9-dbe2-48ec-896e-ddd03c2057db",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep079-2018-06-21.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 80: Annie & Dan Linley, pt. 2",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-07-05",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "8863b523-806b-49e5-a09c-25ec35610282",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep080-2018-07-05.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 81: Marty Cunnie & Michelle",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-07-12",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "6704201a-aff8-4288-b90c-ba18c816f202",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep081-2018-07-12.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 82: Sticky Buns",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-07-19",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "793297e8-06ee-434b-8b62-5a8e4643ec6f",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep082-2018-07-19.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 83: Sara DeForest, pt. 2",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-07-26",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "5c00aa62-89cc-4185-871b-5a565935cc9b",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep083-2018-07-26.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 84: Jon Cooper, pt. 2 (Fire Island Special)",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-08-02",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "873cdd23-05f7-4f03-b3b5-0a799ed18092",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep084-2018-08-02.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 85: Erica Johnston",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-08-09",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "18e57e24-aae2-4184-923a-c446de3d369a",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep085-2018-08-09.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 86: Rachel Raphael",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-08-16",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "d90855b1-7417-4365-944a-5e6fe7a976c0",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep086-2018-08-16.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 87: Munnette, Anally, pt. 2",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-09-06",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "98c7de92-a8d0-41e1-a383-4717ec3ac0e3",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep087-2018-09-06.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 88: Alexandria Love, pt. 4 ",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-09-20",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "fab07c4c-6400-425f-9e39-ab4f9412b3b2",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep088-2018-09-20.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 89: Dan Linley, pt. 6",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-10-04",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "46764156-73de-4a6b-8cae-1d71e379cc85",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep089-2018-10-04.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 90: Tracy Nguyen, pt. 4",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-10-11",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "e479f1ee-75ff-40bf-aa38-da118c92eb87",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep090-2018-10-11.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 91: Trish Pandya & Watson",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-10-18",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "c658e3e0-e20c-42b9-9312-9834843c74c8",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep091-2018-10-18.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 92: Pamela",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-10-25",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "688b97c6-6b80-4da6-97b3-a26b4d7b8d1a",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep092-2018-10-25.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 93: Clara Bodacious",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-11-01",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "de2a749b-11ec-4247-b8dc-3254dc5b471e",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep093-2018-11-01.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 94: Clara Cooper & Paul Conyers",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-11-08",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "e17c7161-2415-4b40-aa1a-e6c1e710936e",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep094-2018-11-08.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 95: Annie",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-11-15",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "46650e1c-07a9-485a-be51-7ea1026587e7",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep095-2018-11-15.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 96: Ben (Isle of Man Special)",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-11-22",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "29ee8834-0b22-4975-9abf-816276bf4e2b",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep096-2018-11-22.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 97: Dan Linley, pt. 7",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-11-29",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "3d5de764-abc2-4249-b570-9121de39e132",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep097-2018-11-29.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 98: Kevin Whittinghill",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-12-06",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "ceae64b3-4129-455a-aad7-43e2d6e63dfc",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep098-2018-12-06.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 99: Krista Fatka",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-12-13",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "5c1e0777-6f8c-4931-811d-104836d991a1",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep099-2018-12-13.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 100: Priyanka Wali & Dan Linley",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-12-20",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "34e63ad0-bc12-4bff-a365-39faa5cf7e0e",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep100-2018-12-20.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 101: Sam Chown",
+    "show": "tigwit",
+    "published": true,
+    "date": "2018-12-27",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "9d94336f-e513-43d9-8f27-9743f7cdc85c",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep101-2018-12-27.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 102: Andrew Jaquith",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-01-03",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "baacb563-dae1-46b8-a33e-5dc5456a7a13",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep102-2019-01-03.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 103: Red Scott",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-01-10",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "d2513c03-9191-49f2-b067-c0b30c9689ee",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep103-2019-01-10.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 104: John D.",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-01-17",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "7ff15bab-a280-45b7-acb3-97a276491bef",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep104-2019-01-17.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 105: Jack & Felicia",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-01-24",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "ecc3d9be-7b46-4f5f-860f-61817c32412b",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep105-2019-01-24.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 106: Ira Summer",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-01-31",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "e14baf11-3c33-497f-981e-cd84b32d60cd",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep106-2019-01-31.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 107: Pamela, pt. 2",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-02-07",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "6b309dcc-4caf-41b9-9549-696a7ff61244",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep107-2019-02-07.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 108: Miranda, pt. 4 (Valentine's Day Special)",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-02-14",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "b1d69019-6ecc-47dc-8607-5822aa05a247",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep108-2019-02-14.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 109: Darnell Lee (Rusty Shackleford), pt. 3",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-02-21",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "a931a3db-1a95-43b4-8360-4e708c99ff03",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep109-2019-02-21.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 110: Erica Weiss",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-02-28",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "4d448373-1f9c-47d0-877e-8f4afc9180a7",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep110-2019-02-28.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 111: Dan Linley, pt. 8",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-03-07",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "c18148a2-f6ce-4dc1-8009-5b3bc018f82a",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep111-2019-03-07.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 112: Donkey Show",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-03-14",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "66a7eb9e-7525-426b-8d28-161e5f94982e",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep112-2019-03-14.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 113: Roberto",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-03-21",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "5a869334-ab59-4ed8-803a-1f11e355861b",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep113-2019-03-21.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 114: David the Car Guy",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-03-28",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "d35c42f0-8bbc-40c0-8330-d09f817dc46c",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep114-2019-03-28.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 115: Atish Mehta, pt. 2",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-04-04",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "d89f9adc-13c3-4f55-8e17-c39032a90fc4",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep115-2019-04-04.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 116: Laura",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-04-11",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "755da0ae-cbd5-478e-a39c-3c224b7b303a",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep116-2019-04-11.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 117: Jack & Felicia, pt. 2",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-04-18",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "a5e24464-5658-4fac-9392-c86259b15ead",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep117-2019-04-18.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 118: Ray Connolly, pt. 4",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-04-25",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "71eeee68-3277-41f7-85db-4034fa1ee553",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep118-2019-04-25.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 119: Omar & Sara Doe",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-05-02",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "195407fa-f6a4-4299-af46-d6bd3226376d",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep119-2019-05-02.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 120: Rachel Barth & Dan Linley",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-05-09",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "b88d0fbb-f4f6-43a5-a7ac-110e37f91884",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep120-2019-05-09.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 121: Ezra Teshome",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-05-16",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "5f07585b-4c5d-46a1-8c8e-edd600248f77",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep121-2019-05-16.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 122: Avi",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-06-06",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "e1ccdbd6-79e3-484e-a9ab-c4cdca6dd70e",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep122-2019-06-06.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 123: Tracy Nguyen, pt. 5",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-06-27",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "4402e4d3-59ae-49a6-bfa5-8f043dfb21de",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep123-2019-06-27.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 124: Dan Linley & Sara DeForest",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-07-11",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "77651596-1132-4a1f-af8e-9c8739242bf6",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep124-2019-07-11.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 125: David Roth, pt. 2",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-07-18",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "468f367a-be51-488d-8873-cf35e5ba85e3",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep125-2019-07-18.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 126: Big Willie",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-07-25",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "60ee2dce-8a24-4db9-ae27-be79dc4afc38",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep126-2019-07-25.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 127: Rachel Raphael, pt. 2",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-08-08",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "bb5ba09d-7e5a-4435-8f5d-10b63528aa6b",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep127-2019-08-08.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 128: Alyssa Westerlund",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-08-15",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "e3c487b1-193b-4ea3-99f2-7c093670c512",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep128-2019-08-15.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 129: Victor Trevino",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-09-12",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "4488569d-6198-411f-95fc-77db5d7e6140",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep129-2019-09-12.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 130: Monica & Annick Adelle",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-09-19",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "f1265ebc-00c0-4d63-9279-0c3909c4fcc4",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep130-2019-09-19.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 131: Scott Cohen, pt. 2",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-09-26",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "dc174cc9-e543-422e-a09b-e906cb0c7bf4",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep131-2019-09-26.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 132: Joseph Ugalde, pt. 3",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-10-03",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "1ea89612-bf14-46f7-b897-a8f02b206cff",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep132-2019-10-03.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 133: Andrea",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-10-10",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "9515a272-b374-4a96-9c2d-ce06b83d4089",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep133-2019-10-10.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 134: Roberto & Kelsey",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-10-17",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "32c38fd3-7d13-49f1-957a-93bfe6071db7",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep134-2019-10-17.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 135: Dan Linley, pt. 9",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-10-24",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "28dfbdd8-fe50-4bcc-98ef-9a192ded370a",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep135-2019-10-24.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 136: Celeste Winter",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-10-31",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "4ab4faab-80a9-4316-955e-003c57a70566",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep136-2019-10-31.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 137: Rachel Pinson & Ernest Evangelista",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-11-07",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "f50970c3-3de3-426e-b1eb-f5856217b5d3",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep137-2019-11-07.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 138: Sequoia",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-11-21",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "4bb6bf35-0a46-4679-b58d-b0c34c493376",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep138-2019-11-21.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 139: Natasha Vinik",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-12-05",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "8c623dca-ba2c-413e-9af4-daee6124da2e",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep139-2019-12-05.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 140: Tracy Nguyen, pt. 6",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-12-19",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "c39af2ff-4e8b-4da8-b6c3-20b35eace678",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep140-2019-12-19.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 141: Pete Lee",
+    "show": "tigwit",
+    "published": true,
+    "date": "2019-12-26",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "125b3fd8-cca0-4276-8706-bc082edc93ab",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep141-2019-12-26.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 142: Annie, pt. 2",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-01-02",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "4140a521-73d2-41d8-a64d-a312679d1678",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep142-2020-01-02.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 143: Marty Cunnie, pt. 2",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-01-09",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "b97a7117-2f91-494e-924b-d93b062be67d",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep143-2020-01-09.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 144: Terese Taylor",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-01-23",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "d2194442-0ec7-4e9b-9900-5d9487871e3d",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep144-2020-01-23.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 145: Alyssa Westerlund, pt. 2",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-01-30",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "09ba3a24-e30f-4ef8-83a9-4dced4805d9b",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep145-2020-01-30.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 146: T. J. & Dan Linley",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-02-06",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "d725b037-d417-4529-8e83-802845651acd",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep146-2020-02-06.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 147: Vahé Hove, pt. 2",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-02-13",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "3aad57b1-49b2-4bf8-bef5-92ffc25963db",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep147-2020-02-13.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 148: Miranda, pt. 5",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-02-20",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "638395c4-6952-4679-96f6-645f94ce9272",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep148-2020-02-20.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 149: Bobzilla",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-02-27",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "5b2f521d-0c4e-4c0e-a4ce-2553657d15e4",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep149-2020-02-27.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 150: Celeste Winter, pt. 4",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-03-05",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "4c6a6823-47ce-4da2-94ef-cdb5db8f43f4",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep150-2020-03-05.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 151: JJ Schultz",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-03-19",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "6f8375ef-298b-40da-a620-5c5af8d2d8b6",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep151-2020-03-19.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 152: David Alone",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-03-26",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "84a91bfd-9601-44fe-bfc7-4d5e156bdbb3",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep152-2020-03-26.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 153: David Alone, pt. 2",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-04-02",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "ab78b5b6-5ab1-4206-aa68-845148541d02",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep153-2020-04-02.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 154: David Alone, pt. 3",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-04-09",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "539aee14-5c31-4912-8800-ba1b15f002d2",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep154-2020-04-09.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 155: David Alone, pt. 4",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-04-16",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "4e4cfc43-d172-440b-bbe9-ef01ab1a8bf5",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep155-2020-04-16.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 156: David Alone, pt. 5",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-04-23",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "e8f3f2db-74d4-4205-ab02-256aeaefafed",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep156-2020-04-23.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 157: David Alone, pt. 6",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-04-30",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "39b3d6f8-8a2a-426a-a8de-950f45639205",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep157-2020-04-30.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 158: Jack & Felicia, pt. 3",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-05-07",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "0f4e949b-d6d8-47e5-b191-f9860b94cb67",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep158-2020-05-07.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 159: Miranda, pt. 6",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-05-14",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "3e6864ac-b49a-46e4-b4e1-267b5548842a",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep159-2020-05-14.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 160: David Alone, pt. 7",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-05-21",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "dd4be5a5-d83e-4384-9642-5281c3e37a2f",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep160-2020-05-21.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 161: David Alone, pt. 8",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-05-28",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "23ebf7d8-82a0-49cb-90a4-9cab0030f4c1",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep161-2020-05-28.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 162: Andrea, pt. 2",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-06-04",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "b77e1dc4-a15a-4656-8fd7-7f8d7a2fd358",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep162-2020-06-04.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 163: David Alone, pt. 9",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-06-11",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "8e626208-82f8-4104-b7d5-2cb4aa08bd6d",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep163-2020-06-11.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 164: Tracy Nguyen, pt. 8 (David's Birthday Special)",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-06-18",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "c5fa0e47-2d2e-48e7-81a3-ed1090105c3d",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep164-2020-06-18.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 165: David Alone, pt. 10",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-06-25",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "9df286fe-687b-4efc-a457-03f2f616f78d",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep165-2020-06-25.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 166: Alyssa Westerlund, pt. 3",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-07-02",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "d196a051-1c76-4ed0-bc97-bd4e855d8c64",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep166-2020-07-02.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 167: Natasha Vinik, pt. 2",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-07-09",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "6dd0e28c-4029-44c4-93fe-bd45822b662b",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep167-2020-07-09.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 168: Dan Linley, pt. 10",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-07-16",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "da7a078f-2807-434a-a96b-797148f5acc0",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep168-2020-07-16.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 169: Rev. James",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-07-23",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "6dd0d84e-552a-4ad6-b6d9-fd83bec840af",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep169-2020-07-23.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 170: Tracy Nguyen, pt. 9",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-07-30",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "84c500f3-f07a-4a32-bcab-4df3320f4a79",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep170-2020-07-30.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 171: Joseph Ugalde, pt. 4",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-08-06",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "8628e7dc-e3f5-42ce-a8b2-989057f89f52",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep171-2020-08-06.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 172: Jon Cooper, pt. 3",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-08-13",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "a5fec4f4-c95f-403f-97ea-8146acde467a",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep172-2020-08-13.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 173: Sequoia, pt. 2",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-08-20",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "1f94c31c-1d2b-4af2-bc14-841c26a2499e",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep173-2020-08-20.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 174: Trish Pandya, pt. 2",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-08-27",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "53bdd1aa-feab-4760-b00d-db4d8e1a205e",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep174-2020-08-27.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 175: Allegra Meshuggah",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-09-03",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "f8eb9573-e0c1-44ab-b804-5122a41dc4ae",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep175-2020-09-03.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 176: Alyssa Westerlund, pt. 4",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-09-10",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "fb87f407-cdd0-47bd-b85c-aa4611b7440f",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep176-2020-09-10.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 177: David Plays Country Music & Takes Calls For the 10th Time",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-09-17",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "f14cb400-e10f-48b3-907c-cb2ea60bfce5",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep177-2020-09-17.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 178: Munette, Anally, pt. 3",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-10-01",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "65f2b039-b08d-4bf1-8056-422e6d100870",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep178-2020-10-01.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 179: Tracy Nguyen, pt. 10",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-10-08",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "18f80052-0352-4da8-a7e6-8a0900bbf498",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep179-2020-10-08.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 180: Tony's Takeover",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-10-15",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "8f79ebe9-9873-43d5-9cbb-72744b014d89",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep180-2020-10-15.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 181: Tracy Nguyen, pt. 11",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-11-05",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "f93833d7-465e-47f3-b226-1472dac3a008",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep181-2020-11-05.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 182: Dan Linley & Sara DeForest, pt. 2",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-11-12",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "0d1ddb0f-4243-4805-906a-f82aa51a5382",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep182-2020-11-12.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 183: Annick Adelle, pt. 2",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-11-19",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "ef08b699-78ab-44bb-81fc-95bf6a5529e5",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep183-2020-11-19.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 184: Kelly Moe",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-12-03",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "811afc5e-f207-4c22-b069-479dd9bef373",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep184-2020-12-03.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 185: Victor Pacheco",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-12-10",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "ad2b4b9c-778e-4b16-8f85-4c0fb58db7b1",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep185-2020-12-10.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 186: A Very Lonely, Very Jewish, Very Country Christmas",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-12-24",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "b794ddd7-02b6-4cdc-b04c-a0da450f7213",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep186-2020-12-24.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 187: Ray Connolly, pt. 5",
+    "show": "tigwit",
+    "published": true,
+    "date": "2020-12-31",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "c7f5484c-8317-4cf0-a598-50fa63592eff",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep187-2020-12-31.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 188: Zues [sic]",
+    "show": "tigwit",
+    "published": true,
+    "date": "2021-01-07",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "345aad13-2040-46fb-8ce5-3361af989d5b",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep188-2021-01-07.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 189: Guru (Career Debrief)",
+    "show": "tigwit",
+    "published": true,
+    "date": "2021-01-14",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "b3a5b026-3fef-4404-9553-03938d455fcf",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep189-2021-01-14.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 190: Hannah Marianetti, pt. 2",
+    "show": "tigwit",
+    "published": true,
+    "date": "2021-01-21",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "014d535c-14d9-444b-8c9b-4fcee00fcd96",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep190-2021-01-21.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 191: Rev. James, pt. 2",
+    "show": "tigwit",
+    "published": true,
+    "date": "2021-01-28",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "da03b9f2-4416-464e-b0b4-4ac79a724a7f",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep191-2021-01-28.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 192: Marty Cunnie, pt. 3",
+    "show": "tigwit",
+    "published": true,
+    "date": "2021-02-04",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "2ac85e1a-d6f2-434a-ae7c-6cb3ec3b1b3b",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep192-2021-02-04.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 193: Kollin Holtz",
+    "show": "tigwit",
+    "published": true,
+    "date": "2021-02-18",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "163c1aba-b2ff-4029-9a4f-6f4992454684",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep193-2021-02-18.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 194: Laura (Canadian)",
+    "show": "tigwit",
+    "published": true,
+    "date": "2021-02-23",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "6ac13e93-bc78-4698-a75f-3c7eeb44d1d3",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep194-2021-02-23.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 195: Tony & Call Tests",
+    "show": "tigwit",
+    "published": true,
+    "date": "2021-03-09",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "2f86387a-4293-4372-94c9-e5c87554d4be",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep195-2021-03-09.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 196: Sammie On The Scene",
+    "show": "tigwit",
+    "published": true,
+    "date": "2021-03-23",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "b29d8bd9-5b48-464c-916b-24a4c0ec6aa7",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep196-2021-03-23.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 197: Jon Cooper, pt. 4",
+    "show": "tigwit",
+    "published": true,
+    "date": "2021-04-06",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "31680a68-b2ec-4bb3-8e3a-dd8cd9907ed5",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep197-2021-04-06.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 198: Jill Weiner & Dan Linley",
+    "show": "tigwit",
+    "published": true,
+    "date": "2021-04-13",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "76dfb9a3-da75-483b-a23c-e455819a5a44",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep198-2021-04-13.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 199: Panther Cub",
+    "show": "tigwit",
+    "published": true,
+    "date": "2021-05-04",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "8588c845-9732-442d-b9fb-182099d47128",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep199-2021-05-04.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 200: Dan Linley, pt. 11",
+    "show": "tigwit",
+    "published": true,
+    "date": "2021-05-11",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "527bdca0-3390-445b-98ac-451d44591dc7",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep200-2021-05-11.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 201: Natalie Norman",
+    "show": "tigwit",
+    "published": true,
+    "date": "2021-05-25",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "450f6c15-170d-4532-874c-9b141df8c504",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep201-2021-05-25.mp3"
+  }
+},
+{
+  "model": "shows.episode",
+  "fields": {
+    "name": "Ep. 202: Sammie On The Scene, pt. 2",
+    "show": "tigwit",
+    "published": true,
+    "date": "2021-09-07",
+    "duration": "00:00:00",
+    "description": "",
+    "guid": "e3a5ef2a-d35a-4163-9d9e-7d8551b11659",
+    "asset_url": "https://jewpizza.nyc3.digitaloceanspaces.com/shows/TIGWIT-ep202-2021-09-07.mp3"
+  }
+}
+]

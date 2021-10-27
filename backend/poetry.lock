@@ -164,17 +164,6 @@ database = ["django-picklefield"]
 redis = ["redis"]
 
 [[package]]
-name = "django-durationwidget"
-version = "1.0.5"
-description = "Django Duration field widget to handle duration field in the form"
-category = "main"
-optional = false
-python-versions = "*"
-
-[package.dependencies]
-Django = ">=1.11"
-
-[[package]]
 name = "django-environ"
 version = "0.8.1"
 description = "A package that allows you to utilize 12factor inspired environment variables to configure your Django application."
@@ -885,7 +874,7 @@ brotli = ["brotli"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "1eb7ef41a5124e30034e31a1f494d3813c0abe7d311838b7cbf996746347669a"
+content-hash = "94a3fc997e86588f6706c3ff51a7a36229af32f272adb7de96e168de8a77ec67"
 
 [metadata.files]
 appnope = [
@@ -974,10 +963,6 @@ django = [
 django-constance = [
     {file = "django-constance-2.8.0.tar.gz", hash = "sha256:0a492454acc78799ce7b9f7a28a00c53427d513f34f8bf6fdc90a46d8864b2af"},
     {file = "django_constance-2.8.0-py3-none-any.whl", hash = "sha256:60fec73e397d5f4f7440f611b18d3e7ce5342647f316fedc47b62e1411c849e7"},
-]
-django-durationwidget = [
-    {file = "django-durationwidget-1.0.5.tar.gz", hash = "sha256:a77bba14c173cbfe50071ae08759ca37218acb8567639687b0119647cb78c53f"},
-    {file = "django_durationwidget-1.0.5-py3-none-any.whl", hash = "sha256:7d14d5dfcf46c444fb203fe911cd058f78ba482c81ea2f0665db08369a1eff47"},
 ]
 django-environ = [
     {file = "django-environ-0.8.1.tar.gz", hash = "sha256:6f0bc902b43891656b20486938cba0861dc62892784a44919170719572a534cb"},
