@@ -98,9 +98,6 @@ class Episode(ShowBaseModel):
     def ffprobe(self):
         if not hasattr(self, "_ffprobe_cached") or self._ffprobe_cached[0] != self.asset_url:
             self._ffprobe_cached = (self.asset_url, ffprobe(self.asset_url))
-            print('cache miss')
-        else:
-            print('cached')
         return self._ffprobe_cached[1]
 
     def clean(self):

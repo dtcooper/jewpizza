@@ -34,7 +34,7 @@ class EpisodeAdminModelForm(forms.ModelForm):
 
 class EpisodeAdmin(ShowsCommonModelAdminMixin, admin.ModelAdmin):
     form = EpisodeAdminModelForm
-    fields = ("published", "show", "name", "name_from_ffprobe", "asset_url", "date", "duration", "guid")
+    fields = ("published", "show", "asset_url", "name", "name_from_ffprobe", "description", "date", "duration", "guid")
     readonly_fields = ("guid",)
     list_display = ("published", "show", "display_name", "date", "date", "duration")
 
