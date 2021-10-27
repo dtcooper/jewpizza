@@ -41,6 +41,7 @@
     - `ffprobe -i <filename> -print_format json -hide_banner -loglevel error -show_format -show_error -show_streams -select_streams a:0`
 * [ ] Use headphone jewippy when you click shows or listen
 * [ ] [Space Grotesk](https://fonts.google.com/specimen/Space+Grotesk) for body copy
+* [ ] [Change Podcast RSS](https://castos.com/podcast-directories/)
 
 ## Sections
 

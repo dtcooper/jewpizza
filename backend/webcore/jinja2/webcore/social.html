@@ -22,12 +22,12 @@
         ('Substack', 'simple-icons:substack', 'https://{}.substack.com/'.format(config.SUBSTACK_NAME)),
         ('Facebook', 'simple-icons:facebook', 'https://www.facebook.com/{}'.format(config.FACEBOOK_NAME)),
         ('Tiktok', 'simple-icons:tiktok', 'https://www.tiktok.com/@{}'.format(config.TIKTOK_NAME)),
-        ('Email', 'ic:outline-email', None)
+        ('Email', 'ic:outline-email', '_EMAIL')
       )
     %}
       <a
         class="btn md:btn-lg btn-neutral btn-rounded umami--click--social-{{ name|lower }}" target="_blank"
-        {% if name == 'Email' %}
+        {% if link == '_EMAIL' %}
           x-data :href="`mailto:${emailAddress}`"
         {% else %}
           href="{{ link }}"

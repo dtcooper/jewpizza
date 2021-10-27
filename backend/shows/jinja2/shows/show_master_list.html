@@ -4,7 +4,7 @@
 
 {% block content %}
   <article>
-    Here's a list of the shows I've been on.
+    <p>Here are some of shows I'm on.</p>
   </article>
 
   <div class="grid md:grid-cols-2 gap-3 mt-3">
@@ -14,8 +14,13 @@
 
       <div class="card border-accent border-4 lg:border-[6px] rounded-3xl">
         {% if show.has_banner_img %}
-          <figure class="border-accent border-b-4 lg:border-b-[6px]">
-            <a href="#"><img src="{{ static('shows/images/{}.png'.format(show.code)) }}"></a>
+          <figure>
+            <a data-navigo href="{{ url_for('shows:show-list', show=show.code) }}">
+              <img alt="{{ show.name }}"
+                class="border-accent border-b-4 lg:border-b-[6px]"
+                src="{{ static('shows/images/banners/{}.png'.format(show.code)) }}"
+              >
+            </a>
           </figure>
         {% endif %}
         <div class="card-body">
@@ -46,7 +51,7 @@
           {% endif %}
 
           <div class="justify-end card-actions">
-            <a class="btn md:btn-lg btn-secondary" href="#">
+            <a data-navigo class="btn md:btn-lg btn-secondary" href="{{ url_for('shows:show-list', show=show.code) }}">
               More Info &amp; {% if episodes %}Other{% endif %} Episodes
             </a>
           </div>

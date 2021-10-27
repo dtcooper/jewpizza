@@ -36,7 +36,7 @@
       {% endfor %}
     </div>
 
-    <div class="pointer-events-auto w-[220px] h-[155px] px-[3px] pt-[3px] absolute top-0 left-0 jewippy-bubble relative" x-show="open && bubbleOpen">
+    <div class="pointer-events-auto w-[220px] h-[155px] px-[3px] pt-[3px] absolute top-0 left-0 jewippy-bubble relative" x-show="allLoaded && open && bubbleOpen">
       <div id="jewippy-scroller" class="group jewippy-scroller w-[214px] h-[111px] p-1 pl-1.5 overflow-y-auto">
         <div class="font-jewippy text-sm flex flex-col h-full">
           <div class="flex-1 flex flex-col justify-center"><span x-html="bubbleDemoHTML"></span></div>

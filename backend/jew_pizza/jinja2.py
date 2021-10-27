@@ -1,10 +1,9 @@
-import base64
 from collections import namedtuple
 import hashlib
+import json
 import os
 import random
 import string
-import json
 
 from jinja2 import BytecodeCache, Environment, pass_context, pass_eval_context
 from jinja2.filters import do_forceescape, do_tojson
@@ -62,7 +61,8 @@ def get_cached_file_hash(path):
 
 
 @pass_context
-def static(ctx, path, no_hash=False, *args, **kwargs):
+def static(ctx, path, *args, **kwargs):
+    no_hash = kwargs.pop("_no_hash", False)
     file_hash = None
 
     if not no_hash:
@@ -72,21 +72,21 @@ def static(ctx, path, no_hash=False, *args, **kwargs):
                 path = f"{path.removesuffix(ext)}.min{ext}"
         file_hash = get_cached_file_hash(path)
 
-    absolute = kwargs.pop('_external', False)
+    absolute = kwargs.pop("_external", False)
     static_path = django_static(path, *args, **kwargs)
     if file_hash:
         static_path = f"{static_path}?v={file_hash}"
     if absolute:
-        static_path = ctx['request'].build_absolute_uri(static_path)
+        static_path = ctx["request"].build_absolute_uri(static_path)
     return static_path
 
 
 @pass_context
 def url_for(ctx, name, *args, **kwargs):
-    absolute = kwargs.pop('_external', False)
+    absolute = kwargs.pop("_external", False)
     path = reverse(name, args=args, kwargs=kwargs)
     if absolute:
-        path = ctx['request'].build_absolute_uri(path)
+        path = ctx["request"].build_absolute_uri(path)
     return path
 
 
@@ -123,16 +123,17 @@ def liqval(value, comment_string=True):
 
 def nav_links(request):
     nav_links = []
-    active_link = None
+    active_url = None
+    active_url_name = request.resolver_match.view_name if request.resolver_match else None
 
     for name, url_name, icon, is_subnav in constants.NAVIGATION_LINKS:
         url = reverse(url_name)
-        is_active = request.resolver_match.view_name == url_name if request.resolver_match else False
+        is_active = active_url_name == url_name if request.resolver_match else False
         nav_links.append(NavLink(name, url, url_name, icon, is_subnav, is_active))
         if is_active:
-            active_link = url
+            active_url = url
 
-    return {"nav_links": nav_links, "active_link": active_link}
+    return {"nav_links": nav_links, "active_url": active_url, "active_url_name": active_url_name}
 
 
 def __encoded_email():
@@ -183,7 +184,10 @@ def create_environment(**options):
             "config": constance_config,
             "encoded_email": __encoded_email(),
             "get_messages": get_messages_jinja2,
-            "jewippy_gifs": [{**i, "webp": static(path=i["webp"], ctx=None), "gif": static(path=i["gif"], ctx=None)} for i in constants.JEWIPPY_GIFS],
+            "jewippy_gifs": [
+                {**i, "webp": static(path=i["webp"], ctx=None), "gif": static(path=i["gif"], ctx=None)}
+                for i in constants.JEWIPPY_GIFS
+            ],
             "randint": random.randint,
             "settings": settings,
             "shuffle": shuffle,

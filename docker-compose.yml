@@ -74,7 +74,7 @@ services:
 
   db:
     <<: *service-defaults
-    image: library/postgres:14-alpine
+    image: library/postgres:14.0-alpine
     volumes:
       - postgres_data:/var/lib/postgresql/data/
       - ./init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
@@ -84,7 +84,7 @@ services:
 
   redis:
     <<: *service-defaults
-    image: library/redis:6-alpine
+    image: library/redis:6.2-alpine
     volumes:
       - redis_data:/data
     environment:
@@ -106,7 +106,7 @@ services:
 
   logs:
     <<: *service-defaults
-    image: amir20/dozzle:latest
+    image: amir20/dozzle:v3.8.2
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     ports:

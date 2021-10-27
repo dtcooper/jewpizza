@@ -3,7 +3,7 @@ CACHE_KEY_PREFIX_STATIC_ASSET_HASH = "static-asset-hash::"
 NAVIGATION_LINKS = [
     # name, url_name, icon, is_subnav
     ("Home", "webcore:home", "ic:baseline-home", False),
-    ("Shows", "shows:master-list", "mdi:calendar-check-outline", False),
+    ("Shows", "shows:show-master-list", "mdi:calendar-check-outline", False),
     ("Listen", "shows:listen", "ic:outline-radio", False),
     ("Bio", "webcore:bio", "mdi:text-account", False),
     ("Newsletter", "notifications:newsletter", "mdi:email-newsletter", True),

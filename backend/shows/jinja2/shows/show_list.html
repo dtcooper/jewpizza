@@ -1,0 +1,23 @@
+{% extends 'webcore/base.html' %}
+
+{% block content %}
+  <div class="max-w-screen-md mx-auto">
+    {% if show.has_banner_img %}
+      <figure>
+        <img alt="{{ show.name }}"
+          class="z-[-1] border-4 lg:border-[6px] rounded-2xl border-accent"
+          src="{{ static('shows/images/banners/{}.png'.format(show.code)) }}"
+        >
+      </figure>
+    {% else %}
+      <h3 class="text-xl md:text-3xl text-accent underline underline-wavy text-center mb-3 md:text-left italic">
+        {{ show.name }}
+      </h3>
+    {% endif %}
+
+    <p class="pt-1">
+      <a class="link link-hover" data-navigo href="{{ url_for('shows:show-master-list') }}">&lt;- Back to shows list</a>
+    </p>
+  </div>
+
+{% endblock %}
