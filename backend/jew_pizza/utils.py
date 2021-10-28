@@ -43,7 +43,7 @@ def format_date_short(date):
     return format_date(date, format="n/j/y")
 
 
-def format_time(time, format='g:i A'):
+def format_time(time, format="g:i A"):
     return django_date_format(time, format=format)
 
 

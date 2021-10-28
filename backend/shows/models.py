@@ -88,7 +88,7 @@ class Episode(ShowBaseModel):
         help_text="In <code>HH:MM:SS</code> format. Leave 00:00:00 to autofill from file.",
     )
     description = models.TextField(blank=True)
-    guid = models.UUIDField('GUID', default=uuid.uuid4, unique=True, help_text="For podcast. Automatically generated.")
+    guid = models.UUIDField("GUID", default=uuid.uuid4, unique=True, help_text="For podcast. Automatically generated.")
     slug = models.SlugField("URL slug", max_length=100)
     asset_url = S3DirectField(
         "audio asset",

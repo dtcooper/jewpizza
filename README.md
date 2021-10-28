@@ -183,7 +183,9 @@ server {
 
 To <ins>test</ins> (and _only_ test) with `DEBUG=0` without running nginx and
 have Gunicorn serve static assets using [Whitenoise](http://whitenoise.evans.io/en/stable/),
-set `SERVE_ASSETS_FROM_DJANGO=1` in the `.env` file,
+set `SERVE_ASSETS_FROM_DJANGO=1` in the `.env` file. You'll need to build the
+container with `DEBUG=1` first, since Whitenoise is <ins>**not**</ins> installed
+into the container when `DEBUG=0`.
 
 
 #### Change Passwords

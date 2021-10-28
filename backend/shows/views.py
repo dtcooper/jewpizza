@@ -22,12 +22,9 @@ class ListenView(TemplateView):
     extra_context = {"title": "Listen"}
 
     def get_context_data(self, **kwargs):
-        shows_and_show_dates = tuple(
-            (show, list(ShowDate.active.filter(show_code=show.code)))
-            for show in SHOWS
-        )
+        shows_and_show_dates = tuple((show, list(ShowDate.active.filter(show_code=show.code))) for show in SHOWS)
 
-        return {**super().get_context_data(**kwargs), 'shows_and_show_dates': shows_and_show_dates}
+        return {**super().get_context_data(**kwargs), "shows_and_show_dates": shows_and_show_dates}
 
 
 class ShowListView(ListView):

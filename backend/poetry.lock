@@ -864,7 +864,7 @@ python-versions = "*"
 name = "whitenoise"
 version = "5.3.0"
 description = "Radically simplified static file serving for WSGI applications"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.5, <4"
 
@@ -874,7 +874,7 @@ brotli = ["brotli"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "94a3fc997e86588f6706c3ff51a7a36229af32f272adb7de96e168de8a77ec67"
+content-hash = "9f72c2f4cc526323a124c39eabb096f4f537f12e152b089249221d0eb70efe57"
 
 [metadata.files]
 appnope = [

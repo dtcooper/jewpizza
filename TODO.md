@@ -44,6 +44,7 @@
 * [ ] [Space Grotesk](https://fonts.google.com/specimen/Space+Grotesk) for body copy
 * [ ] [Change Podcast RSS](https://castos.com/podcast-directories/)
 * [ ] Decouple podcast namedtuples with shows?
+* [ ] Radio should have a mountpoint to pre-empty and stream from
 
 ## Sections
 
