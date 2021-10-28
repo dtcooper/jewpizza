@@ -61,6 +61,15 @@
         debugResponse = response.clone()
       }
       json = await response.json()
+
+      if (DATA.debug && json.status >= 400) {
+        document.open()
+        const pre = document.createElement('pre')
+        pre.textContent = json.content
+        document.append(pre)
+        document.close()
+        return
+      }
     } catch (err) {
       if (DATA.debug || DATA.isSuperuser) {
         console.error(`An error occurred while fetching ${url}`)

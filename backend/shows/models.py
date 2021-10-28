@@ -4,6 +4,7 @@ import uuid
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.urls import reverse
 from django.utils.timezone import get_default_timezone, get_default_timezone_name
 
 from recurrence.fields import RecurrenceField
@@ -11,7 +12,7 @@ from s3direct.fields import S3DirectField
 
 from jew_pizza.utils import format_date_short
 
-from .constants import SHOW_CHOICES
+from .constants import SHOW_CHOICES, SHOW_CODES_TO_SHOW
 from .utils import ffprobe, today_in_default_timezone
 
 
@@ -24,10 +25,14 @@ class ShowBaseModel(models.Model):
             " override that, ie for podcasts, named or special shows."
         ),
     )
-    show = models.CharField(max_length=max(len(c) for c, _ in SHOW_CHOICES), choices=SHOW_CHOICES)
+    show_code = models.CharField('show', max_length=max(len(c) for c, _ in SHOW_CHOICES), choices=SHOW_CHOICES)
     published = models.BooleanField(
         default=True, help_text="Whether to show this entry on the actual website. Leave unchecked for draft mode."
     )
+
+    @property
+    def show(self):
+        return SHOW_CODES_TO_SHOW.get(self.show_code)
 
     class Meta:
         abstract = True
@@ -52,7 +57,7 @@ class ShowDate(ShowBaseModel):
         s = ""
         if not self.published:
             s += "<DRAFT> "
-        s += self.get_show_display()
+        s += self.get_show_code_display()
         if self.name:
             s += f" / {self.name}"
         if show_times:
@@ -76,7 +81,7 @@ class Episode(ShowBaseModel):
     )
     description = models.TextField(blank=True)
     guid = models.UUIDField(default=uuid.uuid4, unique=True, help_text="GUID for podcast. Automatically generated.")
-    slug = models.SlugField('URL slug', max_length=100)
+    slug = models.SlugField("URL slug", max_length=100)
     asset_url = S3DirectField(
         "audio asset",
         dest="show_asset_url",
@@ -85,15 +90,18 @@ class Episode(ShowBaseModel):
 
     objects = EpisodeManager()
 
-    def natural_key(self):
-        return (self.guid,)
-
     class Meta:
-        ordering = ('-date', 'show')
+        ordering = ("-date", "show_code")
         indexes = (
             models.Index(fields=("date",)),
-            models.Index(fields=("show", "date")),
+            models.Index(fields=("show_code", "date")),
         )
+
+    def get_absolute_url(self):
+        return reverse("shows:show-detail", kwargs={"show": self.show, "slug": self.slug})
+
+    def natural_key(self):
+        return (self.guid,)
 
     @property
     def ffprobe(self):
@@ -124,7 +132,7 @@ class Episode(ShowBaseModel):
         s = ""
         if not self.published:
             s += "<DRAFT> "
-        s += self.get_show_display()
+        s += self.get_show_code_display()
         if self.name:
             s += f" / {self.name}"
         if show_times:

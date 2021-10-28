@@ -32,11 +32,15 @@ def format_datetime(dt, format="N j, Y g:i A"):
 
 
 def format_datetime_short(dt):
-    return format_datetime(localtime(dt), format="n/j/y g:i A")
+    return format_datetime(dt, format="n/j/y g:i A")
+
+
+def format_date(date, format="N j, Y"):
+    return django_date_format(date, format=format)
 
 
 def format_date_short(date):
-    return django_date_format(date, format="n/j/y")
+    return format_date(date, format="n/j/y")
 
 
 def _call_controller(cmd, fail_silently=False, params=None, json=False):

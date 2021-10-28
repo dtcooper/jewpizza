@@ -7,7 +7,7 @@
         <atom:link href="https://feeds.soundcloud.com/users/soundcloud:users:263209418/sounds.rss" rel="self" type="application/rss+xml"/>
         <atom:link href="https://feeds.soundcloud.com/users/soundcloud:users:263209418/sounds.rss?before=289392752" rel="next" type="application/rss+xml"/>
         <title>{{ podcast.title }}</title>
-        <link>{{ url_for('shows:show-list', show=show.code, _external=True) }}</link>
+        <link>{{ url_for('shows:show-list', show=show, _external=True) }}</link>
         <pubDate>Sun, 24 Oct 2021 22:55:04 +0000</pubDate>
         <lastBuildDate>Sun, 24 Oct 2021 22:55:04 +0000</lastBuildDate>
         <ttl>60</ttl>
@@ -26,7 +26,7 @@
         <image>
             <url>{{ album_cover_url }}</url>
             <title>{{ podcast.title }}</title>
-            <link>{{ url_for('shows:show-list', show=show.code, _external=True) }}</link>
+            <link>{{ url_for('shows:show-list', show=show, _external=True) }}</link>
         </image>
         <itunes:category text="Comedy" />
         <item>

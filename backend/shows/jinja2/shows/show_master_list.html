@@ -8,14 +8,13 @@
   </article>
 
   <div class="grid md:grid-cols-2 gap-3 mt-3">
-    {% for show in shows %}
+    {% for show, episodes in shows_and_episodes %}
       {% from 'shows/snippets/{}.html'.format(show.code) import short_description, title %}
-      {% set episodes = episodes_for_shows[show.code] %}
 
       <div class="card border-accent border-4 lg:border-[6px] rounded-3xl">
         {% if show.has_banner_img %}
           <figure>
-            <a data-navigo href="{{ url_for('shows:show-list', show=show.code) }}">
+            <a data-navigo href="{{ url_for('shows:show-list', show=show) }}">
               <img alt="{{ show.name }}"
                 class="border-accent border-b-4 lg:border-b-[6px]"
                 src="{{ static('shows/images/banners/{}.png'.format(show.code)) }}"
@@ -43,7 +42,7 @@
             <ul class="text-responsive list-disc list-outside ml-6 space-y-2">
               {% for episode in episodes %}
                 <li>
-                  <a class="link link-primary link-hover" href="#TODO">{{ episode.start|date }}</a> /
+                  <a class="link link-primary link-hover" href="#TODO">{{ episode.date|date }}</a> /
                   <button class="link link-accent link-hover italic" x-data  @click="alert('would play: ' + {{ episode.asset_url|attrjs }})">Play!</button>
                 </li>
               {% endfor  %}
@@ -51,7 +50,7 @@
           {% endif %}
 
           <div class="justify-end card-actions">
-            <a data-navigo class="btn md:btn-lg btn-secondary" href="{{ url_for('shows:show-list', show=show.code) }}">
+            <a data-navigo class="btn md:btn-lg btn-secondary" href="{{ url_for('shows:show-list', show=show) }}">
               More Info &amp; {% if episodes %}Other{% endif %} Episodes
             </a>
           </div>

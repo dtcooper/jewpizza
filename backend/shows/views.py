@@ -7,44 +7,41 @@ from .models import Episode
 
 class ShowsMasterListView(TemplateView):
     template_name = "shows/show_master_list.html"
-    extra_context = {"title": "Shows", "shows": SHOWS}
+    extra_context = {"title": "Shows"}
     MAX_EPISODES_PER_SHOW = 3
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["episodes_for_shows"] = {
-            show.code: list(Episode.objects.filter(show=show.code).order_by("-start")[: self.MAX_EPISODES_PER_SHOW])
+        shows_and_episodes = tuple(
+            (show, list(Episode.objects.filter(show_code=show.code).order_by("-date")[: self.MAX_EPISODES_PER_SHOW]))
             for show in SHOWS
-        }
-        return context
+        )
+        return {**super().get_context_data(**kwargs), 'shows_and_episodes': shows_and_episodes}
 
 
-class ShowContextMixin:
-    def get_context_data(self, **kwargs):
-        show = SHOW_CODES_TO_SHOW.get(self.kwargs["show"])
-        if not show:
-            raise Http404
-
-        return {**super().get_context_data(**kwargs), "show": show}
-
-
-class ShowListView(ShowContextMixin, ListView):
+class ShowListView(ListView):
     template_name = "shows/show_list.html"
+    model = Episode
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        show = context["show"]
-        return {**context, "title": show.name, "hide_title": True}
+        show = self.kwargs['show']
+        return {**super().get_context_data(**kwargs), "show": show, "title": show.name, "hide_title": True}
 
     def get_queryset(self):
-        return Episode.objects.filter(show=self.kwargs["show"])
+        return Episode.objects.filter(show_code=self.kwargs['show'].code)
 
 
-class ShowDetailView(ShowContextMixin, DetailView):
+class ShowDetailView(DetailView):
     template_name = "shows/show_detail.html"
+    model = Episode
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        show = self.kwargs['show']
+        episode = context['episode']
+        return {**context, "show": show, "title": episode.name}
 
 
-class PodcastRSSView(ShowContextMixin, TemplateView):
+class PodcastRSSView(TemplateView):
     template_name = "shows/podcast_rss.xml"
     content_type = "application/xml"
 

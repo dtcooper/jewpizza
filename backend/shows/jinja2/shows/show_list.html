@@ -20,4 +20,14 @@
     </p>
   </div>
 
+  <div>
+    {% if episode_list %}
+      <ul class="list-disc">
+        {% for episode in episode_list %}
+          <li><a data-navigo class="link link-primary link-hover" href="{{ episode.get_absolute_url() }}">{{ episode.name }}</a> &mdash; {{ episode.date|date }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+
 {% endblock %}

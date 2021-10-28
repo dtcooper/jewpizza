@@ -6,12 +6,12 @@ from .models import Episode, ShowDate
 
 
 class ShowsCommonModelAdminMixin:
-    list_filter = ("published", "show")
-    list_display_links = ("show", "display_name")
+    list_filter = ("published", "show_code")
+    list_display_links = ("show_code", "display_name")
 
-    @admin.display(description="Name", ordering="name", empty_value='asdf')
+    @admin.display(description="Name", ordering="name", empty_value=mark_safe("<em>Untitled</em>"))
     def display_name(self, obj):
-        return obj.name or mark_safe('<em>Untitled</em>')
+        return obj.name or None
 
     def get_fields(self, request, obj=None):
         fields = list(super().get_fields(request, obj=obj))
@@ -32,11 +32,23 @@ class EpisodeAdminModelForm(forms.ModelForm):
         ),
     )
 
+
 class EpisodeAdmin(ShowsCommonModelAdminMixin, admin.ModelAdmin):
     form = EpisodeAdminModelForm
-    fields = ("published", "show", "slug", "asset_url", "name", "name_from_ffprobe", "description", "date", "duration", "guid")
+    fields = (
+        "published",
+        "show_code",
+        "slug",
+        "asset_url",
+        "name",
+        "name_from_ffprobe",
+        "description",
+        "date",
+        "duration",
+        "guid",
+    )
     readonly_fields = ("guid",)
-    list_display = ("published", "show", "display_name", "date", "date", "duration")
+    list_display = ("published", "show_code", "display_name", "date", "date", "duration")
 
     def save_model(self, request, obj, form, change):
         if form.cleaned_data["name_from_ffprobe"]:
@@ -45,14 +57,9 @@ class EpisodeAdmin(ShowsCommonModelAdminMixin, admin.ModelAdmin):
 
 
 class ShowDateAdmin(ShowsCommonModelAdminMixin, admin.ModelAdmin):
-    fields = ("show", "published", "name", "dates", "start_time", "duration", "end_time")
-    list_display = ("published", "show", "display_name", "start_time", "end_time", "duration")
+    fields = ("show_code", "published", "name", "dates", "start_time", "duration", "end_time")
+    list_display = ("published", "show_code", "display_name", "start_time", "end_time", "duration")
     readonly_fields = ("end_time",)
-
-    @admin.display(description="Show name", ordering="show")
-    def display_show(self, obj):
-        return obj.__str__(show_times=False)
-
 
 admin.site.register(Episode, EpisodeAdmin)
 admin.site.register(ShowDate, ShowDateAdmin)

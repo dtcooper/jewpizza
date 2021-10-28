@@ -1,0 +1,9 @@
+{% extends 'webcore/base.html' %}
+
+{% block content %}
+  <article class="mb-5">
+    <p>{{ episode.description }}</p>
+  </article>
+
+  <a data-navigo class="link link-hover" href="{{ url_for('shows:show-list', show=show) }}">&lt- Back to show</a>
+{% endblock %}
