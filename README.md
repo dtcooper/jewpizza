@@ -104,7 +104,7 @@ NOTE: [Gunicorn](https://gunicorn.org/) will listen on `127.0.0.1:8000`
 into the service using `nginx` (or similar) and serve the static and media assets
 (deployed to the `serve/static/` and `serve/media/` folders, respectively).
 
-You'll also have to reverse proxy into SSE service, [umami](https://umami.is/)
+You'll also have to reverse proxy into the SSE service, [umami](https://umami.is/)
 analytics, and [Dozzle](https://dozzle.dev/) logs containers on ports `8001`,
 `3000`, and `8888`, respectively.
 
@@ -135,6 +135,7 @@ server {
 server {
     listen 443 ssl http2;
     server_name sse.jew.pizza;
+    include ssl_params;
 
     location / {
         include proxy_params;
