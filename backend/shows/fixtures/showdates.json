@@ -22,5 +22,17 @@
     "duration": "02:00:00",
     "dates": "RRULE:FREQ=WEEKLY;BYDAY=TU"
   }
+},
+{
+  "model": "shows.showdate",
+  "pk": 3,
+  "fields": {
+    "name": "",
+    "show_code": "twwit",
+    "published": true,
+    "start_time": "03:00:00",
+    "duration": "03:00:00",
+    "dates": "RDATE:20211125T050000Z"
+  }
 }
 ]
