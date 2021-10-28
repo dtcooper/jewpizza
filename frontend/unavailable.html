@@ -23,33 +23,33 @@
     }
   </style>
 </head>
-<body
-  :class="{'cursor-wait': reloading}"
-  x-data="{
-    timeout: 10,
-    reloading: false,
-    interval: null,
-    reload() {
-      if (!this.reloading) {
-        clearInterval(this.interval)
-        this.timeout = 0
-        this.reloading = true
-        setTimeout(() => window.location.reload(), 700)
-      }
-    }
-  }"
-  x-init="
-    interval = setInterval(() => {
-      timeout = Math.max(0, timeout - 1)
-      if (timeout == 0) {
-        reload()
-      }
-    }, 1000)
-  "
->
+<body>
   <div class="hero min-h-screen">
     <div class="text-center hero-content">
-      <div class="max-w-screen-2xl">
+      <div
+        class="max-w-screen-2xl"
+        x-data="{
+          timeout: 10,
+          reloading: false,
+          interval: null,
+          reload() {
+            if (!this.reloading) {
+              clearInterval(this.interval)
+              this.timeout = 0
+              this.reloading = true
+              setTimeout(() => window.location.reload(), 700)
+            }
+          }
+        }"
+        x-init="
+          interval = setInterval(() => {
+            timeout = Math.max(0, timeout - 1)
+            if (timeout == 0) {
+              reload()
+            }
+          }, 1000)
+        "
+      >
         <h1 class="mb-5 text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold italic">
           <span class="text-accent">jew.pizza</span> is Currently Unavailable!
         </h1>
