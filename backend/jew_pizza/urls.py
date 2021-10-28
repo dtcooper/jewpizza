@@ -24,7 +24,7 @@ def error_handler(request, status, title, description, *args, **kwargs):
     # JSONResponseMiddleware.process_template_response() seems to be ignored
     if JSONResponseMiddleware.is_json(request):
         context["content_only"] = True
-    return render(request, "webcore/error.html", context, *args, **kwargs)
+    return render(request, "webcore/error.html", context, status=status, *args, **kwargs)
 
 
 def handler500(request, *args, **kwargs):

@@ -76,6 +76,7 @@ class Episode(ShowBaseModel):
     )
     description = models.TextField(blank=True)
     guid = models.UUIDField(default=uuid.uuid4, unique=True, help_text="GUID for podcast. Automatically generated.")
+    slug = models.SlugField('URL slug', max_length=100)
     asset_url = S3DirectField(
         "audio asset",
         dest="show_asset_url",

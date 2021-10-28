@@ -49,7 +49,7 @@ class JSONResponseMiddleware:
                 )
                 if hasattr(response, "context_data") and (title := response.context_data.get("title")):
                     json_data["title"] = title
-            response = JsonResponse(json_data, headers=headers)
+            response = JsonResponse(json_data, headers=headers, status=response.status_code)
 
         return response
 
