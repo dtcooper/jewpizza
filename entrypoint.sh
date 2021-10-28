@@ -50,7 +50,7 @@ migrate_and_init_db () {
         DJANGO_SUPERUSER_PASSWORD=cooper ./manage.py createsuperuser --noinput --username dave --email 'david@jew.pizza'
     fi
 
-    ./manage.py loaddata showdates.json episodes.json
+    ./manage.py loaddata shows/show_dates.json shows/episodes.json
 }
 
 init_umami () {

@@ -1,8 +1,7 @@
-from django.http import Http404
 from django.views.generic import DetailView, ListView, TemplateView
 
-from .constants import SHOW_CODES_TO_SHOW, SHOWS
-from .models import Episode
+from .constants import SHOWS
+from .models import Episode, ShowDate
 
 
 class ShowsMasterListView(TemplateView):
@@ -12,10 +11,23 @@ class ShowsMasterListView(TemplateView):
 
     def get_context_data(self, **kwargs):
         shows_and_episodes = tuple(
-            (show, list(Episode.objects.filter(show_code=show.code).order_by("-date")[: self.MAX_EPISODES_PER_SHOW]))
+            (show, list(Episode.active.filter(show_code=show.code).order_by("-date")[: self.MAX_EPISODES_PER_SHOW]))
             for show in SHOWS
         )
-        return {**super().get_context_data(**kwargs), 'shows_and_episodes': shows_and_episodes}
+        return {**super().get_context_data(**kwargs), "shows_and_episodes": shows_and_episodes}
+
+
+class ListenView(TemplateView):
+    template_name = "shows/listen.html"
+    extra_context = {"title": "Listen"}
+
+    def get_context_data(self, **kwargs):
+        shows_and_show_dates = tuple(
+            (show, list(ShowDate.active.filter(show_code=show.code)))
+            for show in SHOWS
+        )
+
+        return {**super().get_context_data(**kwargs), 'shows_and_show_dates': shows_and_show_dates}
 
 
 class ShowListView(ListView):
@@ -23,21 +35,22 @@ class ShowListView(ListView):
     model = Episode
 
     def get_context_data(self, **kwargs):
-        show = self.kwargs['show']
+        show = self.kwargs["show"]
         return {**super().get_context_data(**kwargs), "show": show, "title": show.name, "hide_title": True}
 
     def get_queryset(self):
-        return Episode.objects.filter(show_code=self.kwargs['show'].code)
+        return Episode.active.filter(show_code=self.kwargs["show"].code)
 
 
 class ShowDetailView(DetailView):
     template_name = "shows/show_detail.html"
     model = Episode
+    queryset = Episode.active.all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        show = self.kwargs['show']
-        episode = context['episode']
+        show = self.kwargs["show"]
+        episode = context["episode"]
         return {**context, "show": show, "title": episode.name}
 
 

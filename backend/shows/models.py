@@ -5,7 +5,7 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls import reverse
-from django.utils.timezone import get_default_timezone, get_default_timezone_name
+from django.utils.timezone import get_default_timezone_name
 
 from recurrence.fields import RecurrenceField
 from s3direct.fields import S3DirectField
@@ -14,6 +14,11 @@ from jew_pizza.utils import format_date_short
 
 from .constants import SHOW_CHOICES, SHOW_CODES_TO_SHOW
 from .utils import ffprobe, today_in_default_timezone
+
+
+class PublishedManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(published=True)
 
 
 class ShowBaseModel(models.Model):
@@ -25,10 +30,13 @@ class ShowBaseModel(models.Model):
             " override that, ie for podcasts, named or special shows."
         ),
     )
-    show_code = models.CharField('show', max_length=max(len(c) for c, _ in SHOW_CHOICES), choices=SHOW_CHOICES)
+    show_code = models.CharField("show", max_length=max(len(c) for c, _ in SHOW_CHOICES), choices=SHOW_CHOICES)
     published = models.BooleanField(
         default=True, help_text="Whether to show this entry on the actual website. Leave unchecked for draft mode."
     )
+
+    objects = models.Manager()
+    active = PublishedManager()
 
     @property
     def show(self):
@@ -80,7 +88,7 @@ class Episode(ShowBaseModel):
         help_text="In <code>HH:MM:SS</code> format. Leave 00:00:00 to autofill from file.",
     )
     description = models.TextField(blank=True)
-    guid = models.UUIDField(default=uuid.uuid4, unique=True, help_text="GUID for podcast. Automatically generated.")
+    guid = models.UUIDField('GUID', default=uuid.uuid4, unique=True, help_text="For podcast. Automatically generated.")
     slug = models.SlugField("URL slug", max_length=100)
     asset_url = S3DirectField(
         "audio asset",

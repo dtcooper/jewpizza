@@ -6,6 +6,7 @@ from .models import Episode, ShowDate
 
 
 class ShowsCommonModelAdminMixin:
+    save_on_top = True
     list_filter = ("published", "show_code")
     list_display_links = ("show_code", "display_name")
 
@@ -36,8 +37,8 @@ class EpisodeAdminModelForm(forms.ModelForm):
 class EpisodeAdmin(ShowsCommonModelAdminMixin, admin.ModelAdmin):
     form = EpisodeAdminModelForm
     fields = (
-        "published",
         "show_code",
+        "published",
         "slug",
         "asset_url",
         "name",
@@ -60,6 +61,7 @@ class ShowDateAdmin(ShowsCommonModelAdminMixin, admin.ModelAdmin):
     fields = ("show_code", "published", "name", "dates", "start_time", "duration", "end_time")
     list_display = ("published", "show_code", "display_name", "start_time", "end_time", "duration")
     readonly_fields = ("end_time",)
+
 
 admin.site.register(Episode, EpisodeAdmin)
 admin.site.register(ShowDate, ShowDateAdmin)

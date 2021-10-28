@@ -4,6 +4,7 @@ from .models import TextMessage
 
 
 class TextMessageAdmin(admin.ModelAdmin):
+    save_on_top = True
     date_hierarchy = "created"
     list_display = ("phone_number", "created", "message")
     search_fields = ("phone_number",)

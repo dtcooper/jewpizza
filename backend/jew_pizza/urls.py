@@ -1,12 +1,36 @@
+import re
+
 from django.contrib import admin
 from django.shortcuts import render
-from django.urls import include, path
+from django.urls import include, path, register_converter
 
+from shows.constants import SHOW_CODES_TO_SHOW, Show
 from webcore.middleware import JSONResponseMiddleware
 
 
 admin.site.index_title = admin.site.site_header = "jew.pizza administration"
 admin.site.site_title = "jew.pizza site admin"
+
+
+class ShowConverter:
+    regex = "|".join(re.escape(code) for code in SHOW_CODES_TO_SHOW.keys())
+
+    def to_python(self, value):
+        return SHOW_CODES_TO_SHOW[value]
+
+    def to_url(self, value):
+        if isinstance(value, Show):
+            value = value.code
+        return value
+
+
+class PodcastConverter(ShowConverter):
+    regex = "|".join(re.escape(code) for code, show in SHOW_CODES_TO_SHOW.items() if show.podcast)
+
+
+register_converter(ShowConverter, "show")
+register_converter(PodcastConverter, "podcast")
+
 
 urlpatterns = [
     path("", include("webcore.urls")),

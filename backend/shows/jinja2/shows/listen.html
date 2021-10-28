@@ -1,0 +1,29 @@
+{% extends 'webcore/base.html' %}
+
+{% block content %}
+  <article>
+    {% for show, show_dates in shows_and_show_dates %}
+      {% if show_dates %}
+        {# Figure out if there are rrules to print #}
+        {% set ns = namespace(has_rrules=false) %}
+        {% for show_date in show_dates %}
+          {% if show_date.dates.rrules %}
+            {% set ns.has_rrules = true %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+
+        {% if ns.has_rrules %}
+          <h3>{{ show.name }}</h3>
+          <ul>
+            {% for show_date in show_dates %}
+              {% for rrule in show_date.dates.rrules %}
+                <li>{{ show_date.start_time|time }} - {{ show_date.end_time|time }} {{ rrule.to_text() }}</li>
+              {% endfor %}
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  </article>
+{% endblock %}
