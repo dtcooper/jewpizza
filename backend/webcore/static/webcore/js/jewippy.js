@@ -149,7 +149,7 @@ document.addEventListener('alpine:init', () => {
       bubbleDemoClick () {
         this.setImg('explode')
         this.queueImg(['idle', 'idleAlt'], true)
-        window.router.navigate(this.bubbleDemoLink)
+        window.navigate(this.bubbleDemoLink)
         this.bubbleDemoClose(7500)
       },
       bubbleDemoClickMinimize (animation) {

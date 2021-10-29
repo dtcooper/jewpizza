@@ -116,6 +116,7 @@
     contentScrollerDiv = document.getElementById('content-scroller')
     contentDiv = document.getElementById('content')
     router = new Navigo('/')
+    window.navigate = router.navigate
 
     router.on('*', async ({ url, ...args }) => {
       url = `/${url}`
