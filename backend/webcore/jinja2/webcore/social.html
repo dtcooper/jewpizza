@@ -9,7 +9,7 @@
     </p>
     <p>
       I'm verified{{ icon('octicon:verified-16', margin='ml-1.5', classes='inline text-blue-400 align-baseline', size='text-2xl') }}
-      on <a href="https://twitter.com/{{ config.TWITTER_NAME }}" class="umami--click--social-twitter" target="_blank">Twitter</a>,
+      on <a href="https://twitter.com/{{ config.TWITTER_NAME }}" class="umami--click--social-twitter">Twitter</a>,
       but still hate myself.
     </p>
   </article>
@@ -26,7 +26,7 @@
       )
     %}
       <a
-        class="btn md:btn-lg btn-neutral btn-rounded umami--click--social-{{ name|lower }}" target="_blank"
+        class="btn md:btn-lg btn-neutral btn-rounded umami--click--social-{{ name|lower }}"
         {% if link == '_EMAIL' %}
           x-data :href="`mailto:${emailAddress}`"
         {% else %}

@@ -40,8 +40,12 @@ def shuffle(items):
 
 
 def get_cached_file_hash(path):
+    file_hash = None
+
     if settings.DEBUG:
-        return "{:032x}".format(random.randrange(16 ** 32))
+        if any(path.endswith(ext) and not path.endswith(f".min{ext}") for ext in (".js", ".css")):
+            # Reload all JS and CSS in DEBUG
+            file_hash = "{:032x}".format(random.randrange(16 ** 32))
     else:
         cache_key = f"{constants.CACHE_KEY_PREFIX_STATIC_ASSET_HASH}{path}"
         file_hash = cache.get(cache_key)
@@ -57,7 +61,7 @@ def get_cached_file_hash(path):
             else:
                 file_hash = False
             cache.set(cache_key, file_hash, timeout=None)
-        return file_hash
+    return file_hash
 
 
 @pass_context

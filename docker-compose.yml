@@ -13,8 +13,6 @@ x-app-template: &app-template
   depends_on:
     - db
     - redis
-  environment:
-    TZ: "${TIMEZONE:-US/Eastern}"
 
 services:
   app:

@@ -4,14 +4,15 @@
     {#- Copy and image #}
     {# TODO: Redo, why bother struggling tof it in MD when we can just use the dropdown #}
     <div class="flex flex-row flex-1">
-      <{% if request.user.is_superuser %}a href="{{ url_for('admin:index') }}" tabindex="-1"{% else %}div{% endif %} class="overflow-hidden">
+      {# _external=True avoids using Navigo #}
+      <{% if request.user.is_superuser %}a href="{{ url_for('admin:index', _external=true) }}" tabindex="-1" no-spa-routing{% else %}div{% endif %} class="overflow-hidden">
         <img
           src="{{ static('webcore/images/david-headshot.jpg') }}"
           class="animate-spin-custom h-12 w-12 mr-2 xl:h-16 xl:w-16 xl:mr-3 rounded-full border-[3px] xl:border-4 border-secondary select-none drag-none"
           style="{{ random_spin_style(min=4000, max=5500, direction='normal') }}"
         >
         </{% if request.user.is_superuser %}a{% else %}div{% endif %}>
-      <{% if request.user.is_superuser %}a href="{{ url_for('admin:index') }}" tabindex="-1"{% else %}div{% endif %}
+      <{% if request.user.is_superuser %}a href="{{ url_for('admin:index', _external=True) }}" tabindex="-1" no-spa-routing{% else %}div{% endif %}
         class="flex flex-col items-start sm:flex-row sm:items-baseline sm:space-x-2"
 
       >
@@ -24,7 +25,7 @@
     <div class="flex-none flex items-center space-x-1 xl:space-x-1.5 2xl:space-x-2">
       {% for link in nav_links %}
         <a
-          data-navigo href="{{ link.url }}"
+          href="{{ link.url }}"
           class="btn 2xl:btn-lg btn-rounded no-animation btn-primary hidden {% if link.is_subnav %}3xl:flex{% else %}lg:flex{% endif %}{% if link.is_active %} btn-disabled btn-outline{% endif %}"
           :class="{
             'btn-outline': $store.page.current == {{ link.url|attrjs }},
@@ -45,7 +46,7 @@
               {% if link.is_subnav %}
                 <li :class="{'bordered text-secondary-content': $store.page.current == {{ link.url|attrjs }}}">
                   <span x-show="$store.page.current == {{ link.url|attrjs }}">{{ icon(link.icon) }} {{ link.name }}</span>
-                  <a data-navigo x-show="$store.page.current != {{ link.url|attrjs }}" href="{{ link.url }}">
+                  <a x-show="$store.page.current != {{ link.url|attrjs }}" href="{{ link.url }}">
                     {{ icon(link.icon) }} {{ link.name }}
                   </a>
                 </li>
@@ -71,7 +72,7 @@
       {% for link in nav_links %}
         <li :class="{'bordered text-secondary-content': $store.page.current == {{ link.url|attrjs }}}">
           <span x-show="$store.page.current == {{ link.url|attrjs }}">{{ icon(link.icon, size='text-2xl') }} {{ link.name }}</span>
-          <a data-navigo x-show="$store.page.current != {{ link.url|attrjs }}" href="{{ link.url }}">
+          <a x-show="$store.page.current != {{ link.url|attrjs }}" href="{{ link.url }}">
             {{ icon(link.icon, size='text-2xl') }} {{ link.name }}
           </a>
         </li>

@@ -22,19 +22,23 @@ class LogJSErrorView(View):
         except json.JSONDecodeError:
             return HttpResponseBadRequest()
 
-        logger.warning(f"Got JS error: {error['title']}")
-
-        message = f"{error['title']} occurred at {error['url']}"
+        message = ""
+        if settings.DEBUG:
+            message = "[not sending due to DEBUG = True] "
+        message += f"{error['title']} occurred at {error['url']}"
         if filename := error.get("filename"):
             message += f" ({filename})"
         message += f":\n\n{error['detail']}"
 
-        send_mail(
-            subject=f"jew.pizza JS Error: {error['title']}",
-            message=message,
-            from_email=None,
-            recipient_list=[settings.EMAIL_ADDRESS],
-        )
+        logger.warning(f"Got JS error: {message}")
+
+        if not settings.DEBUG:
+            send_mail(
+                subject=f"jew.pizza JS Error: {error['title']}",
+                message=message,
+                from_email=None,
+                recipient_list=[settings.EMAIL_ADDRESS],
+            )
 
         return HttpResponse(status=204)
 

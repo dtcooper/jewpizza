@@ -14,7 +14,7 @@
       <div class="card border-accent border-4 lg:border-[6px] rounded-3xl">
         {% if show.has_banner_img %}
           <figure>
-            <a data-navigo href="{{ url_for('shows:show-list', show=show) }}">
+            <a href="{{ url_for('shows:show-list', show=show) }}">
               <img alt="{{ show.name }}"
                 class="border-accent border-b-4 lg:border-b-[6px]"
                 src="{{ static('shows/images/banners/{}.png'.format(show.code)) }}"
@@ -50,7 +50,7 @@
           {% endif %}
 
           <div class="justify-end card-actions">
-            <a data-navigo class="btn md:btn-lg btn-secondary" href="{{ url_for('shows:show-list', show=show) }}">
+            <a class="btn md:btn-lg btn-secondary" href="{{ url_for('shows:show-list', show=show) }}">
               More Info &amp; {% if episodes %}Other{% endif %} Episodes
             </a>
           </div>

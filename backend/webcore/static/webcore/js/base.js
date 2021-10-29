@@ -1,7 +1,7 @@
 /* global DATA, Alpine, Navigo */
 
 (() => {
-  let router
+  let router, contentScrollerDiv, contentDiv
 
   // Send JS Errors to backend
   async function reportError (title, detail, filename) {
@@ -87,17 +87,16 @@
     }
 
     if (json.redirect) {
-      router._setCurrent(null) // Force reloads
+      router._setCurrent(null) // Force reloads if we never leave the page
       router.navigate(json.redirect)
     } else {
       document.title = (DATA.debug ? '[dev] ' : '') + (json.title ? `${json.title} - ` : '') + 'jew.pizza'
       store.current = url
-      document.getElementById('content').innerHTML = json.content
+      contentDiv.innerHTML = json.content
 
       store.loading = false
       Alpine.store('messages', json.messages)
-      router.updatePageLinks()
-      document.getElementById('content-scroller').scrollTop = 0
+      setTimeout(() => { contentScrollerDiv.scrollTop = 0 }, 2)
     }
   }
 
@@ -112,8 +111,11 @@
   }
 
   document.addEventListener('alpine:init', () => {
-    router = window.router = new Navigo('/')
-    window.router = router
+    window.history.scrollRestoration = 'manual'
+
+    contentScrollerDiv = document.getElementById('content-scroller')
+    contentDiv = document.getElementById('content')
+    router = new Navigo('/')
 
     router.on('*', async ({ url, ...args }) => {
       url = `/${url}`
@@ -122,6 +124,28 @@
       }
       await loadURL(url)
     })
+
+    // Override <a> click events and send to navigo
+    document.addEventListener('click', (e) => {
+      for (let anchor = e.target; anchor && anchor !== this; anchor = anchor.parentNode) {
+        if (anchor.tagName === 'A') {
+          const href = anchor.getAttribute('href')
+          // Open http/mailto/tel links as normal
+          if (href.match(/^(?:https?|mailto|tel):/)) {
+            if (window.location.host !== anchor.host) {
+              // Dynamically add target=_blank for remote links
+              anchor.setAttribute('target', '_blank')
+            }
+          } else {
+            // Otherwise, intercept and route via navigo
+            e.preventDefault()
+            e.stopPropagation()
+            router._setCurrent(null) // Force reloads if we never leave the page
+            router.navigate(href)
+          }
+        }
+      }
+    }, false)
 
     Alpine.store('page', {
       current: DATA.currentPage,

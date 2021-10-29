@@ -29,17 +29,17 @@
         <p class="lg:text-indent mx-2 lg:mx-0 text-lg sm:text-xl" x-data="localizedTimeBlurb">
           Welcome to my very special website. You can catch me live
           <span class="font-bold"><span x-text="showTime">Sun to Thurs nights at 1:30am-2:30am {{ default_tz_abbrev }}</span>
-          on <a class="link-primary link-hover" target="_blank"
+          on <a class="link-primary link-hover"
             href="https://www.iheartradio.ca/newstalk-1010/shows/the-late-showgram-with-jim-richards-1.14645758">The
           Showgram w/ Jim Richards</a></span><span x-text="showTechnicalTime"> (technically Mon to Fri mornings)</span>.
           It airs nationally in Canada, and you can <span class="font-bold">stream it on Toronto-based
-          <a href="https://www.iheartradio.ca/newstalk-1010" class="link-primary link-hover" target="_blank">CFRB
+          <a href="https://www.iheartradio.ca/newstalk-1010" class="link-primary link-hover">CFRB
             NEWSTALK 1010's website</a></span>.
         </p>
 
         <div class="grid xs:grid-cols-2 xs:grid-rows-2 gap-2 sm:block mt-6 lg:mt-8 text-center lg:text-left select-none">
           {% for link in nav_links[1:5] %} {# Skip home (first item) #}
-            <a data-navigo class="btn btn-neutral btn-rounded" href="{{ link.url }}">
+            <a class="btn btn-neutral btn-rounded" href="{{ link.url }}">
               {{ icon(link.icon, size='text-2xl', margin='mr-2') }} {{ link.name }}
             </a>
           {% endfor %}
