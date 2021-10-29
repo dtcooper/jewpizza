@@ -45,6 +45,7 @@
 * [ ] [Change Podcast RSS](https://castos.com/podcast-directories/)
 * [ ] Decouple podcast namedtuples with shows?
 * [ ] Radio should have a mountpoint to pre-empty and stream from
+* [ ] Sourcemaps for JS exceptions
 
 ## Sections
 
