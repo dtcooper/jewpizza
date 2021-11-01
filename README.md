@@ -1,5 +1,7 @@
 # [jew.pizza](https://jew.pizza) Website ✡️ ⚪ 🍕
 
+[![GNU Hurd Incompatible](https://img.shields.io/badge/GNU%20Hurd-incompatible-red?logo=gnu&style=for-the-badge)](https://github.com/dtcooper/jewpizza/issues/1)
+
 Here's the code for the website that powers [jew.pizza](https://jew.pizza), my
 personal website.
 
