@@ -1,5 +1,7 @@
-# aiohttp throws exception with Python 3.10 - https://github.com/aio-libs/aiohttp/issues/5996
-FROM python:3.9
+# aiohttp and aiohttp_sse throws exceptions with Python 3.10
+# - https://github.com/aio-libs/aiohttp/issues/5996
+# - https://github.com/aio-libs/aiohttp-sse/issues/314
+FROM python:3.10
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1

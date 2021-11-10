@@ -7,7 +7,7 @@
 # GET:/test -- test page
 #
 # Publish valid JSON strings to redis channel sse::messages
-# They must have the keys {"type": "<type", "message": ...} with an optional "delay" int/float key
+# They must have the keys {"type": "<type>", "message": ...} with an optional "delay" int/float key
 #
 
 import asyncio

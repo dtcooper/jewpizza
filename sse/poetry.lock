@@ -20,14 +20,21 @@ speedups = ["aiodns", "brotli", "cchardet"]
 
 [[package]]
 name = "aiohttp-sse"
-version = "2.0.0"
+version = "2.2.0"
 description = "Server-sent events  support for aiohttp."
 category = "main"
 optional = false
 python-versions = "*"
+develop = false
 
 [package.dependencies]
 aiohttp = ">=3.0"
+
+[package.source]
+type = "git"
+url = "https://github.com/dtcooper/aiohttp-sse.git"
+reference = "master"
+resolved_reference = "92d66a0ddf3e6273d0727d7429f3bef95540c848"
 
 [[package]]
 name = "aioredis"
@@ -390,8 +397,8 @@ multidict = ">=4.0"
 
 [metadata]
 lock-version = "1.1"
-python-versions = "^3.9"
-content-hash = "e03f9edaf478c3f28428b3037565488eedf094da547c041a82f11d887e4634c8"
+python-versions = "^3.10"
+content-hash = "d159676c9375880ff0a0aaf494e82573cb6273d0647bdae557ec73ef7ad54c96"
 
 [metadata.files]
 aiohttp = [
@@ -468,10 +475,7 @@ aiohttp = [
     {file = "aiohttp-3.8.0-cp39-cp39-win_amd64.whl", hash = "sha256:3c5e9981e449d54308c6824f172ec8ab63eb9c5f922920970249efee83f7e919"},
     {file = "aiohttp-3.8.0.tar.gz", hash = "sha256:d3b19d8d183bcfd68b25beebab8dc3308282fe2ca3d6ea3cb4cd101b3c279f8d"},
 ]
-aiohttp-sse = [
-    {file = "aiohttp-sse-2.0.0.tar.gz", hash = "sha256:547e1eaa129749f090d02b31956215edbcde74ce99721f5f0ac902a9ccb1202e"},
-    {file = "aiohttp_sse-2.0.0-py3-none-any.whl", hash = "sha256:d0c6fbe655f590ab70800714121fa1f80f7a88a74ca8fbd0140a7dfb0b327fe2"},
-]
+aiohttp-sse = []
 aioredis = [
     {file = "aioredis-2.0.0-py3-none-any.whl", hash = "sha256:9921d68a3df5c5cdb0d5b49ad4fc88a4cfdd60c108325df4f0066e8410c55ffb"},
     {file = "aioredis-2.0.0.tar.gz", hash = "sha256:3a2de4b614e6a5f8e104238924294dc4e811aefbe17ddf52c04a93cbf06e67db"},

@@ -1,4 +1,4 @@
-<div class="max-w-screen-xl mx-auto w-full relative">
+<div class="max-w-screen-2xl mx-auto w-full relative">
   <div
     x-cloak x-data="jewippy"
     :class="{
@@ -16,7 +16,7 @@
       {{ icon('bx:bx-window-close', size='text-2xl', margin=None) }}
     </button>
     <button
-      x-data x-show="!open" @click="open = true"
+      x-data x-show="!open" @click="open = true; setImg('flirt'); queueImg(['idle', 'idleAlt'], true)"
       class="pointer-events-auto bg-primary hover:bg-primary-focus text-primary-content absolute bottom-0 right-1.5 p-1.5 animate-bounce rounded-xl umami--click--jewippy-expand"
     >
       {{ icon('fa-solid:glasses', size='text-5xl', margin=None) }}

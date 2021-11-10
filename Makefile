@@ -1,10 +1,12 @@
-.PHONY: pre-commit build shell show-outdated deploy up down ssh
+.PHONY: pre-commit build shell show-outdated export-show-fixtures deploy up down ssh
 
 COMPOSE:=docker compose
 SERVER:=jew.pizza
 SERVER_NODENAME:=jewpizza
 SERVER_PROJECT_DIR:=dev.jew.pizza
 SHELL:=/bin/bash
+SHOW_FIXTURE_MODELS=episode showdate
+SHOW_FIXTURE_DIR=backend/shows/fixtures/shows
 
 pre-commit:
 	@$(COMPOSE) run --rm --no-deps app sh -c '\
@@ -38,6 +40,19 @@ show-outdated:
 	@$(COMPOSE) run --rm --no-deps sse sh -c '\
 		echo "============ Backend (sse) =============";\
 		poetry show -o'
+
+export-show-fixtures:
+	@for model in $(SHOW_FIXTURE_MODELS); do \
+		echo "Exporting $${model}s..." ; \
+		$(COMPOSE) run --rm app ./manage.py dumpdata --indent=2 --format=json --natural-primary --natural-foreign \
+			"shows.$${model}" > "$(SHOW_FIXTURE_DIR)/$${model}s.json"; \
+	done
+# @$(COMPOSE) run --rm app ./manage.py dumpdata --indent=2 --format=json --natural-primary --natural-foreign \
+# 	shows.episode > backend/shows/fixtures/shows/episodes.json
+# @echo 'Exporting show dates...'
+# @$(COMPOSE) run --rm app ./manage.py dumpdata --indent=2 --format=json --natural-primary --natural-foreign \
+# 	shows.showdate > backend/shows/fixtures/shows/show_dates.json
+#@echo '... fixtures exported!'
 
 deploy:
 	@if [ $(shell uname -n) = $(SERVER_NODENAME) ]; then \

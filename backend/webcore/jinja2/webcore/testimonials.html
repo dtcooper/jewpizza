@@ -8,23 +8,35 @@
       - another quote from someone famous brushing me off?
     #}
     {%
-      for quote, person in shuffle([
-        ('Ustoppable.', 'Rick Moranis'),
-        ("You're a psycho […]!", 'George Stroumboulopoulos'),
-        ('Uh, nice to meet you.', 'Malcolm Gladwell'),
-        ("We're very proud of you, David.", "Clara Cooper (David's Mother)"),
+      for quote, person, link in shuffle([
+        ('Ustoppable.', 'Rick Moranis', "https://www.imdb.com/name/nm0001548/"),
+        ("You're a psycho […]!", 'George Stroumboulopoulos', "https://twitter.com/strombo"),
+        ('Uh, nice to meet you.', 'Malcolm Gladwell', "https://www.gladwellbooks.com/"),
+        ("We're very proud of you, David.", "Clara Cooper (David's Mother)", "https://www.jfandcs.com/"),
         (('David, thank you for calling State Farm regarding your coverage. We are '
           'here to help you and your family with your insurance coverage needs and '
           'to answer any questions you have regarding eligibility and coverage.'),
-          'Michelle, Insurance Agent'),
-          ("Sure, I'll take a photo with you.", 'The Fonz, Henry Winkler'),
+          'Michelle, Insurance Agent', "https://www.statefarm.com/"),
+          ("Sure, I'll take a photo with you.", 'The Fonz, Henry Winkler', "https://www.imdb.com/name/nm0001857/"),
+        ("Canada's late night radio just got worse!", 'Ad Copy for Failed Radio Pilot', none),
+        (("I've reviewed and attached your recent test results to this message. Your blood "
+          "test for syphilis came back as a false-positive result. This can occur either "
+          "because it’s too early to show a true-positive result or other antibodies in "
+          "your body triggered a false-positive reading. Until we confirm these results we "
+          "recommend consistent condom use and practicing safe sex. If you develop any "
+          "symptoms (sores on the genitals, rash, cold/flu-like symptoms), please schedule "
+          "an office visit with a provider."), 'Hadijah, RN, One Medical Group', "https://www.onemedical.com/"),
       ])
     %}
-      <div class="border-l-primary border-l-4 lg:border-l-[6px] pl-4 py-1 text-lg sm:text-xl md:text-2xl lg:text-3xl space-y-4">
+      <div class="{{ loop.cycle('border-l-primary', 'border-l-secondary') }} border-l-4 lg:border-l-[6px] pl-4 py-1 text-lg sm:text-xl md:text-2xl lg:text-3xl space-y-4">
         <div class="italic">"{{ quote }}"</div>
         <div class="flex">
-          <span class="ml-5 mr-2">&mdash;</span>
-          <span>{{ person }}</span>
+          <span class="ml-5 mr-2 text-base-300">&mdash;</span>
+          {% if link %}
+            <a class="link link-hover link-accent" href="{{ link }}">{{ person }}</a>
+          {% else %}
+            <span class="text-accent">{{ person }}</span>
+          {% endif %}
         </div>
       </div>
     {% endfor %}

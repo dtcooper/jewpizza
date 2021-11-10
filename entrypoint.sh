@@ -31,7 +31,6 @@ if [ -z "$SECRET_KEY" ]; then
     exit 1
 fi
 
-
 collectstatic () {
     npm --prefix=../frontend run build
     ./manage.py collectstatic -v0 --noinput --clear
@@ -50,7 +49,7 @@ migrate_and_init_db () {
         DJANGO_SUPERUSER_PASSWORD=cooper ./manage.py createsuperuser --noinput --username dave --email 'david@jew.pizza'
     fi
 
-    ./manage.py loaddata shows/show_dates.json shows/episodes.json
+    ./manage.py loaddata shows/showdates.json shows/episodes.json
 }
 
 init_umami () {
