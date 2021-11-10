@@ -34,7 +34,7 @@ aiohttp = ">=3.0"
 type = "git"
 url = "https://github.com/dtcooper/aiohttp-sse.git"
 reference = "master"
-resolved_reference = "92d66a0ddf3e6273d0727d7429f3bef95540c848"
+resolved_reference = "7e9d9dbdf4a40645ecd0da8891d8098211974bd5"
 
 [[package]]
 name = "aioredis"
