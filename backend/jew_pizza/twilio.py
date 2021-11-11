@@ -1,4 +1,5 @@
 from functools import wraps
+import logging
 
 from twilio.base.exceptions import TwilioRestException
 from twilio.request_validator import RequestValidator
@@ -15,6 +16,7 @@ from phonenumber_field.phonenumber import PhoneNumber
 
 twilio_client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
 twilio_validator = RequestValidator(settings.TWILIO_AUTH_TOKEN)
+logger = logging.getLogger(f'jewpizza.{__file__}')
 
 
 def send_sms(message, phone_number):
@@ -28,6 +30,7 @@ def send_sms(message, phone_number):
         twilio_client.messages.create(to=phone_number, from_=from_number, body=message)
         return True
     except TwilioRestException:
+        logger.exception('Error sending test message')
         return False
 
 

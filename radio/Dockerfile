@@ -3,6 +3,8 @@ FROM savonet/liquidsoap:v2.0.0
 ENV SCRIPT_NAME=radio
 
 ARG WAIT_FOR_IT_VERSION=81b1373f \
+    # Problem with 2.1.6 @ https://github.com/gorakhargosh/watchdog/issues/855
+    WATCHDOG_VERSION=2.1.5 \
     DEBUG=0
 
 USER root
@@ -22,8 +24,7 @@ RUN apt-get update \
             rlwrap \
         ; fi) \
     && if [ "$DEBUG" -a "$DEBUG" != '0' ]; then pip3 install \
-        PyYAML \
-        watchdog \
+        "watchdog[watchmedo]==$WATCHDOG_VERSION" \
     ; fi \
     && rm -rf /var/lib/apt/lists/*
 

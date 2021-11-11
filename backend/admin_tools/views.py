@@ -71,9 +71,10 @@ class SendTextMessageView(AdminFormView):
         audience = form.cleaned_data["audience"]
         if audience == "single":
             phone_number = form.cleaned_data["phone_number"]
-            send_sms(message, phone_number)
-
-            messages.success(self.request, "Your message has been sent!")
+            if send_sms(message, phone_number):
+                messages.success(self.request, "Your message has been sent!")
+            else:
+                messages.error(self.request, 'Error sending text message. Check server logs.')
         else:
             # XXX TODO
             messages.warning(self.request, "Sign up messages not yet implemented.")
