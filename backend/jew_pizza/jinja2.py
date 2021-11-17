@@ -163,7 +163,7 @@ class RedisBytecodeCache(BytecodeCache):
 
 
 def autoescape(filename):
-    return any(filename.endswith(ext) for ext in (".xml", ".html"))
+    return any(filename.endswith(ext) for ext in (".xml", ".html")) if isinstance(filename, str) else True
 
 
 def create_environment(**options):

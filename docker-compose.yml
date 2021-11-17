@@ -72,7 +72,7 @@ services:
 
   db:
     <<: *service-defaults
-    image: library/postgres:14.0-alpine
+    image: library/postgres:14.1-alpine
     volumes:
       - postgres_data:/var/lib/postgresql/data/
       - ./init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
