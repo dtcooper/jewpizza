@@ -15,6 +15,7 @@ if [ "$#" != 0 ]; then
     exec "$@"
 else
     wait-for-it -t 0 redis:6379
+    export SECRET_KEY
 
     if [ "$DEBUG" -a "$DEBUG" != '0' ]; then
         exec watchmedo auto-restart --directory=./ --pattern=*.py -- python sse.py

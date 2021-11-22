@@ -99,7 +99,7 @@ services:
       - DATABASE_URL=postgresql://postgres:postgres@db:5432/umami
       - DATABASE_TYPE=postgresql
       # SECRET_KEY needs to be set in order to run this container
-      - "HASH_SALT=${SECRET_KEY}"
+      - "HASH_SALT=${SECRET_KEY:?SECRET_KEY needs to be set. See .env file.}"
       - "TZ=${TIMEZONE:-US/Eastern}"
 
   logs:

@@ -1,0 +1,58 @@
+{% extends 'admin_tools/base.html' %}
+
+{% block extra_head %}
+  <script src="{{ static('vendor/js/alpinejs/dist/cdn.min.js') }}" defer></script>
+  <script>
+    const MAX_MESSAGES = 50
+    const SSE_URL = {{ (config.SSE_URL.removesuffix('/') + '/stats?secret_key=' + secret_key)|tojson }}
+
+    document.addEventListener('alpine:init', () => {
+      Alpine.data('sse', () => ({
+        connected: false,
+        eventsource: null,
+        num_connected: 0,
+        messages: [],
+        init() {
+          this.eventsource = new EventSource(SSE_URL)
+          this.eventsource.addEventListener('open', () => {
+            this.connected = true
+          })
+          this.eventsource.addEventListener('error', () => {
+            this.num_connected = 0
+            this.connected = false
+          })
+          this.eventsource.addEventListener('message', (e) => {
+            const msg = JSON.parse(e.data)
+            if (msg.type == 'stats') {
+              this.num_connected = msg.message.num_connected
+            } else {
+              this.messages.length = Math.min(this.messages.length, MAX_MESSAGES - 1)
+              this.messages.unshift(["" + new Date(), msg])
+            }
+          })
+        }
+      }))
+    })
+  </script>
+  <style>
+    .connected {
+      color: forestgreen;
+    }
+    .disconnected {
+      color: darkred;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div x-data="sse">
+    Status: <span :class="{connected: connected, disconnected: !connected}">&#x25cf;</span>
+      <span x-text="connected ? 'Connected' : 'Disconnected'"></span><br>
+    Clients: <span x-text="connected ? num_connected : 'N/A'">0</span><br>
+
+    <div x-show="connected">
+      Last <span x-text="messages.length"></span> Messages:<br>
+      <pre x-text="JSON.stringify(messages, null, 2)"></pre>
+    </div>
+  </div>
+{% endblock %}

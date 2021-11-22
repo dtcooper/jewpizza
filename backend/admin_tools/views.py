@@ -1,3 +1,6 @@
+import hashlib
+
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.messages.views import SuccessMessageMixin
@@ -20,11 +23,11 @@ NAVIGATION_VIEWS = (
     ("container-status", "Container Status"),
     ("send-text-message", "Send Text Message"),
     ("send-email", "Send Email"),
+    ("sse-status", "SSE Status"),
 )
 NAVIGATION_EXT_LINKS = (
     (lambda: config.LOGS_URL, "Service Logs"),
     (lambda: config.UMAMI_URL, "Analytics"),
-    (lambda: f"{config.SSE_URL.removesuffix('/')}/test", "SSE Test"),
 )
 
 
@@ -74,7 +77,7 @@ class SendTextMessageView(AdminFormView):
             if send_sms(message, phone_number):
                 messages.success(self.request, "Your message has been sent!")
             else:
-                messages.error(self.request, 'Error sending text message. Check server logs.')
+                messages.error(self.request, "Error sending text message. Check server logs.")
         else:
             # XXX TODO
             messages.warning(self.request, "Sign up messages not yet implemented.")
@@ -114,3 +117,14 @@ class ContainerStatusView(AdminTemplateView):
                     request, f"An error occurred while restarting the {container} container. Check the server logs."
                 )
         return redirect("admin-tools:container-status")
+
+
+class SSEStatusView(AdminTemplateView):
+    template_name = "admin_tools/sse_status.html"
+    title = "SSE Status"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # At least if the secret key is exposed somehow, it's a SHA256 of it, not the actual key
+        context["secret_key"] = hashlib.sha256(settings.SECRET_KEY.encode()).hexdigest()
+        return context

@@ -105,7 +105,7 @@ def list_containers(fail_silently=False):
 
 def send_sse_message(message_type, message, delay=None):
     if not isinstance(message, dict):
-        raise TypeError('message must be a dict')
+        raise TypeError("message must be a dict")
     message = json.dumps({"type": message_type, "message": message, "delay": delay})
     redis = get_redis_connection()
     redis.publish(REDIS_PUBSUB_CHANNEL, message)

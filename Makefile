@@ -1,4 +1,4 @@
-.PHONY: pre-commit build shell show-outdated export-show-fixtures deploy up down ssh
+.PHONY: pre-commit build build-no-cache shell show-outdated export-show-fixtures deploy up down ssh
 
 COMPOSE:=docker compose
 SERVER:=jew.pizza
@@ -26,6 +26,10 @@ pre-commit:
 build:
 	@$(COMPOSE) pull
 	@$(COMPOSE) build --pull --build-arg GIT_REV=$(shell git describe --tags --always --dirty)
+
+build-no-cache:
+	@$(COMPOSE) pull
+	@$(COMPOSE) build --no-cache --pull --build-arg GIT_REV=$(shell git describe --tags --always --dirty)
 
 shell:
 	@$(COMPOSE) run --rm --service-ports --use-aliases app bash || true
