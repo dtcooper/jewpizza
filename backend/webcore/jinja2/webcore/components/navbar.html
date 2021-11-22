@@ -1,5 +1,5 @@
 <div>
-  <div class="navbar w-full min-h-[3.5rem] xs:min-h-[4.75rem] sm:min-h-[3.5rem] xl:min-h-[4.75rem] bg-base-100">
+  <div class="navbar w-full min-h-[3.25rem] xs:min-h-[4.5rem] sm:min-h-[3.25rem] xl:min-h-[4.5rem] bg-base-200">
 
     {#- Copy and image #}
     {# TODO: Redo, why bother struggling tof it in MD when we can just use the dropdown #}
@@ -8,7 +8,7 @@
       <{% if request.user.is_superuser %}a href="{{ url_for('admin:index', _external=true) }}" tabindex="-1" no-spa-routing{% else %}div{% endif %} class="overflow-hidden">
         <img
           src="{{ static('webcore/images/david-headshot.jpg') }}"
-          class="animate-spin-custom h-12 w-12 mr-2 xl:h-16 xl:w-16 xl:mr-3 rounded-full border-[3px] xl:border-4 border-secondary select-none drag-none"
+          class="animate-spin-custom h-12 w-12 mr-2 xl:h-14 xl:w-14 2xl:h-16 2xl:w-16 xl:mr-3 rounded-full border-[3px] xl:border-4 border-secondary select-none drag-none"
           style="{{ random_spin_style(min=4000, max=5500, direction='normal') }}"
         >
         </{% if request.user.is_superuser %}a{% else %}div{% endif %}>

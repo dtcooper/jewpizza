@@ -97,7 +97,8 @@ module.exports = {
         // 'error': '#ff5724',
         '--border-btn': '0.1875rem',
         '--btn-text-case': 'none',
-        '--rounded-btn': '0'
+        '--rounded-btn': '0',
+        '--navbar-padding': '0.375rem'
       }
     }]
   }

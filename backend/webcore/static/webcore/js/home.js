@@ -2,6 +2,7 @@
 
 document.addEventListener('alpine:init', () => {
   Alpine.data('localizedTimeBlurb', () => ({
+    // TODO DATA.timezone
     userTZ: DATA.test_tz || moment.tz.guess() || 'US/Eastern',
     showNightBefore: false,
     showNight: false,

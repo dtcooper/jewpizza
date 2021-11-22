@@ -8,6 +8,9 @@ SHELL:=/bin/bash
 SHOW_FIXTURE_MODELS=episode showdate
 SHOW_FIXTURE_DIR=backend/shows/fixtures/shows
 
+up:
+	@$(COMPOSE) up --remove-orphans $(shell source .env; if [ -z "$$DEBUG" -o "$$DEBUG" = 0 ]; then echo "-d"; fi)
+
 pre-commit:
 	@$(COMPOSE) run --rm --no-deps app sh -c '\
 		echo "=============== standard ===============";\
@@ -64,9 +67,6 @@ deploy:
 	else \
 		git push && ssh $(SERVER) 'cd $(SERVER_PROJECT_DIR) && make deploy'; \
 	fi
-
-up:
-	@$(COMPOSE) up --remove-orphans $(shell source .env; if [ -z "$$DEBUG" -o "$$DEBUG" = 0 ]; then echo "-d"; fi)
 
 down:
 	@$(COMPOSE) down --remove-orphans
