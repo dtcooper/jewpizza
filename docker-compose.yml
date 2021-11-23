@@ -90,7 +90,7 @@ services:
 
   umami:
     <<: *service-defaults
-    image: ghcr.io/mikecao/umami:postgresql-cfa220c
+    image: ghcr.io/mikecao/umami:postgresql-b756fcd
     depends_on:
       - db
     ports:
