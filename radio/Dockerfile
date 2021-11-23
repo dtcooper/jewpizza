@@ -3,8 +3,6 @@ FROM savonet/liquidsoap:v2.0.0
 ENV SCRIPT_NAME=radio
 
 ARG WAIT_FOR_IT_VERSION=81b1373f \
-    # Problem with 2.1.6 @ https://github.com/gorakhargosh/watchdog/issues/855
-    WATCHDOG_VERSION=2.1.5 \
     DEBUG=0
 
 USER root
@@ -18,14 +16,11 @@ RUN apt-get update \
         wget \
         # Dev requirements
         $(if [ "$DEBUG" -a "$DEBUG" != '0' ]; then echo \
+            inotify-tools \
             netcat-traditional \
-            python3-pip \
             python3-pygments \
             rlwrap \
         ; fi) \
-    && if [ "$DEBUG" -a "$DEBUG" != '0' ]; then pip3 install \
-        "watchdog[watchmedo]==$WATCHDOG_VERSION" \
-    ; fi \
     && rm -rf /var/lib/apt/lists/*
 
 RUN wget -qO /usr/local/bin/wait-for-it "https://raw.githubusercontent.com/vishnubob/wait-for-it/${WAIT_FOR_IT_VERSION}/wait-for-it.sh" \

@@ -31,14 +31,14 @@ if [ -z "$SECRET_KEY" ]; then
     exit 1
 fi
 
-collectstatic () {
+collect_static () {
     npm --prefix=../frontend run build
     ./manage.py collectstatic -v0 --noinput --clear
 }
 
-compressstatic () {
+compress_static () {
     echo "$(date) - Compressing files using brotli and gzip..."
-    find /static_root -type f -exec brotli -q 11 '{}' \; -exec gzip -9 --keep '{}' \;
+    find /static_root -type f -exec echo Compressing '{}...' \; -exec brotli -q 11 '{}' \; -exec gzip -9 --keep '{}' \;
     echo "$(date) - Done compressing files"
 }
 
@@ -105,7 +105,7 @@ else
     fi
 
     if [ -z "$DEBUG" ]; then
-        collectstatic &
+        collect_static &
     fi
 
     migrate_and_init_db &
@@ -122,7 +122,7 @@ else
         fi
 
         wait
-        compressstatic &  # This can happen after startup
+        compress_static &  # This can happen after startup
         exec gunicorn \
                 $GUNICORN_EXTRA_ARGS \
                 --forwarded-allow-ips '*' \
