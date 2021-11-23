@@ -21,9 +21,9 @@
   },
   "homepage": "https://github.com/dtcooper/jewpizza#readme",
   "dependencies": {
-    "@alpinejs/persist": "^3.5.1",
+    "@alpinejs/persist": "^3.5.2",
     "@tailwindcss/typography": "^0.4.1",
-    "alpinejs": "^3.5.1",
+    "alpinejs": "^3.5.2",
     "daisyui": "^1.16.2",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.34",
