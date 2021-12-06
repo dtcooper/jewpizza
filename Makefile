@@ -27,12 +27,12 @@ pre-commit:
 		exit 0'
 
 build:
-	@$(COMPOSE) pull
-	@$(COMPOSE) build --pull --build-arg GIT_REV=$(shell git describe --tags --always --dirty)
+	$(COMPOSE) pull
+	$(COMPOSE) build --pull --build-arg GIT_REV=$(shell git describe --tags --always --dirty)
 
 build-no-cache:
-	@$(COMPOSE) pull
-	@$(COMPOSE) build --no-cache --pull --build-arg GIT_REV=$(shell git describe --tags --always --dirty)
+	$(COMPOSE) pull
+	$(COMPOSE) build --no-cache --pull --build-arg GIT_REV=$(shell git describe --tags --always --dirty)
 
 shell:
 	@$(COMPOSE) run --rm --service-ports --use-aliases app bash || true
