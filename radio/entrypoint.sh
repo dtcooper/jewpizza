@@ -32,9 +32,8 @@ else
     wait-for-it -t 0 app:8000
     wait-for-it -t 0 redis:6379
 
-    download_script
-
     if [ "$DEBUG" -a "$DEBUG" != '0' -a -d /watch ]; then
+        # Auto-reload on changes to backend/radio/jinja2/radio/*.liq (mounted as /watch)
         LIQUIDSOAP_PID=
 
         exit_handler () {
@@ -47,15 +46,16 @@ else
         trap exit_handler INT TERM
 
         while true; do
+            download_script
             liquidsoap "$SCRIPT" &
             LIQUIDSOAP_PID="$!"
-            inotifywait -qq --includei '\.liq$' -e modify -e move -e create -e delete -e attrib /watch/
-            echo 'Detecting change in script. Restarting Liquidsoap.'
+            inotifywait -qq -e modify -e move -e create -e delete -e attrib /watch/
+            echo 'Detecting change in .liq file. Restarting Liquidsoap.'
             kill "$LIQUIDSOAP_PID"
             wait
-            download_script
         done
     else
+        download_script
         exec liquidsoap "$SCRIPT"
     fi
 fi

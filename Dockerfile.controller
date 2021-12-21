@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 
-ARG COMPOSE_VERSION=2.0.1
+ARG COMPOSE_VERSION=2.2.2
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \

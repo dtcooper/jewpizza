@@ -6,6 +6,7 @@
       - one from Jim
       - make person names links where applicable
       - another quote from someone famous brushing me off?
+      - Just make them or a macro, and not embedded in the for loop to allow better formatting, and randomize after
     #}
     {%
       for quote, person, link in shuffle([
@@ -21,12 +22,16 @@
         ("Canada's late night radio just got worse!", 'Ad Copy for Failed Radio Pilot', none),
         (("I've reviewed and attached your recent test results to this message. Your blood "
           "test for syphilis came back as a false-positive result. This can occur either "
-          "because it’s too early to show a true-positive result or other antibodies in "
+          "because it's too early to show a true-positive result or other antibodies in "
           "your body triggered a false-positive reading. Until we confirm these results we "
           "recommend consistent condom use and practicing safe sex. If you develop any "
           "symptoms (sores on the genitals, rash, cold/flu-like symptoms), please schedule "
           "an office visit with a provider."), 'Hadijah, RN, One Medical Group', "https://www.onemedical.com/"),
         ("Fuck off, David!", "Tony Five from England", none),
+        (("[W]ould it be possible to take down our recording of your [radio show]? "
+          "No worries if not! […] I'd prefer it the whole thing we're deleted but "
+          "I understand if you don't like to do that. […] Hey David, I just wanted to "
+          "follow up and see if you’d be down to take the episode down"), "Ginny Hogan", "https://twitter.com/ginnyhogan_"),
       ])
     %}
       <div class="{{ loop.cycle('border-l-primary', 'border-l-secondary') }} border-l-4 lg:border-l-[6px] pl-4 py-1 text-lg sm:text-xl md:text-2xl lg:text-3xl space-y-4">

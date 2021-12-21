@@ -46,6 +46,7 @@
 * [ ] Decouple podcast namedtuples with shows?
 * [ ] Radio should have a mountpoint to pre-empty and stream from
 * [ ] Sourcemaps for JS exceptions
+* [ ] Upgrade Django 4, Tailwind 3
 
 ## Sections
 
