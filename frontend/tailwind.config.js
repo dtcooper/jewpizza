@@ -1,8 +1,6 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
-const colors = require('tailwindcss/colors')
 const cyberpunkTheme = require('daisyui/colors/themes')['[data-theme=cyberpunk]']
 
-delete colors.lightBlue // Avoid a tailwind deprecation warning
 
 module.exports = {
   mode: 'jit',
@@ -11,23 +9,20 @@ module.exports = {
     removeDeprecatedGapUtilities: true,
     purgeLayersByDefault: true
   },
-  purge: {
-    enabled: true,
-    content: [
-      '../backend/**/jinja2/*.html',
-      '../backend/**/jinja2/**/*.html',
-      '../backend/**/static/js/*.js',
-      '../backend/**/templates/*.html',
-      '../backend/**/templates/**/*.html'
-    ],
-    safelist: [
-      'animate-spin',
-      'alert-success',
-      'alert-info',
-      'alert-warning',
-      'alert-error'
-    ]
-  },
+  content: [
+    '../backend/**/jinja2/*.html',
+    '../backend/**/jinja2/**/*.html',
+    '../backend/**/static/js/*.js',
+    '../backend/**/templates/*.html',
+    '../backend/**/templates/**/*.html'
+  ],
+  safelist: [
+    'animate-spin',
+    'alert-success',
+    'alert-info',
+    'alert-warning',
+    'alert-error'
+  ],
   theme: {
     screens: {
       xs: '375px',
@@ -40,8 +35,7 @@ module.exports = {
         jewippy: ['"Pixelated MS Sans Serif"', 'Arial', 'sans-serif']
       },
       colors: {
-        'base-alt': '#ffdfad',
-        ...colors
+        'base-alt': '#ffdfad'
       },
       borderWidth: {
         3: '3px'

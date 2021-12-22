@@ -50,31 +50,29 @@
     }
   }
 
-  @variants {
-    .z-max {
-        z-index: 9999;
-    }
+  .z-max {
+      z-index: 9999;
+  }
 
-    .text-indent {
-        text-indent: 2rem;
-    }
+  .text-indent {
+      text-indent: 2rem;
+  }
 
-    .underline-wavy {
-        text-decoration-style: wavy;
-        text-underline-offset: 0.25em;
-        text-decoration-thickness: 0.1em;
-    }
+  .underline-wavy {
+      text-decoration-style: wavy;
+      text-underline-offset: 0.25em;
+      text-decoration-thickness: 0.1em;
+  }
 
-    .drag-none {
-        -webkit-user-drag: none;
-        -moz-user-drag: none;
-        -o-user-drag: none;
-        user-drag: none;
-    }
+  .drag-none {
+      -webkit-user-drag: none;
+      -moz-user-drag: none;
+      -o-user-drag: none;
+      user-drag: none;
+  }
 
-    .font-smoothing-none {
-      -webkit-font-smoothing: none;
-    }
+  .font-smoothing-none {
+    -webkit-font-smoothing: none;
   }
 }
 
