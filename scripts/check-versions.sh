@@ -44,6 +44,10 @@ compare () {
     fi
 }
 
+if [ -z "$GITHUB_API_TOKEN" ]; then
+    echo -e "\x1B[91mWarning: GITHUB_API_TOKEN not set\x1B[0m"
+fi
+
 POSTGRES_LOCAL="$(yq -r .services.db.image docker-compose.yml | sed 's/^library\/postgres:\(.*\)-alpine/\1/')"
 POSTGRES_UPSTREAM="$(lastversion postgres/postgres)"
 compare PostgreSQL "$POSTGRES_LOCAL" "$POSTGRES_UPSTREAM" 1

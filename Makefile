@@ -39,7 +39,7 @@ shell:
 
 show-outdated:
 	@echo 'Showing outdated dependencies... (empty means none)'
-	@$(COMPOSE) run --rm --no-deps app sh -c '\
+	@$(COMPOSE) run --rm --no-deps -e "GITHUB_API_TOKEN=$$GITHUB_API_TOKEN" app sh -c '\
 		echo "============ Misc Dependencies =========";\
 		../scripts/check-versions.sh;\
 		echo "============ Frontend (app) ============";\
