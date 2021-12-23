@@ -17,6 +17,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash \
         nodejs \
         # Dev requirements
         $(if [ "$DEBUG" -a "$DEBUG" != '0' ]; then echo \
+            jq \
             less \
             nano \
             netcat \
@@ -47,7 +48,7 @@ RUN npm --prefix=../frontend install $(if [ -z "$DEBUG" -o "$DEBUG" = '0' ]; the
 
 COPY . /app/
 
-ENTRYPOINT ["/app/entrypoint.sh"]
+ENTRYPOINT ["/app/backend/entrypoint.sh"]
 CMD []
 
 ARG GIT_REV=unknown

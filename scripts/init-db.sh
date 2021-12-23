@@ -1,7 +1,11 @@
 #!/bin/sh
 
-# Initialize postgres DB for umami (mounts automatically to postgres container)
+if [ ! -f /.dockerenv ]; then
+    echo 'Must run in docker container'
+    exit 1
+fi
 
+# Initialize postgres DB for umami (mounts automatically to postgres container)
 set -e
 
 UMAMI_SQL_URL='https://raw.githubusercontent.com/mikecao/umami/9b1a75fd9/sql/schema.postgresql.sql'

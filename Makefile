@@ -38,8 +38,10 @@ shell:
 	@$(COMPOSE) run --rm --service-ports --use-aliases app bash || true
 
 show-outdated:
-	@echo 'Showing outdated dependencies... (empty for none)'
+	@echo 'Showing outdated dependencies... (empty means none)'
 	@$(COMPOSE) run --rm --no-deps app sh -c '\
+		echo "============ Misc Dependencies =========";\
+		../scripts/check-versions.sh;\
 		echo "============ Frontend (app) ============";\
 		npm --prefix=../frontend outdated;\
 		echo "============ Backend (app) =============";\

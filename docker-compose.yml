@@ -4,6 +4,7 @@ x-service-defaults: &service-defaults
 x-app-template: &app-template
   build:
     context: .
+    dockerfile: backend/Dockerfile
     args:
       - "DEBUG=${DEBUG:-0}"
   volumes:
@@ -75,7 +76,7 @@ services:
     image: library/postgres:14.1-alpine
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-      - ./init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
+      - ./scripts/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
     environment:
       - POSTGRES_PASSWORD=postgres
       - "TZ=${TIMEZONE:-US/Eastern}"
