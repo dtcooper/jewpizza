@@ -188,6 +188,7 @@ CACHES = {
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
             "CONNECTION_POOL_KWARGS": {"max_connections": 10},
+            "PARSER_CLASS": "redis.connection.HiredisParser",
         },
         "KEY_PREFIX": "cache",
     }
@@ -210,6 +211,7 @@ TIME_ZONE = env("TIMEZONE", default="US/Eastern")
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
+USE_DEPRECATED_PYTZ = True
 
 STATIC_URL = "/static/"
 STATIC_ROOT = "/static_root"
@@ -265,7 +267,7 @@ CONSTANCE_ADDITIONAL_FIELDS = {
 CONSTANCE_CONFIG = {
     "ENABLE_JEWIPPY": (True, "Enable jewippy at bottom of page"),
     "ENABLE_PLAYER": (False, "Enable audio player"),
-    "ENABLE_TEST_NOTIFICATIONS": (False, "Enable test notifications on home page for superuser only."),
+    "ENABLE_TEST_NOTIFICATIONS": (False, "Enable test notifications on home page (for superuser only)"),
     "HIDDEN_IMG_MODE": (False, "Enable hidden image mode (for development in public, to not look so awkward)"),
     "FACEBOOK_NAME": ("dtcooper", "Social media account name for Facebook", "char"),
     "INSTAGRAM_NAME": ("dtcooper", "Social media account name for Instagram", "char"),
