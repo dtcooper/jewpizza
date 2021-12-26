@@ -16,8 +16,8 @@
         class="flex flex-col items-start sm:flex-row sm:items-baseline sm:space-x-2"
 
       >
-        <p class="text-xl xs:text-2xl sm:text-3xl lg:text-[length:min(3rem,2.6vw)] font-bold italic">David Cooper</p>
-        <p class="text-sm xs:text-lg sm:text-2xl lg:text-[length:min(1.875rem,1.9vw)] italic">Radio Personality</p>
+        <p class="text-xl xs:text-2xl sm:text-3xl lg:text-[length:min(3rem,2.6vw)] font-bold italic{% if config.HIDDEN_IMG_MODE %} bg-base-content{% endif %}">David Cooper</p>
+        <p class="text-sm xs:text-lg sm:text-2xl lg:text-[length:min(1.875rem,1.9vw)] italic{% if config.HIDDEN_IMG_MODE %} bg-base-content{% endif %}">Radio Personality</p>
       </{% if request.user.is_superuser %}a{% else %}div{% endif %}>
     </div>
 

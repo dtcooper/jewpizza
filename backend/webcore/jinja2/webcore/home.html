@@ -13,7 +13,7 @@
   <div class="hero h-full">
     <div class="flex-col hero-content max-w-screen-lg lg:flex-row-reverse lg:rounded-3xl">
       <div class="flex flex-col lg:flex-col-reverse gap-y-3 items-center">
-        <h1 class="italic text-xl md:text-2xl lg:text-xl font-bold">David Cooper <small class="font-normal">Radio Personality</small></h1>
+        <h1 class="italic text-xl md:text-2xl lg:text-xl font-bold{% if config.HIDDEN_IMG_MODE %} bg-base-content{% endif %}">David Cooper <small class="font-normal">Radio Personality</small></h1>
         <div class="overflow-hidden">
           <img
             src="{{ static('webcore/images/david-headshot.jpg') }}" style="{{ random_spin_style(min=4000, max=5500, direction='normal') }}"
@@ -23,7 +23,7 @@
       </div>
       <div>
         <h2 class="mb-6 sm:mb-8 lg:mb-10 text-2xl sm:text-3xl lg:text-5xl font-bold italic text-center lg:text-left">
-          Welcome to <span class="text-accent underline underline-wavy">jew.pizza</span>
+          Welcome to <span class="text-accent underline underline-wavy{% if config.HIDDEN_IMG_MODE %} bg-accent{% endif %}">jew.pizza</span>
         </h2>
 
         <p class="lg:text-indent mx-2 lg:mx-0 text-lg sm:text-xl" x-data="localizedTimeBlurb">

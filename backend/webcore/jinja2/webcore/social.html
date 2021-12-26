@@ -23,17 +23,10 @@
         ('Substack', 'simple-icons:substack', 'https://{}.substack.com/'.format(config.SUBSTACK_NAME)),
         ('Facebook', 'simple-icons:facebook', 'https://www.facebook.com/{}'.format(config.FACEBOOK_NAME)),
         ('Tiktok', 'simple-icons:tiktok', 'https://www.tiktok.com/@{}'.format(config.TIKTOK_NAME)),
-        ('Email', 'ic:outline-email', '_EMAIL')
+        ('Twitch', 'simple-icons:twitch', 'https://www.twitch.tv/{}'.format(config.TWITCH_NAME)),
       )
     %}
-      <a
-        class="btn md:btn-lg btn-neutral btn-rounded umami--click--social-{{ name|lower }}"
-        {% if link == '_EMAIL' %}
-          x-data :href="`mailto:${emailAddress}`"
-        {% else %}
-          href="{{ link }}"
-        {% endif %}
-      >
+      <a class="btn md:btn-lg btn-neutral btn-rounded umami--click--social-{{ name|lower }}" href="{{ link }}">
         {{ name }} {{ icon(icon_name, size='text-2xl md:text-3xl', margin='ml-2 md:ml-3') }}
       </a>
     {% endfor %}

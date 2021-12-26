@@ -26,7 +26,7 @@
   <link href="{{ static('webcore/css/styles.css') }}" rel="stylesheet">
   {% include 'webcore/components/favicon.html' %}
   {% if settings.DEBUG and config.HIDDEN_IMG_MODE %}
-    <style>img { filter: brightness(0.075); }</style>
+    <style>img:not([x-ref="jewippyGif"]) { filter: brightness(0.075); }</style>
   {% endif %}
   <script src="https://code.iconify.design/2/2.0.4/iconify.min.js"></script>
   <script src="{{ static('vendor/js/navigo/lib/navigo.min.js') }}"></script>

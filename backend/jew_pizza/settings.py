@@ -272,6 +272,7 @@ CONSTANCE_CONFIG = {
     "INSTAGRAM_NAME": ("dtcooper", "Social media account name for Instagram", "char"),
     "SUBSTACK_NAME": ("jewpizza", "Social media account name for Substack", "char"),
     "TIKTOK_NAME": ("jew.pizza", "Social media account name for Tiktok", "char"),
+    "TWITCH_NAME": ("JewDotPizza", "Social media account name for Twitter", "char"),
     "TWITTER_NAME": ("dtcooper", "Social media account name for Twitter", "char"),
     "TWILIO_FROM_NUMBER": ("+14164390000", "Twilio from number for texts/calls", "phone"),
     "LOGS_URL": (
@@ -301,7 +302,10 @@ CONSTANCE_CONFIG = {
 CONSTANCE_CONFIG_FIELDSETS = OrderedDict(
     (
         ("Development Options", ("ENABLE_JEWIPPY", "ENABLE_PLAYER", "ENABLE_TEST_NOTIFICATIONS", "HIDDEN_IMG_MODE")),
-        ("Social Media Account", ("FACEBOOK_NAME", "INSTAGRAM_NAME", "SUBSTACK_NAME", "TIKTOK_NAME", "TWITTER_NAME")),
+        (
+            "Social Media Account",
+            ("FACEBOOK_NAME", "INSTAGRAM_NAME", "SUBSTACK_NAME", "TIKTOK_NAME", "TWITCH_NAME", "TWITTER_NAME"),
+        ),
         ("Telephony", ("TWILIO_FROM_NUMBER",)),
         ("Umami Tracking Tag", ("UMAMI_WEBSITE_ID", "UMAMI_URL")),
         (
