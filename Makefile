@@ -29,10 +29,12 @@ pre-commit:
 build:
 	$(COMPOSE) pull
 	$(COMPOSE) build --pull --build-arg GIT_REV=$(shell git describe --tags --always --dirty)
+	docker system prune -f
 
 build-no-cache:
 	$(COMPOSE) pull
 	$(COMPOSE) build --no-cache --pull --build-arg GIT_REV=$(shell git describe --tags --always --dirty)
+	docker system prune -f
 
 shell:
 	@$(COMPOSE) run --rm --service-ports --use-aliases app bash || true
