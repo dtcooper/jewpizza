@@ -40,7 +40,7 @@ RUN poetry install \
 
 RUN mkdir -p /app/frontend
 COPY frontend/package.json frontend/package-lock.json /app/frontend/
-RUN npm --prefix=../frontend install $(-z "$DEBUG" -o "$DEBUG" = '0' ] && echo '--production') \
+RUN npm --prefix=../frontend install $([ -z "$DEBUG" -o "$DEBUG" = '0' ] && echo '--production') \
     && echo "alias npm='npm --prefix=/app/frontend'" >> /root/.bashrc \
     && echo "alias npx='npx --prefix=/app/frontend'" >> /root/.bashrc \
     # May as well set redis-cli alias while we're at it
