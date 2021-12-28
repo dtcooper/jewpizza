@@ -18,7 +18,7 @@ WORKDIR /app
 COPY pyproject.toml poetry.lock /app/
 RUN poetry install \
     # In prod use "--no-dev"
-    $(if [ -z "$DEBUG" -o "$DEBUG" = '0' ]; then echo '--no-dev'; fi)
+    $([ -z "$DEBUG" -o "$DEBUG" = '0' ] && echo '--no-dev')
 
 COPY . /app/
 

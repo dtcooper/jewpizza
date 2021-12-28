@@ -16,14 +16,14 @@ RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash \
         gzip \
         nodejs \
         # Dev requirements
-        $(if [ "$DEBUG" -a "$DEBUG" != '0' ]; then echo \
+        $([ "$DEBUG" -a "$DEBUG" != '0' ] && echo \
             jq \
             less \
             nano \
             netcat \
             postgresql-client \
             redis-tools \
-        ; fi) \
+        ) \
     && rm -rf /var/lib/apt/lists/*
 
 RUN wget -qO /usr/local/bin/wait-for-it "https://raw.githubusercontent.com/vishnubob/wait-for-it/${WAIT_FOR_IT_VERSION}/wait-for-it.sh" \
@@ -36,11 +36,11 @@ WORKDIR /app/backend
 COPY backend/pyproject.toml backend/poetry.lock /app/backend/
 RUN poetry install \
     # In prod use "--no-dev"
-    $(if [ -z "$DEBUG" -o "$DEBUG" = '0' ]; then echo '--no-dev'; fi)
+    $([ -z "$DEBUG" -o "$DEBUG" = '0' ] && echo '--no-dev')
 
 RUN mkdir -p /app/frontend
 COPY frontend/package.json frontend/package-lock.json /app/frontend/
-RUN npm --prefix=../frontend install $(if [ -z "$DEBUG" -o "$DEBUG" = '0' ]; then echo '--production'; fi) \
+RUN npm --prefix=../frontend install $(-z "$DEBUG" -o "$DEBUG" = '0' ] && echo '--production') \
     && echo "alias npm='npm --prefix=/app/frontend'" >> /root/.bashrc \
     && echo "alias npx='npx --prefix=/app/frontend'" >> /root/.bashrc \
     # May as well set redis-cli alias while we're at it
