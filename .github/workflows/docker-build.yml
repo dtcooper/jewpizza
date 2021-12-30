@@ -1,0 +1,59 @@
+name: docker-build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Get short SHA
+        id: slug
+        run: echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      -
+        name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: app
+        uses: docker/build-push-action@v2.7.0
+        with:
+          push: true
+          tags: dtcooper/jewpizza-app:latest,dtcooper/jewpizza-app:${{ steps.slug.outputs.sha8 }}
+          platforms: linux/amd64
+          file: backend/Dockerfile
+      -
+        name: sse
+        uses: docker/build-push-action@v2.7.0
+        with:
+          push: true
+          tags: dtcooper/jewpizza-sse:latest,dtcooper/jewpizza-sse:${{ steps.slug.outputs.sha8 }}
+          platforms: linux/amd64
+          context: "https://github.com/${{ github.repository }}.git#${{ github.sha }}:sse"
+      -
+        name: radio
+        uses: docker/build-push-action@v2.7.0
+        with:
+          push: true
+          tags: dtcooper/jewpizza-radio:latest,dtcooper/jewpizza-radio:${{ steps.slug.outputs.sha8 }}
+          platforms: linux/amd64
+          context: "https://github.com/${{ github.repository }}.git#${{ github.sha }}:radio"
+      -
+        name: controller
+        uses: docker/build-push-action@v2.7.0
+        with:
+          push: true
+          tags: dtcooper/jewpizza-controller:latest,dtcooper/jewpizza-controller:${{ steps.slug.outputs.sha8 }}
+          platforms: linux/amd64
+          file: Dockerfile.controller
