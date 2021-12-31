@@ -7,7 +7,7 @@ SERVER_PROJECT_DIR:=dev.jew.pizza
 SHELL:=/bin/bash
 SHOW_FIXTURE_MODELS=episode showdate
 SHOW_FIXTURE_DIR=backend/shows/fixtures/shows
-GIT_REV=$(shell git describe --tags --always --abbrev=8 --dirty)
+GIT_REV=$(shell git describe --tags --always --dirty)
 
 up:
 	@$(COMPOSE) up --remove-orphans $(shell source .env; if [ -z "$$DEBUG" -o "$$DEBUG" = 0 ]; then echo "-d"; fi)
