@@ -50,6 +50,7 @@ jobs:
             fi
             if [ "$SHOULD_DEPLOY" ]; then
               git pull --ff-only
+              docker compose pull
               docker compose up --remove-orphans -d
               docker system prune -f
             else
