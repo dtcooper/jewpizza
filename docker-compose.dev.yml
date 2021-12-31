@@ -50,6 +50,7 @@ services:
   icecast:
     <<: *service-dev-defaults
     image: moul/icecast
+    # TODO send SIGINT (https://docs.docker.com/compose/faq/#why-do-my-services-take-10-seconds-to-recreate-or-stop)
     init: true  # for Icecast to shut down faster
     environment:
       - "ICECAST_HOSTNAME=${DOMAIN_NAME:-localhost}"

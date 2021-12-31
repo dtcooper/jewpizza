@@ -2,6 +2,7 @@ x-service-defaults: &service-defaults
   restart: always
 
 x-app-template: &app-template
+  image: dtcooper/jewpizza-app:latest
   build:
     context: .
     dockerfile: backend/Dockerfile
@@ -33,6 +34,7 @@ services:
 
   radio:
     <<: *service-defaults
+    image: dtcooper/jewpizza-radio:latest
     build:
       context: radio
       args:
@@ -49,6 +51,7 @@ services:
 
   sse:
     <<: *service-defaults
+    image: dtcooper/jewpizza-sse:latest
     build:
       context: sse
       args:
@@ -62,8 +65,10 @@ services:
 
   controller:
     <<: *service-defaults
+    image: dtcooper/jewpizza-controller:latest
     build:
       dockerfile: Dockerfile.controller
+    # TODO send SIGINT (https://docs.docker.com/compose/faq/#why-do-my-services-take-10-seconds-to-recreate-or-stop)
     init: true
     volumes:
       - .:/app
