@@ -1,4 +1,4 @@
-name: Build Docker Containers
+name: Docker Containers
 
 on:
   push:
@@ -8,9 +8,10 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
+    name: Build and deploy docker containers
     steps:
       -
-        name: Cancel Previous Runs
+        name: Cancel previous runs
         uses: styfle/cancel-workflow-action@0.9.1
         with:
           access_token: ${{ github.token }}
