@@ -12,7 +12,9 @@ jobs:
       -
         name: Get short SHA
         id: slug
-        run: echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
+        run: |
+          echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
+          echo "::set-output name=sha7::$(echo ${GITHUB_SHA} | cut -c1-7)"
 
       -
         name: Set up QEMU
@@ -34,18 +36,22 @@ jobs:
         uses: docker/build-push-action@v2.7.0
         with:
           push: true
-          tags: dtcooper/jewpizza-app:latest,dtcooper/jewpizza-app:${{ steps.slug.outputs.sha8 }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           platforms: linux/amd64
+          tags: dtcooper/jewpizza-app:latest,dtcooper/jewpizza-app:${{ steps.slug.outputs.sha8 }}
           file: backend/Dockerfile
-          build-args: GIT_REV=${{ steps.slug.outputs.sha8 }}
+          build-args: GIT_REV=${{ steps.slug.outputs.sha7 }}
 
       -
         name: Build sse container
         uses: docker/build-push-action@v2.7.0
         with:
           push: true
-          tags: dtcooper/jewpizza-sse:latest,dtcooper/jewpizza-sse:${{ steps.slug.outputs.sha8 }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           platforms: linux/amd64
+          tags: dtcooper/jewpizza-sse:latest,dtcooper/jewpizza-sse:${{ steps.slug.outputs.sha8 }}
           context: "https://github.com/${{ github.repository }}.git#${{ github.sha }}:sse"
 
       -
@@ -53,8 +59,10 @@ jobs:
         uses: docker/build-push-action@v2.7.0
         with:
           push: true
-          tags: dtcooper/jewpizza-radio:latest,dtcooper/jewpizza-radio:${{ steps.slug.outputs.sha8 }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           platforms: linux/amd64
+          tags: dtcooper/jewpizza-radio:latest,dtcooper/jewpizza-radio:${{ steps.slug.outputs.sha8 }}
           context: "https://github.com/${{ github.repository }}.git#${{ github.sha }}:radio"
 
       -
@@ -62,8 +70,10 @@ jobs:
         uses: docker/build-push-action@v2.7.0
         with:
           push: true
-          tags: dtcooper/jewpizza-controller:latest,dtcooper/jewpizza-controller:${{ steps.slug.outputs.sha8 }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           platforms: linux/amd64
+          tags: dtcooper/jewpizza-controller:latest,dtcooper/jewpizza-controller:${{ steps.slug.outputs.sha8 }}
           file: Dockerfile.controller
 
       -
