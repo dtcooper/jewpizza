@@ -27,4 +27,3 @@ jobs:
           compose_file: docker-compose.yml
           image_tag: ${{ steps.slug.outputs.sha }},latest
           build_extra_args: "--build-arg=GIT_REV=${{ steps.slug.outputs.sha }}"
-          pull_image_and_stages: false
