@@ -2,36 +2,24 @@ x-service-defaults: &service-defaults
   restart: always
 
 x-app-template: &app-template
-    image: dtcooper/jewpizza-app:latest
-    build:
-      context: .
-      dockerfile: backend/Dockerfile
-      args:
-        - "DEBUG=${DEBUG:-0}"
-    volumes:
-      - ./.env:/.env:ro
-      - ./serve/static:/static_root
-      - ./serve/media:/media_root
-    depends_on:
-      - db
-      - redis
+  image: dtcooper/jewpizza-app:latest
+  build:
+    context: .
+    dockerfile: backend/Dockerfile
+    args:
+      - "DEBUG=${DEBUG:-0}"
+  volumes:
+    - ./.env:/.env:ro
+    - ./serve/static:/static_root
+    - ./serve/media:/media_root
+  depends_on:
+    - db
+    - redis
 
 services:
   app:
     <<: *service-defaults
-    image: dtcooper/jewpizza-app:latest
-    build:
-      context: .
-      dockerfile: backend/Dockerfile
-      args:
-        - "DEBUG=${DEBUG:-0}"
-    volumes:
-      - ./.env:/.env:ro
-      - ./serve/static:/static_root
-      - ./serve/media:/media_root
-    depends_on:
-      - db
-      - redis
+    <<: *app-template
     ports:
       - "${BIND_ADDR:-127.0.0.1:8000}:8000"
     environment:
@@ -39,19 +27,7 @@ services:
 
   tasks:
     <<: *service-defaults
-    image: dtcooper/jewpizza-app:latest
-    build:
-      context: .
-      dockerfile: backend/Dockerfile
-      args:
-        - "DEBUG=${DEBUG:-0}"
-    volumes:
-      - ./.env:/.env:ro
-      - ./serve/static:/static_root
-      - ./serve/media:/media_root
-    depends_on:
-      - db
-      - redis
+    <<: *app-template
     environment:
       - RUN_HUEY=1
       - "TZ=${TIMEZONE:-US/Eastern}"
