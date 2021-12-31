@@ -297,6 +297,7 @@ CONSTANCE_CONFIG = {
     "ICECAST_USERNAME": ("source", "Username for Icecast server", "char"),
     "ICECAST_PASSWORD": ("hackme", "Password for Icecast server", "char"),
     "ICECAST_PROTOCOL": ("http", "Protocol for Icecast server", "icecast_protocol"),
+    "AUTO_DEPLOY": (True, "Automatically deploy from Github Actions when code is pushed to main branch"),
 }
 
 CONSTANCE_CONFIG_FIELDSETS = OrderedDict(
@@ -319,6 +320,6 @@ CONSTANCE_CONFIG_FIELDSETS = OrderedDict(
                 "ICECAST_PROTOCOL",
             ),
         ),
-        ("Miscellaneous", ("LOGS_URL", "SSE_URL")),
+        ("Miscellaneous", ("LOGS_URL", "SSE_URL", "AUTO_DEPLOY")),
     )
 )

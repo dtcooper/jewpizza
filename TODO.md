@@ -48,6 +48,7 @@
 * [ ] Sourcemaps for JS exceptions
 * [x] Upgrade Django 4, Tailwind 3
 * [ ] Add _Highlights_ sections, possible on Home page?
+* [ ] Restart radio container if radio.liq is updated?
 
 ## Sections
 
