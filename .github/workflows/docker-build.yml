@@ -81,5 +81,5 @@ jobs:
             git pull --ff-only
             docker compose pull
             docker compose down --remove-orphans
-            docker compose up -d
+            docker compose up --remove-orphans -d
             docker system prune -f
