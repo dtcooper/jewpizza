@@ -7,6 +7,7 @@ SERVER_PROJECT_DIR:=dev.jew.pizza
 SHELL:=/bin/bash
 SHOW_FIXTURE_MODELS=episode showdate
 SHOW_FIXTURE_DIR=backend/shows/fixtures/shows
+GIT_REV=$(shell git describe --tags --always --abbrev=8 --dirty)
 
 up:
 	@$(COMPOSE) up --remove-orphans $(shell source .env; if [ -z "$$DEBUG" -o "$$DEBUG" = 0 ]; then echo "-d"; fi)
@@ -28,12 +29,12 @@ pre-commit:
 
 build:
 	$(COMPOSE) pull
-	$(COMPOSE) build --pull --build-arg GIT_REV=$(shell git describe --tags --always --dirty)
+	$(COMPOSE) build --pull --build-arg GIT_REV=$(GIT_REV)
 	docker system prune -f
 
 build-no-cache:
 	$(COMPOSE) pull
-	$(COMPOSE) build --no-cache --pull --build-arg GIT_REV=$(shell git describe --tags --always --dirty)
+	$(COMPOSE) build --no-cache --pull --build-arg GIT_REV=$(GIT_REV)
 	docker system prune -f
 
 shell:

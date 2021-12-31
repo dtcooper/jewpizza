@@ -33,6 +33,7 @@ jobs:
           tags: dtcooper/jewpizza-app:latest,dtcooper/jewpizza-app:${{ steps.slug.outputs.sha8 }}
           platforms: linux/amd64
           file: backend/Dockerfile
+          build-args: GIT_REV=${{ steps.slug.outputs.sha8 }}
       -
         name: sse
         uses: docker/build-push-action@v2.7.0
