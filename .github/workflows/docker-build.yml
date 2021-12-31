@@ -68,7 +68,6 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           fingerprint: ${{ secrets.SSH_FINGERPRINT }}
-          script_stop: true
           script: |
             cd ${{ secrets.SSH_DEPLOY_DIRECTORY }}
             SHOULD_DEPLOY=
