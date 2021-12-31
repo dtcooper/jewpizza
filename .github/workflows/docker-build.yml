@@ -19,14 +19,52 @@ jobs:
         uses: actions/checkout@v2
 
       -
-        name: Build containers and push to Docker Hub
+        name: Build app container
         uses: whoan/docker-build-with-cache-action@v5
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          compose_file: docker-compose.yml
           image_tag: ${{ steps.slug.outputs.sha }},latest
+          image_name: dtcooper/jewpizza-app
+          pull_image_and_stages: false
           build_extra_args: "--build-arg=GIT_REV=${{ steps.slug.outputs.sha }}"
+          dockerfile: backend/Dockerfile
+
+      -
+        name: Build radio container
+        uses: whoan/docker-build-with-cache-action@v5
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          image_tag: ${{ steps.slug.outputs.sha }},latest
+          image_name: dtcooper/jewpizza-radio
+          pull_image_and_stages: false
+          build_extra_args: "--build-arg=GIT_REV=${{ steps.slug.outputs.sha }}"
+          context: ./radio/
+
+      -
+        name: Build sse container
+        uses: whoan/docker-build-with-cache-action@v5
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          image_tag: ${{ steps.slug.outputs.sha }},latest
+          image_name: dtcooper/jewpizza-sse
+          pull_image_and_stages: false
+          build_extra_args: "--build-arg=GIT_REV=${{ steps.slug.outputs.sha }}"
+          context: ./sse/
+
+      -
+        name: Build controller container
+        uses: whoan/docker-build-with-cache-action@v5
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          image_tag: ${{ steps.slug.outputs.sha }},latest
+          image_name: dtcooper/jewpizza-controller
+          pull_image_and_stages: false
+          build_extra_args: "--build-arg=GIT_REV=${{ steps.slug.outputs.sha }}"
+          dockerfile: Dockerfile.controller
 
       -
         name: Update dev deployment
@@ -39,7 +77,7 @@ jobs:
           fingerprint: ${{ secrets.SSH_FINGERPRINT }}
           script_stop: true
           script: |
-            cd dev.jew.pizza
+            cd ${{ secrets.SSH_DEPLOY_DIRECTORY }}
             SHOULD_DEPLOY=
             if docker compose ps --services --filter "status=running" | grep -q '^app$'; then
               if [ "$(docker compose exec app poetry run ./manage.py constance get AUTO_DEPLOY)" = True ]; then

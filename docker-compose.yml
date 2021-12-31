@@ -67,7 +67,7 @@ services:
     <<: *service-defaults
     image: dtcooper/jewpizza-controller:latest
     build:
-      context: controller
+      dockerfile: Dockerfile.controller
     # TODO send SIGINT (https://docs.docker.com/compose/faq/#why-do-my-services-take-10-seconds-to-recreate-or-stop)
     init: true
     volumes:
