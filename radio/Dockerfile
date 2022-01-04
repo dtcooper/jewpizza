@@ -26,11 +26,11 @@ RUN wget -qO /usr/local/bin/wait-for-it "https://raw.githubusercontent.com/vishn
 
 RUN mkdir /radio && chown -R liquidsoap:liquidsoap /radio && usermod -d /radio liquidsoap
 COPY --chown=liquidsoap reload.liq /radio/script.liq
-COPY entrypoint.sh failsafe.mp3 jingle.mp3 /
+COPY entrypoint.sh healthcheck.sh failsafe.mp3 jingle.mp3 /
 
 USER liquidsoap
 WORKDIR /radio
 ENTRYPOINT ["/usr/bin/tini", "--", "/entrypoint.sh"]
 CMD []
 
-HEALTHCHECK --start-period=30s CMD '[ "$(wget -q -O - -t 1 -T 15 http://localhost:8000/ping/)" = pong ]'
+HEALTHCHECK --start-period=30s CMD [ "/healthcheck.sh" ]

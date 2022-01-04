@@ -69,6 +69,10 @@ UMAMI_TAG="$(curl -s --user "dtcooper:$GITHUB_API_TOKEN" https://api.github.com/
 UMAMI_UPSTREAM="$(curl -s --user "dtcooper:$GITHUB_API_TOKEN" "https://api.github.com/repos/mikecao/umami/git/ref/tags/$UMAMI_TAG" | jq -r .object.sha)"
 compare Umami "$UMAMI_LOCAL" "$UMAMI_UPSTREAM" 1
 
+AUTOHEAL_LOCAL="$(yq -r .services.autoheal.image docker-compose.yml | sed 's/^willfarrell\/docker-autoheal://')"
+AUTOHEAL_UPSTREAM="$(lastversion willfarrell/docker-autoheal)"
+compare Autoheal "$DOZZLE_LOCAL" "$DOZZLE_UPSTREAM"
+
 POETRY_LOCAL="$(fgrep 'POETRY_VERSION=' backend/Dockerfile | sed 's/.*POETRY_VERSION=\([0-9.]*\).*/\1/')"
 POETRY_UPSTREAM="$(lastversion python-poetry/poetry)"
 compare Poetry "$POETRY_LOCAL" "$POETRY_UPSTREAM"
