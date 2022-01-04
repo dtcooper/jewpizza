@@ -73,10 +73,6 @@ POETRY_LOCAL="$(fgrep 'POETRY_VERSION=' backend/Dockerfile | sed 's/.*POETRY_VER
 POETRY_UPSTREAM="$(lastversion python-poetry/poetry)"
 compare Poetry "$POETRY_LOCAL" "$POETRY_UPSTREAM"
 
-COMPOSE_LOCAL="$(fgrep 'COMPOSE_VERSION=' Dockerfile.controller | sed 's/.*COMPOSE_VERSION=\([0-9.]*\).*/\1/')"
-COMPOSE_UPSTREAM="$(lastversion docker/compose)"
-compare Compose "$COMPOSE_LOCAL" "$COMPOSE_UPSTREAM"
-
 WAIT_FOR_IT_LOCAL="$(fgrep 'WAIT_FOR_IT_VERSION=' backend/Dockerfile | sed 's/.*WAIT_FOR_IT_VERSION=\([0-9a-z]*\).*/\1/')"
 WAIT_FOR_IT_DEFAULT_BRANCH="$(curl -s --user "dtcooper:$GITHUB_API_TOKEN" https://api.github.com/repos/vishnubob/wait-for-it | jq -r .default_branch)"
 WAIT_FOR_IT_UPSTREAM="$(curl -s --user "dtcooper:$GITHUB_API_TOKEN" "https://api.github.com/repos/vishnubob/wait-for-it/commits/$WAIT_FOR_IT_DEFAULT_BRANCH" | jq -r .sha)"

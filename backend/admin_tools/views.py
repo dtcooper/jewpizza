@@ -13,14 +13,12 @@ from django.views.generic import FormView, TemplateView
 from constance import config
 
 from jew_pizza.twilio import send_sms
-from jew_pizza.utils import list_containers, restart_container
 
 from .forms import SendEmailForm, SendTextMessageForm
 
 
 NAVIGATION_VIEWS = (
     ("index", "Tools Index"),
-    ("container-status", "Container Status"),
     ("send-text-message", "Send Text Message"),
     ("send-email", "Send Email"),
     ("sse-status", "SSE Status"),
@@ -98,25 +96,6 @@ class SendEmailView(SuccessMessageMixin, AdminFormView):
         message = form.cleaned_data["message"]
         send_mail(subject=subject, message=message, from_email=None, recipient_list=[recipient])
         return super().form_valid(form)
-
-
-class ContainerStatusView(AdminTemplateView):
-    template_name = "admin_tools/container_status.html"
-    title = "Container Status"
-
-    def get_context_data(self, **kwargs):
-        return {"containers": list_containers(fail_silently=True), **super().get_context_data(**kwargs)}
-
-    def post(self, request, *args, **kwargs):
-        container = request.POST.get("container")
-        if container:
-            if restart_container(container, fail_silently=True):
-                messages.success(request, f"You successfully restarted the {container} container!")
-            else:
-                messages.error(
-                    request, f"An error occurred while restarting the {container} container. Check the server logs."
-                )
-        return redirect("admin-tools:container-status")
 
 
 class SSEStatusView(AdminTemplateView):

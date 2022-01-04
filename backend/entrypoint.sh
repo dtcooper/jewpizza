@@ -93,7 +93,7 @@ elif [ "$RUN_HUEY" ]; then
     wait
 
     CMD="./manage.py run_huey --workers $HUEY_WORKERS --flush-locks"
-    if [ "$DEBUG" -a "$DEBUG" != '0' ]; then
+    if [ "$DEBUG" ]; then
         exec watchmedo auto-restart --directory=./ --pattern=*.py --recursive -- $CMD
     else
         exec $CMD

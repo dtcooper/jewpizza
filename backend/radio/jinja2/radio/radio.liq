@@ -7,6 +7,8 @@ settings.server.telnet.port.set(1234)
 settings.server.telnet.bind_addr.set("0.0.0.0")
 settings.server.timeout.set(-1.)
 
+log("Starting harbor (script generated " ^ {{ now()|liqval }} ^ ")")
+
 REDIS_PUBSUB_CHANNEL = {{ REDIS_PUBSUB_CHANNEL|liqval }}
 HOSTNAME = {{ config.ICECAST_HOSTNAME|liqval }}
 PORT = {{ config.ICECAST_PORT|liqval }}
@@ -15,6 +17,27 @@ PASSWORD = {{ config.ICECAST_PASSWORD|liqval }}
 PROTOCOL = {{ config.ICECAST_PROTOCOL|liqval }}
 
 METADATA_SSE_DELAY = 5.
+
+{% include 'radio/reload.liq' %}
+harbor.http.register("^/reload/?", fun(~protocol, ~data, ~headers, uri) -> begin
+    response = json()
+
+    if headers["X-Secret-Key"] == SECRET_KEY then
+        let (success, error_detail) = reload()
+        if success then
+            response.add("status", "okay")
+        else
+            response.add("status", "error")
+            response.add("error", error_detail)
+        end
+    else
+        response.add("status", "error")
+        response.add("error", "Invalid secret key")
+    end
+
+    data = json.stringify(response, compact=true)
+    http.response(protocol=protocol, content_type='application/json', data=data)
+end)
 
 jingle = single(fallible=false, '/jingle.mp3')
 

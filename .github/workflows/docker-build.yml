@@ -57,16 +57,6 @@ jobs:
           context: ./sse/
 
       -
-        name: Build controller container
-        uses: whoan/docker-build-with-cache-action@v5
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-          image_tag: ${{ steps.slug.outputs.sha }},latest
-          image_name: dtcooper/jewpizza-controller
-          dockerfile: Dockerfile.controller
-
-      -
         name: Deploy containers
         uses: appleboy/ssh-action@master
         with:

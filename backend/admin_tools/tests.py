@@ -11,9 +11,6 @@ class ViewRenderTests(JewPizzaTestCase):
     def test_index_renders(self):
         self.assertPageRenders("admin-tools:index", "admin_tools/base.html")
 
-    def test_container_status_renders(self):
-        self.assertPageRenders("admin-tools:container-status", "admin_tools/container_status.html")
-
     def test_send_text_message_renders(self):
         self.assertPageRenders("admin-tools:send-text-message", "admin_tools/send_text_message.html")
 

@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.dispatch import receiver
 
 from jew_pizza.signals import config_updated_in_admin
-from jew_pizza.utils import restart_container
+from jew_pizza.utils import reload_radio_container
 
 
 logger = logging.getLogger(f"jewpizza.{__name__}")
@@ -13,7 +13,7 @@ logger = logging.getLogger(f"jewpizza.{__name__}")
 @receiver(config_updated_in_admin)
 def constance_updated(changes, request=None, **kwargs):
     if any(change.startswith("ICECAST_") and change != "ICECAST_URL" for change in changes):
-        status = restart_container("radio", fail_silently=True)
+        status = reload_radio_container()
         if request:
             if status:
                 messages.info(request, "radio container restarted")

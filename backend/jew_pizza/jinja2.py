@@ -1,4 +1,5 @@
 from collections import namedtuple
+import datetime
 import hashlib
 import json
 import os
@@ -12,6 +13,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.core.cache import cache
 from django.templatetags.static import static as django_static
+from django.utils.timezone import get_default_timezone
 from django.urls import reverse
 
 from constance import config as constance_config
@@ -192,6 +194,7 @@ def create_environment(**options):
                 {**i, "webp": static(path=i["webp"], ctx=None), "gif": static(path=i["gif"], ctx=None)}
                 for i in constants.JEWIPPY_GIFS
             ],
+            "now": lambda: datetime.datetime.now(get_default_timezone()),
             "randint": random.randint,
             "settings": settings,
             "shuffle": shuffle,

@@ -4,6 +4,7 @@
   <script src="{{ static('vendor/js/alpinejs/dist/cdn.min.js') }}" defer></script>
   <script>
     const MAX_MESSAGES = 50
+    {# Hack, since you can't set a header w/ EventSource #}
     const SSE_URL = {{ (config.SSE_URL.removesuffix('/') + '/stats?secret_key=' + secret_key)|tojson }}
 
     document.addEventListener('alpine:init', () => {

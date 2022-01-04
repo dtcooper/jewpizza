@@ -25,6 +25,8 @@
 * [x] Custom error pages
     - [x] nginx 502 unavailable during deployment (static file @ `frontend/unavailable.html`)
     - [x] Django specific (500, 404, 403)
+* [x] Upgrade Django 4, Tailwind 3
+* [x] Restart radio container if radio.liq is updated?
 * [ ] Icecast server + liquidsoap with player to play whatever show I'm on, read
       countdowns when I'm not on air
     - [ ] Call-in button via Twilio client
@@ -46,9 +48,9 @@
 * [ ] Decouple podcast namedtuples with shows?
 * [ ] Radio should have a mountpoint to pre-empty and stream from
 * [ ] Sourcemaps for JS exceptions
-* [x] Upgrade Django 4, Tailwind 3
 * [ ] Add _Highlights_ sections, possible on Home page?
-* [ ] Restart radio container if radio.liq is updated?
+* [ ] Restart unhealthy containers using [docker-autoheal](https://github.com/willfarrell/docker-autoheal)
+      (mostly needed for liquidsoap/radio container)
 
 ## Sections
 

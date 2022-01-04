@@ -63,19 +63,6 @@ services:
     ports:
       - "${SSE_BIND_ADDR:-127.0.0.1:8001}:8001"
 
-  controller:
-    <<: *service-defaults
-    image: dtcooper/jewpizza-controller:latest
-    build:
-      dockerfile: Dockerfile.controller
-    # TODO send SIGINT (https://docs.docker.com/compose/faq/#why-do-my-services-take-10-seconds-to-recreate-or-stop)
-    init: true
-    volumes:
-      - .:/app
-      - /var/run/docker.sock:/var/run/docker.sock
-    environment:
-      - "COMPOSE_PROJECT_NAME=${COMPOSE_PROJECT_NAME:-jewpizza}"
-
   db:
     <<: *service-defaults
     image: library/postgres:14.1-alpine

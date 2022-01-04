@@ -4,7 +4,7 @@
 # and an X-Accel-Redirect
 #
 # GET:/ -- subscribes to messages
-# GET:/stats -- subscribes to messages with admin stats (set ?secret_key=<...> in URL)
+# GET:/stats -- subscribes to messages with admin stats (set SHA256 hashed ?secret_key=<...> in URL)
 #
 # Publish valid JSON strings to redis channel sse::messages
 # They must have the keys {"type": "<type>", "message": ...} with an optional "delay" int/float key
@@ -28,7 +28,7 @@ DISCONNECT = object()
 MAX_DELAY = 2 * 60  # Sane default
 REDIS_PUBSUB_CHANNEL = "sse::messages"  # Duplicated in backend/jew_pizza/constants.py
 REDIS_URL = "redis://redis"
-SECRET_KEY = hashlib.sha256(os.environ["SECRET_KEY"].encode()).hexdigest()
+SECRET_KEY_HASHED = hashlib.sha256(os.environ["SECRET_KEY"].encode()).hexdigest()
 STATS_SLEEP_SECS = 0.5
 
 
@@ -112,7 +112,7 @@ async def subscribe(request):
 
     stats_task = None
     with_stats = request.match_info.route.name == "subscribe-stats"
-    if with_stats and not (SECRET_KEY == request.query.get("secret_key")):
+    if with_stats and not (SECRET_KEY_HASHED == request.query.get("secret_key")):
         return web.HTTPForbidden()
 
     async with sse_response(request, headers={"Access-Control-Allow-Origin": "*"}) as response:
