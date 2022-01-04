@@ -27,6 +27,8 @@
     - [x] Django specific (500, 404, 403)
 * [x] Upgrade Django 4, Tailwind 3
 * [x] Restart radio container if radio.liq is updated?
+* [x] Restart unhealthy containers using [docker-autoheal](https://github.com/willfarrell/docker-autoheal)
+      (mostly needed for liquidsoap/radio container)
 * [ ] Icecast server + liquidsoap with player to play whatever show I'm on, read
       countdowns when I'm not on air
     - [ ] Call-in button via Twilio client
@@ -49,8 +51,6 @@
 * [ ] Radio should have a mountpoint to pre-empty and stream from
 * [ ] Sourcemaps for JS exceptions
 * [ ] Add _Highlights_ sections, possible on Home page?
-* [ ] Restart unhealthy containers using [docker-autoheal](https://github.com/willfarrell/docker-autoheal)
-      (mostly needed for liquidsoap/radio container)
 
 ## Sections
 

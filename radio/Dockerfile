@@ -1,7 +1,5 @@
 FROM savonet/liquidsoap:v2.0.2
 
-ENV SCRIPT_NAME=radio
-
 ARG WAIT_FOR_IT_VERSION=81b1373f \
     DEBUG=0
 
@@ -34,3 +32,5 @@ USER liquidsoap
 WORKDIR /radio
 ENTRYPOINT ["/usr/bin/tini", "--", "/entrypoint.sh"]
 CMD []
+
+HEALTHCHECK --start-period=30s CMD '[ "$(wget -q -O - -t 1 -T 15 http://localhost:8000/ping/)" = pong ]'

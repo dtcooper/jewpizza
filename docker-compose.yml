@@ -48,6 +48,8 @@ services:
       - "TZ=${TIMEZONE:-US/Eastern}"
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    labels:
+      - "autoheal=true"
 
   sse:
     <<: *service-defaults
@@ -106,6 +108,14 @@ services:
       - DOZZLE_TAILSIZE=2500
       - DOZZLE_NO_ANALYTICS=true
       - "TZ=${TIMEZONE:-US/Eastern}"
+
+  autoheal:
+    <<: *service-defaults
+    image: willfarrell/autoheal:1.2.0
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - AUTOHEAL_START_PERIOD=30
 
 volumes:
   postgres_data:

@@ -1,5 +1,8 @@
 x-service-dev-defaults: &service-dev-defaults
   restart: "no"
+  # Disable autohealing for `docker compose run` during development
+  labels:
+    - "autoheal=false"
 
 services:
   app:
@@ -36,6 +39,8 @@ services:
 
   radio:
     <<: *service-dev-defaults
+    depends_on:
+      - icecast
     volumes:
       - ./backend/radio/jinja2/radio:/watch
       - ./radio/entrypoint.sh:/entrypoint.sh
