@@ -1,61 +1,84 @@
-name: Docker Containers
+name: Build and Deploy
 
 on:
   push:
     branches:
       - main
 
+concurrency:
+  group: main
+  cancel-in-progress: true
+
 jobs:
-  docker:
+  build-app:
     runs-on: ubuntu-latest
-    name: Build and deploy docker containers
+    name: Build app container
     steps:
       -
-        name: Cancel previous runs
-        uses: styfle/cancel-workflow-action@0.9.1
-        with:
-          access_token: ${{ github.token }}
-
-      -
         name: Get short SHA
-        id: slug
+        id: sha
         run: echo "::set-output name=sha::$(echo ${GITHUB_SHA} | cut -c1-7)"
-
       -
         name: Check out repository
         uses: actions/checkout@v2
-
       -
-        name: Build app container
+        name: Build container
         uses: whoan/docker-build-with-cache-action@v5
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          image_tag: ${{ steps.slug.outputs.sha }},latest
+          image_tag: ${{ steps.sha.outputs.sha }},latest
           image_name: dtcooper/jewpizza-app
-          build_extra_args: "--build-arg=GIT_REV=${{ steps.slug.outputs.sha }}"
+          build_extra_args: "--build-arg=GIT_REV=${{ steps.sha.outputs.sha }}"
           dockerfile: backend/Dockerfile
 
+  build-radio:
+    runs-on: ubuntu-latest
+    name: Build radio container
+    steps:
       -
-        name: Build radio container
+        name: Get short SHA
+        id: sha
+        run: echo "::set-output name=sha::$(echo ${GITHUB_SHA} | cut -c1-7)"
+      -
+        name: Check out repository
+        uses: actions/checkout@v2
+      -
+        name: Build container
         uses: whoan/docker-build-with-cache-action@v5
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          image_tag: ${{ steps.slug.outputs.sha }},latest
+          image_tag: ${{ steps.sha.outputs.sha }},latest
           image_name: dtcooper/jewpizza-radio
           context: ./radio/
 
+  build-sse:
+    runs-on: ubuntu-latest
+    name: Build sse container
+    steps:
       -
-        name: Build sse container
+        name: Get short SHA
+        id: sha
+        run: echo "::set-output name=sha::$(echo ${GITHUB_SHA} | cut -c1-7)"
+      -
+        name: Check out repository
+        uses: actions/checkout@v2
+      -
+        name: Build container
         uses: whoan/docker-build-with-cache-action@v5
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          image_tag: ${{ steps.slug.outputs.sha }},latest
+          image_tag: ${{ steps.sha.outputs.sha }},latest
           image_name: dtcooper/jewpizza-sse
           context: ./sse/
 
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy
+    needs: [build-app, build-radio, build-sse]
+    steps:
       -
         name: Deploy containers
         uses: appleboy/ssh-action@master
