@@ -6,7 +6,7 @@ authors = ["David Cooper <david@jew.pizza>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-Django = "^4.0"
+Django = "^4.0.1"
 django-constance = "^2.8.0"
 django-environ = "^0.8.1"
 django-npm = "^1.0.0"
