@@ -5,5 +5,7 @@
     <p>{{ episode.description }}</p>
   </article>
 
+  <audio class="w-full my-3" controls src="{{ episode.asset_url }}"></audio>
+
   <span class="link link-hover" x-data @click="window.history.back(1)">&lt- Back to show</span>
 {% endblock %}
