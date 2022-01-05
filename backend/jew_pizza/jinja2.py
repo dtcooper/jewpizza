@@ -13,8 +13,8 @@ from django.conf import settings
 from django.contrib import messages
 from django.core.cache import cache
 from django.templatetags.static import static as django_static
-from django.utils.timezone import get_default_timezone
 from django.urls import reverse
+from django.utils.timezone import get_default_timezone
 
 from constance import config as constance_config
 from widget_tweaks.templatetags.widget_tweaks import add_class, add_error_class, set_attr

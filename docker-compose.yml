@@ -2,6 +2,7 @@ x-service-defaults: &service-defaults
   restart: always
 
 x-app-template: &app-template
+  <<: *service-defaults
   image: dtcooper/jewpizza-app:latest
   build:
     context: .
@@ -18,7 +19,6 @@ x-app-template: &app-template
 
 services:
   app:
-    <<: *service-defaults
     <<: *app-template
     ports:
       - "${BIND_ADDR:-127.0.0.1:8000}:8000"
@@ -26,7 +26,6 @@ services:
       - "TZ=${TIMEZONE:-US/Eastern}"
 
   tasks:
-    <<: *service-defaults
     <<: *app-template
     environment:
       - RUN_HUEY=1

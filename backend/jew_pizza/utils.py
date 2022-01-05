@@ -1,4 +1,3 @@
-from collections import namedtuple
 import json
 import logging
 
@@ -8,7 +7,6 @@ from django.conf import settings
 from django.utils.formats import date_format as django_date_format
 from django.utils.timezone import localtime
 
-from constance import config
 from django_redis import get_redis_connection
 
 from jew_pizza.constants import REDIS_PUBSUB_CHANNEL
@@ -56,12 +54,12 @@ def send_sse_message(message_type, message, delay=None):
 
 def reload_radio_container():
     try:
-        response = requests.get("http://radio:8000/reload/", headers={'X-Secret-Key': settings.SECRET_KEY}).json()
+        response = requests.get("http://radio:8000/reload/", headers={"X-Secret-Key": settings.SECRET_KEY}).json()
     except Exception:
         logger.exception("Error reloading radio container")
         return False
 
-    if response['status'] != 'okay':
+    if response["status"] != "okay":
         logger.error(f"Error reloading radio container: {response['error']}")
         return False
     return True
