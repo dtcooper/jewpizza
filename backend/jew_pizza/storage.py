@@ -2,49 +2,49 @@ from functools import partial
 import gzip
 import os
 
-from django.contrib.staticfiles.storage import StaticFilesStorage
-from django.contrib.staticfiles.management.commands import collectstatic
-
 import brotli
+
+from django.contrib.staticfiles.storage import StaticFilesStorage
 
 
 class PostProcessCompressionStorage(StaticFilesStorage):
-    COMPRESS_EXTENSIONS = {'css', 'gif', 'html', 'jpg', 'js', 'png', 'svg', 'txt', 'webp'}
+    COMPRESS_EXTENSIONS = {"css", "gif", "html", "jpg", "js", "png", "svg", "txt", "webp"}
     COMPRESSION_METHODS = (
-        ('gz', partial(gzip.compress, compresslevel=9), gzip.decompress),
-        ('br', partial(brotli.compress, quality=11), brotli.decompress),
+        ("gz", partial(gzip.compress, compresslevel=9), gzip.decompress),
+        ("br", partial(brotli.compress, quality=11), brotli.decompress),
     )
 
+    def _file_contents_post_process(self, path, cache=None):
+        if cache is not None:
+            return cache
+        with self.open(path, "rb") as file:
+            return file.read()
+
     def post_process(self, paths, **options):
-        if options.get('dry_run'):
+        if options.get("dry_run"):
             return
 
         for path in paths:
             processed = False
-            extension = os.path.splitext(path)[1].removeprefix('.')
+            extension = os.path.splitext(path)[1].removeprefix(".")
             if extension in self.COMPRESS_EXTENSIONS:
-                contents = None
+                file_contents = None
 
                 for compressed_extension, compress, decompress in self.COMPRESSION_METHODS:
-                    compressed_path = f'{path}.{compressed_extension}'
+                    compressed_path = f"{path}.{compressed_extension}"
                     should_compress = True
 
                     # Compare the decompressed contents with existing contents
                     if self.exists(compressed_path):
-                        with self.open(compressed_path, 'rb') as file:
-                            decompressed_contents = decompress(file.read())
-                        if contents is None:  # Cached
-                            with self.open(path, 'rb') as file:
-                                contents = file.read()
-                        should_compress = (contents != decompressed_contents)
+                        decompressed_contents = decompress(self._file_contents_post_process(compressed_path))
+                        file_contents = self._file_contents_post_process(path, cache=file_contents)
+                        should_compress = file_contents != decompressed_contents
 
                     if should_compress:
-                        if contents is None:  # Cached
-                            with self.open(path, 'rb') as file:
-                                contents = file.read()
+                        file_contents = self._file_contents_post_process(path, cache=file_contents)
 
-                        with self.open(compressed_path, 'wb') as file:
-                            file.write(compress(contents))
+                        with self.open(compressed_path, "wb") as file:
+                            file.write(compress(file_contents))
 
                         processed = True
 
