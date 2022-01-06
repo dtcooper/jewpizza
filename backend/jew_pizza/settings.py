@@ -233,6 +233,7 @@ NPM_FILE_PATTERNS = {
 
 PHONENUMBER_DEFAULT_REGION = "US"
 
+STATICFILES_STORAGE = "jew_pizza.storage.PostProcessCompressionStorage"
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",

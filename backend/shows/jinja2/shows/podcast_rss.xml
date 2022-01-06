@@ -1,4 +1,4 @@
-{% set album_cover_url = static('shows/images/podcast-covers/{}.jpg'.format(show.code), _external=True, _no_hash=True) -%}
+{% set album_cover_url = static('shows/images/podcast-covers/{}.jpg'.format(show.code), _external=True, _hash=False) -%}
 <?xml version='1.0' encoding='UTF-8'?>
 <rss version="2.0"
     xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"

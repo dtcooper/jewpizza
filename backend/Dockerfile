@@ -48,6 +48,8 @@ RUN npm --prefix=../frontend install $([ -z "$DEBUG" -o "$DEBUG" = '0' ] && echo
 
 COPY . /app/
 
+RUN npm --prefix=../frontend run build
+
 ENTRYPOINT ["/app/backend/entrypoint.sh"]
 CMD []
 

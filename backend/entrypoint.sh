@@ -31,20 +31,7 @@ if [ -z "$SECRET_KEY" ]; then
     exit 1
 fi
 
-collect_static () {
-    npm --prefix=../frontend run build
-    ./manage.py collectstatic -v0 --noinput --clear
-}
-
-compress_static () {
-    echo "$(date) - Compressing files using brotli and gzip..."
-    find /static_root -type f -exec echo Compressing '{}...' \; -exec brotli -q 11 '{}' \; -exec gzip -9 --keep '{}' \;
-    echo "$(date) - Done compressing files"
-}
-
-migrate_and_init_db () {
-    wait-for-it -t 0 db:5432 -- ./manage.py migrate
-
+init_db () {
     if [ "$(./manage.py shell -c 'from django.contrib.auth.models import User; print("" if User.objects.exists() else "1")')" = 1 ]; then
         DJANGO_SUPERUSER_PASSWORD=cooper ./manage.py createsuperuser --noinput --username dave --email 'david@jew.pizza'
     fi
@@ -83,6 +70,7 @@ if [ "$#" != 0 ]; then
     fi
 
     exec "$@"
+
 elif [ "$RUN_HUEY" ]; then
     if [ -z "$HUEY_WORKERS" ]; then
         HUEY_WORKERS="$(python -c 'import multiprocessing as m; print(max(m.cpu_count() * 3, 6))')"
@@ -98,21 +86,27 @@ elif [ "$RUN_HUEY" ]; then
     else
         exec $CMD
     fi
+
 else
+    wait-for-it -t 0 db:5432 -- ./manage.py migrate &
+
     if [ "$DEBUG" -a ! -d '../frontend/node_modules' ]; then
         # In case /app is mounted in Docker, needed to re-install the /app/frontend/node_modules folder
         npm --prefix=../frontend install &
     fi
 
     if [ -z "$DEBUG" ]; then
-        collect_static &
+        ./manage.py collectstatic --noinput &
     fi
 
-    migrate_and_init_db &
     wait-for-it -t 0 redis:6379 &
 
+    # Wait on DB migrated, static collected, and redis up. Ready to start afterwards.
+    wait
+
+    init_db &
+
     if [ "$DEBUG" ]; then
-        wait
         init_umami &
         exec ./manage.py runserver
     else
@@ -121,8 +115,6 @@ else
             GUNICORN_WORKERS="$(python -c 'import multiprocessing as m; print(max(round(m.cpu_count() * 1.5 + 1), 3))')"
         fi
 
-        wait
-        compress_static &  # This can happen after startup
         exec gunicorn \
                 $GUNICORN_EXTRA_ARGS \
                 --forwarded-allow-ips '*' \

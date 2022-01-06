@@ -68,14 +68,17 @@ def get_cached_file_hash(path):
 
 @pass_context
 def static(ctx, path, *args, **kwargs):
-    no_hash = kwargs.pop("_no_hash", False)
+    should_hash = kwargs.pop("_hash", True)
+    should_minify = kwargs.pop("_minify", True)
     file_hash = None
 
-    if not no_hash:
+    if should_minify:
         for ext in (".js", ".css"):
             if path.endswith(ext) and not path.endswith(f".min{ext}") and not settings.DEBUG:
                 # If we're not requesting the minified version in prod, swap it out
                 path = f"{path.removesuffix(ext)}.min{ext}"
+
+    if should_hash:
         file_hash = get_cached_file_hash(path)
 
     absolute = kwargs.pop("_external", False)
