@@ -40,6 +40,6 @@ runs:
         build-args: GIT_REV=${{ steps.sha.outputs.sha }}
         context: ${{ inputs.context }}
         file: ${{ inputs.dockerfile }}
-        tags: ${{ inputs.username }}/jewpizza-${{ inputs.container }}:${{ inputs.username }}/jewpizza-${{ inputs.container }}:${{ steps.sha.outputs.sha }}
+        tags: ${{ inputs.username }}/jewpizza-${{ inputs.container }}:latest,${{ inputs.username }}/jewpizza-${{ inputs.container }}:${{ steps.sha.outputs.sha }}
         cache-from: type=registry,ref=${{ inputs.username }}/jewpizza-${{ inputs.container }}:buildcache
         cache-to: type=registry,ref=${{ inputs.username }}/jewpizza-${{ inputs.container }}:buildcache,mode=max
