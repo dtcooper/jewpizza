@@ -4,16 +4,22 @@ inputs:
     required: true
   context:
     description: 'Docker context directory'
-    required: true
+    required: false
+    default: ./
   dockerfile:
     description: 'Dockerfile path'
     required: true
   username:
     description: 'Docker Hub username'
-    required: true
+    required: false
+    default: dtcooper
   token:
     description: 'Docker Hub access token'
     required: true
+  debug:
+    description: 'Value for DEBUG build arg'
+    required: false
+    default: '0'
 
 runs:
   using: "composite"
@@ -37,9 +43,15 @@ runs:
       uses: docker/build-push-action@v2
       with:
         push: true
-        build-args: GIT_REV=${{ steps.sha.outputs.sha }}
+        # Only build multi-arch for debug (dev) container since it's slow, we can deploy faster
+        platforms: ${{ inputs.debug == '1' && 'linux/amd64,linux/arm64' || 'linux/amd64' }}
+        build-args: |
+          DEBUG=${{ inputs.debug }}
+          GIT_REV=${{ steps.sha.outputs.sha }}
         context: ${{ inputs.context }}
         file: ${{ inputs.dockerfile }}
-        tags: ${{ inputs.username }}/jewpizza-${{ inputs.container }}:latest,${{ inputs.username }}/jewpizza-${{ inputs.container }}:${{ steps.sha.outputs.sha }}
-        cache-from: type=registry,ref=${{ inputs.username }}/jewpizza-${{ inputs.container }}:buildcache
-        cache-to: type=registry,ref=${{ inputs.username }}/jewpizza-${{ inputs.container }}:buildcache,mode=max
+        tags: >-
+          ${{ inputs.username }}/jewpizza-${{ inputs.container }}:${{ inputs.debug == '1' && 'debug' || 'latest' }},
+          ${{ inputs.username }}/jewpizza-${{ inputs.container }}:${{ inputs.debug == '1' && 'debug-' || '' }}${{ steps.sha.outputs.sha }}
+        cache-from: type=registry,ref=${{ inputs.username }}/jewpizza-${{ inputs.container }}:${{ inputs.debug == '1' && 'debug-' || '' }}buildcache
+        cache-to: type=registry,ref=${{ inputs.username }}/jewpizza-${{ inputs.container }}:${{ inputs.debug == '1' && 'debug-' || '' }}buildcache,mode=max

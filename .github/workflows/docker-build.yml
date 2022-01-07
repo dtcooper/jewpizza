@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 concurrency:
   group: main
@@ -21,10 +22,8 @@ jobs:
         name: Build container
         uses: ./.github/actions/docker-build-push
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
           token: ${{ secrets.DOCKERHUB_TOKEN }}
           container: app
-          context: ./
           dockerfile: ./backend/Dockerfile
 
   build-radio:
@@ -38,7 +37,6 @@ jobs:
         name: Build container
         uses: ./.github/actions/docker-build-push
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
           token: ${{ secrets.DOCKERHUB_TOKEN }}
           container: radio
           dockerfile: ./radio/Dockerfile
@@ -55,7 +53,6 @@ jobs:
         name: Build container
         uses: ./.github/actions/docker-build-push
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
           token: ${{ secrets.DOCKERHUB_TOKEN }}
           container: sse
           dockerfile: ./sse/Dockerfile
@@ -93,3 +90,56 @@ jobs:
             else
               echo "Deploy disabled by constance config (AUTO_DEPLOY = False)"
             fi
+
+  build-app-debug:
+    runs-on: ubuntu-latest
+    name: Build app container (debug)
+    needs: [deploy]
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Build container
+        uses: ./.github/actions/docker-build-push
+        with:
+          token: ${{ secrets.DOCKERHUB_TOKEN }}
+          container: app
+          dockerfile: ./backend/Dockerfile
+          debug: '1'
+
+  build-radio-debug:
+    runs-on: ubuntu-latest
+    name: Build radio container (debug)
+    needs: [deploy]
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Build container
+        uses: ./.github/actions/docker-build-push
+        with:
+          token: ${{ secrets.DOCKERHUB_TOKEN }}
+          container: radio
+          dockerfile: ./radio/Dockerfile
+          context: ./radio/
+          debug: '1'
+
+  build-sse-debug:
+    runs-on: ubuntu-latest
+    name: Build sse container (debug)
+    needs: [deploy]
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Build container
+        uses: ./.github/actions/docker-build-push
+        with:
+          token: ${{ secrets.DOCKERHUB_TOKEN }}
+          container: sse
+          dockerfile: ./sse/Dockerfile
+          context: ./sse/
+          debug: '1'
