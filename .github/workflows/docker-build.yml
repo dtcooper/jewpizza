@@ -13,84 +13,33 @@ jobs:
   build-app:
     runs-on: ubuntu-latest
     name: Build app container
-    env:
-      CONTAINER: dtcooper/jewpizza-app
-      DEBUG: false
-      CONTEXT: ./
-      DOCKERFILE: ./backend/Dockerfile
     steps:
-      -
-        name: Get short SHA
-        id: sha
-        run: echo "::set-output name=sha::$(echo ${GITHUB_SHA} | cut -c1-7)"
       -
         name: Checkout
         uses: actions/checkout@v2
       -
-        name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-      -
-        name: Login to Docker Hub
-        uses: docker/login-action@v1
+        name: Build container
+        uses: ./.github/actions/docker-build-push
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      -
-        name: Build and push
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          platforms: linux/amd64,linux/arm64
-          build-args: DEBUG=${{ env.DEBUG && '1' || '0' }}
-          context: ${{ env.CONTEXT }}
-          file: ${{ env.DOCKERFILE }}
-          tags: ${{ env.CONTAINER }}:${{ env.DEBUG && 'debug' || 'latest' }},${{ env.CONTAINER }}:${{ env.DEBUG && 'debug-' || '' }}${{ steps.sha.outputs.sha }}
-          cache-from: type=registry,ref=${{ env.CONTAINER }}:${{ env.DEBUG && 'debug-' || '' }}buildcache
-          cache-to: type=registry,ref=${{ env.CONTAINER }}:${{ env.DEBUG && 'debug-' || '' }}buildcache,mode=max
+          dockerhub_token: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
+          container: dtcooper/jewpizza-app
+          dockerfile: ./backend/Dockerfile
 
   build-app-debug:
     runs-on: ubuntu-latest
     name: Build app container (debug)
-    env:
-      CONTAINER: dtcooper/jewpizza-app
-      DEBUG: true
-      CONTEXT: ./
-      DOCKERFILE: ./backend/Dockerfile
     steps:
-      -
-        name: Get short SHA
-        id: sha
-        run: echo "::set-output name=sha::$(echo ${GITHUB_SHA} | cut -c1-7)"
       -
         name: Checkout
         uses: actions/checkout@v2
       -
-        name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-      -
-        name: Login to Docker Hub
-        uses: docker/login-action@v1
+        name: Build container
+        uses: ./.github/actions/docker-build-push
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      -
-        name: Build and push
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          platforms: linux/amd64,linux/arm64
-          build-args: DEBUG=${{ env.DEBUG && '1' || '0' }}
-          context: ${{ env.CONTEXT }}
-          file: ${{ env.DOCKERFILE }}
-          tags: ${{ env.CONTAINER }}:${{ env.DEBUG && 'debug' || 'latest' }},${{ env.CONTAINER }}:${{ env.DEBUG && 'debug-' || '' }}${{ steps.sha.outputs.sha }}
-          cache-from: type=registry,ref=${{ env.CONTAINER }}:${{ env.DEBUG && 'debug-' || '' }}buildcache
-          cache-to: type=registry,ref=${{ env.CONTAINER }}:${{ env.DEBUG && 'debug-' || '' }}buildcache,mode=max
+          dockerhub_token: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
+          container: dtcooper/jewpizza-app
+          dockerfile: ./backend/Dockerfile
+          debug: '1'
 
   # build-radio:
   #   runs-on: ubuntu-latest
