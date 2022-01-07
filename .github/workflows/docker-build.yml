@@ -23,6 +23,7 @@ jobs:
         uses: ./.github/actions/docker-build-push
         with:
           token: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
           container: app
           context: ./
           dockerfile: ./backend/Dockerfile
@@ -39,6 +40,7 @@ jobs:
         uses: ./.github/actions/docker-build-push
         with:
           token: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
           container: radio
 
   build-sse:
@@ -53,6 +55,7 @@ jobs:
         uses: ./.github/actions/docker-build-push
         with:
           token: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
           container: sse
 
   deploy:

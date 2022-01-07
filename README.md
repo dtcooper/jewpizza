@@ -97,7 +97,8 @@ make pre-commit
 Build containers and start in daemon mode.
 
 ```bash
-docker compose build
+docker compose pull
+# Or optionally build the containers via: docker compose build
 docker compose up -d
 ```
 

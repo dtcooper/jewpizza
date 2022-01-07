@@ -14,6 +14,9 @@ inputs:
     description: 'Docker Hub username'
     required: false
     default: dtcooper
+  password:
+    description: 'Docker Hub password'
+    required: true
   token:
     description: 'Docker Hub access token'
     required: true
@@ -26,7 +29,7 @@ runs:
       id: vars
       run: |
         echo "::set-output name=sha::$(echo ${GITHUB_SHA} | cut -c1-8)"
-        echo "::set-output name=container::${{ inputs.username }}/jewpizza-${{ inputs.container }}"
+        echo "::set-output name=repo::${{ inputs.username }}/jewpizza-${{ inputs.container }}"
       shell: bash
     -
       name: Set up Docker Buildx
@@ -46,6 +49,14 @@ runs:
         build-args: GIT_REV=${{ steps.vars.outputs.sha }}
         context: ${{ inputs.context == '' && format('./{0}/', inputs.container) || inputs.context}}
         file: ${{ inputs.dockerfile == '' && format('./{0}/Dockerfile', inputs.container) || inputs.dockerfile}}
-        tags: ${{ steps.vars.outputs.container }}:latest,${{ steps.vars.outputs.container }}:${{ steps.vars.outputs.sha }}
-        cache-from: type=registry,ref=${{ steps.vars.outputs.container }}:buildcache
-        cache-to: type=registry,ref=${{ steps.vars.outputs.container }}:buildcache,mode=max
+        tags: ${{ steps.vars.outputs.repo }}:latest,${{ steps.vars.outputs.repo }}:${{ steps.vars.outputs.sha }}
+        cache-from: type=registry,ref=${{ steps.vars.outputs.repo }}:buildcache
+        cache-to: type=registry,ref=${{ steps.vars.outputs.repo }}:buildcache,mode=max
+    -
+      name: Update Docker Hub description
+      uses: peter-evans/dockerhub-description@v2
+      with:
+        username: ${{ inputs.username }}
+        password: ${{ inputs.password }}
+        repository: ${{ steps.vars.outputs.repo }}
+        short-description: jew.pizza website ${{ inputs.container }} container
