@@ -13,96 +13,156 @@ jobs:
   build-app:
     runs-on: ubuntu-latest
     name: Build app container
+    env:
+      CONTAINER: dtcooper/jewpizza-app
+      DEBUG: false
+      CONTEXT: ./
+      DOCKERFILE: ./backend/Dockerfile
     steps:
       -
         name: Get short SHA
         id: sha
         run: echo "::set-output name=sha::$(echo ${GITHUB_SHA} | cut -c1-7)"
       -
-        name: Check out repository
+        name: Checkout
         uses: actions/checkout@v2
       -
-        name: Build container
-        uses: whoan/docker-build-with-cache-action@v5
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      -
+        name: Login to Docker Hub
+        uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-          image_tag: ${{ steps.sha.outputs.sha }},latest
-          image_name: dtcooper/jewpizza-app
-          build_extra_args: "--build-arg=GIT_REV=${{ steps.sha.outputs.sha }}"
-          dockerfile: backend/Dockerfile
+          password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          platforms: linux/amd64,linux/arm64
+          build-args: DEBUG=${{ env.DEBUG && '1' || '0' }}
+          context: ${{ env.CONTEXT }}
+          file: ${{ env.DOCKERFILE }}
+          tags: ${{ env.CONTAINER }}:${{ env.DEBUG && 'debug' || 'latest' }},${{ env.CONTAINER }}:${{ env.DEBUG && 'debug-' || '' }}${{ steps.sha.outputs.sha }}
+          cache-from: type=registry,ref=${{ env.CONTAINER }}:${{ env.DEBUG && 'debug-' || '' }}buildcache
+          cache-to: type=registry,ref=${{ env.CONTAINER }}:${{ env.DEBUG && 'debug-' || '' }}buildcache,mode=max
 
-  build-radio:
+  build-app-debug:
     runs-on: ubuntu-latest
-    name: Build radio container
+    name: Build app container (debug)
+    env:
+      CONTAINER: dtcooper/jewpizza-app
+      DEBUG: true
+      CONTEXT: ./
+      DOCKERFILE: ./backend/Dockerfile
     steps:
       -
         name: Get short SHA
         id: sha
         run: echo "::set-output name=sha::$(echo ${GITHUB_SHA} | cut -c1-7)"
       -
-        name: Check out repository
+        name: Checkout
         uses: actions/checkout@v2
       -
-        name: Build container
-        uses: whoan/docker-build-with-cache-action@v5
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      -
+        name: Login to Docker Hub
+        uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-          image_tag: ${{ steps.sha.outputs.sha }},latest
-          image_name: dtcooper/jewpizza-radio
-          context: ./radio/
-
-  build-sse:
-    runs-on: ubuntu-latest
-    name: Build sse container
-    steps:
+          password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
       -
-        name: Get short SHA
-        id: sha
-        run: echo "::set-output name=sha::$(echo ${GITHUB_SHA} | cut -c1-7)"
-      -
-        name: Check out repository
-        uses: actions/checkout@v2
-      -
-        name: Build container
-        uses: whoan/docker-build-with-cache-action@v5
+        name: Build and push
+        uses: docker/build-push-action@v2
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-          image_tag: ${{ steps.sha.outputs.sha }},latest
-          image_name: dtcooper/jewpizza-sse
-          context: ./sse/
+          push: true
+          platforms: linux/amd64,linux/arm64
+          build-args: DEBUG=${{ env.DEBUG && '1' || '0' }}
+          context: ${{ env.CONTEXT }}
+          file: ${{ env.DOCKERFILE }}
+          tags: ${{ env.CONTAINER }}:${{ env.DEBUG && 'debug' || 'latest' }},${{ env.CONTAINER }}:${{ env.DEBUG && 'debug-' || '' }}${{ steps.sha.outputs.sha }}
+          cache-from: type=registry,ref=${{ env.CONTAINER }}:${{ env.DEBUG && 'debug-' || '' }}buildcache
+          cache-to: type=registry,ref=${{ env.CONTAINER }}:${{ env.DEBUG && 'debug-' || '' }}buildcache,mode=max
 
-  deploy:
-    runs-on: ubuntu-latest
-    name: Deploy
-    needs: [build-app, build-radio, build-sse]
-    steps:
-      -
-        name: Deploy containers
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          port: ${{ secrets.SSH_PORT }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
-          fingerprint: ${{ secrets.SSH_FINGERPRINT }}
-          script: |
-            cd ${{ secrets.SSH_DEPLOY_DIRECTORY }}
-            SHOULD_DEPLOY=
-            if docker compose ps --services --filter "status=running" | grep -q '^app$'; then
-              if [ "$(docker compose exec app poetry run ./manage.py constance get AUTO_DEPLOY)" = True ]; then
-                SHOULD_DEPLOY=1
-              fi
-            else
-              SHOULD_DEPLOY=1
-            fi
-            if [ "$SHOULD_DEPLOY" ]; then
-              git pull --ff-only
-              docker compose pull
-              docker compose up --remove-orphans -d
-              docker system prune -f
-            else
-              echo "Deploy disabled by constance config (AUTO_DEPLOY = False)"
-            fi
+  # build-radio:
+  #   runs-on: ubuntu-latest
+  #   name: Build radio container
+  #   steps:
+  #     -
+  #       name: Get short SHA
+  #       id: sha
+  #       run: echo "::set-output name=sha::$(echo ${GITHUB_SHA} | cut -c1-7)"
+  #     -
+  #       name: Check out repository
+  #       uses: actions/checkout@v2
+  #     -
+  #       name: Build container
+  #       uses: whoan/docker-build-with-cache-action@v5
+  #       with:
+  #         username: ${{ secrets.DOCKERHUB_USERNAME }}
+  #         password: ${{ secrets.DOCKERHUB_TOKEN }}
+  #         image_tag: ${{ steps.sha.outputs.sha }},latest
+  #         image_name: dtcooper/jewpizza-radio
+  #         context: ./radio/
+
+  # build-sse:
+  #   runs-on: ubuntu-latest
+  #   name: Build sse container
+  #   steps:
+  #     -
+  #       name: Get short SHA
+  #       id: sha
+  #       run: echo "::set-output name=sha::$(echo ${GITHUB_SHA} | cut -c1-7)"
+  #     -
+  #       name: Check out repository
+  #       uses: actions/checkout@v2
+  #     -
+  #       name: Build container
+  #       uses: whoan/docker-build-with-cache-action@v5
+  #       with:
+  #         username: ${{ secrets.DOCKERHUB_USERNAME }}
+  #         password: ${{ secrets.DOCKERHUB_TOKEN }}
+  #         image_tag: ${{ steps.sha.outputs.sha }},latest
+  #         image_name: dtcooper/jewpizza-sse
+  #         context: ./sse/
+
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   name: Deploy
+  #   needs: [build-app, build-radio, build-sse]
+  #   steps:
+  #     -
+  #       name: Deploy containers
+  #       uses: appleboy/ssh-action@master
+  #       with:
+  #         host: ${{ secrets.SSH_HOST }}
+  #         port: ${{ secrets.SSH_PORT }}
+  #         username: ${{ secrets.SSH_USERNAME }}
+  #         key: ${{ secrets.SSH_KEY }}
+  #         fingerprint: ${{ secrets.SSH_FINGERPRINT }}
+  #         script: |
+  #           cd ${{ secrets.SSH_DEPLOY_DIRECTORY }}
+  #           SHOULD_DEPLOY=
+  #           if docker compose ps --services --filter "status=running" | grep -q '^app$'; then
+  #             if [ "$(docker compose exec app poetry run ./manage.py constance get AUTO_DEPLOY)" = True ]; then
+  #               SHOULD_DEPLOY=1
+  #             fi
+  #           else
+  #             SHOULD_DEPLOY=1
+  #           fi
+  #           if [ "$SHOULD_DEPLOY" ]; then
+  #             git pull --ff-only
+  #             docker compose pull
+  #             docker compose up --remove-orphans -d
+  #             docker system prune -f
+  #           else
+  #             echo "Deploy disabled by constance config (AUTO_DEPLOY = False)"
+  #           fi
