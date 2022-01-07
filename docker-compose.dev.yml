@@ -7,20 +7,20 @@ x-service-dev-defaults: &service-dev-defaults
 services:
   app:
     <<: *service-dev-defaults
-    image: dtcooper/jewpizza-app:debug
+    image: dtcooper/jewpizza-app:dev
     volumes:
       - .:/app
     tty: true  # needed for tailwind --watch
 
   tasks:
     <<: *service-dev-defaults
-    image: dtcooper/jewpizza-app:debug
+    image: dtcooper/jewpizza-app:dev
     volumes:
       - .:/app
 
   radio:
     <<: *service-dev-defaults
-    image: dtcooper/jewpizza-radio:debug
+    image: dtcooper/jewpizza-radio:dev
     depends_on:
       - icecast
     volumes:
@@ -31,7 +31,7 @@ services:
 
   sse:
     <<: *service-dev-defaults
-    image: dtcooper/jewpizza-sse:debug
+    image: dtcooper/jewpizza-sse:dev
     volumes:
       - ./sse:/app
 

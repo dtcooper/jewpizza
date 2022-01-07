@@ -57,5 +57,5 @@ runs:
         tags:
           "${{ inputs.username }}/jewpizza-${{ inputs.container }}:${{ inputs.debug == '1' && 'dev' || 'latest' }}\
            ${{ inputs.debug == '1' && '' || format(',{0}/jewpizza-{1}:{2}', inputs.username, inputs.container, steps.sha.outputs.sha) }}"
-        cache-from: type=registry,ref=${{ inputs.username }}/jewpizza-${{ inputs.container }}:${{ inputs.debug == '1' && 'dev-' || '' }}buildcache
-        cache-to: type=registry,ref=${{ inputs.username }}/jewpizza-${{ inputs.container }}:${{ inputs.dev == '1' && 'dev-' || '' }}buildcache,mode=max
+        cache-from: type=registry,ref=${{ inputs.username }}/jewpizza-${{ inputs.container }}:buildcache${{ inputs.debug == '1' && '-dev' || '' }}
+        cache-to: type=registry,ref=${{ inputs.username }}/jewpizza-${{ inputs.container }}:buildcache${{ inputs.debug == '1' && '-dev' || '' }},mode=max

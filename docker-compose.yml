@@ -3,7 +3,7 @@ x-service-defaults: &service-defaults
 
 x-app-template: &app-template
   <<: *service-defaults
-  image: dtcooper/jewpizza-app:latest
+  image: dtcooper/jewpizza-app:${PINNED_CONTAINER_VERSION:-latest}"
   build:
     context: .
     dockerfile: backend/Dockerfile
@@ -33,7 +33,7 @@ services:
 
   radio:
     <<: *service-defaults
-    image: dtcooper/jewpizza-radio:latest
+    image: dtcooper/jewpizza-radio:${PINNED_CONTAINER_VERSION:-latest}"
     build:
       context: radio
       args:
@@ -52,7 +52,7 @@ services:
 
   sse:
     <<: *service-defaults
-    image: dtcooper/jewpizza-sse:latest
+    image: dtcooper/jewpizza-sse:${PINNED_CONTAINER_VERSION:-latest}"
     build:
       context: sse
       args:
