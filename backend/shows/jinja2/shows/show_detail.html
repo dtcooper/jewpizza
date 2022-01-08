@@ -5,7 +5,13 @@
     <p>{{ episode.description }}</p>
   </article>
 
-  <audio class="w-full my-3" controls src="{{ episode.asset_url }}"></audio>
+  <div class="w-full space-y-3 my-3" x-data="episodePlayer({{ episode.asset_url|attrjs }})">
+    <div class="w-full cursor-pointer" x-ref="wavesurfer"></div>
+    <div class="text-center">
+      <button class="btn btn-primary" @click="play">Play</button>
+      <button class="btn btn-secondary" @click="stop">Stop</button>
+    </div>
+  </div>
 
   <span class="link link-hover" x-data @click="window.history.back(1)">&lt- Back to show</span>
 {% endblock %}

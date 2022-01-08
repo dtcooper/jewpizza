@@ -229,6 +229,7 @@ NPM_FILE_PATTERNS = {
     "moment": ["min/moment.min.js"],
     "navigo": ["lib/navigo.min.js"],
     "simpledotcss": ["simple.min.css"],
+    "wavesurfer": ["dist/wavesurfer.min.js"],
 }
 
 PHONENUMBER_DEFAULT_REGION = "US"

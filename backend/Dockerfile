@@ -1,4 +1,4 @@
-FROM python:3.10 as audiowaveform-builder
+FROM python:3.10 as audiowaveform
 
 ARG AUDIOWAVEFORM_VERSION=1.5.1
 
@@ -23,6 +23,7 @@ RUN wget -qO - "https://github.com/bbc/audiowaveform/archive/refs/tags/${AUDIOWA
     && cmake -D ENABLE_TESTS=0 .. \
     && make && make install
 
+
 FROM python:3.10
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -32,8 +33,6 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 ARG POETRY_VERSION=1.1.12 \
     WAIT_FOR_IT_VERSION=81b1373f \
     DEBUG=0
-
-COPY --from=audiowaveform-builder /usr/local/bin/audiowaveform /usr/local/bin/audiowaveform
 
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash \
     && apt-get update \
@@ -83,6 +82,8 @@ RUN npm --prefix=../frontend install $([ -z "$DEBUG" -o "$DEBUG" = '0' ] && echo
 COPY . /app/
 
 RUN npm --prefix=../frontend run build
+
+COPY --from=audiowaveform /usr/local/bin/audiowaveform /usr/local/bin/audiowaveform
 
 ENTRYPOINT ["/app/backend/entrypoint.sh"]
 CMD []

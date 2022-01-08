@@ -34,6 +34,7 @@
   <script src="{{ static('vendor/js/alpinejs/dist/cdn.min.js') }}" defer></script>
   <script src="{{ static('vendor/js/moment/min/moment.min.js') }}"></script>
   <script src="{{ static('vendor/js/moment-timezone/builds/moment-timezone-with-data-1970-2030.min.js') }}"></script>
+  <script src="{{ static('vendor/js/wavesurfer/dist/wavesurfer.min.js') }}"></script>
   <script>
     {# XXX bubbleDemoNavLinks variable for bubble demo only, delete it #}
     const DATA = window.DATA = {{ {
@@ -54,6 +55,7 @@
   </script>
   <script src="{{ static('webcore/js/base.js') }}"></script>
   <script src="{{ static('webcore/js/home.js') }}"></script>
+  <script src="{{ static('shows/js/player.js') }}"></script>
   {% if config.ENABLE_JEWIPPY %}
     <script src="{{ static('webcore/js/jewippy.js') }}"></script>
   {% endif %}
@@ -74,7 +76,7 @@
   {% include 'webcore/components/messages.html' %}
 
   <div id="content-scroller" class="flex flex-col flex-1 w-full overflow-y-auto">
-    <div id="content" class="flex-1" x-data :class="{'pb-[275px]': $store.jewippy.open, 'pb-5': !$store.jewippy.open}">
+    <div id="content" class="flex-1 {% if config.JEWIPPY_ENABLED %}pb-5{% endif %}" {% if config.JEWIPPY_ENABLED %}x-data :class="{'pb-[275px]': $store.jewippy.open, 'pb-5': !$store.jewippy.open}"{% endif %}>
       {% block base_content required %}{% endblock %}
     </div>
     {% include 'webcore/components/emojis.html' %}
