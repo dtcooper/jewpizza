@@ -1,3 +1,28 @@
+FROM python:3.10 as audiowaveform-builder
+
+ARG AUDIOWAVEFORM_VERSION=1.5.1
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        cmake \
+        g++ \
+        gcc \
+        libboost-filesystem-dev \
+        libboost-program-options-dev \
+        libboost-regex-dev \
+        libgd-dev \
+        libid3tag0-dev \
+        libmad0-dev \
+        libsndfile1-dev \
+        make \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN wget -qO - "https://github.com/bbc/audiowaveform/archive/refs/tags/${AUDIOWAVEFORM_VERSION}.tar.gz" | tar xz -C /tmp \
+    && cd "/tmp/audiowaveform-${AUDIOWAVEFORM_VERSION}" \
+    && mkdir build && cd build \
+    && cmake -D ENABLE_TESTS=0 .. \
+    && make && make install
+
 FROM python:3.10
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -8,6 +33,8 @@ ARG POETRY_VERSION=1.1.12 \
     WAIT_FOR_IT_VERSION=81b1373f \
     DEBUG=0
 
+COPY --from=audiowaveform-builder /usr/local/bin/audiowaveform /usr/local/bin/audiowaveform
+
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -15,6 +42,13 @@ RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash \
         ffmpeg \
         gzip \
         nodejs \
+        # For audiowaveform
+        libboost-filesystem1.74.0 \
+        libboost-program-options1.74.0 \
+        libboost-regex1.74.0 \
+        libgd3 \
+        libid3tag0 \
+        libmad0 \
         # Dev requirements
         $([ "$DEBUG" -a "$DEBUG" != '0' ] && echo \
             jq \
