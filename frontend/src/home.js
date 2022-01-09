@@ -1,4 +1,6 @@
-/* global moment, Alpine, DATA */
+/* global DATA */
+import Alpine from 'alpinejs'
+import moment from 'moment-timezone/builds/moment-timezone-with-data-1970-2030'
 
 document.addEventListener('alpine:init', () => {
   Alpine.data('localizedTimeBlurb', () => ({

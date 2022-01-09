@@ -224,16 +224,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 NPM_ROOT_PATH = "/app/frontend"
 NPM_STATIC_FILES_PREFIX = "vendor/js"
 NPM_FILE_PATTERNS = {
-    "@alpinejs/persist": ["dist/cdn.min.js"],
     "alpinejs": ["dist/cdn.min.js"],
-    "moment-timezone": ["builds/moment-timezone-with-data-1970-2030.min.js"],
-    "moment": ["min/moment.min.js"],
-    "navigo": ["lib/navigo.min.js"],
     "simpledotcss": ["simple.min.css"],
-    "wavesurfer.js": [
-        "dist/wavesurfer.min.js",
-        "dist/plugin/wavesurfer.timeline.min.js",
-    ],
 }
 
 PHONENUMBER_DEFAULT_REGION = "US"

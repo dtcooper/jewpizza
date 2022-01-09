@@ -5,9 +5,10 @@
   "scripts": {
     "build": "run-p build:*",
     "build:css": "tailwind -i tailwind.css -o ../backend/webcore/static/webcore/css/styles.min.css --minify",
-    "build:js": "sh -c 'for f in $(find ../backend/*/static/*/js/ -type f ! -iname '*.min.js'); do npx uglify-js \"$f\" -o \"${f%.js}.min.js\" ; done'",
+    "build:js": "esbuild src/index.js --outfile=../backend/webcore/static/webcore/js/script.min.js --bundle --minify",
     "watch:dev-css": "tailwind -i tailwind.css -o ../backend/webcore/static/webcore/css/styles.css --watch",
-    "watch": "npm run watch:dev-css"
+    "watch:js": "esbuild src/index.js --outfile=../backend/webcore/static/webcore/js/script.js --bundle --sourcemap --watch",
+    "watch": "run-p watch:*"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
     "@tailwindcss/typography": "^0.5.0",
     "alpinejs": "^3.7.1",
     "daisyui": "^1.22.0",
+    "esbuild": "^0.14.11",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.34",
     "navigo": "^8.11.1",

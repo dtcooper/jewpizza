@@ -5,10 +5,10 @@ Dockerfile
 # Below copied from .gitignore
 .DS_Store
 .env
-/backend/*/static/*/js/*.min.js
 /backend/.coverage
 /backend/htmlcov
 /backend/webcore/static/webcore/css/styles*.css
+/backend/webcore/static/webcore/js/script*.js*
 /frontend/node_modules/
 /serve/
 __pycache__

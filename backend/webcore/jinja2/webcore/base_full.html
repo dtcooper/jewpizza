@@ -29,13 +29,6 @@
     <style>img:not([x-ref="jewippyGif"]) { filter: brightness(0.075); }</style>
   {% endif %}
   <script src="https://code.iconify.design/2/2.0.4/iconify.min.js"></script>
-  <script src="{{ static('vendor/js/navigo/lib/navigo.min.js') }}"></script>
-  <script src="{{ static('vendor/js/@alpinejs/persist/dist/cdn.min.js') }}" defer></script>
-  <script src="{{ static('vendor/js/alpinejs/dist/cdn.min.js') }}" defer></script>
-  <script src="{{ static('vendor/js/moment/min/moment.min.js') }}"></script>
-  <script src="{{ static('vendor/js/moment-timezone/builds/moment-timezone-with-data-1970-2030.min.js') }}"></script>
-  <script src="{{ static('vendor/js/wavesurfer.js/dist/wavesurfer.min.js') }}"></script>
-  <script src="{{ static('vendor/js/wavesurfer.js/dist/plugin/wavesurfer.timeline.min.js') }}"></script>
   <script>
     {# XXX bubbleDemoNavLinks variable for bubble demo only, delete it #}
     const DATA = window.DATA = {{ {
@@ -47,6 +40,7 @@
       'encodedEmail': encoded_email,
       'isAuthenticated': request.user.is_authenticated,
       'isSuperuser': request.user.is_superuser,
+      'enabledJewippy': config.ENABLE_JEWIPPY,
       'jewippyGifs': jewippy_gifs,
       'jewippyTestWEBP': static('webcore/images/jewippy/test.webp'),
       'jsErrorURL': url_for('webcore:log-js-error'),
@@ -54,12 +48,7 @@
       'sseURL': config.SSE_URL,
     }|tojson(indent=2 if settings.DEBUG else none) }}
   </script>
-  <script src="{{ static('webcore/js/base.js') }}"></script>
-  <script src="{{ static('webcore/js/home.js') }}"></script>
-  <script src="{{ static('shows/js/player.js') }}"></script>
-  {% if config.ENABLE_JEWIPPY %}
-    <script src="{{ static('webcore/js/jewippy.js') }}"></script>
-  {% endif %}
+  <script src="{{ static('webcore/js/script.js') }}" defer></script>
 
   {% if config.UMAMI_WEBSITE_ID %}
     <script async defer data-website-id="{{ config.UMAMI_WEBSITE_ID }}" src="{{ config.UMAMI_URL.removesuffix('/') }}/umami.js"></script>
@@ -77,7 +66,7 @@
   {% include 'webcore/components/messages.html' %}
 
   <div id="content-scroller" class="flex flex-col flex-1 w-full overflow-y-auto">
-    <div id="content" class="flex-1 {% if config.JEWIPPY_ENABLED %}pb-5{% endif %}" {% if config.JEWIPPY_ENABLED %}x-data :class="{'pb-[275px]': $store.jewippy.open, 'pb-5': !$store.jewippy.open}"{% endif %}>
+    <div id="content" class="flex-1 {% if config.ENABLE_JEWIPPY %}pb-5{% endif %}" {% if config.ENABLE_JEWIPPY %}x-data :class="{'pb-[275px]': $store.jewippy.open, 'pb-5': !$store.jewippy.open}"{% endif %}>
       {% block base_content required %}{% endblock %}
     </div>
     {% include 'webcore/components/emojis.html' %}

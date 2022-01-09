@@ -1,4 +1,6 @@
-/* global Alpine, WaveSurfer */
+import WaveSurfer from 'wavesurfer.js'
+import TimelinePlugin from 'wavesurfer.js/dist/plugin/wavesurfer.timeline'
+import Alpine from 'alpinejs'
 
 document.addEventListener('alpine:init', () => {
   Alpine.data('episodePlayer', (url, peaks, duration) => ({
@@ -14,8 +16,8 @@ document.addEventListener('alpine:init', () => {
         progressColor: '#f10486',
         waveColor: '#fc49ab',
         plugins: [
-          WaveSurfer.timeline.create({
-            container: this.$refs.timeline,
+          TimelinePlugin.create({
+            container: this.$refs.timeline
           })
         ]
       })

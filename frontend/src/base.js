@@ -1,4 +1,6 @@
-/* global DATA, Alpine, Navigo */
+/* global DATA */
+import Alpine from 'alpinejs'
+import Navigo from 'navigo'
 
 (() => {
   let router, contentScrollerDiv, contentDiv
