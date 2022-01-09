@@ -6,6 +6,7 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls import reverse
 from django.utils.timezone import get_default_timezone_name
+from django.contrib.postgres.fields import ArrayField
 
 from recurrence.fields import RecurrenceField
 from s3direct.fields import S3DirectField
@@ -95,6 +96,7 @@ class Episode(ShowBaseModel):
         dest="show_asset_url",
         help_text="Upload audio asset here directly to DigitalOcean Spaces (S3). In mp3 format only.",
     )
+    peaks = ArrayField(models.FloatField(), default=list)
 
     objects = EpisodeManager()
 
@@ -103,6 +105,9 @@ class Episode(ShowBaseModel):
         indexes = (
             models.Index(fields=("date",)),
             models.Index(fields=("show_code", "date")),
+        )
+        unique_together = (
+            ('show_code', 'slug'),
         )
 
     def get_absolute_url(self):

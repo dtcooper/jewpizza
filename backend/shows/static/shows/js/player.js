@@ -1,18 +1,25 @@
 /* global Alpine, WaveSurfer */
 
 document.addEventListener('alpine:init', () => {
-  Alpine.data('episodePlayer', (assetUrl) => ({
+  Alpine.data('episodePlayer', (url, peaks, duration) => ({
     init () {
       this.playing = false
       this.wavesurfer = WaveSurfer.create({
         container: this.$refs.wavesurfer,
+        backend: 'MediaElement',
         barWidth: 3,
         barMinHeight: 1,
+        responsive: true,
         normalize: true,
         progressColor: '#f10486',
-        waveColor: '#fc49ab'
+        waveColor: '#fc49ab',
+        plugins: [
+          WaveSurfer.timeline.create({
+            container: this.$refs.timeline,
+          })
+        ]
       })
-      this.wavesurfer.load(assetUrl)
+      this.wavesurfer.load(this.$refs.audio, peaks)
     },
     play () {
       this.playing = true

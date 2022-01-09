@@ -5,8 +5,10 @@
     <p>{{ episode.description }}</p>
   </article>
 
-  <div class="w-full space-y-3 my-3" x-data="episodePlayer({{ episode.asset_url|attrjs }})">
-    <div class="w-full cursor-pointer" x-ref="wavesurfer"></div>
+  <div class="space-y-3 my-3" x-data="episodePlayer({{ episode.asset_url|attrjs }}, {{ episode.peaks|attrjs }})">
+    <audio src="{{ episode.asset_url }}" crossorigin="anonymous" x-ref="audio"></audio>
+    <div class="cursor-pointer w-full" x-ref="wavesurfer"></div>
+    <div class="w-full" x-ref="timeline"></div>
     <div class="text-center">
       <button class="btn btn-primary" @click="play">Play</button>
       <button class="btn btn-secondary" @click="stop">Stop</button>

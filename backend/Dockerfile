@@ -17,8 +17,10 @@ RUN apt-get update \
         make \
     && rm -rf /var/lib/apt/lists/*
 
-RUN wget -qO - "https://github.com/bbc/audiowaveform/archive/refs/tags/${AUDIOWAVEFORM_VERSION}.tar.gz" | tar xz -C /tmp \
-    && cd "/tmp/audiowaveform-${AUDIOWAVEFORM_VERSION}" \
+RUN mkdir /build \
+    && wget -qO - "https://github.com/bbc/audiowaveform/archive/refs/tags/${AUDIOWAVEFORM_VERSION}.tar.gz" \
+        | tar xz -C /build --strip-components 1 \
+    && cd "/build" \
     && mkdir build && cd build \
     && cmake -D ENABLE_TESTS=0 .. \
     && make && make install

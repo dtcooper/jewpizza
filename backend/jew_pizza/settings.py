@@ -75,6 +75,7 @@ if DEBUG:
         "from django_redis import get_redis_connection",
         "from jew_pizza.twilio import send_sms, twilio_client",
         "from jew_pizza.utils import reload_radio_container, send_sse_message",
+        "from shows.tasks import generate_peaks",
     ]
 
 MIDDLEWARE = ["django.middleware.security.SecurityMiddleware"]
@@ -229,7 +230,10 @@ NPM_FILE_PATTERNS = {
     "moment": ["min/moment.min.js"],
     "navigo": ["lib/navigo.min.js"],
     "simpledotcss": ["simple.min.css"],
-    "wavesurfer": ["dist/wavesurfer.min.js"],
+    "wavesurfer.js": [
+        "dist/wavesurfer.min.js",
+        "dist/plugin/wavesurfer.timeline.min.js",
+    ],
 }
 
 PHONENUMBER_DEFAULT_REGION = "US"

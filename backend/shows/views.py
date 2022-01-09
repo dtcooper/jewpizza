@@ -36,7 +36,7 @@ class ShowListView(ListView):
         return {**super().get_context_data(**kwargs), "show": show, "title": show.name, "hide_title": True}
 
     def get_queryset(self):
-        return Episode.active.filter(show_code=self.kwargs["show"].code)
+        return Episode.active.defer("peaks").filter(show_code=self.kwargs["show"].code)
 
 
 class ShowDetailView(DetailView):
