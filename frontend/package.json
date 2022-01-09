@@ -5,9 +5,9 @@
   "scripts": {
     "build": "run-p build:*",
     "build:css": "tailwind -i tailwind.css -o ../backend/webcore/static/webcore/css/styles.min.css --minify",
-    "build:js": "esbuild src/index.js --outfile=../backend/webcore/static/webcore/js/script.min.js --bundle --minify",
+    "build:js": "esbuild src/index.js --outfile=../backend/webcore/static/webcore/js/script.min.js --bundle --minify --legal-comments=none",
     "watch:dev-css": "tailwind -i tailwind.css -o ../backend/webcore/static/webcore/css/styles.css --watch",
-    "watch:js": "esbuild src/index.js --outfile=../backend/webcore/static/webcore/js/script.js --bundle --sourcemap --watch",
+    "watch:dev-js": "esbuild src/index.js --outfile=../backend/webcore/static/webcore/js/script.js --bundle --sourcemap --watch",
     "watch": "run-p watch:*"
   },
   "repository": {
