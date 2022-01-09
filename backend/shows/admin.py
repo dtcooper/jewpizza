@@ -47,9 +47,14 @@ class EpisodeAdmin(ShowsCommonModelAdminMixin, admin.ModelAdmin):
         "date",
         "duration",
         "guid",
+        "has_peaks",
     )
-    readonly_fields = ("guid",)
-    list_display = ("published", "show_code", "display_name", "date", "date", "duration")
+    readonly_fields = ("guid", "has_peaks")
+    list_display = ("published", "show_code", "display_name", "date", "date", "duration", "has_peaks")
+
+    @admin.display(description="Peaks", boolean=True)
+    def has_peaks(self, obj):
+        return bool(obj.peaks)
 
     def save_model(self, request, obj, form, change):
         if form.cleaned_data["name_from_ffprobe"]:

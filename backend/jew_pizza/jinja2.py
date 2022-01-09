@@ -221,4 +221,6 @@ def create_environment(**options):
             "smart_title": smart_title,
         }
     )
+    if not settings.DEBUG:
+        env.policies["json.dumps_kwargs"]["separators"] = (",", ":")
     return env

@@ -1,13 +1,15 @@
 /.git/
 /.github/
 /scratch/
+Dockerfile
 # Below copied from .gitignore
 .DS_Store
 .env
+/backend/*/static/*/js/*.min.js
 /backend/.coverage
-/backend/*/static/js/*.min.js
 /backend/htmlcov
-/backend/webcore/static/css/styles*.css
+/backend/webcore/static/webcore/css/styles*.css
 /frontend/node_modules/
 /serve/
+__pycache__
 docker-compose.override.yml

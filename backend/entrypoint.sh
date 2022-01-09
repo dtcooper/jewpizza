@@ -104,6 +104,7 @@ else
     # Wait on DB migrated, static collected, and redis up. Ready to start afterwards.
     wait
 
+    # We can initialize the DB (fixtures) async
     init_db &
 
     if [ "$DEBUG" ]; then

@@ -6,7 +6,7 @@ SERVER_NODENAME:=jewpizza
 SERVER_PROJECT_DIR:=dev.jew.pizza
 SHELL:=/bin/bash
 SHOW_FIXTURE_MODELS=episode showdate
-SHOW_FIXTURE_DIR=shows/fixtures/shows
+SHOW_FIXTURE_DIR=backend/shows/fixtures/shows
 GIT_REV=$(shell git describe --tags --always --abbrev=8 --dirty)
 
 up:
@@ -56,7 +56,8 @@ export-show-fixtures:
 	@for model in $(SHOW_FIXTURE_MODELS); do \
 		echo "Exporting $${model}s..." ; \
 		$(COMPOSE) run --rm app ./manage.py dumpdata --indent=2 --format=json --natural-primary --natural-foreign \
-			-o "$(SHOW_FIXTURE_DIR)/$${model}s.json" "shows.$${model}"; \
+			"shows.$${model}" > "$(SHOW_FIXTURE_DIR)/$${model}s.json" ; \
+		bzip2 -9f "$(SHOW_FIXTURE_DIR)/$${model}s.json" ; \
 	done
 
 ssh: # For me only.
