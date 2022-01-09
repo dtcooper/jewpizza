@@ -8,7 +8,7 @@ Dockerfile
 /backend/.coverage
 /backend/htmlcov
 /backend/webcore/static/webcore/css/styles*.css
-/backend/webcore/static/webcore/js/script*.js*
+/backend/webcore/static/webcore/js/bundle*.js*
 /frontend/node_modules/
 /serve/
 __pycache__

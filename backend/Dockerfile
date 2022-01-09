@@ -83,7 +83,8 @@ RUN npm --prefix=../frontend install $([ -z "$DEBUG" -o "$DEBUG" = '0' ] && echo
 
 COPY . /app/
 
-RUN npm --prefix=../frontend run build
+RUN npm --prefix=../frontend run build \
+    && sed -i 's/^\/\*.*\*\///' webcore/static/webcore/css/styles.min.css
 
 COPY --from=audiowaveform /usr/local/bin/audiowaveform /usr/local/bin/audiowaveform
 

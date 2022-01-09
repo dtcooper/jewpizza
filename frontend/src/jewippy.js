@@ -1,7 +1,7 @@
 /* global DATA */
 import Alpine from 'alpinejs'
 
-if (DATA.enabledJewippy) {
+if (DATA.jewippyEnabled) {
   document.addEventListener('alpine:init', () => {
     let component = null
 

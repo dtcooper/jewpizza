@@ -36,19 +36,19 @@
       'csrfToken': csrf_token|string,
       'currentPage': active_url,
       'debug': settings.DEBUG,
-      'enabledPlayer': config.ENABLE_PLAYER,
       'encodedEmail': encoded_email,
       'isAuthenticated': request.user.is_authenticated,
       'isSuperuser': request.user.is_superuser,
-      'enabledJewippy': config.ENABLE_JEWIPPY,
+      'jewippyEnabled': config.ENABLE_JEWIPPY,
       'jewippyGifs': jewippy_gifs,
       'jewippyTestWEBP': static('webcore/images/jewippy/test.webp'),
       'jsErrorURL': url_for('webcore:log-js-error'),
       'messages': get_messages(),
+      'playerEnabled': config.ENABLE_PLAYER,
       'sseURL': config.SSE_URL,
     }|tojson(indent=2 if settings.DEBUG else none) }}
   </script>
-  <script src="{{ static('webcore/js/script.js') }}" defer></script>
+  <script src="{{ static('webcore/js/bundle.js') }}" defer></script>
 
   {% if config.UMAMI_WEBSITE_ID %}
     <script async defer data-website-id="{{ config.UMAMI_WEBSITE_ID }}" src="{{ config.UMAMI_URL.removesuffix('/') }}/umami.js"></script>

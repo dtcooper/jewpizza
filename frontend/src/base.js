@@ -158,7 +158,7 @@ import Navigo from 'navigo'
     Alpine.store('messages', DATA.messages)
 
     // XXX Test eventsource
-    if (DATA.enabledPlayer) {
+    if (DATA.playerEnabled) {
       Alpine.store('sse', {})
 
       const eventsource = window.eventsource = new window.EventSource(DATA.sseURL)

@@ -1,7 +1,6 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 const cyberpunkTheme = require('daisyui/colors/themes')['[data-theme=cyberpunk]']
 
-
 module.exports = {
   mode: 'jit',
   darkMode: 'media',
