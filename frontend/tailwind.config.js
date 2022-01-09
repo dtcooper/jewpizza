@@ -12,7 +12,8 @@ module.exports = {
   content: [
     '../backend/**/jinja2/*.html',
     '../backend/**/jinja2/**/*.html',
-    '../backend/**/static/js/*.js',
+    'src/*.js',
+    'src/**/*.js',
     '../backend/**/templates/*.html',
     '../backend/**/templates/**/*.html'
   ],
