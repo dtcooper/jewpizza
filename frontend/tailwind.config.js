@@ -2,12 +2,7 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 const cyberpunkTheme = require('daisyui/colors/themes')['[data-theme=cyberpunk]']
 
 module.exports = {
-  mode: 'jit',
   darkMode: 'media',
-  future: {
-    removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: true
-  },
   content: [
     '../backend/**/jinja2/*.html',
     '../backend/**/jinja2/**/*.html',
@@ -58,7 +53,6 @@ module.exports = {
       }
     }
   },
-  variants: {},
   plugins: [
     require('daisyui'),
     // Intentionally after daisyUI as its typography CSS is screwy

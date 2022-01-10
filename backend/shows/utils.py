@@ -9,7 +9,7 @@ from django.utils.timezone import get_default_timezone
 
 
 logger = logging.getLogger(f"jewpizza.{__file__}")
-FFProbeData = namedtuple("FFProbeData", ("format", "duration", "artist", "title"))
+FFProbeData = namedtuple("FFProbeData", ("format", "duration", "artist", "title", "sample_rate"))
 
 
 def ffprobe(url):
@@ -44,6 +44,8 @@ def ffprobe(url):
                     "duration": datetime.timedelta(
                         seconds=math.ceil(float(ffprobe_data["streams"][0].get("duration") or 0))
                     ),
+                    # For peak generation
+                    "sample_rate": int(ffprobe_data["streams"][0].get("sample_rate")) or 0,
                 }
             )
         else:
