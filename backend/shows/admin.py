@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.utils.safestring import mark_safe
 
 from .models import Episode, ShowDate
+from .tasks import generate_peaks
 
 
 class ShowsCommonModelAdminMixin:
@@ -60,6 +61,7 @@ class EpisodeAdmin(ShowsCommonModelAdminMixin, admin.ModelAdmin):
         if form.cleaned_data["name_from_ffprobe"]:
             obj.name = " - ".join(filter(None, (obj.ffprobe.artist, obj.ffprobe.title)))
         super().save_model(request, obj, form, change)
+        generate_peaks(obj)
 
 
 class ShowDateAdmin(ShowsCommonModelAdminMixin, admin.ModelAdmin):

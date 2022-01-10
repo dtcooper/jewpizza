@@ -17,8 +17,6 @@ down:
 
 pre-commit:
 	@$(COMPOSE) run --rm --no-deps app sh -c '\
-		echo "=============== standard ===============";\
-		npx --prefix=/app/frontend standard --fix ;\
 		echo "=============== black ==================";\
 		black . ;\
 		black --config pyproject.toml ../sse ;\
@@ -28,6 +26,9 @@ pre-commit:
 		echo "=============== flake8 =================";\
 		flake8;\
 		flake8 --config .flake8 ../sse ;\
+		echo "=============== standard ===============";\
+		cd ../frontend/src ;\
+		npx standard --fix ;\
 		exit 0'
 
 build:

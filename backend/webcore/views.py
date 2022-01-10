@@ -28,7 +28,7 @@ class LogJSErrorView(View):
         message += f"{error['title']} occurred at {error['url']}"
         if filename := error.get("filename"):
             message += f" ({filename})"
-        message += f":\n\n{error['detail']}"
+        message += f":\n\n{error.get('detail', '[none]')}"
 
         logger.warning(f"Got JS error: {message}")
 

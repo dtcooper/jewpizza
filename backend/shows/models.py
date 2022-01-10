@@ -2,11 +2,11 @@ import datetime
 import uuid
 
 from django.conf import settings
+from django.contrib.postgres.fields import ArrayField
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls import reverse
 from django.utils.timezone import get_default_timezone_name
-from django.contrib.postgres.fields import ArrayField
 
 from recurrence.fields import RecurrenceField
 from s3direct.fields import S3DirectField
@@ -106,9 +106,7 @@ class Episode(ShowBaseModel):
             models.Index(fields=("date",)),
             models.Index(fields=("show_code", "date")),
         )
-        unique_together = (
-            ('show_code', 'slug'),
-        )
+        unique_together = (("show_code", "slug"),)
 
     def get_absolute_url(self):
         return reverse("shows:show-detail", kwargs={"show": self.show, "slug": self.slug})
