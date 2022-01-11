@@ -109,14 +109,14 @@ uvloop = ["uvloop (>=0.15.2)"]
 
 [[package]]
 name = "boto3"
-version = "1.20.31"
+version = "1.20.33"
 description = "The AWS SDK for Python"
 category = "main"
 optional = false
 python-versions = ">= 3.6"
 
 [package.dependencies]
-botocore = ">=1.23.31,<1.24.0"
+botocore = ">=1.23.33,<1.24.0"
 jmespath = ">=0.7.1,<1.0.0"
 s3transfer = ">=0.5.0,<0.6.0"
 
@@ -125,7 +125,7 @@ crt = ["botocore[crt] (>=1.21.0,<2.0a0)"]
 
 [[package]]
 name = "botocore"
-version = "1.23.31"
+version = "1.23.33"
 description = "Low-level, data-driven core of boto 3."
 category = "main"
 optional = false
@@ -380,7 +380,7 @@ resolved_reference = "6a35e0e24cdc8f0b2a38bbece08864de18a04ab0"
 
 [[package]]
 name = "django-widget-tweaks"
-version = "1.4.9"
+version = "1.4.11"
 description = "Tweak the form field rendering in templates, not in python-level form definitions."
 category = "main"
 optional = false
@@ -706,7 +706,7 @@ ptyprocess = ">=0.5"
 
 [[package]]
 name = "phonenumbers"
-version = "8.12.40"
+version = "8.12.41"
 description = "Python version of Google's common library for parsing, formatting, storing and validating international phone numbers."
 category = "main"
 optional = false
@@ -1159,7 +1159,7 @@ tests = ["coverage", "flake8", "wheel"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "0c5cec7b8bc28787eba2190c2e3cb77cb096de700c63444aa9adde6979481d79"
+content-hash = "dc44fb5adee3aededb8c564064fbc4f47b59db0d0009b6e3fcfe705b52609467"
 
 [metadata.files]
 appdirs = [
@@ -1199,12 +1199,12 @@ black = [
     {file = "black-21.12b0.tar.gz", hash = "sha256:77b80f693a569e2e527958459634f18df9b0ba2625ba4e0c2d5da5be42e6f2b3"},
 ]
 boto3 = [
-    {file = "boto3-1.20.31-py3-none-any.whl", hash = "sha256:948e81af347085e6bc5ff08368d7901afec9e7628adf180c9cc856c7b0ae3395"},
-    {file = "boto3-1.20.31.tar.gz", hash = "sha256:3003d64ebef678b89a9909d2df3836160c7cbad5cbfe6c995a61de0875b36237"},
+    {file = "boto3-1.20.33-py3-none-any.whl", hash = "sha256:4110e8a1790842d1f818363b83c5f72dea4bdd980c46df1540814c4a79d72884"},
+    {file = "boto3-1.20.33.tar.gz", hash = "sha256:1e72294b042651ab27a3b6a9eea2810fc8faab5be52b0876f9f5b55f5fd9e101"},
 ]
 botocore = [
-    {file = "botocore-1.23.31-py3-none-any.whl", hash = "sha256:187c736ce242bbea3d1440c580d270e0fd839276c5cc3938a85b8c59366c1803"},
-    {file = "botocore-1.23.31.tar.gz", hash = "sha256:bb34fa60ab894f9a4a1f7de36e32a68ce17f302108f83732c3ca99c7da2bf68c"},
+    {file = "botocore-1.23.33-py3-none-any.whl", hash = "sha256:9be1ea775e6de420a5873dff42108a1843e9137a52ef98c926dad56a8152ef2f"},
+    {file = "botocore-1.23.33.tar.gz", hash = "sha256:8faeda0da14a3cb5df8005052527cc0263181adad6bdbfedbe20079c72973c2c"},
 ]
 brotli = [
     {file = "Brotli-1.0.9-cp27-cp27m-macosx_10_9_x86_64.whl", hash = "sha256:268fe94547ba25b58ebc724680609c8ee3e5a843202e9a381f6f9c5e8bdb5c70"},
@@ -1366,8 +1366,8 @@ django-redis = [
 ]
 django-s3direct = []
 django-widget-tweaks = [
-    {file = "django-widget-tweaks-1.4.9.tar.gz", hash = "sha256:19bcb66a4a9e68493ced04e7124882d753c5be517ed001556f9e35a40147f545"},
-    {file = "django_widget_tweaks-1.4.9-py2.py3-none-any.whl", hash = "sha256:d6c64fbf92cd2df9031f597c1374982233c05a1190d295c39d1c57ce007569c7"},
+    {file = "django-widget-tweaks-1.4.11.tar.gz", hash = "sha256:07674e32031eda81077f0b8e390ce78d1d415e700cedd0396ef0ce452e95b94d"},
+    {file = "django_widget_tweaks-1.4.11-py2.py3-none-any.whl", hash = "sha256:01b911a1b47629de0a3a3097774798dee4eb703b94d41666929f688d5f77c723"},
 ]
 feedparser = [
     {file = "feedparser-6.0.8-py3-none-any.whl", hash = "sha256:1b7f57841d9cf85074deb316ed2c795091a238adb79846bc46dccdaf80f9c59a"},
@@ -1610,8 +1610,8 @@ pexpect = [
     {file = "pexpect-4.8.0.tar.gz", hash = "sha256:fc65a43959d153d0114afe13997d439c22823a27cefceb5ff35c2178c6784c0c"},
 ]
 phonenumbers = [
-    {file = "phonenumbers-8.12.40-py2.py3-none-any.whl", hash = "sha256:fc105364dfee2bdb5be9116071e877b66fc7afbff6491c1b739fe7cff9a4c7bf"},
-    {file = "phonenumbers-8.12.40.tar.gz", hash = "sha256:00f2955a456b458f9b6ab0d24329049c3e7358c44dfc1979fe4908ced40f1eb8"},
+    {file = "phonenumbers-8.12.41-py2.py3-none-any.whl", hash = "sha256:2b8c7a7ffac4fe2be3d8bf20dad316ea1292f27422c9e18b1f3cd16734d4a5ed"},
+    {file = "phonenumbers-8.12.41.tar.gz", hash = "sha256:f477da623a51cba084567d6a67b1882a8aaaf3e7beadad655f8613a8f887ac62"},
 ]
 pickleshare = [
     {file = "pickleshare-0.7.5-py2.py3-none-any.whl", hash = "sha256:9649af414d74d4df115d5d718f82acb59c9d418196b7b4290ed47a12ce62df56"},
