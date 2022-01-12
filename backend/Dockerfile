@@ -91,5 +91,7 @@ COPY --from=audiowaveform /usr/local/bin/audiowaveform /usr/local/bin/audiowavef
 ENTRYPOINT ["/app/backend/entrypoint.sh"]
 CMD []
 
-ARG GIT_REV=unknown
-ENV GIT_REV=${GIT_REV}
+ARG GIT_REV=unknown \
+    BUILD_DATE=unknown
+ENV GIT_REV=${GIT_REV} \
+    BUILD_DATE=${BUILD_DATE}

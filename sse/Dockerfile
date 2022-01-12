@@ -23,3 +23,8 @@ RUN poetry install \
 COPY . /app/
 
 ENTRYPOINT ["/app/entrypoint.sh"]
+
+ARG GIT_REV=unknown \
+    BUILD_DATE=unknown
+ENV GIT_REV=${GIT_REV} \
+    BUILD_DATE=${BUILD_DATE}

@@ -105,7 +105,7 @@
       <a href="{{ url_for('admin:index') }}">Admin</a> /
       <a href="{{ url_for('admin:logout') }}">Log Out</a>
     </div>
-    Current git rev: <code>{{ settings.GIT_REV }}</code>
+    Revision <code>{{ settings.GIT_REV }}</code> built on {{ settings.BUILD_DATE|datetime }}
   </footer>
 </body>
 </html>

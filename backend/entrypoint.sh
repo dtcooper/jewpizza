@@ -1,5 +1,7 @@
 #!/bin/sh
 
+echo "Starting app container (revision $GIT_REV built on $(date -d "$BUILD_DATE"))"
+
 cd /app/backend
 
 # Use the poetry's virtualenv

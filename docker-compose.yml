@@ -61,6 +61,8 @@ services:
       - ./.env:/.env:ro
     depends_on:
       - redis
+    environment:
+      - "TZ=${TIMEZONE:-US/Eastern}"
     ports:
       - "${SSE_BIND_ADDR:-127.0.0.1:8001}:8001"
 
@@ -115,6 +117,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       - AUTOHEAL_START_PERIOD=30
+      - "TZ=${TIMEZONE:-US/Eastern}"
 
 volumes:
   postgres_data:

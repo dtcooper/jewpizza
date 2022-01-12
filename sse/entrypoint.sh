@@ -1,5 +1,7 @@
 #!/bin/sh
 
+echo "Starting sse container (revision $GIT_REV built on $(date -d "$BUILD_DATE"))"
+
 cd /app
 
 export PATH="$(poetry env info -p)/bin:$PATH"

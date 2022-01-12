@@ -8,6 +8,7 @@ SHELL:=/bin/bash
 SHOW_FIXTURE_MODELS=episode showdate
 SHOW_FIXTURE_DIR=backend/shows/fixtures/shows
 GIT_REV=$(shell git describe --tags --always --abbrev=8 --dirty)
+BUILD_DATE=$(shell date -u +%FT%TZ)
 
 up:
 	@$(COMPOSE) up --remove-orphans $(shell source .env; if [ -z "$$DEBUG" -o "$$DEBUG" = 0 ]; then echo "-d"; fi)
@@ -32,10 +33,10 @@ pre-commit:
 		exit 0'
 
 build:
-	$(COMPOSE) build --pull --build-arg GIT_REV=$(GIT_REV)
+	$(COMPOSE) build --pull --build-arg GIT_REV=$(GIT_REV) --build-arg BUILD_DATE=$(BUILD_DATE)
 
 build-no-cache:
-	$(COMPOSE) build --no-cache --pull --build-arg GIT_REV=$(GIT_REV)
+	$(COMPOSE) build --no-cache --pull --build-arg GIT_REV=$(GIT_REV) --build-arg BUILD_DATE=$(BUILD_DATE)
 
 shell:
 	@$(COMPOSE) run --rm --service-ports --use-aliases app bash || true

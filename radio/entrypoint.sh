@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Starting radio container (revision $GIT_REV built on $(date -d "$BUILD_DATE"))"
+
 cd /radio
 
 if [ -f /.env ]; then

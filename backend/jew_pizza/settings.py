@@ -3,6 +3,8 @@ import os
 from pathlib import Path
 import sys
 
+from dateutil.parser import parse as dateutil_parse
+
 import environ
 
 
@@ -37,6 +39,11 @@ AWS_S3_REGION_NAME = env("DIGITALOCEAN_SPACES_REGION_NAME")
 
 RUN_HUEY = env.bool("__RUN_HUEY", default=False)
 GIT_REV = env("GIT_REV", default="unknown")
+BUILD_DATE = env("BUILD_DATE", default="unknown")
+try:
+    BUILD_DATE = dateutil_parse(BUILD_DATE)
+except ValueError:
+    pass
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 

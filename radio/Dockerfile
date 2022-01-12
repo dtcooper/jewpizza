@@ -34,3 +34,8 @@ ENTRYPOINT ["/usr/bin/tini", "--", "/entrypoint.sh"]
 CMD []
 
 HEALTHCHECK --start-period=30s CMD [ "/healthcheck.sh" ]
+
+ARG GIT_REV=unknown \
+    BUILD_DATE=unknown
+ENV GIT_REV=${GIT_REV} \
+    BUILD_DATE=${BUILD_DATE}

@@ -1211,7 +1211,7 @@ tests = ["coverage", "flake8", "wheel"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "9646fed81f7dcdcaea60788f5137972041cc5a07bc8195f89309fb4568b24b67"
+content-hash = "d2671e982d2bd326bb7a10bb066f657cbd100e919d14631adf773cb5bcba85e6"
 
 [metadata.files]
 appdirs = [
