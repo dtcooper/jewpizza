@@ -43,14 +43,14 @@ shell:
 
 show-outdated:
 	@echo 'Showing outdated dependencies... (empty means none)'
-	@$(COMPOSE) run --rm --no-deps -e "GITHUB_API_TOKEN=$$GITHUB_API_TOKEN" app sh -c '\
+	@$(COMPOSE) run --rm --no-deps -e "GITHUB_API_TOKEN=$$GITHUB_API_TOKEN" -e NO_STARTUP_MESSAGE=1 app sh -c '\
 		echo "============ Misc Dependencies =========";\
 		../scripts/check-versions.sh;\
 		echo "============ Frontend (app) ============";\
 		npm --prefix=../frontend outdated;\
 		echo "============ Backend (app) =============";\
 		poetry show -o'
-	@$(COMPOSE) run --rm --no-deps sse sh -c '\
+	@$(COMPOSE) run --rm --no-deps -e NO_STARTUP_MESSAGE=1 sse sh -c '\
 		echo "============ Backend (sse) =============";\
 		poetry show -o'
 

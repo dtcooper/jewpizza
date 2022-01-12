@@ -1,6 +1,8 @@
 #!/bin/bash
 
-echo "Starting radio container (revision $GIT_REV built on $(date -d "$BUILD_DATE"))"
+if [ -z "$NO_STARTUP_MESSAGE" ]; then
+    echo "Starting radio container revision $GIT_REV built on $(date -d "$BUILD_DATE")"
+fi
 
 cd /radio
 
