@@ -286,6 +286,7 @@ CONSTANCE_CONFIG = {
         "url",
     ),
     "UMAMI_URL": ("http://localhost:3000/" if DEBUG else "https://umami.jew.pizza/", "URL for umami analytics", "url"),
+    "UMAMI_SCRIPT_URL": ("http://localhost:3000/" if DBEUG else "https://umami.jew.pizza/script.js", "URL for umami.js script", "url"),
     "UMAMI_WEBSITE_ID": ("", "Website ID in umami", "uuid_optional"),
     "SSE_URL": (
         "http://localhost:8001/" if DEBUG else "https://sse.jew.pizza/",

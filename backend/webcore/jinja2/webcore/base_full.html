@@ -51,7 +51,8 @@
   <script src="{{ static('webcore/js/bundle.js') }}" defer></script>
 
   {% if config.UMAMI_WEBSITE_ID %}
-    <script async defer data-website-id="{{ config.UMAMI_WEBSITE_ID }}" src="{{ config.UMAMI_URL.removesuffix('/') }}/umami.js"></script>
+    {# Shouldn't be umami.js for uBlock Origin #}
+    <script async defer data-website-id="{{ config.UMAMI_WEBSITE_ID }}" src="{{ config.UMAMI_SCRIPT_URL }}"></script>
   {% endif %}
 </head>
 
