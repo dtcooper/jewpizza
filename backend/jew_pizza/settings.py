@@ -238,11 +238,6 @@ NPM_FILE_PATTERNS = {
 PHONENUMBER_DEFAULT_REGION = "US"
 
 STATICFILES_STORAGE = "jew_pizza.storage.PostProcessCompressionStorage"
-STATICFILES_FINDERS = [
-    "django.contrib.staticfiles.finders.FileSystemFinder",
-    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-    "npm.finders.NpmFinder",
-]
 
 AWS_S3_ENDPOINT_URL = f"https://{AWS_S3_REGION_NAME}.digitaloceanspaces.com"
 DIGITALOCEAN_SPACES_REWRITE_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.{AWS_S3_REGION_NAME}.digitaloceanspaces.com"
@@ -314,7 +309,7 @@ CONSTANCE_CONFIG_FIELDSETS = OrderedDict(
             ("FACEBOOK_NAME", "INSTAGRAM_NAME", "SUBSTACK_NAME", "TIKTOK_NAME", "TWITCH_NAME", "TWITTER_NAME"),
         ),
         ("Telephony", ("TWILIO_FROM_NUMBER",)),
-        ("Umami Tracking Tag", ("UMAMI_WEBSITE_ID", "UMAMI_URL")),
+        ("Umami Tracking Tag", ("UMAMI_WEBSITE_ID", "UMAMI_URL", "UMAMI_SCRIPT_URL")),
         (
             "Icecast",
             (

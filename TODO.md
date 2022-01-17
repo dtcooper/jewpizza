@@ -51,6 +51,7 @@
 * [ ] Radio should have a mountpoint to pre-empty and stream from
 * [ ] Sourcemaps for JS exceptions
 * [ ] Add _Highlights_ sections, possible on Home page?
+* [ ] Showgram nightly segment breakdown with links to podcast?
 
 ## Sections
 

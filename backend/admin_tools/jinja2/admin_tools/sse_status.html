@@ -1,7 +1,7 @@
 {% extends 'admin_tools/base.html' %}
 
 {% block extra_head %}
-  <script src="{{ static('vendor/js/alpinejs/dist/cdn.min.js') }}" defer></script>
+  <script src="{{ static('admin_tools/vendor/js/alpine.js') }}" defer></script>
   <script>
     const MAX_MESSAGES = 50
     {# Hack, since you can't set a header w/ EventSource #}
