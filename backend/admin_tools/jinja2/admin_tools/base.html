@@ -8,7 +8,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700" rel="stylesheet">
     {% include 'webcore/components/favicon.html' %}
-    <link rel="stylesheet" href="{{ static('admin_tools/vendor/css/simple.css') }}">
+    {# Don't minify, since simpledotcss's included minified CSS file is v1 and not v2 #}
+    <link rel="stylesheet" href="{{ static('admin_tools/vendor/css/simple.css', _minify=False) }}">
     <style>
       :root {
         --mono-font: "Space Mono", Consolas, Menlo, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
