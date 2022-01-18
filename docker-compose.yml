@@ -86,7 +86,7 @@ services:
 
   umami:
     <<: *service-defaults
-    image: ghcr.io/mikecao/umami:postgresql-b756fcd
+    image: ghcr.io/mikecao/umami:postgresql-5d74e86
     depends_on:
       - db
     ports:
