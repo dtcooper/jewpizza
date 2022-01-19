@@ -41,8 +41,6 @@ jobs:
         run: |
           sudo pip install poetry yq lastversion
 
-          echo 'Showing outdated dependencies... (empty means none)' > dependencies.txt
-
           echo '============ Misc Dependencies =========' >> dependencies.txt
           ./scripts/check-versions.sh github-action | tee -a dependencies.txt
 
@@ -85,5 +83,5 @@ jobs:
           password: ${{secrets.MAIL_PASSWORD}}
           to: ${{ secrets.MAIL_TO_ADDRESS }}
           from: ${{ secrets.MAIL_FROM }}
-          subject: jewpizza Dependencies Out of Date!
+          subject: jewpizza Dependencies Changed!
           body: file://dependencies.txt
