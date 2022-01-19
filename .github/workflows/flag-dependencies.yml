@@ -61,7 +61,7 @@ jobs:
           echo '============ Backend (sse) =============' >> dependencies.txt
           cd sse
           poetry env use "python${PYTHON_VERSION}"
-          #poetry show -o | tee -a ../dependencies.txt
+          poetry show -o | tee -a ../dependencies.txt
           cd ..
 
           echo 'Done!'
