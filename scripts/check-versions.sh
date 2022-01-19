@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
-if [ ! -f /.dockerenv ]; then
+GITHUB_ACTION=
+
+if [ "$1" = 'github-action' ]; then
+    GITHUB_ACTION=1
+elif [ ! -f /.dockerenv ]; then
     echo 'Must run in docker container'
     exit 1
 fi
@@ -37,8 +41,12 @@ compare () {
 
     if [ -z "$UP_TO_DATE" ]; then
         # Red
-        echo -e "\x1B[91m${NAME} needs updating! ${VERS}\x1B[0m"
-    else
+        if [ "$GITHUB_ACTION" ]; then
+            echo "${NAME} needs updating! ${VERS}"
+        else
+            echo -e "\x1B[91m${NAME} needs updating! ${VERS}\x1B[0m"
+        fi
+    elif [ -z "$GITHUB_ACTION" ]; then
         # Green
         echo -e "\x1B[92m${NAME} up to date.\x1B[0m $VERS"
     fi
