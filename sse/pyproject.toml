@@ -15,7 +15,7 @@ uvloop = "^0.16.0"
 
 [tool.poetry.dev-dependencies]
 ipdb = "^0.13.9"
-ipython = "^8.0.0"
+ipython = "^8.0.1"
 watchdog = {extras = ["watchmedo"], version = "^2.1.6"}
 
 [build-system]
