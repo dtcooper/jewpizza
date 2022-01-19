@@ -1,0 +1,89 @@
+name: Flag Stale Dependencies
+
+on:
+  schedule:
+    - cron:  '*/20 * * * *'
+
+  workflow_dispatch:
+    inputs:
+      force_email:
+        description: 'Force sending an email'
+        required: false
+        default: false
+
+concurrency:
+  group: dependency-flagger
+  cancel-in-progress: true
+
+jobs:
+  flag_stale_deps:
+    name: Flagger
+    runs-on: ubuntu-20.04
+    env:
+      PYTHON_VERSION: '3.10'
+
+    steps:
+      -
+        name: Checkout repo
+        uses: actions/checkout@v2
+
+      -
+        name: Set up Python 3
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      -
+        name: Check versions
+        env:
+          GITHUB_API_TOKEN: ${{ github.token }}
+
+        run: |
+          sudo pip install poetry yq lastversion
+
+          echo 'Showing outdated dependencies... (empty means none)' > dependencies.txt
+
+          echo '============ Misc Dependencies =========' >> dependencies.txt
+          ./scripts/check-versions.sh github-action | tee -a dependencies.txt
+
+          echo '============ Frontend (app) ============' >> dependencies.txt
+          cd frontend
+          npm install
+          npm outdated | tee -a ../dependencies.txt
+          cd ..
+
+          echo '============ Backend (app) =============' >> dependencies.txt
+          cd backend
+          poetry env use "python${PYTHON_VERSION}"
+          poetry show -o | tee -a ../dependencies.txt
+          cd ..
+
+          echo '============ Backend (sse) =============' >> dependencies.txt
+          cd sse
+          poetry env use "python${PYTHON_VERSION}"
+          #poetry show -o | tee -a ../dependencies.txt
+          cd ..
+
+          echo 'Done!'
+
+      -
+        name: Cache versions
+        uses: actions/cache@v2
+        id: versions-have-changed
+        with:
+          path: dependencies.txt
+          key: versions-${{ hashFiles('dependencies.txt') }}
+
+      -
+        name: Send mail
+        uses: dawidd6/action-send-mail@v3
+        if: steps.versions-have-changed.outputs.cache-hit != 'true' || (github.event_name == 'workflow_dispatch' && github.event.inputs.force_email)
+        with:
+          server_address: ${{ secrets.MAIL_SERVER_ADDRESS }}
+          server_port: ${{ secrets.MAIL_SERVER_PORT }}
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
+          to: ${{ secrets.MAIL_TO_ADDRESS }}
+          from: ${{ secrets.MAIL_FROM }}
+          subject: jewpizza Dependencies Out of Date!
+          body: file://dependencies.txt
