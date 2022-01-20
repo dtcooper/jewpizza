@@ -21,7 +21,14 @@ from widget_tweaks.templatetags.widget_tweaks import add_class, add_error_class,
 
 from webcore import constants
 
-from .utils import format_date, format_date_short, format_datetime, format_datetime_short, format_time
+from .utils import (
+    BUILD_DATE_FORMATTED,
+    format_date,
+    format_date_short,
+    format_datetime,
+    format_datetime_short,
+    format_time,
+)
 
 
 NavLink = namedtuple("NavLink", "name url url_name icon is_subnav is_active")
@@ -203,6 +210,7 @@ def create_environment(**options):
             "shuffle": shuffle,
             "static": static,
             "url_for": url_for,
+            "BUILD_DATE": BUILD_DATE_FORMATTED,
         }
     )
     env.filters.update(

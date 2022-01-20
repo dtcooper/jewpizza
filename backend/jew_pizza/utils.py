@@ -1,6 +1,7 @@
 import json
 import logging
 
+from dateutil.parser import parse as dateutil_parse
 import requests
 
 from django.conf import settings
@@ -9,7 +10,7 @@ from django.utils.timezone import localtime
 
 from django_redis import get_redis_connection
 
-from jew_pizza.constants import REDIS_PUBSUB_CHANNEL
+from .constants import REDIS_PUBSUB_CHANNEL
 
 
 logger = logging.getLogger(f"jewpizza.{__name__}")
@@ -65,6 +66,15 @@ def reload_radio_container():
     return True
 
 
-def settings_template_context(request):
+try:
+    BUILD_DATE_FORMATTED = format_datetime(dateutil_parse(settings.BUILD_DATE))
+except ValueError:
+    BUILD_DATE_FORMATTED = "unknown"
+
+
+def django_template_context(request):
     # Template context processor for Django templates
-    return {"settings": settings}
+    return {
+        "settings": settings,
+        "BUILD_DATE": BUILD_DATE_FORMATTED,
+    }

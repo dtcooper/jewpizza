@@ -3,8 +3,6 @@ import os
 from pathlib import Path
 import sys
 
-from dateutil.parser import parse as dateutil_parse
-
 import environ
 
 
@@ -40,10 +38,6 @@ AWS_S3_REGION_NAME = env("DIGITALOCEAN_SPACES_REGION_NAME")
 RUN_HUEY = env.bool("__RUN_HUEY", default=False)
 GIT_REV = env("GIT_REV", default="unknown")
 BUILD_DATE = env("BUILD_DATE", default="unknown")
-try:
-    BUILD_DATE = dateutil_parse(BUILD_DATE)
-except ValueError:
-    pass
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
@@ -115,7 +109,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "jew_pizza.utils.settings_template_context",
+                "jew_pizza.utils.django_template_context",
             ],
         },
     },
@@ -281,7 +275,11 @@ CONSTANCE_CONFIG = {
         "url",
     ),
     "UMAMI_URL": ("http://localhost:3000/" if DEBUG else "https://umami.jew.pizza/", "URL for umami analytics", "url"),
-    "UMAMI_SCRIPT_URL": ("http://localhost:3000/" if DEBUG else "https://umami.jew.pizza/script.js", "URL for umami.js script", "url"),
+    "UMAMI_SCRIPT_URL": (
+        "http://localhost:3000/" if DEBUG else "https://umami.jew.pizza/script.js",
+        "URL for umami.js script",
+        "url",
+    ),
     "UMAMI_WEBSITE_ID": ("", "Website ID in umami", "uuid_optional"),
     "SSE_URL": (
         "http://localhost:8001/" if DEBUG else "https://sse.jew.pizza/",
