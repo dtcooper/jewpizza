@@ -6,13 +6,13 @@ authors = ["David Cooper <david@jew.pizza>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-boto3 = "^1.20.40"
+boto3 = "^1.20.41"
 Brotli = "^1.0.9"
 Django = "^4.0.1"
 django-constance = "^2.8.0"
 django-environ = "^0.8.1"
 django-phonenumber-field = {extras = ["phonenumbers"], version = "^6.0.0"}
-django-recurrence = {git = "https://github.com/django-recurrence/django-recurrence.git"}
+django-recurrence = {git = "https://github.com/django-recurrence/django-recurrence.git", rev = "1.11.0"}
 django-redis = "^5.2.0"
 django-s3direct = {git = "https://github.com/jsayles/django-s3direct.git", rev = "main"}
 django-widget-tweaks = "^1.4.12"
