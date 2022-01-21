@@ -330,7 +330,7 @@ phonenumberslite = ["phonenumberslite (>=7.0.2)"]
 
 [[package]]
 name = "django-recurrence"
-version = "1.0.1.dev318+g79a8af5"
+version = "1.0.1.dev326+g936e167"
 description = "Django utility wrapping dateutil.rrule"
 category = "main"
 optional = false
@@ -343,9 +343,9 @@ python-dateutil = "*"
 
 [package.source]
 type = "git"
-url = "https://github.com/django-recurrence/django-recurrence"
+url = "https://github.com/django-recurrence/django-recurrence.git"
 reference = "master"
-resolved_reference = "79a8af558bb1c6549969c27e374edca60370dc56"
+resolved_reference = "936e167312e5efcfd2b7667a82d7d152f2b0b725"
 
 [[package]]
 name = "django-redis"
@@ -1199,7 +1199,7 @@ tests = ["coverage", "flake8", "wheel"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "12ae612618f8a5629d7577f9b242b4e36a08b18bbf896fb7eccac104971341bd"
+content-hash = "a14f35b3738fb93fc5b110cb7cf06d7089f58c429d078f5f62723ef0462b0832"
 
 [metadata.files]
 appdirs = [
