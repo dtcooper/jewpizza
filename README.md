@@ -13,10 +13,10 @@ So, these instructions are mostly for me &mdash; in case of sudden amnesia or
 coming back to this project after a year or so of neglect.
 
 
-## Stack &mdash; **DR. DJ PLASTIC HAND**
+## Stack &mdash; **_DR. DJ PLACENTA DISH_**
 
-It's built using the _wildly_ popular, _extremely_ common **DR. DJ PLASTIC HAND**
-stack, ie,
+It's built using the _wildly_ popular and _extremely_ common
+**_DR. DJ PLACENTA DISH_** stack, ie,
 
 * [**D**jango](https://www.djangoproject.com/), a back-end web framework;
 * [**R**edis](https://redis.io/), a data store and message broker;
@@ -28,24 +28,26 @@ stack, ie,
     for describing audio streams;
 * [**A**lpineJS](https://alpinejs.dev/), a lightweight, reactive front-end
     framework;
-* [**S**erver-Sent Events (SSE)](https://en.wikipedia.org/wiki/Server-sent_events),
-    to send realtime messages to the browser, using
-    [aoihttp-sse](https://github.com/aio-libs/aiohttp-sse);
-* [**T**ailwind CSS](https://tailwindcss.com/), a utility-first CSS framework;
-* [**I**cecast](https://icecast.org/), a streaming media server for listeners to
-    connect;
 * [**C**ompose](https://docs.docker.com/compose/), ie Docker Compose, for
     multi-container orchestration;
-* [**h**uey](https://huey.readthedocs.io/), a lightweight asynchronous task
-    queue for Python;
+* [**e**sbuild](https://esbuild.github.io/), a fast JavaScript bundler;
+* [**N**avigo](https://github.com/krasimir/navigo) for a simple
+    [SPA](https://en.wikipedia.org/wiki/Single-page_application) router;
+* [**T**ailwind CSS](https://tailwindcss.com/), a utility-first CSS framework;
 * [**a**iohttp](https://docs.aiohttp.org/) for the SSE service. Django's bad at
     persistent connections and aiohttp isn't;
-* [**N**avigo](https://github.com/krasimir/navigo) for a simple
-    [SPA](https://en.wikipedia.org/wiki/Single-page_application) router; and
 * [**d**aisyUI](https://daisyui.com/) as lightweight UI component framework on
-    top of Tailwind CSS.
+    top of Tailwind CSS;
+* [**I**cecast](https://icecast.org/), a streaming media server for listeners to
+    connect;
+* [**S**erver-Sent Events (SSE)](https://en.wikipedia.org/wiki/Server-sent_events),
+    to send realtime messages to the browser (using
+    [aoihttp-sse](https://github.com/aio-libs/aiohttp-sse)); and
+* [**h**uey](https://huey.readthedocs.io/), a lightweight asynchronous task
+    queue for Python.
 
-**DR. DJ PLASTIC HAND**. A very well-known acronym in the engineering world, _probably._
+**_DR. DJ PLACENTA DISH_**. A very well-known acronym in the engineering world,
+_probably._
 
 
 ## Initial Setup
