@@ -41,22 +41,15 @@ module.exports = {
       typography: {
         DEFAULT: {
           css: {
-            maxWidth: 'none',
-            a: {
-              '@apply link link-primary link-hover': ''
-            },
-            blockquote: {
-              '@apply border-l-primary': ''
-            }
+            maxWidth: 'none'
           }
         }
       }
     }
   },
   plugins: [
+    require('@tailwindcss/typography'),
     require('daisyui'),
-    // Intentionally after daisyUI as its typography CSS is screwy
-    require('@tailwindcss/typography')
   ],
   daisyui: {
     themes: [{

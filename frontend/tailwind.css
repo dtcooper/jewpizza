@@ -74,6 +74,19 @@
   .font-smoothing-none {
     -webkit-font-smoothing: none;
   }
+
+  /* daisyUI + tailwind typography customizations */
+  .prose a {
+    @apply link link-primary link-hover;
+  }
+
+  .prose blockquote {
+    @apply border-l-primary;
+  }
+
+  .prose ul {
+    @apply marker:text-base-content;
+  }
 }
 
 .btn-rounded {
