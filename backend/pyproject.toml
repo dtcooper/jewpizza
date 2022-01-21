@@ -12,7 +12,7 @@ Django = "^4.0.1"
 django-constance = "^2.8.0"
 django-environ = "^0.8.1"
 django-phonenumber-field = {extras = ["phonenumbers"], version = "^6.0.0"}
-django-recurrence = {git = "https://github.com/GergelyKalmar/django-recurrence"}
+django-recurrence = {git = "https://github.com/django-recurrence/django-recurrence"}
 django-redis = "^5.2.0"
 django-s3direct = {git = "https://github.com/jsayles/django-s3direct.git", rev = "main"}
 django-widget-tweaks = "^1.4.12"

@@ -330,23 +330,22 @@ phonenumberslite = ["phonenumberslite (>=7.0.2)"]
 
 [[package]]
 name = "django-recurrence"
-version = "1.10.3"
+version = "1.0.1.dev318+g79a8af5"
 description = "Django utility wrapping dateutil.rrule"
 category = "main"
 optional = false
-python-versions = "*"
+python-versions = ">=3.7"
 develop = false
 
 [package.dependencies]
-Django = "*"
+django = ">=2.2"
 python-dateutil = "*"
-pytz = "*"
 
 [package.source]
 type = "git"
-url = "https://github.com/GergelyKalmar/django-recurrence"
+url = "https://github.com/django-recurrence/django-recurrence"
 reference = "master"
-resolved_reference = "266ed193f57d2a8ea7b57ad327a31e6e47f4eac2"
+resolved_reference = "79a8af558bb1c6549969c27e374edca60370dc56"
 
 [[package]]
 name = "django-redis"
@@ -855,7 +854,7 @@ Markdown = ">=3.2"
 
 [[package]]
 name = "pyparsing"
-version = "3.0.6"
+version = "3.0.7"
 description = "Python parsing module"
 category = "main"
 optional = false
@@ -1200,7 +1199,7 @@ tests = ["coverage", "flake8", "wheel"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "ab4660f70d54523fcc00ed57d668271b006662a17ac6411c052c2e52623d42b3"
+content-hash = "12ae612618f8a5629d7577f9b242b4e36a08b18bbf896fb7eccac104971341bd"
 
 [metadata.files]
 appdirs = [
@@ -1721,8 +1720,8 @@ pymdown-extensions = [
     {file = "pymdown_extensions-9.1-py3-none-any.whl", hash = "sha256:b03e66f91f33af4a6e7a0e20c740313522995f69a03d86316b1449766c473d0e"},
 ]
 pyparsing = [
-    {file = "pyparsing-3.0.6-py3-none-any.whl", hash = "sha256:04ff808a5b90911829c55c4e26f75fa5ca8a2f5f36aa3a51f68e27033341d3e4"},
-    {file = "pyparsing-3.0.6.tar.gz", hash = "sha256:d9bdec0013ef1eb5a84ab39a3b3868911598afa494f5faa038647101504e2b81"},
+    {file = "pyparsing-3.0.7-py3-none-any.whl", hash = "sha256:a6c06a88f252e6c322f65faf8f418b16213b51bdfaece0524c1c1bc30c63c484"},
+    {file = "pyparsing-3.0.7.tar.gz", hash = "sha256:18ee9022775d270c55187733956460083db60b37d0d0fb357445f3094eed3eea"},
 ]
 pytest = [
     {file = "pytest-6.2.5-py3-none-any.whl", hash = "sha256:7310f8d27bc79ced999e760ca304d69f6ba6c6649c0b60fb0e04a4a77cacc134"},
