@@ -96,6 +96,10 @@ MIDDLEWARE.extend(
 if DEBUG and len(sys.argv) >= 2 and sys.argv[1] == "runserver":
     MIDDLEWARE.append("webcore.middleware.TailwindFunctioningRunserverMiddleware")
 
+MIGRATION_MODULES = {
+    'recurrence': None,
+}
+
 ROOT_URLCONF = "jew_pizza.urls"
 
 TEMPLATES = [
