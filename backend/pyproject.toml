@@ -6,7 +6,7 @@ authors = ["David Cooper <david@jew.pizza>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-boto3 = "^1.20.41"
+boto3 = "^1.20.42"
 Brotli = "^1.0.9"
 Django = "^4.0.1"
 django-constance = "^2.8.0"
