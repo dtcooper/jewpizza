@@ -123,14 +123,14 @@ uvloop = ["uvloop (>=0.15.2)"]
 
 [[package]]
 name = "boto3"
-version = "1.20.43"
+version = "1.20.44"
 description = "The AWS SDK for Python"
 category = "main"
 optional = false
 python-versions = ">= 3.6"
 
 [package.dependencies]
-botocore = ">=1.23.43,<1.24.0"
+botocore = ">=1.23.44,<1.24.0"
 jmespath = ">=0.7.1,<1.0.0"
 s3transfer = ">=0.5.0,<0.6.0"
 
@@ -139,7 +139,7 @@ crt = ["botocore[crt] (>=1.21.0,<2.0a0)"]
 
 [[package]]
 name = "botocore"
-version = "1.23.43"
+version = "1.23.44"
 description = "Low-level, data-driven core of boto 3."
 category = "main"
 optional = false
@@ -1082,7 +1082,7 @@ test = ["pytest"]
 
 [[package]]
 name = "twilio"
-version = "7.5.0"
+version = "7.5.1"
 description = "Twilio API client and TwiML generator"
 category = "main"
 optional = false
@@ -1199,7 +1199,7 @@ tests = ["coverage", "flake8", "wheel"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "76538a0e8dd9c0a8863f43cc281e8c6585040ed34474cacc9633a4eb0d113a79"
+content-hash = "b6dd88a33fb62fbccb7f2d2c54b384def2ddb85cc2d04be17f2481016f5a1f31"
 
 [metadata.files]
 appdirs = [
@@ -1243,12 +1243,12 @@ black = [
     {file = "black-21.12b0.tar.gz", hash = "sha256:77b80f693a569e2e527958459634f18df9b0ba2625ba4e0c2d5da5be42e6f2b3"},
 ]
 boto3 = [
-    {file = "boto3-1.20.43-py3-none-any.whl", hash = "sha256:50611d4707e967f1300e897c196db98cfc1b0ab95eca5d46d3b56a1c8e2a27b5"},
-    {file = "boto3-1.20.43.tar.gz", hash = "sha256:219cba1d078b3c0f3bd1678ee355e07c4a07ea75ee75adee6c306d89d60c555c"},
+    {file = "boto3-1.20.44-py3-none-any.whl", hash = "sha256:26f18ca7411615f33d8d1bf60cc8efe5b331a57b3013d5f8f3587cd5350c27cb"},
+    {file = "boto3-1.20.44.tar.gz", hash = "sha256:4470f64e4af609ff678055338c96a6f7cbe601d1fb06a4ea7dc8d9223c2e527a"},
 ]
 botocore = [
-    {file = "botocore-1.23.43-py3-none-any.whl", hash = "sha256:22c88a653a026439f2e9b0ade154fafe0eaaaea3fee6e080102d90ec4271284e"},
-    {file = "botocore-1.23.43.tar.gz", hash = "sha256:f8c60dff90a7aea7f84908f0e4e778890d4f08c883d2da111c15c10d7c199102"},
+    {file = "botocore-1.23.44-py3-none-any.whl", hash = "sha256:11483a493de4a76ef218d8cd3980c63550d006a0d082c10d53c0954184ca542a"},
+    {file = "botocore-1.23.44.tar.gz", hash = "sha256:8e5317f84fc1118bff58fa6fa79a9b62083e75a2a9c62feb3ea73694c550b99d"},
 ]
 brotli = [
     {file = "Brotli-1.0.9-cp27-cp27m-macosx_10_9_x86_64.whl", hash = "sha256:268fe94547ba25b58ebc724680609c8ee3e5a843202e9a381f6f9c5e8bdb5c70"},
@@ -1838,8 +1838,8 @@ traitlets = [
     {file = "traitlets-5.1.1.tar.gz", hash = "sha256:059f456c5a7c1c82b98c2e8c799f39c9b8128f6d0d46941ee118daace9eb70c7"},
 ]
 twilio = [
-    {file = "twilio-7.5.0-py2.py3-none-any.whl", hash = "sha256:ef2b38de9c06ae55570313af30cfc5c215c272cb54a8614da209be1a7d7b5ca2"},
-    {file = "twilio-7.5.0.tar.gz", hash = "sha256:91922bd2e347dd279868d2102404a7da056169da10a8b10be3fd9eb9c6bab391"},
+    {file = "twilio-7.5.1-py2.py3-none-any.whl", hash = "sha256:8e2f487e49a37da9caf61bfc3ca61883c8af5f478aafe4160cce738f81bd1e5a"},
+    {file = "twilio-7.5.1.tar.gz", hash = "sha256:d6f22603065b6bac232e0fb16e9a35abb71b6a9b38b7aa7fccf64d37aff4d01c"},
 ]
 typing-extensions = [
     {file = "typing_extensions-4.0.1-py3-none-any.whl", hash = "sha256:7f001e5ac290a0c0401508864c7ec868be4e701886d5b573a9528ed3973d9d3b"},
