@@ -62,8 +62,8 @@ runs:
         context: ${{ inputs.context == '' && format('./{0}/', inputs.container) || inputs.context}}
         file: ${{ inputs.dockerfile == '' && format('./{0}/Dockerfile', inputs.container) || inputs.dockerfile}}
         tags: ${{ inputs.dev == '1' && format('{0}:dev', steps.vars.outputs.repo) || format('{0}:latest,{0}:{1}', steps.vars.outputs.repo, steps.vars.outputs.sha) }}
-        cache-from: type=registry,ref=${{ steps.vars.outputs.repo }}:buildcache${{ inputs.dev == '1' && '-dev' || '' }}
-        cache-to: type=registry,ref=${{ steps.vars.outputs.repo }}:buildcache${{ inputs.dev == '1' && '-dev' || '' }},mode=max
+        cache-from: type=registry,ref=${{ steps.vars.outputs.repo }}:buildcache
+        cache-to: type=registry,ref=${{ steps.vars.outputs.repo }}:buildcache,mode=max
     -
       name: Update Docker Hub description
       uses: peter-evans/dockerhub-description@v2
