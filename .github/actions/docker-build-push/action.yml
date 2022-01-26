@@ -23,7 +23,7 @@ inputs:
   dev:
     description: 'Build Dev Containers'
     required: false
-    default: '1'
+    default: '0'
 
 runs:
   using: "composite"

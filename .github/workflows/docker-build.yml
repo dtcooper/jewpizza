@@ -28,6 +28,24 @@ jobs:
           context: ./
           dockerfile: ./backend/Dockerfile
 
+  build-app-dev:
+    runs-on: ubuntu-latest
+    name: Build app container (dev)
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Build container
+        uses: ./.github/actions/docker-build-push
+        with:
+          token: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          container: app
+          context: ./
+          dockerfile: ./backend/Dockerfile
+          dev: '1'
+
   build-radio:
     runs-on: ubuntu-latest
     name: Build radio container
@@ -43,6 +61,22 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
           container: radio
 
+  build-radio-dev:
+    runs-on: ubuntu-latest
+    name: Build radio container (dev)
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Build container
+        uses: ./.github/actions/docker-build-push
+        with:
+          token: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          container: radio
+          dev: '1'
+
   build-sse:
     runs-on: ubuntu-latest
     name: Build sse container
@@ -57,6 +91,22 @@ jobs:
           token: ${{ secrets.DOCKERHUB_TOKEN }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
           container: sse
+
+  build-sse-dev:
+    runs-on: ubuntu-latest
+    name: Build sse container (dev)
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Build container
+        uses: ./.github/actions/docker-build-push
+        with:
+          token: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          container: sse
+          dev: '1'
 
   deploy:
     runs-on: ubuntu-latest
