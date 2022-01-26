@@ -20,6 +20,10 @@ inputs:
   token:
     description: 'Docker Hub access token'
     required: true
+  dev:
+    description: 'Build Dev Containers'
+    required: false
+    default: '1'
 
 runs:
   using: "composite"
@@ -46,15 +50,16 @@ runs:
       uses: docker/build-push-action@v2
       with:
         push: true
-        platforms: linux/amd64
+        platforms: ${{ inputs.dev == '1' && 'linux/arm64,linux/amd64' || 'linux/amd64' }}
         build-args: |
           GIT_REV=${{ steps.vars.outputs.sha }}
           BUILD_DATE=${{ steps.vars.outputs.build-date }}
+          DEBUG=${{ inputs.dev }}
         context: ${{ inputs.context == '' && format('./{0}/', inputs.container) || inputs.context}}
         file: ${{ inputs.dockerfile == '' && format('./{0}/Dockerfile', inputs.container) || inputs.dockerfile}}
-        tags: ${{ steps.vars.outputs.repo }}:latest,${{ steps.vars.outputs.repo }}:${{ steps.vars.outputs.sha }}
-        cache-from: type=registry,ref=${{ steps.vars.outputs.repo }}:buildcache
-        cache-to: type=registry,ref=${{ steps.vars.outputs.repo }}:buildcache,mode=max
+        tags: ${{ inputs.dev == '1' && format('{0}:dev', steps.vars.outputs.repo) || format('{0}:latest,{0}:{1}', steps.vars.outputs.repo, steps.vars.outputs.sha) }}
+        cache-from: type=registry,ref=${{ steps.vars.outputs.repo }}:buildcache${{ inputs.dev == '1' && '-dev' || '' }}
+        cache-to: type=registry,ref=${{ steps.vars.outputs.repo }}:buildcache${{ inputs.dev == '1' && '-dev' || '' }},mode=max
     -
       name: Update Docker Hub description
       uses: peter-evans/dockerhub-description@v2
