@@ -51,6 +51,9 @@ services:
   logs:
     <<: *service-dev-defaults
 
+  autoheal:
+    <<: *service-dev-defaults
+
   icecast:
     <<: *service-dev-defaults
     image: moul/icecast
