@@ -10,7 +10,7 @@ from django.core.management.base import BaseCommand, CommandError
 class Command(BaseCommand):
     def add_arguments(self, parser):
         group = parser.add_mutually_exclusive_group()
-        group.add_argument("-g", "--get", action="store_true", help="get CORS for bucket")
+        group.add_argument("-g", "--get", action="store_true", help="get CORS for bucket (default)")
         group.add_argument("-s", "--set", action="store_true", help="set CORS for bucket")
         group.add_argument("-a", "--set-all", action="store_true", help="set for all domains (*)")
         parser.add_argument(
@@ -65,4 +65,5 @@ class Command(BaseCommand):
             else:
                 raise e
 
-        print(f'CORS rules for bucket "{bucket}": {json.dumps(response["CORSRules"], indent=2, sort_keys=True)}')
+        rules_json = json.dumps(response["CORSRules"], indent=2, sort_keys=True)
+        print(f'CORS rules for bucket "{bucket}": {rules_json}')

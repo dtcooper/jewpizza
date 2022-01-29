@@ -20,17 +20,17 @@ def sign_up_for_substack(email, request=None):
     substack_url = f"https://{substack_host}"
     substack_url_embed = f"{substack_url}/embed"
     substack_url_api = f"{substack_url}/api/v1/free"
+    user_agent = request.headers.get("User-Agent", DEFAULT_USER_AGENT) if request else DEFAULT_USER_AGENT
 
     # Sketchy, brittle, but returns False if we encountered an error for graceful downgrade
     try:
         response = requests.post(
             substack_url_api,
             headers={
-                "user-agent": request.headers.get("User-Agent", DEFAULT_USER_AGENT) if request else DEFAULT_USER_AGENT,
-                "authority": substack_host,
-                "origin": substack_url,
-                "referer": substack_url_embed,
-                "content-type": "application/json",
+                "User-Agent": user_agent,
+                "Origin": substack_url,
+                "Referer": substack_url_embed,
+                "Content-Type": "application/json",
             },
             json={
                 "email": email,

@@ -97,7 +97,7 @@ if DEBUG and len(sys.argv) >= 2 and sys.argv[1] == "runserver":
     MIDDLEWARE.append("webcore.middleware.TailwindFunctioningRunserverMiddleware")
 
 MIGRATION_MODULES = {
-    'recurrence': None,
+    "recurrence": None,
 }
 
 ROOT_URLCONF = "jew_pizza.urls"
@@ -266,12 +266,6 @@ CONSTANCE_CONFIG = {
     "ENABLE_PLAYER": (False, "Enable audio player"),
     "ENABLE_TEST_NOTIFICATIONS": (False, "Enable test notifications on home page (for superuser only)"),
     "HIDDEN_IMG_MODE": (False, "Enable hidden image mode (for development in public, to not look so awkward)"),
-    "FACEBOOK_NAME": ("dtcooper", "Social media account name for Facebook", "char"),
-    "INSTAGRAM_NAME": ("dtcooper", "Social media account name for Instagram", "char"),
-    "SUBSTACK_NAME": ("jewpizza", "Social media account name for Substack", "char"),
-    "TIKTOK_NAME": ("jew.pizza", "Social media account name for Tiktok", "char"),
-    "TWITCH_NAME": ("JewDotPizza", "Social media account name for Twitter", "char"),
-    "TWITTER_NAME": ("dtcooper", "Social media account name for Twitter", "char"),
     "TWILIO_FROM_NUMBER": ("+14164390000", "Twilio from number for texts/calls", "phone"),
     "LOGS_URL": (
         "http://localhost:8888/" if DEBUG else "https://logs.jew.pizza/",
@@ -306,10 +300,6 @@ CONSTANCE_CONFIG = {
 CONSTANCE_CONFIG_FIELDSETS = OrderedDict(
     (
         ("Development Options", ("ENABLE_JEWIPPY", "ENABLE_PLAYER", "ENABLE_TEST_NOTIFICATIONS", "HIDDEN_IMG_MODE")),
-        (
-            "Social Media Account",
-            ("FACEBOOK_NAME", "INSTAGRAM_NAME", "SUBSTACK_NAME", "TIKTOK_NAME", "TWITCH_NAME", "TWITTER_NAME"),
-        ),
         ("Telephony", ("TWILIO_FROM_NUMBER",)),
         ("Umami Tracking Tag", ("UMAMI_WEBSITE_ID", "UMAMI_URL", "UMAMI_SCRIPT_URL")),
         (

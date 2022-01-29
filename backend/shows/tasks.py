@@ -1,8 +1,8 @@
 import json
 import logging
+import math
 import os
 import subprocess
-import math
 
 import requests
 
@@ -27,7 +27,7 @@ def generate_peaks(episode):
     if episode.ffprobe.sample_rate and episode.ffprobe.duration:
         num_samples = episode.ffprobe.sample_rate * episode.ffprobe.duration.total_seconds()
         zoom = math.ceil(num_samples / NUMBER_OF_PEAKS)
-        command.extend(['--zoom', str(zoom)])
+        command.extend(["--zoom", str(zoom)])
     else:
         command.extend(["--pixels-per-second", "1"])
 

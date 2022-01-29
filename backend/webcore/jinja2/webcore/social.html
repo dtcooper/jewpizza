@@ -15,15 +15,17 @@
   </article>
 
   <div class="mt-6 grid xs:grid-cols-2 sm:grid-cols-3 gap-2 md:gap-3">
-    {# Twitch? JewDotPizza #}
     {%
       for name, icon_name, link in (
-        ('Twitter', 'simple-icons:twitter', 'https://twitter.com/{}'.format(config.TWITTER_NAME)),
-        ('Instagram', 'simple-icons:instagram', 'https://www.instagram.com/{}/'.format(config.INSTAGRAM_NAME)),
-        ('Substack', 'simple-icons:substack', 'https://{}.substack.com/'.format(config.SUBSTACK_NAME)),
-        ('Facebook', 'simple-icons:facebook', 'https://www.facebook.com/{}'.format(config.FACEBOOK_NAME)),
-        ('Tiktok', 'simple-icons:tiktok', 'https://www.tiktok.com/@{}'.format(config.TIKTOK_NAME)),
-        ('Twitch', 'simple-icons:twitch', 'https://www.twitch.tv/{}'.format(config.TWITCH_NAME)),
+        ('Twitter', 'simple-icons:twitter', 'https://twitter.com/dtcooper'),
+        ('Instagram', 'simple-icons:instagram', 'https://www.instagram.com/dtcooper/'),
+        ('Substack', 'simple-icons:substack', 'https://jewpizza.substack.com/'),
+        ('Facebook', 'simple-icons:facebook', 'https://www.facebook.com/dtcooper'),
+        ('Tiktok', 'simple-icons:tiktok', 'https://www.tiktok.com/@jew'),
+        ('Twitch', 'simple-icons:twitch', 'https://www.twitch.tv/JewDotPizza'),
+        ('LinkedIn', 'simple-icons:linkedin', 'https://www.linkedin.com/in/davidthomascooper/'),
+        ('GitHub', 'simple-icons:github', 'https://github.com/dtcooper'),
+        ('iHeartRadio', 'simple-icons:iheartradio', 'https://www.iheartradio.ca/newstalk-1010/host/Person/David%20Cooper'),
       )
     %}
       <a class="btn md:btn-lg btn-neutral btn-rounded umami--click--social-{{ name|lower }}" href="{{ link }}">
