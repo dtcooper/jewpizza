@@ -150,6 +150,12 @@ jobs:
         name: Checkout
         uses: actions/checkout@v2
       -
+        name: Run tests
+        run: |
+          cp -v .env.sample .env
+          sed -i 's/SECRET_KEY=/SECRET_KEY=hackme/' .env
+
+      -
         name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
         with:
