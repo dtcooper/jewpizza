@@ -153,10 +153,9 @@ jobs:
         name: Run tests
         run: |
           cp -v .env.sample .env
-          sed -i 's/SECRET_KEY=/SECRET_KEY=hackme/' .env
-
-      -
-        name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-        with:
-          limit-access-to-actor: true
+          echo 'Updating .env file for testing'
+          sed -i "s/^\(SECRET_KEY=\).*$/\1'hackme'/" .env
+          sed -i "s/^#\(PINNED_CONTAINER_VERSION=\).*$/\1'dev'/" .env
+          sed -i "s/^\(DEBUG=\).*$/\1'1'/" .env
+          docker compose pull
+          docker compose run app pytest
