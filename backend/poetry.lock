@@ -182,7 +182,7 @@ python-versions = "*"
 
 [[package]]
 name = "charset-normalizer"
-version = "2.0.10"
+version = "2.0.11"
 description = "The Real First Universal Charset Detector. Open, modern and actively maintained alternative to Chardet."
 category = "main"
 optional = false
@@ -352,21 +352,14 @@ hiredis = ["redis[hiredis] (>=3,!=4.0.0,!=4.0.1)"]
 
 [[package]]
 name = "django-s3direct"
-version = "1.1.8"
+version = "2.0.0"
 description = "Add direct uploads to S3 functionality with a progress bar to file input fields."
 category = "main"
 optional = false
 python-versions = "*"
-develop = false
 
 [package.dependencies]
-django = ">=1.8"
-
-[package.source]
-type = "git"
-url = "https://github.com/jsayles/django-s3direct.git"
-reference = "main"
-resolved_reference = "6a35e0e24cdc8f0b2a38bbece08864de18a04ab0"
+django = ">=3.0"
 
 [[package]]
 name = "django-widget-tweaks"
@@ -1179,7 +1172,7 @@ tests = ["coverage", "flake8", "wheel"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "9ecd0d1f46e4b85dc89521e9ec583b1a3e62b4601818ef4a6be9059630c51317"
+content-hash = "8dbb22ac1b5e480c5f7bf9aebb5adb01d6a6ccd68658a780888fe91c4f502d95"
 
 [metadata.files]
 appdirs = [
@@ -1324,8 +1317,8 @@ certifi = [
     {file = "certifi-2021.10.8.tar.gz", hash = "sha256:78884e7c1d4b00ce3cea67b44566851c4343c120abd683433ce934a68ea58872"},
 ]
 charset-normalizer = [
-    {file = "charset-normalizer-2.0.10.tar.gz", hash = "sha256:876d180e9d7432c5d1dfd4c5d26b72f099d503e8fcc0feb7532c9289be60fcbd"},
-    {file = "charset_normalizer-2.0.10-py3-none-any.whl", hash = "sha256:cb957888737fc0bbcd78e3df769addb41fd1ff8cf950dc9e7ad7793f1bf44455"},
+    {file = "charset-normalizer-2.0.11.tar.gz", hash = "sha256:98398a9d69ee80548c762ba991a4728bfc3836768ed226b3945908d1a688371c"},
+    {file = "charset_normalizer-2.0.11-py3-none-any.whl", hash = "sha256:2842d8f5e82a1f6aa437380934d5e1cd4fcf2003b06fed6940769c164a480a45"},
 ]
 click = [
     {file = "click-8.0.3-py3-none-any.whl", hash = "sha256:353f466495adaeb40b6b5f592f9f91cb22372351c84caeb068132442a4518ef3"},
@@ -1421,7 +1414,9 @@ django-redis = [
     {file = "django-redis-5.2.0.tar.gz", hash = "sha256:8a99e5582c79f894168f5865c52bd921213253b7fd64d16733ae4591564465de"},
     {file = "django_redis-5.2.0-py3-none-any.whl", hash = "sha256:1d037dc02b11ad7aa11f655d26dac3fb1af32630f61ef4428860a2e29ff92026"},
 ]
-django-s3direct = []
+django-s3direct = [
+    {file = "django-s3direct-2.0.0.tar.gz", hash = "sha256:078c57a694cf8f4c7709e1b07039ff5bdfab5f2246716248a5858cee9102e2bd"},
+]
 django-widget-tweaks = [
     {file = "django-widget-tweaks-1.4.12.tar.gz", hash = "sha256:9bfc5c705684754a83cc81da328b39ad1b80f32bd0f4340e2a810cbab4b0c00e"},
     {file = "django_widget_tweaks-1.4.12-py3-none-any.whl", hash = "sha256:fe6b17d5d595c63331f300917980db2afcf71f240ab9341b954aea8f45d25b9a"},
