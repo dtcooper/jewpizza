@@ -140,3 +140,17 @@ jobs:
             else
               echo "Deploy disabled by constance config (AUTO_DEPLOY = False)"
             fi
+
+  test:
+    runs-on: ubuntu-latest
+    name: Tests
+    #needs: [build-app-dev]
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        with:
+          limit-access-to-actor: true
