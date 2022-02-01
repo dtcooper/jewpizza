@@ -1169,10 +1169,13 @@ xmltodict = ">=0.11.0"
 [package.extras]
 tests = ["coverage", "flake8", "wheel"]
 
+[extras]
+tests = ["pytest", "pytest-cov", "pytest-django"]
+
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "f6f9a601e6149fd26b4964eba4206bd211086a2740530f8ba8561dd065f5b2fd"
+content-hash = "27e8fe8ec03197503394e1d6fbd94920dfbcf32f2d80fc9438a00135fe4deea4"
 
 [metadata.files]
 appdirs = [
