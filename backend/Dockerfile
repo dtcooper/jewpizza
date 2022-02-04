@@ -1,11 +1,10 @@
 # Build frontend
 FROM node:16-alpine AS frontend
 
-COPY frontend/ /app/frontend/
-WORKDIR /app/frontend
+COPY . /build/
+WORKDIR /build/frontend
 RUN npm install --production \
-    && npm run build \
-    && sed -i 's/^\/\*.*\*\///' ../backend/webcore/static/webcore/css/styles.min.css
+    && npm run build
 
 
 # audiowaveform tool
@@ -93,12 +92,10 @@ RUN poetry install \
 COPY . /app/
 
 # Copy over needed files from stages
-COPY --from=frontend /app/frontend/node_modules/simpledotcss/simple.css /app/frontend/node_modules/simpledotcss/
-COPY --from=frontend \
-    /app/frontend/node_modules/alpinejs/dist/cdn.js /app/frontend/node_modules/alpinejs/dist/cdn.min.js \
-    /app/frontend/node_modules/alpinejs/dist/
-COPY --from=frontend /app/backend/webcore/static/webcore/css/styles.min.css /app/backend/webcore/static/webcore/css/
-COPY --from=frontend /app/backend/webcore/static/webcore/js/bundle.min.js /app/backend/webcore/static/webcore/js/
+COPY --from=frontend /build/frontend/node_modules/simpledotcss/simple.css /app/frontend/node_modules/simpledotcss/
+COPY --from=frontend /build/frontend/node_modules/alpinejs/dist/cdn.min.js /app/frontend/node_modules/alpinejs/dist/
+COPY --from=frontend /build/backend/webcore/static/webcore/css/styles.min.css /app/backend/webcore/static/webcore/css/
+COPY --from=frontend /build/backend/webcore/static/webcore/js/bundle.min.js /app/backend/webcore/static/webcore/js/
 COPY --from=audiowaveform /usr/local/bin/audiowaveform /usr/local/bin/audiowaveform
 
 ENTRYPOINT ["/app/backend/entrypoint.sh"]
