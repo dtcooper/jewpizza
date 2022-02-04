@@ -6,7 +6,7 @@ authors = ["David Cooper <david@jew.pizza>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-boto3 = "^1.20.48"
+boto3 = "^1.20.49"
 Brotli = "^1.0.9"
 Django = "^4.0.2"
 django-constance = "^2.8.0"
@@ -22,7 +22,7 @@ huey = "^2.4.3"
 Jinja2 = "^3.0.3"
 jinja-markdown = "^1.210911"
 psycopg2 = "^2.9.3"
-pytest = {version = "^6.2.5", optional = true}
+pytest = {version = "^7.0.0", optional = true}
 pytest-cov = {version = "^3.0.0", optional = true}
 pytest-django = {version = "^4.5.2", optional = true}
 python-dateutil = "^2.8.2"
@@ -39,7 +39,7 @@ ipdb = "^0.13.9"
 ipython = "^8.0.1"
 isort = "^5.10.1"
 lastversion = "^2.0.1"
-pytest = "^6.2.5"
+pytest = "^7.0.0"
 pytest-cov = "^3.0.0"
 pytest-django = "^4.5.1"
 watchdog = {extras = ["watchmedo"], version = "^2.1.6"}
