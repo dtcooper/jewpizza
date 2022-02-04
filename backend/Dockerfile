@@ -1,10 +1,12 @@
 # Build frontend
 FROM node:16-alpine AS frontend
 
-COPY . /build/
+COPY frontend/package.json frontend/package-lock.json /build/frontend/
 WORKDIR /build/frontend
-RUN npm install --production \
-    && npm run build
+RUN npm install --production
+
+COPY . /build/
+RUN npm run build
 
 
 # audiowaveform tool
@@ -92,7 +94,7 @@ RUN poetry install \
 COPY . /app/
 
 # Copy over needed files from stages
-COPY --from=frontend /build/frontend/node_modules/simpledotcss/simple.css /app/frontend/node_modules/simpledotcss/
+COPY --from=frontend /build/frontend/node_modules/simpledotcss/simple.min.css /app/frontend/node_modules/simpledotcss/
 COPY --from=frontend /build/frontend/node_modules/alpinejs/dist/cdn.min.js /app/frontend/node_modules/alpinejs/dist/
 COPY --from=frontend /build/backend/webcore/static/webcore/css/styles.min.css /app/backend/webcore/static/webcore/css/
 COPY --from=frontend /build/backend/webcore/static/webcore/js/bundle.min.js /app/backend/webcore/static/webcore/js/
