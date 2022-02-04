@@ -1,3 +1,14 @@
+# Build frontend
+FROM node:16-alpine AS frontend
+
+COPY frontend/ /app/frontend/
+WORKDIR /app/frontend
+RUN npm install --production \
+    && npm run build \
+    && sed -i 's/^\/\*.*\*\///' ../backend/webcore/static/webcore/css/styles.min.css
+
+
+# audiowaveform tool
 FROM python:3.10 as audiowaveform
 
 ARG AUDIOWAVEFORM_VERSION=1.5.1
@@ -26,6 +37,7 @@ RUN mkdir /build \
     && make && make install
 
 
+# Actual app container
 FROM python:3.10
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -36,13 +48,17 @@ ARG POETRY_VERSION=1.1.12 \
     WAIT_FOR_IT_VERSION=81b1373f \
     DEBUG=0
 
-RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash \
+RUN if [ "$DEBUG" -a "$DEBUG" != '0' ]; then \
+        curl -fsSL https://deb.nodesource.com/setup_16.x | bash \
+        && echo "alias npm='npm --prefix=/app/frontend'" >> /root/.bashrc \
+        && echo "alias npx='npx --prefix=/app/frontend'" >> /root/.bashrc \
+        && echo "alias redis-cli='redis-cli -h redis'" >> /root/.bashrc \
+    ; fi \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
         brotli \
         ffmpeg \
         gzip \
-        nodejs \
         # For audiowaveform
         libboost-filesystem1.74.0 \
         libboost-program-options1.74.0 \
@@ -56,6 +72,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash \
             less \
             nano \
             netcat \
+            nodejs \
             postgresql-client \
             redis-tools \
         ) \
@@ -66,26 +83,22 @@ RUN wget -qO /usr/local/bin/wait-for-it "https://raw.githubusercontent.com/vishn
 
 RUN pip install --no-cache-dir "poetry==$POETRY_VERSION"
 
-RUN mkdir -p /app/backend
-WORKDIR /app/backend
 COPY backend/pyproject.toml backend/poetry.lock /app/backend/
+WORKDIR /app/backend
+
 RUN poetry install \
     # In prod use "--no-dev"
     $([ -z "$DEBUG" -o "$DEBUG" = '0' ] && echo '--no-dev')
 
-RUN mkdir -p /app/frontend
-COPY frontend/package.json frontend/package-lock.json /app/frontend/
-RUN npm --prefix=../frontend install $([ -z "$DEBUG" -o "$DEBUG" = '0' ] && echo '--production') \
-    && echo "alias npm='npm --prefix=/app/frontend'" >> /root/.bashrc \
-    && echo "alias npx='npx --prefix=/app/frontend'" >> /root/.bashrc \
-    # May as well set redis-cli alias while we're at it
-    && echo "alias redis-cli='redis-cli -h redis'" >> /root/.bashrc
-
 COPY . /app/
 
-RUN npm --prefix=../frontend run build \
-    && sed -i 's/^\/\*.*\*\///' webcore/static/webcore/css/styles.min.css
-
+# Copy over needed files from stages
+COPY --from=frontend /app/frontend/node_modules/simpledotcss/simple.css /app/frontend/node_modules/simpledotcss/
+COPY --from=frontend \
+    /app/frontend/node_modules/alpinejs/dist/cdn.js /app/frontend/node_modules/alpinejs/dist/cdn.min.js \
+    /app/frontend/node_modules/alpinejs/dist/
+COPY --from=frontend /app/backend/webcore/static/webcore/css/styles.min.css /app/backend/webcore/static/webcore/css/
+COPY --from=frontend /app/backend/webcore/static/webcore/js/bundle.min.js /app/backend/webcore/static/webcore/js/
 COPY --from=audiowaveform /usr/local/bin/audiowaveform /usr/local/bin/audiowaveform
 
 ENTRYPOINT ["/app/backend/entrypoint.sh"]
