@@ -76,8 +76,7 @@ docker compose build
 docker compose up
 ```
 
-The development server will run at <http://localhost:8000/>. To make it publicly
-accessible, set `BIND_ADDR=0.0.0.0:8000` in `.env`.
+The development server will run at <http://localhost:8000/>.
 
 
 #### Miscellaneous Development Operations

@@ -1,9 +1,5 @@
 #!/bin/bash
 
-if [ -z "$NO_STARTUP_MESSAGE" ]; then
-    echo "Starting radio container revision $GIT_REV built on $(date -d "$BUILD_DATE")"
-fi
-
 cd /radio
 
 if [ -f /.env ]; then
@@ -11,6 +7,20 @@ if [ -f /.env ]; then
 else
     echo "Couldn't find .env file. Exiting."
     exit 1
+fi
+
+if [ "$DEBUG" -a "$DEBUG" != '0' ]; then
+    DEBUG=1
+else
+    DEBUG=
+fi
+
+if [ -z "$NO_STARTUP_MESSAGE" ]; then
+    printf "Starting radio container revision $GIT_REV built on $(date -d "$BUILD_DATE")"
+    if [ "$DEBUG" ]; then
+        printf ' (DEBUG mode on)'
+    fi
+    echo
 fi
 
 SCRIPT="/radio/script.liq"
@@ -38,10 +48,10 @@ else
 
 
     sed -i "s/^SECRET_KEY.*/SECRET_KEY = '$SECRET_KEY'  # from entrypoint.sh/" "$SCRIPT"
-    sed -i "s/^DEBUG.*/DEBUG = $([ "$DEBUG" -a "$DEBUG" != '0' ] && echo 'true' || echo 'false')  # from entrypoint.sh/" "$SCRIPT"
+    sed -i "s/^DEBUG.*/DEBUG = $([ "$DEBUG" ] && echo 'true' || echo 'false')  # from entrypoint.sh/" "$SCRIPT"
     echo "Replaced SECRET_KEY and DEBUG in $SCRIPT"
 
-    if [ "$DEBUG" -a "$DEBUG" != '0' -a -d /watch ]; then
+    if [ "$DEBUG" -a -d /watch ]; then
         trap "trap - SIGTERM && kill -- -$$" SIGINT SIGTERM EXIT  # /bin/bash needed to kill children (not /bin/sh)
         run_liquidsoap_loop_debug &
         run_restart_loop_debug &

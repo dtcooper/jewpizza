@@ -1,9 +1,5 @@
 #!/bin/sh
 
-if [ -z "$NO_STARTUP_MESSAGE" ]; then
-    echo "Starting app container revision $GIT_REV built on $(date -d "$BUILD_DATE")"
-fi
-
 cd /app/backend
 
 # Use the poetry's virtualenv
@@ -24,6 +20,14 @@ if [ "$DEBUG" -a "$DEBUG" != '0' ]; then
     fi
 else
     DEBUG=
+fi
+
+if [ -z "$NO_STARTUP_MESSAGE" ]; then
+    printf "Starting app container revision $GIT_REV built on $(date -d "$BUILD_DATE")"
+    if [ "$DEBUG" ]; then
+        printf ' (DEBUG mode on)'
+    fi
+    echo
 fi
 
 if [ "$RUN_HUEY" ]; then

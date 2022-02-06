@@ -10,8 +10,9 @@ SHOW_FIXTURE_DIR=backend/shows/fixtures/shows
 GIT_REV=$(shell git describe --tags --always --abbrev=8 --dirty)
 BUILD_DATE=$(shell date -u +%FT%TZ)
 
+up: CONTAINERS:=
 up:
-	@$(COMPOSE) up --remove-orphans $(shell source .env; if [ -z "$$DEBUG" -o "$$DEBUG" = 0 ]; then echo "-d"; fi)
+	@$(COMPOSE) up --remove-orphans $(shell source .env; if [ -z "$$DEBUG" -o "$$DEBUG" = 0 ]; then echo "-d"; fi) $(CONTAINERS)
 
 down:
 	@$(COMPOSE) down --remove-orphans
@@ -32,14 +33,17 @@ pre-commit:
 		npx standard --fix ;\
 		exit 0'
 
+build: CONTAINERS:=
 build:
-	$(COMPOSE) build --pull --build-arg GIT_REV=$(GIT_REV) --build-arg BUILD_DATE=$(BUILD_DATE)
+	$(COMPOSE) build --pull --build-arg GIT_REV=$(GIT_REV) --build-arg BUILD_DATE=$(BUILD_DATE) $(CONTAINERS)
 
+build-no-cache: CONTAINERS:=
 build-no-cache:
-	$(COMPOSE) build --no-cache --pull --build-arg GIT_REV=$(GIT_REV) --build-arg BUILD_DATE=$(BUILD_DATE)
+	$(COMPOSE) build --no-cache --pull --build-arg GIT_REV=$(GIT_REV) --build-arg BUILD_DATE=$(BUILD_DATE) $(CONTAINERS)
 
+shell: CONTAINER:=app
 shell:
-	@$(COMPOSE) run --rm --service-ports --use-aliases app bash || true
+	@$(COMPOSE) run --rm --service-ports --use-aliases $(CONTAINER) bash || true
 
 show-outdated:
 	@echo 'Showing outdated dependencies... (empty means none)'

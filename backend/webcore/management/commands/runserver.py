@@ -13,6 +13,7 @@ from django.utils.autoreload import DJANGO_AUTORELOAD_ENV
 
 class Command(RunserverCommand):
     if settings.DEBUG:
+
         def add_arguments(self, parser):
             super().add_arguments(parser)
             parser.add_argument(

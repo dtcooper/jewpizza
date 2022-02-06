@@ -1,3 +1,6 @@
+FROM python:3.10 as base
+
+
 # Build frontend
 FROM node:16-alpine AS frontend
 
@@ -10,7 +13,7 @@ RUN npm run build
 
 
 # audiowaveform tool
-FROM python:3.10 as audiowaveform
+FROM base as audiowaveform
 
 ARG AUDIOWAVEFORM_VERSION=1.5.1
 
@@ -39,7 +42,7 @@ RUN mkdir /build \
 
 
 # Actual app container
-FROM python:3.10
+FROM base
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
@@ -67,6 +70,7 @@ RUN if [ "$DEBUG" -a "$DEBUG" != '0' ]; then \
         libgd3 \
         libid3tag0 \
         libmad0 \
+        libsndfile1 \
         # Dev requirements
         $([ "$DEBUG" -a "$DEBUG" != '0' ] && echo \
             jq \
@@ -101,7 +105,9 @@ COPY --from=frontend \
     /build/frontend/node_modules/alpinejs/dist/cdn.js /build/frontend/node_modules/alpinejs/dist/cdn.min.js \
     /app/frontend/node_modules/alpinejs/dist/
 COPY --from=frontend /build/backend/webcore/static/webcore/css/styles.min.css /app/backend/webcore/static/webcore/css/
-COPY --from=frontend /build/backend/webcore/static/webcore/js/bundle.min.js /app/backend/webcore/static/webcore/js/
+COPY --from=frontend \
+    /build/backend/webcore/static/webcore/js/index.min.js /build/backend/webcore/static/webcore/js/placeholder.min.js \
+    /app/backend/webcore/static/webcore/js/
 COPY --from=audiowaveform /usr/local/bin/audiowaveform /usr/local/bin/audiowaveform
 
 ENTRYPOINT ["/app/backend/entrypoint.sh"]

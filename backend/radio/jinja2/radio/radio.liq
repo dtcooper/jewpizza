@@ -10,18 +10,14 @@ settings.server.timeout.set(-1.)
 log("Starting harbor (script generated " ^ {{ now()|liqval }} ^ ")")
 
 REDIS_PUBSUB_CHANNEL = {{ REDIS_PUBSUB_CHANNEL|liqval }}
-HOSTNAME = {{ config.ICECAST_HOSTNAME|liqval }}
-PORT = {{ config.ICECAST_PORT|liqval }}
-USERNAME = {{ config.ICECAST_USERNAME|liqval }}
-PASSWORD = {{ config.ICECAST_PASSWORD|liqval }}
-PROTOCOL = {{ config.ICECAST_PROTOCOL|liqval }}
+PASSWORD = {{ settings.ICECAST_SOURCE_PASSWORD|liqval }}
 
 METADATA_SSE_DELAY = 5.
 
 {% include 'radio/reload.liq' %}
 {% include 'radio/http.liq' %}
 
-jingle = single(fallible=false, '/jingle.mp3')
+jingle = single(fallible=false, '/audio/jingle.mp3')
 
 def show_announcement_request()
     minutes = random.int(min=1, max=20)
@@ -61,14 +57,13 @@ radio = mksafe(radio)
 output.dummy(radio)
 output = output.icecast(
     %mp3,
-    host=HOSTNAME,
-    port=PORT,
-    user=USERNAME,
+    host='icecast',
+    port=8888,
+    user='source',
     password=PASSWORD,
-    protocol=PROTOCOL,
     mount="radio",
     on_error=fun(e) -> begin
-        log("ERROR: error connecting to #{PROTOCOL}://#{USERNAME}:#{PASSWORD}@#{HOSTNAME}:#{PORT}/radio: #{e}")
+        log("ERROR: error connecting to http://source:#{PASSWORD}@icecast:8888/radio: #{e}")
         1.
     end,
     radio,

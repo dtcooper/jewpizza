@@ -108,38 +108,101 @@ jobs:
           container: sse
           dev: '1'
 
-  deploy:
+  build-nginx:
     runs-on: ubuntu-latest
-    name: Deploy
-    needs: [build-app, build-radio, build-sse]
+    name: Build nginx container
     steps:
       -
-        name: Deploy containers
-        uses: appleboy/ssh-action@master
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Build container
+        uses: ./.github/actions/docker-build-push
         with:
-          host: ${{ secrets.SSH_HOST }}
-          port: ${{ secrets.SSH_PORT }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
-          fingerprint: ${{ secrets.SSH_FINGERPRINT }}
-          script: |
-            cd ${{ secrets.SSH_DEPLOY_DIRECTORY }}
-            SHOULD_DEPLOY=
-            if docker compose ps --services --filter "status=running" | grep -q '^app$'; then
-              if [ "$(docker compose exec app poetry run ./manage.py constance get AUTO_DEPLOY)" = True ]; then
-                SHOULD_DEPLOY=1
-              fi
-            else
-              SHOULD_DEPLOY=1
-            fi
-            if [ "$SHOULD_DEPLOY" ]; then
-              git pull --ff-only
-              docker compose pull --quiet
-              docker compose up --quiet-pull --remove-orphans -d
-              docker system prune --force
-            else
-              echo "Deploy disabled by constance config (AUTO_DEPLOY = False)"
-            fi
+          token: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          container: nginx
+
+  build-nginx-dev:
+    runs-on: ubuntu-latest
+    name: Build nginx container (dev)
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Build container
+        uses: ./.github/actions/docker-build-push
+        with:
+          token: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          container: nginx
+          dev: '1'
+
+  build-icecast:
+    runs-on: ubuntu-latest
+    name: Build icecast container
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Build container
+        uses: ./.github/actions/docker-build-push
+        with:
+          token: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          container: icecast
+
+  build-icecast-dev:
+    runs-on: ubuntu-latest
+    name: Build icecast container (dev)
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Build container
+        uses: ./.github/actions/docker-build-push
+        with:
+          token: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          container: icecast
+          dev: '1'
+
+
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   name: Deploy
+  #   needs: [build-app, build-radio, build-sse, build-nginx, build-icecast]
+  #   steps:
+  #     -
+  #       name: Deploy containers
+  #       uses: appleboy/ssh-action@master
+  #       with:
+  #         host: ${{ secrets.SSH_HOST }}
+  #         port: ${{ secrets.SSH_PORT }}
+  #         username: ${{ secrets.SSH_USERNAME }}
+  #         key: ${{ secrets.SSH_KEY }}
+  #         fingerprint: ${{ secrets.SSH_FINGERPRINT }}
+  #         script: |
+  #           cd ${{ secrets.SSH_DEPLOY_DIRECTORY }}
+  #           SHOULD_DEPLOY=
+  #           if docker compose ps --services --filter "status=running" | grep -q '^app$'; then
+  #             if [ "$(docker compose exec app poetry run ./manage.py constance get AUTO_DEPLOY)" = True ]; then
+  #               SHOULD_DEPLOY=1
+  #             fi
+  #           else
+  #             SHOULD_DEPLOY=1
+  #           fi
+  #           if [ "$SHOULD_DEPLOY" ]; then
+  #             git pull --ff-only
+  #             docker compose pull --quiet
+  #             docker compose up --quiet-pull --remove-orphans -d
+  #             docker system prune --force
+  #           else
+  #             echo "Deploy disabled by constance config (AUTO_DEPLOY = False)"
+  #           fi
 
   test:
     runs-on: ubuntu-latest

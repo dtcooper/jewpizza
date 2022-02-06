@@ -5,29 +5,27 @@ from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.mail import send_mail
-from django.urls import reverse, reverse_lazy
+from django.http import HttpResponse
+from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import FormView, TemplateView
-
-from constance import config
+from django.views.generic import FormView, TemplateView, View
 
 from jew_pizza.twilio import send_sms
 
 from .forms import SendEmailForm, SendTextMessageForm
 
 
-NAVIGATION_VIEWS = (
-    ("index", "Tools Index"),
-    ("send-text-message", "Send Text Message"),
-    ("send-email", "Send Email"),
-    ("sse-status", "SSE Status"),
-)
-NAVIGATION_EXT_LINKS = (
-    (lambda: config.LOGS_URL, "Service Logs"),
-    (lambda: config.UMAMI_URL, "Analytics"),
+NAVIGATION_LINKS = (
+    (reverse_lazy("admin-tools:index"), "Tools Index", False),
+    (reverse_lazy("admin-tools:send-text-message"), "Send Text Message", False),
+    (reverse_lazy("admin-tools:send-email"), "Send Email", False),
+    (reverse_lazy("admin-tools:sse-status"), "SSE Status", False),
+    (reverse_lazy("admin-tools:logs"), "Service Logs", True),
+    (f"//{settings.UMAMI_HOST}/", "Analytics", True),
 )
 
 
+@method_decorator(staff_member_required, name="dispatch")
 class AdminToolsViewMixin:
     title = None
 
@@ -38,17 +36,11 @@ class AdminToolsViewMixin:
             extra_context["title"] = title or cls.title
         return super().as_view(*args, **kwargs)
 
-    @method_decorator(staff_member_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        nav_links = []
-        for url_name, name in NAVIGATION_VIEWS:
-            nav_links.append((reverse(f"admin-tools:{url_name}"), name, False))
-        for url_func, name in NAVIGATION_EXT_LINKS:
-            nav_links.append((url_func(), name, True))
-        return {"admin_nav_links": nav_links, **super().get_context_data(**kwargs)}
+        return {"admin_nav_links": NAVIGATION_LINKS, **super().get_context_data(**kwargs)}
 
 
 class AdminTemplateView(AdminToolsViewMixin, TemplateView):
@@ -106,3 +98,9 @@ class SSEStatusView(AdminTemplateView):
         # At least if the secret key is exposed somehow, it's a SHA256 of it, not the actual key
         context["secret_key"] = hashlib.sha256(settings.SECRET_KEY.encode()).hexdigest()
         return context
+
+
+@method_decorator(staff_member_required, name="dispatch")
+class LogsView(View):
+    def dispatch(self, request, *args, **kwargs):
+        return HttpResponse(headers={"X-Accel-Redirect": f"/protected{request.get_full_path()}"})

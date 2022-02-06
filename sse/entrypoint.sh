@@ -1,9 +1,5 @@
 #!/bin/sh
 
-if [ -z "$NO_STARTUP_MESSAGE" ]; then
-    echo "Starting sse container revision $GIT_REV built on $(date -d "$BUILD_DATE")"
-fi
-
 cd /app
 
 export PATH="$(poetry env info -p)/bin:$PATH"
@@ -15,13 +11,27 @@ else
     exit 1
 fi
 
+if [ "$DEBUG" -a "$DEBUG" != '0' ]; then
+    DEBUG=1
+else
+    DEBUG=
+fi
+
+if [ -z "$NO_STARTUP_MESSAGE" ]; then
+    printf "Starting sse container revision $GIT_REV built on $(date -d "$BUILD_DATE")"
+    if [ "$DEBUG" ]; then
+        printf ' (DEBUG mode on)'
+    fi
+    echo
+fi
+
 if [ "$#" != 0 ]; then
     exec "$@"
 else
     wait-for-it -t 0 redis:6379
     export SECRET_KEY
 
-    if [ "$DEBUG" -a "$DEBUG" != '0' ]; then
+    if [ "$DEBUG" ]; then
         exec watchmedo auto-restart --directory=./ --pattern=*.py -- python sse.py
     else
         exec gunicorn \

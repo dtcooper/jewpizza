@@ -1,0 +1,6 @@
+error_page 502 @unavailable;
+
+location @unavailable {
+    root /etc/nginx/unavailable;
+    try_files /unavailable.html =502;
+}

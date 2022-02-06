@@ -1,0 +1,45 @@
+<icecast>
+    <location>Planet Earthe</location>
+    <admin>${EMAIL_ADDRESS}</admin>
+    <hostname>radio.${DOMAIN_NAME}</hostname>
+
+    <limits>
+        <queue-size>524288</queue-size>
+        <client-timeout>30</client-timeout>
+        <header-timeout>15</header-timeout>
+        <source-timeout>10</source-timeout>
+        <burst-size>65535</burst-size>
+    </limits>
+
+    <authentication>
+        <source-password>${ICECAST_SOURCE_PASSWORD}</source-password>
+        <relay-password>${ICECAST_SOURCE_PASSWORD}</relay-password>
+
+        <admin-user>admin</admin-user>
+        <admin-password>${ICECAST_ADMIN_PASSWORD}</admin-password>
+    </authentication>
+
+    <listen-socket>
+        <port>8888</port>
+    </listen-socket>
+    <fileserve>1</fileserve>
+    <paths>
+        <!-- Docker internal IPs -->
+        <x-forwarded-for>172.*</x-forwarded-for>
+        <basedir>/usr/share/icecast</basedir>
+        <logdir>/var/log/icecast</logdir>
+        <webroot>/usr/share/icecast/web</webroot>
+        <adminroot>/usr/share/icecast/admin</adminroot>
+        <alias source="/" dest="/index.html"/>
+    </paths>
+
+    <logging>
+        <accesslog>-</accesslog>
+        <errorlog>-</errorlog>
+        <loglevel>3</loglevel>
+    </logging>
+
+    <security>
+        <chroot>0</chroot>
+    </security>
+</icecast>

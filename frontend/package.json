@@ -4,10 +4,10 @@
   "description": "",
   "scripts": {
     "build": "run-p build:*",
-    "build:css": "tailwind -i tailwind.css -o ../backend/webcore/static/webcore/css/styles.min.css --minify",
-    "build:js": "esbuild src/index.js --outfile=../backend/webcore/static/webcore/js/bundle.min.js --bundle --minify --legal-comments=none",
+    "build:css": "tailwind -i tailwind.css -o ../backend/webcore/static/webcore/css/styles.min.css",
+    "build:js": "esbuild src/index.js src/placeholder.js --outdir=../backend/webcore/static/webcore/js --bundle --minify --out-extension:.js=.min.js --legal-comments=none",
     "watch:dev-css": "tailwind -i tailwind.css -o ../backend/webcore/static/webcore/css/styles.css --watch",
-    "watch:dev-js": "esbuild src/index.js --outfile=../backend/webcore/static/webcore/js/bundle.js --bundle --sourcemap --watch",
+    "watch:dev-js": "esbuild src/index.js src/placeholder.js --outdir=../backend/webcore/static/webcore/js --bundle --sourcemap --watch",
     "watch": "run-p watch:*"
   },
   "repository": {

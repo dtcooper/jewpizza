@@ -29,61 +29,66 @@
     <style>img:not([x-ref="jewippyGif"]) { filter: brightness(0.075); }</style>
   {% endif %}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/iconify/2.1.2/iconify.min.js"></script>
-  <script>
-    {# XXX bubbleDemoNavLinks variable for bubble demo only, delete it #}
-    const DATA = window.DATA = {{ {
-      'bubbleDemoNavLinks': nav_links,
-      'csrfToken': csrf_token|string,
-      'currentPage': active_url,
-      'debug': settings.DEBUG,
-      'encodedEmail': encoded_email,
-      'isAuthenticated': request.user.is_authenticated,
-      'isSuperuser': request.user.is_superuser,
-      'jewippyEnabled': config.ENABLE_JEWIPPY,
-      'jewippyGifs': jewippy_gifs,
-      'jewippyTestWEBP': static('webcore/images/jewippy/test.webp'),
-      'jsErrorURL': url_for('webcore:log-js-error'),
-      'messages': get_messages(),
-      'playerEnabled': config.ENABLE_PLAYER,
-      'sseURL': config.SSE_URL,
-    }|tojson(indent=2 if settings.DEBUG else none) }}
-  </script>
-  <script src="{{ static('webcore/js/bundle.js') }}" defer></script>
+
+  {% block base_script %}
+    <script>
+      {# XXX bubbleDemoNavLinks variable for bubble demo only, delete it #}
+      const DATA = window.DATA = {{ {
+        'bubbleDemoNavLinks': nav_links,
+        'csrfToken': csrf_token|string,
+        'currentPage': active_url,
+        'debug': settings.DEBUG,
+        'encodedEmail': encoded_email,
+        'isAuthenticated': request.user.is_authenticated,
+        'isSuperuser': request.user.is_superuser,
+        'jewippyEnabled': config.ENABLE_JEWIPPY,
+        'jewippyGifs': jewippy_gifs,
+        'jewippyTestWEBP': static('webcore/images/jewippy/test.webp'),
+        'jsErrorURL': url_for('webcore:log-js-error'),
+        'messages': get_messages(),
+        'playerEnabled': config.ENABLE_PLAYER,
+        'sseURL': settings.SSE_URL,
+      }|tojson(indent=2 if settings.DEBUG else none) }}
+    </script>
+    <script src="{{ static('webcore/js/index.js') }}" defer></script>
+  {% endblock %}
 
   {% if config.UMAMI_WEBSITE_ID %}
     {# Shouldn't be umami.js for uBlock Origin #}
-    <script async defer data-website-id="{{ config.UMAMI_WEBSITE_ID }}" src="{{ config.UMAMI_SCRIPT_URL }}"></script>
+    <script async defer data-website-id="{{ config.UMAMI_WEBSITE_ID }}" src="//{{ settings.UMAMI_HOST }}/script.js"></script>
   {% endif %}
 </head>
 
-<body
-  {#- Overflow hidden needed on mobile safari to fix weird scrolling bug.
-      ie, we want scrolling to apply ONLY to item (main content) #}
-  x-data class="h-screen-iphone-fix flex flex-col overflow-hidden-iphone-only"
-  {# Disable overflow-hidden in unlikely event nav is larger than screen #}
-  :class="{'overflow-hidden-iphone-only': !$store.menuOpen, 'cursor-wait': $store.page.loading}"
->
-  {% include 'webcore/components/navbar.html' %}
-  {% include 'webcore/components/messages.html' %}
+{% block base_body %}
+  <body
+    {#- Overflow hidden needed on mobile safari to fix weird scrolling bug.
+        ie, we want scrolling to apply ONLY to item (main content) #}
+    x-data class="h-screen-iphone-fix flex flex-col overflow-hidden-iphone-only"
+    {# Disable overflow-hidden in unlikely event nav is larger than screen #}
+    :class="{'overflow-hidden-iphone-only': !$store.menuOpen, 'cursor-wait': $store.page.loading}"
+  >
+    {% include 'webcore/components/navbar.html' %}
+    {% include 'webcore/components/messages.html' %}
 
-  <div id="content-scroller" class="flex flex-col flex-1 w-full overflow-y-auto">
-    <div id="content" class="flex-1 {% if config.ENABLE_JEWIPPY %}pb-5{% endif %}" {% if config.ENABLE_JEWIPPY %}x-data :class="{'pb-[275px]': $store.jewippy.open, 'pb-5': !$store.jewippy.open}"{% endif %}>
-      {% block base_content required %}{% endblock %}
+    <div id="content-scroller" class="flex flex-col flex-1 w-full overflow-y-auto">
+      <div id="content" class="flex-1 {% if config.ENABLE_JEWIPPY %}pb-5{% endif %}" {% if config.ENABLE_JEWIPPY %}x-data :class="{'pb-[275px]': $store.jewippy.open, 'pb-5': !$store.jewippy.open}"{% endif %}>
+        {% block base_content required %}{% endblock %}
+      </div>
+      {% include 'webcore/components/emojis.html' %}
     </div>
-    {% include 'webcore/components/emojis.html' %}
-  </div>
 
-  {% if config.ENABLE_JEWIPPY %}
-    {% include 'webcore/components/jewippy.html' %}
-  {% endif %}
+    {% if config.ENABLE_JEWIPPY %}
+      {% include 'webcore/components/jewippy.html' %}
+    {% endif %}
 
-  {% if config.ENABLE_PLAYER %}
-    {% include 'webcore/components/player.html' %}
-  {% endif %}
+    {% if config.ENABLE_PLAYER %}
+      {% include 'webcore/components/player.html' %}
+    {% endif %}
 
-  {% if settings.DEBUG or request.user.is_superuser %}
-    {% include 'webcore/components/debug.html' %}
-  {% endif %}
+    {% if settings.DEBUG or request.user.is_superuser %}
+      {% include 'webcore/components/debug.html' %}
+    {% endif %}
 
-</body>
+  </body>
+{% endblock %}
 </html>

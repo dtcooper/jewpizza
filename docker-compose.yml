@@ -20,8 +20,6 @@ x-app-template: &app-template
 services:
   app:
     <<: *app-template
-    ports:
-      - "${BIND_ADDR:-127.0.0.1:8000}:8000"
     environment:
       - "TZ=${TIMEZONE:-US/Eastern}"
 
@@ -42,6 +40,7 @@ services:
       - ./.env:/.env:ro
     depends_on:
       - app
+      - icecast
       - redis
     environment:
       - "TZ=${TIMEZONE:-US/Eastern}"
@@ -63,8 +62,48 @@ services:
       - redis
     environment:
       - "TZ=${TIMEZONE:-US/Eastern}"
+
+  nginx:
+    <<: *service-defaults
+    image: dtcooper/jewpizza-nginx:${PINNED_CONTAINER_VERSION:-latest}
+    build:
+      context: nginx
+    volumes:
+      - nginx_secrets:/etc/letsencrypt
+      - ./.env:/.env:ro
+      - ./serve/static:/static_root
+      - ./serve/media:/media_root
+    depends_on:
+      - app
+      - icecast
+      - logs
+      - sse
+      - umami
+    environment:
+      - "CERTBOT_DNS_PROPAGATION_SECONDS=${CERTBOT_DNS_PROPAGATION_SECONDS:-120}"
+      - "CERTBOT_EMAIL=${EMAIL_ADDRESS:?EMAIL_ADDRESS needs to be set. See .env file.}"
+      - "DEBUG=${DEBUG:-0}"
+      - "DIGITALOCEAN_API_TOKEN=${DIGITALOCEAN_API_TOKEN:?DIGITALOCEAN_API_TOKEN needs to be set. See .env file.}"
+      - "DOMAIN_NAME=${DOMAIN_NAME:?DOMAIN_NAME needs to be set. See .env file.}"
+      - "STAGING=${LETSENCRYPT_STAGING:-0}"
+      - "USE_LOCAL_CA=${NGINX_USE_LOCAL_CA:-0}"
     ports:
-      - "${SSE_BIND_ADDR:-127.0.0.1:8001}:8001"
+      - "${HTTP_PORT:-80}:80"
+      - "${HTTPS_PORT:-443}:443"
+
+  icecast:
+    <<: *service-defaults
+    image: dtcooper/jewpizza-icecast:${PINNED_CONTAINER_VERSION:-latest}
+    build:
+      context: icecast
+    environment:
+      - "DOMAIN_NAME=${DOMAIN_NAME:?DOMAIN_NAME needs to be set. See .env file.}"
+      - "EMAIL_ADDRESS=${EMAIL_ADDRESS:?EMAIL_ADDRESS needs to be set. See .env file.}"
+      - "ICECAST_ADMIN_PASSWORD=${ICECAST_ADMIN_PASSWORD:?ICECAST_ADMIN_PASSWORD needs to be set. See .env file.}"
+      - "ICECAST_SOURCE_PASSWORD=${ICECAST_SOURCE_PASSWORD:?ICECAST_SOURCE_PASSWORD needs to be set. See .env file.}"
+      - "TZ=${TIMEZONE:-US/Eastern}"
+    ports:
+      - "${ICECAST_PORT:-8888}:8888"
 
   db:
     <<: *service-defaults
@@ -89,8 +128,6 @@ services:
     image: ghcr.io/mikecao/umami:postgresql-5d74e86
     depends_on:
       - db
-    ports:
-      - "${UMAMI_BIND_ADDR:-127.0.0.1:3000}:3000"
     environment:
       - DATABASE_URL=postgresql://postgres:postgres@db:5432/umami
       - DATABASE_TYPE=postgresql
@@ -103,11 +140,10 @@ services:
     image: amir20/dozzle:v3.10.2
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    ports:
-      - "${LOGS_BIND_ADDR:-127.0.0.1:8888}:8080"
     environment:
       - DOZZLE_TAILSIZE=2500
       - DOZZLE_NO_ANALYTICS=true
+      - "DOZZLE_BASE=/cmsadmin/tools/logs"
       - "TZ=${TIMEZONE:-US/Eastern}"
 
   autoheal:
@@ -120,5 +156,6 @@ services:
       - "TZ=${TIMEZONE:-US/Eastern}"
 
 volumes:
+  nginx_secrets:
   postgres_data:
   redis_data:

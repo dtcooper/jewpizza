@@ -24,9 +24,9 @@ RUN apt-get update \
 RUN wget -qO /usr/local/bin/wait-for-it "https://raw.githubusercontent.com/vishnubob/wait-for-it/${WAIT_FOR_IT_VERSION}/wait-for-it.sh" \
     && chmod +x /usr/local/bin/wait-for-it
 
-RUN mkdir /radio && chown -R liquidsoap:liquidsoap /radio && usermod -d /radio liquidsoap
+RUN usermod -d /radio liquidsoap
 COPY --chown=liquidsoap reload.liq /radio/script.liq
-COPY entrypoint.sh healthcheck.sh failsafe.mp3 jingle.mp3 /
+COPY image/ /
 
 USER liquidsoap
 WORKDIR /radio

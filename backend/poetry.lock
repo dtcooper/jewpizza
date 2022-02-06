@@ -1126,17 +1126,6 @@ optional = false
 python-versions = "*"
 
 [[package]]
-name = "whitenoise"
-version = "5.3.0"
-description = "Radically simplified static file serving for WSGI applications"
-category = "dev"
-optional = false
-python-versions = ">=3.5, <4"
-
-[package.extras]
-brotli = ["brotli"]
-
-[[package]]
 name = "wrapt"
 version = "1.13.3"
 description = "Module for decorators, wrappers and monkey patching."
@@ -1175,7 +1164,7 @@ tests = ["pytest", "pytest-cov", "pytest-django"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "88a09a5ef48168443bef81b240e8fc4de8aee2298575a91f8d6d71399449cf13"
+content-hash = "3ee1e38d3a5a224d81a66c6227ece729253382129c1449b6269db77331b3a9ad"
 
 [metadata.files]
 appdirs = [
@@ -1880,10 +1869,6 @@ watchdog = [
 wcwidth = [
     {file = "wcwidth-0.2.5-py2.py3-none-any.whl", hash = "sha256:beb4802a9cebb9144e99086eff703a642a13d6a0052920003a230f3294bbe784"},
     {file = "wcwidth-0.2.5.tar.gz", hash = "sha256:c4d647b99872929fdb7bdcaa4fbe7f01413ed3d98077df798530e5b04f116c83"},
-]
-whitenoise = [
-    {file = "whitenoise-5.3.0-py2.py3-none-any.whl", hash = "sha256:d963ef25639d1417e8a247be36e6aedd8c7c6f0a08adcb5a89146980a96b577c"},
-    {file = "whitenoise-5.3.0.tar.gz", hash = "sha256:d234b871b52271ae7ed6d9da47ffe857c76568f11dd30e28e18c5869dbd11e12"},
 ]
 wrapt = [
     {file = "wrapt-1.13.3-cp27-cp27m-macosx_10_9_x86_64.whl", hash = "sha256:e05e60ff3b2b0342153be4d1b597bbcfd8330890056b9619f4ad6b8d5c96a81a"},

@@ -28,6 +28,7 @@ EMAIL_HOST_PASSWORD = env("EMAIL_PASSWORD")
 EMAIL_PORT = env.int("EMAIL_PORT", default=587)
 EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=(EMAIL_PORT == 587))
 DEFAULT_FROM_EMAIL = SERVER_EMAIL = env("EMAIL_FROM_ADDRESS")
+ICECAST_SOURCE_PASSWORD = env("ICECAST_SOURCE_PASSWORD")
 TWILIO_ACCOUNT_SID = env("TWILIO_ACCOUNT_SID")
 TWILIO_AUTH_TOKEN = env("TWILIO_AUTH_TOKEN")
 AWS_ACCESS_KEY_ID = env("DIGITALOCEAN_SPACES_ACCESS_KEY_ID")
@@ -42,6 +43,8 @@ BUILD_DATE = env("BUILD_DATE", default="unknown")
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 ADMINS = [(f"{DOMAIN_NAME} Admin", EMAIL_ADDRESS)]
+UMAMI_HOST = f"umami.{DOMAIN_NAME}"
+SSE_URL = "/sse"
 
 if DEBUG:
     ALLOWED_HOSTS = ["*"]
@@ -79,20 +82,16 @@ if DEBUG:
         "from shows.tasks import generate_peaks",
     ]
 
-MIDDLEWARE = ["django.middleware.security.SecurityMiddleware"]
-if not DEBUG and SERVE_ASSETS_FROM_DJANGO:
-    MIDDLEWARE.append("whitenoise.middleware.WhiteNoiseMiddleware")
-MIDDLEWARE.extend(
-    [
-        "django.contrib.sessions.middleware.SessionMiddleware",
-        "django.middleware.common.CommonMiddleware",
-        "django.middleware.csrf.CsrfViewMiddleware",
-        "django.contrib.auth.middleware.AuthenticationMiddleware",
-        "django.contrib.messages.middleware.MessageMiddleware",
-        "django.middleware.clickjacking.XFrameOptionsMiddleware",
-        "webcore.middleware.JSONResponseMiddleware",
-    ]
-)
+MIDDLEWARE = [
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "webcore.middleware.JSONResponseMiddleware",
+]
 if DEBUG and len(sys.argv) >= 2 and sys.argv[1] == "runserver":
     MIDDLEWARE.append("webcore.middleware.TailwindFunctioningRunserverMiddleware")
 
@@ -267,33 +266,7 @@ CONSTANCE_CONFIG = {
     "ENABLE_TEST_NOTIFICATIONS": (False, "Enable test notifications on home page (for superuser only)"),
     "HIDDEN_IMG_MODE": (False, "Enable hidden image mode (for development in public, to not look so awkward)"),
     "TWILIO_FROM_NUMBER": ("+14164390000", "Twilio from number for texts/calls", "phone"),
-    "LOGS_URL": (
-        "http://localhost:8888/" if DEBUG else "https://logs.jew.pizza/",
-        "URL for logs container, linked in admin",
-        "url",
-    ),
-    "UMAMI_URL": ("http://localhost:3000/" if DEBUG else "https://umami.jew.pizza/", "URL for umami analytics", "url"),
-    "UMAMI_SCRIPT_URL": (
-        "http://localhost:3000/" if DEBUG else "https://umami.jew.pizza/script.js",
-        "URL for umami.js script",
-        "url",
-    ),
     "UMAMI_WEBSITE_ID": ("", "Website ID in umami", "uuid_optional"),
-    "SSE_URL": (
-        "http://localhost:8001/" if DEBUG else "https://sse.jew.pizza/",
-        "URL for server-sent events endpoint",
-        "url",
-    ),
-    "ICECAST_URL": (
-        "http://localhost:8080/" if DEBUG else "https://radio.jew.pizza/",
-        "Public URL for Icecast server",
-        "url",
-    ),
-    "ICECAST_HOSTNAME": ("icecast" if DEBUG else "host.docker.internal", "Hostname for Icecast server", "char"),
-    "ICECAST_PORT": (8000, "Port for Icecast server", "positive_int"),
-    "ICECAST_USERNAME": ("source", "Username for Icecast server", "char"),
-    "ICECAST_PASSWORD": ("hackme", "Password for Icecast server", "char"),
-    "ICECAST_PROTOCOL": ("http", "Protocol for Icecast server", "icecast_protocol"),
     "AUTO_DEPLOY": (True, "Automatically deploy from Github Actions when code is pushed to main branch"),
 }
 
@@ -301,18 +274,6 @@ CONSTANCE_CONFIG_FIELDSETS = OrderedDict(
     (
         ("Development Options", ("ENABLE_JEWIPPY", "ENABLE_PLAYER", "ENABLE_TEST_NOTIFICATIONS", "HIDDEN_IMG_MODE")),
         ("Telephony", ("TWILIO_FROM_NUMBER",)),
-        ("Umami Tracking Tag", ("UMAMI_WEBSITE_ID", "UMAMI_URL", "UMAMI_SCRIPT_URL")),
-        (
-            "Icecast",
-            (
-                "ICECAST_URL",
-                "ICECAST_HOSTNAME",
-                "ICECAST_PORT",
-                "ICECAST_USERNAME",
-                "ICECAST_PASSWORD",
-                "ICECAST_PROTOCOL",
-            ),
-        ),
-        ("Miscellaneous", ("LOGS_URL", "SSE_URL", "AUTO_DEPLOY")),
+        ("Miscellaneous", ("UMAMI_WEBSITE_ID", "AUTO_DEPLOY")),
     )
 )

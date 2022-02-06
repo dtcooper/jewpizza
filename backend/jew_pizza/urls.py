@@ -2,7 +2,7 @@ import re
 
 from django.contrib import admin
 from django.shortcuts import render
-from django.urls import include, path, register_converter
+from django.urls import include, path, register_converter, reverse_lazy
 
 from shows.constants import SHOW_CODES_TO_SHOW, Show
 from webcore.middleware import JSONResponseMiddleware
@@ -10,6 +10,7 @@ from webcore.middleware import JSONResponseMiddleware
 
 admin.site.index_title = admin.site.site_header = "jew.pizza administration"
 admin.site.site_title = "jew.pizza site admin"
+admin.site.site_url = reverse_lazy("webcore:home")
 
 
 class ShowConverter:

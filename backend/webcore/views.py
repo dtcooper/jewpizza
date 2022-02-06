@@ -2,6 +2,8 @@ import datetime
 import json
 import logging
 
+import pytz
+
 from django.conf import settings
 from django.contrib import messages
 from django.core.mail import send_mail
@@ -41,6 +43,18 @@ class LogJSErrorView(View):
             )
 
         return HttpResponse(status=204)
+
+
+class PlaceholderView(TemplateView):
+    template_name = "webcore/placeholder.html"
+    extra_context = {"title": "jew.pizza - David Cooper"}
+
+    def get_context_data(self, **kwargs):
+        return {
+            "eastern_tz_abbrev": pytz.timezone("US/Eastern").localize(datetime.datetime.now()).tzname(),
+            "js_data": {"test_tz": self.request.GET.get("testtz")},
+            **super().get_context_data(**kwargs),
+        }
 
 
 class HomeView(TemplateView):

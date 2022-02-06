@@ -3,6 +3,20 @@ import Alpine from 'alpinejs'
 import moment from 'moment-timezone/builds/moment-timezone-with-data-1970-2030'
 
 document.addEventListener('alpine:init', () => {
+  Alpine.data('obfuscatedEmail', () => ({
+    jank: 'mzaDJiq2blRb6Kt6IEBkog1xFTK:C1sXQz4dyGlwp2cWa6XCJwQRVkvBSdLDSzzc5i7zuCyxRtXZXdy2ZXu92mWpmB@oVuskLGzw3myjjr' +
+        'R5ZEFwmqBgLj9e3Iebb7lZjsm4s3uw3rQw6nqH3Hrqtsdg.6zfrMHUsUbDhdB9vspQXw48WIi5FUaZco0LkiEX5ZCaPBCQ1GkM5vafAzEBeL' +
+        'xvwLHGOIOcGzbzl0zEFUMLKdYxWa0BZKWdmgg2a9SW8nreNfJ2cOUctNnsYBe',
+    email () {
+      let email = ''
+      let jank = this.jank
+      for (let i = 0; jank.length > 0; i++) {
+        email += jank.charAt(i)
+        jank = jank.substr(i + 1)
+      }
+      return email
+    }
+  }))
   Alpine.data('localizedTimeBlurb', () => ({
     userTZ: DATA.test_tz || moment.tz.guess() || 'US/Eastern',
     showNightBefore: false,
@@ -87,3 +101,6 @@ document.addEventListener('alpine:init', () => {
     }
   }))
 })
+
+window.Alpine = Alpine
+Alpine.start()

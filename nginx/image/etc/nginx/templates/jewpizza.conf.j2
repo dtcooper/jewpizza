@@ -1,0 +1,125 @@
+map $sent_http_content_type $expires {
+    default                    off;
+    text/html                  epoch;
+    text/css                   30d;
+    application/javascript     30d;
+    ~image/                    30d;
+    ~font/                     30d;
+}
+
+upstream app {
+    server app:8000;
+}
+
+upstream logs {
+    server logs:8080;
+}
+
+upstream sse {
+    server sse:8001;
+}
+
+upstream umami {
+    server umami:3000;
+}
+
+upstream icecast {
+    server icecast:8888;
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name {{ DOMAIN_NAME }};
+    include proxy_busy_error;
+
+    location = /favicon.ico {
+        return 204;
+        access_log off;
+        log_not_found off;
+    }
+
+    {% if not DEBUG|int %}
+        location /static {
+            expires $expires;
+            alias /static_root;
+        }
+
+        location /media {
+            expires $expires;
+            alias /media_root;
+        }
+    {% endif -%}
+
+    location /sse/ {
+        include proxy_params;
+        proxy_buffering off;
+        proxy_cache off;
+        proxy_pass http://sse/;
+    }
+
+    location /protected/cmsadmin/tools/logs/ {
+        internal;
+        include proxy_params;
+        proxy_buffering off;
+        proxy_cache off;
+        proxy_pass http://logs/cmsadmin/tools/logs/;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://app;
+    }
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name umami.{{ DOMAIN_NAME }} analytics.{{ DOMAIN_NAME }};  # certbot_domain:*.{{ DOMAIN_NAME }}
+    include proxy_busy_error;
+
+    ssl_certificate /etc/letsencrypt/live/jew-pizza/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/jew-pizza/privkey.pem;
+    ssl_trusted_certificate /etc/letsencrypt/live/jew-pizza/chain.pem;
+    ssl_dhparam /etc/letsencrypt/dhparams/dhparam.pem;
+
+    # uBlockOrigin breaks /umami.js
+    location = /script.js {
+        rewrite ^.*$ /umami.js last;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://umami;
+    }
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name radio.{{ DOMAIN_NAME }};  # certbot_domain:*.{{ DOMAIN_NAME }}
+    include proxy_busy_error;
+
+    ssl_certificate /etc/letsencrypt/live/jew-pizza/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/jew-pizza/privkey.pem;
+    ssl_trusted_certificate /etc/letsencrypt/live/jew-pizza/chain.pem;
+    ssl_dhparam /etc/letsencrypt/dhparams/dhparam.pem;
+
+    location / {
+        include proxy_params;
+        proxy_pass http://icecast;
+    }
+}
+
+server {
+    listen 443 ssl http2 default_server;
+    listen [::]:443 ssl http2 default_server;
+    server_name _;  # certbot_domain:*.{{ DOMAIN_NAME }}
+
+    ssl_certificate /etc/letsencrypt/live/jew-pizza/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/jew-pizza/privkey.pem;
+    ssl_trusted_certificate /etc/letsencrypt/live/jew-pizza/chain.pem;
+    ssl_dhparam /etc/letsencrypt/dhparams/dhparam.pem;
+
+    return 301 https://{{ DOMAIN_NAME }}$request_uri;
+}
