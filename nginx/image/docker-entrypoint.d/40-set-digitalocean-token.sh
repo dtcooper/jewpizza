@@ -5,7 +5,7 @@ SCRIPT="$(basename "$0")"
 
 # ALSO use USE_LOCAL_CA with dir mounted, with instructions on how to install
 
-if [ "$DIGITALOCEAN_API_TOKEN" -a "$USE_LOCAL_CA" -ne '1' ]; then
+if [ "$DIGITALOCEAN_API_TOKEN" -a "$USE_LOCAL_CA" != '1' ]; then
     echo "$SCRIPT: Writing digitalocean API token to $INI_FILE"
     echo "dns_digitalocean_token = $DIGITALOCEAN_API_TOKEN" > "$INI_FILE"
     chmod 600 "$INI_FILE"
