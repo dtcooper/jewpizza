@@ -56,6 +56,10 @@ if [ -z "$GITHUB_API_TOKEN" ]; then
     echo -e "\x1B[91mWarning: GITHUB_API_TOKEN not set\x1B[0m"
 fi
 
+PYTHON_LOCAL="$(grep '^FROM python' backend/Dockerfile | sed 's/FROM python:\(.*\) as base/\1/')"
+PYTHON_UPSTREAM="$(lastversion python/cpython)"
+compare Python "$PYTHON_LOCAL" "$PYTHON_UPSTREAM" 1
+
 POSTGRES_LOCAL="$(yq -r .services.db.image docker-compose.yml | sed 's/^library\/postgres:\(.*\)-alpine/\1/')"
 POSTGRES_UPSTREAM="$(lastversion postgres/postgres)"
 compare PostgreSQL "$POSTGRES_LOCAL" "$POSTGRES_UPSTREAM" 1
@@ -77,13 +81,30 @@ UMAMI_TAG="$(curl -s --user "dtcooper:$GITHUB_API_TOKEN" https://api.github.com/
 UMAMI_UPSTREAM="$(curl -s --user "dtcooper:$GITHUB_API_TOKEN" "https://api.github.com/repos/mikecao/umami/git/ref/tags/$UMAMI_TAG" | jq -r .object.sha)"
 compare Umami "$UMAMI_LOCAL" "$UMAMI_UPSTREAM" 1
 
+ICECAST_KH_LOCAL="$(fgrep 'ICECAST_KH_VERSION=' icecast/Dockerfile | sed 's/.*ICECAST_KH_VERSION="\([0-9a-zA-Z.-]*\).*/\1/')"
+ICECAST_KH_REMOTE="$(curl -s --user "dtcooper:$GITHUB_API_TOKEN" https://api.github.com/repos/karlheyes/icecast-kh/releases/latest | jq -r .tag_name | sed 's/^icecast-//')"
+compare icecast-kh "$ICECAST_KH_LOCAL" "$ICECAST_KH_REMOTE"
+
 AUTOHEAL_LOCAL="$(yq -r .services.autoheal.image docker-compose.yml | sed 's/^willfarrell\/autoheal://')"
 AUTOHEAL_UPSTREAM="$(lastversion willfarrell/docker-autoheal)"
 compare Autoheal "$AUTOHEAL_LOCAL" "$AUTOHEAL_UPSTREAM"
 
+DOCKER_NGINX_CERTBOT_LOCAL="$(grep '^FROM jonasal/nginx-certbot' nginx/Dockerfile | sed 's/FROM jonasal\/nginx-certbot:\(.*\)-alpine AS base/\1/')"
+DOCKER_NGINX_CERTBOT_UPSTREAM="$(lastversion JonasAlfredsson/docker-nginx-certbot)"
+compare docker-nginx-certbot "$DOCKER_NGINX_CERTBOT_LOCAL" "$DOCKER_NGINX_CERTBOT_UPSTREAM" 1
+
 POETRY_LOCAL="$(fgrep 'POETRY_VERSION=' backend/Dockerfile | sed 's/.*POETRY_VERSION=\([0-9.]*\).*/\1/')"
 POETRY_UPSTREAM="$(lastversion python-poetry/poetry)"
 compare Poetry "$POETRY_LOCAL" "$POETRY_UPSTREAM"
+
+JINJA2_CLI_LOCAL="$(fgrep 'JINJA2_CLI_VERSION=' nginx/Dockerfile | sed 's/.*JINJA2_CLI_VERSION=\([0-9.]*\).*/\1/')"
+JINJA2_CLI_UPSTREAM="$(lastversion mattrobenolt/jinja2-cli)"
+compare jinja2-cli "$JINJA2_CLI_LOCAL" "$JINJA2_CLI_UPSTREAM"
+
+NGINX_BROTLI_LOCAL="$(fgrep 'NGX_BROTLI_VERSION=' nginx/Dockerfile | sed 's/.*NGX_BROTLI_VERSION=\([0-9a-zA-Z]*\).*/\1/')"
+NGINX_BROTLI_DEFAULT_BRANCH="$(curl -s --user "dtcooper:$GITHUB_API_TOKEN" https://api.github.com/repos/google/ngx_brotli | jq -r .default_branch)"
+NGINX_BROTLI_UPSTREAM="$(curl -s --user "dtcooper:$GITHUB_API_TOKEN" "https://api.github.com/repos/google/ngx_brotli/commits/$NGINX_BROTLI_DEFAULT_BRANCH" | jq -r .sha)"
+compare nginx-brotli "$NGINX_BROTLI_LOCAL" "$NGINX_BROTLI_UPSTREAM" 1
 
 AUDIOWAVEFORM_LOCAL="$(fgrep 'AUDIOWAVEFORM_VERSION=' backend/Dockerfile | sed 's/.*AUDIOWAVEFORM_VERSION=\([0-9.]*\).*/\1/')"
 AUDIOWAVEFORM_UPSTREAM="$(lastversion bbc/audiowaveform)"

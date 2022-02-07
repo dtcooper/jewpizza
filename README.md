@@ -39,7 +39,7 @@ It's built using the _wildly_ popular and _extremely_ common
 * [**h**uey](https://huey.readthedocs.io/), a lightweight asynchronous task
     queue for Python;
 * [**I**cecast](https://icecast.org/), a streaming media server for listeners to
-    connect;
+    connect (Karl Heyes's [fork](https://github.com/karlheyes/icecast-kh));
 * [**n**ginx](https://www.nginx.com/) as a web server and reverse proxy with
     [jonasal/nginx-certbot](https://github.com/JonasAlfredsson/docker-nginx-certbot/)
     container as its base for [HTTPS](https://en.wikipedia.org/wiki/HTTPS);
