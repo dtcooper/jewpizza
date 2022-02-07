@@ -9,7 +9,7 @@ jinja2 --format=env "$TEMPLATE_FILE" /.env > "$CONF_FILE"
 echo "$SCRIPT: Rendered config ($CONF_FILE)"
 
 if [ "$DEBUG" -a "$DEBUG" != '0' ]; then
-    echo "------------- $CONF_FILE -------------"
+    echo "========== begin: $CONF_FILE =========="
     cat "$CONF_FILE"
-    echo "------------- $CONF_FILE -------------"
+    echo "=========== end: $CONF_FILE ==========="
 fi

@@ -1,3 +1,21 @@
+{%- macro server_name() -%}
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+
+    ssl_certificate /etc/letsencrypt/live/jew-pizza/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/jew-pizza/privkey.pem;
+    ssl_trusted_certificate /etc/letsencrypt/live/jew-pizza/chain.pem;
+    ssl_dhparam /etc/letsencrypt/dhparams/dhparam.pem;
+
+    {% if varargs %}
+        {% for subdomain in varargs %}
+            server_name {% if subdomain == '_' %}_{% else %}{{ subdomain }}.{{ DOMAIN_NAME }}{% endif %};  # certbot_domain:*.{{ DOMAIN_NAME }}
+        {% endfor %}
+    {% else %}
+        server_name {{ DOMAIN_NAME }};
+    {% endif %}
+{%- endmacro -%}
+
 # Cache values
 map $sent_http_content_type $expires {
     default                    off;
@@ -16,9 +34,8 @@ upstream icecast { server icecast:8888; }
 
 # {{ DOMAIN_NAME }}, main Django app
 server {
-    listen 443 ssl http2;
-    listen [::]:443 ssl http2;
-    server_name {{ DOMAIN_NAME }};
+    {{ server_name() }}
+
     include proxy_busy_error;
 
     location = /favicon.ico {
@@ -65,17 +82,11 @@ server {
     }
 }
 
-# umami.{{ DOMAIN_NAME }} or analytics.{{ DOMAIN_NAME }}, Umami analytics
+# Umami analytics
 server {
-    listen 443 ssl http2;
-    listen [::]:443 ssl http2;
-    server_name umami.{{ DOMAIN_NAME }} analytics.{{ DOMAIN_NAME }};  # certbot_domain:*.{{ DOMAIN_NAME }}
-    include proxy_busy_error;
+    {{ server_name('umami', 'analytics') }}
 
-    ssl_certificate /etc/letsencrypt/live/jew-pizza/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/jew-pizza/privkey.pem;
-    ssl_trusted_certificate /etc/letsencrypt/live/jew-pizza/chain.pem;
-    ssl_dhparam /etc/letsencrypt/dhparams/dhparam.pem;
+    include proxy_busy_error;
 
     # uBlockOrigin breaks /umami.js
     location = /script.js {
@@ -90,15 +101,9 @@ server {
 
 # radio service
 server {
-    listen 443 ssl http2;
-    listen [::]:443 ssl http2;
-    server_name radio.{{ DOMAIN_NAME }};  # certbot_domain:*.{{ DOMAIN_NAME }}
-    include proxy_busy_error;
+    {{ server_name('radio') }}
 
-    ssl_certificate /etc/letsencrypt/live/jew-pizza/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/jew-pizza/privkey.pem;
-    ssl_trusted_certificate /etc/letsencrypt/live/jew-pizza/chain.pem;
-    ssl_dhparam /etc/letsencrypt/dhparams/dhparam.pem;
+    include proxy_busy_error;
 
     location / {
         include proxy_params;
@@ -106,65 +111,33 @@ server {
     }
 }
 
-{% if NGINX_ENABLE_ETC_SUBDOMAIN|default(0)|int %}
-     # etc.{{ DOMAIN_NAME }}, served folder enabled by config NGINX_ENABLE_ETC_SUBDOMAIN
-    server {
-        listen 443 ssl http2;
-        server_name etc.{{ DOMAIN_NAME }};
+{% for subdomain, enabled in (
+    ('etc', NGINX_ENABLE_ETC_SUBDOMAIN|default(0)|int),
+    ('priv', NGINX_ENABLE_PRIV_SUBDOMAIN|default(0)|int),
+) %}
+    {% if enabled %}
+        # {{ subdomain }}, served folder enabled by config
+        server {
+            {{ server_name(subdomain) }}
 
-        ssl_certificate /etc/letsencrypt/live/jew-pizza/fullchain.pem;
-        ssl_certificate_key /etc/letsencrypt/live/jew-pizza/privkey.pem;
-        ssl_trusted_certificate /etc/letsencrypt/live/jew-pizza/chain.pem;
-        ssl_dhparam /etc/letsencrypt/dhparams/dhparam.pem;
+            root /{{ subdomain }}_root;
+            {% if subdomain == 'etc' %}autoindex on;{% endif %}
 
-        root /etc_root;
-        autoindex on;
+            location = /robots.txt {
+                add_header Content-Type text/plain;
+                return 200 "User-agent: *\nDisallow: /\n";
+            }
 
-        location = /robots.txt {
-            add_header Content-Type text/plain;
-            return 200 "User-agent: *\nDisallow: /\n";
+            location / {
+                try_files $uri $uri/ =404;
+            }
         }
-
-        location / {
-            try_files $uri $uri/ =404;
-        }
-    }
-{% endif %}
-
-{% if NGINX_ENABLE_PRIV_SUBDOMAIN|default(0)|int %}
-    # priv.{{ DOMAIN_NAME }}, served folder enabled by config NGINX_ENABLE_PRIV_SUBDOMAIN
-    server {
-        listen 443 ssl http2;
-        server_name priv.{{ DOMAIN_NAME }};
-
-        ssl_certificate /etc/letsencrypt/live/jew-pizza/fullchain.pem;
-        ssl_certificate_key /etc/letsencrypt/live/jew-pizza/privkey.pem;
-        ssl_trusted_certificate /etc/letsencrypt/live/jew-pizza/chain.pem;
-        ssl_dhparam /etc/letsencrypt/dhparams/dhparam.pem;
-
-        root /priv_root;
-
-        location = /robots.txt {
-            add_header Content-Type text/plain;
-            return 200 "User-agent: *\nDisallow: /\n";
-        }
-
-        location / {
-            try_files $uri $uri/ =404;
-        }
-    }
-{% endif %}
+    {% endif %}
+{% endfor %}
 
 # Catch-all subdomain redirect to Django app (include www.{{ DOMAIN_NAME }})
 server {
-    listen 443 ssl http2 default_server;
-    listen [::]:443 ssl http2 default_server;
-    server_name _;  # certbot_domain:*.{{ DOMAIN_NAME }}
-
-    ssl_certificate /etc/letsencrypt/live/jew-pizza/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/jew-pizza/privkey.pem;
-    ssl_trusted_certificate /etc/letsencrypt/live/jew-pizza/chain.pem;
-    ssl_dhparam /etc/letsencrypt/dhparams/dhparam.pem;
+    {{ server_name('_') }}
 
     return 302 https://{{ DOMAIN_NAME }}$request_uri;
 }

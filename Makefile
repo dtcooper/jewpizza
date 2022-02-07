@@ -12,10 +12,10 @@ BUILD_DATE=$(shell date -u +%FT%TZ)
 
 up: CONTAINERS:=
 up:
-	@$(COMPOSE) up --remove-orphans $(shell source .env; if [ -z "$$DEBUG" -o "$$DEBUG" = 0 ]; then echo "-d"; fi) $(CONTAINERS)
+	$(COMPOSE) up --remove-orphans $(shell source .env; if [ -z "$$DEBUG" -o "$$DEBUG" = 0 ]; then echo "-d"; fi) $(CONTAINERS)
 
 down:
-	@$(COMPOSE) down --remove-orphans
+	$(COMPOSE) down --remove-orphans
 
 pre-commit:
 	@$(COMPOSE) run --rm --no-deps app sh -c '\
