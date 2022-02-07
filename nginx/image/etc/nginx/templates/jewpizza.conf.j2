@@ -111,6 +111,53 @@ server {
     }
 }
 
+{% if ENABLE_ETC_SUBDOMAIN|int %}
+    server {
+        listen 443 ssl http2;
+        server_name etc.{{ DOMAIN_NAME }};
+
+        ssl_certificate /etc/letsencrypt/live/jew-pizza/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/jew-pizza/privkey.pem;
+        ssl_trusted_certificate /etc/letsencrypt/live/jew-pizza/chain.pem;
+        ssl_dhparam /etc/letsencrypt/dhparams/dhparam.pem;
+
+        root /etc_root;
+        autoindex on;
+
+        location = /robots.txt {
+            add_header Content-Type text/plain;
+            return 200 "User-agent: *\nDisallow: /\n";
+        }
+
+        location / {
+            try_files $uri $uri/ =404;
+        }
+    }
+{% endif %}
+
+{% if ENABLE_PRIV_SUBDOMAIN|int %}
+    server {
+        listen 443 ssl http2;
+        server_name priv.{{ DOMAIN_NAME }};
+
+        ssl_certificate /etc/letsencrypt/live/jew-pizza/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/jew-pizza/privkey.pem;
+        ssl_trusted_certificate /etc/letsencrypt/live/jew-pizza/chain.pem;
+        ssl_dhparam /etc/letsencrypt/dhparams/dhparam.pem;
+
+        root /priv_root;
+
+        location = /robots.txt {
+            add_header Content-Type text/plain;
+            return 200 "User-agent: *\nDisallow: /\n";
+        }
+
+        location / {
+            try_files $uri $uri/ =404;
+        }
+    }
+{% endif %}
+
 server {
     listen 443 ssl http2 default_server;
     listen [::]:443 ssl http2 default_server;

@@ -1,7 +1,7 @@
 import os
 
 from django.conf import settings
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponseServerError, JsonResponse
 
 from jew_pizza.jinja2 import get_messages
 
@@ -16,7 +16,7 @@ class TailwindFunctioningRunserverMiddleware:
             response = self.get_response(request)
             return response
         else:
-            return HttpResponse(
+            return HttpResponseServerError(
                 "Tailwind did NOT generate stylesheet, see command output.",
                 content_type="text/plain",
             )

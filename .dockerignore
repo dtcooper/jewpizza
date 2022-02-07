@@ -11,6 +11,7 @@ Dockerfile
 /backend/webcore/static/webcore/js/index*.js*
 /backend/webcore/static/webcore/js/placeholder*.js*
 /frontend/node_modules/
+/local-certificate-authority/
 /serve/
 __pycache__
 docker-compose.override.yml

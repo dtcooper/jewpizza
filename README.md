@@ -64,10 +64,29 @@ cp .env.sample .env
 ln -s docker-compose.dev.yml docker-compose.override.yml
 ```
 
+Assuming you set `DOMAIN_NAME=local.jew.pizza` for local development, you'll
+want to properly point your system's DNS that way, for example add the following
+to `/etc/hosts`.
+
+```
+# jew.pizza local development
+127.0.0.1 local.jew.pizza
+127.0.0.1 analytics.local.jew.pizza umami.local.jew.pizza
+127.0.0.1 etc.local.jew.pizza
+127.0.0.1 priv.local.jew.pizza
+127.0.0.1 radio.local.jew.pizza
+127.0.0.1 www.local.jew.pizza
+```
+
+If you set `NGINX_USE_LOCAL_CERTIFICATE_AUTHORITY=1` (and you **should** for
+local development), you'll want to install the phony certificate authority's
+root certificate located at `local-certificate-authority/caCert.pem`. It expires
+every 30 days.
+
 
 ## Running
 
-### Development Mode (`DEBUG=1`)
+### Development Mode (`DEBUG=1` with `docker-compose.dev.yml` symlinked)
 
 Build and start containers,
 
@@ -95,102 +114,19 @@ make pre-commit
 
 ### Production Mode (`DEBUG=0`)
 
-Build containers and start in daemon mode.
+Build containers and start in daemon mode. Set all appropriate variables in the
+`.env` file, making note to properly configure the following,
+
+* An SMTP server &mdash; works with [SendGrid](https://sendgrid.com/)
+* Twilio account SID and auth token
+* DigitalOcean Spaces, along with an API key, taking note to run the domain
+    name's DNS off of DigitalOcean
 
 ```bash
 docker compose pull
 # Or optionally build the containers via: docker compose build
 docker compose up -d
 ```
-
-NOTE: [Gunicorn](https://gunicorn.org/) will listen on `127.0.0.1:8000`
-(default of `BIND_ADDR` in your `.env` file). You will have to reverse proxy
-into the service using `nginx` (or similar) and serve the static and media assets
-(deployed to the `serve/static/` and `serve/media/` folders, respectively).
-
-You'll also have to reverse proxy into the SSE service, [umami](https://umami.is/)
-analytics, and [Dozzle](https://dozzle.dev/) logs containers on ports `8001`,
-`3000`, and `8888`, respectively.
-
-A sample nginx config might be,
-
-```nginx
-# Main site
-server {
-    listen 443 ssl http2;
-    server_name jew.pizza;
-    include ssl_params;
-
-    location /static {
-        alias /home/username/jew.pizza/serve/static;
-    }
-
-    location /media {
-        alias /home/username/jew.pizza/serve/media;
-    }
-
-    location / {
-        include proxy_params;
-        proxy_pass http://127.0.0.1:8000;
-    }
-}
-
-# SSE service
-server {
-    listen 443 ssl http2;
-    server_name sse.jew.pizza;
-    include ssl_params;
-
-    location / {
-        include proxy_params;
-        proxy_buffering off;
-        proxy_cache off;
-        proxy_pass http://127.0.0.1:8001;
-    }
-}
-
-# Umami analytics
-server {
-    listen 443 ssl http2;
-    server_name umami.jew.pizza;
-    include ssl_params;
-
-    location / {
-        include proxy_params;
-        proxy_pass http://127.0.0.1:3000;
-    }
-}
-
-# Dozzle logs
-server {
-    listen 443 ssl http2;
-    server_name logs.jew.pizza;
-    include ssl_params;
-
-    auth_basic "jew.pizza Logs";
-    # Generate via: htpasswd -Bc /path.to/htpaswd username
-    auth_basic_user_file /home/username/config/htpasswd;
-
-    location / {
-        include proxy_params;
-        proxy_pass http://127.0.0.1:8888;
-    }
-
-    location /api {
-        include proxy_params;
-        proxy_buffering off;
-        proxy_cache off;
-        proxy_pass http://127.0.0.1:8888;
-    }
-}
-```
-
-To <ins>test</ins> (and _only_ test) with `DEBUG=0` without running nginx and
-have Gunicorn serve static assets using [Whitenoise](http://whitenoise.evans.io/en/stable/),
-set `SERVE_ASSETS_FROM_DJANGO=1` in the `.env` file. You'll need to build the
-container with `DEBUG=1` first, since Whitenoise is <ins>**not**</ins> installed
-into the container when `DEBUG=0`.
-
 
 #### Change Passwords
 
