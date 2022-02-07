@@ -8,9 +8,9 @@ COPY frontend/package.json frontend/package-lock.json /build/frontend/
 WORKDIR /build/frontend
 RUN npm install --production
 
-COPY . /build/
+COPY backend/ /build/backend
+COPY frontend/ /build/frontend
 RUN npm run build
-
 
 # audiowaveform tool
 FROM base as audiowaveform
