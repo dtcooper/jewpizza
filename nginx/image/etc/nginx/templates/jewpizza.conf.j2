@@ -1,3 +1,4 @@
+# Cache values
 map $sent_http_content_type $expires {
     default                    off;
     text/html                  epoch;
@@ -7,26 +8,13 @@ map $sent_http_content_type $expires {
     ~font/                     30d;
 }
 
-upstream app {
-    server app:8000;
-}
+upstream app { server app:8000; }
+upstream logs { server logs:8080; }
+upstream sse { server sse:8001; }
+upstream umami { server umami:3000; }
+upstream icecast { server icecast:8888; }
 
-upstream logs {
-    server logs:8080;
-}
-
-upstream sse {
-    server sse:8001;
-}
-
-upstream umami {
-    server umami:3000;
-}
-
-upstream icecast {
-    server icecast:8888;
-}
-
+# {{ DOMAIN_NAME }}, main Django app
 server {
     listen 443 ssl http2;
     listen [::]:443 ssl http2;
@@ -40,6 +28,7 @@ server {
     }
 
     {% if not DEBUG|int %}
+        # /static and /media enabled when DEBUG=1
         location /static {
             expires $expires;
             alias /static_root;
@@ -49,8 +38,11 @@ server {
             expires $expires;
             alias /media_root;
         }
+    {% else %}
+        # /static and /media disabled when DEBUG=0
     {% endif -%}
 
+    # sse service
     location /sse/ {
         include proxy_params;
         proxy_buffering off;
@@ -58,6 +50,7 @@ server {
         proxy_pass http://sse/;
     }
 
+    # Logs service only accessible by X-Accel-Redirect in Django app (internal)
     location /protected/cmsadmin/tools/logs/ {
         internal;
         include proxy_params;
@@ -72,6 +65,7 @@ server {
     }
 }
 
+# umami.{{ DOMAIN_NAME }} or analytics.{{ DOMAIN_NAME }}, Umami analytics
 server {
     listen 443 ssl http2;
     listen [::]:443 ssl http2;
@@ -94,6 +88,7 @@ server {
     }
 }
 
+# radio service
 server {
     listen 443 ssl http2;
     listen [::]:443 ssl http2;
@@ -111,7 +106,8 @@ server {
     }
 }
 
-{% if ENABLE_ETC_SUBDOMAIN|int %}
+{% if NGINX_ENABLE_ETC_SUBDOMAIN|default(0)|int %}
+     # etc.{{ DOMAIN_NAME }}, served folder enabled by config NGINX_ENABLE_ETC_SUBDOMAIN
     server {
         listen 443 ssl http2;
         server_name etc.{{ DOMAIN_NAME }};
@@ -135,7 +131,8 @@ server {
     }
 {% endif %}
 
-{% if ENABLE_PRIV_SUBDOMAIN|int %}
+{% if NGINX_ENABLE_PRIV_SUBDOMAIN|default(0)|int %}
+    # priv.{{ DOMAIN_NAME }}, served folder enabled by config NGINX_ENABLE_PRIV_SUBDOMAIN
     server {
         listen 443 ssl http2;
         server_name priv.{{ DOMAIN_NAME }};
@@ -158,6 +155,7 @@ server {
     }
 {% endif %}
 
+# Catch-all subdomain redirect to Django app (include www.{{ DOMAIN_NAME }})
 server {
     listen 443 ssl http2 default_server;
     listen [::]:443 ssl http2 default_server;
@@ -168,5 +166,5 @@ server {
     ssl_trusted_certificate /etc/letsencrypt/live/jew-pizza/chain.pem;
     ssl_dhparam /etc/letsencrypt/dhparams/dhparam.pem;
 
-    return 301 https://{{ DOMAIN_NAME }}$request_uri;
+    return 302 https://{{ DOMAIN_NAME }}$request_uri;
 }

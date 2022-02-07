@@ -42,7 +42,8 @@ RUN pip install --no-cache-dir jinja2-cli==$JINJA2_CLI_VERSION
 
 RUN echo -e 'load_module "modules/ngx_http_brotli_filter_module.so";\nload_module "modules/ngx_http_brotli_static_module.so";\n' \
         | cat - /etc/nginx/nginx.conf > /tmp/nginx.conf \
-    && mv /tmp/nginx.conf /etc/nginx/nginx.conf
+    && mv /tmp/nginx.conf /etc/nginx/nginx.conf \
+    && sed -i 's/$remote_addr/$host \0/' /etc/nginx/nginx.conf
 
 COPY --from=brotli \
     /build/objs/ngx_http_brotli_filter_module.so /build/objs/ngx_http_brotli_static_module.so \

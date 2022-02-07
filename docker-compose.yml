@@ -86,9 +86,6 @@ services:
       - "CERTBOT_EMAIL=${EMAIL_ADDRESS:?EMAIL_ADDRESS needs to be set. See .env file.}"
       - "DEBUG=${DEBUG:-0}"
       - "DIGITALOCEAN_API_TOKEN=${DIGITALOCEAN_API_TOKEN:-}"
-      - "DOMAIN_NAME=${DOMAIN_NAME:?DOMAIN_NAME needs to be set. See .env file.}"
-      - "ENABLE_ETC_SUBDOMAIN=${NGINX_ENABLE_ETC_SUBDOMAIN:-0}"
-      - "ENABLE_PRIV_SUBDOMAIN=${NGINX_ENABLE_PRIV_SUBDOMAIN:-0}"
       - "STAGING=${LETSENCRYPT_STAGING:-0}"
     ports:
       - "${HTTP_PORT:-80}:80"
