@@ -13,10 +13,10 @@ So, these instructions are mostly for me &mdash; in case of sudden amnesia or
 coming back to this project after a year or so of neglect.
 
 
-## Stack &mdash; **_DR. DJ PLACENTA DISH_**
+## Stack &mdash; **_DR. DJ PLACENTA HINDS_**
 
 It's built using the _wildly_ popular and _extremely_ common
-**_DR. DJ PLACENTA DISH_** stack, ie,
+**_DR. DJ PLACENTA HINDS_** stack, ie,
 
 * [**D**jango](https://www.djangoproject.com/), a back-end web framework;
 * [**R**edis](https://redis.io/), a data store and message broker;
@@ -36,17 +36,21 @@ It's built using the _wildly_ popular and _extremely_ common
 * [**T**ailwind CSS](https://tailwindcss.com/), a utility-first CSS framework;
 * [**a**iohttp](https://docs.aiohttp.org/) for the SSE service. Django's bad at
     persistent connections and aiohttp isn't;
-* [**d**aisyUI](https://daisyui.com/) as lightweight UI component framework on
-    top of Tailwind CSS;
+* [**h**uey](https://huey.readthedocs.io/), a lightweight asynchronous task
+    queue for Python;
 * [**I**cecast](https://icecast.org/), a streaming media server for listeners to
     connect;
+* [**n**ginx](https://www.nginx.com/) as a web server and reverse proxy with
+    [jonasal/nginx-certbot](https://github.com/JonasAlfredsson/docker-nginx-certbot/)
+    container as its base for [HTTPS](https://en.wikipedia.org/wiki/HTTPS);
+* [**d**aisyUI](https://daisyui.com/) as lightweight UI component framework on
+    top of Tailwind CSS; and
 * [**S**erver-Sent Events (SSE)](https://en.wikipedia.org/wiki/Server-sent_events),
     to send realtime messages to the browser (using
-    [aoihttp-sse](https://github.com/aio-libs/aiohttp-sse)); and
-* [**h**uey](https://huey.readthedocs.io/), a lightweight asynchronous task
-    queue for Python.
+    [aoihttp-sse](https://github.com/aio-libs/aiohttp-sse)).
 
-**_DR. DJ PLACENTA DISH_**. A very well-known acronym in the engineering world,
+
+**_DR. DJ PLACENTA HINDS_**. A very well-known acronym in the engineering world,
 _probably._
 
 
