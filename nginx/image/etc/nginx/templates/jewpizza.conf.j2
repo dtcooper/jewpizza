@@ -2,17 +2,28 @@
     listen 443 ssl http2;
     listen [::]:443 ssl http2;
 
-    ssl_certificate /etc/letsencrypt/live/jew-pizza/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/jew-pizza/privkey.pem;
-    ssl_trusted_certificate /etc/letsencrypt/live/jew-pizza/chain.pem;
+    ssl_certificate /etc/letsencrypt/live/{{ environ('DOMAIN_NAME') }}/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/{{ environ('DOMAIN_NAME') }}/privkey.pem;
+    ssl_trusted_certificate /etc/letsencrypt/live/{{ environ('DOMAIN_NAME') }}/chain.pem;
     ssl_dhparam /etc/letsencrypt/dhparams/dhparam.pem;
 
     {% if varargs %}
         {% for subdomain in varargs %}
-            server_name {% if subdomain == '_' %}_{% else %}{{ subdomain }}.{{ DOMAIN_NAME }}{% endif %};  # certbot_domain:*.{{ DOMAIN_NAME }}
+            {% if subdomain == '_' %}
+                # Multiple server_name with "_" are ignored by nginx, but we trick
+                # docker-nginx-certbot scripts here to register multiple domains
+                server_name _;  # certbot_domain:{{ environ('DOMAIN_NAME') }}
+                server_name _;  # certbot_domain:*.{{ environ('DOMAIN_NAME') }}
+                {% for extra_domain in (environ('NGINX_REDIRECT_DOMAINS')|default('')).strip().split() %}
+                    server_name _;  # certbot_domain:{{ extra_domain }}
+                    server_name _;  # certbot_domain:*.{{ extra_domain }}
+                {% endfor %}
+            {% else %}
+                server_name {{ subdomain }}.{{ environ('DOMAIN_NAME') }};  # certbot_domain:*.{{ environ('DOMAIN_NAME') }}
+            {% endif %}
         {% endfor %}
     {% else %}
-        server_name {{ DOMAIN_NAME }};
+        server_name {{ environ('DOMAIN_NAME') }};
     {% endif %}
 {%- endmacro -%}
 
@@ -32,7 +43,7 @@ upstream sse { server sse:8001; }
 upstream umami { server umami:3000; }
 upstream icecast { server icecast:8888; }
 
-# {{ DOMAIN_NAME }}, main Django app
+# {{ environ('DOMAIN_NAME') }}, main Django app
 server {
     {{ server_name() }}
 
@@ -44,7 +55,7 @@ server {
         log_not_found off;
     }
 
-    {% if not DEBUG|int %}
+    {% if not environ('DEBUG')|int %}
         # /static and /media enabled when DEBUG=1
         location /static {
             expires $expires;
@@ -112,8 +123,8 @@ server {
 }
 
 {% for subdomain, enabled in (
-    ('etc', NGINX_ENABLE_ETC_SUBDOMAIN|default(0)|int),
-    ('priv', NGINX_ENABLE_PRIV_SUBDOMAIN|default(0)|int),
+    ('etc', environ('NGINX_ENABLE_ETC_SUBDOMAIN')|default(0)|int),
+    ('priv', environ('NGINX_ENABLE_PRIV_SUBDOMAIN')|default(0)|int),
 ) %}
     {% if enabled %}
         # {{ subdomain }}, served folder enabled by config
@@ -135,9 +146,9 @@ server {
     {% endif %}
 {% endfor %}
 
-# Catch-all subdomain redirect to Django app (include www.{{ DOMAIN_NAME }})
+# Catch-all subdomain redirect to Django app (include www.{{ environ('DOMAIN_NAME') }})
 server {
     {{ server_name('_') }}
 
-    return 302 https://{{ DOMAIN_NAME }}$request_uri;
+    return 302 https://{{ environ('DOMAIN_NAME') }}$request_uri;
 }
