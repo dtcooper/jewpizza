@@ -12,8 +12,8 @@
             server_name {{ subdomain }}.{{ environ('DOMAIN_NAME') }};  # certbot_domain:*.{{ environ('DOMAIN_NAME') }}
         {% endfor %}
     {% elif catch_all %}
-        # Multiple server_name with "_" are ignored by nginx, but we trick
-        # docker-nginx-certbot scripts here to register multiple domains
+        # Multiple server_name commands with "_" are ignored by nginx, but we
+        # trick docker-nginx-certbot scripts here to register multiple domains
         server_name _;  # certbot_domain:{{ environ('DOMAIN_NAME') }}
         server_name _;  # certbot_domain:*.{{ environ('DOMAIN_NAME') }}
         {% for extra_domain in (environ('NGINX_REDIRECT_DOMAINS') or '').strip().split() %}
@@ -57,12 +57,12 @@ server {
         # /static and /media enabled when DEBUG=1
         location /static {
             expires $expires;
-            alias /static_root;
+            alias /serve/static;
         }
 
         location /media {
             expires $expires;
-            alias /media_root;
+            alias /serve/media;
         }
     {% else %}
         # /static and /media disabled when DEBUG=0
@@ -120,28 +120,24 @@ server {
     }
 }
 
-{% for subdomain, enabled in (
-    ('etc', environ('NGINX_ENABLE_ETC_SUBDOMAIN')|default(0)|int),
-    ('priv', environ('NGINX_ENABLE_PRIV_SUBDOMAIN')|default(0)|int),
-) %}
-    {% if enabled %}
-        # {{ subdomain }}, served folder enabled by config
-        server {
-            {{ server_name([subdomain]) }}
+# {{ environ['NGINX_EXTRA_SUBDOMAINS'] }}
+{% for subdomain in (environ('NGINX_EXTRA_SUBDOMAINS') or '').strip().split() %}
+    {% set subdomain, mode = subdomain.split(':') %}
+    server {
+        {{ server_name([subdomain]) }}
 
-            root /{{ subdomain }}_root;
-            {% if subdomain == 'etc' %}autoindex on;{% endif %}
+        root /serve/{{ subdomain }};
+        {% if mode == 'autoindex' %}autoindex on;{% endif %}
 
-            location = /robots.txt {
-                add_header Content-Type text/plain;
-                return 200 "User-agent: *\nDisallow: /\n";
-            }
-
-            location / {
-                try_files $uri $uri/ =404;
-            }
+        location = /robots.txt {
+            add_header Content-Type text/plain;
+            return 200 "User-agent: *\nDisallow: /\n";
         }
-    {% endif %}
+
+        location / {
+            try_files $uri $uri/ {% if mode == 'index' %}$uri/index.html {% endif %}=404;
+        }
+    }
 {% endfor %}
 
 # Catch-all subdomain redirect to Django app (include www.{{ environ('DOMAIN_NAME') }})

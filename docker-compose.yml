@@ -71,10 +71,7 @@ services:
     volumes:
       - nginx_secrets:/etc/letsencrypt
       - ./.env:/.env:ro
-      - ./serve/etc:/etc_root
-      - ./serve/media:/media_root
-      - ./serve/priv:/priv_root
-      - ./serve/static:/static_root
+      - ./serve:/serve
     depends_on:
       - app
       - icecast

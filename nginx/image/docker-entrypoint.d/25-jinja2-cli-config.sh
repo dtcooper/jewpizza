@@ -13,6 +13,11 @@ else
     exit 1
 fi
 
+for subdomain in $NGINX_EXTRA_SUBDOMAINS; do
+    subdomain="$(echo "$subdomain" | cut -d ':' -f 1)"
+    mkdir -p "/serve/$subdomain"
+done
+
 echo "$SCRIPT: Rendering jinja2 template ($TEMPLATE_FILE)"
 
 # --format=env and empty env (/dev/null) needed to fix weird bug

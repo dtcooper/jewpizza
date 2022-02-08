@@ -52,6 +52,8 @@
 * [ ] Sourcemaps for JS exceptions
 * [ ] Add _Highlights_ sections, possible on Home page?
 * [ ] Showgram nightly segment breakdown with links to podcast?
+* [ ] Remove BUILD_DATE + GIT_REV from all but app container, it ends up with
+    needless restarts in radio, etc and differences in container
 
 ## Sections
 
