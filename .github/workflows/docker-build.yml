@@ -186,7 +186,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
-          #fingerprint: ${{ secrets.SSH_FINGERPRINT }}
+          fingerprint: ${{ secrets.SSH_FINGERPRINT }}
           script: |
             cd ${{ env.SSH_DEPLOY_DIRECTORY }}
             SHOULD_DEPLOY=
