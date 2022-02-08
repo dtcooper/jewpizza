@@ -1,26 +1,24 @@
-{%- macro server_name() -%}
-    listen 443 ssl http2;
-    listen [::]:443 ssl http2;
+{%- macro server_name(subdomains=[], catch_all=False) -%}
+    listen 443 ssl http2{% if catch_all %} default_server{% endif %};
+    listen [::]:443 ssl http2{% if catch_all %} default_server{% endif %};
 
     ssl_certificate /etc/letsencrypt/live/{{ environ('DOMAIN_NAME') }}/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/{{ environ('DOMAIN_NAME') }}/privkey.pem;
     ssl_trusted_certificate /etc/letsencrypt/live/{{ environ('DOMAIN_NAME') }}/chain.pem;
     ssl_dhparam /etc/letsencrypt/dhparams/dhparam.pem;
 
-    {% if varargs %}
-        {% for subdomain in varargs %}
-            {% if subdomain == '_' %}
-                # Multiple server_name with "_" are ignored by nginx, but we trick
-                # docker-nginx-certbot scripts here to register multiple domains
-                server_name _;  # certbot_domain:{{ environ('DOMAIN_NAME') }}
-                server_name _;  # certbot_domain:*.{{ environ('DOMAIN_NAME') }}
-                {% for extra_domain in (environ('NGINX_REDIRECT_DOMAINS')|default('')).strip().split() %}
-                    server_name _;  # certbot_domain:{{ extra_domain }}
-                    server_name _;  # certbot_domain:*.{{ extra_domain }}
-                {% endfor %}
-            {% else %}
-                server_name {{ subdomain }}.{{ environ('DOMAIN_NAME') }};  # certbot_domain:*.{{ environ('DOMAIN_NAME') }}
-            {% endif %}
+    {% if subdomains %}
+        {% for subdomain in subdomains %}
+            server_name {{ subdomain }}.{{ environ('DOMAIN_NAME') }};  # certbot_domain:*.{{ environ('DOMAIN_NAME') }}
+        {% endfor %}
+    {% elif catch_all %}
+        # Multiple server_name with "_" are ignored by nginx, but we trick
+        # docker-nginx-certbot scripts here to register multiple domains
+        server_name _;  # certbot_domain:{{ environ('DOMAIN_NAME') }}
+        server_name _;  # certbot_domain:*.{{ environ('DOMAIN_NAME') }}
+        {% for extra_domain in (environ('NGINX_REDIRECT_DOMAINS') or '').strip().split() %}
+            server_name _;  # certbot_domain:{{ extra_domain }}
+            server_name _;  # certbot_domain:*.{{ extra_domain }}
         {% endfor %}
     {% else %}
         server_name {{ environ('DOMAIN_NAME') }};
@@ -95,7 +93,7 @@ server {
 
 # Umami analytics
 server {
-    {{ server_name('umami', 'analytics') }}
+    {{ server_name(['umami', 'analytics']) }}
 
     include proxy_busy_error;
 
@@ -112,7 +110,7 @@ server {
 
 # radio service
 server {
-    {{ server_name('radio') }}
+    {{ server_name(['radio']) }}
 
     include proxy_busy_error;
 
@@ -129,7 +127,7 @@ server {
     {% if enabled %}
         # {{ subdomain }}, served folder enabled by config
         server {
-            {{ server_name(subdomain) }}
+            {{ server_name([subdomain]) }}
 
             root /{{ subdomain }}_root;
             {% if subdomain == 'etc' %}autoindex on;{% endif %}
@@ -148,7 +146,7 @@ server {
 
 # Catch-all subdomain redirect to Django app (include www.{{ environ('DOMAIN_NAME') }})
 server {
-    {{ server_name('_') }}
+    {{ server_name(catch_all=True) }}
 
     return 302 https://{{ environ('DOMAIN_NAME') }}$request_uri;
 }
