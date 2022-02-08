@@ -11,172 +11,171 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # build-app:
-  #   runs-on: ubuntu-latest
-  #   name: Build app container
-  #   steps:
-  #     -
-  #       name: Checkout
-  #       uses: actions/checkout@v2
-  #     -
-  #       name: Build container
-  #       uses: ./.github/actions/docker-build-push
-  #       with:
-  #         token: ${{ secrets.DOCKERHUB_TOKEN }}
-  #         password: ${{ secrets.DOCKERHUB_PASSWORD }}
-  #         container: app
-  #         context: ./
-  #         dockerfile: ./backend/Dockerfile
+  build-app:
+    runs-on: ubuntu-latest
+    name: Build app container
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Build container
+        uses: ./.github/actions/docker-build-push
+        with:
+          token: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          container: app
+          context: ./
+          dockerfile: ./backend/Dockerfile
 
-  # build-app-dev:
-  #   runs-on: ubuntu-latest
-  #   name: Build app container (dev)
-  #   steps:
-  #     -
-  #       name: Checkout
-  #       uses: actions/checkout@v2
-  #     -
-  #       name: Build container
-  #       uses: ./.github/actions/docker-build-push
-  #       with:
-  #         token: ${{ secrets.DOCKERHUB_TOKEN }}
-  #         password: ${{ secrets.DOCKERHUB_PASSWORD }}
-  #         container: app
-  #         context: ./
-  #         dockerfile: ./backend/Dockerfile
-  #         dev: '1'
+  build-app-dev:
+    runs-on: ubuntu-latest
+    name: Build app container (dev)
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Build container
+        uses: ./.github/actions/docker-build-push
+        with:
+          token: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          container: app
+          context: ./
+          dockerfile: ./backend/Dockerfile
+          dev: '1'
 
-  # build-radio:
-  #   runs-on: ubuntu-latest
-  #   name: Build radio container
-  #   steps:
-  #     -
-  #       name: Checkout
-  #       uses: actions/checkout@v2
-  #     -
-  #       name: Build container
-  #       uses: ./.github/actions/docker-build-push
-  #       with:
-  #         token: ${{ secrets.DOCKERHUB_TOKEN }}
-  #         password: ${{ secrets.DOCKERHUB_PASSWORD }}
-  #         container: radio
+  build-radio:
+    runs-on: ubuntu-latest
+    name: Build radio container
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Build container
+        uses: ./.github/actions/docker-build-push
+        with:
+          token: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          container: radio
 
-  # build-radio-dev:
-  #   runs-on: ubuntu-latest
-  #   name: Build radio container (dev)
-  #   steps:
-  #     -
-  #       name: Checkout
-  #       uses: actions/checkout@v2
-  #     -
-  #       name: Build container
-  #       uses: ./.github/actions/docker-build-push
-  #       with:
-  #         token: ${{ secrets.DOCKERHUB_TOKEN }}
-  #         password: ${{ secrets.DOCKERHUB_PASSWORD }}
-  #         container: radio
-  #         dev: '1'
+  build-radio-dev:
+    runs-on: ubuntu-latest
+    name: Build radio container (dev)
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Build container
+        uses: ./.github/actions/docker-build-push
+        with:
+          token: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          container: radio
+          dev: '1'
 
-  # build-sse:
-  #   runs-on: ubuntu-latest
-  #   name: Build sse container
-  #   steps:
-  #     -
-  #       name: Checkout
-  #       uses: actions/checkout@v2
-  #     -
-  #       name: Build container
-  #       uses: ./.github/actions/docker-build-push
-  #       with:
-  #         token: ${{ secrets.DOCKERHUB_TOKEN }}
-  #         password: ${{ secrets.DOCKERHUB_PASSWORD }}
-  #         container: sse
+  build-sse:
+    runs-on: ubuntu-latest
+    name: Build sse container
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Build container
+        uses: ./.github/actions/docker-build-push
+        with:
+          token: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          container: sse
 
-  # build-sse-dev:
-  #   runs-on: ubuntu-latest
-  #   name: Build sse container (dev)
-  #   steps:
-  #     -
-  #       name: Checkout
-  #       uses: actions/checkout@v2
-  #     -
-  #       name: Build container
-  #       uses: ./.github/actions/docker-build-push
-  #       with:
-  #         token: ${{ secrets.DOCKERHUB_TOKEN }}
-  #         password: ${{ secrets.DOCKERHUB_PASSWORD }}
-  #         container: sse
-  #         dev: '1'
+  build-sse-dev:
+    runs-on: ubuntu-latest
+    name: Build sse container (dev)
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Build container
+        uses: ./.github/actions/docker-build-push
+        with:
+          token: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          container: sse
+          dev: '1'
 
-  # build-nginx:
-  #   runs-on: ubuntu-latest
-  #   name: Build nginx container
-  #   steps:
-  #     -
-  #       name: Checkout
-  #       uses: actions/checkout@v2
-  #     -
-  #       name: Build container
-  #       uses: ./.github/actions/docker-build-push
-  #       with:
-  #         token: ${{ secrets.DOCKERHUB_TOKEN }}
-  #         password: ${{ secrets.DOCKERHUB_PASSWORD }}
-  #         container: nginx
+  build-nginx:
+    runs-on: ubuntu-latest
+    name: Build nginx container
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Build container
+        uses: ./.github/actions/docker-build-push
+        with:
+          token: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          container: nginx
 
-  # build-nginx-dev:
-  #   runs-on: ubuntu-latest
-  #   name: Build nginx container (dev)
-  #   steps:
-  #     -
-  #       name: Checkout
-  #       uses: actions/checkout@v2
-  #     -
-  #       name: Build container
-  #       uses: ./.github/actions/docker-build-push
-  #       with:
-  #         token: ${{ secrets.DOCKERHUB_TOKEN }}
-  #         password: ${{ secrets.DOCKERHUB_PASSWORD }}
-  #         container: nginx
-  #         dev: '1'
+  build-nginx-dev:
+    runs-on: ubuntu-latest
+    name: Build nginx container (dev)
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Build container
+        uses: ./.github/actions/docker-build-push
+        with:
+          token: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          container: nginx
+          dev: '1'
 
-  # build-icecast:
-  #   runs-on: ubuntu-latest
-  #   name: Build icecast container
-  #   steps:
-  #     -
-  #       name: Checkout
-  #       uses: actions/checkout@v2
-  #     -
-  #       name: Build container
-  #       uses: ./.github/actions/docker-build-push
-  #       with:
-  #         token: ${{ secrets.DOCKERHUB_TOKEN }}
-  #         password: ${{ secrets.DOCKERHUB_PASSWORD }}
-  #         container: icecast
+  build-icecast:
+    runs-on: ubuntu-latest
+    name: Build icecast container
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Build container
+        uses: ./.github/actions/docker-build-push
+        with:
+          token: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          container: icecast
 
-  # build-icecast-dev:
-  #   runs-on: ubuntu-latest
-  #   name: Build icecast container (dev)
-  #   steps:
-  #     -
-  #       name: Checkout
-  #       uses: actions/checkout@v2
-  #     -
-  #       name: Build container
-  #       uses: ./.github/actions/docker-build-push
-  #       with:
-  #         token: ${{ secrets.DOCKERHUB_TOKEN }}
-  #         password: ${{ secrets.DOCKERHUB_PASSWORD }}
-  #         container: icecast
-  #         dev: '1'
-
+  build-icecast-dev:
+    runs-on: ubuntu-latest
+    name: Build icecast container (dev)
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Build container
+        uses: ./.github/actions/docker-build-push
+        with:
+          token: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          container: icecast
+          dev: '1'
 
   deploy:
     runs-on: ubuntu-latest
     name: Deploy
     env:
       SSH_DEPLOY_DIRECTORY: jewpizza
-    #needs: [build-app, build-radio, build-sse, build-nginx, build-icecast]
+    needs: [build-app, build-radio, build-sse, build-nginx, build-icecast]
     steps:
       -
         name: Deploy containers
@@ -206,20 +205,20 @@ jobs:
               echo "Deploy disabled by constance config (AUTO_DEPLOY = False)"
             fi
 
-  # test:
-  #   runs-on: ubuntu-latest
-  #   name: Tests
-  #   needs: [build-app]
-  #   steps:
-  #     -
-  #       name: Checkout
-  #       uses: actions/checkout@v2
-  #     -
-  #       name: Run tests
-  #       run: |
-  #         cp -v .env.sample .env
-  #         echo 'Updating .env file for testing'
-  #         sed -i 's/^\(SECRET_KEY\)=.*$/\1=hackme/' .env
-  #         sed -i 's/^\(DEBUG\)=.*$/\1=0/' .env
-  #         docker compose pull --quiet app
-  #         docker compose run --quiet-pull --no-TTY app sh -c 'poetry install --extras tests --no-dev && pytest'
+  test:
+    runs-on: ubuntu-latest
+    name: Tests
+    needs: [build-app]
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Run tests
+        run: |
+          cp -v .env.sample .env
+          echo 'Updating .env file for testing'
+          sed -i 's/^\(SECRET_KEY\)=.*$/\1=hackme/' .env
+          sed -i 's/^\(DEBUG\)=.*$/\1=0/' .env
+          docker compose pull --quiet app
+          docker compose run --quiet-pull --no-TTY app sh -c 'poetry install --extras tests --no-dev && pytest'
