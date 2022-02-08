@@ -191,7 +191,7 @@ jobs:
             cd ${{ env.SSH_DEPLOY_DIRECTORY }}
             SHOULD_DEPLOY=
             if docker compose ps --services --filter "status=running" | grep -q '^app$'; then
-              if [ "$(docker compose exec app poetry run ./manage.py constance get AUTO_DEPLOY)" = True ]; then
+              if [ "$(docker compose exec -T app poetry run ./manage.py constance get AUTO_DEPLOY)" = True ]; then
                 SHOULD_DEPLOY=1
               fi
             else
