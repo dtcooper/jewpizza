@@ -17,14 +17,6 @@ else
     DEBUG=
 fi
 
-if [ -z "$NO_STARTUP_MESSAGE" ]; then
-    printf "Starting sse container revision $GIT_REV built on $(date -d "$BUILD_DATE")"
-    if [ "$DEBUG" ]; then
-        printf ' (DEBUG mode on)'
-    fi
-    echo
-fi
-
 if [ "$#" != 0 ]; then
     exec "$@"
 else

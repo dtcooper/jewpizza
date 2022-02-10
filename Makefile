@@ -54,7 +54,7 @@ show-outdated:
 		npm --prefix=../frontend outdated;\
 		echo "============ Backend (app) =============";\
 		poetry show -o'
-	@$(COMPOSE) run --rm --no-deps -e NO_STARTUP_MESSAGE=1 sse sh -c '\
+	@$(COMPOSE) run --rm --no-deps sse sh -c '\
 		echo "============ Backend (sse) =============";\
 		poetry show -o'
 

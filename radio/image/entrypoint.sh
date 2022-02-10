@@ -15,14 +15,6 @@ else
     DEBUG=
 fi
 
-if [ -z "$NO_STARTUP_MESSAGE" ]; then
-    printf "Starting radio container revision $GIT_REV built on $(date -d "$BUILD_DATE")"
-    if [ "$DEBUG" ]; then
-        printf ' (DEBUG mode on)'
-    fi
-    echo
-fi
-
 SCRIPT="/radio/script.liq"
 
 run_liquidsoap_loop_debug () {
