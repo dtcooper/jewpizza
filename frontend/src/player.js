@@ -14,9 +14,9 @@ document.addEventListener('alpine:init', () => {
       this.wavesurfer = WaveSurfer.create({
         container: this.$refs.wavesurfer,
         backend: 'MediaElement',
-        barWidth: 3,
+        barWidth: 2,
         barMinHeight: 1,
-        barGap: 1.5,
+        barGap: 2,
         height: 120,
         responsive: true,
         normalize: true,
@@ -55,7 +55,7 @@ document.addEventListener('alpine:init', () => {
           })
         ]
       })
-      this.wavesurfer.load(this.$refs.audio, peaks)
+      this.wavesurfer.load(url, peaks)
     },
     play () {
       this.playing = true

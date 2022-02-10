@@ -6,7 +6,6 @@
   </article>
 
   <div class="space-y-3 my-3" x-data="episodePlayer({{ episode.asset_url|attrjs }}, {{ episode.peaks|attrjs }})">
-    <audio src="{{ episode.asset_url }}" crossorigin="anonymous" x-ref="audio"></audio>
     <div class="cursor-pointer w-full relative" x-ref="wavesurfer"></div>
     <div class="w-full" x-ref="timeline"></div>
     <div class="text-center">

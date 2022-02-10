@@ -120,9 +120,12 @@ server {
     }
 }
 
-# {{ environ['NGINX_EXTRA_SUBDOMAINS'] }}
 {% for subdomain in (environ('NGINX_EXTRA_SUBDOMAINS') or '').strip().split() %}
-    {% set subdomain, mode = subdomain.split(':') %}
+    {% set subdomain, mode = subdomain, 'noindex' %}
+    {% if ':' in subdomain %}
+        {% set subdomain, mode = subdomain.split(':') %}
+    {% endif %}
+    # subdomain "{{ subdomain }}" ({{ mode }})
     server {
         {{ server_name([subdomain]) }}
 
