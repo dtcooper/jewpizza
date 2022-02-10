@@ -54,6 +54,7 @@
 * [ ] Sourcemaps for JS exceptions
 * [ ] Add _Highlights_ sections, possible on Home page?
 * [ ] Showgram nightly segment breakdown with links to podcast?
+* [ ] Misc: poolabs, kawika talk, fish burps, here's why that's funny, shitbag
 
 ## Sections
 
