@@ -51,7 +51,27 @@ It's built using the _wildly_ popular and _extremely_ common
 
 
 **_DR. DJ PLACENTA HINDS_**. A very well-known acronym in the engineering world,
-_probably._
+_probably._ I definitely didn't just make this up as a joke.
+
+
+## Prerequisites
+
+Everything runs with [Docker](https://www.docker.com/) and
+[Docker Compose](https://docs.docker.com/compose/), including
+[nginx](https://www.nginx.com/). This can be deployed on any Linux machine.
+
+To install on Debian/Ubuntu,
+
+```bash
+# Install Docker
+curl -fsSL https://get.docker.com | sh
+
+# Install latest Compose
+sudo mkdir -p /usr/local/lib/docker/cli-plugins/
+sudo curl -fsSL -o /usr/local/lib/docker/cli-plugins/docker-compose \
+    "$(curl -fsSL https://api.github.com/repos/docker/compose/releases/latest | grep browser_download_url | cut -d '"' -f 4 | grep -i "$(uname -s)-$(arch)$")"
+sudo chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
+```
 
 
 ## Initial Setup
@@ -84,8 +104,8 @@ to `/etc/hosts`.
 
 If you set `NGINX_USE_LOCAL_CERTIFICATE_AUTHORITY=1` (and you **should** for
 local development), you'll want to install the phony certificate authority's
-root certificate located at `local-certificate-authority/caCert.pem`. It expires
-every 30 days.
+root certificate located at `<project-dir>/local-certificate-authority/caCert.pem`.
+It expires every 30 days.
 
 
 ## Running
@@ -99,7 +119,10 @@ docker compose build
 docker compose up
 ```
 
-The development server will run at <http://localhost:8000/>.
+The development `app` server will run at <http://localhost:8000/>, or if you've
+set a `DOMAIN_NAME` and your `/etc/hosts` to work properly with it, navigate to
+that. For example <https://local.jew.pizza/>. You'll need to install the phony
+certificate authority's root certificate (see above).
 
 
 #### Miscellaneous Development Operations
@@ -115,16 +138,28 @@ docker compose run --rm app bash
 make pre-commit
 ```
 
+#### Faster Start Time (SSL Certificate Generation)
+
+The entropy daemon [haveged](https://www.issihosts.com/haveged/) is a
+nice-to-have to provide your system with randomness to speed up SSL certificate
+generation. On Debian/Ubuntu, it can be installed via the following,
+
+```bash
+sudo apt-get install haveged
+```
+
 
 ### Production Mode (`DEBUG=0`)
 
-Build containers and start in daemon mode. Set all appropriate variables in the
-`.env` file, making note to properly configure the following,
+Pull (or build) containers and run `docker compose up` in daemon mode (`-d`).
+Set all appropriate variables in the `.env` file, making note to properly
+configure the following,
 
 * An SMTP server &mdash; works with [SendGrid](https://sendgrid.com/)
 * Twilio account SID and auth token
 * DigitalOcean Spaces, along with an API key, taking note to run the domain
-    name's DNS off of DigitalOcean
+    name's DNS off of DigitalOcean. This is necessary for wildcard certificates
+    from [Certbot](https://certbot.eff.org/)/[Lets Encrypt](https://letsencrypt.org/).
 
 ```bash
 docker compose pull
@@ -134,7 +169,7 @@ docker compose up -d
 
 #### Change Passwords
 
-Change passwords,
+Make sure to change these insecure passwords not sent in the `.env` file,
 
 * Django: `dave:cooper`
 * Umami: `dave:cooper`
