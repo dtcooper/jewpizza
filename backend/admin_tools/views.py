@@ -20,8 +20,9 @@ NAVIGATION_LINKS = (
     (reverse_lazy("admin-tools:send-text-message"), "Send Text Message", False),
     (reverse_lazy("admin-tools:send-email"), "Send Email", False),
     (reverse_lazy("admin-tools:sse-status"), "SSE Status", False),
-    (reverse_lazy("admin-tools:logs"), "Service Logs", True),
+    (reverse_lazy("admin-tools:nginx-internal", kwargs={'module': 'logs'}), "Service Logs", True),
     (f"//{settings.UMAMI_HOST}/", "Analytics", True),
+    (reverse_lazy("admin-tools:nginx-internal", kwargs={'module': 'nchan'}), "nchan Status", True),
 )
 
 
@@ -101,6 +102,6 @@ class SSEStatusView(AdminTemplateView):
 
 
 @method_decorator(staff_member_required, name="dispatch")
-class LogsView(View):
+class NginxInternalView(View):
     def dispatch(self, request, *args, **kwargs):
         return HttpResponse(headers={"X-Accel-Redirect": f"/protected{request.get_full_path()}"})

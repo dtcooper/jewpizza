@@ -85,6 +85,11 @@ server {
         proxy_pass http://logs/cmsadmin/tools/logs/;
     }
 
+    location /protected/cmsadmin/tools/nchan/ {
+        internal;
+        nchan_stub_status;
+    }
+
     location / {
         include proxy_params;
         proxy_pass http://app;

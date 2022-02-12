@@ -9,5 +9,5 @@ urlpatterns = [
     path("send-text-message/", views.SendTextMessageView.as_view(), name="send-text-message"),
     path("send-email/", views.SendEmailView.as_view(), name="send-email"),
     path("sse/", views.SSEStatusView.as_view(), name="sse-status"),
-    re_path("^logs/.*", views.LogsView.as_view(), name="logs"),
+    re_path("^(?P<module>logs|nchan)/.*", views.NginxInternalView.as_view(), name="nginx-internal"),
 ]
