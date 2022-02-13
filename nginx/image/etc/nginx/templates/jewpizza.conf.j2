@@ -68,10 +68,9 @@ server {
     {% endif -%}
 
     # Server-sent Events, channels separated by slashes
-    location ~ ^/sse/([a-z/]+)/$ {
+    location = /sse/ {
         nchan_subscriber eventsource;
-        nchan_channel_id $1;
-        nchan_channel_id_split_delimiter /;
+        nchan_channel_id sse;
         nchan_eventsource_ping_interval 15;
         nchan_eventsource_ping_event "";
         nchan_eventsource_ping_comment " ping";
@@ -89,6 +88,10 @@ server {
     location /protected/cmsadmin/tools/nchan/ {
         internal;
         nchan_stub_status;
+    }
+
+    location /protected/ {
+        internal;
     }
 
     location / {
@@ -161,10 +164,22 @@ server {
     listen 3000 reuseport;
     listen [::]:3000 reuseport;
 
-    # Post to channel
-    location ~ ^/([a-z]+)/$ {
+    location /store-sse-in-cache/ {
+        internal;
+        include proxy_params;
+        proxy_pass http://app/protected/store-sse-in-cache/;
+    }
+
+    location = / {
+        if ($http_x_eventsource_event = '') {
+            return 412;
+        }
+        # Set X-Skip-Store-SSE-In-Cache: 1 header when coming from app to avoid double logging
+        if ($http_x_skip_store_sse_in_cache = '') {
+            nchan_publisher_upstream_request /store-sse-in-cache/;
+        }
         nchan_publisher http;
-        nchan_channel_id $1;
-        nchan_message_buffer_length 1;
+        nchan_channel_id sse;
+        nchan_store_messages off;
     }
 }

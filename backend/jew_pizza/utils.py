@@ -6,6 +6,7 @@ from dateutil.parser import parse as dateutil_parse
 import requests
 
 from django.conf import settings
+from django.core.cache import cache
 from django.utils.formats import date_format as django_date_format
 from django.utils.timezone import localtime
 
@@ -13,6 +14,7 @@ from django_redis import get_redis_connection
 
 
 logger = logging.getLogger(f"jewpizza.{__name__}")
+SSE_MESSAGE_CACHE_KEY_PREFIX = "sse-message::"
 
 
 def get_client_ip(request):
@@ -44,23 +46,42 @@ def format_time(time, format="g:i A"):
     return django_date_format(time, format=format)
 
 
+def store_sse_message_in_cache(message_type, message):
+    cache.set(f"{SSE_MESSAGE_CACHE_KEY_PREFIX}{message_type}", message, timeout=None)
+
+
+def get_last_sse_message(message_type):
+    return cache.get(f"{SSE_MESSAGE_CACHE_KEY_PREFIX}{message_type}")
+
+
 def send_sse_message(message_type, message, delay=None):
     if not isinstance(message, dict):
         raise TypeError("message must be a dict")
 
     if delay is None:
-        timestamp = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
-        message = json.dumps({"type": message_type, "timestamp": timestamp, "message": message})
+        timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
+        message = {"type": message_type, "timestamp": timestamp, "message": message}
         try:
-            response = requests.post(f"http://nginx:3000/{message_type}/", data=message, headers={'Accept': 'text/json'})
+            response = requests.post(
+                f"http://nginx:3000/",
+                data=json.dumps(message),
+                # We store it in the cache below, no need for nginx to call app back, skip via X-Skip-Store-SSE-In-Cache
+                headers={"Accept": "text/json", "X-EventSource-Event": message_type, 'X-Skip-Store-SSE-In-Cache': '1'},
+            )
         except requests.RequestException:
-            logger.exception('An error occurred while making sending an SSE message')
+            logger.exception("An error occurred while making sending an SSE message")
         else:
             if response.status_code in (201, 202):
-                num_subscribers = response.json().get('subscribers', 0)
-                logger.info(f"{message_type} message sent to nchan to {num_subscribers} subscriber(s) (code: {response.status_code})")
+                store_sse_message_in_cache(message_type, message)
+                num_subscribers = response.json().get("subscribers", 0)
+                logger.info(
+                    f"{message_type} message sent to nchan to {num_subscribers} subscriber(s) (code:"
+                    f" {response.status_code})"
+                )
             else:
-                logger.error(f"Got code {response.status_code} while sending {message_type} message to nchan: {response.text}")
+                logger.error(
+                    f"Got code {response.status_code} while sending {message_type} message to nchan: {response.text}"
+                )
     else:
         from webcore.tasks import send_sse_message_async
 

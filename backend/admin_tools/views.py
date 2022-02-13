@@ -20,9 +20,9 @@ NAVIGATION_LINKS = (
     (reverse_lazy("admin-tools:send-text-message"), "Send Text Message", False),
     (reverse_lazy("admin-tools:send-email"), "Send Email", False),
     (reverse_lazy("admin-tools:sse-status"), "SSE Status", False),
-    (reverse_lazy("admin-tools:nginx-internal", kwargs={'module': 'logs'}), "Service Logs", True),
+    (reverse_lazy("admin-tools:nginx-internal", kwargs={"module": "logs"}), "Service Logs", True),
     (f"//{settings.UMAMI_HOST}/", "Analytics", True),
-    (reverse_lazy("admin-tools:nginx-internal", kwargs={'module': 'nchan'}), "nchan Status", True),
+    (reverse_lazy("admin-tools:nginx-internal", kwargs={"module": "nchan"}), "nchan Status", True),
 )
 
 

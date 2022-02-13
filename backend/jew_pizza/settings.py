@@ -79,7 +79,7 @@ if DEBUG:
         "from constance import config",
         "from django_redis import get_redis_connection",
         "from jew_pizza.twilio import send_sms, twilio_client",
-        "from jew_pizza.utils import reload_radio_container, send_sse_message",
+        "from jew_pizza.utils import reload_radio_container, get_last_sse_message, send_sse_message",
         "from shows.tasks import generate_peaks",
     ]
 
