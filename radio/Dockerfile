@@ -1,4 +1,4 @@
-FROM savonet/liquidsoap:v2.0.2
+FROM savonet/liquidsoap:v2.0.3
 
 ARG WAIT_FOR_IT_VERSION=81b1373f \
     DEBUG=0

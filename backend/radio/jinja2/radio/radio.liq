@@ -40,7 +40,7 @@ end
 
 def zulu_now()
     t = time.utc()
-    "#{t.year + 1900}-#{pad(t.mon + 1)}-#{pad(t.mday)}T#{pad(t.hour)}:#{pad(t.min)}:#{pad(t.sec)}Z"
+    "#{t.year}-#{pad(t.month)}-#{pad(t.day)}T#{pad(t.hour)}:#{pad(t.min)}:#{pad(t.sec)}Z"
 end
 
 def _send_message_to_nchan_http_post(type, message)

@@ -4,7 +4,8 @@
   <script src="{{ static('admin_tools/vendor/js/alpine.js') }}" defer></script>
   <script>
     const MAX_MESSAGES = 50
-    const SSE_URL = {{ (settings.SSE_URL + '/'.join(settings.SSE_CHANNELS) + '/')|tojson }}
+    const SSE_URL = {{ settings.SSE_URL|tojson }}
+    const SSE_MESSAGE_TYPES = {{ settings.SSE_MESSAGE_TYPES|tojson }}
 
     document.addEventListener('alpine:init', () => {
       Alpine.data('sse', () => ({
@@ -21,11 +22,13 @@
             this.num_connected = 0
             this.connected = false
           })
-          this.eventsource.addEventListener('message', (e) => {
-            const msg = JSON.parse(e.data)
-            this.messages.length = Math.min(this.messages.length, MAX_MESSAGES - 1)
-            this.messages.unshift(["" + new Date(), msg])
-          })
+          for (let messageType of SSE_MESSAGE_TYPES) {
+            this.eventsource.addEventListener(messageType, (e) => {
+              const msg = JSON.parse(e.data)
+              this.messages.length = Math.min(this.messages.length, MAX_MESSAGES - 1)
+              this.messages.unshift({'type': messageType, 'message': msg})
+            })
+          }
         }
       }))
     })

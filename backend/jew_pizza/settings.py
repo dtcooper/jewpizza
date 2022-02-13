@@ -45,7 +45,7 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 ADMINS = [(f"{DOMAIN_NAME} Admin", EMAIL_ADDRESS)]
 UMAMI_HOST = f"umami.{DOMAIN_NAME}"
 SSE_URL = "/sse/"
-SSE_CHANNELS = {"metadata"}
+SSE_MESSAGE_TYPES = ("metadata",)
 
 if DEBUG:
     ALLOWED_HOSTS = ["*"]
