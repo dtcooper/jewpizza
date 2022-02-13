@@ -10,7 +10,6 @@ RUN apt-get update \
         ca-certificates \
         festival \
         festvox-kallpc16k \
-        redis-tools \
         wget \
         # Dev requirements
         $([ "$DEBUG" -a "$DEBUG" != '0' ] && echo \

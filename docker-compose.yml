@@ -41,27 +41,12 @@ services:
     depends_on:
       - app
       - icecast
-      - redis
     environment:
       - "TZ=${TIMEZONE:-US/Eastern}"
     extra_hosts:
       - "host.docker.internal:host-gateway"
     labels:
       - "autoheal=true"
-
-  sse:
-    <<: *service-defaults
-    image: dtcooper/jewpizza-sse:${PINNED_CONTAINER_VERSION:-latest}
-    build:
-      context: sse
-      args:
-        - "DEBUG=${DEBUG:-0}"
-    volumes:
-      - ./.env:/.env:ro
-    depends_on:
-      - redis
-    environment:
-      - "TZ=${TIMEZONE:-US/Eastern}"
 
   nginx:
     <<: *service-defaults
@@ -76,7 +61,6 @@ services:
       - app
       - icecast
       - logs
-      - sse
       - umami
     environment:
       - "CERTBOT_DNS_PROPAGATION_SECONDS=${CERTBOT_DNS_PROPAGATION_SECONDS:-90}"

@@ -38,7 +38,6 @@ else
     wait-for-it -t 0 app:8000
     wait-for-it -t 0 redis:6379
 
-
     sed -i "s/^SECRET_KEY.*/SECRET_KEY = '$SECRET_KEY'  # from entrypoint.sh/" "$SCRIPT"
     sed -i "s/^DEBUG.*/DEBUG = $([ "$DEBUG" ] && echo 'true' || echo 'false')  # from entrypoint.sh/" "$SCRIPT"
     echo "Replaced SECRET_KEY and DEBUG in $SCRIPT"

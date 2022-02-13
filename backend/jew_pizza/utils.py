@@ -1,3 +1,4 @@
+import datetime
 import json
 import logging
 
@@ -9,8 +10,6 @@ from django.utils.formats import date_format as django_date_format
 from django.utils.timezone import localtime
 
 from django_redis import get_redis_connection
-
-from .constants import REDIS_PUBSUB_CHANNEL
 
 
 logger = logging.getLogger(f"jewpizza.{__name__}")
@@ -48,9 +47,25 @@ def format_time(time, format="g:i A"):
 def send_sse_message(message_type, message, delay=None):
     if not isinstance(message, dict):
         raise TypeError("message must be a dict")
-    message = json.dumps({"type": message_type, "message": message, "delay": delay})
-    redis = get_redis_connection()
-    redis.publish(REDIS_PUBSUB_CHANNEL, message)
+
+    if delay is None:
+        timestamp = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+        message = json.dumps({"type": message_type, "timestamp": timestamp, "message": message})
+        try:
+            response = requests.post(f"http://nginx:3000/{message_type}/", data=message, headers={'Accept': 'text/json'})
+        except requests.RequestException:
+            logger.exception('An error occurred while making sending an SSE message')
+        else:
+            if response.status_code in (201, 202):
+                num_subscribers = response.json().get('subscribers', 0)
+                logger.info(f"{message_type} message sent to nchan to {num_subscribers} subscriber(s) (code: {response.status_code})")
+            else:
+                logger.error(f"Got code {response.status_code} while sending {message_type} message to nchan: {response.text}")
+    else:
+        from webcore.tasks import send_sse_message_async
+
+        logger.info(f"Delaying {message_type} message by {delay} seconds")
+        send_sse_message_async.schedule((message_type, message), delay=delay)
 
 
 def reload_radio_container():

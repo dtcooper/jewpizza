@@ -44,20 +44,14 @@ jobs:
           echo '============ Misc Dependencies =========' >> dependencies.txt
           ./scripts/check-versions.sh github-action | tee -a dependencies.txt
 
-          echo '============ Frontend (app) ============' >> dependencies.txt
+          echo '============ Frontend ==================' >> dependencies.txt
           cd frontend
           npm install
           npm outdated | tee -a ../dependencies.txt
           cd ..
 
-          echo '============ Backend (app) =============' >> dependencies.txt
+          echo '============ Backend ===================' >> dependencies.txt
           cd backend
-          poetry env use "python${PYTHON_VERSION}"
-          poetry show -o | tee -a ../dependencies.txt
-          cd ..
-
-          echo '============ Backend (sse) =============' >> dependencies.txt
-          cd sse
           poetry env use "python${PYTHON_VERSION}"
           poetry show -o | tee -a ../dependencies.txt
           cd ..

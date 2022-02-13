@@ -90,17 +90,6 @@ class SendEmailView(SuccessMessageMixin, AdminFormView):
         return super().form_valid(form)
 
 
-class SSEStatusView(AdminTemplateView):
-    template_name = "admin_tools/sse_status.html"
-    title = "SSE Status"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        # At least if the secret key is exposed somehow, it's a SHA256 of it, not the actual key
-        context["secret_key"] = hashlib.sha256(settings.SECRET_KEY.encode()).hexdigest()
-        return context
-
-
 @method_decorator(staff_member_required, name="dispatch")
 class NginxInternalView(View):
     def dispatch(self, request, *args, **kwargs):

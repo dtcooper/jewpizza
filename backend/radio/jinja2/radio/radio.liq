@@ -9,10 +9,10 @@ settings.server.timeout.set(-1.)
 
 log("Starting harbor (script generated " ^ {{ now()|liqval }} ^ ")")
 
-REDIS_PUBSUB_CHANNEL = {{ REDIS_PUBSUB_CHANNEL|liqval }}
 PASSWORD = {{ settings.ICECAST_SOURCE_PASSWORD|liqval }}
 
-METADATA_SSE_DELAY = 5.
+METADATA_MESSAGE_DELAY = 5.
+NCHAN_URL = "http://nginx:3000/"
 
 {% include 'radio/reload.liq' %}
 {% include 'radio/http.liq' %}
@@ -30,28 +30,51 @@ end
 
 radio = mksafe(rotate([request.dynamic.list(show_announcement_request), jingle]))
 
-def send_message_to_redis(type, message, ~delay=0.)
+def pad(n, ~char="0", ~num=2)
+    out = ref(string_of(n))
+    while string.length(!out) < num do
+        out := "#{char}#{!out}"
+    end
+    !out
+end
+
+def zulu_now()
+    t = time.utc()
+    "#{t.year + 1900}-#{pad(t.mon + 1)}-#{pad(t.mday)}T#{pad(t.hour)}:#{pad(t.min)}:#{pad(t.sec)}Z"
+end
+
+def _send_message_to_nchan_http_post(type, message)
     data = json()
     data.add("type", type)
     data.add("message", message)
-    data.add("delay", delay)
-    json_message = json.stringify(compact=true, data)
-    cmd = "redis-cli -h redis publish #{process.quote(REDIS_PUBSUB_CHANNEL)} #{process.quote(json_message)}"
-    if not process.test(cmd) then
-        log("ERROR: error publishing to redis with command: #{cmd}")
+    data.add("timestamp", zulu_now())
+    data = json.stringify(compact=true, data)
+    print(data)
+    response = http.post(data=data, headers=[("Accept", "text/json")], "#{NCHAN_URL}/#{type}/")
+    if response.status_code >= 201 and response.status_code <= 202 then
+        num_subscribers = string_of(list.assoc(default=0, "subscribers", json.parse(default=[("_", 0)], response)))
+        log("#{type} message sent to nchan to #{num_subscribers} subscriber(s) (code: #{response.status_code})")
     else
-        log("#{type} message sent to #{REDIS_PUBSUB_CHANNEL}")
+        log("ERROR: got code #{response.status_code} while sending #{type} message to nchan: #{response.status_message}")
     end
 end
 
-def send_metadata_to_redis(m)
-    message = json()
-    message.add("title", metadata.title(m))
-    message.add("full", metadata.export(m))
-    send_message_to_redis("metadata", message, delay=METADATA_SSE_DELAY)
+def send_message_to_nchan(type, message, ~delay=0.)
+    if delay == 0. then
+        _send_message_to_nchan_http_post(type, message)
+    else
+        log("Delaying #{type} message by #{delay} seconds")
+        thread.run(fast=false, delay=delay, fun() -> _send_message_to_nchan_http_post(type, message))
+    end
 end
 
-radio.on_metadata(send_metadata_to_redis)
+def send_metadata_to_nchan(m)
+    message = json()
+    message.add("title", metadata.title(m))
+    send_message_to_nchan("metadata", message, delay=METADATA_MESSAGE_DELAY)
+end
+
+radio.on_metadata(send_metadata_to_nchan)
 
 radio = mksafe(radio)
 output.dummy(radio)

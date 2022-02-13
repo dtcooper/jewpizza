@@ -77,37 +77,6 @@ jobs:
           container: radio
           dev: '1'
 
-  build-sse:
-    runs-on: ubuntu-latest
-    name: Build sse container
-    steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v2
-      -
-        name: Build container
-        uses: ./.github/actions/docker-build-push
-        with:
-          token: ${{ secrets.DOCKERHUB_TOKEN }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          container: sse
-
-  build-sse-dev:
-    runs-on: ubuntu-latest
-    name: Build sse container (dev)
-    steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v2
-      -
-        name: Build container
-        uses: ./.github/actions/docker-build-push
-        with:
-          token: ${{ secrets.DOCKERHUB_TOKEN }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          container: sse
-          dev: '1'
-
   build-nginx:
     runs-on: ubuntu-latest
     name: Build nginx container
@@ -175,7 +144,7 @@ jobs:
     name: Deploy
     env:
       SSH_DEPLOY_DIRECTORY: jewpizza
-    needs: [build-app, build-radio, build-sse, build-nginx, build-icecast]
+    needs: [build-app, build-radio, build-nginx, build-icecast]
     steps:
       -
         name: Deploy containers

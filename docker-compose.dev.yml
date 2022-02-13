@@ -31,14 +31,6 @@ services:
     ports:
       - "127.0.0.1:1234:1234"
 
-  sse:
-    <<: *service-dev-defaults
-    image: dtcooper/jewpizza-sse:dev
-    volumes:
-      - ./sse:/app
-    ports:
-      - "8001:8001"
-
   nginx:
     <<: *service-dev-defaults
     image: dtcooper/jewpizza-nginx:dev
@@ -48,6 +40,8 @@ services:
       - ./local-certificate-authority:/etc/local_ca
     environment:
       - "USE_LOCAL_CA=${NGINX_DEBUG_MODE_ONLY_USE_LOCAL_CERTIFICATE_AUTHORITY:-0}"
+    ports:
+      - "3000:3000"
 
   icecast:
     <<: *service-dev-defaults

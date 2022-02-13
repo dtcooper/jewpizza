@@ -21,13 +21,10 @@ pre-commit:
 	@$(COMPOSE) run --rm --no-deps app sh -c '\
 		echo "=============== black ==================";\
 		black . ;\
-		black --config pyproject.toml ../sse ;\
 		echo "=============== isort ==================";\
 		isort . ;\
-		isort --sp pyproject.toml ../sse ;\
 		echo "=============== flake8 =================";\
 		flake8;\
-		flake8 --config .flake8 ../sse ;\
 		echo "=============== standard ===============";\
 		cd ../frontend/src ;\
 		npx standard --fix ;\
@@ -53,9 +50,6 @@ show-outdated:
 		echo "============ Frontend (app) ============";\
 		npm --prefix=../frontend outdated;\
 		echo "============ Backend (app) =============";\
-		poetry show -o'
-	@$(COMPOSE) run --rm --no-deps sse sh -c '\
-		echo "============ Backend (sse) =============";\
 		poetry show -o'
 
 export-show-fixtures:

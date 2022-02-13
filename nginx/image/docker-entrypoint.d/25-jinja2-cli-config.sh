@@ -34,6 +34,6 @@ echo "$SCRIPT: Rendered config ($CONF_FILE)"
 
 if [ "$DEBUG" -a "$DEBUG" != '0' ]; then
     echo "========== begin: $CONF_FILE =========="
-    cat "$CONF_FILE"
+    cat -n "$CONF_FILE"
     echo "=========== end: $CONF_FILE ==========="
 fi
