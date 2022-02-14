@@ -38,8 +38,7 @@ It's built using the _wildly_ popular and _extremely_ common
 * [**d**aisyUI](https://daisyui.com/) as lightweight UI component framework on
     top of Tailwind CSS;
 * [**S**erver-Sent Events (SSE)](https://en.wikipedia.org/wiki/Server-sent_events),
-    to send realtime messages to the browser (using the nginx module
-    [Nchan](https://nchan.io/) as described below);
+    to send realtime messages to the browser;
 * [**P**ostgresSQL](https://www.postgresql.org/), a database;
 * [**L**iquidsoap](https://www.liquidsoap.info/), a fantastic scripting language
     for describing audio streams;
