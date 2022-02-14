@@ -13,44 +13,43 @@ So, these instructions are mostly for me &mdash; in case of sudden amnesia or
 coming back to this project after a year or so of neglect.
 
 
-## Stack &mdash; **_DR. DJ PLACENTA HINDS_**
+## Stack &mdash; **_DJ DRENCH AND SPLINT_**
 
 It's built using the _wildly_ popular and _extremely_ common
-**_DR. DJ PLACENTA HINDS_** stack, ie,
+**_DJ DRENCH AND SPLINT_** stack, ie,
 
 * [**D**jango](https://www.djangoproject.com/), a back-end web framework;
-* [**R**edis](https://redis.io/), a data store and message broker;
-* [**D**ocker](https://www.docker.com/) to run all this crap in containers;
 * [**J**inja](https://jinja.palletsprojects.com/) for templating. Like django,
     but less sucky;
-* [**P**ostgresSQL](https://www.postgresql.org/), a database;
-* [**L**iquidsoap](https://www.liquidsoap.info/), a fantastic scripting language
-    for describing audio streams;
-* [**A**lpineJS](https://alpinejs.dev/), a lightweight, reactive front-end
-    framework;
-* [**C**ompose](https://docs.docker.com/compose/), ie Docker Compose, for
-    multi-container orchestration;
+* [**D**ocker](https://www.docker.com/) to run all this crap in containers;
+* [**R**edis](https://redis.io/), a data store and message broker;
 * [**e**sbuild](https://esbuild.github.io/), a fast JavaScript bundler;
 * [**N**avigo](https://github.com/krasimir/navigo) for a simple
     [SPA](https://en.wikipedia.org/wiki/Single-page_application) router;
-* [**T**ailwind CSS](https://tailwindcss.com/), a utility-first CSS framework;
-* [**a**iohttp](https://docs.aiohttp.org/) for the SSE service. Django's bad at
-    persistent connections and aiohttp isn't;
+* [**C**ompose](https://docs.docker.com/compose/), ie Docker Compose, for
+    multi-container orchestration;
 * [**h**uey](https://huey.readthedocs.io/), a lightweight asynchronous task
     queue for Python;
-* [**I**cecast](https://icecast.org/), a streaming media server for listeners to
-    connect (Karl Heyes's [fork](https://github.com/karlheyes/icecast-kh));
+* [**A**lpineJS](https://alpinejs.dev/), a lightweight, reactive front-end
+    framework;
 * [**n**ginx](https://www.nginx.com/) as a web server and reverse proxy with
     [jonasal/nginx-certbot](https://github.com/JonasAlfredsson/docker-nginx-certbot/)
     container as its base for [HTTPS](https://en.wikipedia.org/wiki/HTTPS);
 * [**d**aisyUI](https://daisyui.com/) as lightweight UI component framework on
-    top of Tailwind CSS; and
+    top of Tailwind CSS;
 * [**S**erver-Sent Events (SSE)](https://en.wikipedia.org/wiki/Server-sent_events),
-    to send realtime messages to the browser (using
-    [aoihttp-sse](https://github.com/aio-libs/aiohttp-sse)).
+    to send realtime messages to the browser (using the nginx module
+    [Nchan](https://nchan.io/) as described below);
+* [**P**ostgresSQL](https://www.postgresql.org/), a database;
+* [**L**iquidsoap](https://www.liquidsoap.info/), a fantastic scripting language
+    for describing audio streams;
+* [**I**cecast](https://icecast.org/), a streaming media server for listeners to
+    connect (Karl Heyes's [fork](https://github.com/karlheyes/icecast-kh));
+* [**N**chan](https://nchan.io/), an nginx module managing EventSource (SSE)
+    clients; and
+* [**T**ailwind CSS](https://tailwindcss.com/), a utility-first CSS framework.
 
-
-**_DR. DJ PLACENTA HINDS_**. A very well-known acronym in the engineering world,
+**_DJ DRENCH AND SPLINT_**. A very well-known acronym in the engineering world,
 _probably._ I definitely didn't just make this up as a joke.
 
 
