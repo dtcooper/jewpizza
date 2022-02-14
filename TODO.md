@@ -56,6 +56,7 @@
 * [ ] Add _Highlights_ sections, possible on Home page?
 * [ ] Showgram nightly segment breakdown with links to podcast?
 * [ ] Misc: poolabs, kawika talk, fish burps, here's why that's funny, shitbag
+* [ ] Add backend/ frontend/ and radio/.../reload.liq explicitly to backend container instead of complete dir
 
 ## Sections
 
