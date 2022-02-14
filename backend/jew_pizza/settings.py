@@ -47,10 +47,7 @@ UMAMI_HOST = f"umami.{DOMAIN_NAME}"
 SSE_URL = "/sse/"
 SSE_MESSAGE_TYPES = ("metadata",)
 
-if DEBUG:
-    ALLOWED_HOSTS = ["*"]
-else:
-    ALLOWED_HOSTS = list({"app", "localhost", "127.0.0.1", DOMAIN_NAME})
+ALLOWED_HOSTS = list({"app", "nginx", "localhost", "127.0.0.1", DOMAIN_NAME})
 
 INSTALLED_APPS = [
     "django.contrib.admin",
