@@ -31,6 +31,7 @@
       (mostly needed for liquidsoap/radio container)
 * [x] Remove BUILD_DATE + GIT_REV from all but app container, it ends up with
     needless restarts in radio, etc and differences in container
+* [x] use nchan instead of aiohttp
 * [ ] Icecast server + liquidsoap with player to play whatever show I'm on, read
       countdowns when I'm not on air
     - [ ] Call-in button via Twilio client
@@ -55,7 +56,6 @@
 * [ ] Add _Highlights_ sections, possible on Home page?
 * [ ] Showgram nightly segment breakdown with links to podcast?
 * [ ] Misc: poolabs, kawika talk, fish burps, here's why that's funny, shitbag
-* [ ] use nchan instead of aiohttp
 
 ## Sections
 
