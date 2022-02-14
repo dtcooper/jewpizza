@@ -35,6 +35,7 @@ map $sent_http_content_type $expires {
     ~font/                     30d;
 }
 
+# Mirrored in /docker-entrypoint.d/50-wait-for-upstream-services.sh
 upstream app { server app:8000; }
 upstream logs { server logs:8080; }
 upstream umami { server umami:3000; }

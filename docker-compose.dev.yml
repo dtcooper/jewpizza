@@ -36,7 +36,9 @@ services:
     image: dtcooper/jewpizza-nginx:dev
     volumes:
       - ./nginx/image/etc/nginx/templates:/etc/nginx/templates
-      - ./nginx/image/docker-entrypoint.d:/docker-entrypoint.d
+      - ./nginx/image/docker-entrypoint.d/25-jinja2-cli-config.sh:/docker-entrypoint.d/25-jinja2-cli-config.sh
+      - ./nginx/image/docker-entrypoint.d/40-set-digitalocean-token.sh:/docker-entrypoint.d/40-set-digitalocean-token.sh
+      - ./nginx/image/docker-entrypoint.d/50-wait-for-upstream-services.sh:/docker-entrypoint.d/50-wait-for-upstream-services.sh
       - ./local-certificate-authority:/etc/local_ca
     environment:
       - "USE_LOCAL_CA=${NGINX_DEBUG_MODE_ONLY_USE_LOCAL_CERTIFICATE_AUTHORITY:-0}"
