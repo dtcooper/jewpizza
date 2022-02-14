@@ -196,6 +196,7 @@ def create_environment(**options):
     env = Environment(**options)
     env.globals.update(
         {
+            "BUILD_DATE": BUILD_DATE_FORMATTED,
             "choice": random.choice,
             "config": constance_config,
             "encoded_email": __encoded_email(),
@@ -210,7 +211,6 @@ def create_environment(**options):
             "shuffle": shuffle,
             "static": static,
             "url_for": url_for,
-            "BUILD_DATE": BUILD_DATE_FORMATTED,
         }
     )
     env.filters.update(
@@ -220,13 +220,13 @@ def create_environment(**options):
             "add_error_class": add_error_class,
             "attrjs": attrjs,
             "bool": bool,
-            "datetime": format_datetime,
             "date": format_date,
             "dateshort": format_date_short,
+            "datetime": format_datetime,
             "datetimeshort": format_datetime_short,
-            "time": format_time,
             "liqval": liqval,
             "smart_title": smart_title,
+            "time": format_time,
         }
     )
     if not settings.DEBUG:
