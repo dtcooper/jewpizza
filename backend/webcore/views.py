@@ -81,8 +81,8 @@ class LogJSErrorView(View):
         return HttpResponse(status=204)
 
 
-@method_decorator(csrf_exempt, name="dispatch")
 class LogSSEToCacheView(View):
+    @method_decorator(csrf_exempt)
     def post(self, request, *args, **kwargs):
         try:
             message = json.loads(request.body)
