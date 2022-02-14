@@ -1,5 +1,3 @@
-import hashlib
-
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required

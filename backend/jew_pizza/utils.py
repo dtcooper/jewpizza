@@ -10,8 +10,6 @@ from django.core.cache import cache
 from django.utils.formats import date_format as django_date_format
 from django.utils.timezone import localtime
 
-from django_redis import get_redis_connection
-
 
 logger = logging.getLogger(f"jewpizza.{__name__}")
 SSE_MESSAGE_CACHE_KEY_PREFIX = "sse-message::"
@@ -63,10 +61,10 @@ def send_sse_message(message_type, message, delay=None):
         message = {"type": message_type, "timestamp": timestamp, "message": message}
         try:
             response = requests.post(
-                f"http://nginx:3000/",
+                "http://nginx:3000/",
                 data=json.dumps(message),
                 # We store it in the cache below, no need for nginx to call app back, skip via X-Skip-Store-SSE-In-Cache
-                headers={"Accept": "text/json", "X-EventSource-Event": message_type, 'X-Skip-Store-SSE-In-Cache': '1'},
+                headers={"Accept": "text/json", "X-EventSource-Event": message_type, "X-Skip-Store-SSE-In-Cache": "1"},
             )
         except requests.RequestException:
             logger.exception("An error occurred while making sending an SSE message")
