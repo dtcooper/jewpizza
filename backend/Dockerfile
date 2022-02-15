@@ -95,20 +95,15 @@ RUN poetry install \
     # In prod use "--no-dev"
     $([ -z "$DEBUG" -o "$DEBUG" = '0' ] && echo '--no-dev')
 
-COPY . /app/
-
 # Copy over needed files from stages
-COPY --from=frontend \
-    /build/frontend/node_modules/simpledotcss/simple.css /build/frontend/node_modules/simpledotcss/simple.min.css \
-    /app/frontend/node_modules/simpledotcss/
-COPY --from=frontend \
-    /build/frontend/node_modules/alpinejs/dist/cdn.js /build/frontend/node_modules/alpinejs/dist/cdn.min.js \
-    /app/frontend/node_modules/alpinejs/dist/
-COPY --from=frontend /build/backend/webcore/static/webcore/css/styles.min.css /app/backend/webcore/static/webcore/css/
-COPY --from=frontend \
-    /build/backend/webcore/static/webcore/js/index.min.js /build/backend/webcore/static/webcore/js/placeholder.min.js \
-    /app/backend/webcore/static/webcore/js/
+COPY --from=frontend /build/frontend/node_modules/simpledotcss/simple.*css /app/frontend/node_modules/simpledotcss/
+COPY --from=frontend /build/frontend/node_modules/alpinejs/dist/cdn.*js /app/frontend/node_modules/alpinejs/dist/
+COPY --from=frontend /build/backend/webcore/static/webcore/css/* /app/backend/webcore/static/webcore/css/
+COPY --from=frontend /build/backend/webcore/static/webcore/js/* /app/backend/webcore/static/webcore/js/
 COPY --from=audiowaveform /usr/local/bin/audiowaveform /usr/local/bin/audiowaveform
+
+COPY radio/reload.liq /app/backend/radio/jinja2/radio/
+COPY backend/ /app/backend/
 
 ENTRYPOINT ["/app/backend/entrypoint.sh"]
 CMD []

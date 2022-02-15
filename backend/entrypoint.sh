@@ -15,9 +15,6 @@ fi
 
 if [ "$DEBUG" -a "$DEBUG" != '0' ]; then
     DEBUG=1
-    if [ ! -f ../docker-compose.override.yml ]; then
-        echo "WARNING: docker-compose.override.yml NOT found. You'll need to symlink so DEBUG can to work properly."
-    fi
 else
     DEBUG=
 fi
@@ -28,6 +25,10 @@ if [ -z "$NO_STARTUP_MESSAGE" ]; then
         printf ' (DEBUG mode on)'
     fi
     echo
+fi
+
+if [ "$DEBUG" -a ! -f ../docker-compose.override.yml ]; then
+    echo "WARNING: docker-compose.override.yml NOT found. You'll need to symlink so DEBUG can to work properly."
 fi
 
 if [ "$RUN_HUEY" ]; then
