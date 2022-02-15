@@ -41,6 +41,9 @@ upstream logs { server logs:8080; }
 upstream umami { server umami:3000; }
 upstream icecast { server icecast:8888; }
 
+# So nginx can detect restarted upstreams
+resolver {{ environ('DNS_RESOLVER_IP') }} valid=10s;
+
 # {{ environ('DOMAIN_NAME') }}, main Django app
 server {
     {{ server_name() }}
