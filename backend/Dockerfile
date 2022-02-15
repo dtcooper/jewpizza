@@ -93,15 +93,16 @@ RUN poetry install \
     # In prod use "--no-dev"
     $([ -z "$DEBUG" -o "$DEBUG" = '0' ] && echo '--no-dev')
 
-# Copy over needed files from stages
-COPY --from=frontend /app/frontend/node_modules/simpledotcss/simple.*css /app/frontend/node_modules/simpledotcss/
-COPY --from=frontend /app/frontend/node_modules/alpinejs/dist/cdn.*js /app/frontend/node_modules/alpinejs/dist/
+# Copy over needed files from source tree (break symlinks)
+COPY backend/ /app/backend
+COPY radio/reload.liq /app/backend/radio/jinja2/radio/
+
+# Copy over needed files from stages (overwrite symlinks)
+COPY --from=frontend /app/frontend/node_modules/simpledotcss/simple.*css /app/backend/admin_tools/static/admin_tools/vendor/css/
+COPY --from=frontend /app/frontend/node_modules/alpinejs/dist/cdn.*js /app/backend/admin_tools/static/admin_tools/vendor/js/
 COPY --from=frontend /app/backend/webcore/static/webcore/css/* /app/backend/webcore/static/webcore/css/
 COPY --from=frontend /app/backend/webcore/static/webcore/js/* /app/backend/webcore/static/webcore/js/
 COPY --from=audiowaveform /usr/local/bin/audiowaveform /usr/local/bin/audiowaveform
-
-COPY radio/reload.liq /app/backend/radio/jinja2/radio/
-COPY backend/ /app/backend/
 
 ENTRYPOINT ["/app/backend/entrypoint.sh"]
 CMD []
