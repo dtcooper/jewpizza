@@ -13,7 +13,7 @@ RUN apk add --no-cache \
     libxslt-dev \
     speex-dev
 
-RUN mkdir /build && cd /build \
+RUN mkdir -p /usr/src/icecast && cd /usr/src/icecast \
     && wget -qO - "https://github.com/karlheyes/icecast-kh/archive/icecast-${ICECAST_KH_VERSION}.tar.gz" | tar xz --strip=1 \
     && ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
     && make && make install

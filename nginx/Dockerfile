@@ -24,13 +24,12 @@ RUN apk add --no-cache \
     perl-dev \
     zlib-dev
 
-RUN mkdir -p /build /brotli /nchan \
-    && wget -qO - "https://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz" | tar xz --strip=1 -C /build \
-    && wget -qO - "https://github.com/google/ngx_brotli/tarball/${NGX_BROTLI_VERSION}" | tar xz --strip=1 -C /brotli \
-    && wget -qO - "https://github.com/slact/nchan/tarball/v${NGX_NCHAN_VERSION}" | tar xz --strip=1 -C /nchan \
-    && cd /build \
+RUN mkdir -p /usr/src/nginx && cd /usr/src/nginx && mkdir ../brotli ../nchan \
+    && wget -qO - "https://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz" | tar xz --strip=1  \
+    && wget -qO - "https://github.com/google/ngx_brotli/tarball/${NGX_BROTLI_VERSION}" | tar xz --strip=1 -C ../brotli \
+    && wget -qO - "https://github.com/slact/nchan/tarball/v${NGX_NCHAN_VERSION}" | tar xz --strip=1 -C ../nchan \
     && CONFARGS=$(nginx -V 2>&1 | sed -n -e 's/^.*arguments: //p') \
-    && sh -c "./configure --with-compat ${CONFARGS} --add-dynamic-module=/brotli --add-dynamic-module=/nchan" \
+    && sh -c "./configure --with-compat ${CONFARGS} --add-dynamic-module=../brotli --add-dynamic-module=../nchan" \
     && make modules
 
 
@@ -55,5 +54,5 @@ RUN echo -e 'include modules.conf;\n' | cat - /etc/nginx/nginx.conf > /tmp/nginx
     # Add hostname to nginx logs
     && sed -i 's/$remote_addr/$host \0/' /etc/nginx/nginx.conf
 
-COPY --from=modules /build/objs/*.so /usr/lib/nginx/modules/
+COPY --from=modules /usr/src/nginx/objs/*.so /usr/lib/nginx/modules/
 COPY image/ /

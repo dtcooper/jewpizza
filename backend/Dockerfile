@@ -4,12 +4,12 @@ FROM python:3.10 as base
 # Build frontend
 FROM node:16-alpine AS frontend
 
-COPY frontend/package.json frontend/package-lock.json /build/frontend/
-WORKDIR /build/frontend
+COPY frontend/package.json frontend/package-lock.json /app/frontend/
+WORKDIR /app/frontend
 RUN npm install --production
 
-COPY backend/ /build/backend
-COPY frontend/ /build/frontend
+COPY backend/ /app/backend
+COPY frontend/ /app/frontend
 RUN npm run build
 
 # audiowaveform tool
@@ -32,10 +32,8 @@ RUN apt-get update \
         make \
     && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir /build \
-    && wget -qO - "https://github.com/bbc/audiowaveform/archive/refs/tags/${AUDIOWAVEFORM_VERSION}.tar.gz" \
-        | tar xz -C /build --strip-components 1 \
-    && cd "/build" \
+RUN mkdir -p /usr/src/audiowaveform && cd /usr/src/audiowaveform \
+    && wget -qO - "https://github.com/bbc/audiowaveform/archive/refs/tags/${AUDIOWAVEFORM_VERSION}.tar.gz" | tar xz --strip-components 1 \
     && mkdir build && cd build \
     && cmake -D ENABLE_TESTS=0 .. \
     && make && make install
@@ -96,10 +94,10 @@ RUN poetry install \
     $([ -z "$DEBUG" -o "$DEBUG" = '0' ] && echo '--no-dev')
 
 # Copy over needed files from stages
-COPY --from=frontend /build/frontend/node_modules/simpledotcss/simple.*css /app/frontend/node_modules/simpledotcss/
-COPY --from=frontend /build/frontend/node_modules/alpinejs/dist/cdn.*js /app/frontend/node_modules/alpinejs/dist/
-COPY --from=frontend /build/backend/webcore/static/webcore/css/* /app/backend/webcore/static/webcore/css/
-COPY --from=frontend /build/backend/webcore/static/webcore/js/* /app/backend/webcore/static/webcore/js/
+COPY --from=frontend /app/frontend/node_modules/simpledotcss/simple.*css /app/frontend/node_modules/simpledotcss/
+COPY --from=frontend /app/frontend/node_modules/alpinejs/dist/cdn.*js /app/frontend/node_modules/alpinejs/dist/
+COPY --from=frontend /app/backend/webcore/static/webcore/css/* /app/backend/webcore/static/webcore/css/
+COPY --from=frontend /app/backend/webcore/static/webcore/js/* /app/backend/webcore/static/webcore/js/
 COPY --from=audiowaveform /usr/local/bin/audiowaveform /usr/local/bin/audiowaveform
 
 COPY radio/reload.liq /app/backend/radio/jinja2/radio/
