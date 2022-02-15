@@ -11,7 +11,7 @@ Brotli = "^1.0.9"
 Django = "^4.0.2"
 django-constance = "^2.8.0"
 django-environ = "^0.8.1"
-django-phonenumber-field = {extras = ["phonenumbers"], version = "^6.0.0"}
+django-phonenumber-field = {extras = ["phonenumbers"], version = "^6.1.0"}
 django-recurrence = "^1.11.1"
 django-redis = "^5.2.0"
 django-s3direct = "^2.0.0"
