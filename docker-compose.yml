@@ -11,8 +11,7 @@ x-app-template: &app-template
       - "DEBUG=${DEBUG:-0}"
   volumes:
     - ./.env:/.env:ro
-    - ./serve/static:/static_root
-    - ./serve/media:/media_root
+    - ./serve:/serve
   depends_on:
     - db
     - redis

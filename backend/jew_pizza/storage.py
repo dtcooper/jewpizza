@@ -8,7 +8,7 @@ from django.contrib.staticfiles.storage import StaticFilesStorage
 
 
 class PostProcessCompressionStorage(StaticFilesStorage):
-    COMPRESS_EXTENSIONS = {"css", "gif", "html", "jpg", "js", "png", "svg", "txt", "webp"}
+    COMPRESS_EXTENSIONS = {"css", "gif", "html", "jpg", "js", "map", "png", "svg", "txt", "webp"}
     COMPRESSION_METHODS = (
         ("gz", partial(gzip.compress, compresslevel=9), gzip.decompress),
         ("br", partial(brotli.compress, quality=11), brotli.decompress),

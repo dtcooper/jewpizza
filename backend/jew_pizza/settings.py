@@ -216,9 +216,9 @@ USE_TZ = True
 USE_DEPRECATED_PYTZ = True
 
 STATIC_URL = "/static/"
-STATIC_ROOT = "/static_root"
+STATIC_ROOT = "/serve/static"
 MEDIA_URL = "/media/"
-MEDIA_ROOT = "/media_root"
+MEDIA_ROOT = "/serve/media"
 
 # Causes django-recurrence to issue a migration
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
