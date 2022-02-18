@@ -15,7 +15,7 @@ RUN npm run build
 # audiowaveform tool
 FROM base as audiowaveform
 
-ARG AUDIOWAVEFORM_VERSION=1.5.1
+ARG AUDIOWAVEFORM_VERSION=1.6.0
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
