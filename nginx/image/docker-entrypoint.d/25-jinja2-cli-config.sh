@@ -13,9 +13,6 @@ else
     exit 1
 fi
 
-export DNS_RESOLVER_IP="$(grep nameserver /etc/resolv.conf | grep -o '[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*')"
-echo "Using resolver IP: $DNS_RESOLVER_IP"
-
 for subdomain in $NGINX_EXTRA_SUBDOMAINS; do
     subdomain="$(echo "$subdomain" | cut -d ':' -f 1)"
     mkdir -p "/serve/$subdomain"
