@@ -61,7 +61,7 @@ json={'username': 'dave', 'password': 'cooper'}).json()['token']
 uuid = requests.post(
 'http://umami:3000/api/website',
 json={'domain': 'localhost', 'name': 'jew.pizza local dev', 'enable_share_url': False},
-headers={'Cookie': f'umami.auth={token}'}).json()['website_uuid']
+headers={'Authorization': f'Bearer {token}'}).json()['website_uuid']
 print(uuid)
 END
 )"

@@ -35,6 +35,12 @@ map $sent_http_content_type $expires {
     ~font/                     30d;
 }
 
+# Mirrored in /docker-entrypoint.d/50-wait-for-upstream-services.sh
+upstream app { server app:8000; }
+upstream logs { server logs:8080; }
+upstream umami { server umami:3000; }
+upstream icecast { server icecast:8888; }
+
 # So nginx can detect restarted upstreams
 resolver {{ environ('DNS_RESOLVER_IP') }} valid=10s;
 
@@ -80,7 +86,7 @@ server {
         include proxy_params;
         proxy_buffering off;
         proxy_cache off;
-        proxy_pass http://logs:8080/cmsadmin/tools/logs/;
+        proxy_pass http://logs/cmsadmin/tools/logs/;
     }
 
     location /protected/cmsadmin/tools/nchan/ {
@@ -94,7 +100,7 @@ server {
 
     location / {
         include proxy_params;
-        proxy_pass http://app:8000;
+        proxy_pass http://app;
     }
 }
 
@@ -111,7 +117,7 @@ server {
 
     location / {
         include proxy_params;
-        proxy_pass http://umami:3000;
+        proxy_pass http://umami;
     }
 }
 
@@ -123,7 +129,7 @@ server {
 
     location / {
         include proxy_params;
-        proxy_pass http://icecast:8888;
+        proxy_pass http://icecast;
     }
 }
 
@@ -165,7 +171,7 @@ server {
     location /store-sse-in-cache/ {
         internal;
         include proxy_params;
-        proxy_pass http://app:8000/protected/store-sse-in-cache/;
+        proxy_pass http://app/protected/store-sse-in-cache/;
     }
 
     location = / {
