@@ -19,7 +19,7 @@ It's built using the _wildly_ popular and _extremely_ common
 **_DJ DRENCH AND SPLINT_** stack, ie,
 
 * [**D**jango](https://www.djangoproject.com/), a back-end web framework;
-* [**J**inja](https://jinja.palletsprojects.com/) for templating. Like django,
+* [**J**inja](https://jinja.palletsprojects.com/) for templating. Like Django's,
     but less sucky;
 * [**D**ocker](https://www.docker.com/) to run all this crap in containers;
 * [**R**edis](https://redis.io/), a data store and message broker;
@@ -32,12 +32,12 @@ It's built using the _wildly_ popular and _extremely_ common
     queue for Python;
 * [**A**lpineJS](https://alpinejs.dev/), a lightweight, reactive front-end
     framework;
-* [**n**ginx](https://www.nginx.com/) as a web server and reverse proxy with
+* [**n**ginx](https://www.nginx.com/) as a web server and reverse proxy using
     [jonasal/nginx-certbot](https://github.com/JonasAlfredsson/docker-nginx-certbot/)
-    container as its base for [HTTPS](https://en.wikipedia.org/wiki/HTTPS);
-* [**d**aisyUI](https://daisyui.com/) as lightweight UI component framework on
+    as its base (for [HTTPS](https://en.wikipedia.org/wiki/HTTPS));
+* [**d**aisyUI](https://daisyui.com/), a lightweight UI component framework on
     top of Tailwind CSS;
-* [**S**erver-Sent Events (SSE)](https://en.wikipedia.org/wiki/Server-sent_events),
+* [**S**erver-Sent Events (SSE)](https://en.wikipedia.org/wiki/Server-sent_events)
     to send realtime messages to the browser;
 * [**P**ostgresSQL](https://www.postgresql.org/), a database;
 * [**L**iquidsoap](https://www.liquidsoap.info/), a fantastic scripting language
@@ -87,7 +87,7 @@ ln -s docker-compose.dev.yml docker-compose.override.yml
 ```
 
 Assuming you set `DOMAIN_NAME=local.jew.pizza` for local development, you'll
-want to properly point your system's DNS that way, for example add the following
+want to properly point your system's DNS that way. For example, add the following
 to `/etc/hosts`.
 
 ```
@@ -113,13 +113,13 @@ It expires every 30 days.
 Build and start containers,
 
 ```bash
-docker compose build
+make build
 docker compose up
 ```
 
 The development `app` server will run at <http://localhost:8000/>, or if you've
 set a `DOMAIN_NAME` and your `/etc/hosts` to work properly with it, navigate to
-that. For example <https://local.jew.pizza/>. You'll need to install the phony
+that. For example, <https://local.jew.pizza/>. You'll need to install the phony
 certificate authority's root certificate (see above).
 
 
@@ -161,7 +161,7 @@ configure the following,
 
 ```bash
 docker compose pull
-# Or optionally build the containers via: docker compose build
+# Or optionally build the containers via: make build
 docker compose up -d
 ```
 
