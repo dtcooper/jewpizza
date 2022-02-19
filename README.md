@@ -1,8 +1,8 @@
 # [jew.pizza][jewpizza-url] Website ✡️🍕
 
-[![GNU Hurd Incompatible](https://img.shields.io/badge/GNU%20Hurd-incompatible-red?logo=gnu&style=for-the-badge)](https://github.com/dtcooper/jewpizza/issues/1)
-
 [![][license]][license-url]
+[![][build]][build-url]
+[![][gnu-hurd]][gnu-hurd-url]
 
 [![][app-container]][app-container-url]
 [![][radio-container]][radio-container-url]
@@ -35,7 +35,7 @@ It's built using the _wildly_ popular and _extremely_ common
     orchestration;
 * [**h**uey][huey-url], a lightweight asynchronous task queue for Python;
 * [**A**lpineJS][alpinejs-url], a lightweight, reactive front-end framework;
-* [**n**ginx][nginx-url] as a web server and reverse proxy using
+* [**n**ginx][nginx-url] as a web server and reverse proxy using the
     [jonasal/nginx-certbot][nginx-certbot-url] container as its base (for
     [HTTPS][https-url]);
 * [**d**aisyUI][daisyui-url], a lightweight UI component framework on
@@ -193,6 +193,10 @@ for details.
 
 [license]: https://badgen.net/badge/license/MIT/blue
 [license-url]: https://github.com/dtcooper/jewpizza/blob/main/LICENSE
+[gnu-hurd]: https://badgen.net/badge/GNU%20hurd/incompatible/red
+[gnu-hurd-url]: https://github.com/dtcooper/jewpizza/issues/1
+[build]: https://badgen.net/github/checks/dtcooper/jewpizza?label=build
+[build-url]: https://github.com/dtcooper/jewpizza/actions
 
 
 [alpinejs-url]: https://alpinejs.dev/
