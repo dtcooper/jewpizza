@@ -23,6 +23,7 @@
 
     {#- Buttons + Dropdown Menu #}
     <div class="flex-none flex items-center space-x-1 xl:space-x-1.5 2xl:space-x-2">
+      {# Main buttons #}
       {% for link in nav_links %}
         <a
           href="{{ link.url }}"
@@ -36,12 +37,14 @@
         </a>
       {% endfor %}
       <div class="hidden lg:block 3xl:hidden" @click.away="$store.menuOpen = false">
+        {# Dropbown button #}
         <button class="btn btn-primary btn-rounded no-animation 2xl:btn-lg pr-1.5 2xl:pr-3 umami--click--navbar-more" @click="$store.menuOpen = !$store.menuOpen" :class="{'btn-disabled': $store.page.loading}">
           More {{ icon('mdi:dots-vertical', size='text-2xl 2xl:text-3xl', margin=None) }}
         </button>
 
+        {# Actual dropdown #}
         <div class="relative" x-show="$store.menuOpen" x-cloak>
-          <ul class="absolute z-max top-1 right-3 select-none menu bg-secondary text-sm 2xl:text-lg text-primary font-bold w-72 rounded-lg">
+          <ul class="absolute z-max top-1 right-3 select-none menu bg-base-200 text-sm 2xl:text-lg text-primary font-bold w-72 rounded-lg">
             {% for link in nav_links %}
               {% if link.is_subnav %}
                 <li :class="{'bordered text-secondary-content': $store.page.current == {{ link.url|attrjs }}}">
@@ -68,7 +71,7 @@
 
   {# Mobile nav #}
   <div x-cloak class="w-full lg:hidden z-max" x-show="$store.menuOpen">
-    <ul class="menu bg-secondary text-sm font-bold text-primary">
+    <ul class="menu bg-base-200 text-sm font-bold text-primary">
       {% for link in nav_links %}
         <li :class="{'bordered text-secondary-content': $store.page.current == {{ link.url|attrjs }}}">
           <span x-show="$store.page.current == {{ link.url|attrjs }}">{{ icon(link.icon, size='text-2xl') }} {{ link.name }}</span>

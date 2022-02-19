@@ -47,6 +47,8 @@ services:
   icecast:
     <<: *service-dev-defaults
     image: dtcooper/jewpizza-icecast:dev
+    volumes:
+      - ./icecast/icecast.xml.template:/etc/icecast.xml.template
 
   db:
     <<: *service-dev-defaults
