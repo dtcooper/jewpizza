@@ -1,8 +1,15 @@
-# [jew.pizza](https://jew.pizza) Website ✡️🍕
+# [jew.pizza][jewpizza-url] Website ✡️🍕
 
 [![GNU Hurd Incompatible](https://img.shields.io/badge/GNU%20Hurd-incompatible-red?logo=gnu&style=for-the-badge)](https://github.com/dtcooper/jewpizza/issues/1)
 
-Here's the code for the website that powers [jew.pizza](https://jew.pizza), my
+[![][license]][license-url]
+
+[![][app-container]][app-container-url]
+[![][radio-container]][radio-container-url]
+[![][nginx-container]][nginx-container-url]
+[![][icecast-container]][icecast-container-url]
+
+Here's the code for the website that powers [jew.pizza][jewpizza-url], my
 personal website.
 
 
@@ -18,35 +25,31 @@ coming back to this project after a year or so of neglect.
 It's built using the _wildly_ popular and _extremely_ common
 **_DJ DRENCH AND SPLINT_** stack, ie,
 
-* [**D**jango](https://www.djangoproject.com/), a back-end web framework;
-* [**J**inja](https://jinja.palletsprojects.com/) for templating. Like Django's,
-    but less sucky;
-* [**D**ocker](https://www.docker.com/) to run all this crap in containers;
-* [**R**edis](https://redis.io/), a data store and message broker;
-* [**e**sbuild](https://esbuild.github.io/), a fast JavaScript bundler;
-* [**N**avigo](https://github.com/krasimir/navigo) for a simple
-    [SPA](https://en.wikipedia.org/wiki/Single-page_application) router;
-* [**C**ompose](https://docs.docker.com/compose/), ie Docker Compose, for
-    multi-container orchestration;
-* [**h**uey](https://huey.readthedocs.io/), a lightweight asynchronous task
-    queue for Python;
-* [**A**lpineJS](https://alpinejs.dev/), a lightweight, reactive front-end
-    framework;
-* [**n**ginx](https://www.nginx.com/) as a web server and reverse proxy using
-    [jonasal/nginx-certbot](https://github.com/JonasAlfredsson/docker-nginx-certbot/)
-    as its base (for [HTTPS](https://en.wikipedia.org/wiki/HTTPS));
-* [**d**aisyUI](https://daisyui.com/), a lightweight UI component framework on
+* [**D**jango][django-url], a back-end web framework;
+* [**J**inja][jinja-url] for templating. Like Django's, but less sucky;
+* [**D**ocker][docker-url] to run all this crap in containers;
+* [**R**edis][redis-url], a data store and message broker;
+* [**e**sbuild][esbuild-url], a fast JavaScript bundler;
+* [**N**avigo][navigo-url] for a simple [SPA][spa-url] router;
+* [**C**ompose][docker-compose-url], ie Docker Compose, for multi-container
+    orchestration;
+* [**h**uey][huey-url], a lightweight asynchronous task queue for Python;
+* [**A**lpineJS][alpinejs-url], a lightweight, reactive front-end framework;
+* [**n**ginx][nginx-url] as a web server and reverse proxy using
+    [jonasal/nginx-certbot][nginx-certbot-url] container as its base (for
+    [HTTPS][https-url]);
+* [**d**aisyUI][daisyui-url], a lightweight UI component framework on
     top of Tailwind CSS;
-* [**S**erver-Sent Events (SSE)](https://en.wikipedia.org/wiki/Server-sent_events)
-    to send realtime messages to the browser;
-* [**P**ostgresSQL](https://www.postgresql.org/), a database;
-* [**L**iquidsoap](https://www.liquidsoap.info/), a fantastic scripting language
-    for describing audio streams;
-* [**I**cecast](https://icecast.org/), a streaming media server for listeners to
-    connect (Karl Heyes's [fork](https://github.com/karlheyes/icecast-kh));
-* [**N**chan](https://nchan.io/), an nginx module managing EventSource (SSE)
+* [**S**erver-Sent Events (SSE)][sse-url], to send realtime messages to the
+    browser;
+* [**P**ostgresSQL][postgres-url], a SQL database;
+* [**L**iquidsoap][liquidsoap-url]), a fantastic scripting language for
+    declaratively describing audio streams;
+* [**I**cecast][icecast-url], a streaming media server for listeners to connect
+    ([Karl Heyes's fork][icecast-kh-url]);
+* [**N**chan][nchan-url], an nginx module managing EventSource ([SSE][sse-url])
     clients; and
-* [**T**ailwind CSS](https://tailwindcss.com/), a utility-first CSS framework.
+* [**T**ailwind CSS][tailwind-url], a utility-first CSS framework.
 
 **_DJ DRENCH AND SPLINT_**. A very well-known acronym in the engineering world,
 _probably._ I definitely didn't just make this up as a joke.
@@ -54,9 +57,9 @@ _probably._ I definitely didn't just make this up as a joke.
 
 ## Prerequisites
 
-Everything runs with [Docker](https://www.docker.com/) and
-[Docker Compose](https://docs.docker.com/compose/), including
-[nginx](https://www.nginx.com/). This can be deployed on any Linux machine.
+Everything runs with [Docker][docker-url] and
+[Docker Compose][docker-compose-url], including [nginx][nginx-url]. This can be
+deployed on any Linux machine.
 
 To install on Debian/Ubuntu,
 
@@ -138,9 +141,9 @@ make pre-commit
 
 #### Faster Start Time (SSL Certificate Generation)
 
-The entropy daemon [haveged](https://www.issihosts.com/haveged/) is a
-nice-to-have to provide your system with randomness to speed up SSL certificate
-generation. On Debian/Ubuntu, it can be installed via the following,
+The entropy daemon [haveged][haveged-url] is a nice-to-have to provide your
+system with randomness to speed up SSL certificate generation. On Debian/Ubuntu,
+it can be installed via the following,
 
 ```bash
 sudo apt-get install haveged
@@ -153,11 +156,11 @@ Pull (or build) containers and run `docker compose up` in daemon mode (`-d`).
 Set all appropriate variables in the `.env` file, making note to properly
 configure the following,
 
-* An SMTP server &mdash; works with [SendGrid](https://sendgrid.com/)
-* Twilio account SID and auth token
+* An SMTP server &mdash; works with [SendGrid][sendgrid-url]
+* [Twilio][twilio-url] account SID and auth token
 * DigitalOcean Spaces, along with an API key, taking note to run the domain
     name's DNS off of DigitalOcean. This is necessary for wildcard certificates
-    from [Certbot](https://certbot.eff.org/)/[Lets Encrypt](https://letsencrypt.org/).
+    from [Certbot][certbot-url]/[Lets Encrypt][letsencrypt-url].
 
 ```bash
 docker compose pull
@@ -175,5 +178,47 @@ Make sure to change these insecure passwords not sent in the `.env` file,
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
+This project is licensed under the MIT License - see the [LICENSE][license-url] file
 for details.
+
+
+[app-container]: https://badgen.net/docker/size/dtcooper/jewpizza-app?label=app+container
+[app-container-url]: https://hub.docker.com/r/dtcooper/jewpizza-app
+[radio-container]: https://badgen.net/docker/size/dtcooper/jewpizza-radio?label=radio+container
+[radio-container-url]: https://hub.docker.com/r/dtcooper/jewpizza-radio
+[nginx-container]: https://badgen.net/docker/size/dtcooper/jewpizza-nginx?label=nginx+container
+[nginx-container-url]: https://hub.docker.com/r/dtcooper/jewpizza-nginx
+[icecast-container]: https://badgen.net/docker/size/dtcooper/jewpizza-icecast?label=icecast+container
+[icecast-container-url]: https://hub.docker.com/r/dtcooper/jewpizza-icecast
+
+[license]: https://badgen.net/badge/license/MIT/blue
+[license-url]: https://github.com/dtcooper/jewpizza/blob/main/LICENSE
+
+
+[alpinejs-url]: https://alpinejs.dev/
+[certbot-url]: https://certbot.eff.org/
+[daisyui-url]: https://daisyui.com/
+[django-url]: https://www.djangoproject.com/
+[docker-compose-url]: https://docs.docker.com/compose/
+[docker-url]: https://www.docker.com/
+[esbuild-url]: https://esbuild.github.io/
+[haveged-url]: https://www.issihosts.com/haveged/
+[https-url]: https://en.wikipedia.org/wiki/HTTPS
+[huey-url]: https://huey.readthedocs.io/
+[icecast-kh-url]: https://github.com/karlheyes/icecast-kh
+[icecast-url]: https://icecast.org/
+[jewpizza-url]: https://jew.pizza/
+[jinja-url]: https://jinja.palletsprojects.com/
+[letsencrypt-url]: https://letsencrypt.org/
+[liquidsoap-url]: https://www.liquidsoap.info/
+[navigo-url]: https://github.com/krasimir/navigo
+[nchan-url]: https://nchan.io/
+[nginx-certbot-url]: https://github.com/JonasAlfredsson/docker-nginx-certbot/
+[nginx-url]: https://www.nginx.com/
+[postgres-url]: https://www.postgresql.org/
+[redis-url]: https://redis.io/
+[sendgrid-url]: https://sendgrid.com/
+[spa-url]: https://en.wikipedia.org/wiki/Single-page_application
+[sse-url]: https://en.wikipedia.org/wiki/Server-sent_events
+[tailwind-url]: https://tailwindcss.com/
+[twilio-url]: https://www.twilio.com/
