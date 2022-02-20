@@ -1,13 +1,16 @@
 # [jew.pizza][jewpizza-url] Website ✡️🍕
 
-[![][license]][license-url]
-[![][build]][build-url]
-[![][gnu-hurd]][gnu-hurd-url]
+[![][license-badge]][license-url]
+[![][hurd-badge]][hurd-url]
 
-[![][app-container]][app-container-url]
-[![][radio-container]][radio-container-url]
-[![][nginx-container]][nginx-container-url]
-[![][icecast-container]][icecast-container-url]
+[![][build-badge]][build-url]
+[![][last-commit-badge]][last-commit-url]
+[![][stars-badge]][stars-url]
+
+[![][app-container-badge]][app-container-url]
+[![][radio-container-badge]][radio-container-url]
+[![][nginx-container-badge]][nginx-container-url]
+[![][icecast-container-badge]][icecast-container-url]
 
 Here's the code for the website that powers [jew.pizza][jewpizza-url], my
 personal website.
@@ -182,22 +185,25 @@ This project is licensed under the MIT License - see the [LICENSE][license-url] 
 for details.
 
 
-[app-container]: https://badgen.net/docker/size/dtcooper/jewpizza-app?label=app+container
+[app-container-badge]: https://img.shields.io/docker/image-size/dtcooper/jewpizza-app/latest?label=app&logo=docker&logoColor=ffffff&style=flat-square
 [app-container-url]: https://hub.docker.com/r/dtcooper/jewpizza-app
-[radio-container]: https://badgen.net/docker/size/dtcooper/jewpizza-radio?label=radio+container
-[radio-container-url]: https://hub.docker.com/r/dtcooper/jewpizza-radio
-[nginx-container]: https://badgen.net/docker/size/dtcooper/jewpizza-nginx?label=nginx+container
-[nginx-container-url]: https://hub.docker.com/r/dtcooper/jewpizza-nginx
-[icecast-container]: https://badgen.net/docker/size/dtcooper/jewpizza-icecast?label=icecast+container
+[icecast-container-badge]: https://img.shields.io/docker/image-size/dtcooper/jewpizza-icecast/latest?label=icecast&logo=docker&logoColor=ffffff&style=flat-square
 [icecast-container-url]: https://hub.docker.com/r/dtcooper/jewpizza-icecast
+[nginx-container-badge]: https://img.shields.io/docker/image-size/dtcooper/jewpizza-nginx/latest?label=nginx&logo=docker&logoColor=ffffff&style=flat-square
+[nginx-container-url]: https://hub.docker.com/r/dtcooper/jewpizza-nginx
+[radio-container-badge]: https://img.shields.io/docker/image-size/dtcooper/jewpizza-radio/latest?label=radio&logo=docker&logoColor=ffffff&style=flat-square
+[radio-container-url]: https://hub.docker.com/r/dtcooper/jewpizza-radio
 
-[license]: https://badgen.net/badge/license/MIT/blue
-[license-url]: https://github.com/dtcooper/jewpizza/blob/main/LICENSE
-[gnu-hurd]: https://badgen.net/badge/GNU%20hurd/incompatible/red
-[gnu-hurd-url]: https://github.com/dtcooper/jewpizza/issues/1
-[build]: https://github.com/dtcooper/jewpizza/actions/workflows/docker-build.yml/badge.svg
+[build-badge]: https://img.shields.io/github/workflow/status/dtcooper/jewpizza/Build%20and%20Deploy?label=build%20%26%20deploy&logo=github&style=flat-square
 [build-url]: https://github.com/dtcooper/jewpizza/actions/workflows/docker-build.yml
-
+[hurd-badge]: https://img.shields.io/badge/GNU%20hurd-incompatable-critical?logo=gnu&logoColor=white&style=flat-square
+[hurd-url]: https://github.com/dtcooper/jewpizza/issues/1
+[last-commit-badge]: https://img.shields.io/github/last-commit/dtcooper/jewpizza/main?logo=github&style=flat-square
+[last-commit-url]: https://github.com/dtcooper/jewpizza/commits/main
+[license-badge]: https://img.shields.io/github/license/dtcooper/jewpizza?style=flat-square
+[license-url]: https://github.com/dtcooper/jewpizza/blob/main/LICENSE
+[stars-badge]: https://img.shields.io/github/stars/dtcooper/jewpizza?logo=github&style=flat-square
+[stars-url]: https://github.com/dtcooper/jewpizza/stargazers
 
 [alpinejs-url]: https://alpinejs.dev/
 [certbot-url]: https://certbot.eff.org/
