@@ -1,5 +1,6 @@
 # [jew.pizza][jewpizza-url] Website ✡️🍕
 
+[![][jewpizza-badge]][jewpizza-url]
 [![][license-badge]][license-url]
 [![][hurd-badge]][hurd-url]
 
@@ -194,13 +195,15 @@ for details.
 [radio-container-badge]: https://img.shields.io/docker/image-size/dtcooper/jewpizza-radio/latest?label=radio&logo=docker&logoColor=ffffff&style=flat-square
 [radio-container-url]: https://hub.docker.com/r/dtcooper/jewpizza-radio
 
+[jewpizza-badge]: https://img.shields.io/badge/%E2%9C%A1%EF%B8%8F%F0%9F%8D%95%20jew.pizza-website%20%F0%9F%8D%95%E2%9C%A1%EF%B8%8F-informational?style=flat-square
+[jewpizza-url]: https://jew.pizza/
 [build-badge]: https://img.shields.io/github/workflow/status/dtcooper/jewpizza/Build%20and%20Deploy?label=build%20%26%20deploy&logo=github&style=flat-square
 [build-url]: https://github.com/dtcooper/jewpizza/actions/workflows/docker-build.yml
 [hurd-badge]: https://img.shields.io/badge/GNU%20hurd-incompatable-critical?logo=gnu&logoColor=white&style=flat-square
 [hurd-url]: https://github.com/dtcooper/jewpizza/issues/1
 [last-commit-badge]: https://img.shields.io/github/last-commit/dtcooper/jewpizza/main?logo=github&style=flat-square
 [last-commit-url]: https://github.com/dtcooper/jewpizza/commits/main
-[license-badge]: https://img.shields.io/github/license/dtcooper/jewpizza?style=flat-square
+[license-badge]: https://img.shields.io/github/license/dtcooper/jewpizza?style=flat-square&color=success
 [license-url]: https://github.com/dtcooper/jewpizza/blob/main/LICENSE
 [stars-badge]: https://img.shields.io/github/stars/dtcooper/jewpizza?logo=github&style=flat-square
 [stars-url]: https://github.com/dtcooper/jewpizza/stargazers
@@ -217,7 +220,6 @@ for details.
 [huey-url]: https://huey.readthedocs.io/
 [icecast-kh-url]: https://github.com/karlheyes/icecast-kh
 [icecast-url]: https://icecast.org/
-[jewpizza-url]: https://jew.pizza/
 [jinja-url]: https://jinja.palletsprojects.com/
 [letsencrypt-url]: https://letsencrypt.org/
 [liquidsoap-url]: https://www.liquidsoap.info/
