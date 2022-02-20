@@ -195,8 +195,8 @@ for details.
 [license-url]: https://github.com/dtcooper/jewpizza/blob/main/LICENSE
 [gnu-hurd]: https://badgen.net/badge/GNU%20hurd/incompatible/red
 [gnu-hurd-url]: https://github.com/dtcooper/jewpizza/issues/1
-[build]: https://badgen.net/github/checks/dtcooper/jewpizza?label=build
-[build-url]: https://github.com/dtcooper/jewpizza/actions
+[build]: https://github.com/dtcooper/jewpizza/actions/workflows/docker-build.yml/badge.svg
+[build-url]: https://github.com/dtcooper/jewpizza/actions/workflows/docker-build.yml
 
 
 [alpinejs-url]: https://alpinejs.dev/

@@ -29,10 +29,6 @@ runs:
   using: "composite"
   steps:
     -
-      name: Fail for testing purposes
-      run: exit 1
-      shell: bash
-    -
       name: Set variables
       id: vars
       run: |
