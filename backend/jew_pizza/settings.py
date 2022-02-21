@@ -6,8 +6,10 @@ import sys
 import environ
 
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Root Django/backend dir (ie /app/backend in container)
 BASE_DIR = Path(__file__).resolve().parent.parent
+# Project project dir (ie /app in container)
+PROJECT_DIR = BASE_DIR.parent
 
 env = environ.Env()
 if os.path.exists("/.env"):

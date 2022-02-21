@@ -95,6 +95,7 @@ RUN poetry install \
 
 # Copy over needed files from source tree (break symlinks)
 COPY backend/ /app/backend
+COPY README.md /app/
 COPY radio/reload.liq /app/backend/radio/jinja2/radio/
 
 # Copy over needed files from stages (overwrite symlinks)

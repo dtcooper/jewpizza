@@ -46,7 +46,7 @@ class Command(RunserverCommand):
 
                 # stdin needs to be a pipe, since sharing it with parent breaks pdb
                 process = subprocess.Popen(
-                    ["npm", "--prefix=../frontend", "run", "watch"],
+                    ["npm", f"--prefix={settings.PROJECT_DIR / 'frontend'}", "run", "watch"],
                     stdin=subprocess.PIPE,
                     preexec_fn=os.setsid,
                 )

@@ -23,6 +23,7 @@ from webcore import constants
 
 from .utils import (
     BUILD_DATE_FORMATTED,
+    extract_stack_from_readme,
     format_date,
     format_date_short,
     format_datetime,
@@ -207,6 +208,7 @@ def create_environment(**options):
             ],
             "now": lambda: datetime.datetime.now(get_default_timezone()),
             "randint": random.randint,
+            "README_STACK": extract_stack_from_readme(),
             "settings": settings,
             "shuffle": shuffle,
             "static": static,
