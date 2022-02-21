@@ -77,9 +77,8 @@ DOZZLE_UPSTREAM="$(lastversion amir20/dozzle)"
 compare Dozzle "$DOZZLE_LOCAL" "$DOZZLE_UPSTREAM"
 
 UMAMI_LOCAL="$(yq -r .services.umami.image docker-compose.yml | sed 's/^ghcr.io\/mikecao\/umami:postgresql-\(.*\)/\1/')"
-UMAMI_TAG="$(curl -s --user "dtcooper:$GITHUB_API_TOKEN" https://api.github.com/repos/mikecao/umami/releases/latest | jq -r .tag_name)"
-UMAMI_UPSTREAM="$(curl -s --user "dtcooper:$GITHUB_API_TOKEN" "https://api.github.com/repos/mikecao/umami/git/ref/tags/$UMAMI_TAG" | jq -r .object.sha)"
-compare Umami "$UMAMI_LOCAL" "$UMAMI_UPSTREAM" 1
+UMAMI_UPSTREAM="$(curl -s --user "dtcooper:$GITHUB_API_TOKEN" https://api.github.com/users/mikecao/packages/container/umami/versions | jq -r .[].metadata.container.tags | grep -A 1 postgresql-latest | tail -n1 | sed 's/.*postgresql-\([0-9a-f]*\).*/\1/')"
+compare Umami "$UMAMI_LOCAL" "$UMAMI_UPSTREAM"
 
 ICECAST_KH_LOCAL="$(fgrep 'ICECAST_KH_VERSION=' icecast/Dockerfile | sed 's/.*ICECAST_KH_VERSION="\([0-9a-zA-Z.-]*\).*/\1/')"
 ICECAST_KH_REMOTE="$(curl -s --user "dtcooper:$GITHUB_API_TOKEN" https://api.github.com/repos/karlheyes/icecast-kh/releases/latest | jq -r .tag_name | sed 's/^icecast-//')"
