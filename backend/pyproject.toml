@@ -44,7 +44,7 @@ pytest = "^7.0.1"
 pytest-cov = "^3.0.0"
 pytest-django = "^4.5.1"
 watchdog = {extras = ["watchmedo"], version = "^2.1.6"}
-yq = "^2.13.0"
+yq = "^2.14.0"
 
 [tool.poetry.extras]
 tests = ["pytest", "pytest-cov", "pytest-django"]
