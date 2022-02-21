@@ -13,5 +13,5 @@ urlpatterns = [
         views.AdminTemplateView.as_view(title="SSE Status", template_name="admin_tools/sse_status.html"),
         name="sse-status",
     ),
-    re_path("^(?P<module>logs|nchan)/.*", views.NginxInternalView.as_view(), name="nginx-internal"),
+    re_path("^(?P<module>logs|nchan|nginx)/.*", views.NginxInternalView.as_view(), name="nginx-internal"),
 ]

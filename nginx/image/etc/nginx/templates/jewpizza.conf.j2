@@ -1,4 +1,8 @@
 {%- macro server_name(subdomains=[], catch_all=False) -%}
+    {%- if subdomains is string -%}
+        {%- set subdomains = [subdomains] -%}
+    {%- endif %}
+
     listen 443 ssl http2{% if catch_all %} default_server reuseport{% endif %};
     listen [::]:443 ssl http2{% if catch_all %} default_server reuseport{% endif %};
 
@@ -92,6 +96,11 @@ server {
         nchan_stub_status;
     }
 
+    location /protected/cmsadmin/tools/nginx/ {
+        internal;
+        stub_status;
+    }
+
     location /protected/ {
         internal;
     }
@@ -121,7 +130,7 @@ server {
 
 # radio service
 server {
-    {{ server_name(['radio']) }}
+    {{ server_name(['radio', 'play', 'listen']) }}
 
     include proxy_busy_error;
 
@@ -138,7 +147,7 @@ server {
     {% endif %}
     # subdomain "{{ subdomain }}" ({{ mode }})
     server {
-        {{ server_name([subdomain]) }}
+        {{ server_name(subdomain) }}
 
         root /serve/{{ subdomain }};
         {% if mode == 'autoindex' %}autoindex on;{% endif %}

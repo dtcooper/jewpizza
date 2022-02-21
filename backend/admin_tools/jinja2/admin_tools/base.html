@@ -96,9 +96,11 @@
 
   <footer>
     <div>
-      {% for url, name, target_blank in admin_nav_links %}
-        <a href="{{ url }}"{% if target_blank %} target="_blank"{% endif %}>{{ name }}</a>{% if not loop.last %} /{% endif %}
-      {% endfor %}
+      <small>
+        {% for url, name, target_blank in admin_nav_links %}
+          <a href="{{ url }}"{% if target_blank %} target="_blank"{% endif %}>{{ name }}</a>{% if not loop.last %} /{% endif %}
+        {% endfor %}
+      </small>
     </div>
     <div>
       <a href="{{ url_for('webcore:home') }}">View Site</a> /

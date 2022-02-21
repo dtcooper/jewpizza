@@ -18,7 +18,7 @@ down:
 	$(COMPOSE) down --remove-orphans
 
 pre-commit:
-	@$(COMPOSE) run --rm --no-deps app sh -c '\
+	@APP_IP_OVERRIDE=172.22.0.50 $(COMPOSE) run --rm --no-deps app sh -c '\
 		echo "=============== black ==================";\
 		black . ;\
 		echo "=============== isort ==================";\
@@ -40,11 +40,11 @@ build-no-cache:
 
 shell: CONTAINER:=app
 shell:
-	@$(COMPOSE) run --rm --service-ports --use-aliases $(CONTAINER) bash || true
+	@APP_IP_OVERRIDE=172.22.0.51 $(COMPOSE) run --rm --service-ports --use-aliases $(CONTAINER) bash || true
 
 show-outdated:
 	@echo 'Showing outdated dependencies... (empty means none)'
-	@$(COMPOSE) run --rm --no-deps -e "GITHUB_API_TOKEN=$$GITHUB_API_TOKEN" -e NO_STARTUP_MESSAGE=1 app sh -c '\
+	@APP_IP_OVERRIDE=172.22.0.52 $(COMPOSE) run --rm --no-deps -e "GITHUB_API_TOKEN=$$GITHUB_API_TOKEN" -e NO_STARTUP_MESSAGE=1 -e APP_IP_OVERRIDE=172.22.0.21 app sh -c '\
 		echo "============ Misc Dependencies =========";\
 		../scripts/check-versions.sh;\
 		echo "============ Frontend (app) ============";\
@@ -55,7 +55,7 @@ show-outdated:
 export-show-fixtures:
 	@for model in $(SHOW_FIXTURE_MODELS); do \
 		echo "Exporting $${model}s..." ; \
-		$(COMPOSE) run --rm app ./manage.py dumpdata --indent=2 --format=json --natural-primary --natural-foreign \
+		APP_IP_OVERRIDE=172.22.0.53 $(COMPOSE) run --rm app ./manage.py dumpdata --indent=2 --format=json --natural-primary --natural-foreign \
 			"shows.$${model}" > "$(SHOW_FIXTURE_DIR)/$${model}s.json" ; \
 		bzip2 -9f "$(SHOW_FIXTURE_DIR)/$${model}s.json" ; \
 	done

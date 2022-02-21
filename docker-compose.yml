@@ -25,7 +25,8 @@ services:
       - "TZ=${TIMEZONE:-US/Eastern}"
     networks:
       default:
-        ipv4_address: 172.22.0.2  # Referenced in nginx/image/etc/nginx/templates/jewpizza.conf.j2
+        # Allow overriding for this container, so we can run multiple at once
+        ipv4_address: "${APP_IP_OVERRIDE:-172.22.0.2}"  # Referenced in nginx/image/etc/nginx/templates/jewpizza.conf.j2
 
   tasks:
     <<: *app-template
