@@ -103,7 +103,7 @@ RUN rm -vrf /app/backend/admin_tools/static/admin_tools/vendor/
 COPY --from=frontend /app/frontend/node_modules/simpledotcss/simple.*css /app/backend/admin_tools/static/admin_tools/vendor/css/
 COPY --from=frontend /app/frontend/node_modules/alpinejs/dist/cdn.js /app/backend/admin_tools/static/admin_tools/vendor/js/alpine.js
 COPY --from=frontend /app/frontend/node_modules/alpinejs/dist/cdn.min.js /app/backend/admin_tools/static/admin_tools/vendor/js/alpine.min.js
-COPY --from=frontend /app/backend/webcore/static/webcore/css/* /app/backend/webcore/static/webcore/css/
+COPY --from=frontend /app/backend/webcore/static/webcore/css/*.min.css* /app/backend/webcore/static/webcore/css/
 COPY --from=frontend /app/backend/webcore/static/webcore/js/* /app/backend/webcore/static/webcore/js/
 COPY --from=audiowaveform /usr/local/bin/audiowaveform /usr/local/bin/audiowaveform
 

@@ -195,12 +195,12 @@ for details.
 [radio-container-badge]: https://img.shields.io/docker/image-size/dtcooper/jewpizza-radio/latest?label=radio&logo=docker&logoColor=ffffff&style=flat-square
 [radio-container-url]: https://hub.docker.com/r/dtcooper/jewpizza-radio
 
-[jewpizza-badge]: https://img.shields.io/badge/jew.pizza-website-informational?style=flat-square
-[jewpizza-url]: https://jew.pizza/
 [build-badge]: https://img.shields.io/github/workflow/status/dtcooper/jewpizza/Build%20and%20Deploy?label=build%20%26%20deploy&logo=github&style=flat-square
 [build-url]: https://github.com/dtcooper/jewpizza/actions/workflows/docker-build.yml
 [hurd-badge]: https://img.shields.io/badge/GNU%20hurd-incompatable-critical?logo=gnu&logoColor=white&style=flat-square
 [hurd-url]: https://github.com/dtcooper/jewpizza/issues/1
+[jewpizza-badge]: https://img.shields.io/badge/jew.pizza-website-informational?style=flat-square
+[jewpizza-url]: https://jew.pizza/
 [last-commit-badge]: https://img.shields.io/github/last-commit/dtcooper/jewpizza/main?logo=github&style=flat-square
 [last-commit-url]: https://github.com/dtcooper/jewpizza/commits/main
 [license-badge]: https://img.shields.io/github/license/dtcooper/jewpizza?style=flat-square&color=success

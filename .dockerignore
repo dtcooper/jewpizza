@@ -7,7 +7,7 @@ Dockerfile
 .env
 /backend/.coverage
 /backend/htmlcov
-/backend/webcore/static/webcore/css/styles*.css
+/backend/webcore/static/webcore/css/styles*.css*
 /backend/webcore/static/webcore/js/index*.js*
 /backend/webcore/static/webcore/js/placeholder*.js*
 /frontend/node_modules/
