@@ -209,6 +209,7 @@ HUEY = {
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
+SESSION_COOKIE_SECURE = CSRF_COOKIE_SECURE = not DEBUG
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 
 LANGUAGE_CODE = "en-us"

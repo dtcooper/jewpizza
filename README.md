@@ -47,10 +47,10 @@ It's built using the _wildly_ popular and _extremely_ common
 * [**S**erver-Sent Events (SSE)][sse-url], to send realtime messages to the
     browser;
 * [**P**ostgresSQL][postgres-url], a SQL database;
-* [**L**iquidsoap][liquidsoap-url]), a fantastic scripting language for
+* [**L**iquidsoap][liquidsoap-url], a fantastic scripting language for
     declaratively describing audio streams;
 * [**I**cecast][icecast-url], a streaming media server for listeners to connect
-    ([Karl Heyes's fork][icecast-kh-url]);
+    (using [Karl Heyes's fork][icecast-kh-url]);
 * [**N**chan][nchan-url], an nginx module managing EventSource ([SSE][sse-url])
     clients; and
 * [**T**ailwind CSS][tailwind-url], a utility-first CSS framework.

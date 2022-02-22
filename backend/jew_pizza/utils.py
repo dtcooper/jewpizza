@@ -1,6 +1,7 @@
 import datetime
 import json
 import logging
+import textwrap
 
 from bs4 import BeautifulSoup
 from dateutil.parser import parse as dateutil_parse
@@ -128,7 +129,12 @@ def extract_stack_from_readme(indent=4):
         return "<Couldn't extract stack>"
 
     stack_list = (" ".join(li.text.strip().split()) for li in ul.find_all("li"))
-    return f"\n{' ' * indent}* ".join(stack_list)
+    return (
+        "\n".join(
+            textwrap.fill(item, width=80, initial_indent="    * ", subsequent_indent="      ", break_on_hyphens=False)
+            for item in stack_list
+        )
+    ).strip()
 
 
 def django_template_context(request):
