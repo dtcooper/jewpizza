@@ -3,14 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "run-p build:css build:js",
+    "build": "run-p build:*",
     "build:css": "run-s build:css:tailwind build:css:minify",
     "build:css:tailwind": "tailwind -i tailwind.css -o ../backend/webcore/static/webcore/css/styles.css",
     "build:css:minify": "esbuild ../backend/webcore/static/webcore/css/styles.css --outdir=../backend/webcore/static/webcore/css --out-extension:.css=.min.css --sourcemap --minify --legal-comments=none --banner:css='/*\n * jew.pizza compiled CSS\n *\n * For more info go to https://github.com/dtcooper/jewpizza\n */'",
     "build:js": "esbuild src/index.js src/placeholder.js --outdir=../backend/webcore/static/webcore/js --bundle --sourcemap --minify --out-extension:.js=.min.js --legal-comments=none --banner:js='/*\n * jew.pizza compiled JavaScript\n *\n * For more info go to https://github.com/dtcooper/jewpizza\n */'",
-    "watch:dev-css": "tailwind -i tailwind.css -o ../backend/webcore/static/webcore/css/styles.css --watch",
-    "watch:dev-js": "esbuild src/index.js src/placeholder.js --outdir=../backend/webcore/static/webcore/js --bundle --sourcemap --watch",
-    "watch": "run-p watch:*"
+    "watch": "run-p watch:*",
+    "watch:css": "tailwind -i tailwind.css -o ../backend/webcore/static/webcore/css/styles.css --watch",
+    "watch:js": "esbuild src/index.js src/placeholder.js --outdir=../backend/webcore/static/webcore/js --bundle --sourcemap --watch"
   },
   "repository": {
     "type": "git",
