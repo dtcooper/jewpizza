@@ -40,11 +40,11 @@ build-no-cache:
 
 shell: CONTAINER:=app
 shell:
-	@APP_IP_OVERRIDE=172.22.0.51 $(COMPOSE) run --rm --service-ports --use-aliases $(CONTAINER) bash || true
+	@APP_IP_OVERRIDE=172.22.0.51 $(COMPOSE) run --rm --service-ports --use-aliases -e "GITHUB_API_TOKEN=$$GITHUB_API_TOKEN" $(CONTAINER) bash || true
 
 show-outdated:
 	@echo 'Showing outdated dependencies... (empty means none)'
-	@APP_IP_OVERRIDE=172.22.0.52 $(COMPOSE) run --rm --no-deps -e "GITHUB_API_TOKEN=$$GITHUB_API_TOKEN" -e NO_STARTUP_MESSAGE=1 -e APP_IP_OVERRIDE=172.22.0.21 app sh -c '\
+	@APP_IP_OVERRIDE=172.22.0.52 $(COMPOSE) run --rm --no-deps -e "GITHUB_API_TOKEN=$$GITHUB_API_TOKEN" -e NO_STARTUP_MESSAGE=1 app sh -c '\
 		echo "============ Misc Dependencies =========";\
 		../scripts/check-versions.sh;\
 		echo "============ Frontend (app) ============";\

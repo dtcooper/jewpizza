@@ -58,9 +58,7 @@ RUN if [ "$DEBUG" -a "$DEBUG" != '0' ]; then \
     ; fi \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
-        brotli \
         ffmpeg \
-        gzip \
         # For audiowaveform
         libboost-filesystem1.74.0 \
         libboost-program-options1.74.0 \

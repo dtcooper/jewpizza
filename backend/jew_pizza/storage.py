@@ -25,7 +25,7 @@ class PostProcessCompressionStorage(StaticFilesStorage):
             return
 
         for path in paths:
-            processed = False
+            processed_extensions = []
             extension = os.path.splitext(path)[1].removeprefix(".")
             if extension in self.COMPRESS_EXTENSIONS:
                 file_contents = None
@@ -46,6 +46,12 @@ class PostProcessCompressionStorage(StaticFilesStorage):
                         with self.open(compressed_path, "wb") as file:
                             file.write(compress(file_contents))
 
-                        processed = True
+                        processed_extensions.append(compressed_extension)
 
-            yield path, path, processed
+            processed = None
+            if len(processed_extensions) == 1:
+                processed = f"{path}.{processed_extensions[0]}"
+            elif len(processed_extensions) >= 2:
+                processed = f"{path}.{{{','.join(processed_extensions)}}}"
+
+            yield path, processed, processed is not None
