@@ -3,9 +3,10 @@ import TimelinePlugin from 'wavesurfer.js/dist/plugin/wavesurfer.timeline'
 import CursorPlugin from 'wavesurfer.js/dist/plugin/wavesurfer.cursor'
 import Alpine from 'alpinejs'
 
-import tailwindConfig from '../tailwind.config'
-
-const theme = tailwindConfig.daisyui.themes[0].jewpizza
+function daisyUIColor (varName) {
+  const hsl = window.getComputedStyle(document.documentElement).getPropertyValue(`--${varName}`)
+  return `hsl(${hsl})`
+}
 
 document.addEventListener('alpine:init', () => {
   Alpine.data('episodePlayer', (url, peaks, duration) => ({
@@ -21,14 +22,14 @@ document.addEventListener('alpine:init', () => {
         responsive: true,
         normalize: true,
         partialRender: true,
-        progressColor: theme['primary-focus'],
-        waveColor: theme.primary,
-        cursorColor: theme['secondary-focus'],
+        progressColor: daisyUIColor('pf'), // primary-focus
+        waveColor: daisyUIColor('p'), // primary
+        cursorColor: daisyUIColor('sf'), // secondary-focus
         cursorWidth: 3,
         plugins: [
           CursorPlugin.create({
             width: '1px',
-            color: theme['base-content'],
+            color: daisyUIColor('bc'), // base-content
             showTime: true,
             opacity: 1,
             customShowTimeStyle: {
