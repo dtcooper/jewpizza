@@ -195,7 +195,7 @@ for details.
 [radio-container-badge]: https://img.shields.io/docker/image-size/dtcooper/jewpizza-radio/latest?label=radio&logo=docker&logoColor=ffffff&style=flat-square
 [radio-container-url]: https://hub.docker.com/r/dtcooper/jewpizza-radio
 
-[jewpizza-badge]: https://img.shields.io/badge/%E2%9C%A1%EF%B8%8F%F0%9F%8D%95%20jew.pizza-website%20%F0%9F%8D%95%E2%9C%A1%EF%B8%8F-informational?style=flat-square
+[jewpizza-badge]: https://img.shields.io/badge/jew.pizza-website-informational?style=flat-square
 [jewpizza-url]: https://jew.pizza/
 [build-badge]: https://img.shields.io/github/workflow/status/dtcooper/jewpizza/Build%20and%20Deploy?label=build%20%26%20deploy&logo=github&style=flat-square
 [build-url]: https://github.com/dtcooper/jewpizza/actions/workflows/docker-build.yml
