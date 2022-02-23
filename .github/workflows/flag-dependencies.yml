@@ -16,7 +16,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  flag_stale_deps:
+  flag-stale-deps:
     name: Flagger
     runs-on: ubuntu-20.04
     env:
