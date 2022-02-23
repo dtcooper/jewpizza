@@ -1,6 +1,7 @@
 # [jew.pizza][jewpizza-url] Website ✡️🍕
 
 [![][jewpizza-badge]][jewpizza-url]
+[![][stack-badge]](#stack--dj-drench-and-splint)
 [![][license-badge]][license-url]
 [![][hurd-badge]][hurd-url]
 
@@ -199,8 +200,9 @@ for details.
 [build-url]: https://github.com/dtcooper/jewpizza/actions/workflows/docker-build.yml
 [hurd-badge]: https://img.shields.io/badge/GNU%20hurd-incompatable-critical?logo=gnu&logoColor=white&style=flat-square
 [hurd-url]: https://github.com/dtcooper/jewpizza/issues/1
-[jewpizza-badge]: https://img.shields.io/badge/jew.pizza-website-informational?style=flat-square
+[jewpizza-badge]: https://img.shields.io/badge/website-jew.pizza-informational?style=flat-square
 [jewpizza-url]: https://jew.pizza/
+[stack-badge]: https://img.shields.io/badge/stack-DJ%20DRENCH%20AND%20SPLIT-informational?style=flat-square
 [last-commit-badge]: https://img.shields.io/github/last-commit/dtcooper/jewpizza/main?logo=github&style=flat-square
 [last-commit-url]: https://github.com/dtcooper/jewpizza/commits/main
 [license-badge]: https://img.shields.io/github/license/dtcooper/jewpizza?style=flat-square&color=success
