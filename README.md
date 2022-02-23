@@ -25,38 +25,40 @@ So, these instructions are mostly for me &mdash; in case of sudden amnesia or
 coming back to this project after a year or so of neglect.
 
 
-## Stack &mdash; **_DJ DRENCH AND SPLINT_**
+## Stack &mdash; **DJ DRENCH AND SPLINT**
 
 It's built using the _wildly_ popular and _extremely_ common
-**_DJ DRENCH AND SPLINT_** stack, ie,
+**DJ DRENCH AND SPLINT** stack, ie,
 
-* [**D**jango][django-url], a back-end web framework;
-* [**J**inja][jinja-url] for templating. Like Django's, but less sucky;
+* [**D**jango][django-url], a [Python][python-url] back-end web framework;
+* [**J**inja][jinja-url] for templating. Like [Django][django-url]'s, but less
+    sucky;
 * [**D**ocker][docker-url] to run all this crap in containers;
 * [**R**edis][redis-url], a data store and message broker;
 * [**e**sbuild][esbuild-url], a fast JavaScript bundler;
 * [**N**avigo][navigo-url] for a simple [SPA][spa-url] router;
 * [**C**ompose][docker-compose-url], ie Docker Compose, for multi-container
     orchestration;
-* [**h**uey][huey-url], a lightweight asynchronous task queue for Python;
+* [**h**uey][huey-url], a lightweight asynchronous task queue for
+    [Python][python-url];
 * [**A**lpineJS][alpinejs-url], a lightweight, reactive front-end framework;
-* [**n**ginx][nginx-url] as a web server and reverse proxy using the
-    [jonasal/nginx-certbot][nginx-certbot-url] container as its base (for
-    [HTTPS][https-url]);
+* [**n**ginx][nginx-url] as a web server and [reverse proxy][reverse-proxy-url]
+    using the [jonasal/nginx-certbot][nginx-certbot-url] container as its bas
+    (for SSL/[HTTPS][https-url]);
 * [**d**aisyUI][daisyui-url], a lightweight UI component framework on
-    top of Tailwind CSS;
+    top of [Tailwind CSS][tailwind-url];
 * [**S**erver-Sent Events (SSE)][sse-url], to send realtime messages to the
     browser;
-* [**P**ostgresSQL][postgres-url], a SQL database;
+* [**P**ostgresSQL][postgres-url], a [SQL][sql-url] database;
 * [**L**iquidsoap][liquidsoap-url], a fantastic scripting language for
     declaratively describing audio streams;
 * [**I**cecast][icecast-url], a streaming media server for listeners to connect
     (using [Karl Heyes's fork][icecast-kh-url]);
-* [**N**chan][nchan-url], an nginx module managing EventSource ([SSE][sse-url])
-    clients; and
+* [**N**chan][nchan-url], an [nginx][nginx-url] module managing
+    [EventSource][eventsource-url] ([SSE][sse-url]) clients; and
 * [**T**ailwind CSS][tailwind-url], a utility-first CSS framework.
 
-**_DJ DRENCH AND SPLINT_**. A very well-known acronym in the engineering world,
+**DJ DRENCH AND SPLINT.** A very well-known acronym in the engineering world,
 _probably._ I definitely didn't just make this up as a joke.
 
 
@@ -64,9 +66,9 @@ _probably._ I definitely didn't just make this up as a joke.
 
 Everything runs with [Docker][docker-url] and
 [Docker Compose][docker-compose-url], including [nginx][nginx-url]. This can be
-deployed on any Linux machine.
+deployed on any [Linux][linux-url] machine.
 
-To install on Debian/Ubuntu,
+To install on [Debian][debian-url]/[Ubuntu][ubuntu-url],
 
 ```bash
 # Install Docker
@@ -81,8 +83,8 @@ sudo chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
 
 
 ## Initial Setup
-Clone, then copy and edit the `.env` file, and optionally copy over the docker
-compose dev overrides.
+Clone, then copy and edit the `.env` file, and optionally copy over the
+[Docker Compose][docker-compose-url] dev overrides.
 
 ```bash
 git clone https://github.com/dtcooper/jewpizza.git
@@ -147,8 +149,9 @@ make pre-commit
 #### Faster Start Time (SSL Certificate Generation)
 
 The entropy daemon [haveged][haveged-url] is a nice-to-have to provide your
-system with randomness to speed up SSL certificate generation. On Debian/Ubuntu,
-it can be installed via the following,
+system with randomness to speed up SSL certificate generation. On
+[Debian][debian-url]/[Ubuntu][ubuntu-url], it can be installed via the
+following,
 
 ```bash
 sudo apt-get install haveged
@@ -163,8 +166,9 @@ configure the following,
 
 * An SMTP server &mdash; works with [SendGrid][sendgrid-url]
 * [Twilio][twilio-url] account SID and auth token
-* DigitalOcean Spaces, along with an API key, taking note to run the domain
-    name's DNS off of DigitalOcean. This is necessary for wildcard certificates
+* [DigitalOcean][digitalocean-url] [Spaces][digitalocean-spaces-url], along with
+    an API key, taking note to run the domain name's DNS off of
+    [DigitalOcean][digitalocean-url]. This is necessary for wildcard certificates
     from [Certbot][certbot-url]/[Lets Encrypt][letsencrypt-url].
 
 ```bash
@@ -183,9 +187,12 @@ Make sure to change these insecure passwords not sent in the `.env` file,
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE][license-url] file
-for details.
+This project is licensed under the [MIT License][mit-license-url] &mdash; see
+the [LICENSE][license-url] file for details.
 
+## Final Note
+
+**_...and remember kids, have fun!_**
 
 [app-container-badge]: https://img.shields.io/docker/image-size/dtcooper/jewpizza-app/latest?label=app&logo=docker&logoColor=ffffff&style=flat-square
 [app-container-url]: https://hub.docker.com/r/dtcooper/jewpizza-app
@@ -213,10 +220,14 @@ for details.
 [alpinejs-url]: https://alpinejs.dev/
 [certbot-url]: https://certbot.eff.org/
 [daisyui-url]: https://daisyui.com/
+[debian-url]: https://www.debian.org/
+[digitalocean-spaces-url]: https://www.digitalocean.com/products/spaces
+[digitalocean-url]: https://www.digitalocean.com/
 [django-url]: https://www.djangoproject.com/
 [docker-compose-url]: https://docs.docker.com/compose/
 [docker-url]: https://www.docker.com/
 [esbuild-url]: https://esbuild.github.io/
+[eventsource-url]: https://developer.mozilla.org/en-US/docs/Web/API/EventSource
 [haveged-url]: https://www.issihosts.com/haveged/
 [https-url]: https://en.wikipedia.org/wiki/HTTPS
 [huey-url]: https://huey.readthedocs.io/
@@ -224,15 +235,21 @@ for details.
 [icecast-url]: https://icecast.org/
 [jinja-url]: https://jinja.palletsprojects.com/
 [letsencrypt-url]: https://letsencrypt.org/
+[linux-url]: https://www.kernel.org/
 [liquidsoap-url]: https://www.liquidsoap.info/
+[mit-license-url]: https://en.wikipedia.org/wiki/MIT_License
 [navigo-url]: https://github.com/krasimir/navigo
 [nchan-url]: https://nchan.io/
 [nginx-certbot-url]: https://github.com/JonasAlfredsson/docker-nginx-certbot/
 [nginx-url]: https://www.nginx.com/
 [postgres-url]: https://www.postgresql.org/
+[python-url]: https://www.python.org/
 [redis-url]: https://redis.io/
+[reverse-proxy-url]: https://en.wikipedia.org/wiki/Reverse_proxy
 [sendgrid-url]: https://sendgrid.com/
 [spa-url]: https://en.wikipedia.org/wiki/Single-page_application
+[sql-url]: https://en.wikipedia.org/wiki/SQL
 [sse-url]: https://en.wikipedia.org/wiki/Server-sent_events
 [tailwind-url]: https://tailwindcss.com/
 [twilio-url]: https://www.twilio.com/
+[ubuntu-url]: https://ubuntu.com/
