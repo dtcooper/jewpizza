@@ -87,9 +87,8 @@ RUN pip install --no-cache-dir "poetry==$POETRY_VERSION"
 COPY backend/pyproject.toml backend/poetry.lock /app/backend/
 WORKDIR /app/backend
 
-RUN poetry install \
-    # In prod use "--no-dev"
-    $([ -z "$DEBUG" -o "$DEBUG" = '0' ] && echo '--no-dev')
+# In prod use "--no-dev"
+RUN poetry install $([ -z "$DEBUG" -o "$DEBUG" = '0' ] && echo '--no-dev')
 
 # Copy over needed files from source tree (break symlinks)
 COPY backend/ /app/backend
