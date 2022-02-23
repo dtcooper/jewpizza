@@ -38,7 +38,8 @@ FROM base
 ARG JINJA2_CLI_VERSION=0.8.1 \
     WAIT_FOR_IT_VERSION=81b1373f
 
-ENV CERTBOT_AUTHENTICATOR=dns-digitalocean
+ENV CERTBOT_AUTHENTICATOR=dns-digitalocean \
+    RENEWAL_INTERVAL=1d
 
 RUN apk add --no-cache \
     # bash needed for wait-for-it
