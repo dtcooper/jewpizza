@@ -1,6 +1,6 @@
 /* global DATA */
 import Alpine from 'alpinejs'
-import moment from 'moment-timezone/builds/moment-timezone-with-data-1970-2030'
+import moment from 'moment-timezone/builds/moment-timezone-with-data-10-year-range'
 
 document.addEventListener('alpine:init', () => {
   Alpine.data('obfuscatedEmail', () => ({
