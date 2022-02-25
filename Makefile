@@ -67,8 +67,8 @@ export-show-fixtures:
 	done
 
 env-diff:
-	@APP_IP_OVERRIDE=172.22.0.55 $(COMPOSE) run --rm --no-deps -e NO_STARTUP_MESSAGE=1 app sh -c '\
-		cd .. ; \
+	@APP_IP_OVERRIDE=172.22.0.55 $(COMPOSE) run -v "$(CURDIR):/mnt" --rm --no-deps -e NO_STARTUP_MESSAGE=1 app sh -c '\
+		cd /mnt ; \
 		for env in .env .env.sample ; \
 			do sed "s/^\([A-Z_]\+=\).*/\1/" "$$env" > "/tmp/env-$${env}" ; \
 		done ; \
