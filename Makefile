@@ -1,4 +1,4 @@
-.PHONY: up down pre-commit build build-no-cache shell show-outdated export-show-fixtures ssh
+.PHONY: up down pre-commit build build-no-cache shell-no-cache show-outdated env-diff export-show-fixtures ssh
 
 COMPOSE:=docker compose
 SERVER:=jew.pizza
@@ -65,6 +65,15 @@ export-show-fixtures:
 			"shows.$${model}" > "$(SHOW_FIXTURE_DIR)/$${model}s.json" ; \
 		bzip2 -9f "$(SHOW_FIXTURE_DIR)/$${model}s.json" ; \
 	done
+
+env-diff:
+	@APP_IP_OVERRIDE=172.22.0.55 $(COMPOSE) run --rm --no-deps -e NO_STARTUP_MESSAGE=1 app sh -c '\
+		cd .. ; \
+		for env in .env .env.sample ; \
+			do sed "s/^\([A-Z_]\+=\).*/\1/" "$$env" > "/tmp/env-$${env}" ; \
+		done ; \
+		diff --color -u /tmp/env-.env.sample /tmp/env-.env ; \
+		rm /tmp/env-.env.sample /tmp/env-.env'
 
 ssh: # For me only.
 	ssh -R 8888:localhost:8000 jew.pizza
