@@ -1,4 +1,4 @@
-.PHONY: up down pre-commit build build-no-cache shell-no-cache show-outdated env-diff export-show-fixtures ssh
+.PHONY: up down pre-commit build build-no-cache shell-no-deps show-outdated env-diff export-show-fixtures ssh
 
 COMPOSE:=docker compose
 SERVER:=jew.pizza
@@ -70,7 +70,7 @@ env-diff:
 	@APP_IP_OVERRIDE=172.22.0.55 $(COMPOSE) run -v "$(CURDIR):/mnt" --rm --no-deps -e NO_STARTUP_MESSAGE=1 app sh -c '\
 		cd /mnt ; \
 		for env in .env .env.sample ; \
-			do sed "s/^\([A-Z_]\+=\).*/\1/" "$$env" > "/tmp/env-$${env}" ; \
+			do sed "s/^\([A-Z_]\+\)=.*/\1/" "$$env" > "/tmp/env-$${env}" ; \
 		done ; \
 		diff --color -u /tmp/env-.env.sample /tmp/env-.env ; \
 		rm /tmp/env-.env.sample /tmp/env-.env'

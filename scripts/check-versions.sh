@@ -105,6 +105,10 @@ NGINX_BROTLI_DEFAULT_BRANCH="$(curl -s --user "dtcooper:$GITHUB_API_TOKEN" https
 NGINX_BROTLI_UPSTREAM="$(curl -s --user "dtcooper:$GITHUB_API_TOKEN" "https://api.github.com/repos/google/ngx_brotli/commits/$NGINX_BROTLI_DEFAULT_BRANCH" | jq -r .sha)"
 compare nginx-brotli "$NGINX_BROTLI_LOCAL" "$NGINX_BROTLI_UPSTREAM" 1
 
+NCHAN_LOCAL="$(fgrep 'NCHAN_VERSION=' nginx/Dockerfile | sed 's/.*NCHAN_VERSION=\([0-9.]*\).*/\1/')"
+NCHAN_UPSTREAM="$(lastversion slact/nchan)"
+compare nchan "$NCHAN_LOCAL" "$NCHAN_UPSTREAM"
+
 AUDIOWAVEFORM_LOCAL="$(fgrep 'AUDIOWAVEFORM_VERSION=' backend/Dockerfile | sed 's/.*AUDIOWAVEFORM_VERSION=\([0-9.]*\).*/\1/')"
 AUDIOWAVEFORM_UPSTREAM="$(lastversion bbc/audiowaveform)"
 compare audiowaveform "$AUDIOWAVEFORM_LOCAL" "$AUDIOWAVEFORM_UPSTREAM"
