@@ -1,4 +1,4 @@
-.PHONY: up down pre-commit build build-no-cache shell-no-deps show-outdated env-diff export-show-fixtures ssh
+.PHONY: up down pre-commit build build-no-cache shell shell-no-deps show-outdated env-diff export-show-fixtures ssh
 
 COMPOSE:=docker compose
 SERVER:=jew.pizza
