@@ -63,4 +63,4 @@ runs:
         username: ${{ inputs.username }}
         password: ${{ inputs.password }}
         repository: ${{ steps.vars.outputs.repo }}
-        short-description: ${{ inputs.short-description }} (${{ inputs.container }} container)
+        short-description: A serious website for a serious domain name. https://jew.pizza (${{ inputs.container }} container)

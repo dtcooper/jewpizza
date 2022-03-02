@@ -117,3 +117,7 @@ WAIT_FOR_IT_LOCAL="$(fgrep 'WAIT_FOR_IT_VERSION=' backend/Dockerfile | sed 's/.*
 WAIT_FOR_IT_DEFAULT_BRANCH="$(curl -s --user "dtcooper:$GITHUB_API_TOKEN" https://api.github.com/repos/vishnubob/wait-for-it | jq -r .default_branch)"
 WAIT_FOR_IT_UPSTREAM="$(curl -s --user "dtcooper:$GITHUB_API_TOKEN" "https://api.github.com/repos/vishnubob/wait-for-it/commits/$WAIT_FOR_IT_DEFAULT_BRANCH" | jq -r .sha)"
 compare 'wait-for-it' "$WAIT_FOR_IT_LOCAL" "$WAIT_FOR_IT_UPSTREAM" 1
+
+ICONIFY_LOCAL="$(fgrep iconify backend/webcore/jinja2/webcore/base_full.html | sed 's/.*iconify\/\([0-9.]*\)\/.*/\1/')"
+ICONIFY_UPSTREAM="$(npm --silent view @iconify/iconify version)"
+compare 'iconify' "$ICONIFY_LOCAL" "$ICONIFY_UPSTREAM"
