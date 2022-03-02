@@ -24,6 +24,7 @@ jobs:
         with:
           token: ${{ secrets.DOCKERHUB_TOKEN }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          short-description: ${{ github.event.repository.description }}
           container: app
           context: ./
           dockerfile: ./backend/Dockerfile
@@ -41,6 +42,7 @@ jobs:
         with:
           token: ${{ secrets.DOCKERHUB_TOKEN }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          short-description: ${{ github.event.repository.description }}
           container: radio
 
   build-nginx:
@@ -56,6 +58,7 @@ jobs:
         with:
           token: ${{ secrets.DOCKERHUB_TOKEN }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          short-description: ${{ github.event.repository.description }}
           container: nginx
 
   build-icecast:
@@ -71,6 +74,7 @@ jobs:
         with:
           token: ${{ secrets.DOCKERHUB_TOKEN }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          short-description: ${{ github.event.repository.description }}
           container: icecast
 
   deploy:

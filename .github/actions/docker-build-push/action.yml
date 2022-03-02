@@ -63,4 +63,4 @@ runs:
         username: ${{ inputs.username }}
         password: ${{ inputs.password }}
         repository: ${{ steps.vars.outputs.repo }}
-        short-description: jew.pizza website ${{ inputs.container }} container
+        short-description: ${{ inputs.short-description }} (${{ inputs.container }} container)
