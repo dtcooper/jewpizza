@@ -29,6 +29,8 @@
     {% endif %}
 {%- endmacro -%}
 
+server_tokens off;
+
 # Cache values
 map $sent_http_content_type $expires {
     default                    off;
