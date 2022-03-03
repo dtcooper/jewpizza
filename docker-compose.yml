@@ -134,7 +134,6 @@ services:
       - DATABASE_TYPE=postgresql
       - "HASH_SALT=${SECRET_KEY:?SECRET_KEY needs to be set. See .env file.}"
       - "IGNORE_IP=${UMAMI_IGNORE_IPS:-}"
-      - "TRACKER_SCRIPT_NAME=script.js"
       - "TZ=${TIMEZONE:-US/Eastern}"
     networks:
       default:
