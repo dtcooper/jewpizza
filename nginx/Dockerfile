@@ -1,4 +1,4 @@
-FROM jonasal/nginx-certbot:3.0-alpine AS base
+FROM jonasal/nginx-certbot:3.1-alpine AS base
 
 
 FROM base AS modules
