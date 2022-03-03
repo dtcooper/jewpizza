@@ -4,6 +4,7 @@ FROM jonasal/nginx-certbot:3.1-alpine AS base
 FROM base AS modules
 
 ARG NGX_BROTLI_VERSION=9aec15e2 \
+    NGX_HEADERS_MORE_VERSION=0.33 \
     NGX_NCHAN_VERSION=1.2.15
 
 # From https://github.com/nginxinc/docker-nginx/blob/master/stable/alpine/Dockerfile
@@ -24,13 +25,14 @@ RUN apk add --no-cache \
     perl-dev \
     zlib-dev
 
-RUN mkdir -p /usr/src/nginx && cd /usr/src/nginx && mkdir ../brotli ../nchan \
+RUN mkdir -p /usr/src/nginx && cd /usr/src/nginx && mkdir ../brotli ../nchan ../headers-more \
     && wget -qO - "https://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz" | tar xz --strip=1  \
     && wget -qO - "https://github.com/google/ngx_brotli/tarball/${NGX_BROTLI_VERSION}" | tar xz --strip=1 -C ../brotli \
     && wget -qO - "https://github.com/slact/nchan/tarball/v${NGX_NCHAN_VERSION}" | tar xz --strip=1 -C ../nchan \
+    && wget -qO - "https://github.com/openresty/headers-more-nginx-module/tarball/v${NGX_HEADERS_MORE_VERSION}" | tar xz --strip=1 -C ../headers-more \
     && CONFARGS=$(nginx -V 2>&1 | sed -n -e 's/^.*arguments: //p') \
-    && sh -c "./configure --with-compat ${CONFARGS} --add-dynamic-module=../brotli --add-dynamic-module=../nchan" \
-    && make modules
+    && sh -c "./configure --with-compat ${CONFARGS} --add-dynamic-module=../brotli --add-dynamic-module=../nchan --add-dynamic-module=../headers-more" \
+    && make modules && strip objs/*.so
 
 
 FROM base

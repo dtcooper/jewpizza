@@ -30,6 +30,7 @@
 {%- endmacro -%}
 
 server_tokens off;
+more_set_headers 'Server: JewDotPizza';
 
 # Cache values
 map $sent_http_content_type $expires {
