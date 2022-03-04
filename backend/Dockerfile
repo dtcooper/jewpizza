@@ -50,13 +50,17 @@ COPY backend/pyproject.toml backend/poetry.lock /app/backend/
 WORKDIR /app/backend
 
 RUN poetry export > requirements.txt \
-    && poetry export -E test > requirements-test.txt
+    && poetry export --dev --without-hashes | grep '^pytest' > requirements-tests.txt
 
 
 FROM base AS final
 
 ARG DEBUG=0 \
     WAIT_FOR_VERSION=2.2.2
+
+ENV DJANGO_SETTINGS_MODULE=jew_pizza.settings \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
 
 RUN wget -qO /usr/local/bin/wait-for "https://raw.githubusercontent.com/eficode/wait-for/v${WAIT_FOR_VERSION}/wait-for" \
     && chmod +x /usr/local/bin/wait-for
@@ -93,7 +97,7 @@ RUN apk add --no-cache \
         && echo "alias redis-cli='redis-cli -h redis'" >> /etc/profile.d/aliases.sh \
     ; fi
 
-COPY --from=poetry /app/backend/requirements.txt /app/backend/requirements-test.txt /app/backend/
+COPY --from=poetry /app/backend/requirements.txt /app/backend/requirements-tests.txt /app/backend/
 COPY backend/pyproject.toml backend/poetry.lock /app/backend/
 WORKDIR /app/backend
 

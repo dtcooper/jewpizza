@@ -124,4 +124,4 @@ jobs:
           sed -i 's/^\(SECRET_KEY\)=.*$/\1=hackme/' .env
           sed -i 's/^\(DEBUG\)=.*$/\1=0/' .env
           docker compose pull --quiet app
-          docker compose run --quiet-pull --no-TTY app sh -c 'pip install -r requirements-test.txt && pytest'
+          docker compose run --quiet-pull --no-TTY app sh -c 'pip install -r requirements-tests.txt && pytest'
