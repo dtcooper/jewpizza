@@ -15,6 +15,7 @@ METADATA_MESSAGE_DELAY = 5.
 NCHAN_URL = "http://nginx:3000/"
 
 {% include 'radio/reload.liq' %}
+{% include 'radio/protocols.liq' %}
 {% include 'radio/http.liq' %}
 
 jingle = single(fallible=false, '/audio/jingle.mp3')
@@ -24,7 +25,7 @@ def show_announcement_request()
     minutes_str = "#{string_of(minutes)} minute" ^ if minutes == 1 then "" else "s" end
     announcement = "The show will begin in #{minutes_str}! Please stay tuned."
     title = "jew.pizza Annoucement: The show begins in #{minutes_str}"
-    uri = 'annotate:title="#{string.escape(title)}":text2wave:#{announcement}'
+    uri = 'annotate:title="#{string.escape(title)}":mimic:#{announcement}'
     [request.create(uri)]
 end
 

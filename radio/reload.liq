@@ -1,6 +1,6 @@
 SECRET_KEY = {{ settings.SECRET_KEY|liqval }}
 DEBUG = {{ settings.DEBUG|liqval }}
-SCRIPT_PATH = "/radio/script.liq"
+SCRIPT_PATH = "/var/liquidsoap/script.liq"
 RELOAD_DELAY = 0.5
 
 def reload(~delay=true)

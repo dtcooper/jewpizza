@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/sh
 
-cd /radio
+cd /var/liquidsoap
 
 if [ -f /.env ]; then
     . /.env
@@ -15,7 +15,7 @@ else
     DEBUG=
 fi
 
-SCRIPT="/radio/script.liq"
+SCRIPT="/var/liquidsoap/script.liq"
 
 run_liquidsoap_loop_debug () {
     while true; do
@@ -32,18 +32,29 @@ run_restart_loop_debug () {
     done
 }
 
+wait_for_service() {
+    echo "Waiting for ${1}..."
+    wait-for -t 0 "$1"
+}
+
+kill_children() {
+    kill $(jobs -p) 2> /dev/null
+}
+
 if [ "$#" != 0 ]; then
     exec "$@"
 else
-    wait-for-it -t 0 app:8000
-    wait-for-it -t 0 redis:6379
+    wait_for_service app:8000
+    wait_for_service redis:6379
 
     sed -i "s/^SECRET_KEY.*/SECRET_KEY = '$SECRET_KEY'  # from entrypoint.sh/" "$SCRIPT"
     sed -i "s/^DEBUG.*/DEBUG = $([ "$DEBUG" ] && echo 'true' || echo 'false')  # from entrypoint.sh/" "$SCRIPT"
     echo "Replaced SECRET_KEY and DEBUG in $SCRIPT"
 
     if [ "$DEBUG" -a -d /watch ]; then
-        trap "trap - SIGTERM && kill -- -$$" SIGINT SIGTERM EXIT  # /bin/bash needed to kill children (not /bin/sh)
+        trap kill_children SIGINT
+        trap kill_children SIGTERM
+        trap kill_children EXIT
         run_liquidsoap_loop_debug &
         run_restart_loop_debug &
         wait

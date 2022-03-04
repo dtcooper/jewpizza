@@ -35,22 +35,14 @@ RUN mkdir -p /usr/src/nginx && cd /usr/src/nginx && mkdir ../brotli ../nchan ../
     && make modules && strip objs/*.so
 
 
-FROM base
+FROM base AS final
 
-ARG JINJA2_CLI_VERSION=0.8.1 \
-    WAIT_FOR_IT_VERSION=81b1373f
+ARG JINJA2_CLI_VERSION=0.8.1
 
 ENV CERTBOT_AUTHENTICATOR=dns-digitalocean \
     RENEWAL_INTERVAL=1d
 
-RUN apk add --no-cache \
-    # bash needed for wait-for-it
-    bash
-
 RUN pip install --no-cache-dir jinja2-cli==$JINJA2_CLI_VERSION
-
-RUN wget -qO /usr/local/bin/wait-for-it "https://raw.githubusercontent.com/vishnubob/wait-for-it/${WAIT_FOR_IT_VERSION}/wait-for-it.sh" \
-    && chmod +x /usr/local/bin/wait-for-it
 
 RUN echo -e 'include modules.conf;\n' | cat - /etc/nginx/nginx.conf > /tmp/nginx.conf \
     && mv -v /tmp/nginx.conf /etc/nginx/nginx.conf \

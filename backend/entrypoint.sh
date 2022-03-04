@@ -2,9 +2,6 @@
 
 cd /app/backend
 
-# Use the poetry's virtualenv
-export PATH="$(poetry env info -p)/bin:$PATH"
-
 # Source .env file
 if [ -f /.env ]; then
     . /.env
@@ -15,12 +12,14 @@ fi
 
 if [ "$DEBUG" -a "$DEBUG" != '0' ]; then
     DEBUG=1
+    # Use the poetry's virtualenv (DEBUG only)
+    export PATH="$(poetry env info -p)/bin:$PATH"
 else
     DEBUG=
 fi
 
 if [ -z "$NO_STARTUP_MESSAGE" ]; then
-    printf "Starting app container revision $GIT_REV built on $(date -d "$BUILD_DATE")"
+    printf "Starting app container revision $GIT_REV built on $(date -d "@$(date -u -D '%Y-%m-%dT%TZ' -d "$BUILD_DATE" +%s)")"
     if [ "$DEBUG" ]; then
         printf ' (DEBUG mode on)'
     fi
@@ -40,6 +39,11 @@ if [ -z "$SECRET_KEY" ]; then
     exit 1
 fi
 
+wait_for_service() {
+    echo "Waiting for ${1}..."
+    wait-for -t 0 "$1"
+}
+
 init_db () {
     if [ "$(./manage.py shell -c 'from django.contrib.auth.models import User; print("" if User.objects.exists() else "1")')" = 1 ]; then
         DJANGO_SUPERUSER_PASSWORD=cooper ./manage.py createsuperuser --noinput --username dave --email 'david@jew.pizza'
@@ -51,7 +55,7 @@ init_db () {
 init_umami () {
     if [ -z "$(./manage.py constance get UMAMI_WEBSITE_ID)" ]; then
         echo "No UMAMI_WEBSITE_ID with DEBUG = True. Setting..."
-        wait-for-it -t 0 umami:3000
+        wait_for_service umami:3000
         WEBSITE_ID="$(cat <<'END' | python
 import requests
 
@@ -65,17 +69,18 @@ headers={'Authorization': f'Bearer {token}'}).json()['website_uuid']
 print(uuid)
 END
 )"
-        wait-for-it -t 0 redis:6379
+        wait_for_service redis:6379
         ./manage.py constance set UMAMI_WEBSITE_ID "$WEBSITE_ID"
     fi
 }
 
 if [ "$#" != 0 ]; then
-    if [ "$DEBUG" ] ; then
+    if [ "$DEBUG" ]; then
         # Make psql work easily
         export PGHOST=db
         export PGUSER=postgres
         export PGPASSWORD=postgres
+        export ENV=/etc/profile
     fi
 
     exec "$@"
@@ -85,8 +90,8 @@ elif [ "$RUN_HUEY" ]; then
         HUEY_WORKERS="$(python -c 'import multiprocessing as m; print(max(m.cpu_count() * 3, 6))')"
     fi
 
-    wait-for-it -t 0 db:5432 &
-    wait-for-it -t 0 redis:6379 &
+    wait_for_service db:5432 &
+    wait_for_service redis:6379 &
     wait
 
     CMD="./manage.py run_huey --workers $HUEY_WORKERS --flush-locks"
@@ -97,7 +102,7 @@ elif [ "$RUN_HUEY" ]; then
     fi
 
 else
-    wait-for-it -t 0 db:5432 -- ./manage.py migrate &
+    wait_for_service db:5432 -- ./manage.py migrate &
 
     if [ "$DEBUG" -a ! -d '../frontend/node_modules' ]; then
         # In case /app is mounted in Docker, needed to re-install the /app/frontend/node_modules folder
@@ -108,7 +113,7 @@ else
         ./manage.py collectstatic --noinput &
     fi
 
-    wait-for-it -t 0 redis:6379 &
+    wait_for_service redis:6379 &
 
     # Wait on DB migrated, static collected, and redis up. Ready to start afterwards.
     wait

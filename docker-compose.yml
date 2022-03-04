@@ -68,8 +68,6 @@ services:
       - nginx_secrets:/etc/letsencrypt
       - ./.env:/.env:ro
       - ./serve:/serve
-    # Wait on dependencies in /docker-entrypoint.d/50-wait-for-upstream-services.sh
-    # but don't explicitly list them here, to avoid restarting container
     environment:
       - "CERTBOT_DNS_PROPAGATION_SECONDS=${CERTBOT_DNS_PROPAGATION_SECONDS:-90}"
       - "CERTBOT_EMAIL=${EMAIL_ADDRESS:?EMAIL_ADDRESS needs to be set. See .env file.}"

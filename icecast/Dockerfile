@@ -19,7 +19,7 @@ RUN mkdir -p /usr/src/icecast && cd /usr/src/icecast \
     && make && make install
 
 
-FROM base
+FROM base AS final
 
 RUN apk add --no-cache \
     gettext \
