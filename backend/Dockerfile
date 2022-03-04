@@ -93,7 +93,7 @@ RUN apk add --no-cache \
         && echo "alias redis-cli='redis-cli -h redis'" >> /etc/profile.d/aliases.sh \
     ; fi
 
-COPY --from=poetry /app/backend/requirements.txt /app/backend/requirements.txt
+COPY --from=poetry /app/backend/requirements.txt /app/backend/requirements-test.txt /app/backend/
 COPY backend/pyproject.toml backend/poetry.lock /app/backend/
 WORKDIR /app/backend
 
