@@ -6,7 +6,6 @@ ARG WAIT_FOR_VERSION=2.2.2 \
 USER root
 
 RUN apk add --no-cache \
-        inotify-tools \
         mimic1 \
         # Dev requirements
         $([ "$DEBUG" -a "$DEBUG" != '0' ] && echo \
@@ -17,7 +16,6 @@ RUN apk add --no-cache \
 RUN wget -qO /usr/local/bin/wait-for "https://raw.githubusercontent.com/eficode/wait-for/v${WAIT_FOR_VERSION}/wait-for" \
     && chmod +x /usr/local/bin/wait-for
 
-COPY --chown=liquidsoap reload.liq /var/liquidsoap/script.liq
 COPY image/ /
 
 USER liquidsoap
