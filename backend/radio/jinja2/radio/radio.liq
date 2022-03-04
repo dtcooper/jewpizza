@@ -25,7 +25,7 @@ def show_announcement_request()
     minutes_str = "#{string_of(minutes)} minute" ^ if minutes == 1 then "" else "s" end
     announcement = "The show will begin in #{minutes_str}! Please stay tuned."
     title = "jew.pizza Annoucement: The show begins in #{minutes_str}"
-    uri = 'annotate:title="#{string.escape(title)}":mimic:#{announcement}'
+    uri = 'annotate:title="#{string.escape(title)}":stereo:mimic:#{announcement}'
     [request.create(uri)]
 end
 
