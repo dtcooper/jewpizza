@@ -77,11 +77,11 @@ DOZZLE_UPSTREAM="$(lastversion amir20/dozzle)"
 compare Dozzle "$DOZZLE_LOCAL" "$DOZZLE_UPSTREAM"
 
 UMAMI_LOCAL="$(yq -r .services.umami.image docker-compose.yml | sed 's/^ghcr.io\/mikecao\/umami:postgresql-\(.*\)/\1/')"
-UMAMI_UPSTREAM="$(wget --header "Authorization: token ${GITHUB_API_TOKEN}" -qO - "https://@api.github.com/users/mikecao/packages/container/umami/versions" | jq -r .[].metadata.container.tags | grep -A 1 postgresql-latest | tail -n1 | sed 's/.*postgresql-\([0-9a-f]*\).*/\1/')"
+UMAMI_UPSTREAM="$(wget --header "Authorization: token ${GITHUB_API_TOKEN}" -qO - "https://api.github.com/users/mikecao/packages/container/umami/versions" | jq -r .[].metadata.container.tags | grep -A 1 postgresql-latest | tail -n1 | sed 's/.*postgresql-\([0-9a-f]*\).*/\1/')"
 compare Umami "$UMAMI_LOCAL" "$UMAMI_UPSTREAM"
 
 ICECAST_KH_LOCAL="$(fgrep 'ICECAST_KH_VERSION=' icecast/Dockerfile | sed 's/.*ICECAST_KH_VERSION="\([0-9a-zA-Z.-]*\).*/\1/')"
-ICECAST_KH_REMOTE="$(wget --header "Authorization: token ${GITHUB_API_TOKEN}" -qO - "https://@api.github.com/repos/karlheyes/icecast-kh/releases/latest" | jq -r .tag_name | sed 's/^icecast-//')"
+ICECAST_KH_REMOTE="$(wget --header "Authorization: token ${GITHUB_API_TOKEN}" -qO - "https://api.github.com/repos/karlheyes/icecast-kh/releases/latest" | jq -r .tag_name | sed 's/^icecast-//')"
 compare icecast-kh "$ICECAST_KH_LOCAL" "$ICECAST_KH_REMOTE"
 
 AUTOHEAL_LOCAL="$(yq -r .services.autoheal.image docker-compose.yml | sed 's/^willfarrell\/autoheal://')"
@@ -101,8 +101,8 @@ JINJA2_CLI_UPSTREAM="$(lastversion mattrobenolt/jinja2-cli)"
 compare jinja2-cli "$JINJA2_CLI_LOCAL" "$JINJA2_CLI_UPSTREAM"
 
 NGINX_BROTLI_LOCAL="$(fgrep 'NGX_BROTLI_VERSION=' nginx/Dockerfile | sed 's/.*NGX_BROTLI_VERSION=\([0-9a-zA-Z]*\).*/\1/')"
-NGINX_BROTLI_DEFAULT_BRANCH="$(wget --header "Authorization: token ${GITHUB_API_TOKEN}" -qO - "https://@api.github.com/repos/google/ngx_brotli" | jq -r .default_branch)"
-NGINX_BROTLI_UPSTREAM="$(wget --header "Authorization: token ${GITHUB_API_TOKEN}" -qO - "https://@api.github.com/repos/google/ngx_brotli/commits/$NGINX_BROTLI_DEFAULT_BRANCH" | jq -r .sha)"
+NGINX_BROTLI_DEFAULT_BRANCH="$(wget --header "Authorization: token ${GITHUB_API_TOKEN}" -qO - "https://api.github.com/repos/google/ngx_brotli" | jq -r .default_branch)"
+NGINX_BROTLI_UPSTREAM="$(wget --header "Authorization: token ${GITHUB_API_TOKEN}" -qO - "https://api.github.com/repos/google/ngx_brotli/commits/$NGINX_BROTLI_DEFAULT_BRANCH" | jq -r .sha)"
 compare nginx-brotli "$NGINX_BROTLI_LOCAL" "$NGINX_BROTLI_UPSTREAM" 1
 
 NCHAN_LOCAL="$(fgrep 'NCHAN_VERSION=' nginx/Dockerfile | sed 's/.*NCHAN_VERSION=\([0-9.]*\).*/\1/')"
