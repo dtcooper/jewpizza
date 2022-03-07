@@ -25,40 +25,50 @@ So, these instructions are mostly for me &mdash; in case of sudden amnesia or
 coming back to this project after a year or so of neglect.
 
 
-## Stack &mdash; **DJ DRENCH AND SPLINT**
+## Stack &mdash; **CLING! THUD! DARN JEW'S PANDA!**
 
 It's built using the _wildly_ popular and _extremely_ common
-**DJ DRENCH AND SPLINT** stack, ie,
+**CLING! THUD! DARN JEW'S PANDA!** stack, ie,
 
-* [**D**jango][django-url], a [Python][python-url] back-end web framework;
-* [**J**inja][jinja-url] for templating. Like [Django][django-url]'s, but less
-    sucky;
-* [**D**ocker][docker-url] to run all this crap in containers;
-* [**R**edis][redis-url], a data store and message broker;
-* [**e**sbuild][esbuild-url], a fast JavaScript bundler;
-* [**N**avigo][navigo-url] for a simple [SPA][spa-url] router;
 * [**C**ompose][docker-compose-url], ie Docker Compose, for multi-container
     orchestration;
-* [**h**uey][huey-url], a lightweight asynchronous task queue for
-    [Python][python-url];
-* [**A**lpineJS][alpinejs-url], a lightweight, reactive front-end framework;
-* [**n**ginx][nginx-url] as a web server and [reverse proxy][reverse-proxy-url]
-    using the [jonasal/nginx-certbot][nginx-certbot-url] container as its bas
-    (for SSL/[HTTPS][https-url]);
-* [**d**aisyUI][daisyui-url], a lightweight UI component framework on
-    top of [Tailwind CSS][tailwind-url];
-* [**S**erver-Sent Events (SSE)][sse-url], to send realtime messages to the
-    browser;
-* [**P**ostgresSQL][postgres-url], a [SQL][sql-url] database;
 * [**L**iquidsoap][liquidsoap-url], a fantastic scripting language for
     declaratively describing audio streams;
 * [**I**cecast][icecast-url], a streaming media server for listeners to connect
     (using [Karl Heyes's fork][icecast-kh-url]);
+* [**n**ginx][nginx-url] as a web server and [reverse proxy][reverse-proxy-url]
+    using the [jonasal/nginx-certbot][nginx-certbot-url] container as its base
+    (for SSL/[HTTPS][https-url]);
+* [**G**unicorn][gunicorn-url] to run the web app via [Python][python-url]'s
+    [Web Server Gateway Interface][wsgi-url];
+* [**T**ailwind CSS][tailwind-url], a utility-first CSS framework;
+* [**h**uey][huey-url], a lightweight asynchronous task queue for
+    [Python][python-url];
+* [**U**mami][umami-url] for web analytics;
+* [**D**ocker][docker-url] to run all this crap in containers;
+* [**D**jango][django-url], a [Python][python-url] back-end web framework;
+* [**A**lpine Linux][alpine-linux-url] a lightweight [Linux][linux-url]
+    distribution perfect for containers, based on [musl libc][musl-url] and
+    [BusyBox][busybox-url];
+* [**R**edis][redis-url], a data store and message broker;
+* [**N**avigo][navigo-url] for a simple [SPA][spa-url] router;
+* [**J**inja][jinja-url] for templating. Like [Django][django-url]'s, but less
+    sucky;
+* [**e**sbuild][esbuild-url], a fast [JavaScript][javascript-url] bundler;
+* [**W**aveSurfer.js][wavesurfer-url] for [JavaScript][javascript-url] audio
+    waveform visualizations;
+* [**S**erver-Sent Events (SSE)][sse-url], to send realtime messages to the
+    browser;
+* [**P**ostgresSQL][postgres-url], a [SQL][sql-url] database;
+* [**A**lpineJS][alpinejs-url], a lightweight, reactive front-end framework;
 * [**N**chan][nchan-url], an [nginx][nginx-url] module managing
-    [EventSource][eventsource-url] ([SSE][sse-url]) clients; and
-* [**T**ailwind CSS][tailwind-url], a utility-first CSS framework.
+    [EventSource][eventsource-url] ([SSE][sse-url]) clients;
+* [**d**aisyUI][daisyui-url], a lightweight UI component framework on
+    top of [Tailwind CSS][tailwind-url]; and
+* [**a**udiowaveform][audiowaveform-url], The [BBC][bbc-url]'s offline rendering
+    tool for generating waveforms for [WaveSurfer.js][wavesurfer-url].
 
-**DJ DRENCH AND SPLINT.** A very well-known acronym in the engineering world,
+**CLING! THUD! DARN JEW'S PANDA!** A very well-known acronym in the engineering world,
 _probably._ I definitely didn't just make this up as a joke.
 
 
@@ -209,7 +219,7 @@ the [LICENSE][license-url] file for details.
 [hurd-url]: https://github.com/dtcooper/jewpizza/issues/1
 [jewpizza-badge]: https://img.shields.io/badge/website-jew.pizza-informational?style=flat-square
 [jewpizza-url]: https://jew.pizza/
-[stack-badge]: https://img.shields.io/badge/stack-DJ%20DRENCH%20AND%20SPLIT-informational?style=flat-square
+[stack-badge]: https://img.shields.io/badge/stack-CLING%21%20THUD%21%20DARN%20JEW%27S%20PANDA%21-informational?style=flat-square
 [last-commit-badge]: https://img.shields.io/github/last-commit/dtcooper/jewpizza/main?logo=github&style=flat-square
 [last-commit-url]: https://github.com/dtcooper/jewpizza/commits/main
 [license-badge]: https://img.shields.io/github/license/dtcooper/jewpizza?style=flat-square&color=success
@@ -217,7 +227,11 @@ the [LICENSE][license-url] file for details.
 [stars-badge]: https://img.shields.io/github/stars/dtcooper/jewpizza?logo=github&style=flat-square
 [stars-url]: https://github.com/dtcooper/jewpizza/stargazers
 
+[alpine-linux-url]: https://alpinelinux.org/
 [alpinejs-url]: https://alpinejs.dev/
+[audiowaveform-url]: https://github.com/bbc/audiowaveform
+[bbc-url]: https://www.bbc.com/
+[busybox-url]: https://busybox.net/
 [certbot-url]: https://certbot.eff.org/
 [daisyui-url]: https://daisyui.com/
 [debian-url]: https://www.debian.org/
@@ -228,16 +242,19 @@ the [LICENSE][license-url] file for details.
 [docker-url]: https://www.docker.com/
 [esbuild-url]: https://esbuild.github.io/
 [eventsource-url]: https://developer.mozilla.org/en-US/docs/Web/API/EventSource
+[gunicorn-url]: https://gunicorn.org/
 [haveged-url]: https://www.issihosts.com/haveged/
 [https-url]: https://en.wikipedia.org/wiki/HTTPS
 [huey-url]: https://huey.readthedocs.io/
 [icecast-kh-url]: https://github.com/karlheyes/icecast-kh
 [icecast-url]: https://icecast.org/
+[javascript-url]: https://developer.mozilla.org/en-US/docs/Web/JavaScript
 [jinja-url]: https://jinja.palletsprojects.com/
 [letsencrypt-url]: https://letsencrypt.org/
 [linux-url]: https://www.kernel.org/
 [liquidsoap-url]: https://www.liquidsoap.info/
 [mit-license-url]: https://en.wikipedia.org/wiki/MIT_License
+[musl-url]: https://musl.libc.org/
 [navigo-url]: https://github.com/krasimir/navigo
 [nchan-url]: https://nchan.io/
 [nginx-certbot-url]: https://github.com/JonasAlfredsson/docker-nginx-certbot/
@@ -253,3 +270,6 @@ the [LICENSE][license-url] file for details.
 [tailwind-url]: https://tailwindcss.com/
 [twilio-url]: https://www.twilio.com/
 [ubuntu-url]: https://ubuntu.com/
+[umami-url]: https://umami.is/
+[wavesurfer-url]: https://wavesurfer-js.org/
+[wsgi-url]: https://en.wikipedia.org/wiki/Web_Server_Gateway_Interface

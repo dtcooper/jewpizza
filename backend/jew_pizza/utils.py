@@ -8,6 +8,7 @@ from dateutil.parser import parse as dateutil_parse
 from jinja_markdown import EXTENSIONS as MARKDOWN_EXTENSIONS
 from markdown import Markdown
 import requests
+from unidecode import unidecode
 
 from django.conf import settings
 from django.core.cache import cache
@@ -119,7 +120,7 @@ def extract_stack_from_readme(indent=4):
         return "<Couldn't extract stack>"
 
     for h2 in soup.find_all("h2"):
-        if "dj drench and splint" in h2.text.lower():
+        if "cling! thud! darn jew's panda!" in unidecode(h2.text).lower():
             break
     else:
         return "<Couldn't extract stack>"
@@ -128,7 +129,7 @@ def extract_stack_from_readme(indent=4):
     if ul is None:
         return "<Couldn't extract stack>"
 
-    stack_list = (" ".join(li.text.strip().split()) for li in ul.find_all("li"))
+    stack_list = (" ".join(unidecode(li.text).strip().split()) for li in ul.find_all("li"))
     return (
         "\n".join(
             textwrap.fill(item, width=80, initial_indent="    * ", subsequent_indent="      ", break_on_hyphens=False)
