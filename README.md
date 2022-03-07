@@ -30,46 +30,48 @@ coming back to this project after a year or so of neglect.
 It's built using the _wildly_ popular and _extremely_ common
 **CLING! THUD! DARN JEW'S PANDA!** stack, ie,
 
-* [**C**ompose][docker-compose-url], ie Docker Compose, for multi-container
-    orchestration;
-* [**L**iquidsoap][liquidsoap-url], a fantastic scripting language for
+* **C** for [Compose][docker-compose-url], ie Docker Compose, fo
+    multi-container orchestration;
+* **L** for [Liquidsoap][liquidsoap-url], a fantastic scripting language for
     declaratively describing audio streams;
-* [**I**cecast][icecast-url], a streaming media server for listeners to connect
-    (using [Karl Heyes's fork][icecast-kh-url]);
-* [**n**ginx][nginx-url] as a web server and [reverse proxy][reverse-proxy-url]
-    using the [jonasal/nginx-certbot][nginx-certbot-url] container as its base
-    (for SSL/[HTTPS][https-url]);
-* [**G**unicorn][gunicorn-url] to run the web app via [Python][python-url]'s
-    [Web Server Gateway Interface][wsgi-url];
-* [**T**ailwind CSS][tailwind-url], a utility-first CSS framework;
-* [**h**uey][huey-url], a lightweight asynchronous task queue for
+* **I** for [Icecast][icecast-url], a streaming media server for listeners to
+    connect (using [Karl Heyes's fork][icecast-kh-url]);
+* **N** for [nginx][nginx-url] as a web server and
+    [reverse proxy][reverse-proxy-url] using the
+    [jonasal/nginx-certbot][nginx-certbot-url] container as its base (for
+    SSL/[HTTPS][https-url]);
+* **G** for [Gunicorn][gunicorn-url] to run the web app via
+    [Python][python-url]'s [Web Server Gateway Interface][wsgi-url];
+* **T** for [Tailwind CSS][tailwind-url], a utility-first CSS framework;
+* **H** for [huey][huey-url], a lightweight asynchronous task queue for
     [Python][python-url];
-* [**U**mami][umami-url] for web analytics;
-* [**D**ocker][docker-url] to run all this crap in containers;
-* [**D**jango][django-url], a [Python][python-url] back-end web framework;
-* [**A**lpine Linux][alpine-linux-url] a lightweight [Linux][linux-url]
+* **U** for [Umami][umami-url] for web analytics;
+* **D** for [Docker][docker-url] to run all this crap in containers;
+* **D** for [Django][django-url], a [Python][python-url] back-end web framework;
+* **A** for [Alpine Linux][alpine-linux-url] a lightweight [Linux][linux-url]
     distribution perfect for containers, based on [musl libc][musl-url] and
     [BusyBox][busybox-url];
-* [**R**edis][redis-url], a data store and message broker;
-* [**N**avigo][navigo-url] for a simple [SPA][spa-url] router;
-* [**J**inja][jinja-url] for templating. Like [Django][django-url]'s, but less
-    sucky;
-* [**e**sbuild][esbuild-url], a fast [JavaScript][javascript-url] bundler;
-* [**W**aveSurfer.js][wavesurfer-url] for [JavaScript][javascript-url] audio
-    waveform visualizations;
-* [**S**erver-Sent Events (SSE)][sse-url], to send realtime messages to the
-    browser;
-* [**P**ostgresSQL][postgres-url], a [SQL][sql-url] database;
-* [**A**lpineJS][alpinejs-url], a lightweight, reactive front-end framework;
-* [**N**chan][nchan-url], an [nginx][nginx-url] module managing
+* **R** for [Redis][redis-url], a data store and message broker;
+* **N** for [Navigo][navigo-url] for a simple [SPA][spa-url] router;
+* **J** for [Jinja][jinja-url] for templating. Like [Django][django-url]'s, but
+    less sucky;
+* **E** for [esbuild][esbuild-url], a fast [JavaScript][javascript-url] bundler;
+* **W** for [WaveSurfer.js][wavesurfer-url] for [JavaScript][javascript-url]
+    audio waveform visualizations;
+* **S** for [Server-Sent Events (SSE)][sse-url], to send realtime messages to
+    the browser;
+* **P** for [PostgresSQL][postgres-url], a [SQL][sql-url] database;
+* **A** for [AlpineJS][alpinejs-url], a lightweight, reactive front-end
+    framework;
+* **N** for [Nchan][nchan-url], an [nginx][nginx-url] module managing
     [EventSource][eventsource-url] ([SSE][sse-url]) clients;
-* [**d**aisyUI][daisyui-url], a lightweight UI component framework on
-    top of [Tailwind CSS][tailwind-url]; and
-* [**a**udiowaveform][audiowaveform-url], The [BBC][bbc-url]'s offline rendering
-    tool for generating waveforms for [WaveSurfer.js][wavesurfer-url].
+* **D** for [daisyUI][daisyui-url], a lightweight UI component framework on top
+    of [Tailwind CSS][tailwind-url]; and
+* **A** for [audiowaveform][audiowaveform-url], The [BBC][bbc-url]'s offline
+    rendering tool for generating waveforms for [WaveSurfer.js][wavesurfer-url].
 
-**CLING! THUD! DARN JEW'S PANDA!** A very well-known acronym in the engineering world,
-_probably._ I definitely didn't just make this up as a joke.
+**CLING! THUD! DARN JEW'S PANDA!** A very well-known acronym in the engineering
+world, _probably._ I definitely didn't just make this up as a joke.
 
 
 ## Prerequisites

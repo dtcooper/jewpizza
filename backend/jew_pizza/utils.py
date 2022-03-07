@@ -132,7 +132,7 @@ def extract_stack_from_readme(indent=4):
     stack_list = (" ".join(unidecode(li.text).strip().split()) for li in ul.find_all("li"))
     return (
         "\n".join(
-            textwrap.fill(item, width=80, initial_indent="    * ", subsequent_indent="      ", break_on_hyphens=False)
+            textwrap.fill(item, width=80, initial_indent="    * ", subsequent_indent=" " * 10, break_on_hyphens=False)
             for item in stack_list
         )
     ).strip()
