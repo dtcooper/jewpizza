@@ -1,7 +1,7 @@
 # [jew.pizza][jewpizza-url] Website ✡️🍕
 
 [![][jewpizza-badge]][jewpizza-url]
-[![][stack-badge]](#stack--dj-drench-and-splint)
+[![][stack-badge]][stack-url]
 [![][license-badge]][license-url]
 [![][hurd-badge]][hurd-url]
 
@@ -48,7 +48,7 @@ It's built using the _wildly_ popular and _extremely_ common
 * **U** for [Umami][umami-url] for web analytics;
 * **D** for [Docker][docker-url] to run all this crap in containers;
 * **D** for [Django][django-url], a [Python][python-url] back-end web framework;
-* **A** for [Alpine Linux][alpine-linux-url] a lightweight [Linux][linux-url]
+* **A** for [Alpine Linux][alpine-linux-url], a lightweight [Linux][linux-url]
     distribution perfect for containers, based on [musl libc][musl-url] and
     [BusyBox][busybox-url];
 * **R** for [Redis][redis-url], a data store and message broker;
@@ -80,7 +80,14 @@ Everything runs with [Docker][docker-url] and
 [Docker Compose][docker-compose-url], including [nginx][nginx-url]. This can be
 deployed on any [Linux][linux-url] machine.
 
-To install on [Debian][debian-url]/[Ubuntu][ubuntu-url],
+Installing, compiling, running, and maintaining the motley crew of technologies
+that make up the [**CLING! THUD! DARN JEW'S PANDA!**][stack-url] stack in both
+prod and dev environments would be an absolute nightmare. With
+[Docker][docker-url] and [Docker Compose][docker-compose-url], that can be done
+in just a couple of commands. It even works with
+[Docker Desktop on macOS][docker-for-mac-url]!
+
+To install these on [Debian][debian-url]/[Ubuntu][ubuntu-url],
 
 ```bash
 # Install Docker
@@ -118,7 +125,7 @@ to `/etc/hosts`.
 127.0.0.1 analytics.local.jew.pizza umami.local.jew.pizza
 127.0.0.1 etc.local.jew.pizza
 127.0.0.1 priv.local.jew.pizza
-127.0.0.1 radio.local.jew.pizza
+127.0.0.1 radio.local.jew.pizza play.local.jew.pizza listen.local.jew.pizza
 127.0.0.1 www.local.jew.pizza
 ```
 
@@ -222,6 +229,7 @@ the [LICENSE][license-url] file for details.
 [jewpizza-badge]: https://img.shields.io/badge/website-jew.pizza-informational?style=flat-square
 [jewpizza-url]: https://jew.pizza/
 [stack-badge]: https://img.shields.io/badge/stack-CLING%21%20THUD%21%20DARN%20JEW%27S%20PANDA%21-informational?style=flat-square
+[stack-url]: #stack--cling-thud-darn-jews-panda
 [last-commit-badge]: https://img.shields.io/github/last-commit/dtcooper/jewpizza/main?logo=github&style=flat-square
 [last-commit-url]: https://github.com/dtcooper/jewpizza/commits/main
 [license-badge]: https://img.shields.io/github/license/dtcooper/jewpizza?style=flat-square&color=success
@@ -241,6 +249,7 @@ the [LICENSE][license-url] file for details.
 [digitalocean-url]: https://www.digitalocean.com/
 [django-url]: https://www.djangoproject.com/
 [docker-compose-url]: https://docs.docker.com/compose/
+[docker-for-mac-url]: https://docs.docker.com/desktop/mac/install/
 [docker-url]: https://www.docker.com/
 [esbuild-url]: https://esbuild.github.io/
 [eventsource-url]: https://developer.mozilla.org/en-US/docs/Web/API/EventSource
