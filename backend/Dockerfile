@@ -56,7 +56,7 @@ RUN poetry export > requirements.txt \
 FROM base AS final
 
 ARG DEBUG=0 \
-    WAIT_FOR_VERSION=2.2.2
+    WAIT_FOR_VERSION=2.2.3
 
 ENV DJANGO_SETTINGS_MODULE=jew_pizza.settings \
     PYTHONDONTWRITEBYTECODE=1 \

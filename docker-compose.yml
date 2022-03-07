@@ -44,6 +44,7 @@ services:
       context: radio
       args:
         - "DEBUG=${DEBUG:-0}"
+    init: true
     volumes:
       - ./.env:/.env:ro
     # Wait on app in /entrypoint.sh but don't list here, to avoid restarting container

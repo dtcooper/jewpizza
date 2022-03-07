@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ "$(wget -q -O - -T 15 http://localhost:8000/ping/ 2> /dev/null)" = pong ]; then
+if [ "$(wget -q -O - -t 1 -T 15 http://localhost:8000/ping/)" = pong ]; then
     exit 0
 else
     exit 1
