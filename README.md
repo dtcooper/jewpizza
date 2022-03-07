@@ -25,53 +25,67 @@ So, these instructions are mostly for me &mdash; in case of sudden amnesia or
 coming back to this project after a year or so of neglect.
 
 
-## Stack &mdash; **CLING! THUD! DARN JEW'S PANDA!**
+## Stack &mdash; **CLANG! THUD! IT'S A DARN JEW'S PANDA!**
 
 It's built using the _wildly_ popular and _extremely_ common
-**CLING! THUD! DARN JEW'S PANDA!** stack, ie,
+**CLANG! THUD! IT'S A DARN JEW'S PANDA!** stack, ie,
 
-* **C** for [Compose][docker-compose-url], ie Docker Compose, fo
-    multi-container orchestration;
-* **L** for [Liquidsoap][liquidsoap-url], a fantastic scripting language for
+* **C** is for [Compose][docker-compose-url], ie Docker Compose, a
+    multi-container orchestration tool;
+* **L** is for [Liquidsoap][liquidsoap-url], a fantastic scripting language for
     declaratively describing audio streams;
-* **I** for [Icecast][icecast-url], a streaming media server for listeners to
-    connect (using [Karl Heyes's fork][icecast-kh-url]);
-* **N** for [nginx][nginx-url] as a web server and
+* **A** is for [Alpine Linux][alpine-linux-url], a lightweight
+    [Linux][linux-url] distribution perfect for containers, based on
+    [musl libc][musl-url] and [BusyBox][busybox-url];
+* **N** is for [nginx][nginx-url], a web server and
     [reverse proxy][reverse-proxy-url] using the
     [jonasal/nginx-certbot][nginx-certbot-url] container as its base (for
     SSL/[HTTPS][https-url]);
-* **G** for [Gunicorn][gunicorn-url] to run the web app via
+* **G** is for [Gunicorn][gunicorn-url] to run the web app via
     [Python][python-url]'s [Web Server Gateway Interface][wsgi-url];
-* **T** for [Tailwind CSS][tailwind-url], a utility-first CSS framework;
-* **H** for [huey][huey-url], a lightweight asynchronous task queue for
+* **T** is for [Tailwind CSS][tailwind-url], a utility-first CSS framework;
+* **H** is for [huey][huey-url], a lightweight asynchronous task queue for
     [Python][python-url];
-* **U** for [Umami][umami-url] for web analytics;
-* **D** for [Docker][docker-url] to run all this crap in containers;
-* **D** for [Django][django-url], a [Python][python-url] back-end web framework;
-* **A** for [Alpine Linux][alpine-linux-url], a lightweight [Linux][linux-url]
-    distribution perfect for containers, based on [musl libc][musl-url] and
-    [BusyBox][busybox-url];
-* **R** for [Redis][redis-url], a data store and message broker;
-* **N** for [Navigo][navigo-url] for a simple [SPA][spa-url] router;
-* **J** for [Jinja][jinja-url] for templating. Like [Django][django-url]'s, but
-    less sucky;
-* **E** for [esbuild][esbuild-url], a fast [JavaScript][javascript-url] bundler;
-* **W** for [WaveSurfer.js][wavesurfer-url] for [JavaScript][javascript-url]
-    audio waveform visualizations;
-* **S** for [Server-Sent Events (SSE)][sse-url], to send realtime messages to
-    the browser;
-* **P** for [PostgresSQL][postgres-url], a [SQL][sql-url] database;
-* **A** for [AlpineJS][alpinejs-url], a lightweight, reactive front-end
+* **U** is for [Umami][umami-url] to get insights via web analytics;
+* **D** is for [Docker][docker-url] to run all this crap in containers;
+* **I** for [Icecast][icecast-url], a streaming media server for listeners to
+    connect (using [Karl Heyes's fork][icecast-kh-url]);
+* **T** for [Twilio][twilio-url], an API to send programmable communications —
+    in this case, [text messages (SMS)][sms-url];
+* **S** for [S3][amazon-s3-url], ie Amazon S3 Cloud Object Storage, to store
+    large audio files (I use the compatible
+    [DigitalOcean Spaces][digitalocean-spaces-url]);
+* **A** is for [AlpineJS][alpinejs-url], a lightweight, reactive front-end
+    [JavaScript][javascript-url] framework;
+* **D** is for [Django][django-url], a [Python][python-url] back-end web
     framework;
-* **N** for [Nchan][nchan-url], an [nginx][nginx-url] module managing
+* **A** for [autoheal][autoheal-url], ie Docker Autoheal, a tool to monitor and
+    restart unhealthy docker containers;
+* **R** is for [Redis][redis-url], a data store and message broker;
+* **N** is for [Navigo][navigo-url] that provides a simple [SPA][spa-url]
+    router;
+* **J** is for [Jinja][jinja-url] templating — like [Django][django-url]'s,
+    but less sucky;
+* **E** is for [esbuild][esbuild-url], a fast [JavaScript][javascript-url]
+    bundler;
+* **W** is for [WaveSurfer.js][wavesurfer-url], a front-end audio player with
+    waveform visualizations;
+* **S** is for [Server-Sent Events (SSE)][sse-url], to send realtime messages to
+    the browser;
+* **A** is for [audiowaveform][audiowaveform-url], The [BBC][bbc-url]'s offline
+    rendering tool for generating waveforms for [WaveSurfer.js][wavesurfer-url];
+* **P** is for [PostgresSQL][postgres-url], a [SQL][sql-url] database;
+* **A** is for [AlpineJS][alpinejs-url], a lightweight, reactive front-end
+    framework;
+* **N** is for [Nchan][nchan-url], an [nginx][nginx-url] module managing
     [EventSource][eventsource-url] ([SSE][sse-url]) clients;
-* **D** for [daisyUI][daisyui-url], a lightweight UI component framework on top
-    of [Tailwind CSS][tailwind-url]; and
-* **A** for [audiowaveform][audiowaveform-url], The [BBC][bbc-url]'s offline
-    rendering tool for generating waveforms for [WaveSurfer.js][wavesurfer-url].
+* **D** is for [daisyUI][daisyui-url], a lightweight UI component framework on
+    top of [Tailwind CSS][tailwind-url]; and
+* **A** is for app, ie [web app][web-app-url], because this is a web app and I
+    needed a word starting with "A" to complete this acronym.
 
-**CLING! THUD! DARN JEW'S PANDA!** A very well-known acronym in the engineering
-world, _probably._ I definitely didn't just make this up as a joke.
+**CLANG! THUD! IT'S A DARN JEW'S PANDA!** A very well-known acronym in the
+engineering world, _probably._ I definitely didn't just make this up as a joke.
 
 
 ## Prerequisites
@@ -81,8 +95,8 @@ Everything runs with [Docker][docker-url] and
 deployed on any [Linux][linux-url] machine.
 
 Installing, compiling, running, and maintaining the motley crew of technologies
-that make up the [**CLING! THUD! DARN JEW'S PANDA!**][stack-url] stack in both
-prod and dev environments would be an absolute nightmare. With
+that make up the [**CLANG! THUD! IT'S A DARN JEW'S PANDA!**][stack-url] stack in
+both prod and dev environments would be an absolute nightmare. With
 [Docker][docker-url] and [Docker Compose][docker-compose-url], that can be done
 in just a couple of commands. It even works with
 [Docker Desktop on macOS][docker-for-mac-url]!
@@ -239,7 +253,9 @@ the [LICENSE][license-url] file for details.
 
 [alpine-linux-url]: https://alpinelinux.org/
 [alpinejs-url]: https://alpinejs.dev/
+[amazon-s3-url]: https://aws.amazon.com/s3/
 [audiowaveform-url]: https://github.com/bbc/audiowaveform
+[autoheal-url]: https://github.com/willfarrell/docker-autoheal
 [bbc-url]: https://www.bbc.com/
 [busybox-url]: https://busybox.net/
 [certbot-url]: https://certbot.eff.org/
@@ -275,6 +291,7 @@ the [LICENSE][license-url] file for details.
 [redis-url]: https://redis.io/
 [reverse-proxy-url]: https://en.wikipedia.org/wiki/Reverse_proxy
 [sendgrid-url]: https://sendgrid.com/
+[sms-url]: https://en.wikipedia.org/wiki/SMS
 [spa-url]: https://en.wikipedia.org/wiki/Single-page_application
 [sql-url]: https://en.wikipedia.org/wiki/SQL
 [sse-url]: https://en.wikipedia.org/wiki/Server-sent_events
@@ -283,4 +300,5 @@ the [LICENSE][license-url] file for details.
 [ubuntu-url]: https://ubuntu.com/
 [umami-url]: https://umami.is/
 [wavesurfer-url]: https://wavesurfer-js.org/
+[web-app-url]: https://en.wikipedia.org/wiki/Web_application
 [wsgi-url]: https://en.wikipedia.org/wiki/Web_Server_Gateway_Interface

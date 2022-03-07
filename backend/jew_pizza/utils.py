@@ -120,7 +120,7 @@ def extract_stack_from_readme(indent=4):
         return "<Couldn't extract stack>"
 
     for h2 in soup.find_all("h2"):
-        if "cling! thud! darn jew's panda!" in unidecode(h2.text).lower():
+        if "clang! thud! it's a darn jew's panda!" in unidecode(h2.text).lower():
             break
     else:
         return "<Couldn't extract stack>"
