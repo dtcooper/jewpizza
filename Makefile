@@ -40,11 +40,11 @@ build-no-cache:
 
 shell: CONTAINER:=app
 shell:
-	@APP_IP_OVERRIDE=172.22.0.51 $(COMPOSE) run --rm --service-ports --use-aliases -e "GITHUB_API_TOKEN=$$GITHUB_API_TOKEN" $(CONTAINER) $$([ "$(CONTAINER)" = radio ] && echo /bin/bash || echo /bin/bash) || true
+	@APP_IP_OVERRIDE=172.22.0.51 $(COMPOSE) run --rm --service-ports --use-aliases -e "GITHUB_API_TOKEN=$$GITHUB_API_TOKEN" $(CONTAINER) $$([ "$(CONTAINER)" = radio ] && echo /bin/bash || echo /bin/ash) || true
 
 shell-no-deps: CONTAINER:=app
 shell-no-deps:
-	@APP_IP_OVERRIDE=172.22.0.52 $(COMPOSE) run --rm --no-deps --service-ports -e "GITHUB_API_TOKEN=$$GITHUB_API_TOKEN" $(CONTAINER) $$([ "$(CONTAINER)" = radio ] && echo /bin/bash || echo /bin/bash) || true
+	@APP_IP_OVERRIDE=172.22.0.52 $(COMPOSE) run --rm --no-deps --service-ports -e "GITHUB_API_TOKEN=$$GITHUB_API_TOKEN" $(CONTAINER) $$([ "$(CONTAINER)" = radio ] && echo /bin/bash || echo /bin/ash) || true
 
 show-outdated:
 	@echo 'Showing outdated dependencies... (empty means none)'

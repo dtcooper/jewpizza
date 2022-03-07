@@ -68,7 +68,7 @@ REDIS_LOCAL="$(yq -r .services.redis.image docker-compose.yml | sed 's/^library\
 REDIS_UPSTREAM="$(lastversion redis/redis)"
 compare Redis "$REDIS_LOCAL" "$REDIS_UPSTREAM" 1
 
-LIQUIDSOAP_LOCAL="$(grep '^FROM ' radio/Dockerfile | sed 's/^FROM savonet\/liquidsoap-alpine:v\([0-9.]*\).*/\1/')"
+LIQUIDSOAP_LOCAL="$(fgrep 'LIQUIDSOAP_VERSION=' radio/Dockerfile | sed 's/.*LIQUIDSOAP_VERSION=\([0-9.]*\).*/\1/')"
 LIQUIDSOAP_UPSTREAM="$(lastversion savonet/liquidsoap)"
 compare Liquidsoap "$LIQUIDSOAP_LOCAL" "$LIQUIDSOAP_UPSTREAM"
 
