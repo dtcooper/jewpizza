@@ -242,7 +242,7 @@ the [LICENSE][license-url] file for details.
 [hurd-url]: https://github.com/dtcooper/jewpizza/issues/1
 [jewpizza-badge]: https://img.shields.io/badge/website-jew.pizza-informational?style=flat-square
 [jewpizza-url]: https://jew.pizza/
-[stack-badge]: https://img.shields.io/badge/stack-CLING%21%20THUD%21%20DARN%20JEW%27S%20PANDA%21-informational?style=flat-square
+[stack-badge]: https://img.shields.io/badge/stack-CLANG%21%20THUD%21%20IT%27S%20A%20DARN%20JEW%27S%20PANDA%21-informational?style=flat-square
 [stack-url]: #stack--cling-thud-darn-jews-panda
 [last-commit-badge]: https://img.shields.io/github/last-commit/dtcooper/jewpizza/main?logo=github&style=flat-square
 [last-commit-url]: https://github.com/dtcooper/jewpizza/commits/main
