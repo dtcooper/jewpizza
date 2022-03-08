@@ -1,14 +1,9 @@
 import datetime
 import json
 import logging
-import textwrap
 
-from bs4 import BeautifulSoup
 from dateutil.parser import parse as dateutil_parse
-from jinja_markdown import EXTENSIONS as MARKDOWN_EXTENSIONS
-from markdown import Markdown
 import requests
-from unidecode import unidecode
 
 from django.conf import settings
 from django.core.cache import cache
@@ -109,33 +104,6 @@ try:
     BUILD_DATE_FORMATTED = format_datetime(dateutil_parse(settings.BUILD_DATE))
 except ValueError:
     BUILD_DATE_FORMATTED = "unknown"
-
-
-def extract_stack_from_readme(indent=4):
-    markdown = Markdown(extensions=MARKDOWN_EXTENSIONS)
-    try:
-        readme = open(settings.PROJECT_DIR / "README.md").read()
-        soup = BeautifulSoup(markdown.convert(readme), "html.parser")
-    except Exception:
-        return "<Couldn't extract stack>"
-
-    for h2 in soup.find_all("h2"):
-        if "clang! thud! it's a darn jew's panda!" in unidecode(h2.text).lower():
-            break
-    else:
-        return "<Couldn't extract stack>"
-
-    ul = h2.find_next_sibling("ul")
-    if ul is None:
-        return "<Couldn't extract stack>"
-
-    stack_list = (" ".join(unidecode(li.text).strip().split()) for li in ul.find_all("li"))
-    return (
-        "\n".join(
-            textwrap.fill(item, width=80, initial_indent="    * ", subsequent_indent=" " * 10, break_on_hyphens=False)
-            for item in stack_list
-        )
-    ).strip()
 
 
 def django_template_context(request):
