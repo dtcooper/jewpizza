@@ -227,13 +227,13 @@ the [LICENSE][license-url] file for details.
 
 **_...and remember kids, have fun!_**
 
-[app-container-badge]: https://img.shields.io/badge/container-jewpizza--app-informational?style=flat-square&logo=github
+[app-container-badge]: https://img.shields.io/badge/container-app-informational?style=flat-square&logo=docker&logoColor=white
 [app-container-url]: https://ghcr.io/dtcooper/jewpizza-app
-[icecast-container-badge]: https://img.shields.io/badge/container-jewpizza--icecast-informational?style=flat-square&logo=github
+[icecast-container-badge]: https://img.shields.io/badge/container-icecast-informational?style=flat-square&logo=docker&logoColor=white
 [icecast-container-url]: https://ghcr.io/dtcooper/jewpizza-icecast
-[nginx-container-badge]: https://img.shields.io/badge/container-jewpizza--nginx-informational?style=flat-square&logo=github
+[nginx-container-badge]: https://img.shields.io/badge/container-nginx-informational?style=flat-square&logo=docker&logoColor=white
 [nginx-container-url]: https://ghcr.io/dtcooper/jewpizza-nginx
-[radio-container-badge]: https://img.shields.io/badge/container-jewpizza--radio-informational?style=flat-square&logo=github
+[radio-container-badge]: https://img.shields.io/badge/container-radio-informational?style=flat-square&logo=docker&logoColor=white
 [radio-container-url]: https://ghcr.io/dtcooper/jewpizza-radio
 
 [build-badge]: https://img.shields.io/github/workflow/status/dtcooper/jewpizza/Build%20and%20Deploy?label=build%20%26%20deploy&logo=github&style=flat-square
