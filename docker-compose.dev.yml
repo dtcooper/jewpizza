@@ -7,7 +7,6 @@ x-service-dev-defaults: &service-dev-defaults
 services:
   app:
     <<: *service-dev-defaults
-    image: ghcr.io/dtcooper/jewpizza-app:dev
     volumes:
       - .:/app
     tty: true  # needed for tailwind --watch
@@ -16,13 +15,11 @@ services:
 
   tasks:
     <<: *service-dev-defaults
-    image: ghcr.io/dtcooper/jewpizza-app:dev
     volumes:
       - .:/app
 
   radio:
     <<: *service-dev-defaults
-    image: ghcr.io/dtcooper/jewpizza-radio:dev
     depends_on:
       - icecast
     volumes:
@@ -34,7 +31,6 @@ services:
 
   nginx:
     <<: *service-dev-defaults
-    image: ghcr.io/dtcooper/jewpizza-nginx:dev
     volumes:
       - ./nginx/image/etc/nginx/templates:/etc/nginx/templates
       - ./nginx/image/docker-entrypoint.d/25-jinja2-cli-config.sh:/docker-entrypoint.d/25-jinja2-cli-config.sh
@@ -47,7 +43,6 @@ services:
 
   icecast:
     <<: *service-dev-defaults
-    image: ghcr.io/dtcooper/jewpizza-icecast:dev
     volumes:
       - ./icecast/icecast.xml.template:/etc/icecast.xml.template
 

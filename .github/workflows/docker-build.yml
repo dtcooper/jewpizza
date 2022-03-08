@@ -28,24 +28,6 @@ jobs:
           context: ./
           dockerfile: ./backend/Dockerfile
 
-  build-app-dev:
-    runs-on: ubuntu-latest
-    name: Build app container (dev)
-    steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v2
-      -
-        name: Build container
-        uses: ./.github/actions/docker-build-push
-        with:
-          username: ${{ github.repository_owner }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          container: app
-          context: ./
-          dockerfile: ./backend/Dockerfile
-          dev: '1'
-
   build-radio:
     runs-on: ubuntu-latest
     name: Build radio container
@@ -60,22 +42,6 @@ jobs:
           username: ${{ github.repository_owner }}
           token: ${{ secrets.GITHUB_TOKEN }}
           container: radio
-
-  build-radio-dev:
-    runs-on: ubuntu-latest
-    name: Build radio container (dev)
-    steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v2
-      -
-        name: Build container
-        uses: ./.github/actions/docker-build-push
-        with:
-          username: ${{ github.repository_owner }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          container: radio
-          dev: '1'
 
   build-nginx:
     runs-on: ubuntu-latest
@@ -92,22 +58,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           container: nginx
 
-  build-nginx-dev:
-    runs-on: ubuntu-latest
-    name: Build nginx container (dev)
-    steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v2
-      -
-        name: Build container
-        uses: ./.github/actions/docker-build-push
-        with:
-          username: ${{ github.repository_owner }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          container: nginx
-          dev: '1'
-
   build-icecast:
     runs-on: ubuntu-latest
     name: Build icecast container
@@ -122,22 +72,6 @@ jobs:
           username: ${{ github.repository_owner }}
           token: ${{ secrets.GITHUB_TOKEN }}
           container: icecast
-
-  build-icecast-dev:
-    runs-on: ubuntu-latest
-    name: Build icecast container (dev)
-    steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v2
-      -
-        name: Build container
-        uses: ./.github/actions/docker-build-push
-        with:
-          username: ${{ github.repository_owner }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          container: icecast
-          dev: '1'
 
   deploy:
     runs-on: ubuntu-latest
