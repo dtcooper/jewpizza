@@ -26,7 +26,7 @@ runs:
       run: |
         echo "::set-output name=sha::$(echo ${GITHUB_SHA} | cut -c 1-8)"
         echo "::set-output name=repo::ghcr.io/${{ inputs.username }}/jewpizza-${{ inputs.container }}"
-        echo "::set-output name=cache::ghcr.io/${{ inputs.username }}/jewpizza-cache:${{ inputs.container }}"
+        echo "::set-output name=cache::ghcr.io/${{ inputs.username }}/jewpizza-buildcache:${{ inputs.container }}"
         echo "::set-output name=build-date::$(date -u +%FT%TZ)"
       shell: bash
     -
