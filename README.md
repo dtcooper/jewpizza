@@ -9,11 +9,6 @@
 [![][last-commit-badge]][last-commit-url]
 [![][stars-badge]][stars-url]
 
-[![][app-container-badge]][app-container-url]
-[![][radio-container-badge]][radio-container-url]
-[![][nginx-container-badge]][nginx-container-url]
-[![][icecast-container-badge]][icecast-container-url]
-
 Here's the code for the website that powers [jew.pizza][jewpizza-url], my
 personal website.
 
@@ -226,15 +221,6 @@ the [LICENSE][license-url] file for details.
 ## Final Note
 
 **_...and remember kids, have fun!_**
-
-[app-container-badge]: https://img.shields.io/docker/image-size/dtcooper/jewpizza-app/latest?label=app&logo=docker&logoColor=ffffff&style=flat-square
-[app-container-url]: https://hub.docker.com/r/dtcooper/jewpizza-app
-[icecast-container-badge]: https://img.shields.io/docker/image-size/dtcooper/jewpizza-icecast/latest?label=icecast&logo=docker&logoColor=ffffff&style=flat-square
-[icecast-container-url]: https://hub.docker.com/r/dtcooper/jewpizza-icecast
-[nginx-container-badge]: https://img.shields.io/docker/image-size/dtcooper/jewpizza-nginx/latest?label=nginx&logo=docker&logoColor=ffffff&style=flat-square
-[nginx-container-url]: https://hub.docker.com/r/dtcooper/jewpizza-nginx
-[radio-container-badge]: https://img.shields.io/docker/image-size/dtcooper/jewpizza-radio/latest?label=radio&logo=docker&logoColor=ffffff&style=flat-square
-[radio-container-url]: https://hub.docker.com/r/dtcooper/jewpizza-radio
 
 [build-badge]: https://img.shields.io/github/workflow/status/dtcooper/jewpizza/Build%20and%20Deploy?label=build%20%26%20deploy&logo=github&style=flat-square
 [build-url]: https://github.com/dtcooper/jewpizza/actions/workflows/docker-build.yml
