@@ -59,7 +59,8 @@ runs:
           DEBUG=${{ inputs.dev }}
         context: ${{ inputs.context == '' && format('./{0}/', inputs.container) || inputs.context }}
         file: ${{ inputs.dockerfile == '' && format('./{0}/Dockerfile', inputs.container) || inputs.dockerfile }}
-        tags: ${{ steps.vars.outputs.repo }}:${{ inputs == '0' && 'latest' || 'dev' }}
+        tags: |
+          ${{ steps.vars.outputs.repo }}:${{ inputs == '0' && 'latest' || 'dev' }}
           ${{ inputs.dev == '0' && format('{0}:{1}', steps.vars.outputs.repo, steps.vars.outputs.sha) || '' }}
         cache-from: type=registry,ref=${{ steps.vars.outputs.cache }}
         cache-to: type=registry,ref=${{ steps.vars.outputs.cache }},mode=max
