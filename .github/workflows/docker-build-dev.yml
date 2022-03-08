@@ -1,0 +1,70 @@
+name: Build (Dev)
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: main-dev
+  cancel-in-progress: true
+
+jobs:
+  build-app:
+    runs-on: ubuntu-latest
+    name: Build app container
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Build container
+        uses: ./.github/actions/docker-build-push
+        with:
+          container: app
+          context: ./
+          dockerfile: ./backend/Dockerfile
+          dev: '1'
+
+  build-radio:
+    runs-on: ubuntu-latest
+    name: Build radio container
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Build container
+        uses: ./.github/actions/docker-build-push
+        with:
+          container: radio
+          dev: '1'
+
+  build-nginx:
+    runs-on: ubuntu-latest
+    name: Build nginx container
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Build container
+        uses: ./.github/actions/docker-build-push
+        with:
+          container: nginx
+          dev: '1'
+
+  build-icecast:
+    runs-on: ubuntu-latest
+    name: Build icecast container
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Build container
+        uses: ./.github/actions/docker-build-push
+        with:
+          container: icecast
+          dev: '1'
