@@ -12,7 +12,8 @@ inputs:
     default: ''
   username:
     description: 'Docker Hub username'
-    required: true
+    required: false
+    default: dtcooper
   password:
     description: 'Docker Hub password'
     required: true
@@ -28,7 +29,7 @@ runs:
       id: vars
       run: |
         echo "::set-output name=sha::$(echo ${GITHUB_SHA} | cut -c 1-8)"
-        echo "::set-output name=repo::ghcr.io/${{ inputs.username }}/jewpizza-${{ inputs.container }}"
+        echo "::set-output name=repo::${{ inputs.username }}/jewpizza-${{ inputs.container }}"
         echo "::set-output name=build-date::$(date -u +%FT%TZ)"
       shell: bash
     -
@@ -38,7 +39,6 @@ runs:
       name: Login to Docker Hub
       uses: docker/login-action@v1
       with:
-        registry: ghcr.io
         username: ${{ inputs.username }}
         password: ${{ inputs.token }}
     -
@@ -53,8 +53,14 @@ runs:
           DEBUG=0
         context: ${{ inputs.context == '' && format('./{0}/', inputs.container) || inputs.context}}
         file: ${{ inputs.dockerfile == '' && format('./{0}/Dockerfile', inputs.container) || inputs.dockerfile}}
-        tags: |
-          ${{ steps.vars.outputs.repo }}:latest
-          ${{ steps.vars.outputs.repo }}:${{ steps.vars.outputs.sha }}
+        tags: ${{ format('{0}:latest,{0}:{1}', steps.vars.outputs.repo, steps.vars.outputs.sha) }}
         cache-from: type=registry,ref=${{ steps.vars.outputs.repo }}:buildcache
         cache-to: type=registry,ref=${{ steps.vars.outputs.repo }}:buildcache,mode=max
+    -
+      name: Update Docker Hub description
+      uses: peter-evans/dockerhub-description@v2
+      with:
+        username: ${{ inputs.username }}
+        password: ${{ inputs.password }}
+        repository: ${{ steps.vars.outputs.repo }}
+        short-description: A serious website for a serious domain name. https://jew.pizza (${{ inputs.container }} container)
