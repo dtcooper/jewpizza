@@ -73,55 +73,55 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           container: icecast
 
-  # deploy:
-  #   runs-on: ubuntu-latest
-  #   name: Deploy
-  #   env:
-  #     SSH_DEPLOY_DIRECTORY: jewpizza
-  #   needs: [build-app, build-radio, build-nginx, build-icecast]
-  #   steps:
-  #     -
-  #       name: Deploy containers
-  #       uses: appleboy/ssh-action@master
-  #       with:
-  #         host: ${{ secrets.SSH_HOST }}
-  #         port: ${{ secrets.SSH_PORT }}
-  #         username: ${{ secrets.SSH_USERNAME }}
-  #         key: ${{ secrets.SSH_KEY }}
-  #         fingerprint: ${{ secrets.SSH_FINGERPRINT }}
-  #         script: |
-  #           cd ${{ env.SSH_DEPLOY_DIRECTORY }}
-  #           SHOULD_DEPLOY=
-  #           if docker compose ps --services --filter "status=running" | grep -q '^app$'; then
-  #             if [ "$(docker compose exec -T app ./manage.py constance get AUTO_DEPLOY)" = True ]; then
-  #               SHOULD_DEPLOY=1
-  #             fi
-  #           else
-  #             SHOULD_DEPLOY=1
-  #           fi
-  #           if [ "$SHOULD_DEPLOY" ]; then
-  #             git pull --ff-only
-  #             docker compose pull --quiet
-  #             docker compose up --quiet-pull --remove-orphans --no-deps --detach
-  #             docker system prune --force
-  #           else
-  #             echo "Deploy disabled by constance config (AUTO_DEPLOY = False)"
-  #           fi
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy
+    env:
+      SSH_DEPLOY_DIRECTORY: jewpizza
+    needs: [build-app, build-radio, build-nginx, build-icecast]
+    steps:
+      -
+        name: Deploy containers
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          fingerprint: ${{ secrets.SSH_FINGERPRINT }}
+          script: |
+            cd ${{ env.SSH_DEPLOY_DIRECTORY }}
+            SHOULD_DEPLOY=
+            if docker compose ps --services --filter "status=running" | grep -q '^app$'; then
+              if [ "$(docker compose exec -T app ./manage.py constance get AUTO_DEPLOY)" = True ]; then
+                SHOULD_DEPLOY=1
+              fi
+            else
+              SHOULD_DEPLOY=1
+            fi
+            if [ "$SHOULD_DEPLOY" ]; then
+              git pull --ff-only
+              docker compose pull --quiet
+              docker compose up --quiet-pull --remove-orphans --no-deps --detach
+              docker system prune --force
+            else
+              echo "Deploy disabled by constance config (AUTO_DEPLOY = False)"
+            fi
 
-  # test:
-  #   runs-on: ubuntu-latest
-  #   name: Tests
-  #   needs: [build-app]
-  #   steps:
-  #     -
-  #       name: Checkout
-  #       uses: actions/checkout@v2
-  #     -
-  #       name: Run tests
-  #       run: |
-  #         cp -v .env.sample .env
-  #         echo 'Updating .env file for testing'
-  #         sed -i 's/^\(SECRET_KEY\)=.*$/\1=hackme/' .env
-  #         sed -i 's/^\(DEBUG\)=.*$/\1=0/' .env
-  #         docker compose pull --quiet app
-  #         docker compose run --quiet-pull --no-TTY app sh -c 'pip install -r requirements-tests.txt && pytest'
+  test:
+    runs-on: ubuntu-latest
+    name: Tests
+    needs: [build-app]
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Run tests
+        run: |
+          cp -v .env.sample .env
+          echo 'Updating .env file for testing'
+          sed -i 's/^\(SECRET_KEY\)=.*$/\1=hackme/' .env
+          sed -i 's/^\(DEBUG\)=.*$/\1=0/' .env
+          docker compose pull --quiet app
+          docker compose run --quiet-pull --no-TTY app sh -c 'pip install -r requirements-tests.txt && pytest'
