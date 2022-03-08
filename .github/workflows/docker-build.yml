@@ -22,7 +22,6 @@ jobs:
         name: Build container
         uses: ./.github/actions/docker-build-push
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           container: app
           context: ./
           dockerfile: ./backend/Dockerfile
@@ -38,7 +37,6 @@ jobs:
         name: Build container
         uses: ./.github/actions/docker-build-push
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           container: radio
 
   build-nginx:
@@ -52,7 +50,6 @@ jobs:
         name: Build container
         uses: ./.github/actions/docker-build-push
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           container: nginx
 
   build-icecast:
@@ -66,7 +63,6 @@ jobs:
         name: Build container
         uses: ./.github/actions/docker-build-push
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           container: icecast
 
   deploy:
