@@ -10,6 +10,9 @@ inputs:
     description: 'Dockerfile path'
     required: false
     default: ''
+  username:
+    description: 'GitHub username'
+    required: true
   token:
     description: 'GitHub access token'
     required: true
