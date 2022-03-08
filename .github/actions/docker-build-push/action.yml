@@ -29,6 +29,7 @@ runs:
       run: |
         echo "::set-output name=sha::$(echo ${GITHUB_SHA} | cut -c 1-8)"
         echo "::set-output name=repo::ghcr.io/${{ inputs.username }}/jewpizza-${{ inputs.container }}"
+        echo "::set-output name=cache::ghcr.io/${{ inputs.username }}/jewpizza-cache:${{ inputs.container }}"
         echo "::set-output name=build-date::$(date -u +%FT%TZ)"
       shell: bash
     -
@@ -56,5 +57,5 @@ runs:
         tags: |
           ${{ steps.vars.outputs.repo }}:latest
           ${{ steps.vars.outputs.repo }}:${{ steps.vars.outputs.sha }}
-        cache-from: type=registry,ref=${{ steps.vars.outputs.repo }}:buildcache
-        cache-to: type=registry,ref=${{ steps.vars.outputs.repo }}:buildcache,mode=max
+        cache-from: type=registry,ref=${{ steps.vars.outputs.cache }}
+        cache-to: type=registry,ref=${{ steps.vars.outputs.cache }},mode=max
