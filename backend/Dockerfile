@@ -12,7 +12,10 @@ RUN npm install --production
 
 COPY backend/ /app/backend
 COPY frontend/ /app/frontend
-RUN npm run build
+
+ARG GIT_REV=unknown
+RUN sed -i "s/\(jew\.pizza compiled [a-zA-Z]*\)\\\\n/\1 (revision $GIT_REV)\\\\n/" package.json \
+    && npm run build
 
 
 FROM base as audiowaveform

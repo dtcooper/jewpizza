@@ -13,7 +13,7 @@ concurrency:
 jobs:
   build-app:
     runs-on: ubuntu-latest
-    name: Build app container
+    name: Build app container (dev)
     steps:
       -
         name: Checkout
@@ -29,7 +29,7 @@ jobs:
 
   build-radio:
     runs-on: ubuntu-latest
-    name: Build radio container
+    name: Build radio container (dev)
     steps:
       -
         name: Checkout
@@ -43,7 +43,7 @@ jobs:
 
   build-nginx:
     runs-on: ubuntu-latest
-    name: Build nginx container
+    name: Build nginx container (dev)
     steps:
       -
         name: Checkout
@@ -57,7 +57,7 @@ jobs:
 
   build-icecast:
     runs-on: ubuntu-latest
-    name: Build icecast container
+    name: Build icecast container (dev)
     steps:
       -
         name: Checkout
