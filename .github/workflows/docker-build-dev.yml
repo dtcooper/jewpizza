@@ -23,7 +23,7 @@ jobs:
         uses: ./.github/actions/docker-build-push
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
-          token: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
           container: app
           dev: '1'
 
@@ -39,7 +39,7 @@ jobs:
         uses: ./.github/actions/docker-build-push
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
-          token: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
           container: radio
           dev: '1'
 
@@ -55,7 +55,7 @@ jobs:
         uses: ./.github/actions/docker-build-push
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
-          token: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
           container: nginx
           dev: '1'
 
@@ -71,6 +71,6 @@ jobs:
         uses: ./.github/actions/docker-build-push
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
-          token: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
           container: icecast
           dev: '1'
