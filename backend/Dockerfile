@@ -69,10 +69,11 @@ RUN wget -qO /usr/local/bin/wait-for "https://raw.githubusercontent.com/eficode/
     && chmod +x /usr/local/bin/wait-for
 
 RUN apk add --no-cache \
-        # Keep for audiowaveform + psycopg2
+        # Keep for audiowaveform + psycopg2 + ffmpeg
         boost-filesystem \
         boost-program_options \
         boost-regex \
+        ffmpeg \
         libgd \
         libid3tag \
         libmad \
