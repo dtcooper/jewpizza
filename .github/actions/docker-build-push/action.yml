@@ -25,7 +25,6 @@ runs:
         echo "::set-output name=repo::${{ inputs.username }}/${{ inputs.container }}"
         echo "::set-output name=cache-tag::${{ inputs.username }}/buildcache:${{ inputs.container }}${{ inputs.dev == '1' && '-dev' || '' }}"
         echo "::set-output name=build-date::$(date -u +%FT%TZ)"
-        echo "::set-output name=description::A serious website for a serious domain name: jew.pizza (${{ inputs.container }} container)"
       shell: bash
     -
       name: Set up Docker Buildx
@@ -50,11 +49,6 @@ runs:
           GIT_REV=${{ steps.vars.outputs.sha }}
           BUILD_DATE=${{ steps.vars.outputs.build-date }}
           DEBUG=${{ inputs.dev }}
-        labels: |
-          org.opencontainers.image.title="jewpizza ${{ inputs.container }} container"
-          org.opencontainers.image.description="${{ steps.vars.outputs.description }}"
-          org.opencontainers.image.url="${{ github.server_url }}/${{ github.repository }}"
-          org.opencontainers.image.source="${{ github.server_url }}/${{ github.repository }}"
         context: ${{ inputs.container == 'app' && './' || format('./{0}/', inputs.container) }}
         file: ${{ format('./{0}/Dockerfile', inputs.container == 'app' && 'backend' || inputs.container) }}
         tags: |
@@ -70,4 +64,4 @@ runs:
         username: ${{ inputs.username }}
         password: ${{ inputs.password }}
         repository: ${{ steps.vars.outputs.repo }}
-        short-description: ${{ steps.vars.outputs.description }}
+        short-description: 'A serious website for a serious domain name: jew.pizza (${{ inputs.container }} container)'
