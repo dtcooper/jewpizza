@@ -59,8 +59,8 @@ It's built using the _wildly_ popular and _extremely_ common
     [JavaScript][javascript-url] framework;
 * **D** is for [Django][django-url], a [Python][python-url] back-end web
     framework;
-* **A** for [autoheal][autoheal-url], ie Docker Autoheal, a tool to monitor and
-    restart unhealthy docker containers;
+* **A** is for Actions, ie [GitHub Actions][github-actions-url], to continuously
+    and automatically build, test and deploy this code;
 * **R** is for [Redis][redis-url], a data store and message broker;
 * **N** is for [Navigo][navigo-url] that provides a simple [SPA][spa-url]
     router;
@@ -72,17 +72,15 @@ It's built using the _wildly_ popular and _extremely_ common
     waveform visualizations;
 * **S** is for [Server-Sent Events (SSE)][sse-url], to send realtime messages to
     the browser;
-* **A** is for [audiowaveform][audiowaveform-url], The [BBC][bbc-url]'s offline
-    rendering tool for generating waveforms for [WaveSurfer.js][wavesurfer-url];
 * **P** is for [PostgresSQL][postgres-url], a [SQL][sql-url] database;
-* **A** is for [AlpineJS][alpinejs-url], a lightweight, reactive front-end
-    framework;
+* **A** for [autoheal][autoheal-url], ie Docker Autoheal, a tool to monitor and
+    restart unhealthy docker containers;
 * **N** is for [Nchan][nchan-url], an [nginx][nginx-url] module managing
     [EventSource][eventsource-url] ([SSE][sse-url]) clients;
 * **D** is for [daisyUI][daisyui-url], a lightweight UI component framework on
     top of [Tailwind CSS][tailwind-url]; and
-* **A** is for app, ie [web app][web-app-url], because this is a web app and I
-    needed a word starting with "A" to complete this acronym.
+* **A** is for [audiowaveform][audiowaveform-url], The [BBC][bbc-url]'s offline
+    rendering tool for generating waveforms for [WaveSurfer.js][wavesurfer-url].
 
 **CLANG! THUD! IT'S A DARN JEW'S PANDA!** A very well-known acronym in the
 engineering world, _probably._ I definitely didn't just make this up as a joke.
@@ -269,6 +267,7 @@ the [LICENSE][license-url] file for details.
 [docker-url]: https://www.docker.com/
 [esbuild-url]: https://esbuild.github.io/
 [eventsource-url]: https://developer.mozilla.org/en-US/docs/Web/API/EventSource
+[github-actions-url]: https://docs.github.com/en/actions
 [gunicorn-url]: https://gunicorn.org/
 [haveged-url]: https://www.issihosts.com/haveged/
 [https-url]: https://en.wikipedia.org/wiki/HTTPS
