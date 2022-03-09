@@ -23,8 +23,6 @@ jobs:
         uses: ./.github/actions/docker-build-push
         with:
           container: app
-          context: ./
-          dockerfile: ./backend/Dockerfile
 
   build-radio:
     runs-on: ubuntu-latest
