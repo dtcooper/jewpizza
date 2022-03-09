@@ -104,7 +104,7 @@ jobs:
             if [ "$SHOULD_DEPLOY" ]; then
               git pull --ff-only
               docker compose pull --quiet
-              docker compose up --quiet-pull --remove-orphans --no-deps --detach
+              docker compose up --quiet-pull --remove-orphans --no-build --detach
               docker system prune --force
             else
               echo "Deploy disabled by constance config (AUTO_DEPLOY = False)"
