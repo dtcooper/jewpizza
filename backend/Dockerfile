@@ -1,4 +1,4 @@
-FROM python:3.10-alpine AS base
+FROM python:3.10-alpine3.15 AS base
 
 ARG POETRY_VERSION=1.1.13
 

@@ -56,7 +56,7 @@ if [ -z "$GITHUB_API_TOKEN" ]; then
     echo -e "\x1B[91mWarning: GITHUB_API_TOKEN not set\x1B[0m"
 fi
 
-PYTHON_LOCAL="$(grep '^FROM python' backend/Dockerfile | sed 's/FROM python:\([0-9.]*\)-alpine AS base/\1/')"
+PYTHON_LOCAL="$(grep '^FROM python' backend/Dockerfile | sed 's/FROM python:\([0-9.]*\)-alpine[0-9.]* AS base/\1/')"
 PYTHON_UPSTREAM="$(lastversion python/cpython)"
 compare Python "$PYTHON_LOCAL" "$PYTHON_UPSTREAM" 1
 
