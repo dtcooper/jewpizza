@@ -227,14 +227,14 @@ the [LICENSE][license-url] file for details.
 
 **_...and remember kids, have fun!_**
 
-[app-container-badge]: https://img.shields.io/badge/container-app-informational?style=flat-square&logo=docker&logoColor=white
-[app-container-url]: https://ghcr.io/dtcooper/jewpizza-app
-[icecast-container-badge]: https://img.shields.io/badge/container-icecast-informational?style=flat-square&logo=docker&logoColor=white
-[icecast-container-url]: https://ghcr.io/dtcooper/jewpizza-icecast
-[nginx-container-badge]: https://img.shields.io/badge/container-nginx-informational?style=flat-square&logo=docker&logoColor=white
-[nginx-container-url]: https://ghcr.io/dtcooper/jewpizza-nginx
-[radio-container-badge]: https://img.shields.io/badge/container-radio-informational?style=flat-square&logo=docker&logoColor=white
-[radio-container-url]: https://ghcr.io/dtcooper/jewpizza-radio
+[app-container-badge]: https://img.shields.io/docker/image-size/jewpizza/app/latest?label=app&logo=docker&logoColor=ffffff&style=flat-square
+[app-container-url]: https://hub.docker.com/r/jewpizza/app
+[icecast-container-badge]: https://img.shields.io/docker/image-size/jewpizza/icecast/latest?label=icecast&logo=docker&logoColor=ffffff&style=flat-square
+[icecast-container-url]: https://hub.docker.com/r/jewpizza/icecast
+[nginx-container-badge]: https://img.shields.io/docker/image-size/jewpizza/nginx/latest?label=nginx&logo=docker&logoColor=ffffff&style=flat-square
+[nginx-container-url]: https://hub.docker.com/r/jewpizza/nginx
+[radio-container-badge]: https://img.shields.io/docker/image-size/jewpizza/radio/latest?label=radio&logo=docker&logoColor=ffffff&style=flat-square
+[radio-container-url]: https://hub.docker.com/r/jewpizza/radio
 
 [build-badge]: https://img.shields.io/github/workflow/status/dtcooper/jewpizza/Build%20and%20Deploy?label=build%20%26%20deploy&logo=github&style=flat-square
 [build-url]: https://github.com/dtcooper/jewpizza/actions/workflows/docker-build.yml

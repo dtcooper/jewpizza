@@ -2,6 +2,16 @@ inputs:
   container:
     description: 'Container name'
     required: true
+  username:
+    description: 'Docker Hub username'
+    required: true
+  password:
+    description: 'Docker Hub password (unused when dev = "1")'
+    required: false
+    default: ''
+  token:
+    description: 'Docker Hub token'
+    required: true
   dev:
     description: 'Build dev containers (DEBUG=1)'
     required: false
@@ -15,8 +25,8 @@ runs:
       id: vars
       run: |
         echo "::set-output name=sha::$(echo ${GITHUB_SHA} | cut -c 1-8)"
-        echo "::set-output name=repo::ghcr.io/${{ github.repository_owner }}/jewpizza-${{ inputs.container }}"
-        echo "::set-output name=cache-tag::ghcr.io/${{ github.repository_owner }}/jewpizza-buildcache:${{ inputs.container }}${{ inputs.dev == '1' && '-dev' || '' }}"
+        echo "::set-output name=repo::${{ inputs.username }}/${{ inputs.container }}"
+        echo "::set-output name=cache-tag::${{ inputs.username }}/buildcache:${{ inputs.container }}${{ inputs.dev == '1' && '-dev' || '' }}"
         echo "::set-output name=build-date::$(date -u +%FT%TZ)"
       shell: bash
     -
@@ -27,12 +37,11 @@ runs:
       uses: docker/setup-qemu-action@v1
       if: inputs.dev == '1'
     -
-      name: Login to GitHub Container Registry
+      name: Login to Docker Hub
       uses: docker/login-action@v1
       with:
-        registry: ghcr.io
-        username: ${{ github.repository_owner }}
-        password: ${{ github.token }}
+        username: ${{ inputs.username }}
+        password: ${{ inputs.token }}
     -
       name: Build and Push
       uses: docker/build-push-action@v2
@@ -50,3 +59,12 @@ runs:
           ${{ inputs.dev == '0' && format('{0}:{1}', steps.vars.outputs.repo, steps.vars.outputs.sha) || '' }}
         cache-from: type=registry,ref=${{ steps.vars.outputs.cache-tag }}
         cache-to: type=registry,ref=${{ steps.vars.outputs.cache-tag }},mode=max
+    -
+      name: Update Docker Hub description
+      uses: peter-evans/dockerhub-description@v2
+      if: inputs.dev == '0'
+      with:
+        username: ${{ inputs.username }}
+        password: ${{ inputs.password }}
+        repository: ${{ steps.vars.outputs.repo }}
+        short-description: 'A serious website for a serious domain name: jew.pizza (${{ inputs.container }} container)'

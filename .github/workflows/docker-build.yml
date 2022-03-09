@@ -22,6 +22,9 @@ jobs:
         name: Build container
         uses: ./.github/actions/docker-build-push
         with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          token: ${{ secrets.DOCKERHUB_TOKEN }}
           container: app
 
   build-radio:
@@ -35,6 +38,9 @@ jobs:
         name: Build container
         uses: ./.github/actions/docker-build-push
         with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          token: ${{ secrets.DOCKERHUB_TOKEN }}
           container: radio
 
   build-nginx:
@@ -48,6 +54,9 @@ jobs:
         name: Build container
         uses: ./.github/actions/docker-build-push
         with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          token: ${{ secrets.DOCKERHUB_TOKEN }}
           container: nginx
 
   build-icecast:
@@ -61,6 +70,9 @@ jobs:
         name: Build container
         uses: ./.github/actions/docker-build-push
         with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          token: ${{ secrets.DOCKERHUB_TOKEN }}
           container: icecast
 
   deploy:
