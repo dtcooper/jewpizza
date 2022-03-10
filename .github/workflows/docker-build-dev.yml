@@ -11,9 +11,12 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build-app:
+  build:
     runs-on: ubuntu-latest
-    name: Build app container (dev)
+    name: Build dev container
+    strategy:
+      matrix:
+        container: [app, icecast, nginx, radio]
     steps:
       -
         name: Checkout
@@ -24,53 +27,5 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          container: app
-          dev: '1'
-
-  build-radio:
-    runs-on: ubuntu-latest
-    name: Build radio container (dev)
-    steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v2
-      -
-        name: Build container
-        uses: ./.github/actions/docker-build-push
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          container: radio
-          dev: '1'
-
-  build-nginx:
-    runs-on: ubuntu-latest
-    name: Build nginx container (dev)
-    steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v2
-      -
-        name: Build container
-        uses: ./.github/actions/docker-build-push
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          container: nginx
-          dev: '1'
-
-  build-icecast:
-    runs-on: ubuntu-latest
-    name: Build icecast container (dev)
-    steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v2
-      -
-        name: Build container
-        uses: ./.github/actions/docker-build-push
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          container: icecast
+          container: ${{ matrix.container }}
           dev: '1'

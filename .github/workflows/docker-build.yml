@@ -11,9 +11,12 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build-app:
+  build:
     runs-on: ubuntu-latest
     name: Build app container
+    strategy:
+      matrix:
+        container: [app, icecast, nginx, radio]
     steps:
       -
         name: Checkout
@@ -24,59 +27,14 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          container: app
-
-  build-radio:
-    runs-on: ubuntu-latest
-    name: Build radio container
-    steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v2
-      -
-        name: Build container
-        uses: ./.github/actions/docker-build-push
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          container: radio
-
-  build-nginx:
-    runs-on: ubuntu-latest
-    name: Build nginx container
-    steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v2
-      -
-        name: Build container
-        uses: ./.github/actions/docker-build-push
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          container: nginx
-
-  build-icecast:
-    runs-on: ubuntu-latest
-    name: Build icecast container
-    steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v2
-      -
-        name: Build container
-        uses: ./.github/actions/docker-build-push
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          container: icecast
+          container: ${{ matrix.container }}
 
   deploy:
     runs-on: ubuntu-latest
     name: Deploy
     env:
       SSH_DEPLOY_DIRECTORY: jewpizza
-    needs: [build-app, build-radio, build-nginx, build-icecast]
+    needs: [build]
     steps:
       -
         name: Deploy containers
@@ -109,7 +67,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     name: Tests
-    needs: [build-app]
+    needs: [build]
     steps:
       -
         name: Checkout
