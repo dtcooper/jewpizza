@@ -32,6 +32,8 @@
 * [x] Remove BUILD_DATE + GIT_REV from all but app container, it ends up with
     needless restarts in radio, etc and differences in container
 * [x] use nchan instead of aiohttp
+* [x] Add backend/ frontend/ and radio/.../reload.liq explicitly to backend container instead of complete dir
+* [x] Sourcemaps for JS exceptions
 * [ ] Icecast server + liquidsoap with player to play whatever show I'm on, read
       countdowns when I'm not on air
     - [ ] Call-in button via Twilio client
@@ -52,11 +54,9 @@
 * [ ] [Change Podcast RSS](https://castos.com/podcast-directories/)
 * [ ] Decouple podcast namedtuples with shows?
 * [ ] Radio should have a mountpoint to pre-empty and stream from
-* [ ] Sourcemaps for JS exceptions
 * [ ] Add _Highlights_ sections, possible on Home page?
 * [ ] Showgram nightly segment breakdown with links to podcast?
 * [ ] Misc: poolabs, kawika talk, fish burps, here's why that's funny, shitbag
-* [ ] Add backend/ frontend/ and radio/.../reload.liq explicitly to backend container instead of complete dir
 
 ## Sections
 

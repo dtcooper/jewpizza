@@ -76,6 +76,12 @@ server {
         # /static and /media disabled when DEBUG=0
     {% endif -%}
 
+    # Proxy through to radio stream directly
+    location = /radio {
+        include proxy_params;
+        proxy_pass http://icecast;
+    }
+
     # Server-sent Events, channels separated by slashes
     location = /sse/ {
         nchan_subscriber eventsource;
