@@ -3,8 +3,8 @@ FROM python:3.10-alpine3.15 AS base
 ARG POETRY_VERSION=1.1.13
 
 
-# Build frontend
-FROM node:16-alpine AS frontend
+# Build frontend (can use native platform)
+FROM --platform=$BUILDPLATFORM node:16-alpine AS frontend
 
 COPY frontend/package.json frontend/package-lock.json /app/frontend/
 WORKDIR /app/frontend
