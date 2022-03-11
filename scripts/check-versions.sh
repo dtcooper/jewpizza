@@ -88,7 +88,7 @@ AUTOHEAL_LOCAL="$(yq -r .services.autoheal.image docker-compose.yml | sed 's/^wi
 AUTOHEAL_UPSTREAM="$(lastversion willfarrell/docker-autoheal)"
 compare Autoheal "$AUTOHEAL_LOCAL" "$AUTOHEAL_UPSTREAM"
 
-DOCKER_NGINX_CERTBOT_LOCAL="$(grep '^FROM jonasal/nginx-certbot' nginx/Dockerfile | sed 's/FROM jonasal\/nginx-certbot:\(.*\)-alpine AS base/\1/')"
+DOCKER_NGINX_CERTBOT_LOCAL="$(grep '^FROM jonasal/nginx-certbot' nginx/Dockerfile | sed 's/FROM jonasal\/nginx-certbot:\(.*\)-nginx.*/\1/')"
 DOCKER_NGINX_CERTBOT_UPSTREAM="$(lastversion JonasAlfredsson/docker-nginx-certbot)"
 compare docker-nginx-certbot "$DOCKER_NGINX_CERTBOT_LOCAL" "$DOCKER_NGINX_CERTBOT_UPSTREAM" 1
 
