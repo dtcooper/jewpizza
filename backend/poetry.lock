@@ -118,14 +118,14 @@ uvloop = ["uvloop (>=0.15.2)"]
 
 [[package]]
 name = "boto3"
-version = "1.21.17"
+version = "1.21.18"
 description = "The AWS SDK for Python"
 category = "main"
 optional = false
 python-versions = ">= 3.6"
 
 [package.dependencies]
-botocore = ">=1.24.17,<1.25.0"
+botocore = ">=1.24.18,<1.25.0"
 jmespath = ">=0.7.1,<1.0.0"
 s3transfer = ">=0.5.0,<0.6.0"
 
@@ -134,7 +134,7 @@ crt = ["botocore[crt] (>=1.21.0,<2.0a0)"]
 
 [[package]]
 name = "botocore"
-version = "1.24.17"
+version = "1.24.18"
 description = "Low-level, data-driven core of boto 3."
 category = "main"
 optional = false
@@ -700,7 +700,7 @@ ptyprocess = ">=0.5"
 
 [[package]]
 name = "phonenumbers"
-version = "8.12.44"
+version = "8.12.45"
 description = "Python version of Google's common library for parsing, formatting, storing and validating international phone numbers."
 category = "main"
 optional = false
@@ -1161,7 +1161,7 @@ tests = ["coverage", "flake8", "wheel"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "4e77f282f2394d0046d9c92888bace7126687b10eadf2aeef400005382b883c9"
+content-hash = "b1e7b9a99247518d37cbf9d77f25c488d114947cb2e848741d7948021dd7ca37"
 
 [metadata.files]
 appdirs = [
@@ -1226,12 +1226,12 @@ black = [
     {file = "black-22.1.0.tar.gz", hash = "sha256:a7c0192d35635f6fc1174be575cb7915e92e5dd629ee79fdaf0dcfa41a80afb5"},
 ]
 boto3 = [
-    {file = "boto3-1.21.17-py3-none-any.whl", hash = "sha256:b01d29305527fe8754a0c5847c0431ec677dca34069aaed9429ff178826ab366"},
-    {file = "boto3-1.21.17.tar.gz", hash = "sha256:a235c422239d1b468924b37faa95f5750c6abd43651fe7deb3976e10a331c991"},
+    {file = "boto3-1.21.18-py3-none-any.whl", hash = "sha256:d857feb6af9932e1ee3a748060a2cd9fd6043dbbccf66976eda54586597efdc0"},
+    {file = "boto3-1.21.18.tar.gz", hash = "sha256:8d6f3c548f0ee03d742f404c96515e7579fc6968135aaa50dd855a046698ff79"},
 ]
 botocore = [
-    {file = "botocore-1.24.17-py3-none-any.whl", hash = "sha256:e61b9e6d0d5e384f8135211f05fc05694571505390293d939a9688ac08d4f62a"},
-    {file = "botocore-1.24.17.tar.gz", hash = "sha256:29212b4be640efc047665650fee474357e884725a3e2a9bc029bca46a6ef0853"},
+    {file = "botocore-1.24.18-py3-none-any.whl", hash = "sha256:7ea8ef1ff7c4882ab59b337662f90ddf5ea860e95e7e209dca593a34ea585b1b"},
+    {file = "botocore-1.24.18.tar.gz", hash = "sha256:d2da7ccbc5ddd61fe3cd45fcbd3de380d9e3a15bfa8fbfd2d9259a93dcc60c56"},
 ]
 brotli = [
     {file = "Brotli-1.0.9-cp27-cp27m-macosx_10_9_x86_64.whl", hash = "sha256:268fe94547ba25b58ebc724680609c8ee3e5a843202e9a381f6f9c5e8bdb5c70"},
@@ -1623,8 +1623,8 @@ pexpect = [
     {file = "pexpect-4.8.0.tar.gz", hash = "sha256:fc65a43959d153d0114afe13997d439c22823a27cefceb5ff35c2178c6784c0c"},
 ]
 phonenumbers = [
-    {file = "phonenumbers-8.12.44-py2.py3-none-any.whl", hash = "sha256:cc1299cf37b309ecab6214297663ab86cb3d64ae37fd5b88e904fe7983a874a6"},
-    {file = "phonenumbers-8.12.44.tar.gz", hash = "sha256:26cfd0257d1704fe2f88caff2caabb70d16a877b1e65b6aae51f9fbbe10aa8ce"},
+    {file = "phonenumbers-8.12.45-py2.py3-none-any.whl", hash = "sha256:e3af21c1e33a3dd063cddba3cad653abb8d23c37c62cedee597a3f3ea0f5365c"},
+    {file = "phonenumbers-8.12.45.tar.gz", hash = "sha256:94e30f59b2be6c4310a90f3d5da53d49900bdb440484506f3333c694ebb0cdab"},
 ]
 pickleshare = [
     {file = "pickleshare-0.7.5-py2.py3-none-any.whl", hash = "sha256:9649af414d74d4df115d5d718f82acb59c9d418196b7b4290ed47a12ce62df56"},
