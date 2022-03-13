@@ -569,7 +569,7 @@ python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
 
 [[package]]
 name = "lastversion"
-version = "2.2.0"
+version = "2.2.1"
 description = "A CLI tool to find the latest stable version of an arbitrary project"
 category = "dev"
 optional = false
@@ -846,11 +846,11 @@ diagrams = ["jinja2", "railroad-diagrams"]
 
 [[package]]
 name = "pytest"
-version = "7.0.1"
+version = "7.1.0"
 description = "pytest: simple powerful testing with Python"
 category = "dev"
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.7"
 
 [package.dependencies]
 atomicwrites = {version = ">=1.0", markers = "sys_platform == \"win32\""}
@@ -1161,7 +1161,7 @@ tests = ["coverage", "flake8", "wheel"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "b1e7b9a99247518d37cbf9d77f25c488d114947cb2e848741d7948021dd7ca37"
+content-hash = "000fd72184bd9b0a0335fdf91228eca9bab20e71fb98d8ceaf3c330c1cf31c36"
 
 [metadata.files]
 appdirs = [
@@ -1505,8 +1505,8 @@ jmespath = [
     {file = "jmespath-0.10.0.tar.gz", hash = "sha256:b85d0567b8666149a93172712e68920734333c0ce7e89b78b3e987f71e5ed4f9"},
 ]
 lastversion = [
-    {file = "lastversion-2.2.0-py3-none-any.whl", hash = "sha256:ab3bb3170b7fc826c23eebcdb37325ee371e200ee14795d2b94010cb8a1a7cc9"},
-    {file = "lastversion-2.2.0.tar.gz", hash = "sha256:fdc3572ccf8ae49396245dc9ccac96929e724dafaf6defdbdae6bebb334ba00c"},
+    {file = "lastversion-2.2.1-py3-none-any.whl", hash = "sha256:78338e0b35db9fbbd98acafa6c66aa974b1111535623ac5ab60a83f66f9aa038"},
+    {file = "lastversion-2.2.1.tar.gz", hash = "sha256:11e0b901e3c32188fb81fe6ae124da7625d39ffe8e46c8c81aede427e023e0b1"},
 ]
 lockfile = [
     {file = "lockfile-0.12.2-py2.py3-none-any.whl", hash = "sha256:6c3cb24f344923d30b2785d5ad75182c8ea7ac1b6171b08657258ec7429d50fa"},
@@ -1692,8 +1692,8 @@ pyparsing = [
     {file = "pyparsing-3.0.7.tar.gz", hash = "sha256:18ee9022775d270c55187733956460083db60b37d0d0fb357445f3094eed3eea"},
 ]
 pytest = [
-    {file = "pytest-7.0.1-py3-none-any.whl", hash = "sha256:9ce3ff477af913ecf6321fe337b93a2c0dcf2a0a1439c43f5452112c1e4280db"},
-    {file = "pytest-7.0.1.tar.gz", hash = "sha256:e30905a0c131d3d94b89624a1cc5afec3e0ba2fbdb151867d8e0ebd49850f171"},
+    {file = "pytest-7.1.0-py3-none-any.whl", hash = "sha256:b555252a95bbb2a37a97b5ac2eb050c436f7989993565f5e0c9128fcaacadd0e"},
+    {file = "pytest-7.1.0.tar.gz", hash = "sha256:f1089d218cfcc63a212c42896f1b7fbf096874d045e1988186861a1a87d27b47"},
 ]
 pytest-cov = [
     {file = "pytest-cov-3.0.0.tar.gz", hash = "sha256:e7f0f5b1617d2210a2cabc266dfe2f4c75a8d32fb89eafb7ad9d06f6d076d470"},
