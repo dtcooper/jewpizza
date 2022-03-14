@@ -14,6 +14,7 @@ PASSWORD = {{ settings.ICECAST_SOURCE_PASSWORD|liqval }}
 METADATA_MESSAGE_DELAY = 5.
 NCHAN_URL = "http://nginx:3000/"
 
+{# DEBUG and SECRET_KEY come from radio/reload.liq #}
 {% include 'radio/reload.liq' %}
 {% include 'radio/http.liq' %}
 
