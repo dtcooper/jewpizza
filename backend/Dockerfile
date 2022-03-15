@@ -40,7 +40,8 @@ RUN mkdir -p /usr/src/audiowaveform && cd /usr/src/audiowaveform \
     && make && make install
 
 
-FROM base AS poetry
+# Get poetry requirements (can use native platform)
+FROM --platform=$BUILDPLATFORM base AS poetry
 
 RUN apk add --no-cache \
     libffi-dev \
