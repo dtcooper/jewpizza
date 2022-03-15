@@ -92,7 +92,7 @@ DOCKER_NGINX_CERTBOT_LOCAL="$(grep '^FROM jonasal/nginx-certbot' nginx/Dockerfil
 DOCKER_NGINX_CERTBOT_UPSTREAM="$(lastversion JonasAlfredsson/docker-nginx-certbot)"
 compare docker-nginx-certbot "$DOCKER_NGINX_CERTBOT_LOCAL" "$DOCKER_NGINX_CERTBOT_UPSTREAM" 1
 
-POETRY_LOCAL="$(fgrep 'POETRY_VERSION=' backend/Dockerfile | sed 's/.*POETRY_VERSION=\([0-9.]*\).*/\1/')"
+POETRY_LOCAL="$(fgrep 'POETRY_VERSION=' backend/Dockerfile | head -n 1 | sed 's/.*POETRY_VERSION=\([0-9.]*\).*/\1/')"
 POETRY_UPSTREAM="$(lastversion python-poetry/poetry)"
 compare Poetry "$POETRY_LOCAL" "$POETRY_UPSTREAM"
 

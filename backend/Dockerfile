@@ -1,7 +1,8 @@
 FROM python:3.10-alpine3.15 AS base
-
 ARG POETRY_VERSION=1.1.13
 
+FROM --platform=$BUILDPLATFORM python:3.10-alpine3.15 AS base-native
+ARG POETRY_VERSION=1.1.13
 
 # Build frontend (can use native platform)
 FROM --platform=$BUILDPLATFORM node:16-alpine AS frontend
@@ -41,7 +42,7 @@ RUN mkdir -p /usr/src/audiowaveform && cd /usr/src/audiowaveform \
 
 
 # Get poetry requirements (can use native platform)
-FROM --platform=$BUILDPLATFORM base AS poetry
+FROM base-native AS poetry
 
 RUN apk add --no-cache \
     libffi-dev \
