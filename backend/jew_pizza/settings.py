@@ -226,13 +226,6 @@ MEDIA_ROOT = "/serve/media"
 # Causes django-recurrence to issue a migration
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
-NPM_ROOT_PATH = "/app/frontend"
-NPM_STATIC_FILES_PREFIX = "vendor/js"
-NPM_FILE_PATTERNS = {
-    "alpinejs": ["dist/cdn.min.js"],
-    "simpledotcss": ["simple.min.css"],
-}
-
 PHONENUMBER_DEFAULT_REGION = "US"
 
 STATICFILES_STORAGE = "jew_pizza.storage.PostProcessCompressionStorage"
