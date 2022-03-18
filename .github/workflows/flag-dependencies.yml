@@ -21,6 +21,9 @@ jobs:
     runs-on: ubuntu-20.04
     env:
       PYTHON_VERSION: '3.10'
+      LASTVERSION_VERSION: '2.2.2'
+      POETRY_VERSION: '1.1.13'
+      YQ_VERSION: '2.14.0'
 
     steps:
       -
@@ -39,7 +42,7 @@ jobs:
           GITHUB_API_TOKEN: ${{ github.token }}
 
         run: |
-          sudo pip install poetry==1.1.13 yq==2.14.0 lastversion==2.2.1
+          sudo pip install "lastversion==${LASTVERSION_VERSION}" "poetry==${POETRY_VERSION}" "yq==${YQ_VERSION}"
 
           echo '============ Misc Dependencies =========' >> dependencies.txt
           ./scripts/check-versions.sh github-action | tee -a dependencies.txt
