@@ -44,7 +44,7 @@ BUILD_DATE = env("BUILD_DATE", default="unknown")
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 if not DEBUG:
-    SECURE_HSTS_SECONDS = 365 // 4 * 24 * 60 * 60  # 3 months
+    SECURE_HSTS_SECONDS = 365 * 24 * 60 * 60  # 1 year
 
 ADMINS = [(f"{DOMAIN_NAME} Admin", EMAIL_ADDRESS)]
 UMAMI_HOST = f"umami.{DOMAIN_NAME}"
