@@ -119,4 +119,4 @@ compare wait-for "$WAIT_FOR_LOCAL" "$WAIT_FOR_UPSTREAM"
 
 ICONIFY_LOCAL="$(fgrep iconify backend/webcore/jinja2/webcore/base_full.html | sed 's/.*iconify\/\([0-9.]*\)\/.*/\1/')"
 ICONIFY_UPSTREAM="$(npm --silent view @iconify/iconify version)"
-compare iconify "$ICONIFY_LOCAL" "$ICONIFY_UPSTREAM"
+compare Iconify "$ICONIFY_LOCAL" "$ICONIFY_UPSTREAM"
