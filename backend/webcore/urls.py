@@ -20,5 +20,4 @@ urlpatterns = [
         name="social",
     ),
     path("internal/log-js-error/", views.LogJSErrorView.as_view(), name="log-js-error"),
-    path("protected/store-sse-in-cache/", views.LogSSEToCacheView.as_view(), name="store-sse-in-cache"),
 ]

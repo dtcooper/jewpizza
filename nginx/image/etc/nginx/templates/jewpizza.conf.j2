@@ -55,14 +55,6 @@ server {
 
     include proxy_busy_error;
 
-    # TODO: Delete me
-    location /lua {
-        default_type text/plain;
-        content_by_lua_block {
-            ngx.say("Hello World from lua!")
-        }
-    }
-
     location = /favicon.ico {
         return 204;
         access_log off;
@@ -192,20 +184,36 @@ server {
     listen 3000 reuseport;
     listen [::]:3000 reuseport;
 
-    location /store-sse-in-cache/ {
+    location = /store-sse-in-cache/ {
+        default_type text/plain;
         internal;
-        include proxy_params;
-        proxy_pass http://app/protected/store-sse-in-cache/;
+        content_by_lua_block {
+            local redis = require "resty.redis"
+            local red = redis:new()
+            local ok, err = red:connect("172.22.0.8", 6379, {pool_size=4})  -- Defined in docker-compose.yml
+
+            if ok then
+                local headers = ngx.req.get_headers()
+                local cache_key = "sse-message::" .. headers["x-eventsource-event"]  -- key prefix mirrored in jew_pizza/utils.py
+                local ok, err = red:set(cache_key, ngx.var.request_body)
+                if not ok then
+                    ngx.log(ngx.ERR, "failed to set cache key ", key, ":", err)
+                end
+            else
+                ngx.log(ngx.ERR, "failed to connect to redis: ", err)
+            end
+
+            ngx.status = 304
+            ngx.exit(ngx.HTTP_OK)
+        }
     }
 
     location = / {
         if ($http_x_eventsource_event = '') {
             return 412;
         }
-        # Set X-Skip-Store-SSE-In-Cache: 1 header when coming from app to avoid double logging
-        if ($http_x_skip_store_sse_in_cache = '') {
-            nchan_publisher_upstream_request /store-sse-in-cache/;
-        }
+
+        nchan_publisher_upstream_request /store-sse-in-cache/;
         nchan_publisher http;
         nchan_channel_id sse;
         nchan_store_messages off;

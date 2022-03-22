@@ -6,13 +6,14 @@ from dateutil.parser import parse as dateutil_parse
 import requests
 
 from django.conf import settings
-from django.core.cache import cache
 from django.utils.formats import date_format as django_date_format
 from django.utils.timezone import localtime
 
+from django_redis import get_redis_connection
+
 
 logger = logging.getLogger(f"jewpizza.{__name__}")
-SSE_MESSAGE_CACHE_KEY_PREFIX = "sse-message::"
+SSE_MESSAGE_CACHE_KEY_PREFIX = "sse-message::"  # mirrored in in jewpizza.conf.j2
 
 
 def get_client_ip(request):
@@ -44,12 +45,15 @@ def format_time(time, format="g:i A"):
     return django_date_format(time, format=format)
 
 
-def store_sse_message_in_cache(message_type, message):
-    cache.set(f"{SSE_MESSAGE_CACHE_KEY_PREFIX}{message_type}", message, timeout=None)
-
-
 def get_last_sse_message(message_type):
-    return cache.get(f"{SSE_MESSAGE_CACHE_KEY_PREFIX}{message_type}")
+    redis = get_redis_connection()
+    message = redis.get(f"{SSE_MESSAGE_CACHE_KEY_PREFIX}{message_type}")
+
+    try:
+        return json.loads(message)
+    except (json.JSONDecodeError, TypeError):
+        logger.exception(f"Error loading JSON message: {message}")
+        return None
 
 
 def send_sse_message(message_type, message, delay=None):
@@ -63,14 +67,12 @@ def send_sse_message(message_type, message, delay=None):
             response = requests.post(
                 "http://nginx:3000/",
                 data=json.dumps(message),
-                # We store it in the cache below, no need for nginx to call app back, skip via X-Skip-Store-SSE-In-Cache
-                headers={"Accept": "text/json", "X-EventSource-Event": message_type, "X-Skip-Store-SSE-In-Cache": "1"},
+                headers={"Accept": "text/json", "X-EventSource-Event": message_type},
             )
         except requests.RequestException:
             logger.exception("An error occurred while making sending an SSE message")
         else:
             if response.status_code in (201, 202):
-                store_sse_message_in_cache(message_type, message)
                 num_subscribers = response.json().get("subscribers", 0)
                 logger.info(
                     f"{message_type} message sent to nchan to {num_subscribers} subscriber(s) (code:"

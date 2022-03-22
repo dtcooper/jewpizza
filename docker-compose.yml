@@ -121,7 +121,7 @@ services:
       - "TZ=${TIMEZONE:-US/Eastern}"
     networks:
       default:
-        ipv4_address: 172.22.0.8
+        ipv4_address: 172.22.0.8  # Referenced in nginx/image/etc/nginx/templates/jewpizza.conf.j2
 
   umami:
     <<: *service-defaults

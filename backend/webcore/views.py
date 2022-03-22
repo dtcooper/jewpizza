@@ -8,14 +8,10 @@ from django.conf import settings
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.http import HttpResponse, HttpResponseBadRequest
-from django.utils.decorators import method_decorator
 from django.utils.timezone import get_default_timezone
-from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView, View
 
 from constance import config
-
-from jew_pizza.utils import store_sse_message_in_cache
 
 
 logger = logging.getLogger(f"jewpizza.{__file__}")
@@ -79,16 +75,3 @@ class LogJSErrorView(View):
             )
 
         return HttpResponse(status=204)
-
-
-@method_decorator(csrf_exempt, name="dispatch")
-class LogSSEToCacheView(View):
-    def post(self, request, *args, **kwargs):
-        try:
-            message = json.loads(request.body)
-        except json.JSONDecodeError:
-            pass
-        else:
-            store_sse_message_in_cache(request.headers["X-EventSource-Event"], message)
-
-        return HttpResponse(status=304)
