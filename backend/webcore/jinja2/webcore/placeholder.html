@@ -31,39 +31,39 @@
           {# XXX text-shadow is in a style tag -#}
           Welcome to <span class="text-accent underline underline-wavy animate-spin">jew.pizza</span>
         </h2>
-        <p class="lg:text-indent mx-2 lg:mx-0 text-base sm:text-lg" x-data="localizedTimeBlurb">
-          Here is my very special website. I'm still working on it. For now, catch me
+        <p class="lg:text-indent mx-2 lg:mx-0 text-base sm:text-lg" x-data="placeholder">
+          Here is my special website. I'm working on it. For now, catch me
           <span class="font-bold"><span class="underline">every</span>
           <span x-text="showTime">Sun to Thurs night at midnight-5:00am {{ eastern_tz_abbrev }}</span>
           <span class="italic">hosting</span> <a class="link-primary link-hover font-bold umami--click--showgram"
             target="_blank" href="https://www.iheartradio.ca/newstalk-1010/shows/the-late-showgram-with-jim-richards-1.14645758">The
           Showgram</a></span><span x-text="showTechnicalTime"> (technically Mon to Fri mornings)</span>.
           It airs nationally in Canada,
-          and you can <span class="font-bold">stream it on Toronto-based
+          and you can <span class="font-bold">listen on Toronto-based
           <a href="https://www.iheartradio.ca/newstalk-1010" class="link-primary link-hover umami--click--cfrb"
-            target="_blank">CFRB NEWSTALK 1010's website</a></span>
-          <span x-data="{expanded: false}">
-            <span x-show="!expanded">
-              (<span @click="expanded = true" class="link-primary link-hover cursor-pointer umami--click--expand-stns">&amp; more stations&hellip;</span>)
-            </span>
-            <span x-cloak x-show="expanded">
-              (also on
-              <a href="https://www.iheartradio.ca/cjad" class="link-primary link-hover umami--click--cjad" target="_blank">CJAD</a>,
-              <a href="https://www.iheartradio.ca/580-cfra" class="link-primary link-hover umami--click--cfra" target="_blank">CFRA</a>,
-              <a href="https://www.iheartradio.ca/bnn-bloomberg-radio-1410" class="link-primary link-hover umami--click--cfte" target="_blank">CFTE</a>,
-              <a href="https://www.iheartradio.ca/cfax-1070" class="link-primary link-hover umami--click--cfax" target="_blank">CFAX</a>,
-              <a href="https://www.iheartradio.ca/am800" class="link-primary link-hover umami--click--cklw" target="_blank">CKLW</a>,
-              <a href="https://www.iheartradio.ca/bnn-bloomberg-radio-1150" class="link-primary link-hover umami--click--ckoc" target="_blank">CKOC</a>,
-              <a href="https://www.iheartradio.ca/newstalk-1290-cjbk" class="link-primary link-hover umami--click--cjbk" target="_blank">CJBK</a>,
-              <a href="https://www.iheartradio.ca/610cktb" class="link-primary link-hover umami--click--cktb" target="_blank">CKTB</a> &amp;
-              <a href="https://www.iheartradio.ca/am-1150" class="link-primary link-hover umami--click--ckfr" target="_blank">CKFR</a>).
-            </span>
+            target="_blank">CFRB NEWSTALK 1010's website</a></span><span x-show="stationsExpanded">,</span>
+          <span x-show="!stationsExpanded">
+            (<span @click="stationsExpanded = true" class="link-primary link-hover cursor-pointer umami--click--expand-stns">&amp; more stations&hellip;</span>).
+          </span>
+          <span x-cloak x-show="stationsExpanded">
+            <a href="https://www.iheartradio.ca/cjad" class="link-primary link-hover umami--click--cjad" target="_blank">CJAD</a>,
+            <a href="https://www.iheartradio.ca/580-cfra" class="link-primary link-hover umami--click--cfra" target="_blank">CFRA</a>,
+            <a href="https://www.iheartradio.ca/bnn-bloomberg-radio-1410" class="link-primary link-hover umami--click--cfte" target="_blank">CFTE</a>,
+            <a href="https://www.iheartradio.ca/cfax-1070" class="link-primary link-hover umami--click--cfax" target="_blank">CFAX</a>,
+            <a href="https://www.iheartradio.ca/am800" class="link-primary link-hover umami--click--cklw" target="_blank">CKLW</a>,
+            <a href="https://www.iheartradio.ca/bnn-bloomberg-radio-1150" class="link-primary link-hover umami--click--ckoc" target="_blank">CKOC</a>,
+            <a href="https://www.iheartradio.ca/newstalk-1290-cjbk" class="link-primary link-hover umami--click--cjbk" target="_blank">CJBK</a>,
+            <a href="https://www.iheartradio.ca/610cktb" class="link-primary link-hover umami--click--cktb" target="_blank">CKTB</a>,
+            <a href="https://www.iheartradio.ca/am-1150" class="link-primary link-hover umami--click--ckfr" target="_blank">CKFR</a> &amp;
+            <span class="underline italic">globally</span> on
+            <a href="https://en.wikipedia.org/wiki/Shortwave_radio" class="link-primary link-hover umami--click--shortwave" target="_blank">shortwave</a>
+            <a href="https://en.wikipedia.org/wiki/CFRX" class="link-primary link-hover umami--click--cfrx" target="_blank">CFRX 6.07 MHz</a>.
           </span>
           You can <span class="font-bold">listen to
           <a class="link-primary link-hover umami--click--podcast" target="_blank"
             href="https://podcasts.apple.com/us/podcast/this-is-going-well-i-think-with-david-cooper/id1168275879">my
           podcast</a></span> or  <a class="link link-primary link-hover font-bold umami--click--wfmu"
-            href="https://www.wfmu.org/playlists/WD" target="_blank">my show on WFMU</a>.
+            href="https://www.wfmu.org/playlists/WD" target="_blank">show on WFMU</a>.
         </p>
         <div class="grid grid-cols-1 sm:grid-cols-4 gap-1.5 lg:gap-1 mt-5 select-none">
           <a class="btn btn-neutral btn-rounded border-0 umami--click--twitter" href="https://twitter.com/dtcooper" target="_blank">
