@@ -58,6 +58,7 @@
 * [ ] Showgram nightly segment breakdown with links to podcast?
 * [ ] Misc: poolabs, kawika talk, fish burps, here's why that's funny, shitbag
 * [ ] Spawn two processes in radio container... one harbor (reloadable) + one upstream
+* [ ] Add CFRX to placeholder
 
 ## Sections
 
