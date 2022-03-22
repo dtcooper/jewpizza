@@ -37,6 +37,7 @@ services:
     image: jewpizza/nginx:dev
     volumes:
       - ./nginx/image/etc/nginx/templates:/etc/nginx/templates
+      - ./nginx/image/etc/nginx/modules.conf:/etc/nginx/modules.conf
       - ./nginx/image/docker-entrypoint.d/25-jinja2-cli-config.sh:/docker-entrypoint.d/25-jinja2-cli-config.sh
       - ./nginx/image/docker-entrypoint.d/40-set-digitalocean-token.sh:/docker-entrypoint.d/40-set-digitalocean-token.sh
       - ./local-certificate-authority:/etc/local_ca

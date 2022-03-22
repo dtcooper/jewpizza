@@ -55,6 +55,14 @@ server {
 
     include proxy_busy_error;
 
+    # TODO: Delete me
+    location /lua {
+        default_type text/plain;
+        content_by_lua_block {
+            ngx.say("Hello World from lua!")
+        }
+    }
+
     location = /favicon.ico {
         return 204;
         access_log off;
