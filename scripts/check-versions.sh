@@ -90,7 +90,7 @@ compare Autoheal "$AUTOHEAL_LOCAL" "$AUTOHEAL_UPSTREAM"
 
 DOCKER_NGINX_CERTBOT_LOCAL="$(grep '^FROM jonasal/nginx-certbot' nginx/Dockerfile | sed 's/FROM jonasal\/nginx-certbot:\(.*\)-nginx.*/\1/')"
 DOCKER_NGINX_CERTBOT_UPSTREAM="$(lastversion JonasAlfredsson/docker-nginx-certbot)"
-compare docker-nginx-certbot "$DOCKER_NGINX_CERTBOT_LOCAL" "$DOCKER_NGINX_CERTBOT_UPSTREAM" 1
+compare docker-nginx-certbot "$DOCKER_NGINX_CERTBOT_LOCAL" "$DOCKER_NGINX_CERTBOT_UPSTREAM"
 
 POETRY_LOCAL="$(fgrep 'POETRY_VERSION=' backend/Dockerfile | head -n 1 | sed 's/.*POETRY_VERSION=\([0-9.]*\).*/\1/')"
 POETRY_UPSTREAM="$(lastversion python-poetry/poetry)"
@@ -108,6 +108,30 @@ compare nginx-brotli "$NGINX_BROTLI_LOCAL" "$NGINX_BROTLI_UPSTREAM" 1
 NCHAN_LOCAL="$(fgrep 'NCHAN_VERSION=' nginx/Dockerfile | sed 's/.*NCHAN_VERSION=\([0-9.]*\).*/\1/')"
 NCHAN_UPSTREAM="$(lastversion slact/nchan)"
 compare nchan "$NCHAN_LOCAL" "$NCHAN_UPSTREAM"
+
+NGINX_DEVEL_KIT_LOCAL="$(fgrep 'NGX_DEVEL_KIT_VERSION=' nginx/Dockerfile | sed 's/.*NGX_DEVEL_KIT_VERSION=\([rc0-9.]*\).*/\1/')"
+NGINX_DEVEL_KIT_UPSTREAM="$(lastversion --pre vision5/ngx_devel_kit)"
+compare 'devel kit nginx module' "$NGINX_DEVEL_KIT_LOCAL" "$NGINX_DEVEL_KIT_UPSTREAM"
+
+NGINX_HEADERS_MORE_LOCAL="$(fgrep 'NGX_HEADERS_MORE_VERSION=' nginx/Dockerfile | sed 's/.*NGX_HEADERS_MORE_VERSION=\([rc0-9.]*\).*/\1/')"
+NGINX_HEADERS_MORE_UPSTREAM="$(lastversion --pre openresty/headers-more-nginx-module)"
+compare 'headers-more nginx module' "$NGINX_HEADERS_MORE_LOCAL" "$NGINX_HEADERS_MORE_UPSTREAM"
+
+LUA_RESTY_CORE_LOCAL="$(fgrep 'NGX_LUA_RESTY_CORE_VERSION=' nginx/Dockerfile | sed 's/.*NGX_LUA_RESTY_CORE_VERSION=\([rc0-9.]*\).*/\1/')"
+LUA_RESTY_CORE_UPSTREAM="$(lastversion --pre openresty/lua-resty-core)"
+compare 'resty-core lua module' "$LUA_RESTY_CORE_LOCAL" "$LUA_RESTY_CORE_UPSTREAM"
+
+LUA_RESTY_LRUCACHE_LOCAL="$(fgrep 'NGX_LUA_RESTY_LRUCACHE_VERSION=' nginx/Dockerfile | sed 's/.*NGX_LUA_RESTY_LRUCACHE_VERSION=\([rc0-9.]*\).*/\1/')"
+LUA_RESTY_LRUCACHE_UPSTREAM="$(lastversion --pre openresty/lua-resty-lrucache)"
+compare 'resty-lrucache lua module' "$LUA_RESTY_LRUCACHE_LOCAL" "$LUA_RESTY_LRUCACHE_UPSTREAM"
+
+LUA_RESTY_REDIS_LOCAL="$(fgrep 'NGX_LUA_RESTY_REDIS_VERSION=' nginx/Dockerfile | sed 's/.*NGX_LUA_RESTY_REDIS_VERSION=\([rc0-9.]*\).*/\1/')"
+LUA_RESTY_REDIS_UPSTREAM="$(lastversion --pre openresty/lua-resty-redis)"
+compare 'resty-redis lua module' "$LUA_RESTY_REDIS_LOCAL" "$LUA_RESTY_REDIS_UPSTREAM"
+
+NGINX_LUA_LOCAL="$(fgrep 'NGX_LUA_VERSION=' nginx/Dockerfile | sed 's/.*NGX_LUA_VERSION=\([rc0-9.]*\).*/\1/')"
+NGINX_LUA_UPSTREAM="$(lastversion --pre openresty/lua-nginx-module)"
+compare 'lua nginx module' "$NGINX_LUA_LOCAL" "$NGINX_LUA_UPSTREAM"
 
 AUDIOWAVEFORM_LOCAL="$(fgrep 'AUDIOWAVEFORM_VERSION=' backend/Dockerfile | sed 's/.*AUDIOWAVEFORM_VERSION=\([0-9.]*\).*/\1/')"
 AUDIOWAVEFORM_UPSTREAM="$(lastversion bbc/audiowaveform)"
