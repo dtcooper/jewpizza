@@ -48,7 +48,7 @@ RUN mkdir -p /usr/src/nginx && cd /usr/src \
     && cd lua-resty-lrucache && make install PREFIX=/usr && cd .. \
     && cd lua-resty-redis && make install PREFIX=/usr && cd .. \
     && cd nginx \
-    && NGX_CONF_ARGS="$(nginx -V 2>&1 | sed -n -e 's/^.*arguments: //p' | sed "s/\(--with-ld-opt=[^ ]*\)/\1,$EXTRA_LD_OPT/")" \
+    && NGX_CONF_ARGS="$(nginx -V 2>&1 | sed -n -e 's/^.*arguments: //p' | sed "s/--with-ld-opt=[^ ]*/\0,$EXTRA_LD_OPT/")" \
     && sh -c "./configure --with-compat ${NGX_CONF_ARGS} --add-dynamic-module=../brotli --add-dynamic-module=../devel-kit \
         --add-dynamic-module=../lua --add-dynamic-module=../headers-more --add-dynamic-module=../nchan" \
     && make modules && strip objs/*.so
