@@ -49,7 +49,7 @@ RUN mkdir -p /usr/src/nginx && cd /usr/src \
     && cd lua-resty-redis && make install PREFIX=/usr && cd .. \
     && cd nginx \
     && NGX_CONF_ARGS="$(nginx -V 2>&1 | sed -n -e 's/^.*arguments: //p' | sed "s/\(--with-ld-opt=[^ ]*\)/\1,$EXTRA_LD_OPT/")" \
-    && sh -c "./configure --with-compat ${NGX_CONF_ARGS},-lpcre,-E --add-dynamic-module=../brotli --add-dynamic-module=../devel-kit \
+    && sh -c "./configure --with-compat ${NGX_CONF_ARGS} --add-dynamic-module=../brotli --add-dynamic-module=../devel-kit \
         --add-dynamic-module=../lua --add-dynamic-module=../headers-more --add-dynamic-module=../nchan" \
     && make modules && strip objs/*.so
 
@@ -70,7 +70,7 @@ RUN pip install --no-cache-dir jinja2-cli==$JINJA2_CLI_VERSION
 RUN echo -e '# Include dynamic modules\ninclude "modules.conf";' | cat - /etc/nginx/nginx.conf > /tmp/nginx.conf \
     && mv -v /tmp/nginx.conf /etc/nginx/nginx.conf \
     # Add hostname to nginx logs
-    && sed -i 's/$remote_addr/$host \0/' /etc/nginx/nginx.conf
+    && sed -i 's/\$remote_addr/$host \0/' /etc/nginx/nginx.conf
 
 COPY --from=builder /usr/src/nginx/objs/*.so /usr/lib/nginx/modules/
 COPY --from=builder /usr/lib/lua /usr/lib/lua
