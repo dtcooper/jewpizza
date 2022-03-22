@@ -38,7 +38,7 @@ RUN mkdir -p /usr/src/audiowaveform && cd /usr/src/audiowaveform \
     && wget -qO - "https://github.com/bbc/audiowaveform/archive/refs/tags/${AUDIOWAVEFORM_VERSION}.tar.gz" | tar xz --strip-components 1 \
     && mkdir build && cd build \
     && cmake -D ENABLE_TESTS=0 .. \
-    && make && make install
+    && make && make install && strip "$(which audiowaveform)"
 
 
 # Get poetry requirements (can use native platform)
