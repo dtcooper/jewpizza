@@ -51,6 +51,14 @@ six = "*"
 test = ["astroid", "pytest"]
 
 [[package]]
+name = "async-timeout"
+version = "4.0.2"
+description = "Timeout context manager for asyncio programs"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[[package]]
 name = "atomicwrites"
 version = "1.4.0"
 description = "Atomic file writes."
@@ -118,14 +126,14 @@ uvloop = ["uvloop (>=0.15.2)"]
 
 [[package]]
 name = "boto3"
-version = "1.21.24"
+version = "1.21.25"
 description = "The AWS SDK for Python"
 category = "main"
 optional = false
 python-versions = ">= 3.6"
 
 [package.dependencies]
-botocore = ">=1.24.24,<1.25.0"
+botocore = ">=1.24.25,<1.25.0"
 jmespath = ">=0.7.1,<2.0.0"
 s3transfer = ">=0.5.0,<0.6.0"
 
@@ -134,7 +142,7 @@ crt = ["botocore[crt] (>=1.21.0,<2.0a0)"]
 
 [[package]]
 name = "botocore"
-version = "1.24.24"
+version = "1.24.25"
 description = "Low-level, data-driven core of boto 3."
 category = "main"
 optional = false
@@ -924,15 +932,17 @@ python-versions = ">=3.6"
 
 [[package]]
 name = "redis"
-version = "4.1.4"
+version = "4.2.0"
 description = "Python client for Redis database and key-value store"
 category = "main"
 optional = false
 python-versions = ">=3.6"
 
 [package.dependencies]
+async-timeout = ">=4.0.2"
 deprecated = ">=1.2.3"
 packaging = ">=20.4"
+typing-extensions = "*"
 
 [package.extras]
 hiredis = ["hiredis (>=1.0.0)"]
@@ -1063,7 +1073,7 @@ test = ["pytest"]
 
 [[package]]
 name = "twilio"
-version = "7.7.1"
+version = "7.8.0"
 description = "Twilio API client and TwiML generator"
 category = "main"
 optional = false
@@ -1073,6 +1083,14 @@ python-versions = ">=3.6.0"
 PyJWT = ">=2.0.0,<3.0.0"
 pytz = "*"
 requests = ">=2.0.0"
+
+[[package]]
+name = "typing-extensions"
+version = "4.1.1"
+description = "Backported and Experimental Type Hints for Python 3.6+"
+category = "main"
+optional = false
+python-versions = ">=3.6"
 
 [[package]]
 name = "tzdata"
@@ -1161,7 +1179,7 @@ tests = ["coverage", "flake8", "wheel"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "9580ef5b81ee0e61a006ba0d65e9e1dd33a33f39308887f87b465218a10a0349"
+content-hash = "3721e144fa4a0b7dadbe28fd12b29be87246d643e5c72b9cb0c316be7a808880"
 
 [metadata.files]
 appdirs = [
@@ -1183,6 +1201,10 @@ asgiref = [
 asttokens = [
     {file = "asttokens-2.0.5-py2.py3-none-any.whl", hash = "sha256:0844691e88552595a6f4a4281a9f7f79b8dd45ca4ccea82e5e05b4bbdb76705c"},
     {file = "asttokens-2.0.5.tar.gz", hash = "sha256:9a54c114f02c7a9480d56550932546a3f1fe71d8a02f1bc7ccd0ee3ee35cf4d5"},
+]
+async-timeout = [
+    {file = "async-timeout-4.0.2.tar.gz", hash = "sha256:2163e1640ddb52b7a8c80d0a67a08587e5d245cc9c553a74a847056bc2976b15"},
+    {file = "async_timeout-4.0.2-py3-none-any.whl", hash = "sha256:8ca1e4fcf50d07413d66d1a5e416e42cfdf5851c981d679a09851a6853383b3c"},
 ]
 atomicwrites = [
     {file = "atomicwrites-1.4.0-py2.py3-none-any.whl", hash = "sha256:6d1784dea7c0c8d4a5172b6c620f40b6e4cbfdf96d783691f2e1302a7b88e197"},
@@ -1226,12 +1248,12 @@ black = [
     {file = "black-22.1.0.tar.gz", hash = "sha256:a7c0192d35635f6fc1174be575cb7915e92e5dd629ee79fdaf0dcfa41a80afb5"},
 ]
 boto3 = [
-    {file = "boto3-1.21.24-py3-none-any.whl", hash = "sha256:8c7c296edac2a76d3fdc9e9664d2adac37ac0205b18ffda22e3f1e3c078038ba"},
-    {file = "boto3-1.21.24.tar.gz", hash = "sha256:c971850fa4466ed7ebcd9bbef58d03cd81c9dd3cf4e45cc1a916fc44cf2dcaf8"},
+    {file = "boto3-1.21.25-py3-none-any.whl", hash = "sha256:61375a673f3a293ea6f9d94c1b781c3bb19233093001a998a4e0bf7b3a67ae33"},
+    {file = "boto3-1.21.25.tar.gz", hash = "sha256:39195734d887bf906629bda9248637f1715522da457a304aa83936b449dd3d8c"},
 ]
 botocore = [
-    {file = "botocore-1.24.24-py3-none-any.whl", hash = "sha256:e6b5fe8bf1d3515256ebeea67b9e89d2f0cacf19131c1c86d744e5037f627d6e"},
-    {file = "botocore-1.24.24.tar.gz", hash = "sha256:6f8c79a784f04f074319cfbc4de7f858639049ac73065b26fd97b66839ab3b30"},
+    {file = "botocore-1.24.25-py3-none-any.whl", hash = "sha256:7f04738ca133e61f4e6cebfc0c7c09fe63bdf3087029cf9cc527b15b066f360c"},
+    {file = "botocore-1.24.25.tar.gz", hash = "sha256:6a28568e3922212a1c89622bc795a4ecba2ef3395ed17f8a26697bf648b7a95a"},
 ]
 brotli = [
     {file = "Brotli-1.0.9-cp27-cp27m-macosx_10_9_x86_64.whl", hash = "sha256:268fe94547ba25b58ebc724680609c8ee3e5a843202e9a381f6f9c5e8bdb5c70"},
@@ -1747,8 +1769,8 @@ pyyaml = [
     {file = "PyYAML-6.0.tar.gz", hash = "sha256:68fb519c14306fec9720a2a5b45bc9f0c8d1b9c72adf45c37baedfcd949c35a2"},
 ]
 redis = [
-    {file = "redis-4.1.4-py3-none-any.whl", hash = "sha256:04629f8e42be942c4f7d1812f2094568f04c612865ad19ad3ace3005da70631a"},
-    {file = "redis-4.1.4.tar.gz", hash = "sha256:1d9a0cdf89fdd93f84261733e24f55a7bbd413a9b219fdaf56e3e728ca9a2306"},
+    {file = "redis-4.2.0-py3-none-any.whl", hash = "sha256:3cbe235cea80b9c9991b397567aa2d65eb4e6fb09787f61d227ae82eb4eb50b4"},
+    {file = "redis-4.2.0.tar.gz", hash = "sha256:6758d01dec81af191b98a35cce3402675d115456584c39b500ab485a5e386bbb"},
 ]
 requests = [
     {file = "requests-2.27.1-py2.py3-none-any.whl", hash = "sha256:f22fa1e554c9ddfd16e6e41ac79759e17be9e492b3587efa038054674760e72d"},
@@ -1794,8 +1816,12 @@ traitlets = [
     {file = "traitlets-5.1.1.tar.gz", hash = "sha256:059f456c5a7c1c82b98c2e8c799f39c9b8128f6d0d46941ee118daace9eb70c7"},
 ]
 twilio = [
-    {file = "twilio-7.7.1-py2.py3-none-any.whl", hash = "sha256:dedc37864ee9682631ce942a0dfbb04286fe4938ed90b1f22a583596ffbf459e"},
-    {file = "twilio-7.7.1.tar.gz", hash = "sha256:d8e021c1c82f5552446d25d2b91b7373d76d712c90324470c886220853496be1"},
+    {file = "twilio-7.8.0-py2.py3-none-any.whl", hash = "sha256:f0707090c57795ee6747b849d6b7762d06c80eb2570c4f5bb37596f888ee1471"},
+    {file = "twilio-7.8.0.tar.gz", hash = "sha256:0ab9d02313ce10a7f7d94dffbbc0c8ca5c6aaa8b2ec4fa392a9dfedf64bb361a"},
+]
+typing-extensions = [
+    {file = "typing_extensions-4.1.1-py3-none-any.whl", hash = "sha256:21c85e0fe4b9a155d0799430b0ad741cdce7e359660ccbd8b530613e8df88ce2"},
+    {file = "typing_extensions-4.1.1.tar.gz", hash = "sha256:1a9462dcc3347a79b1f1c0271fbe79e844580bb598bafa1ed208b94da3cdcd42"},
 ]
 tzdata = [
     {file = "tzdata-2022.1-py2.py3-none-any.whl", hash = "sha256:238e70234214138ed7b4e8a0fab0e5e13872edab3be586ab8198c407620e2ab9"},
