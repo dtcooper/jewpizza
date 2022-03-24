@@ -58,7 +58,7 @@ runs:
         cache-to: type=registry,ref=${{ steps.vars.outputs.cache-tag }},mode=max
     -
       name: Update Docker Hub description
-      uses: peter-evans/dockerhub-description@v2
+      uses: peter-evans/dockerhub-description@v3
       if: inputs.dev == '0'
       with:
         username: ${{ inputs.username }}
