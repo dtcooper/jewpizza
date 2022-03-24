@@ -40,7 +40,7 @@ It's built using the _wildly_ popular and _extremely_ common
 * **N** is for [nginx][nginx-url], a web server and
     [reverse proxy][reverse-proxy-url] using the
     [jonasal/nginx-certbot][nginx-certbot-url] container as its base (for
-    SSL/[HTTPS][https-url]);
+    SSL/[HTTPS][https-url]), with [embedded Lua][nginx-lua-url];
 * **G** is for [Gunicorn][gunicorn-url] to run the web app via
     [Python][python-url]'s [Web Server Gateway Interface][wsgi-url];
 * **T** is for [Tailwind CSS][tailwind-url], a utility-first CSS framework;
@@ -284,6 +284,7 @@ the [LICENSE][license-url] file for details.
 [navigo-url]: https://github.com/krasimir/navigo
 [nchan-url]: https://nchan.io/
 [nginx-certbot-url]: https://github.com/JonasAlfredsson/docker-nginx-certbot/
+[nginx-lua-url]: https://github.com/openresty/lua-nginx-module
 [nginx-url]: https://www.nginx.com/
 [postgres-url]: https://www.postgresql.org/
 [python-url]: https://www.python.org/
