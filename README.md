@@ -20,15 +20,15 @@ personal website.
 
 ## Preface
 
-I can't imagine in a million years _why on earth_ you'd want to run this code.
+I can't imagine _why on earth_ in a million years you'd want to run this code.
 So, these instructions are mostly for me &mdash; in case of sudden amnesia or
-coming back to this project after a year or so of neglect.
+coming back to this project after a period of neglect.
 
 
 ## Stack &mdash; **CLANG! THUD! IT'S A DARN JEW'S PANDA!**
 
-It's built using the _wildly_ popular and _extremely_ common
-**CLANG! THUD! IT'S A DARN JEW'S PANDA!** stack, ie,
+It's built using the _wildly_ popular and _extremely_ common **CLANG! THUD! IT'S
+A DARN JEW'S PANDA!** stack, ie,
 
 * **C** is for [Compose][docker-compose-url], ie Docker Compose, a
     multi-container orchestration tool;
@@ -40,7 +40,7 @@ It's built using the _wildly_ popular and _extremely_ common
 * **N** is for [nginx][nginx-url], a web server and
     [reverse proxy][reverse-proxy-url] using the
     [jonasal/nginx-certbot][nginx-certbot-url] container as its base (for
-    SSL/[HTTPS][https-url]), with [embedded Lua][nginx-lua-url];
+    [HTTPS][https-url]), using [embedded Lua][nginx-lua-url];
 * **G** is for [Gunicorn][gunicorn-url] to run the web app via
     [Python][python-url]'s [Web Server Gateway Interface][wsgi-url];
 * **T** is for [Tailwind CSS][tailwind-url], a utility-first CSS framework;

@@ -56,7 +56,7 @@ RUN mkdir -p /usr/src/nginx && cd /usr/src \
 
 FROM jonasal/nginx-certbot:3.1.2-nginx1.21.6-alpine AS final
 
-ARG JINJA2_CLI_VERSION=0.8.1
+ARG JINJA2_CLI_VERSION=0.8.2
 
 ENV CERTBOT_AUTHENTICATOR=dns-digitalocean \
     RENEWAL_INTERVAL=1d
