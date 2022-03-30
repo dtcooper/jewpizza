@@ -46,6 +46,9 @@ shell-no-deps: CONTAINER:=app
 shell-no-deps:
 	@APP_IP_OVERRIDE=172.22.0.52 $(COMPOSE) run --rm --no-deps --service-ports -e "GITHUB_API_TOKEN=$$GITHUB_API_TOKEN" $(CONTAINER) $$([ "$(CONTAINER)" = radio ] && echo /bin/bash || echo /bin/ash) || true
 
+pull:
+	@$(COMPOSE) pull --include-deps
+
 show-outdated:
 	@echo 'Showing outdated dependencies... (empty means none)'
 	@APP_IP_OVERRIDE=172.22.0.53 $(COMPOSE) run --rm --no-deps -e "GITHUB_API_TOKEN=$$GITHUB_API_TOKEN" -e NO_STARTUP_MESSAGE=1 app sh -c '\
