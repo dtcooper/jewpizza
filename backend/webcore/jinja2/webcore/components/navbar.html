@@ -27,10 +27,10 @@
       {% for link in nav_links %}
         <a
           href="{{ link.url }}"
-          class="btn 2xl:btn-lg btn-rounded no-animation btn-primary hidden {% if link.is_subnav %}3xl:flex{% else %}lg:flex{% endif %}{% if link.is_active %} btn-disabled btn-outline{% endif %}"
+          class="btn 2xl:btn-lg btn-rounded no-animation btn-primary hidden {% if link.is_subnav %}3xl:flex{% else %}lg:flex{% endif %}{% if link.is_active %} btn-outline pointer-events-none{% endif %}"
           :class="{
             'btn-outline': $store.page.current == {{ link.url|attrjs }},
-            'btn-disabled': $store.page.loading || $store.page.current == {{ link.url|attrjs }}
+            'pointer-events-none': $store.page.loading || $store.page.current == {{ link.url|attrjs }}
           }"
         >
           {{ icon(link.icon, size='text-2xl 2xl:text-3xl') }} {{ link.name }}
