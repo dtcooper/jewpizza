@@ -67,7 +67,7 @@
         ie, we want scrolling to apply ONLY to item (main content) #}
     x-data class="h-screen-iphone-fix flex flex-col overflow-hidden-iphone-only"
     {# Disable overflow-hidden in unlikely event nav is larger than screen #}
-    :class="{'overflow-hidden-iphone-only': !$store.menuOpen, 'cursor-wait': $store.page.loading}"
+    :class="{'overflow-hidden-iphone-only': !$store.menuOpen, '!cursor-wait': $store.page.loading}"
   >
     {% include 'webcore/components/navbar.html' %}
     {% include 'webcore/components/messages.html' %}
