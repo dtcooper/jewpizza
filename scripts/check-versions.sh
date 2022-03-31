@@ -141,6 +141,6 @@ WAIT_FOR_LOCAL="$(fgrep 'WAIT_FOR_VERSION=' backend/Dockerfile | sed 's/.*WAIT_F
 WAIT_FOR_UPSTREAM="$(lastversion eficode/wait-for)"
 compare wait-for "$WAIT_FOR_LOCAL" "$WAIT_FOR_UPSTREAM"
 
-ICONIFY_LOCAL="$(fgrep iconify backend/webcore/jinja2/webcore/base_full.html | sed 's/.*iconify\/\([0-9.]*\)\/.*/\1/')"
+ICONIFY_LOCAL="$(fgrep iconify backend/webcore/jinja2/webcore/base_full.html | sed 's/.*iconify@\([0-9.]*\)\/.*/\1/')"
 ICONIFY_UPSTREAM="$(npm --silent view @iconify/iconify version)"
 compare Iconify "$ICONIFY_LOCAL" "$ICONIFY_UPSTREAM"
