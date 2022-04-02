@@ -109,6 +109,7 @@ WORKDIR /app/backend
 
 RUN if [ "$DEBUG" -a "$DEBUG" != '0' ]; then \
         poetry install \
+        && poetry update \
     ; else \
         # Packages needed for pip install, removed afterwards
         apk add --no-cache \
