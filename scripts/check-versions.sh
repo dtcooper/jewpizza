@@ -76,8 +76,8 @@ DOZZLE_LOCAL="$(yq -r .services.logs.image docker-compose.yml | sed 's/^amir20\/
 DOZZLE_UPSTREAM="$(lastversion amir20/dozzle)"
 compare Dozzle "$DOZZLE_LOCAL" "$DOZZLE_UPSTREAM"
 
-UMAMI_LOCAL="$(yq -r .services.umami.image docker-compose.yml | sed 's/^ghcr.io\/mikecao\/umami:postgresql-\(.*\)/\1/')"
-UMAMI_UPSTREAM="$(wget --header "Authorization: token ${GITHUB_API_TOKEN}" -qO - "https://api.github.com/users/mikecao/packages/container/umami/versions" | jq -r .[].metadata.container.tags | grep -A 1 postgresql-latest | tail -n1 | sed 's/.*postgresql-\([0-9a-f]*\).*/\1/')"
+UMAMI_LOCAL="$(yq -r .services.umami.image docker-compose.yml | sed 's/^ghcr.io\/mikecao\/umami:postgresql-v\(.*\)/\1/')"
+UMAMI_UPSTREAM="$(lastversion mikecao/umami)"
 compare Umami "$UMAMI_LOCAL" "$UMAMI_UPSTREAM"
 
 ICECAST_KH_LOCAL="$(fgrep 'ICECAST_KH_VERSION=' icecast/Dockerfile | sed 's/.*ICECAST_KH_VERSION="\([0-9a-zA-Z.-]*\).*/\1/')"

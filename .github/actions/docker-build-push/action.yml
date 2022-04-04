@@ -7,8 +7,7 @@ inputs:
     required: true
   password:
     description: 'Docker Hub password'
-    required: false
-    default: ''
+    required: true
   dev:
     description: 'Build dev containers (DEBUG=1)'
     required: false

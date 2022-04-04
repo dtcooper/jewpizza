@@ -125,7 +125,7 @@ services:
 
   umami:
     <<: *service-defaults
-    image: ghcr.io/mikecao/umami:postgresql-2b4ddb5
+    image: ghcr.io/mikecao/umami:postgresql-v1.29.2
     depends_on:
       - db
     environment:

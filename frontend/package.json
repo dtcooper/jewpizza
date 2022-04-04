@@ -28,7 +28,7 @@
     "@tailwindcss/typography": "^0.5.2",
     "alpinejs": "^3.9.5",
     "daisyui": "^2.13.6",
-    "esbuild": "^0.14.30",
+    "esbuild": "^0.14.31",
     "moment": "^2.29.2",
     "moment-timezone": "^0.5.34",
     "navigo": "^8.11.1",
