@@ -9,6 +9,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import FormView, TemplateView, View
 
 from jew_pizza.twilio import send_sms
+from jew_pizza.utils import get_last_sse_message
 
 from .forms import SendEmailForm, SendTextMessageForm
 
@@ -87,6 +88,19 @@ class SendEmailView(SuccessMessageMixin, AdminFormView):
         message = form.cleaned_data["message"]
         send_mail(subject=subject, message=message, from_email=None, recipient_list=[recipient])
         return super().form_valid(form)
+
+
+class SSEStatusView(AdminToolsViewMixin, TemplateView):
+    title = "SSE Status"
+    template_name = "admin_tools/sse_status.html"
+
+    def get_context_data(self, **kwargs):
+        messages = {msg: get_last_sse_message(msg) for msg in settings.SSE_MESSAGE_TYPES}
+
+        return {
+            "initial_messages": {k: v for k, v in messages.items() if v},
+            **super().get_context_data(**kwargs),
+        }
 
 
 @method_decorator(staff_member_required, name="dispatch")

@@ -6,6 +6,7 @@
     const MAX_MESSAGES = 50
     const SSE_URL = {{ settings.SSE_URL|tojson }}
     const SSE_MESSAGE_TYPES = {{ settings.SSE_MESSAGE_TYPES|tojson }}
+    const INITIAL_MESSAGES = {{ initial_messages|tojson }}
 
     document.addEventListener('alpine:init', () => {
       Alpine.data('sse', () => ({
@@ -13,6 +14,10 @@
         eventsource: null,
         num_connected: 0,
         messages: [],
+        addMessage(messageType, message) {
+            this.messages.length = Math.min(this.messages.length, MAX_MESSAGES - 1)
+            this.messages.unshift({'type': messageType, 'message': message})
+        },
         init() {
           this.eventsource = new EventSource(SSE_URL)
           this.eventsource.addEventListener('open', () => {
@@ -23,10 +28,14 @@
             this.connected = false
           })
           for (let messageType of SSE_MESSAGE_TYPES) {
+            const msg = INITIAL_MESSAGES[messageType]
+            if (msg) {
+              this.addMessage(messageType, msg)
+            }
+
             this.eventsource.addEventListener(messageType, (e) => {
               const msg = JSON.parse(e.data)
-              this.messages.length = Math.min(this.messages.length, MAX_MESSAGES - 1)
-              this.messages.unshift({'type': messageType, 'message': msg})
+              this.addMessage(messageType, msg)
             })
           }
         }
