@@ -45,6 +45,7 @@
 * [ ] Icecast server + liquidsoap with player to play whatever show I'm on, read
     countdowns when I'm not on air
     - [ ] Call-in button via Twilio client
+    - [ ] Name it "All David, All The Time Radio"
 * [ ] Move [radio-calls](https://github.com/dtcooper/radio-calls) repo into this
 * [ ] Warn on leave iff player is playing
 * [ ] Testimonials / Calls / Etc in clippy?
