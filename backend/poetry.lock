@@ -126,14 +126,14 @@ uvloop = ["uvloop (>=0.15.2)"]
 
 [[package]]
 name = "boto3"
-version = "1.21.33"
+version = "1.21.34"
 description = "The AWS SDK for Python"
 category = "main"
 optional = false
 python-versions = ">= 3.6"
 
 [package.dependencies]
-botocore = ">=1.24.33,<1.25.0"
+botocore = ">=1.24.34,<1.25.0"
 jmespath = ">=0.7.1,<2.0.0"
 s3transfer = ">=0.5.0,<0.6.0"
 
@@ -142,7 +142,7 @@ crt = ["botocore[crt] (>=1.21.0,<2.0a0)"]
 
 [[package]]
 name = "botocore"
-version = "1.24.33"
+version = "1.24.34"
 description = "Low-level, data-driven core of boto 3."
 category = "main"
 optional = false
@@ -577,7 +577,7 @@ python-versions = ">=3.7"
 
 [[package]]
 name = "lastversion"
-version = "2.2.2"
+version = "2.3.0"
 description = "A CLI tool to find the latest stable version of an arbitrary project"
 category = "dev"
 optional = false
@@ -1171,7 +1171,7 @@ tests = ["coverage", "flake8", "wheel"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "e7e7ace823557f448351306e01656555439b3049c4006076ecb55b52b18376e2"
+content-hash = "8ce185c05c090b8bb4f35c6c462fe7d6c80b96da52ceef6a7370c8c96f525061"
 
 [metadata.files]
 appdirs = [
@@ -1240,12 +1240,12 @@ black = [
     {file = "black-22.3.0.tar.gz", hash = "sha256:35020b8886c022ced9282b51b5a875b6d1ab0c387b31a065b84db7c33085ca79"},
 ]
 boto3 = [
-    {file = "boto3-1.21.33-py3-none-any.whl", hash = "sha256:9d8ddfefe0c4a993423e2c40831034c78fcb7b3425bf3610cf0087301dd9098b"},
-    {file = "boto3-1.21.33.tar.gz", hash = "sha256:c06b9b29f80da8cf6d9fac8f41d74a74d0f5347927acf11b15428b295fcbdd31"},
+    {file = "boto3-1.21.34-py3-none-any.whl", hash = "sha256:9d2175ad0f5de587473f20b062b1ef462d1e5ee547bb22bdd36e28442823e0a9"},
+    {file = "boto3-1.21.34.tar.gz", hash = "sha256:6cbc3aae70af5f35869d7b2f114cc953edf925231febf892d609682b2ba3f9f0"},
 ]
 botocore = [
-    {file = "botocore-1.24.33-py3-none-any.whl", hash = "sha256:16ca4a2b72fef8caaf0eeb423dbf6cd64938442c4b9f96deb672468229e5e3f9"},
-    {file = "botocore-1.24.33.tar.gz", hash = "sha256:ea5fd180082030a6c33fa19bf011d72970f3ed23cfff1b41413069e325768103"},
+    {file = "botocore-1.24.34-py3-none-any.whl", hash = "sha256:4402900838fad0c46c78f16a497709039f10e945c6ef1f0df5d9a98c80f1563b"},
+    {file = "botocore-1.24.34.tar.gz", hash = "sha256:ec849864a6791c04ac6c52539dae34d53856cd32eb7e5481a3465aab7bd93555"},
 ]
 brotli = [
     {file = "Brotli-1.0.9-cp27-cp27m-macosx_10_9_x86_64.whl", hash = "sha256:268fe94547ba25b58ebc724680609c8ee3e5a843202e9a381f6f9c5e8bdb5c70"},
@@ -1519,8 +1519,8 @@ jmespath = [
     {file = "jmespath-1.0.0.tar.gz", hash = "sha256:a490e280edd1f57d6de88636992d05b71e97d69a26a19f058ecf7d304474bf5e"},
 ]
 lastversion = [
-    {file = "lastversion-2.2.2-py3-none-any.whl", hash = "sha256:85d0874526169837385f378027af84211971cc95e5de5995c89e1519e3192e81"},
-    {file = "lastversion-2.2.2.tar.gz", hash = "sha256:ee4358f27aa8973dc33343a2d725cbbc899c228194e06c384b8ae688bcf707b2"},
+    {file = "lastversion-2.3.0-py3-none-any.whl", hash = "sha256:c8b7d6602efcbe4d7e461c1b9c5e67e3b5a3f5997014668a0dede744a5912acd"},
+    {file = "lastversion-2.3.0.tar.gz", hash = "sha256:07d76cd209fbeabe5be98ee49f714d07144944b0fa34997fd4b3ba03ec8009d8"},
 ]
 lockfile = [
     {file = "lockfile-0.12.2-py2.py3-none-any.whl", hash = "sha256:6c3cb24f344923d30b2785d5ad75182c8ea7ac1b6171b08657258ec7429d50fa"},
