@@ -20,6 +20,10 @@ inputs:
   directory:
     description: SSH directory to deploy in
     required: true
+  restart:
+    description: Force restart of containers
+    required: false
+    default: ''
 
 runs:
   using: "composite"
@@ -27,6 +31,8 @@ runs:
     -
         name: Deploy containers
         uses: appleboy/ssh-action@master
+        env:
+          RESTART: ${{ inputs.restart }}
         with:
           host: ${{ inputs.host }}
           port: ${{ inputs.port }}
@@ -37,5 +43,8 @@ runs:
             cd ${{ inputs.directory }}
             git pull --ff-only
             docker compose pull --quiet
+            if [ "$RESTART" ]; then
+              docker compose down --remove-orphans
+            fi
             docker compose up --quiet-pull --remove-orphans --no-build --detach
             docker system prune --force
