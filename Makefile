@@ -1,4 +1,4 @@
-.PHONY: up down pre-commit build build-no-cache shell shell-no-deps show-outdated env-diff export-show-fixtures ssh
+.PHONY: up down pre-commit build build-prod build-no-cache build-prod-no-cache build-all build-all-no-cache shell shell-no-deps show-outdated env-diff export-show-fixtures ssh
 
 COMPOSE:=docker compose
 SERVER:=jew.pizza
@@ -32,11 +32,21 @@ pre-commit:
 
 build: CONTAINERS:=
 build:
-	$(COMPOSE) build --pull --build-arg GIT_REV=$(GIT_REV) --build-arg BUILD_DATE=$(BUILD_DATE) $(CONTAINERS)
+	$(COMPOSE) $(__COMPOSE_FLAGS) build --pull --build-arg GIT_REV=$(GIT_REV) --build-arg BUILD_DATE=$(BUILD_DATE) $(__BUILD_FLAGS) $(CONTAINERS)
 
-build-no-cache: CONTAINERS:=
-build-no-cache:
-	$(COMPOSE) build --no-cache --pull --build-arg GIT_REV=$(GIT_REV) --build-arg BUILD_DATE=$(BUILD_DATE) $(CONTAINERS)
+build-prod: __COMPOSE_FLAGS=-f docker-compose.yml
+build-prod: __BUILD_FLAGS=--build-arg DEBUG=0
+build-prod: build
+
+build-no-cache: __BUILD_FLAGS=--no-cache
+build-no-cache: build
+
+build-prod-no-cache: __COMPOSE_FLAGS=-f docker-compose.yml
+build-prod-no-cache: __BUILD_FLAGS=--build-arg DEBUG=0 --no-cache
+build-prod-no-cache: build
+
+build-all: build build-prod
+build-all-no-cache: build-no-cache build-prod-no-cache
 
 shell: CONTAINER:=app
 shell:
