@@ -263,13 +263,11 @@ CONSTANCE_CONFIG = {
     "HIDDEN_IMG_MODE": (False, "Enable hidden image mode (for development in public, to not look so awkward)"),
     "TWILIO_FROM_NUMBER": ("+14164390000", "Twilio from number for texts/calls", "phone"),
     "UMAMI_WEBSITE_ID": ("", "Website ID in umami", "uuid_optional"),
-    "AUTO_DEPLOY": (True, "Automatically deploy from Github Actions when code is pushed to main branch"),
 }
 
 CONSTANCE_CONFIG_FIELDSETS = OrderedDict(
     (
         ("Development Options", ("ENABLE_JEWIPPY", "ENABLE_PLAYER", "ENABLE_TEST_NOTIFICATIONS", "HIDDEN_IMG_MODE")),
-        ("Telephony", ("TWILIO_FROM_NUMBER",)),
-        ("Miscellaneous", ("UMAMI_WEBSITE_ID", "AUTO_DEPLOY")),
+        ("Miscellaneous", ("TWILIO_FROM_NUMBER", "UMAMI_WEBSITE_ID")),
     )
 )

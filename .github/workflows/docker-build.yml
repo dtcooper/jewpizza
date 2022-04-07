@@ -19,6 +19,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     name: Build container
+    env:
+      DOCKERHUB_USERNAME: jewpizza
     strategy:
       matrix:
         container: [app, icecast, nginx, radio]
@@ -30,7 +32,7 @@ jobs:
         name: Build container
         uses: ./.github/actions/docker-build-push
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          username: ${{ env.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
           container: ${{ matrix.container }}
 
@@ -47,10 +49,12 @@ jobs:
       -
         name: Set variables
         id: vars
-        run: echo "::set-output name=deploy-in-sha::$(git log -1 --pretty=%B HEAD | fgrep -qi '[deploy]' && echo 1)"
+        # Detect "[deploy]" string in commit message
+        run: echo "::set-output name=deploy-in-sha::$(git log -1 --format='%B' HEAD | fgrep -qi '[deploy]' && echo 1)"
       -
         name: Deploy containers
         uses: appleboy/ssh-action@master
+        # Only if explicit in workflow dispatch, or if "[deploy]" is in commit message
         if: >-
           (github.event_name != 'workflow_dispatch' && steps.vars.outputs.deploy-in-sha == '1')
           || (github.event_name == 'workflow_dispatch' && github.event.inputs.deploy)
@@ -62,22 +66,10 @@ jobs:
           fingerprint: ${{ secrets.SSH_FINGERPRINT }}
           script: |
             cd ${{ env.SSH_DEPLOY_DIRECTORY }}
-            SHOULD_DEPLOY=
-            if docker compose ps --services --filter "status=running" | grep -q '^app$'; then
-              if [ "$(docker compose exec -T app ./manage.py constance get AUTO_DEPLOY)" = True ]; then
-                SHOULD_DEPLOY=1
-              fi
-            else
-              SHOULD_DEPLOY=1
-            fi
-            if [ "$SHOULD_DEPLOY" ]; then
-              git pull --ff-only
-              docker compose pull --quiet
-              docker compose up --quiet-pull --remove-orphans --no-build --detach
-              docker system prune --force
-            else
-              echo "Deploy disabled by constance config (AUTO_DEPLOY = False)"
-            fi
+            git pull --ff-only
+            docker compose pull --quiet
+            docker compose up --quiet-pull --remove-orphans --no-build --detach
+            docker system prune --force
 
   test:
     runs-on: ubuntu-latest
