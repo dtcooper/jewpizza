@@ -15,84 +15,86 @@ concurrency:
   group: main
   cancel-in-progress: true
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    name: Build container
-    strategy:
-      matrix:
-        container: [app, icecast, nginx, radio]
-    steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v3
-      -
-        name: Build container
-        uses: ./.github/actions/docker-build-push
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          container: ${{ matrix.container }}
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     name: Build container
+#     strategy:
+#       matrix:
+#         container: [app, icecast, nginx, radio]
+#     steps:
+#       -
+#         name: Checkout
+#         uses: actions/checkout@v3
+#       -
+#         name: Build container
+#         uses: ./.github/actions/docker-build-push
+#         with:
+#           username: ${{ secrets.DOCKERHUB_USERNAME }}
+#           password: ${{ secrets.DOCKERHUB_PASSWORD }}
+#           container: ${{ matrix.container }}
 
   deploy:
     runs-on: ubuntu-latest
     name: Deploy
     env:
       SSH_DEPLOY_DIRECTORY: jewpizza
-    needs: [build]
+    # needs: [build]
     steps:
       -
         name: Checkout
         uses: actions/checkout@v3
       -
-        name: Set variables
-        id: vars
-        run: echo "::set-output name=deploy-in-sha::$(git log -1 --pretty=%B HEAD | fgrep -qi '[deploy]' && echo 1)"
-      -
-        name: Deploy containers
-        uses: appleboy/ssh-action@master
-        if: >-
-          (github.event_name != 'workflow_dispatch' && steps.vars.deploy-in-sha == '1')
-          || (github.event_name == 'workflow_dispatch' && github.event.inputs.deploy)
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          port: ${{ secrets.SSH_PORT }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
-          fingerprint: ${{ secrets.SSH_FINGERPRINT }}
-          script: |
-            cd ${{ env.SSH_DEPLOY_DIRECTORY }}
-            SHOULD_DEPLOY=
-            if docker compose ps --services --filter "status=running" | grep -q '^app$'; then
-              if [ "$(docker compose exec -T app ./manage.py constance get AUTO_DEPLOY)" = True ]; then
-                SHOULD_DEPLOY=1
-              fi
-            else
-              SHOULD_DEPLOY=1
-            fi
-            if [ "$SHOULD_DEPLOY" ]; then
-              git pull --ff-only
-              docker compose pull --quiet
-              docker compose up --quiet-pull --remove-orphans --no-build --detach
-              docker system prune --force
-            else
-              echo "Deploy disabled by constance config (AUTO_DEPLOY = False)"
-            fi
+        name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        # name: Set variables
+        # id: vars
+        # run: echo "::set-output name=deploy-in-sha::$(git log -1 --pretty=%B HEAD | fgrep -qi '[deploy]' && echo 1)"
+      # -
+      #   name: Deploy containers
+      #   uses: appleboy/ssh-action@master
+      #   if: >-
+      #     (github.event_name != 'workflow_dispatch' && steps.vars.deploy-in-sha == '1')
+      #     || (github.event_name == 'workflow_dispatch' && github.event.inputs.deploy)
+      #   with:
+      #     host: ${{ secrets.SSH_HOST }}
+      #     port: ${{ secrets.SSH_PORT }}
+      #     username: ${{ secrets.SSH_USERNAME }}
+      #     key: ${{ secrets.SSH_KEY }}
+      #     fingerprint: ${{ secrets.SSH_FINGERPRINT }}
+      #     script: |
+      #       cd ${{ env.SSH_DEPLOY_DIRECTORY }}
+      #       SHOULD_DEPLOY=
+      #       if docker compose ps --services --filter "status=running" | grep -q '^app$'; then
+      #         if [ "$(docker compose exec -T app ./manage.py constance get AUTO_DEPLOY)" = True ]; then
+      #           SHOULD_DEPLOY=1
+      #         fi
+      #       else
+      #         SHOULD_DEPLOY=1
+      #       fi
+      #       if [ "$SHOULD_DEPLOY" ]; then
+      #         git pull --ff-only
+      #         docker compose pull --quiet
+      #         docker compose up --quiet-pull --remove-orphans --no-build --detach
+      #         docker system prune --force
+      #       else
+      #         echo "Deploy disabled by constance config (AUTO_DEPLOY = False)"
+      #       fi
 
-  test:
-    runs-on: ubuntu-latest
-    name: Tests
-    needs: [build]
-    steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v3
-      -
-        name: Run tests
-        run: |
-          cp -v .env.sample .env
-          echo 'Updating .env file for testing'
-          sed -i 's/^\(SECRET_KEY\)=.*$/\1=hackme/' .env
-          sed -i 's/^\(DEBUG\)=.*$/\1=0/' .env
-          docker compose pull --quiet app
-          docker compose run --quiet-pull --no-TTY app sh -c 'pip install -r requirements-tests.txt && pytest'
+  # test:
+  #   runs-on: ubuntu-latest
+  #   name: Tests
+  #   needs: [build]
+  #   steps:
+  #     -
+  #       name: Checkout
+  #       uses: actions/checkout@v3
+  #     -
+  #       name: Run tests
+  #       run: |
+  #         cp -v .env.sample .env
+  #         echo 'Updating .env file for testing'
+  #         sed -i 's/^\(SECRET_KEY\)=.*$/\1=hackme/' .env
+  #         sed -i 's/^\(DEBUG\)=.*$/\1=0/' .env
+  #         docker compose pull --quiet app
+  #         docker compose run --quiet-pull --no-TTY app sh -c 'pip install -r requirements-tests.txt && pytest'
