@@ -1,0 +1,41 @@
+name: Deploy
+description: Deploy jewpizza containers via SSH
+
+inputs:
+  host:
+    description: SSH host
+    required: true
+  port:
+    description: SSH port
+    required: true
+  username:
+    description: SSH username
+    required: true
+  key:
+    description: SSH key
+    required: true
+  fingerprint:
+    description: SSH fingerprint
+    required: true
+  directory:
+    description: SSH directory to deploy in
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    -
+        name: Deploy containers
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ inputs.host }}
+          port: ${{ inputs.sport }}
+          username: ${{ inputs.username }}
+          key: ${{ inputs.key }}
+          fingerprint: ${{ inputs.fingerprint }}
+          script: |
+            cd ${{ inputs.directory }}
+            git pull --ff-only
+            docker compose pull --quiet
+            docker compose up --quiet-pull --remove-orphans --no-build --detach
+            docker system prune --force

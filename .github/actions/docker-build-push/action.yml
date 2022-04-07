@@ -1,3 +1,6 @@
+name: Build and Push
+description: Build and push jewpizza docker containers
+
 inputs:
   container:
     description: Container name
@@ -14,7 +17,7 @@ inputs:
     default: '0'
 
 runs:
-  using: "composite"
+  using: composite
   steps:
     -
       name: Set variables

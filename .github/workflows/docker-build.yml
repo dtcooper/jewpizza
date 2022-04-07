@@ -40,7 +40,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Deploy
     env:
-      SSH_DEPLOY_DIRECTORY: jewpizza
+      SSH_DIRECTORY: jewpizza
     needs: [build]
     steps:
       -
@@ -53,7 +53,7 @@ jobs:
         run: echo "::set-output name=deploy-in-sha::$(git log -1 --format='%B' HEAD | fgrep -qi '[deploy]' && echo 1)"
       -
         name: Deploy containers
-        uses: appleboy/ssh-action@master
+        uses: ./.github/actions/deploy
         # Only if explicit in workflow dispatch, or if "[deploy]" is in commit message
         if: >-
           (github.event_name != 'workflow_dispatch' && steps.vars.outputs.deploy-in-sha == '1')
@@ -64,12 +64,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           fingerprint: ${{ secrets.SSH_FINGERPRINT }}
-          script: |
-            cd ${{ env.SSH_DEPLOY_DIRECTORY }}
-            git pull --ff-only
-            docker compose pull --quiet
-            docker compose up --quiet-pull --remove-orphans --no-build --detach
-            docker system prune --force
+          directory: ${{ env.SSH_DIRECTORY }}
 
   test:
     runs-on: ubuntu-latest
