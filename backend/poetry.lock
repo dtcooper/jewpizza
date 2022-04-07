@@ -1073,7 +1073,7 @@ test = ["pytest"]
 
 [[package]]
 name = "twilio"
-version = "7.8.0"
+version = "7.8.1"
 description = "Twilio API client and TwiML generator"
 category = "main"
 optional = false
@@ -1171,7 +1171,7 @@ tests = ["coverage", "flake8", "wheel"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "38627ba9831d69187f906b1d30bbf5d74debfc70b042589e2d6555b08d723cdd"
+content-hash = "c2a4d8b0f1dd9120a4118ef3d85067e6fbd9dcd792d7819c43ebebba9cb59865"
 
 [metadata.files]
 appdirs = [
@@ -1808,8 +1808,8 @@ traitlets = [
     {file = "traitlets-5.1.1.tar.gz", hash = "sha256:059f456c5a7c1c82b98c2e8c799f39c9b8128f6d0d46941ee118daace9eb70c7"},
 ]
 twilio = [
-    {file = "twilio-7.8.0-py2.py3-none-any.whl", hash = "sha256:f0707090c57795ee6747b849d6b7762d06c80eb2570c4f5bb37596f888ee1471"},
-    {file = "twilio-7.8.0.tar.gz", hash = "sha256:0ab9d02313ce10a7f7d94dffbbc0c8ca5c6aaa8b2ec4fa392a9dfedf64bb361a"},
+    {file = "twilio-7.8.1-py2.py3-none-any.whl", hash = "sha256:ae1d1224da7268c3aec1e811c303fcda5cc1f55258c2368fcbecaa4b391c1937"},
+    {file = "twilio-7.8.1.tar.gz", hash = "sha256:b6aeccff49c973a50eb1cbbb9eac277b3219552eac1fd8a51fe101a8e2f43a97"},
 ]
 tzdata = [
     {file = "tzdata-2022.1-py2.py3-none-any.whl", hash = "sha256:238e70234214138ed7b4e8a0fab0e5e13872edab3be586ab8198c407620e2ab9"},
