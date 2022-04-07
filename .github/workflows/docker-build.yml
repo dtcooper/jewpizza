@@ -15,7 +15,7 @@ concurrency:
   group: main
   cancel-in-progress: true
 
-# jobs:
+jobs:
 #   build:
 #     runs-on: ubuntu-latest
 #     name: Build container
