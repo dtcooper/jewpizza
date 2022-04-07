@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       force_email:
-        description: Force sending an email
+        description: 'Force sending an email'
         required: false
         default: false
 

@@ -1,15 +1,15 @@
 inputs:
   container:
-    description: Container name
+    description: 'Container name'
     required: true
   username:
-    description: Docker Hub username
+    description: 'Docker Hub username'
     required: true
   password:
-    description: Docker Hub password
+    description: 'Docker Hub password'
     required: true
   dev:
-    description: Build dev containers (DEBUG=1)
+    description: 'Build dev containers (DEBUG=1)'
     required: false
     default: '0'
 
@@ -19,12 +19,12 @@ runs:
     -
       name: Set variables
       id: vars
-      shell: bash
       run: |
         echo "::set-output name=sha::$(echo ${GITHUB_SHA} | cut -c 1-8)"
         echo "::set-output name=repo::${{ inputs.username }}/${{ inputs.container }}"
         echo "::set-output name=cache-tag::${{ inputs.username }}/buildcache:${{ inputs.container }}${{ inputs.dev == '1' && '-dev' || '' }}"
         echo "::set-output name=build-date::$(date -u +%FT%TZ)"
+      shell: bash
     -
       name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
