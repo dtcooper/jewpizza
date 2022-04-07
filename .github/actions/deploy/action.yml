@@ -33,14 +33,16 @@ runs:
         uses: appleboy/ssh-action@master
         env:
           RESTART: ${{ inputs.restart }}
+          DIRECTORY: ${{ inputs.directory }}
         with:
           host: ${{ inputs.host }}
           port: ${{ inputs.port }}
           username: ${{ inputs.username }}
           key: ${{ inputs.key }}
           fingerprint: ${{ inputs.fingerprint }}
+          envs: DIRECTORY,RESTART
           script: |
-            cd ${{ inputs.directory }}
+            cd "$DIRECTORY"
             git pull --ff-only
             docker compose pull --quiet
             if [ "$RESTART" ]; then
