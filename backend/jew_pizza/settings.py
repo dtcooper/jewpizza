@@ -267,7 +267,7 @@ CONSTANCE_CONFIG = {
 
 CONSTANCE_CONFIG_FIELDSETS = OrderedDict(
     (
+        ("Options", ("TWILIO_FROM_NUMBER", "UMAMI_WEBSITE_ID")),
         ("Development Options", ("ENABLE_JEWIPPY", "ENABLE_PLAYER", "ENABLE_TEST_NOTIFICATIONS", "HIDDEN_IMG_MODE")),
-        ("Miscellaneous", ("TWILIO_FROM_NUMBER", "UMAMI_WEBSITE_ID")),
     )
 )
