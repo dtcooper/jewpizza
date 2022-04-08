@@ -42,7 +42,7 @@ map $sent_http_content_type $expires {
     ~font/                     30d;
 }
 
-# Defined in docker-compose.yml
+# IP addresses defined in docker-compose.yml
 upstream app { server 172.22.0.2:8000; }
 upstream logs { server 172.22.0.10:8080; }
 upstream umami { server 172.22.0.9:3000; }
@@ -190,11 +190,13 @@ server {
         content_by_lua_block {
             local redis = require "resty.redis"
             local red = redis:new()
-            local ok, err = red:connect("172.22.0.8", 6379, {pool_size=4})  -- Defined in docker-compose.yml
+            -- IP address defined in docker-compose.yml
+            local ok, err = red:connect("172.22.0.8", 6379, {pool_size=4})
 
             if ok then
                 local headers = ngx.req.get_headers()
-                local cache_key = "sse-message::" .. headers["x-eventsource-event"]  -- key prefix mirrored in jew_pizza/utils.py
+                -- Cache key prefix mirrored in jew_pizza/utils.py
+                local cache_key = "sse-message::" .. headers["x-eventsource-event"]
                 local ok, err = red:set(cache_key, ngx.var.request_body)
                 if not ok then
                     ngx.log(ngx.ERR, "failed to set cache key ", key, ":", err)
