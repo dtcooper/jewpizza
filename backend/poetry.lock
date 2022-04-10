@@ -577,7 +577,7 @@ python-versions = ">=3.7"
 
 [[package]]
 name = "lastversion"
-version = "2.4.0"
+version = "2.4.2"
 description = "A CLI tool to find the latest stable version of an arbitrary project"
 category = "dev"
 optional = false
@@ -843,14 +843,14 @@ Markdown = ">=3.2"
 
 [[package]]
 name = "pyparsing"
-version = "3.0.7"
-description = "Python parsing module"
+version = "3.0.8"
+description = "pyparsing module - Classes and methods to define and execute parsing grammars"
 category = "main"
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.6.8"
 
 [package.extras]
-diagrams = ["jinja2", "railroad-diagrams"]
+diagrams = ["railroad-diagrams", "jinja2"]
 
 [[package]]
 name = "pytest"
@@ -1171,7 +1171,7 @@ tests = ["coverage", "flake8", "wheel"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "9fab9c97c7d0e1cee55359cceb353e17840de9e99b336e81417b007773fa671d"
+content-hash = "991f5c594a630e210fe786a2fe6a1467e35cfee512cfcbc9efdde547effeed20"
 
 [metadata.files]
 appdirs = [
@@ -1519,8 +1519,8 @@ jmespath = [
     {file = "jmespath-1.0.0.tar.gz", hash = "sha256:a490e280edd1f57d6de88636992d05b71e97d69a26a19f058ecf7d304474bf5e"},
 ]
 lastversion = [
-    {file = "lastversion-2.4.0-py3-none-any.whl", hash = "sha256:14f98e996ea209727128c2fe856c76f0986e28819cb989e70e6a064dedfec122"},
-    {file = "lastversion-2.4.0.tar.gz", hash = "sha256:93ae5b7555c0f7fc95067205b5183b37434ebf66600dd07d36c8b1054a515b7d"},
+    {file = "lastversion-2.4.2-py3-none-any.whl", hash = "sha256:2e462fb935f8095ad3a5a6e1545bc137e1b572dd04d6925dc684073f0e6e26cb"},
+    {file = "lastversion-2.4.2.tar.gz", hash = "sha256:0c588e7a1800fd4963b705c4c86b1159e96781ffdbada6115a9d564c73d6e9a3"},
 ]
 lockfile = [
     {file = "lockfile-0.12.2-py2.py3-none-any.whl", hash = "sha256:6c3cb24f344923d30b2785d5ad75182c8ea7ac1b6171b08657258ec7429d50fa"},
@@ -1702,8 +1702,8 @@ pymdown-extensions = [
     {file = "pymdown_extensions-9.3-py3-none-any.whl", hash = "sha256:b37461a181c1c8103cfe1660081726a0361a8294cbfda88e5b02cefe976f0546"},
 ]
 pyparsing = [
-    {file = "pyparsing-3.0.7-py3-none-any.whl", hash = "sha256:a6c06a88f252e6c322f65faf8f418b16213b51bdfaece0524c1c1bc30c63c484"},
-    {file = "pyparsing-3.0.7.tar.gz", hash = "sha256:18ee9022775d270c55187733956460083db60b37d0d0fb357445f3094eed3eea"},
+    {file = "pyparsing-3.0.8-py3-none-any.whl", hash = "sha256:ef7b523f6356f763771559412c0d7134753f037822dad1b16945b7b846f7ad06"},
+    {file = "pyparsing-3.0.8.tar.gz", hash = "sha256:7bf433498c016c4314268d95df76c81b842a4cb2b276fa3312cfb1e1d85f6954"},
 ]
 pytest = [
     {file = "pytest-7.1.1-py3-none-any.whl", hash = "sha256:92f723789a8fdd7180b6b06483874feca4c48a5c76968e03bb3e7f806a1869ea"},
