@@ -1,5 +1,6 @@
 .DS_Store
 .env
+.vscode
 /backend/.coverage
 /backend/htmlcov
 /backend/webcore/static/webcore/css/styles*.css*
