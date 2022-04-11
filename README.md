@@ -15,7 +15,8 @@
 [![][icecast-container-badge]][icecast-container-url]
 
 Here's the code for the website that powers [jew.pizza][jewpizza-url], my
-personal website.
+personal website. Built using the
+[CLANG! THUD! IT'S A DARN JEW'S PANDA!][stack-url] stack.
 
 
 ## Preface
