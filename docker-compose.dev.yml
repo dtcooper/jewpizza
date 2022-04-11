@@ -64,6 +64,8 @@ services:
 
   umami:
     <<: *service-dev-defaults
+    ports:
+      - "127.0.0.1:3000:3000"
 
   logs:
     <<: *service-dev-defaults
