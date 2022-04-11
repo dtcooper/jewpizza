@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     name: Build container
     env:
       DOCKERHUB_USERNAME: jewpizza
@@ -37,7 +37,7 @@ jobs:
           container: ${{ matrix.container }}
 
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     name: Deploy
     env:
       SSH_DIRECTORY: jewpizza
@@ -67,7 +67,7 @@ jobs:
           directory: ${{ env.SSH_DIRECTORY }}
 
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     name: Tests
     needs: [build]
     steps:

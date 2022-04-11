@@ -126,14 +126,14 @@ uvloop = ["uvloop (>=0.15.2)"]
 
 [[package]]
 name = "boto3"
-version = "1.21.37"
+version = "1.21.38"
 description = "The AWS SDK for Python"
 category = "main"
 optional = false
 python-versions = ">= 3.6"
 
 [package.dependencies]
-botocore = ">=1.24.37,<1.25.0"
+botocore = ">=1.24.38,<1.25.0"
 jmespath = ">=0.7.1,<2.0.0"
 s3transfer = ">=0.5.0,<0.6.0"
 
@@ -142,7 +142,7 @@ crt = ["botocore[crt] (>=1.21.0,<2.0a0)"]
 
 [[package]]
 name = "botocore"
-version = "1.24.37"
+version = "1.24.38"
 description = "Low-level, data-driven core of boto 3."
 category = "main"
 optional = false
@@ -264,7 +264,7 @@ python-versions = ">=3.6"
 
 [[package]]
 name = "django"
-version = "4.0.3"
+version = "4.0.4"
 description = "A high-level Python web framework that encourages rapid development and clean, pragmatic design."
 category = "main"
 optional = false
@@ -1171,7 +1171,7 @@ tests = ["coverage", "flake8", "wheel"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "991f5c594a630e210fe786a2fe6a1467e35cfee512cfcbc9efdde547effeed20"
+content-hash = "6061dd3ae12145630b4912c103869d55100924e31dd8c50de98b2a4ec210cd74"
 
 [metadata.files]
 appdirs = [
@@ -1240,12 +1240,12 @@ black = [
     {file = "black-22.3.0.tar.gz", hash = "sha256:35020b8886c022ced9282b51b5a875b6d1ab0c387b31a065b84db7c33085ca79"},
 ]
 boto3 = [
-    {file = "boto3-1.21.37-py3-none-any.whl", hash = "sha256:1e845aa92b3ad70b954329b98835135c28b3000e322ff8d3fc46a956bdb6e94b"},
-    {file = "boto3-1.21.37.tar.gz", hash = "sha256:013ba57295f05da141e364191dd46f4086e8fe3eb83a3cd09730eeb684ffbab3"},
+    {file = "boto3-1.21.38-py3-none-any.whl", hash = "sha256:4bc11350b4d8ebd81bacfb5b2a9613a419dfe05468a61ccafdcaf3fcd2a6d319"},
+    {file = "boto3-1.21.38.tar.gz", hash = "sha256:62dde36a57697b40b4693e0ad0d39013f1e187e5a3c52fdb50dbe710633061bb"},
 ]
 botocore = [
-    {file = "botocore-1.24.37-py3-none-any.whl", hash = "sha256:21e164a213beca36033c46026bffa62f2ee2cd2600777271f9a551fb34dba006"},
-    {file = "botocore-1.24.37.tar.gz", hash = "sha256:70c48c4ae3c2b9ec0ca025385979d01f4c7dae4d9a61c82758d4cf7caa7082cd"},
+    {file = "botocore-1.24.38-py3-none-any.whl", hash = "sha256:91d3be3f961b35e80e6eb314c54b0c2563f6c3efbf0615e5822d4f291c551851"},
+    {file = "botocore-1.24.38.tar.gz", hash = "sha256:e39af0eea4dea96c643fb899207d945b04a0d1bc6ba4535ce03488fdb165a497"},
 ]
 brotli = [
     {file = "Brotli-1.0.9-cp27-cp27m-macosx_10_9_x86_64.whl", hash = "sha256:268fe94547ba25b58ebc724680609c8ee3e5a843202e9a381f6f9c5e8bdb5c70"},
@@ -1387,8 +1387,8 @@ distro = [
     {file = "distro-1.7.0.tar.gz", hash = "sha256:151aeccf60c216402932b52e40ee477a939f8d58898927378a02abbe852c1c39"},
 ]
 django = [
-    {file = "Django-4.0.3-py3-none-any.whl", hash = "sha256:1239218849e922033a35d2a2f777cb8bee18bd725416744074f455f34ff50d0c"},
-    {file = "Django-4.0.3.tar.gz", hash = "sha256:77ff2e7050e3324c9b67e29b6707754566f58514112a9ac73310f60cd5261930"},
+    {file = "Django-4.0.4-py3-none-any.whl", hash = "sha256:07c8638e7a7f548dc0acaaa7825d84b7bd42b10e8d22268b3d572946f1e9b687"},
+    {file = "Django-4.0.4.tar.gz", hash = "sha256:4e8177858524417563cc0430f29ea249946d831eacb0068a1455686587df40b5"},
 ]
 django-constance = [
     {file = "django-constance-2.8.0.tar.gz", hash = "sha256:0a492454acc78799ce7b9f7a28a00c53427d513f34f8bf6fdc90a46d8864b2af"},
