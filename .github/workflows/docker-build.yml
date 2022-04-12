@@ -42,22 +42,18 @@ jobs:
     env:
       SSH_DIRECTORY: jewpizza
     needs: [build]
+    # Only if explicit in workflow dispatch, or if "[deploy]" is in commit message
+    if: >-
+      (github.event_name == 'push' && (
+        contains(github.event.head_commit.message, '[deploy]') || contains(github.event.head_commit.message, '🚀'))
+      || (github.event_name == 'workflow_dispatch' && github.event.inputs.deploy)
     steps:
       -
         name: Checkout
         uses: actions/checkout@v3
       -
-        name: Set variables
-        id: vars
-        # Detect "[deploy]" string in commit message
-        run: echo "::set-output name=deploy-in-sha::$(git log -1 --format='%B' HEAD | fgrep -qi '[deploy]' && echo 1)"
-      -
         name: Deploy containers
         uses: ./.github/actions/deploy
-        # Only if explicit in workflow dispatch, or if "[deploy]" is in commit message
-        if: >-
-          (github.event_name != 'workflow_dispatch' && steps.vars.outputs.deploy-in-sha == '1')
-          || (github.event_name == 'workflow_dispatch' && github.event.inputs.deploy)
         with:
           host: ${{ secrets.SSH_HOST }}
           port: ${{ secrets.SSH_PORT }}
