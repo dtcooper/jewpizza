@@ -44,8 +44,8 @@ jobs:
     needs: [build]
     # Only if explicit in workflow dispatch, or if "[deploy]" is in commit message
     if: >-
-      (github.event_name == 'push' && (
-        contains(github.event.head_commit.message, '[deploy]') || contains(github.event.head_commit.message, '🚀'))
+      (github.event_name == 'push'
+        && (contains(github.event.head_commit.message, '[deploy]') || contains(github.event.head_commit.message, '🚀')))
       || (github.event_name == 'workflow_dispatch' && github.event.inputs.deploy)
     steps:
       -
