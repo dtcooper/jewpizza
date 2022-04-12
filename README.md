@@ -217,6 +217,16 @@ Make sure to change these insecure passwords not sent in the `.env` file,
 * Umami: `dave:cooper`
 
 
+## Automatic Deploying
+
+You can automatically deploy the code one of two ways via
+[GitHub Actions][github-actions-url],
+
+1. Include the string `[deploy]` (or `🚀`) in your HEAD commit message and push;
+    or
+2. Trigger the [Deploy Workflow][deploy-workflow-url] manually.
+
+
 ## License
 
 This project is licensed under the [MIT License][mit-license-url] &mdash; see
@@ -266,6 +276,7 @@ the [LICENSE][license-url] file for details.
 [docker-compose-url]: https://docs.docker.com/compose/
 [docker-for-mac-url]: https://docs.docker.com/desktop/mac/install/
 [docker-url]: https://www.docker.com/
+[deploy-workflow-url]: https://github.com/dtcooper/jewpizza/actions/workflows/deploy.yml
 [esbuild-url]: https://esbuild.github.io/
 [eventsource-url]: https://developer.mozilla.org/en-US/docs/Web/API/EventSource
 [github-actions-url]: https://docs.github.com/en/actions
