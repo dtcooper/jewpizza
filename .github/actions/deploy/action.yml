@@ -49,4 +49,4 @@ runs:
               docker compose down --remove-orphans
             fi
             docker compose up --quiet-pull --remove-orphans --no-build --detach
-            docker system prune --force
+            docker system prune --force --all
