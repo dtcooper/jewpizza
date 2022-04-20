@@ -24,9 +24,9 @@
   },
   "homepage": "https://github.com/dtcooper/jewpizza#readme",
   "dependencies": {
-    "@alpinejs/persist": "^3.10.1",
+    "@alpinejs/persist": "^3.10.2",
     "@tailwindcss/typography": "^0.5.2",
-    "alpinejs": "^3.10.1",
+    "alpinejs": "^3.10.2",
     "daisyui": "^2.14.1",
     "esbuild": "^0.14.36",
     "moment": "^2.29.3",
@@ -38,6 +38,6 @@
     "wavesurfer.js": "^6.1.0"
   },
   "devDependencies": {
-    "standard": "^16.0.4"
+    "standard": "^17.0.0"
   }
 }
