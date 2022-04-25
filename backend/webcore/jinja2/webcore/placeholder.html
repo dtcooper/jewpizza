@@ -31,7 +31,7 @@
           {# XXX text-shadow is in a style tag -#}
           Welcome to <span class="text-accent underline underline-wavy animate-spin">jew.pizza</span>
         </h2>
-        <p class="lg:text-indent mx-2 lg:mx-0 text-base sm:text-lg" x-data="placeholder">
+        <p class="lg:text-indent mb-1.5 sm:mb-2 lg:mb-2 mx-2 lg:mx-0 text-base sm:text-lg" x-data="placeholder">
           Here is my special website. I'm working on it. For now, catch me
           <span class="font-bold"><span class="underline">every</span>
           <span x-text="showTime">Sun to Thurs night at midnight-5:00am {{ eastern_tz_abbrev }}</span>
@@ -59,11 +59,19 @@
             <a href="https://en.wikipedia.org/wiki/Shortwave_radio" class="link-primary link-hover umami--click--shortwave" target="_blank">shortwave</a>
             <a href="https://en.wikipedia.org/wiki/CFRX" class="link-primary link-hover umami--click--cfrx" target="_blank">CFRX 6.07 MHz</a>.
           </span>
-          You can <span class="font-bold">listen to
-          <a class="link-primary link-hover umami--click--podcast" target="_blank"
-            href="https://podcasts.apple.com/us/podcast/this-is-going-well-i-think-with-david-cooper/id1168275879">my
-          podcast</a></span> or  <a class="link link-primary link-hover font-bold umami--click--wfmu"
-            href="https://www.wfmu.org/playlists/WD" target="_blank">show on WFMU</a>.
+          The show is available
+            <a class="font-bold link-primary link-hover umami--click--showgram-podcast" href="{{ url_for('webcore:podcast-redirect', podcast='showgram') }}" target="_blank">
+              as a podcast
+            </a>.
+        </p>
+        <p class="lg:text-indent mx-2 lg:mx-0 text-base sm:text-lg">
+          You can also <span class="font-bold">listen to my <span class="italic">older</span> podcast
+          <a class="link-primary link-hover umami--click--tigwit-podcast" target="_blank" href="{{ url_for('webcore:podcast-redirect', podcast='tigwit') }}">
+          <span class="italic">This Is Going Well, I Think</span></a></span> or
+          <span class="font-bold">my show</span>
+          <a class="link link-primary link-hover font-bold umami--click--wfmu"
+            href="https://www.wfmu.org/playlists/WD" target="_blank">
+            <span class="italic">That Went Well, I Think</span> on WFMU</a>.
         </p>
         <div class="grid grid-cols-1 sm:grid-cols-4 gap-1.5 lg:gap-1 mt-5 select-none">
           <a class="btn btn-neutral btn-rounded border-0 umami--click--twitter" href="https://twitter.com/dtcooper" target="_blank">

@@ -370,6 +370,18 @@ python-versions = "*"
 django = ">=3.0"
 
 [[package]]
+name = "django-user-agents"
+version = "0.4.0"
+description = "A django package that allows easy identification of visitors' browser, operating system and device information (mobile phone, tablet or has touch capabilities)."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+django = "*"
+user-agents = "*"
+
+[[package]]
 name = "django-widget-tweaks"
 version = "1.4.12"
 description = "Tweak the form field rendering in templates, not in python-level form definitions."
@@ -1093,6 +1105,14 @@ optional = false
 python-versions = ">=2"
 
 [[package]]
+name = "ua-parser"
+version = "0.10.0"
+description = "Python port of Browserscope's user agent parser"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "unidecode"
 version = "1.3.4"
 description = "ASCII transliterations of Unicode text"
@@ -1112,6 +1132,17 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, <4"
 brotli = ["brotlicffi (>=0.8.0)", "brotli (>=1.0.9)", "brotlipy (>=0.6.0)"]
 secure = ["pyOpenSSL (>=0.14)", "cryptography (>=1.3.4)", "idna (>=2.0.0)", "certifi", "ipaddress"]
 socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
+
+[[package]]
+name = "user-agents"
+version = "2.2.0"
+description = "A library to identify devices (phones, tablets) and their capabilities by parsing browser user agent strings."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+ua-parser = ">=0.10.0"
 
 [[package]]
 name = "watchdog"
@@ -1171,7 +1202,7 @@ tests = ["coverage", "flake8", "wheel"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "aa7c23b678453bb8462c836dc0c1bfd48eec7a7df80affa4191f585076dcab58"
+content-hash = "6135d68997b44d03735780318494d897c499bd4567af49ec8a0865471ffe5587"
 
 [metadata.files]
 appdirs = [
@@ -1416,6 +1447,10 @@ django-redis = [
 ]
 django-s3direct = [
     {file = "django-s3direct-2.0.0.tar.gz", hash = "sha256:078c57a694cf8f4c7709e1b07039ff5bdfab5f2246716248a5858cee9102e2bd"},
+]
+django-user-agents = [
+    {file = "django-user_agents-0.4.0.tar.gz", hash = "sha256:cda8ae2146cee30e6867a07943f56ecc570b4391d725ab5309901a8b3e4a3514"},
+    {file = "django_user_agents-0.4.0-py3-none-any.whl", hash = "sha256:cd9d9f7158b23c5237b2dacb0bc4fffdf77fefe1d2633b5814d3874288ebdb5d"},
 ]
 django-widget-tweaks = [
     {file = "django-widget-tweaks-1.4.12.tar.gz", hash = "sha256:9bfc5c705684754a83cc81da328b39ad1b80f32bd0f4340e2a810cbab4b0c00e"},
@@ -1815,6 +1850,10 @@ tzdata = [
     {file = "tzdata-2022.1-py2.py3-none-any.whl", hash = "sha256:238e70234214138ed7b4e8a0fab0e5e13872edab3be586ab8198c407620e2ab9"},
     {file = "tzdata-2022.1.tar.gz", hash = "sha256:8b536a8ec63dc0751342b3984193a3118f8fca2afe25752bb9b7fffd398552d3"},
 ]
+ua-parser = [
+    {file = "ua-parser-0.10.0.tar.gz", hash = "sha256:47b1782ed130d890018d983fac37c2a80799d9e0b9c532e734c67cf70f185033"},
+    {file = "ua_parser-0.10.0-py2.py3-none-any.whl", hash = "sha256:46ab2e383c01dbd2ab284991b87d624a26a08f72da4d7d413f5bfab8b9036f8a"},
+]
 unidecode = [
     {file = "Unidecode-1.3.4-py3-none-any.whl", hash = "sha256:afa04efcdd818a93237574791be9b2817d7077c25a068b00f8cff7baa4e59257"},
     {file = "Unidecode-1.3.4.tar.gz", hash = "sha256:8e4352fb93d5a735c788110d2e7ac8e8031eb06ccbfe8d324ab71735015f9342"},
@@ -1822,6 +1861,10 @@ unidecode = [
 urllib3 = [
     {file = "urllib3-1.26.9-py2.py3-none-any.whl", hash = "sha256:44ece4d53fb1706f667c9bd1c648f5469a2ec925fcf3a776667042d645472c14"},
     {file = "urllib3-1.26.9.tar.gz", hash = "sha256:aabaf16477806a5e1dd19aa41f8c2b7950dd3c746362d7e3223dbe6de6ac448e"},
+]
+user-agents = [
+    {file = "user-agents-2.2.0.tar.gz", hash = "sha256:d36d25178db65308d1458c5fa4ab39c9b2619377010130329f3955e7626ead26"},
+    {file = "user_agents-2.2.0-py3-none-any.whl", hash = "sha256:a98c4dc72ecbc64812c4534108806fb0a0b3a11ec3fd1eafe807cee5b0a942e7"},
 ]
 watchdog = [
     {file = "watchdog-2.1.7-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:177bae28ca723bc00846466016d34f8c1d6a621383b6caca86745918d55c7383"},

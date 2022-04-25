@@ -20,4 +20,5 @@ urlpatterns = [
         name="social",
     ),
     path("internal/log-js-error/", views.LogJSErrorView.as_view(), name="log-js-error"),
+    path("podcast/<slug:podcast>/", views.PodcastRedirectView.as_view(), name="podcast-redirect"),
 ]

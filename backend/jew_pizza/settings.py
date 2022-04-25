@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     # 3rd party
     "constance",
+    "django_user_agents",
     "huey.contrib.djhuey",
     "phonenumber_field",
     "recurrence",
@@ -92,6 +93,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django_user_agents.middleware.UserAgentMiddleware",
     "webcore.middleware.JSONResponseMiddleware",
 ]
 if DEBUG and len(sys.argv) >= 2 and sys.argv[1] == "runserver":

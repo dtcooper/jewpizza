@@ -7,7 +7,7 @@ import pytz
 from django.conf import settings
 from django.contrib import messages
 from django.core.mail import send_mail
-from django.http import HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
 from django.utils.timezone import get_default_timezone
 from django.views.generic import TemplateView, View
 
@@ -75,3 +75,45 @@ class LogJSErrorView(View):
             )
 
         return HttpResponse(status=204)
+
+
+class PodcastRedirectView(View):
+    DEFAULT_PODCAST = "showgram"
+    PODCASTS = {
+        "showgram": {
+            "default": "https://www.iheart.com/podcast/962-showgram-59146123/",
+            "apple": "https://podcasts.apple.com/us/podcast/the-showgram-with-david-cooper/id1502619425",
+            "google": (
+                "https://podcasts.google.com/feed/aHR0cHM6Ly93d3cub21ueWNvbnRlbnQuY29tL2QvcGxheWxpc3QvNDgwOWJjOGEtZTQxY"
+                "S00MDVjLTkzZGEtYThjZjAxMWRmMmY0LzhhY2RmZjg0LWJjMjAtNDlmMy04N2I3LWFiN2MwMTM0YTNhOC8yOGEzMDY0ZC0yZGZmLTR"
+                "jZGQtOTUyOC1hYjdjMDEzNjM5NjkvcG9kY2FzdC5yc3M"
+            ),
+        },
+        "tigwit": {
+            "default": "https://soundcloud.com/tigwit",
+            "apple": "https://podcasts.apple.com/us/podcast/this-is-going-well-i-think-with-david-cooper/id1168275879",
+            "google": (
+                "https://podcasts.google.com/feed/aHR0cHM6Ly9mZWVkcy5zb3VuZGNsb3VkLmNvbS91c2Vycy9zb3VuZGNsb3VkOnVzZXJzO"
+                "jI2MzIwOTQxOC9zb3VuZHMucnNz"
+            ),
+        },
+    }
+
+    def get(self, request, podcast):
+        podcast = self.PODCASTS.get(podcast)
+        if podcast is None:
+            podcast = self.PODCASTS[self.DEFAULT_PODCAST]
+
+        forced_redirect = request.GET.get("force")
+        if forced_redirect is not None and forced_redirect in podcast:
+            redirect = forced_redirect
+
+        else:
+            redirect = "default"
+            os_family = request.user_agent.os.family
+            if os_family in ("Mac OS X", "iOS"):
+                redirect = "apple"
+            elif os_family == "Android":
+                redirect = "google"
+
+        return HttpResponseRedirect(podcast[redirect])
