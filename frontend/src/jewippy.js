@@ -140,7 +140,7 @@ if (DATA.jewippyEnabled) {
             if (emptyQueue) {
               this.animationQueue = []
             }
-            this.animationQueue.push({ name: name, hook: hook })
+            this.animationQueue.push({ name, hook })
             this._debug(`adding to animation queue: [${JSON.stringify(name)}] (emptyQueue=${emptyQueue || false}) (queue=${JSON.stringify(this.animationQueue)})`)
           } else if (DATA.debug) {
             console.error(`invalid animation(s): ${JSON.stringify(name)}. Valid choices: ${JSON.stringify([...this.choices])}`)

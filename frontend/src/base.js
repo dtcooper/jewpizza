@@ -13,8 +13,8 @@ import Navigo from 'navigo'
       credentials: 'same-origin',
       body: JSON.stringify({
         url: window.location.href,
-        title: title,
-        detail: detail,
+        title,
+        detail,
         filename: filename || null
       })
     })
