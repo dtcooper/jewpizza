@@ -44,7 +44,7 @@ services:
     environment:
       - "USE_LOCAL_CA=${NGINX_DEBUG_MODE_ONLY_USE_LOCAL_CERTIFICATE_AUTHORITY:-0}"
     ports:
-      - "3000:3000"
+      - "127.0.0.1:3000:3000"
 
   icecast:
     <<: *service-dev-defaults
@@ -64,8 +64,6 @@ services:
 
   umami:
     <<: *service-dev-defaults
-    ports:
-      - "127.0.0.1:3000:3000"
 
   logs:
     <<: *service-dev-defaults
