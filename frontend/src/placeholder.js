@@ -65,7 +65,7 @@ document.addEventListener('alpine:init', () => {
     },
     showTechnicalTime () {
       if (this.showNightBefore) {
-        return ` (technically ${this.prettyDay(this.weekStart)} to ${this.prettyDay(this.weekEnd)} mornings)`
+        return ` \u2014 technically ${this.prettyDay(this.weekStart)} to ${this.prettyDay(this.weekEnd)} mornings`
       } else {
         return ''
       }
