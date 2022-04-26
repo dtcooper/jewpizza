@@ -5,7 +5,7 @@ x-service-defaults: &service-defaults
 
 x-app-template: &app-template
   <<: *service-defaults
-  image: jewdotpizza/app:${PINNED_CONTAINER_VERSION:-latest}
+  image: ghcr.io/dtcooper/jewpizza-app:${PINNED_CONTAINER_VERSION:-latest}
   build:
     context: .
     dockerfile: backend/Dockerfile
@@ -39,7 +39,7 @@ services:
 
   radio:
     <<: *service-defaults
-    image: jewdotpizza/radio:${PINNED_CONTAINER_VERSION:-latest}
+    image: ghcr.io/dtcooper/jewpizza-radio:${PINNED_CONTAINER_VERSION:-latest}
     build:
       context: radio
       args:
@@ -62,7 +62,7 @@ services:
 
   nginx:
     <<: *service-defaults
-    image: jewdotpizza/nginx:${PINNED_CONTAINER_VERSION:-latest}
+    image: ghcr.io/dtcooper/jewpizza-nginx:${PINNED_CONTAINER_VERSION:-latest}
     build:
       context: nginx
     volumes:
@@ -84,7 +84,7 @@ services:
 
   icecast:
     <<: *service-defaults
-    image: jewdotpizza/icecast:${PINNED_CONTAINER_VERSION:-latest}
+    image: ghcr.io/dtcooper/jewpizza-icecast:${PINNED_CONTAINER_VERSION:-latest}
     build:
       context: icecast
     environment:

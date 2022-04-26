@@ -14,8 +14,6 @@ jobs:
   build:
     runs-on: ubuntu-20.04
     name: Build dev container
-    env:
-      DOCKERHUB_USERNAME: jewdotpizza
     strategy:
       matrix:
         container: [app, icecast, nginx, radio]
@@ -27,7 +25,6 @@ jobs:
         name: Build container
         uses: ./.github/actions/docker-build-push
         with:
-          username: ${{ env.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           container: ${{ matrix.container }}
           dev: '1'

@@ -5,11 +5,8 @@ inputs:
   container:
     description: Container name
     required: true
-  username:
-    description: Docker Hub username
-    required: true
-  password:
-    description: Docker Hub password
+  token:
+    description: GitHub token
     required: true
   dev:
     description: Build dev containers (DEBUG=1)
@@ -24,10 +21,12 @@ runs:
       id: vars
       shell: bash
       run: |
-        echo "::set-output name=sha::$(echo ${GITHUB_SHA} | cut -c 1-8)"
-        echo "::set-output name=repo::${{ inputs.username }}/${{ inputs.container }}"
-        echo "::set-output name=cache-tag::${{ inputs.username }}/buildcache:${{ inputs.container }}${{ inputs.dev == '1' && '-dev' || '' }}"
+        USERNAME=${GITHUB_REPOSITORY_OWNER@L}"
         echo "::set-output name=build-date::$(date -u +%FT%TZ)"
+        echo "::set-output name=cache-tag::ghcr.io/${USERNAME}/jewpizza-cache:${{ inputs.container }}${{ inputs.dev == '1' && '-dev' || '' }}"
+        echo "::set-output name=repo::ghcr.io/${USERNAME}/jewpizza-${{ inputs.container }}"
+        echo "::set-output name=sha::$(echo ${GITHUB_SHA} | cut -c 1-8)"
+        echo "::set-output name=username::${USERNAME}"
     -
       name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
@@ -39,8 +38,9 @@ runs:
       name: Login to Docker Hub
       uses: docker/login-action@v1
       with:
-        username: ${{ inputs.username }}
-        password: ${{ inputs.password }}
+        registry: ghcr.io
+        username: ${{ steps.vars.outputs.username }}
+        password: ${{ inputs.token }}
     -
       name: Build and Push
       uses: docker/build-push-action@v2
@@ -58,12 +58,3 @@ runs:
           ${{ inputs.dev == '0' && format('{0}:{1}', steps.vars.outputs.repo, steps.vars.outputs.sha) || '' }}
         cache-from: type=registry,ref=${{ steps.vars.outputs.cache-tag }}
         cache-to: type=registry,ref=${{ steps.vars.outputs.cache-tag }},mode=max
-    -
-      name: Update Docker Hub description
-      uses: peter-evans/dockerhub-description@v3
-      if: inputs.dev == '0'
-      with:
-        username: ${{ inputs.username }}
-        password: ${{ inputs.password }}
-        repository: ${{ steps.vars.outputs.repo }}
-        short-description: 'A serious website for a serious domain name: jew.pizza (${{ inputs.container }} container)'
