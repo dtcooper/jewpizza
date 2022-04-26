@@ -21,7 +21,7 @@ runs:
       id: vars
       shell: bash
       run: |
-        USERNAME=${GITHUB_REPOSITORY_OWNER@L}"
+        USERNAME="${GITHUB_REPOSITORY_OWNER@L}"
         echo "::set-output name=build-date::$(date -u +%FT%TZ)"
         echo "::set-output name=cache-tag::ghcr.io/${USERNAME}/jewpizza-cache:${{ inputs.container }}${{ inputs.dev == '1' && '-dev' || '' }}"
         echo "::set-output name=repo::ghcr.io/${USERNAME}/jewpizza-${{ inputs.container }}"
