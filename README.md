@@ -236,14 +236,14 @@ the [LICENSE][license-url] file for details.
 
 **_...and remember kids, have fun!_**
 
-[app-container-badge]: https://img.shields.io/docker/image-size/jewpizza/app/latest?label=app&logo=docker&logoColor=ffffff&style=flat-square
-[app-container-url]: https://hub.docker.com/r/jewdotpizza/app
-[icecast-container-badge]: https://img.shields.io/docker/image-size/jewdotpizza/icecast/latest?label=icecast&logo=docker&logoColor=ffffff&style=flat-square
-[icecast-container-url]: https://hub.docker.com/r/jewdotpizza/icecast
-[nginx-container-badge]: https://img.shields.io/docker/image-size/jewdotpizza/nginx/latest?label=nginx&logo=docker&logoColor=ffffff&style=flat-square
-[nginx-container-url]: https://hub.docker.com/r/jewdotpizza/nginx
-[radio-container-badge]: https://img.shields.io/docker/image-size/jewdotpizza/radio/latest?label=radio&logo=docker&logoColor=ffffff&style=flat-square
-[radio-container-url]: https://hub.docker.com/r/jewdotpizza/radio
+[app-container-badge]: https://img.shields.io/badge/container-app-informational?logo=docker&logoColor=ffffff&style=flat-square
+[app-container-url]: https://github.com/dtcooper/jewpizza/pkgs/container/jewpizza-app
+[icecast-container-badge]: https://img.shields.io/badge/container-icecast-informational?logo=docker&logoColor=ffffff&style=flat-square
+[icecast-container-url]: https://github.com/dtcooper/jewpizza/pkgs/container/jewpizza-icecast
+[nginx-container-badge]: https://img.shields.io/badge/container-nginx-informational?logo=docker&logoColor=ffffff&style=flat-square
+[nginx-container-url]: https://github.com/dtcooper/jewpizza/pkgs/container/jewpizza-nginx
+[radio-container-badge]: https://img.shields.io/badge/container-radio-informational?logo=docker&logoColor=ffffff&style=flat-square
+[radio-container-url]: https://github.com/dtcooper/jewpizza/pkgs/container/jewpizza-radio
 
 [build-badge]: https://img.shields.io/github/workflow/status/dtcooper/jewpizza/Build%20and%20Deploy?label=build%20%26%20deploy&logo=github&style=flat-square
 [build-url]: https://github.com/dtcooper/jewpizza/actions/workflows/docker-build.yml
