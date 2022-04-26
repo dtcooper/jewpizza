@@ -7,7 +7,8 @@ inputs:
     required: true
   port:
     description: SSH port
-    required: true
+    required: false
+    default: '22'
   username:
     description: SSH username
     required: true
@@ -41,6 +42,7 @@ runs:
           key: ${{ inputs.key }}
           fingerprint: ${{ inputs.fingerprint }}
           envs: DIRECTORY,RESTART
+          script_stop: true
           script: |
             cd "$DIRECTORY"
             git pull --ff-only
