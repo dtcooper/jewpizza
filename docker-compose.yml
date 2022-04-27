@@ -114,7 +114,7 @@ services:
 
   redis:
     <<: *service-defaults
-    image: library/redis:6.2-alpine
+    image: library/redis:7.0-alpine
     volumes:
       - redis_data:/data
     environment:
