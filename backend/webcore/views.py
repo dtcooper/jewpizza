@@ -13,6 +13,8 @@ from django.views.generic import TemplateView, View
 
 from constance import config
 
+from jew_pizza.utils import get_client_ip
+
 
 logger = logging.getLogger(f"jewpizza.{__file__}")
 
@@ -64,11 +66,12 @@ class LogJSErrorView(View):
             message += f" ({filename})"
         message += f":\n\n{error.get('detail', '[none]')}"
 
-        logger.warning(f"Got JS error: {message}")
+        ip_address = get_client_ip(request)
+        logger.warning(f"Got JS error from IP {ip_address}: {message}")
 
         if not settings.DEBUG:
             send_mail(
-                subject=f"jew.pizza JS Error: {error['title']}",
+                subject=f"jew.pizza JS Error from IP {ip_address}: {error['title']}",
                 message=message,
                 from_email=None,
                 recipient_list=[settings.EMAIL_ADDRESS],
