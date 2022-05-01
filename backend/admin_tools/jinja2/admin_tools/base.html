@@ -107,7 +107,7 @@
       <a href="{{ url_for('admin:index') }}">Admin</a> /
       <a href="{{ url_for('admin:logout') }}">Log Out</a>
     </div>
-    Revision <code>{{ settings.GIT_REV }}</code> built on {{ BUILD_DATE }}
+    Revision <code>{{ settings.GIT_REV }}</code> built on {% if BUILD_DATE %}{{ BUILD_DATE|datetime }}{% else %}[unknown]{% endif %}
   </footer>
 </body>
 </html>

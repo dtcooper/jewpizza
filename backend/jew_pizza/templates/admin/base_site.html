@@ -71,7 +71,7 @@
   <hr/>
   <div class="container pull-left">
     <h5 style="text-align: center">
-      Revision <code>{{ settings.GIT_REV }}</code> built on {{ BUILD_DATE }}
+      Revision <code>{{ settings.GIT_REV }}</code> built on {% if BUILD_DATE %}{{ BUILD_DATE }}{% else %}[unknown]{% endif %}
     </h5>
   </div>
 </div>

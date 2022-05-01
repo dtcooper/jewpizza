@@ -16,7 +16,7 @@
   (Or do. I'm flattered by it. Either way.)
 -->
 <head>
-  <!-- revision {{ settings.GIT_REV }} built on {{ BUILD_DATE }} -->
+  <!-- revision {{ settings.GIT_REV }} built on {% if BUILD_DATE %}{{ BUILD_DATE|datetime }}{% else %}[unknown]{% endif %} -->
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <title>{% if settings.DEBUG %}[dev] {% endif %}{% if title %}{{ title }} - {% endif %}jew.pizza</title>

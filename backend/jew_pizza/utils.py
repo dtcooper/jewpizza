@@ -103,14 +103,14 @@ def reload_radio_container():
 
 
 try:
-    BUILD_DATE_FORMATTED = format_datetime(dateutil_parse(settings.BUILD_DATE))
+    BUILD_DATE = dateutil_parse(settings.BUILD_DATE)
 except ValueError:
-    BUILD_DATE_FORMATTED = "unknown"
+    BUILD_DATE = None
 
 
 def django_template_context(request):
     # Template context processor for Django templates
     return {
         "settings": settings,
-        "BUILD_DATE": BUILD_DATE_FORMATTED,
+        "BUILD_DATE": BUILD_DATE,
     }

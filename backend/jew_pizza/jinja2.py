@@ -22,7 +22,7 @@ from widget_tweaks.templatetags.widget_tweaks import add_class, add_error_class,
 from webcore import constants
 
 from .utils import (
-    BUILD_DATE_FORMATTED,
+    BUILD_DATE,
     format_date,
     format_date_short,
     format_datetime,
@@ -196,7 +196,7 @@ def create_environment(**options):
     env = Environment(**options)
     env.globals.update(
         {
-            "BUILD_DATE": BUILD_DATE_FORMATTED,
+            "BUILD_DATE": BUILD_DATE,
             "choice": random.choice,
             "config": constance_config,
             "encoded_email": __encoded_email(),
