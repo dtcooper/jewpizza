@@ -104,7 +104,7 @@
         </a>
       </div>
       <div class="text-center text-sm py-1 bg-neutral text-neutral-content">{
-        % if BUILD_DATE %}{{ BUILD_DATE|datetimeshort }}{% else %}[unknown]{% endif %}
+        {% if BUILD_DATE %}{{ BUILD_DATE|datetimeshort }}{% else %}[unknown]{% endif %}
       </div>
       <div class="text-center text-sm py-1 bg-neutral text-neutral-content">
         git: {{ settings.GIT_REV }}
