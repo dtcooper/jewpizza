@@ -45,14 +45,14 @@ jobs:
           sudo pip install "lastversion==${LASTVERSION_VERSION}" "poetry==${POETRY_VERSION}" "yq==${YQ_VERSION}"
 
           echo '# Misc Dependencies' >> dependencies.txt
-          ./scripts/check-versions.sh github-action | tee -a dependencies.txt
+          ./scripts/check-versions.sh github-action | awk '{print " * " $0}' | tee -a dependencies.txt
 
           echo >> dependencies.txt
 
           echo '# Frontend' >> dependencies.txt
           cd frontend
           npm install
-          npm outdated | tee -a ../dependencies.txt
+          npm outdated | awk '{print " * " $0}' | tee -a ../dependencies.txt
           cd ..
 
           echo >> dependencies.txt
@@ -60,7 +60,7 @@ jobs:
           echo '# Backend' >> dependencies.txt
           cd backend
           poetry env use "python${PYTHON_VERSION}"
-          poetry show -o | tee -a ../dependencies.txt
+          poetry show -o | awk '{print " * " $0}' | tee -a ../dependencies.txt
           cd ..
 
           echo 'Done!'
