@@ -44,6 +44,13 @@ runs:
           fingerprint: ${{ inputs.fingerprint }}
           envs: DIRECTORY,RESTART,WORKFLOW_URL
           script_stop: true
+          # Steps:
+          #  1. git pull, fast-forward only
+          #  2. pull containers
+          #  3. bring down all containers if RESTART set
+          #  4. bring up containers in detatched mode
+          #  5. Set redis keys describing deployment (date, URL of workflow)
+          #  6. remove all extraneous docker container data (prune)
           script: |
             cd "$DIRECTORY"
             git pull --ff-only
