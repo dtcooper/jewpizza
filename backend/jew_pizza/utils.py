@@ -110,7 +110,11 @@ except ValueError:
 
 def get_deploy_workflow_url():
     redis = get_redis_connection()
-    return redis.get('deploy::workflow-url')
+    workflow_url = redis.get('deploy::workflow-url')
+    if workflow_url:
+        return workflow_url.decode()
+    else:
+        return None
 
 
 def django_template_context(request):
