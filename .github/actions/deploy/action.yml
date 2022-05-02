@@ -58,7 +58,7 @@ runs:
                 echo 'waiting for redis...' ; \
                 sleep 0.1 ; \
               done ; \
-              redis-cli SET deploy::deployed-at \"\$DATE\"
+              redis-cli SET deploy::deployed-at \"\$DATE\" ; \
               redis-cli SET deploy::workflow-url '$WORKFLOW_URL' \
             "
             docker system prune --force --all
