@@ -108,6 +108,11 @@ except ValueError:
     BUILD_DATE = None
 
 
+def get_deploy_workflow_url():
+    redis = get_redis_connection()
+    return redis.get('deploy::workflow-url')
+
+
 def django_template_context(request):
     # Template context processor for Django templates
     return {

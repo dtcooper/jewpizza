@@ -33,15 +33,16 @@ runs:
         name: Deploy containers
         uses: appleboy/ssh-action@master
         env:
-          RESTART: ${{ inputs.restart }}
           DIRECTORY: ${{ inputs.directory }}
+          RESTART: ${{ inputs.restart }}
+          WORKFLOW_URL: ${{ github.server_url	}}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         with:
           host: ${{ inputs.host }}
           port: ${{ inputs.port }}
           username: ${{ inputs.username }}
           key: ${{ inputs.key }}
           fingerprint: ${{ inputs.fingerprint }}
-          envs: DIRECTORY,RESTART
+          envs: DIRECTORY,RESTART,WORKFLOW_URL
           script_stop: true
           script: |
             cd "$DIRECTORY"
@@ -51,4 +52,11 @@ runs:
               docker compose down --remove-orphans
             fi
             docker compose up --quiet-pull --remove-orphans --no-build --detach
+            docker compose exec redis sh -c "\
+              while ! nc -w 1 -z localhost 6379 ; do \
+                echo 'waiting for redis...' ; \
+                sleep 0.1 ; \
+              done ; \
+              redis-cli SET deploy::workflow-url '$WORKFLOW_URL' \
+            "
             docker system prune --force --all
