@@ -28,7 +28,7 @@ from .utils import (
     format_datetime,
     format_datetime_short,
     format_time,
-    get_deploy_workflow_url,
+    get_deploy_data,
 )
 
 
@@ -201,7 +201,7 @@ def create_environment(**options):
             "choice": random.choice,
             "config": constance_config,
             "encoded_email": __encoded_email(),
-            "get_deploy_workflow_url": get_deploy_workflow_url,
+            "get_deploy_data": get_deploy_data,
             "get_messages": get_messages_jinja2,
             "jewippy_gifs": [
                 {**i, "webp": static(path=i["webp"], ctx=None), "gif": static(path=i["gif"], ctx=None)}

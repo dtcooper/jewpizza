@@ -94,27 +94,32 @@
     </div>
   </div>
   {% if request.user.is_staff %}
+    {% set deploy_data = get_deploy_data() %}
     <div class="absolute right-3 bottom-3 flex flex-col">
-      <div class="btn-group">
+      <div class="btn-group justify-between">
         <a href="https://github.com/dtcooper/jewpizza" target="_blank" class="btn btn-secondary btn-sm">
           GitHub
         </a>
         <a href="https://umami.jew.pizza/website/1/jew.pizza%20website" target="_blank" class="btn btn-secondary btn-sm">
           Umami
         </a>
-        {% set DEPLOY_WORKFLOW_URL = get_deploy_workflow_url() %}
-        {% if DEPLOY_WORKFLOW_URL %}
-          <a href="{{ DEPLOY_WORKFLOW_URL }}" target="_blank" class="btn btn-secondary btn-sm">
+        {% if deploy_data.WORKFLOW_URL %}
+          <a href="{{ deploy_data.WORKFLOW_URL }}" target="_blank" class="btn btn-secondary btn-sm">
             Workflow
           </a>
         {% endif %}
       </div>
       {% if BUILD_DATE %}
-        <div class="text-center text-sm py-1 bg-neutral text-neutral-content">
-          {{ BUILD_DATE|datetimeshort }}
+        <div class="text-center text-sm p-1 bg-neutral text-neutral-content">
+          build: {{ BUILD_DATE|datetimeshort }}
         </div>
       {% endif %}
-      <div class="text-center text-sm py-1 bg-neutral text-neutral-content">
+      {% if deploy_data.DEPLOYED_AT %}
+        <div class="text-center text-sm p-1 bg-neutral text-neutral-content">
+          deploy: {{ deploy_data.DEPLOYED_AT|datetimeshort }}
+        </div>
+      {% endif %}
+      <div class="text-center text-sm p-1 bg-neutral text-neutral-content">
         git: {{ settings.GIT_REV }}
       </div>
     </div>

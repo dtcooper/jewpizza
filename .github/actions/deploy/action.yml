@@ -53,10 +53,12 @@ runs:
             fi
             docker compose up --quiet-pull --remove-orphans --no-build --detach
             docker compose exec redis sh -c "\
+              DATE=\"\$(date -u +%FT%TZ)\"
               while ! nc -w 1 -z localhost 6379 ; do \
                 echo 'waiting for redis...' ; \
                 sleep 0.1 ; \
               done ; \
+              redis-cli SET deploy::deployed-at \"\$DATE\"
               redis-cli SET deploy::workflow-url '$WORKFLOW_URL' \
             "
             docker system prune --force --all
