@@ -126,14 +126,14 @@ uvloop = ["uvloop (>=0.15.2)"]
 
 [[package]]
 name = "boto3"
-version = "1.22.7"
+version = "1.22.8"
 description = "The AWS SDK for Python"
 category = "main"
 optional = false
 python-versions = ">= 3.6"
 
 [package.dependencies]
-botocore = ">=1.25.7,<1.26.0"
+botocore = ">=1.25.8,<1.26.0"
 jmespath = ">=0.7.1,<2.0.0"
 s3transfer = ">=0.5.0,<0.6.0"
 
@@ -142,7 +142,7 @@ crt = ["botocore[crt] (>=1.21.0,<2.0a0)"]
 
 [[package]]
 name = "botocore"
-version = "1.25.7"
+version = "1.25.8"
 description = "Low-level, data-driven core of boto 3."
 category = "main"
 optional = false
@@ -624,7 +624,7 @@ python-versions = "*"
 
 [[package]]
 name = "markdown"
-version = "3.3.6"
+version = "3.3.7"
 description = "Python implementation of Markdown."
 category = "main"
 optional = false
@@ -1202,7 +1202,7 @@ tests = ["coverage", "flake8", "wheel"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "246f1e36ec480f3c0c98a8b29875f3acdefe8c807eb1f67be70b8e4bcca63b7e"
+content-hash = "39ceb00422e5c9dfae121b8247c3d5992ebd2bdc52bc196011c772e7edc8cb60"
 
 [metadata.files]
 appdirs = [
@@ -1271,12 +1271,12 @@ black = [
     {file = "black-22.3.0.tar.gz", hash = "sha256:35020b8886c022ced9282b51b5a875b6d1ab0c387b31a065b84db7c33085ca79"},
 ]
 boto3 = [
-    {file = "boto3-1.22.7-py3-none-any.whl", hash = "sha256:de4fa49ca1cbc93313144e93e6d0997cbb61c8cca91f3418b4e3646dc215f441"},
-    {file = "boto3-1.22.7.tar.gz", hash = "sha256:4dc0df36c3465ff0d586017da68b0152123695f38f30ad98fed7185e59298d2c"},
+    {file = "boto3-1.22.8-py3-none-any.whl", hash = "sha256:a6925fe88cc9cd6aab35ea950cdb1678a88210ece5271bb64c1593a46ed6de6c"},
+    {file = "boto3-1.22.8.tar.gz", hash = "sha256:222cfb68bd4f46f4beae7770f1f6b066786254462f289027ca123fe77eb50ff9"},
 ]
 botocore = [
-    {file = "botocore-1.25.7-py3-none-any.whl", hash = "sha256:83da857c12fff5cf4c1a64afaa72a28ff5bef929a2834ec4ed5b0b674f88fd0e"},
-    {file = "botocore-1.25.7.tar.gz", hash = "sha256:190361776d96323ff401b976175f76172acf7ebbe3efbb19c4c6f9800a9ad6b6"},
+    {file = "botocore-1.25.8-py3-none-any.whl", hash = "sha256:5b342da3487e5669801f5589cc15e379fc9f7803a426584d08a6329575644da3"},
+    {file = "botocore-1.25.8.tar.gz", hash = "sha256:f0a7e9fb6000a6cfc7ca63971d8d1ab4ed3c38514ded439bcf1fc8bca162dc1b"},
 ]
 brotli = [
     {file = "Brotli-1.0.9-cp27-cp27m-macosx_10_9_x86_64.whl", hash = "sha256:268fe94547ba25b58ebc724680609c8ee3e5a843202e9a381f6f9c5e8bdb5c70"},
@@ -1562,8 +1562,8 @@ lockfile = [
     {file = "lockfile-0.12.2.tar.gz", hash = "sha256:6aed02de03cba24efabcd600b30540140634fc06cfa603822d508d5361e9f799"},
 ]
 markdown = [
-    {file = "Markdown-3.3.6-py3-none-any.whl", hash = "sha256:9923332318f843411e9932237530df53162e29dc7a4e2b91e35764583c46c9a3"},
-    {file = "Markdown-3.3.6.tar.gz", hash = "sha256:76df8ae32294ec39dcf89340382882dfa12975f87f45c3ed1ecdb1e8cefc7006"},
+    {file = "Markdown-3.3.7-py3-none-any.whl", hash = "sha256:f5da449a6e1c989a4cea2631aa8ee67caa5a2ef855d551c88f9e309f4634c621"},
+    {file = "Markdown-3.3.7.tar.gz", hash = "sha256:cbb516f16218e643d8e0a95b309f77eb118cb138d39a4f27851e6a63581db874"},
 ]
 markupsafe = [
     {file = "MarkupSafe-2.1.1-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:86b1f75c4e7c2ac2ccdaec2b9022845dbb81880ca318bb7a0a01fbf7813e3812"},
@@ -1844,6 +1844,7 @@ traitlets = [
 ]
 twilio = [
     {file = "twilio-7.9.0-py2.py3-none-any.whl", hash = "sha256:8de17f6c75fef9e342a681d6ade1c59791120b0bf06f35db7f23f0604d78daa1"},
+    {file = "twilio-7.9.0.tar.gz", hash = "sha256:1e0dbf3b012206b35d644758735966e4f565c1b2c2b09b10f7c1ddd02db43a36"},
 ]
 tzdata = [
     {file = "tzdata-2022.1-py2.py3-none-any.whl", hash = "sha256:238e70234214138ed7b4e8a0fab0e5e13872edab3be586ab8198c407620e2ab9"},
