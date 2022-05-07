@@ -67,7 +67,7 @@ jobs:
 
       -
         name: Cache versions
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: versions-have-changed
         with:
           path: dependencies.txt
