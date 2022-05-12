@@ -4,6 +4,9 @@ from django.contrib import admin
 from django.shortcuts import render
 from django.urls import include, path, register_converter, reverse_lazy
 
+from constance.admin import Config as ConstanceConfigPsuedoModel
+from constance.apps import ConstanceConfig
+
 from shows.constants import SHOW_CODES_TO_SHOW, Show
 from webcore.middleware import JSONResponseMiddleware
 
@@ -11,6 +14,8 @@ from webcore.middleware import JSONResponseMiddleware
 admin.site.index_title = admin.site.site_header = "jew.pizza administration"
 admin.site.site_title = "jew.pizza site admin"
 admin.site.site_url = reverse_lazy("webcore:home")
+ConstanceConfig.verbose_name = "Settings"
+ConstanceConfigPsuedoModel.Meta.verbose_name = ConstanceConfigPsuedoModel.Meta.verbose_name_plural = "Configuration"
 
 
 class ShowConverter:

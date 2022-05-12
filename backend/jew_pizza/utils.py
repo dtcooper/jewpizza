@@ -110,26 +110,26 @@ except ValueError:
 
 def get_deploy_workflow_url():
     redis = get_redis_connection()
-    workflow_url = redis.get('deploy::workflow-url')
+    workflow_url = redis.get("deploy::workflow-url")
     if workflow_url:
         return workflow_url.decode()
     return None
 
 
 def get_deploy_data():
-    data = {'DEPLOYED_AT': None, 'WORKFLOW_URL': None}
+    data = {"DEPLOYED_AT": None, "WORKFLOW_URL": None}
     redis = get_redis_connection()
 
-    deployed_at = redis.get('deploy::deployed-at')
+    deployed_at = redis.get("deploy::deployed-at")
     if deployed_at:
         try:
-            data['DEPLOYED_AT'] = dateutil_parse(deployed_at.decode())
+            data["DEPLOYED_AT"] = dateutil_parse(deployed_at.decode())
         except ValueError:
             None
 
-    workflow_url = redis.get('deploy::workflow-url')
+    workflow_url = redis.get("deploy::workflow-url")
     if workflow_url:
-        data['WORKFLOW_URL'] = workflow_url.decode()
+        data["WORKFLOW_URL"] = workflow_url.decode()
 
     return data
 
