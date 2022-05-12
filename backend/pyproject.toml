@@ -6,10 +6,10 @@ authors = ["David Cooper <david@jew.pizza>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-boto3 = "^1.22.11"
+boto3 = "^1.22.13"
 Brotli = "^1.0.9"
 Django = "^4.0.4"
-django-constance = "^2.8.0"
+django-constance = "^2.9.0"
 django-environ = "^0.8.1"
 django-phonenumber-field = {extras = ["phonenumbers"], version = "^6.1.0"}
 django-recurrence = "^1.11.1"
