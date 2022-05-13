@@ -3,10 +3,10 @@ FROM nginx:1.21.6-alpine AS builder
 ARG NGX_BROTLI_VERSION=6e975bcb \
     NGX_DEVEL_KIT_VERSION=0.3.1 \
     NGX_HEADERS_MORE_VERSION=0.33 \
-    NGX_LUA_RESTY_CORE_VERSION=0.1.23rc1 \
+    NGX_LUA_RESTY_CORE_VERSION=0.1.23 \
     NGX_LUA_RESTY_LRUCACHE_VERSION=0.11 \
-    NGX_LUA_RESTY_REDIS_VERSION=0.30rc1 \
-    NGX_LUA_VERSION=0.10.21rc2 \
+    NGX_LUA_RESTY_REDIS_VERSION=0.30 \
+    NGX_LUA_VERSION=0.10.21 \
     NGX_NCHAN_VERSION=1.2.15
 
 # From https://github.com/nginxinc/docker-nginx/blob/master/stable/alpine/Dockerfile
