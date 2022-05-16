@@ -52,7 +52,7 @@ jobs:
           echo '# Frontend' >> dependencies.txt
           cd frontend
           npm install
-          npm outdated | awk '{print " * " $0}' | tee -a ../dependencies.txt
+          npm outdated | grep -v '^Package *Current *Wanted *Latest' | awk '{print " * " $0}' | tee -a ../dependencies.txt
           cd ..
 
           echo >> dependencies.txt
