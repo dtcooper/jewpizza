@@ -27,7 +27,7 @@ test = ["coverage", "flake8", "pexpect", "wheel"]
 
 [[package]]
 name = "asgiref"
-version = "3.5.1"
+version = "3.5.2"
 description = "ASGI specs, helper code, and adapters"
 category = "main"
 optional = false
@@ -126,14 +126,14 @@ uvloop = ["uvloop (>=0.15.2)"]
 
 [[package]]
 name = "boto3"
-version = "1.23.0"
+version = "1.23.1"
 description = "The AWS SDK for Python"
 category = "main"
 optional = false
 python-versions = ">= 3.6"
 
 [package.dependencies]
-botocore = ">=1.26.0,<1.27.0"
+botocore = ">=1.26.1,<1.27.0"
 jmespath = ">=0.7.1,<2.0.0"
 s3transfer = ">=0.5.0,<0.6.0"
 
@@ -142,7 +142,7 @@ crt = ["botocore[crt] (>=1.21.0,<2.0a0)"]
 
 [[package]]
 name = "botocore"
-version = "1.26.0"
+version = "1.26.1"
 description = "Low-level, data-driven core of boto 3."
 category = "main"
 optional = false
@@ -1074,14 +1074,14 @@ telegram = ["requests"]
 
 [[package]]
 name = "traitlets"
-version = "5.2.0"
-description = "Traitlets Python configuration system"
+version = "5.2.1.post0"
+description = ""
 category = "dev"
 optional = false
 python-versions = ">=3.7"
 
 [package.extras]
-test = ["pytest", "pre-commit"]
+test = ["pre-commit", "pytest"]
 
 [[package]]
 name = "twilio"
@@ -1202,7 +1202,7 @@ tests = ["coverage", "flake8", "wheel"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "696d52aa4b451faa7b776d12e3f061d14f44c853d111fcf902096c990818d07f"
+content-hash = "666e35240efa8b02eb218d460e31ffbafc53ae298d7b28bb8c20a5d20e8daa3e"
 
 [metadata.files]
 appdirs = [
@@ -1218,8 +1218,8 @@ argcomplete = [
     {file = "argcomplete-2.0.0.tar.gz", hash = "sha256:6372ad78c89d662035101418ae253668445b391755cfe94ea52f1b9d22425b20"},
 ]
 asgiref = [
-    {file = "asgiref-3.5.1-py3-none-any.whl", hash = "sha256:45a429524fba18aba9d512498b19d220c4d628e75b40cf5c627524dbaebc5cc1"},
-    {file = "asgiref-3.5.1.tar.gz", hash = "sha256:fddeea3c53fa99d0cdb613c3941cc6e52d822491fc2753fba25768fb5bf4e865"},
+    {file = "asgiref-3.5.2-py3-none-any.whl", hash = "sha256:1d2880b792ae8757289136f1db2b7b99100ce959b2aa57fd69dab783d05afac4"},
+    {file = "asgiref-3.5.2.tar.gz", hash = "sha256:4a29362a6acebe09bf1d6640db38c1dc3d9217c68e6f9f6204d72667fc19a424"},
 ]
 asttokens = [
     {file = "asttokens-2.0.5-py2.py3-none-any.whl", hash = "sha256:0844691e88552595a6f4a4281a9f7f79b8dd45ca4ccea82e5e05b4bbdb76705c"},
@@ -1271,12 +1271,12 @@ black = [
     {file = "black-22.3.0.tar.gz", hash = "sha256:35020b8886c022ced9282b51b5a875b6d1ab0c387b31a065b84db7c33085ca79"},
 ]
 boto3 = [
-    {file = "boto3-1.23.0-py3-none-any.whl", hash = "sha256:a5b7cce2473cb7f61a9684a68799f80b049236de62e63e7b4cd2bb0d1e9c58ad"},
-    {file = "boto3-1.23.0.tar.gz", hash = "sha256:07c4d128cb625f9459af8b6dff65ad9c3475e3b186f81c0e57af3d563d933cbd"},
+    {file = "boto3-1.23.1-py3-none-any.whl", hash = "sha256:4e3ef99d211266175a97b35d78103c31e3d01af31fd02bf599185421e5873fc0"},
+    {file = "boto3-1.23.1.tar.gz", hash = "sha256:3b50b49c5c0d3f19406cfbcefa32467c199cd6537d80f6fd04f18588670bdeeb"},
 ]
 botocore = [
-    {file = "botocore-1.26.0-py3-none-any.whl", hash = "sha256:25c43b8a7950d785daf3840bb10277378f36d41b208be3e01614537bdb419fe7"},
-    {file = "botocore-1.26.0.tar.gz", hash = "sha256:4c7ae9198ffbe1a834fd3928d2e6a4c68250c0d9f82e70c32b652d3525bec9c3"},
+    {file = "botocore-1.26.1-py3-none-any.whl", hash = "sha256:598304f20df607944c6db3870e005f2775230ec4558c8280d870f861a8003632"},
+    {file = "botocore-1.26.1.tar.gz", hash = "sha256:a805cbd8e79b64da0f719869b6b4c698cf5db7991b1aa412b086b25fb2892795"},
 ]
 brotli = [
     {file = "Brotli-1.0.9-cp27-cp27m-macosx_10_9_x86_64.whl", hash = "sha256:268fe94547ba25b58ebc724680609c8ee3e5a843202e9a381f6f9c5e8bdb5c70"},
@@ -1839,8 +1839,8 @@ tqdm = [
     {file = "tqdm-4.64.0.tar.gz", hash = "sha256:40be55d30e200777a307a7585aee69e4eabb46b4ec6a4b4a5f2d9f11e7d5408d"},
 ]
 traitlets = [
-    {file = "traitlets-5.2.0-py3-none-any.whl", hash = "sha256:9dd4025123fbe018a2092b2ad6984792f53ea3362c698f37473258b1fa97b0bc"},
-    {file = "traitlets-5.2.0.tar.gz", hash = "sha256:60474f39bf1d39a11e0233090b99af3acee93bbc2281777e61dd8c87da8a0014"},
+    {file = "traitlets-5.2.1.post0-py3-none-any.whl", hash = "sha256:f44b708d33d98b0addb40c29d148a761f44af740603a8fd0e2f8b5b27cf0f087"},
+    {file = "traitlets-5.2.1.post0.tar.gz", hash = "sha256:70815ecb20ec619d1af28910ade523383be13754283aef90528eb3d47b77c5db"},
 ]
 twilio = [
     {file = "twilio-7.9.0-py2.py3-none-any.whl", hash = "sha256:8de17f6c75fef9e342a681d6ade1c59791120b0bf06f35db7f23f0604d78daa1"},
