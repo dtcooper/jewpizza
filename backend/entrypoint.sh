@@ -52,7 +52,7 @@ init_db () {
     ./manage.py loaddata shows/showdates.json shows/episodes.json
 }
 
-init_umami () {
+init_umami_debug_only () {
     if [ -z "$(./manage.py constance get UMAMI_WEBSITE_ID)" ]; then
         echo "No UMAMI_WEBSITE_ID with DEBUG = True. Setting..."
         wait_for_service umami:3000
@@ -122,7 +122,7 @@ else
     init_db &
 
     if [ "$DEBUG" ]; then
-        init_umami &
+        init_umami_debug_only &
         exec ./manage.py runserver
     else
         if [ -z "$GUNICORN_WORKERS" ]; then
