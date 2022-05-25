@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-20.04
     env:
       PYTHON_VERSION: '3.10'
-      LASTVERSION_VERSION: '2.4.4'
+      LASTVERSION_VERSION: '2.4.5'
       POETRY_VERSION: '1.1.13'
       YQ_VERSION: '2.14.0'
 

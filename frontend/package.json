@@ -27,7 +27,7 @@
     "@alpinejs/persist": "^3.10.2",
     "@tailwindcss/typography": "^0.5.2",
     "alpinejs": "^3.10.2",
-    "daisyui": "^2.15.0",
+    "daisyui": "^2.15.1",
     "esbuild": "^0.14.39",
     "moment": "^2.29.3",
     "moment-timezone": "^0.5.34",
