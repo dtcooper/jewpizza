@@ -7,7 +7,7 @@ ARG NGX_BROTLI_VERSION=6e975bcb \
     NGX_LUA_RESTY_LRUCACHE_VERSION=0.11 \
     NGX_LUA_RESTY_REDIS_VERSION=0.30 \
     NGX_LUA_VERSION=0.10.21 \
-    NGX_NCHAN_VERSION=1.2.15
+    NGX_NCHAN_VERSION=1.3.0
 
 # From https://github.com/nginxinc/docker-nginx/blob/master/stable/alpine/Dockerfile
 RUN apk add --no-cache \
