@@ -360,7 +360,7 @@ hiredis = ["redis[hiredis] (>=3,!=4.0.0,!=4.0.1)"]
 
 [[package]]
 name = "django-s3direct"
-version = "2.0.0"
+version = "2.0.1"
 description = "Add direct uploads to S3 functionality with a progress bar to file input fields."
 category = "main"
 optional = false
@@ -1202,7 +1202,7 @@ tests = ["coverage", "flake8", "wheel"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "31ef5e386e75bceccc30f6e547ea06e84d0ad95cb9950872726037487d50c411"
+content-hash = "f4f01dcd0508e462f02f95b3fa3d0b6ac339f20b1c7efb492d3ec0c5a3cd3607"
 
 [metadata.files]
 appdirs = [
@@ -1446,7 +1446,7 @@ django-redis = [
     {file = "django_redis-5.2.0-py3-none-any.whl", hash = "sha256:1d037dc02b11ad7aa11f655d26dac3fb1af32630f61ef4428860a2e29ff92026"},
 ]
 django-s3direct = [
-    {file = "django-s3direct-2.0.0.tar.gz", hash = "sha256:078c57a694cf8f4c7709e1b07039ff5bdfab5f2246716248a5858cee9102e2bd"},
+    {file = "django-s3direct-2.0.1.tar.gz", hash = "sha256:1162f825ceb9efef0b23cf1a7ae6110d9718318780a00e31833a891ad258bbd0"},
 ]
 django-user-agents = [
     {file = "django-user_agents-0.4.0.tar.gz", hash = "sha256:cda8ae2146cee30e6867a07943f56ecc570b4391d725ab5309901a8b3e4a3514"},
