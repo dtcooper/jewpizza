@@ -39,9 +39,14 @@ if [ -z "$SECRET_KEY" ]; then
     exit 1
 fi
 
-wait_for_service() {
+wait_for_service () {
     echo "Waiting for ${1}..."
     wait-for -t 0 "$1"
+}
+
+wait_for_db_and_migrate () {
+    wait_for_service db:5432
+    ./manage.py migrate
 }
 
 init_db () {
@@ -102,7 +107,7 @@ elif [ "$RUN_HUEY" ]; then
     fi
 
 else
-    wait_for_service db:5432 -- ./manage.py migrate &
+    wait_for_db_and_migrate &
 
     if [ "$DEBUG" -a ! -d '../frontend/node_modules' ]; then
         # In case /app is mounted in Docker, needed to re-install the /app/frontend/node_modules folder
