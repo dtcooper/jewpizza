@@ -35,7 +35,7 @@ runs:
         env:
           DIRECTORY: ${{ inputs.directory }}
           RESTART: ${{ inputs.restart }}
-          WORKFLOW_URL: ${{ github.server_url	}}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          WORKFLOW_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         with:
           host: ${{ inputs.host }}
           port: ${{ inputs.port }}

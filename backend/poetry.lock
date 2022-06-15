@@ -126,14 +126,14 @@ uvloop = ["uvloop (>=0.15.2)"]
 
 [[package]]
 name = "boto3"
-version = "1.24.7"
+version = "1.24.9"
 description = "The AWS SDK for Python"
 category = "main"
 optional = false
 python-versions = ">= 3.7"
 
 [package.dependencies]
-botocore = ">=1.27.7,<1.28.0"
+botocore = ">=1.27.9,<1.28.0"
 jmespath = ">=0.7.1,<2.0.0"
 s3transfer = ">=0.6.0,<0.7.0"
 
@@ -142,7 +142,7 @@ crt = ["botocore[crt] (>=1.21.0,<2.0a0)"]
 
 [[package]]
 name = "botocore"
-version = "1.27.7"
+version = "1.27.9"
 description = "Low-level, data-driven core of boto 3."
 category = "main"
 optional = false
@@ -317,7 +317,7 @@ Django = ">=2.2"
 
 [[package]]
 name = "django-phonenumber-field"
-version = "6.1.0"
+version = "6.2.0"
 description = "An international phone number field for django models."
 category = "main"
 optional = false
@@ -1202,7 +1202,7 @@ tests = ["coverage", "flake8", "wheel"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "6fde2cc36f31c904894091a1b4b5a0a79eeab87c567784648398f7731015b95c"
+content-hash = "533fb895a1c5fcd4bb925e8b135e2cc8af9b02e3f1dd23721462a39a68f2d465"
 
 [metadata.files]
 appdirs = [
@@ -1271,12 +1271,12 @@ black = [
     {file = "black-22.3.0.tar.gz", hash = "sha256:35020b8886c022ced9282b51b5a875b6d1ab0c387b31a065b84db7c33085ca79"},
 ]
 boto3 = [
-    {file = "boto3-1.24.7-py3-none-any.whl", hash = "sha256:925a34a55257219f4601e803951fd4d61ed6eac2208dc834a04fe150b03f265e"},
-    {file = "boto3-1.24.7.tar.gz", hash = "sha256:6e243e28c804dccd2015935acfac0567e1861b20fdd96aa47f232b47aa214a69"},
+    {file = "boto3-1.24.9-py3-none-any.whl", hash = "sha256:87d34861727699c795bf8d65703f2435e75f12879bdd483e08b35b7c5510e8c8"},
+    {file = "boto3-1.24.9.tar.gz", hash = "sha256:0821212ff521cb934801b1f655cef3c0e976775324b1018f1751700d0f42dbb4"},
 ]
 botocore = [
-    {file = "botocore-1.27.7-py3-none-any.whl", hash = "sha256:3e0cbe26f08fe9a3f6df5de4dcc3bef686e01ba5f79ad03ffbe79d92f51ecea5"},
-    {file = "botocore-1.27.7.tar.gz", hash = "sha256:dc83ef991c730ab0f06b51fcefda74f493b990903b882452aff78c123e3040e2"},
+    {file = "botocore-1.27.9-py3-none-any.whl", hash = "sha256:5669b982b0583e73daef1fe0a4df311055e6287326f857dbb1dcc2de1d8412ad"},
+    {file = "botocore-1.27.9.tar.gz", hash = "sha256:7a7588b0170e571317496ac4104803329d5bc792bc008e8a757ffd440f1b6fa6"},
 ]
 brotli = [
     {file = "Brotli-1.0.9-cp27-cp27m-macosx_10_9_x86_64.whl", hash = "sha256:268fe94547ba25b58ebc724680609c8ee3e5a843202e9a381f6f9c5e8bdb5c70"},
@@ -1434,8 +1434,8 @@ django-extensions = [
     {file = "django_extensions-3.1.5-py3-none-any.whl", hash = "sha256:9238b9e016bb0009d621e05cf56ea8ce5cce9b32e91ad2026996a7377ca28069"},
 ]
 django-phonenumber-field = [
-    {file = "django-phonenumber-field-6.1.0.tar.gz", hash = "sha256:b1ff950f90a8911ff323ccf77c8f6fe4299a9f671fa61c8734a6994359f07446"},
-    {file = "django_phonenumber_field-6.1.0-py3-none-any.whl", hash = "sha256:897b902a1654b0eb21f6268498a3359e2c4eb90af9585cb8693af186ede8c5bb"},
+    {file = "django-phonenumber-field-6.2.0.tar.gz", hash = "sha256:1d89612eed2d6889938577743705119637f8185585dd540f080c5f2d5c218dd3"},
+    {file = "django_phonenumber_field-6.2.0-py3-none-any.whl", hash = "sha256:70a4c3e5a6d916ed91fbc5fabf18a6c29395fb6912e2d1173ae389cda8966ab6"},
 ]
 django-recurrence = [
     {file = "django-recurrence-1.11.1.tar.gz", hash = "sha256:9c89444e651a78c587f352c5f63eda48ab2f53996347b9fcdff2d248f4fcff70"},
