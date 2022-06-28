@@ -1,12 +1,12 @@
-FROM nginx:1.21.6-alpine AS builder
+FROM nginx:1.23.0-alpine AS builder
 
 ARG NGX_BROTLI_VERSION=6e975bcb \
     NGX_DEVEL_KIT_VERSION=0.3.1 \
-    NGX_HEADERS_MORE_VERSION=0.33 \
+    NGX_HEADERS_MORE_VERSION=master \
     NGX_LUA_RESTY_CORE_VERSION=0.1.23 \
-    NGX_LUA_RESTY_LRUCACHE_VERSION=0.11 \
+    NGX_LUA_RESTY_LRUCACHE_VERSION=0.13 \
     NGX_LUA_RESTY_REDIS_VERSION=0.30 \
-    NGX_LUA_VERSION=0.10.21 \
+    NGX_LUA_VERSION=master \
     NGX_NCHAN_VERSION=1.3.0
 
 # From https://github.com/nginxinc/docker-nginx/blob/master/stable/alpine/Dockerfile
@@ -38,8 +38,8 @@ RUN mkdir -p /usr/src/nginx && cd /usr/src \
     && wget -qO - "https://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz" | tar xz --strip=1 -C nginx \
     && wget -qO - "https://github.com/google/ngx_brotli/tarball/${NGX_BROTLI_VERSION}" | tar xz --strip=1 -C brotli \
     && wget -qO - "https://github.com/vision5/ngx_devel_kit/tarball/v${NGX_DEVEL_KIT_VERSION}" | tar xz --strip=1 -C devel-kit \
-    && wget -qO - "https://github.com/openresty/headers-more-nginx-module/tarball/v${NGX_HEADERS_MORE_VERSION}" | tar xz --strip=1 -C headers-more \
-    && wget -qO - "https://github.com/openresty/lua-nginx-module/tarball/v${NGX_LUA_VERSION}" | tar xz --strip=1 -C lua \
+    && wget -qO - "https://github.com/openresty/headers-more-nginx-module/archive/refs/heads/${NGX_HEADERS_MORE_VERSION}.tar.gz" | tar xz --strip=1 -C headers-more \
+    && wget -qO - "https://github.com/openresty/lua-nginx-module/archive/refs/heads/${NGX_LUA_VERSION}.tar.gz" | tar xz --strip=1 -C lua \
     && wget -qO - "https://github.com/openresty/lua-resty-core/tarball/v${NGX_LUA_RESTY_CORE_VERSION}" | tar xz --strip=1 -C lua-resty-core \
     && wget -qO - "https://github.com/openresty/lua-resty-lrucache/tarball/v${NGX_LUA_RESTY_LRUCACHE_VERSION}" | tar xz --strip=1 -C lua-resty-lrucache \
     && wget -qO - "https://github.com/openresty/lua-resty-redis/tarball/v${NGX_LUA_RESTY_REDIS_VERSION}" | tar xz --strip=1 -C lua-resty-redis \
@@ -54,7 +54,7 @@ RUN mkdir -p /usr/src/nginx && cd /usr/src \
     && make modules && strip objs/*.so
 
 
-FROM jonasal/nginx-certbot:3.1.2-nginx1.21.6-alpine AS final
+FROM jonasal/nginx-certbot:3.1.3-nginx1.23.0-alpine AS final
 
 ARG JINJA2_CLI_VERSION=0.8.2
 
