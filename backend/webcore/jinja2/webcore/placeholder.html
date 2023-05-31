@@ -32,8 +32,14 @@
           Welcome to <span class="text-accent underline underline-wavy animate-spin">jew.pizza</span>
         </h2>
         <p class="md:text-indent mb-1.5 sm:mb-2 lg:mb-2 mx-2 lg:mx-0 text-sm sm:text-base lg:text-lg" x-data="placeholder">
-          Here is my special website. Catch me <span class="font-bold"><span class="underline">every</span>
-          <span x-text="showTime">Sun to Thurs night at midnight-5:00am {{ eastern_tz_abbrev }}</span>
+          Here is my special website. Check out my <span class="font-bold">podcast</span>
+          that releases <span class="font-bold"><span class="underline"> every weekday</span></span> called
+            <a class="link link-primary link-hover umami--click--tigwit-podcast font-bold" target="_blank"
+              href="https://shows.acast.com/this-is-going-well-i-think">
+            <span class="italic">This Is Going Well, I Think with David Cooper</span></a>.
+          {#
+          You can also hear me on Newstalk Tonight with Jim Richards
+          <span x-text="showTime">Tues to Thurs night at midnight-5:00am {{ eastern_tz_abbrev }}</span>
           <span class="italic">hosting</span> <a class="link link-primary link-hover font-bold umami--click--showgram"
             target="_blank" href="https://www.iheartradio.ca/newstalk-1010/shows/the-late-showgram-with-jim-richards-1.14645758">The
           Showgram</a></span><span x-text="showTechnicalTime"> &mdash; technically Mon to Fri mornings</span>.
@@ -61,6 +67,7 @@
           The show is available
             <a class="font-bold link link-primary link-hover umami--click--showgram-podcast" href="{{ url_for('webcore:podcast-redirect', podcast='showgram') }}" target="_blank">
               as a podcast</a>.
+          #}
         </p>
         <p class="md:text-indent mb-1.5 sm:mb-2 mx-2 lg:mx-0 text-sm sm:text-base lg:text-lg">
           I <span class="font-bold">descend on the desert every year</span> for the
@@ -72,10 +79,7 @@
           Information Radio</a></span> (BMIR 94.5 FM).
         </p>
         <p class="md:text-indent mx-2 lg:mx-0 text-sm sm:text-base lg:text-lg">
-          You can also <span class="font-bold">listen to my <span class="italic">older</span> podcast
-          <a class="link link-primary link-hover umami--click--tigwit-podcast" target="_blank" href="{{ url_for('webcore:podcast-redirect', podcast='tigwit') }}">
-          <span class="italic">This Is Going Well, I Think</span></a></span> or
-          <span class="font-bold">my show</span>
+          You can also <span class="font-bold">listen to my show</span>
           <a class="link link-primary link-hover font-bold umami--click--wfmu"
             href="https://www.wfmu.org/playlists/WD" target="_blank">
             <span class="italic">That Went Well, I Think</span> on WFMU</a>.
