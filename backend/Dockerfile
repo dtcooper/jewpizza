@@ -1,8 +1,8 @@
 FROM python:3.10-alpine3.15 AS base
-ARG POETRY_VERSION=1.1.13
+ARG POETRY_VERSION=1.5.1
 
 FROM --platform=$BUILDPLATFORM python:3.10-alpine3.15 AS base-native
-ARG POETRY_VERSION=1.1.13
+ARG POETRY_VERSION=1.5.1
 
 # Build frontend (can use native platform)
 FROM --platform=$BUILDPLATFORM node:16-alpine AS frontend
@@ -34,8 +34,9 @@ RUN apk add --no-cache \
         libsndfile-dev \
         make
 
+COPY backend/audiowaveform-1.6.0.tar.gz /tmp/
 RUN mkdir -p /usr/src/audiowaveform && cd /usr/src/audiowaveform \
-    && wget -qO - "https://github.com/bbc/audiowaveform/archive/refs/tags/${AUDIOWAVEFORM_VERSION}.tar.gz" | tar xz --strip-components 1 \
+    && tar xzf /tmp/audiowaveform-1.6.0.tar.gz --strip-components 1 \
     && mkdir build && cd build \
     && cmake -D ENABLE_TESTS=0 .. \
     && make && make install && strip "$(which audiowaveform)"
