@@ -1,0 +1,63 @@
+{%- macro server_name(subdomains=None, catch_all=False) -%}
+    {%- if subdomains is string -%}
+        {%- set subdomains = [subdomains] -%}
+    {%- endif %}
+
+    {% if subdomains %}
+      {% for subdomain in subdomains %}
+        server_name {{ subdomain }}.{{ DOMAIN_NAME }};  # certbot_domain:*.{{ DOMAIN_NAME }}
+      {% endfor %}
+    {% elif catch_all %}
+        # Multiple server_name commands with "_" are ignored by nginx, but we
+        # trick docker-nginx-certbot scripts here to register multiple domains
+        server_name _;  # certbot_domain:{{ DOMAIN_NAME }}
+        server_name _;  # certbot_domain:*.{{ DOMAIN_NAME }}
+        {% for redirect_domain_name in (REDIRECT_DOMAIN_NAMES or '').strip().split() %}
+            server_name _;  # certbot_domain:{{ redirect_domain_name }}
+            server_name _;  # certbot_domain:*.{{ redirect_domain_name }}
+        {% endfor %}
+    {% else %}
+        server_name {{ DOMAIN_NAME }};
+    {% endif %}
+
+    listen 443 ssl{% if catch_all %} default_server reuseport{% endif %};
+    listen [::]:443 ssl{% if catch_all %} default_server reuseport{% endif %};
+    http2 on;
+
+    ssl_certificate /etc/letsencrypt/live/{{ DOMAIN_NAME }}/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/{{ DOMAIN_NAME }}/privkey.pem;
+    ssl_trusted_certificate /etc/letsencrypt/live/{{ DOMAIN_NAME }}/chain.pem;
+    ssl_dhparam /etc/letsencrypt/dhparams/dhparam.pem;
+{%- endmacro -%}
+
+server {
+  {{ server_name() }}
+
+  location /cmsadmin/logs {
+    # TODO: mark internal and reroute via django
+    include proxy_params;
+    proxy_buffering off;
+    proxy_cache off;
+    proxy_pass http://logs:8000;
+  }
+
+  location / {
+    add_header Content-Type text/plain;
+    return 200 'Hi, mom!';
+  }
+}
+
+server {
+  {{ server_name(["a", "analytics"]) }}
+
+  location / {
+    include proxy_params;
+    proxy_pass http://analytics:8000;
+  }
+}
+
+server {
+  {{ server_name(catch_all=True) }}
+
+  return 302 https://{{ DOMAIN_NAME }}$request_uri;
+}

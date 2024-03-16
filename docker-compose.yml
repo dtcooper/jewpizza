@@ -1,0 +1,63 @@
+services:
+  nginx:
+    restart: always
+    image: ghcr.io/dtcooper/jewpizza-nginx:latest
+    build:
+      context: nginx
+    depends_on:
+      - analytics
+      - logs
+    volumes:
+      - ./.env:/.env:ro
+      - nginx_secrets:/etc/letsencrypt
+    environment:
+      CERTBOT_EMAIL: "${CERTBOT_EMAIL:?CERTBOT_EMAIL needs to be set. See .env file.}"
+      DIGITALOCEAN_API_TOKEN: "${DIGITALOCEAN_API_TOKEN:-}"
+      DOMAIN_NAME: "${DOMAIN_NAME:?DOMAIN_NAME needs to be set. See .env file.}"
+      REDIRECT_DOMAIN_NAMES: "${REDIRECT_DOMAIN_NAMES:-}"
+    ports:
+      - 80:80
+      - 443:443
+
+  db:
+    restart: always
+    image: postgres:16.2-alpine3.19
+    volumes:
+      - ./scripts/init-umami-db.sql:/docker-entrypoint-initdb.d/init-umami-db.sql
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_PASSWORD: postgres
+
+  redis:
+    restart: always
+    image: redis:7.2.4-alpine3.19
+    volumes:
+      - redis_data:/data
+
+  analytics:
+    restart: always
+    image: ghcr.io/umami-software/umami:postgresql-v2.10.2
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/umami
+      APP_SECRET: "${SECRET_KEY:?SECRET_KEY needs to be set. See .env file.}"
+      IGNORE_IP: "${UMAMI_IGNORE_IPS:-}"
+      DISABLE_TELEMETRY: "1"
+      PORT: "8000"
+
+  logs:
+    restart: always
+    image: amir20/dozzle:v6.3.1
+    volumes:
+      - "${DOCKER_SOCKET:-/var/run/docker.sock}:/var/run/docker.sock"
+    environment:
+      DOZZLE_ADDR: ":8000"
+      DOZZLE_BASE: "/cmsadmin/logs"
+      DOZZLE_HOSTNAME: "${DOMAIN_NAME}"
+      DOZZLE_NO_ANALYTICS: "true"
+
+volumes:
+  nginx_secrets:
+  postgres_data:
+  redis_data:

@@ -1,0 +1,22 @@
+services:
+  nginx:
+    restart: "no"
+    environment:
+      USE_LOCAL_CA: "${USE_LOCAL_CA:-}"
+    volumes:
+      - ./nginx/image/etc/nginx/templates:/etc/nginx/templates
+      - ./nginx/local-certificate-authority:/etc/local_ca
+  db:
+    restart: "no"
+    ports:
+      - "127.0.0.1:5432:5432"
+  redis:
+    restart: "no"
+  analytics:
+    restart: "no"
+    ports:
+      - "127.0.0.1:8001:8000"
+  logs:
+    restart: "no"
+    ports:
+      - "127.0.0.1:8002:8000"
