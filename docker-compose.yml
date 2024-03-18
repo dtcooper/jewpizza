@@ -1,20 +1,28 @@
 services:
+  frontend:
+    restart: always
+    image: ghcr.io/dtcooper/jewpizza-frontend:latest
+    build:
+      context: frontend
+    env_file: .env
+    volumes:
+      - static_data:/static
+
   nginx:
     restart: always
     image: ghcr.io/dtcooper/jewpizza-nginx:latest
+    env_file: .env
     build:
       context: nginx
     depends_on:
       - analytics
       - logs
+      - frontend
     volumes:
       - ./.env:/.env:ro
+      - ./frontend:/frontend
       - nginx_secrets:/etc/letsencrypt
-    environment:
-      CERTBOT_EMAIL: "${CERTBOT_EMAIL:?CERTBOT_EMAIL needs to be set. See .env file.}"
-      DIGITALOCEAN_API_TOKEN: "${DIGITALOCEAN_API_TOKEN:-}"
-      DOMAIN_NAME: "${DOMAIN_NAME:?DOMAIN_NAME needs to be set. See .env file.}"
-      REDIRECT_DOMAIN_NAMES: "${REDIRECT_DOMAIN_NAMES:-}"
+      - static_data:/static
     ports:
       - 80:80
       - 443:443
@@ -61,3 +69,4 @@ volumes:
   nginx_secrets:
   postgres_data:
   redis_data:
+  static_data:

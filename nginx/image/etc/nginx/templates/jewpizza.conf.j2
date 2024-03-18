@@ -1,4 +1,13 @@
-{%- macro server_name(subdomains=None, catch_all=False) -%}
+{%- set DEV_MODE = environ('DEV_MODE')|int != 0 -%}
+{%- set DOMAIN_NAME = environ("DOMAIN_NAME") -%}
+{%- set REDIRECT_DOMAIN_NAMES = (environ("REDIRECT_DOMAIN_NAMES") or '').strip().split() -%}
+# Rendered jinja2 nginx config
+
+# DEV_MODE = {{ DEV_MODE|tojson }}
+# DOMAIN_NAME = {{ DOMAIN_NAME|tojson }}
+# REDIRECT_DOMAIN_NAMES = {{ REDIRECT_DOMAIN_NAMES|tojson }}
+
+{% macro server_name(subdomains=None, catch_all=False) -%}
     {%- if subdomains is string -%}
         {%- set subdomains = [subdomains] -%}
     {%- endif %}
@@ -12,7 +21,8 @@
         # trick docker-nginx-certbot scripts here to register multiple domains
         server_name _;  # certbot_domain:{{ DOMAIN_NAME }}
         server_name _;  # certbot_domain:*.{{ DOMAIN_NAME }}
-        {% for redirect_domain_name in (REDIRECT_DOMAIN_NAMES or '').strip().split() %}
+        {% for redirect_domain_name in REDIRECT_DOMAIN_NAMES %}
+            # Redirect domian: redirect_domain_name
             server_name _;  # certbot_domain:{{ redirect_domain_name }}
             server_name _;  # certbot_domain:*.{{ redirect_domain_name }}
         {% endfor %}
@@ -28,7 +38,13 @@
     ssl_certificate_key /etc/letsencrypt/live/{{ DOMAIN_NAME }}/privkey.pem;
     ssl_trusted_certificate /etc/letsencrypt/live/{{ DOMAIN_NAME }}/chain.pem;
     ssl_dhparam /etc/letsencrypt/dhparams/dhparam.pem;
+    include options-ssl-nginx.conf;
 {%- endmacro -%}
+
+map $http_upgrade $connection_upgrade {
+  default upgrade;
+  '' close;
+}
 
 server {
   {{ server_name() }}
@@ -41,9 +57,30 @@ server {
     proxy_pass http://logs:8000;
   }
 
-  location / {
-    add_header Content-Type text/plain;
-    return 200 'Hi, mom!';
+  {% if not DEV_MODE %}
+    location /_app/immutable/ {
+      root /static/frontend;
+      expires max;
+      add_header Cache-Control "public, immutable";
+      access_log off;
+      try_files $uri @frontend;
+    }
+
+    location / {
+      root /static/frontend;
+      try_files $uri @app;
+    }
+  {% endif %}
+
+  location {% if DEV_MODE %}/{% else %}@app{% endif %} {
+    include proxy_params;
+    {% if DEV_MODE %}
+      # Support hmr (hot module reload) via websockets in DEV_MODE
+      proxy_http_version 1.1;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection $connection_upgrade;
+    {% endif %}
+    proxy_pass http://frontend:8000;
   }
 }
 

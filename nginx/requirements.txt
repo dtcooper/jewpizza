@@ -1,0 +1,3 @@
+jinja2-cli==0.8.2
+nginxfmt==1.2.2
+python-dotenv[cli]==1.0.1

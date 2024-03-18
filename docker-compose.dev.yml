@@ -1,8 +1,10 @@
 services:
+  frontend:
+    restart: "no"
+    volumes:
+      - ./frontend:/app
   nginx:
     restart: "no"
-    environment:
-      USE_LOCAL_CA: "${USE_LOCAL_CA:-}"
     volumes:
       - ./nginx/image/etc/nginx/templates:/etc/nginx/templates
       - ./nginx/local-certificate-authority:/etc/local_ca
