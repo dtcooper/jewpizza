@@ -35,6 +35,7 @@ services:
       - frontend
     volumes:
       - ./frontend:/frontend
+      - ./subdomains:/subdomains
       - nginx_secrets:/etc/letsencrypt
       - static_data:/static
     ports:

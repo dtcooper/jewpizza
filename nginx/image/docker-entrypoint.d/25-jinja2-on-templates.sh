@@ -21,6 +21,11 @@ auto_jinja2() {
     return 0
   fi
 
+  for subdomain in $EXTRA_SUBDOMAINS; do
+      subdomain="$(echo "$subdomain" | cut -d ':' -f 1)"
+      mkdir -p "/subdomains/$subdomain"
+  done
+
   find "$template_dir" -follow -type f -name "*$suffix" -print | while read -r template; do
     relative_path="${template#"$template_dir/"}"
     output_path="$output_dir/${relative_path%"$suffix"}"

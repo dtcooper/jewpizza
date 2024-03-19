@@ -1,16 +1,19 @@
 {%- set DEV_MODE = environ('DEV_MODE')|int != 0 -%}
 {%- set DOMAIN_NAME = environ("DOMAIN_NAME") -%}
 {%- set REDIRECT_DOMAIN_NAMES = (environ("REDIRECT_DOMAIN_NAMES") or '').strip().split() -%}
+{%- set EXTRA_SUBDOMAINS = (environ('EXTRA_SUBDOMAINS') or '').strip().split() -%}
 # Rendered jinja2 nginx config
 
 # DEV_MODE = {{ DEV_MODE|tojson }}
 # DOMAIN_NAME = {{ DOMAIN_NAME|tojson }}
 # REDIRECT_DOMAIN_NAMES = {{ REDIRECT_DOMAIN_NAMES|tojson }}
+# EXTRA_SUBDOMAINS = {{ EXTRA_SUBDOMAINS|tojson }}
 
 {% macro server_name(subdomains=None, catch_all=False) -%}
+    # Server name for {% if subdomains %}subdomain(s)={{ subdomains|tojson }}{% else %}{{ DOMAIN_NAME }}{% endif %} / catch_all={{ catch_all|tojson }}
     {%- if subdomains is string -%}
         {%- set subdomains = [subdomains] -%}
-    {%- endif %}
+    {%- endif -%}
 
     {% if subdomains %}
       {% for subdomain in subdomains %}
@@ -22,7 +25,7 @@
         server_name _;  # certbot_domain:{{ DOMAIN_NAME }}
         server_name _;  # certbot_domain:*.{{ DOMAIN_NAME }}
         {% for redirect_domain_name in REDIRECT_DOMAIN_NAMES %}
-            # Redirect domian: redirect_domain_name
+            # Redirect domain: {{ redirect_domain_name }}
             server_name _;  # certbot_domain:{{ redirect_domain_name }}
             server_name _;  # certbot_domain:*.{{ redirect_domain_name }}
         {% endfor %}
@@ -52,7 +55,7 @@ server {
   location /cmsadmin {
     include proxy_params;
     proxy_pass http://backend:8000;
-    add_header X-JewPizza-Info "backend";
+    add_header X-JewPizza-Info "backend/cmsadmin" always;
   }
 
   location /__internal__/cmsadmin/tools/logs/ {
@@ -61,17 +64,17 @@ server {
     proxy_buffering off;
     proxy_cache off;
     proxy_pass http://logs:8000/cmsadmin/tools/logs/;
-    add_header X-JewPizza-Info "internal";
+    add_header X-JewPizza-Info "internal/logs" always;
   }
 
   location /backend-static {
     {% if DEV_MODE %}
       include proxy_params;
       proxy_pass http://backend:8000;
-      add_header X-JewPizza-Info "backend";
+      add_header X-JewPizza-Info "backend/static-proxy" always;
     {% else %}
       alias /static/backend;
-      add_header X-JewPizza-Info "static";
+      add_header X-JewPizza-Info "static/backend" always;
     {% endif %}
   }
 
@@ -80,21 +83,21 @@ server {
       root /static/frontend;
       expires max;
       add_header Cache-Control "public, immutable";
-      add_header X-JewPizza-Info "static-immutable";
+      add_header X-JewPizza-Info "static/frontend/immutable" always;
       access_log off;
       try_files $uri @frontend;
     }
 
     location / {
       root /static/frontend;
-      add_header X-JewPizza-Info "static";
+      add_header X-JewPizza-Info "static/frontend" always;
       try_files $uri @frontend;
     }
   {% endif %}
 
   location {% if DEV_MODE %}/{% else %}@frontend{% endif %} {
     include proxy_params;
-    add_header X-JewPizza-Info "frontend";
+    add_header X-JewPizza-Info "frontend" always;
     {% if DEV_MODE %}
       # Support hmr (hot module reload) via websockets in DEV_MODE
       proxy_http_version 1.1;
@@ -110,14 +113,39 @@ server {
 
   location / {
     include proxy_params;
+    add_header X-JewPizza-Info "analytics" always;
     proxy_pass http://analytics:8000;
-    add_header X-JewPizza-Info "analytics";
   }
 }
+
+{% for subdomain in EXTRA_SUBDOMAINS %}
+    {% set subdomain, mode = subdomain, 'noindex' %}
+    {% if ':' in subdomain %}
+        {% set subdomain, mode = subdomain.split(':') %}
+    {% endif %}
+    # subdomain: {{ subdomain }} (mode: {{ mode }})
+    server {
+        {{ server_name(subdomain) }}
+
+        add_header X-JewPizza-Info "subdomain/{{ subdomain }}" always;
+
+        root /subdomains/{{ subdomain }};
+        {% if mode == 'autoindex' %}autoindex on;{% endif %}
+
+        location = /robots.txt {
+            add_header Content-Type text/plain;
+            return 200 "User-agent: *\nDisallow: /\n";
+        }
+
+        location / {
+            try_files $uri $uri/{% if mode == 'index' %} $uri/index.html{% endif %} =404;
+        }
+    }
+{% endfor %}
 
 server {
   {{ server_name(catch_all=True) }}
 
-  add_header X-JewPizza-Info "redirect";
+  add_header X-JewPizza-Info "redirect" always;
   return 302 https://{{ DOMAIN_NAME }}$request_uri;
 }
