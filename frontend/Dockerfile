@@ -1,6 +1,11 @@
-FROM node:21.7.1-alpine3.19
+FROM node:21.7.1
 
-RUN apk add --no-cache rsync
+ARG DEBIAN_FRONTEND=noninteractive
+RUN apt-get update \
+    && apt-get upgrade -y \
+    && apt-get install -y --no-install-recommends \
+        rsync \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY package.json package-lock.json /app/
 WORKDIR /app

@@ -3,7 +3,13 @@
 set -e
 
 if [ "$#" = 0 ]; then
-    echo test
+    wait-for-it --timeout 0 --service db:5432 --service redis:6379
+
+    if [ -z "$DEV_MOD" -o "$DEV_MODE" = '0' ]; then
+        ./manage.py collectstatic --noinput
+    fi
+
+    exec uvicorn --host 0.0.0.0 --port 8000 --reload jewpizza.asgi:application
 else
     echo "Executing: $*"
     exec "$@"

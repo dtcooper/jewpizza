@@ -49,12 +49,30 @@ map $http_upgrade $connection_upgrade {
 server {
   {{ server_name() }}
 
-  location /cmsadmin/logs {
-    # TODO: mark internal and reroute via django
+  location /cmsadmin {
+    include proxy_params;
+    proxy_pass http://backend:8000;
+    add_header X-JewPizza-Info "backend";
+  }
+
+  location /__internal__/cmsadmin/tools/logs/ {
+    internal;
     include proxy_params;
     proxy_buffering off;
     proxy_cache off;
-    proxy_pass http://logs:8000;
+    proxy_pass http://logs:8000/cmsadmin/tools/logs/;
+    add_header X-JewPizza-Info "internal";
+  }
+
+  location /backend-static {
+    {% if DEV_MODE %}
+      include proxy_params;
+      proxy_pass http://backend:8000;
+      add_header X-JewPizza-Info "backend";
+    {% else %}
+      alias /static/backend;
+      add_header X-JewPizza-Info "static";
+    {% endif %}
   }
 
   {% if not DEV_MODE %}
@@ -62,18 +80,21 @@ server {
       root /static/frontend;
       expires max;
       add_header Cache-Control "public, immutable";
+      add_header X-JewPizza-Info "static-immutable";
       access_log off;
       try_files $uri @frontend;
     }
 
     location / {
       root /static/frontend;
-      try_files $uri @app;
+      add_header X-JewPizza-Info "static";
+      try_files $uri @frontend;
     }
   {% endif %}
 
-  location {% if DEV_MODE %}/{% else %}@app{% endif %} {
+  location {% if DEV_MODE %}/{% else %}@frontend{% endif %} {
     include proxy_params;
+    add_header X-JewPizza-Info "frontend";
     {% if DEV_MODE %}
       # Support hmr (hot module reload) via websockets in DEV_MODE
       proxy_http_version 1.1;
@@ -90,11 +111,13 @@ server {
   location / {
     include proxy_params;
     proxy_pass http://analytics:8000;
+    add_header X-JewPizza-Info "analytics";
   }
 }
 
 server {
   {{ server_name(catch_all=True) }}
 
+  add_header X-JewPizza-Info "redirect";
   return 302 https://{{ DOMAIN_NAME }}$request_uri;
 }
