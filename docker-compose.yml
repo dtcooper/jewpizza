@@ -77,7 +77,7 @@ services:
     environment:
       DOZZLE_ADDR: ":8000"
       DOZZLE_BASE: "/cmsadmin/tools/logs"
-      DOZZLE_HOSTNAME: "${DOMAIN_NAME}"
+      DOZZLE_HOSTNAME: "${DOMAIN_NAME:?DOMAIN_NAME needs to be set. See .env file.}"
       DOZZLE_NO_ANALYTICS: "true"
 
 volumes:
