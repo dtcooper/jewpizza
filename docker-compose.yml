@@ -1,4 +1,15 @@
 services:
+  backend:
+    restart: always
+    image: ghcr.io/dtcooper/jewpizza-backend:latest
+    build:
+      context: backend
+      args:
+        DEV_MODE: "${DEV_MODE:-0}"
+    env_file: .env
+    volumes:
+      - static_data:/static
+
   frontend:
     restart: always
     image: ghcr.io/dtcooper/jewpizza-frontend:latest
@@ -19,7 +30,6 @@ services:
       - logs
       - frontend
     volumes:
-      - ./.env:/.env:ro
       - ./frontend:/frontend
       - nginx_secrets:/etc/letsencrypt
       - static_data:/static

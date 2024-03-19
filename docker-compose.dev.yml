@@ -1,4 +1,10 @@
 services:
+  backend:
+    restart: "no"
+    volumes:
+      - ./backend:/app
+    ports:
+      - 127.0.0.1:8000:8000
   frontend:
     restart: "no"
     volumes:

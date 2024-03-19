@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "jewpizza"
+version = "0.0.1"
+description = "jew.pizza Backend"
+authors = ["David Cooper <david@dtcooper.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "^5.0.3"
+uvicorn = {extras = ["standard"], version = "^0.28.0"}
+
+
+[tool.poetry.group.dev.dependencies]
+ipython = "^8.22.2"
+ipdb = "^0.13.13"
+black = "^24.3.0"
+isort = "^5.13.2"
+flake8 = "^7.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
