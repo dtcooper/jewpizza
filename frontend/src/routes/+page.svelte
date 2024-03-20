@@ -1,3 +1,73 @@
+<script>
+  let bioDialog
+
+  const openEmail = ({ addr, tld, domain }) => {
+    const email = `${tld}.${domain}@${addr}:otliam`.split("").reverse().join("")
+    window.open(email, "_blank")
+  }
+</script>
+
+<dialog class="modal" bind:this={bioDialog}>
+  <div class="modal-box w-[97vw] max-w-5xl md:px-4 sm:px-3 px-2">
+    <form method="dialog">
+      <button class="btn btn-sm md:btn-md md:text-xl btn-circle btn-ghost absolute right-2 top-2">✕</button>
+    </form>
+    <h3 class="font-bold text-3xl italic text-center mb-1.5 md:mb-3 underline">Bio</h3>
+
+    <article class="text-indent overflow-hidden">
+      <enhanced:img
+        alt=""
+        src="$lib/assets/images/headshot.jpg"
+        style="--custom-spin-duration: 33.711s; --custom-spin-direction: reverse"
+        class="hidden md:block mx-auto sm:float-right h-2/3 w-2/3 sm:h-1/3 sm:w-1/3 lg:h-1/4 lg:w-1/4 sm:ml-3 rounded-full border-4 border-secondary animate-spin-custom select-none drag-none"
+      />
+
+      <p>
+        David Cooper is a human train wreck and Canadian living in New York City. His extensive broadcasting credentials
+        include having his interview requests denied by celebrities, world leaders, and restroom attendants.
+      </p>
+      <p>
+        After growing up in Toronto, David fled to San Francisco where he was introduced to radio almost by accident:
+        While dabbling in stand-up comedy, David wandered into a radio station to promote one of his shows. Something
+        terrible clicked that day and there was no turning back.
+      </p>
+
+      <enhanced:img
+        alt=""
+        src="$lib/assets/images/david-bmir.jpg"
+        style="--custom-spin-duration: 31.13s; --custom-spin-direction: normal"
+        class="mx-auto sm:float-left h-2/3 w-2/3 sm:h-1/3 sm:w-1/3 lg:h-1/4 lg:w-1/4 sm:mr-5 rounded-full border-8 border-secondary animate-spin-custom select-none drag-none"
+      />
+
+      <p>
+        Since 2016, David has hosted various radio shows on independent stations around San Francisco, including a wacky
+        call-in program called <a href="#TODO">This Is Going Well, I Think</a> (visible from a coffee shop window). His
+        experiment with a phone booth in the desert was showcased in
+        <a href="#TODO">an NPR episode</a> (long story). And at the end of 2020, David quit his lucrative career as a
+        software engineer to pursue radio opportunities full-time &ldquo;like an idiot&rdquo; (a direct quote from his
+        overbearing Jewish mother). Addressing <a href="#">David&rsquo;s mother directly in a 2022 interview</a>, the
+        mayor of Toronto stated that he&rsquo;s proud of David for his minor contributions to overnight radio.
+      </p>
+      <p>
+        David&rsquo;s on-air style oscillates between frenzied comedy and confession-booth sincerity, blurring the lines
+        between his personal relationships and on-air ones in a way both intimate and (arguably) intrusive. He can be
+        heard nightly as contributor on the nationally syndicated
+        <a href="#">Newstalk Tonight with Jim Richards</a> on iHeartRadio Canada&rsquo;s Talk Network; doing the
+        occasional
+        <a href="#">guest spot on WFMU</a>
+        in New York/New Jersey; and every year in the Nevada Desert on
+        <a href="#">Burning Man Information Radio (BMIR) 94.5 FM</a>, where he has interviewed everyone from
+        stripper-clowns to George Stroumboulopoulos.
+      </p>
+
+      <div class="clear-both"></div>
+    </article>
+  </div>
+  <form method="dialog" class="modal-backdrop">
+    <button>close</button>
+  </form>
+</dialog>
+
 <div class="hero min-h-screen">
   <div class="flex-col hero-content max-w-screen-lg lg:flex-row-reverse lg:rounded-3xl">
     <div class="flex flex-col lg:flex-col-reverse gap-y-3 items-center">
@@ -10,8 +80,7 @@
           style="--custom-spin-duration: 4000ms"
           alt=""
           class="max-w-[12rem] sm:max-w-xs lg:max-w-sm rounded-full border-8 border-secondary animate-spin-custom select-none drag-none"
-        >
-        </enhanced:img>
+        />
       </div>
     </div>
     <div>
@@ -34,9 +103,9 @@
       </p>
       <p class="md:text-indent mb-1.5 sm:mb-2 mx-2 lg:mx-0 text-sm sm:text-base lg:text-lg">
         I <span class="font-bold">descend on the desert every year</span> for the
-        <a href="https://burningman.org/" target="_blank" class="link link-primary link-hover umami--click--burningman"
-          >Burning Man</a
-        >
+        <a href="https://burningman.org/" target="_blank" class="link link-primary link-hover umami--click--burningman">
+          Burning Man
+        </a>
         event where <span class="font-bold">I'm an on-air personality</span> on
         <span class="font-bold"
           ><a href="https://bmir.org/" target="_blank" class="link link-primary link-hover umami--click--bmir"
@@ -60,54 +129,27 @@
           href="https://twitter.com/dtcooper"
           target="_blank"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="inline-block w-6 h-6 fill-current"
-            ><path
-              fill="currentColor"
-              d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.29C11.73,8.63 11.77,8.96 11.84,9.27C8.28,9.09 5.11,7.38 3,4.79C2.63,5.42 2.42,6.16 2.42,6.94C2.42,8.43 3.17,9.75 4.33,10.5C3.62,10.5 2.96,10.3 2.38,10C2.38,10 2.38,10 2.38,10.03C2.38,12.11 3.86,13.85 5.82,14.24C5.46,14.34 5.08,14.39 4.69,14.39C4.42,14.39 4.15,14.36 3.89,14.31C4.43,16 6,17.26 7.89,17.29C6.43,18.45 4.58,19.13 2.56,19.13C2.22,19.13 1.88,19.11 1.54,19.07C3.44,20.29 5.7,21 8.12,21C16,21 20.33,14.46 20.33,8.79C20.33,8.6 20.33,8.42 20.32,8.23C21.16,7.63 21.88,6.87 22.46,6Z"
-            /></svg
-          >
-          Twitter
+          <span class="icon-[mdi--twitter] h-6 w-6" /> Twitter
         </a>
         <a
-          class="btn btn-neutral btn-rounded border-0 umami--click--instagram"
-          href="https://www.instagram.com/dtcooper/"
+          class="btn btn-neutral btn-rounded border-0 umami--click--intagram"
+          href="https://instagram.com/dtcooper"
           target="_blank"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="inline-block w-6 h-6 fill-current"
-            ><path
-              fill="currentColor"
-              d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"
-            /></svg
-          >
-          Instagram
+          <span class="icon-[mdi--instagram] h-6 w-6" /> Instgram
         </a>
-        <a
-          class="btn btn-neutral btn-rounded border-0 umami--click--bio"
-          href="https://www.iheartradio.ca/newstalk-1010/host/Person/David%20Cooper"
-          target="_blank"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="inline-block w-6 h-6 fill-current"
-            ><path
-              fill="currentColor"
-              d="M21 5v2H3V5h18M3 17h9v-2H3v2m0-5h18v-2H3v2m15 2a2 2 0 1 1 0 4c-1.11 0-2-.89-2-2s.9-2 2-2m-4 8v-1c0-1.1 1.79-2 4-2s4 .9 4 2v1h-8z"
-            ></path></svg
-          >
-          Bio
-        </a>
-        <a
+        <button class="btn btn-neutral btn-rounded border-0 umami--click--bio" on:click={() => bioDialog.showModal()}>
+          <span class="icon-[mdi--biography] h-6 w-6" /> Bio
+        </button>
+        <button
           class="btn btn-neutral btn-rounded border-0 umami--click--email"
-          x-data="obfuscatedEmail"
-          href="mailto:david@jew.pizza"
-          target="_blank"
+          data-addr="divad"
+          data-tld="azzip"
+          data-domain="wej"
+          on:click={(e) => openEmail({ ...e.target.dataset })}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="inline-block w-6 h-6 fill-current"
-            ><path
-              fill="currentColor"
-              d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6M20 6L12 11L4 6H20M20 18H4V8L12 13L20 8V18Z"
-            /></svg
-          >
-          Email
-        </a>
+          <span class="icon-[mdi--email-outline] h-6 w-6" /> Email
+        </button>
       </div>
     </div>
   </div>
