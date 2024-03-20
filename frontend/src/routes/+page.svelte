@@ -61,6 +61,8 @@
       </p>
 
       <div class="clear-both"></div>
+
+      TODO CLOSE BUTTON
     </article>
   </div>
   <form method="dialog" class="modal-backdrop">

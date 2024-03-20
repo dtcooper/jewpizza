@@ -4,11 +4,13 @@ services:
     volumes:
       - ./backend:/app
     ports:
-      - 127.0.0.1:8000:8000
+      - 8000:8000
   frontend:
     restart: "no"
     volumes:
       - ./frontend:/app
+    ports:
+      - 8001:8000
   nginx:
     restart: "no"
     volumes:
@@ -23,8 +25,8 @@ services:
   analytics:
     restart: "no"
     ports:
-      - "127.0.0.1:8001:8000"
+      - "127.0.0.1:8002:8000"
   logs:
     restart: "no"
     ports:
-      - "127.0.0.1:8002:8000"
+      - "127.0.0.1:8003:8000"
