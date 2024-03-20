@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .btn-rounded {
+    --rounded-btn: 1.25rem;
+  }
+
+  .text-indent {
+    text-indent: 2rem;
+  }
+
+  .underline-wavy {
+    text-decoration-style: wavy;
+    text-underline-offset: 0.25em;
+    text-decoration-thickness: 0.1em;
+  }
+}
