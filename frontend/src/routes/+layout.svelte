@@ -1,7 +1,7 @@
 <script>
   import "../app.css"
 
-  import { env } from '$env/dynamic/public';
+  import { env } from "$env/dynamic/public"
 </script>
 
 <svelte:head>

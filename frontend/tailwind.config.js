@@ -17,7 +17,7 @@ export default {
         "spin-custom": "spin var(--custom-spin-duration, 1s) linear infinite var(--custom-spin-direction, normal);"
       },
       fontFamily: {
-        grotesk: ["Space Grotestk", ...defaultTheme.fontFamily.sans]
+        grotesk: ["Space Grotesk", ...defaultTheme.fontFamily.sans]
       },
       typography: {
         DEFAULT: {

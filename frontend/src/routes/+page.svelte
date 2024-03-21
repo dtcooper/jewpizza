@@ -105,8 +105,7 @@
         class="md:text-indent mb-1.5 sm:mb-2 lg:mb-2 mx-2 lg:mx-0 text-sm sm:text-base lg:text-lg"
         x-data="placeholder"
       >
-        Here is my special website. Check out my <span class="font-bold">podcast</span>
-        that releases <span class="font-bold"><span class="underline"> every weekday</span></span> called
+        Here is my special website. Check out my <span class="font-bold">podcast</span> called
         <a
           class="link link-primary link-hover font-bold"
           target="_blank"
