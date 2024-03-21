@@ -15,7 +15,7 @@ if [ "$#" = 0 ]; then
     if [ -z "$DEV_MODE" -o "$DEV_MODE" = '0' ]; then
         echo 'Copying static files to /static/frontend'
         rsync -a --delete /app/build/client/ /static/frontend
-        PROTOCOL_HEADER=x-forwarded-proto PORT=8000 exec node build
+        PROTOCOL_HEADER=x-forwarded-proto PORT=8000 exec node -r dotenv/config build
     else
         npm install
         exec npm run dev -- --port 8000 --host
