@@ -8,6 +8,7 @@
   {#if PUBLIC_UMAMI_WEBSITE_ID}
     <script defer src="https://a.{PUBLIC_DOMAIN_NAME}/s.js" data-website-id={PUBLIC_UMAMI_WEBSITE_ID}></script>
   {/if}
+  <title>jew.pizza - David Cooper</title>
 </svelte:head>
 
 <slot />
