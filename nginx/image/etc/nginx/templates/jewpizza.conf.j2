@@ -109,7 +109,7 @@ server {
 }
 
 server {
-  {{ server_name(["a", "analytics"]) }}
+  {{ server_name(["analytics", "umami", "a"]) }}
 
   location / {
     include proxy_params;

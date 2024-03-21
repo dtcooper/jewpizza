@@ -68,6 +68,7 @@ services:
       IGNORE_IP: "${UMAMI_IGNORE_IPS:-}"
       DISABLE_TELEMETRY: "1"
       PORT: "8000"
+      TRACKER_SCRIPT_NAME: "s.js"
 
   logs:
     restart: always

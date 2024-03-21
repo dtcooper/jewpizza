@@ -12,9 +12,11 @@
     <form method="dialog">
       <button class="btn btn-sm md:btn-md md:text-xl btn-circle btn-ghost absolute right-2 top-2">✕</button>
     </form>
-    <h3 class="font-bold text-3xl italic text-center mb-1.5 md:mb-3 underline">Bio</h3>
+    <h3 class="font-bold text-3xl italic text-center mb-1.5 md:mb-3 text-accent underline underline-wavy">
+      A Short Bio
+    </h3>
 
-    <article class="text-indent overflow-hidden">
+    <article class="text-indent overflow-hidden font-grotesk">
       <enhanced:img
         alt=""
         src="$lib/assets/images/headshot.jpg"
@@ -41,28 +43,38 @@
 
       <p>
         Since 2016, David has hosted various radio shows on independent stations around San Francisco, including a wacky
-        call-in program called <a href="#TODO">This Is Going Well, I Think</a> (visible from a coffee shop window). His
-        experiment with a phone booth in the desert was showcased in
-        <a href="#TODO">an NPR episode</a> (long story). And at the end of 2020, David quit his lucrative career as a
-        software engineer to pursue radio opportunities full-time &ldquo;like an idiot&rdquo; (a direct quote from his
-        overbearing Jewish mother). Addressing <a href="#">David&rsquo;s mother directly in a 2022 interview</a>, the
-        mayor of Toronto stated that he&rsquo;s proud of David for his minor contributions to overnight radio.
+        call-in program (visible from a coffee shop window). His experiment with a phone booth in the desert was
+        showcased in an NPR episode (long story). And at the end of 2020, David quit his lucrative career as a software
+        engineer to pursue radio opportunities full-time “like an idiot” (a direct quote from his overbearing Jewish
+        mother). Addressing David's mother directly in a 2022 interview, the former mayor of Toronto stated that he's
+        proud of David for his minor contributions to overnight radio.
       </p>
       <p>
-        David&rsquo;s on-air style oscillates between frenzied comedy and confession-booth sincerity, blurring the lines
-        between his personal relationships and on-air ones in a way both intimate and (arguably) intrusive. He can be
-        heard nightly as contributor on the nationally syndicated
-        <a href="#">Newstalk Tonight with Jim Richards</a> on iHeartRadio Canada&rsquo;s Talk Network; doing the
-        occasional
-        <a href="#">guest spot on WFMU</a>
+        David's on-air style oscillates between frenzied comedy and confession-booth sincerity, blurring the lines
+        between his personal relationships and on-air ones in a way both intimate and (arguably) intrusive. David can be
+        heard on his podcast
+        <a href="https://shows.acast.com/this-is-going-well-i-think" target="_blank" data-umami-event="bio:podcast">
+          This Is Going Well, I Think with David Cooper
+        </a>; as contributor on the nationally syndicated
+        <a href="https://www.newstalk1010.com/shows/newstalk-tonight.html" data-umami-event="bio:newstalk-tonight"
+          >NewsTalk Tonight with Jim Richards</a
+        >
+        on iHeartRadio Canada's Talk Network; doing the occasional guest spot on
+        <a href="https://wfmu.org" target="_blank" data-umami-event="bio:wfmu">WFMU</a>
         in New York/New Jersey; and every year in the Nevada Desert on
-        <a href="#">Burning Man Information Radio (BMIR) 94.5 FM</a>, where he has interviewed everyone from
-        stripper-clowns to George Stroumboulopoulos.
+        <a href="https://en.wikipedia.org/wiki/BMIR" target="blank" data-umami-event="bio:bmir"
+          >Burning Man Information Radio</a
+        > (BMIR) 94.5 FM, where he has interviewed everyone from stripper-clowns to George Stroumboulopoulos.
       </p>
 
       <div class="clear-both"></div>
 
-      TODO CLOSE BUTTON
+      <div class="modal-action">
+        <form method="dialog">
+          <!-- if there is a button in form, it will close the modal -->
+          <button class="btn btn-sm sm:btm-md md:btn-lg">Close</button>
+        </form>
+      </div>
     </article>
   </div>
   <form method="dialog" class="modal-backdrop">
@@ -96,7 +108,7 @@
         Here is my special website. Check out my <span class="font-bold">podcast</span>
         that releases <span class="font-bold"><span class="underline"> every weekday</span></span> called
         <a
-          class="link link-primary link-hover umami--click--tigwit-podcast font-bold"
+          class="link link-primary link-hover font-bold"
           target="_blank"
           href="https://shows.acast.com/this-is-going-well-i-think"
         >
@@ -105,21 +117,30 @@
       </p>
       <p class="md:text-indent mb-1.5 sm:mb-2 mx-2 lg:mx-0 text-sm sm:text-base lg:text-lg">
         I <span class="font-bold">descend on the desert every year</span> for the
-        <a href="https://burningman.org/" target="_blank" class="link link-primary link-hover umami--click--burningman">
+        <a
+          href="https://burningman.org/"
+          target="_blank"
+          class="link link-primary link-hover"
+          data-umami-event="splash:burningman"
+        >
           Burning Man
         </a>
         event where <span class="font-bold">I'm an on-air personality</span> on
         <span class="font-bold"
-          ><a href="https://bmir.org/" target="_blank" class="link link-primary link-hover umami--click--bmir"
-            >Burning Man Information Radio</a
+          ><a
+            href="https://bmir.org/"
+            target="_blank"
+            class="link link-primary link-hover"
+            data-umami-event="splash:bmir">Burning Man Information Radio</a
           ></span
         > (BMIR 94.5 FM).
       </p>
       <p class="md:text-indent mx-2 lg:mx-0 text-sm sm:text-base lg:text-lg">
         You can also <span class="font-bold">listen to my show</span>
         <a
-          class="link link-primary link-hover font-bold umami--click--wfmu"
+          class="link link-primary link-hover font-bold"
           href="https://www.wfmu.org/playlists/WD"
+          data-umami-event="splash:wfmu"
           target="_blank"
         >
           <span class="italic">That Went Well, I Think</span> on WFMU</a
@@ -127,27 +148,34 @@
       </p>
       <div class="grid grid-cols-1 sm:grid-cols-4 gap-1.5 lg:gap-1 mt-5 select-none">
         <a
-          class="btn btn-neutral btn-rounded border-0 umami--click--twitter"
+          class="btn btn-neutral btn-rounded border-0"
+          data-umami-event="splash:twitter"
           href="https://twitter.com/dtcooper"
           target="_blank"
         >
           <span class="icon-[mdi--twitter] h-6 w-6" /> Twitter
         </a>
         <a
-          class="btn btn-neutral btn-rounded border-0 umami--click--intagram"
+          class="btn btn-neutral btn-rounded border-0"
+          data-umami-event="splash:instagram"
           href="https://instagram.com/dtcooper"
           target="_blank"
         >
           <span class="icon-[mdi--instagram] h-6 w-6" /> Instgram
         </a>
-        <button class="btn btn-neutral btn-rounded border-0 umami--click--bio" on:click={() => bioDialog.showModal()}>
+        <button
+          class="btn btn-neutral btn-rounded border-0"
+          on:click={() => bioDialog.showModal()}
+          data-umami-event="splash:bio"
+        >
           <span class="icon-[mdi--biography] h-6 w-6" /> Bio
         </button>
         <button
-          class="btn btn-neutral btn-rounded border-0 umami--click--email"
+          class="btn btn-neutral btn-rounded border-0"
           data-addr="divad"
           data-tld="azzip"
           data-domain="wej"
+          data-umami-event="splash:email"
           on:click={(e) => openEmail({ ...e.target.dataset })}
         >
           <span class="icon-[mdi--email-outline] h-6 w-6" /> Email

@@ -4,7 +4,7 @@ SHELL:=/bin/bash
 .PHONY: up
 up: CONTAINERS:=
 up: .env
-	$(COMPOSE) up --remove-orphans $(shell source .env; if [ -z "$$DEV_MODE" -o "$$DEV_MODE" = 0 ]; then echo "-d"; fi) $(CONTAINERS) || true
+	$(COMPOSE) up --remove-orphans$(shell source .env; if [ -z "$$DEV_MODE" -o "$$DEV_MODE" = 0 ]; then echo " -d"; fi) $(CONTAINERS) || true
 
 .PHONY: down
 down:
