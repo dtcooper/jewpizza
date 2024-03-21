@@ -12,7 +12,6 @@ WORKDIR /app
 RUN npm install
 
 COPY src /app/src
-COPY static /app/static
 COPY entrypoint.sh *.config.js /app/
 RUN npm run build
 
