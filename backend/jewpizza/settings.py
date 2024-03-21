@@ -16,6 +16,8 @@ SECRET_KEY = env("SECRET_KEY")
 DEBUG = env.bool("DEV_MODE", False)
 
 ALLOWED_HOSTS = [env("DOMAIN_NAME")]
+if DEBUG:
+    ALLOWED_HOSTS.append("localhost")
 
 
 # Application definition
@@ -27,6 +29,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "api",
+    "calls",
 ]
 
 MIDDLEWARE = [

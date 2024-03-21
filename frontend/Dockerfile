@@ -7,13 +7,8 @@ RUN apt-get update \
         rsync \
     && rm -rf /var/lib/apt/lists/*
 
-COPY package.json package-lock.json /app/
+RUN mkdir /app
 WORKDIR /app
-RUN npm install
-
-COPY src /app/src
-COPY entrypoint.sh *.config.js /app/
-RUN npm run build
 
 ENTRYPOINT ["/app/entrypoint.sh"]
 CMD []

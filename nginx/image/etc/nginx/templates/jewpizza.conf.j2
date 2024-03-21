@@ -78,34 +78,35 @@ server {
     {% endif %}
   }
 
-  {% if not DEV_MODE %}
-    location /_app/immutable/ {
-      root /static/frontend;
-      expires max;
-      add_header Cache-Control "public, immutable";
-      add_header X-JewPizza-Info "static/frontend/immutable" always;
-      access_log off;
-      try_files $uri @frontend;
-    }
+  {% if DEV_MODE %}
+    # Development frontend config
 
     location / {
-      root /static/frontend;
-      add_header X-JewPizza-Info "static/frontend" always;
-      try_files $uri @frontend;
-    }
-  {% endif %}
-
-  location {% if DEV_MODE %}/{% else %}@frontend{% endif %} {
-    include proxy_params;
-    add_header X-JewPizza-Info "frontend" always;
-    {% if DEV_MODE %}
+      include proxy_params;
+      add_header X-JewPizza-Info "frontend" always;
       # Support hmr (hot module reload) via websockets in DEV_MODE
       proxy_http_version 1.1;
       proxy_set_header Upgrade $http_upgrade;
       proxy_set_header Connection $connection_upgrade;
-    {% endif %}
-    proxy_pass http://frontend:8000;
-  }
+      proxy_pass http://frontend:8000;
+    }
+  {% else %}
+    # Production frontend config
+
+    location /_app/immutable/ {
+      root /frontend/build;
+      expires max;
+      add_header Cache-Control "public, immutable";
+      add_header X-JewPizza-Info "static/frontend/immutable" always;
+      access_log off;
+    }
+
+    location / {
+      root /frontend/build;
+      add_header X-JewPizza-Info "static/frontend" always;
+      try_files $uri $uri/ $uri/index.html =404;
+    }
+  {% endif %}
 }
 
 server {

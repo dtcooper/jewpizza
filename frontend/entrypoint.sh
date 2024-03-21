@@ -12,12 +12,11 @@ for PUBLIC_VAR in $PUBLIC_VARS; do
 done
 
 if [ "$#" = 0 ]; then
+    npm install
+
     if [ -z "$DEV_MODE" -o "$DEV_MODE" = '0' ]; then
-        echo 'Copying static files to /static/frontend'
-        rsync -a --delete /app/build/client/ /static/frontend
-        PROTOCOL_HEADER=x-forwarded-proto PORT=8000 exec node -r dotenv/config build
+        exec npm run build
     else
-        npm install
         exec npm run dev -- --port 8000 --host
     fi
 else

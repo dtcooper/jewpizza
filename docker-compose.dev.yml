@@ -7,8 +7,6 @@ services:
       - 8000:8000
   frontend:
     restart: "no"
-    volumes:
-      - ./frontend:/app
     ports:
       - 8001:8000
   nginx:

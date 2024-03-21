@@ -14,13 +14,13 @@ services:
       - static_data:/static
 
   frontend:
-    restart: always
+    restart: "on-failure"
     image: ghcr.io/dtcooper/jewpizza-frontend:latest
     build:
       context: frontend
     env_file: .env
     volumes:
-      - static_data:/static
+      - ./frontend:/app
 
   nginx:
     restart: always
@@ -37,7 +37,7 @@ services:
       - ./frontend:/frontend
       - ./subdomains:/subdomains
       - nginx_secrets:/etc/letsencrypt
-      - static_data:/static
+      - static_data:/static  # TODO fix this
     ports:
       - 80:80
       - 443:443
