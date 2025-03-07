@@ -53,8 +53,8 @@
         David's on-air style oscillates between frenzied comedy and confession-booth sincerity, blurring the lines
         between his personal relationships and on-air ones in a way both intimate and (arguably) intrusive. David can be
         heard on his podcast
-        <a href="https://shows.acast.com/this-is-going-well-i-think" target="_blank" data-umami-event="bio:podcast">
-          This Is Going Well, I Think with David Cooper
+        <a href="https://lastshow.pizza/" target="_blank" data-umami-event="bio:podcast">
+          The Last Show with David Cooper
         </a>; as contributor on the nationally syndicated
         <a href="https://www.newstalk1010.com/shows/newstalk-tonight.html" data-umami-event="bio:newstalk-tonight"
           >NewsTalk Tonight with Jim Richards</a
@@ -105,14 +105,14 @@
         class="md:text-indent mb-1.5 sm:mb-2 lg:mb-2 mx-2 lg:mx-0 text-sm sm:text-base lg:text-lg"
         x-data="placeholder"
       >
-        Here is my special website. Check out my <span class="font-bold">podcast</span> called
+        Here is my special website. Check out my <span class="font-bold">show</span> called
         <a
           class="link link-primary link-hover font-bold"
           target="_blank"
           data-umami-event="splash:podcast"
-          href="https://shows.acast.com/this-is-going-well-i-think"
+          href="https://lastshow.pizza/"
         >
-          <span class="italic">This Is Going Well, I Think with David Cooper</span></a
+          <span class="italic">The Last Show with David Cooper</span></a
         >.
       </p>
       <p class="md:text-indent mb-1.5 sm:mb-2 mx-2 lg:mx-0 text-sm sm:text-base lg:text-lg">
