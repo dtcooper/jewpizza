@@ -1,7 +1,7 @@
 <script>
   import "../app.css"
 
-  import { PUBLIC_UMAMI_WEBSITE_ID, PUBLIC_DOMAIN_NAME } from '$env/static/public';
+  import { PUBLIC_UMAMI_WEBSITE_ID, PUBLIC_DOMAIN_NAME } from "$env/static/public"
 </script>
 
 <svelte:head>

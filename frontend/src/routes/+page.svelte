@@ -52,14 +52,13 @@
       <p>
         David's on-air style oscillates between frenzied comedy and confession-booth sincerity, blurring the lines
         between his personal relationships and on-air ones in a way both intimate and (arguably) intrusive. David can be
-        heard on his podcast
+        heard on his nationally syndicated radio show,
         <a href="https://lastshow.pizza/" target="_blank" data-umami-event="bio:podcast">
           The Last Show with David Cooper
-        </a>; as contributor on the nationally syndicated
-        <a href="https://www.newstalk1010.com/shows/newstalk-tonight.html" data-umami-event="bio:newstalk-tonight"
-          >NewsTalk Tonight with Jim Richards</a
-        >
-        on iHeartRadio Canada's Talk Network; doing the occasional guest spot on
+        </a>
+        that airs on
+        <a href="https://www.corusent.com/" target="_blank" data-umami-event="bio:corus">Corus Entertainment</a>'s talk
+        radio network; doing the occasional guest spot on
         <a href="https://wfmu.org" target="_blank" data-umami-event="bio:wfmu">WFMU</a>
         in New York/New Jersey; and every year in the Nevada Desert on
         <a href="https://en.wikipedia.org/wiki/BMIR" target="blank" data-umami-event="bio:bmir"
@@ -105,7 +104,7 @@
         class="md:text-indent mb-1.5 sm:mb-2 lg:mb-2 mx-2 lg:mx-0 text-sm sm:text-base lg:text-lg"
         x-data="placeholder"
       >
-        Here is my special website. Check out my <span class="font-bold">show</span> called
+        Here is my special website. Check out my national <span class="font-bold">radio show</span> called
         <a
           class="link link-primary link-hover font-bold"
           target="_blank"
@@ -113,7 +112,16 @@
           href="https://lastshow.pizza/"
         >
           <span class="italic">The Last Show with David Cooper</span></a
-        >.
+        >
+        that airs on
+        <a
+          class="link link-primary link-hover"
+          href="https://www.corusent.com/"
+          data-umami-event="splash:corus"
+          target="_blank"
+        >
+          Corus Entertainment</a
+        >'s talk radio network.
       </p>
       <p class="md:text-indent mb-1.5 sm:mb-2 mx-2 lg:mx-0 text-sm sm:text-base lg:text-lg">
         I <span class="font-bold">descend on the desert every year</span> for the
